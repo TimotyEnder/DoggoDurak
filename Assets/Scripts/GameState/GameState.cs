@@ -6,7 +6,4 @@ public class GameState
 {
     private List<CardInfo> _deck;
     private int gold;
-
-    
-
 }

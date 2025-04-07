@@ -14,7 +14,7 @@ public class CardInfo
     {
         return _suit;
     }
-    public int getNumber() 
+    public int getNumber()
     {
         return number;
     }

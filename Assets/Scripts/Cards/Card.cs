@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
     void Update()
     {
     }
-    public void DrawCard(string cardChars) 
+    public void DrawCardImage(string cardChars) 
     {
         this.GetComponent<Image>().sprite = Resources.Load<Sprite>("Grafics/Cards/" + cardChars);
     }
