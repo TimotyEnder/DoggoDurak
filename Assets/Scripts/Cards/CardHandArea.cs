@@ -1,15 +1,21 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CardHandArea : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private float _cardHolderOffSet;
+    private float _cardHolderIdealOffSet;
+    [SerializeField]
+    private float _maxHandSpacing;
     private Vector2 _cardHolderAttachPos;
     private int _cardsInHand;
     private int _handSize;
     void Start()
     {
-        this._cardHolderOffSet = 150;
+        _cardHolderOffSet = 150;
+        _cardHolderIdealOffSet = 150;
         _cardHolderAttachPos = new Vector2(0, 0);
         _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x - (this._cardHolderOffSet / 2), 0);
     }
@@ -19,7 +25,7 @@ public class CardHandArea : MonoBehaviour
     {
         
     }
-    void RealignCardsInHand() 
+    void  RealignCardsInHand() 
     {
         foreach (RectTransform i in this.transform)
         {
@@ -35,9 +41,15 @@ public class CardHandArea : MonoBehaviour
     public Vector2  AttachCard() 
     {
         this._cardsInHand++;
-        _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x + (this._cardHolderOffSet/2), 0);
+        this._cardHolderOffSet = GetCardSpacing();
+        _cardHolderAttachPos = new Vector2(-this._cardHolderOffSet/2 + ((this._cardHolderOffSet/2*(_cardsInHand))), 0);
         RealignCardsInHand();
         return _cardHolderAttachPos;
+    }
+    float GetCardSpacing()
+    {
+        float neededWidth = (this._cardsInHand - 1) * this._cardHolderIdealOffSet;
+        return (neededWidth <= this._maxHandSpacing) ? this._cardHolderIdealOffSet : (this._maxHandSpacing / (this._cardsInHand - 1));
     }
     public int GetCardsInHand() 
     {
