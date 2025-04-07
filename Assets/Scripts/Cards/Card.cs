@@ -19,8 +19,7 @@ public class Card : MonoBehaviour
         GameObject CardHolder = GameObject.Find("CardHandArea");
         CardHandArea cardHandArea = CardHolder.GetComponent<CardHandArea>();
         this.GetComponent<RectTransform>().SetParent(CardHolder.GetComponent<RectTransform>());
-        thisRect.anchoredPosition = cardHandArea.Attach();
-
+        thisRect.anchoredPosition = cardHandArea.AttachCard();
     }
 }
 

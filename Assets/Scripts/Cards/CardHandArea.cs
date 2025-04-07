@@ -6,9 +6,11 @@ public class CardHandArea : MonoBehaviour
     [SerializeField]
     private float _cardHolderOffSet = 100f;
     private Vector2 _cardHolderAttachPos;
+    private int _cardsInHand;
+    private int _handSize;
     void Start()
     {
-        _cardHolderAttachPos = this.GetComponent<RectTransform>().anchoredPosition;
+        _cardHolderAttachPos = new Vector2((-this._cardHolderOffSet/2), 0);
     }
 
     // Update is called once per frame
@@ -16,17 +18,32 @@ public class CardHandArea : MonoBehaviour
     {
         
     }
-    void shift() 
+    void RealignCardsInHand() 
     {
+        foreach (RectTransform i in this.transform)
+        {
+            i.anchoredPosition = new Vector2(0, 0);
+        }
+        float it = 1;
         foreach (RectTransform i in this.transform) 
         {
-            i.anchoredPosition = new Vector2(i.anchoredPosition.x - this._cardHolderOffSet, 0);
+            i.anchoredPosition = new Vector2(_cardHolderAttachPos.x - (_cardHolderOffSet * it), 0);
+            it++;
         }
     }
-    public Vector2  Attach() 
+    public Vector2  AttachCard() 
     {
-        shift();
-        _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x + this._cardHolderOffSet, 0);
+        this._cardsInHand++;
+        _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x + (this._cardHolderOffSet/2), 0);
+        RealignCardsInHand();
         return _cardHolderAttachPos;
+    }
+    public int GetCardsInHand() 
+    {
+        return this._cardsInHand;
+    }
+    public int GetHandSize()
+    {
+        return this._handSize;
     }
 }
