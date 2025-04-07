@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Card : MonoBehaviour
 {
@@ -11,7 +13,10 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    }
+    public void DrawCard(string cardChars) 
+    {
+        this.GetComponent<Image>().sprite = Resources.Load<Sprite>("Grafics/Cards/" + cardChars);
     }
     public void OnDraw() 
     {

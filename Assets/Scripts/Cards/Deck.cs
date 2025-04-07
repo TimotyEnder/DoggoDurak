@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class Deck : MonoBehaviour, IPointerDownHandler
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,8 +19,8 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     }
     void Draw() 
     {
-        Debug.Log("Pressed");
         GameObject CardDrawn=Instantiate(_card);
+        CardDrawn.GetComponent<Card>().DrawCard("C6");
         CardDrawn.GetComponent<Card>().OnDraw();
     }
 
