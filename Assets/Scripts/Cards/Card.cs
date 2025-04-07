@@ -20,6 +20,8 @@ public class Card : MonoBehaviour
         CardHandArea cardHandArea = CardHolder.GetComponent<CardHandArea>();
         this.GetComponent<RectTransform>().SetParent(CardHolder.GetComponent<RectTransform>());
         thisRect.anchoredPosition = cardHandArea.AttachCard();
+        //cardHandArea.RestackHand();
+        this.GetComponent<RectTransform>().SetSiblingIndex(0);
     }
 }
 

@@ -38,6 +38,15 @@ public class CardHandArea : MonoBehaviour
             it++;
         }
     }
+    public void RestackHand ()
+    {
+        int it = 0;
+        foreach (RectTransform i in this.transform)
+        {
+            i.SetSiblingIndex(it);
+            it++;
+        }
+    }
     public Vector2  AttachCard() 
     {
         this._cardsInHand++;
