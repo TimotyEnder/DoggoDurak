@@ -4,7 +4,7 @@ public class CardHandArea : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField]
-    private float _cardHolderOffSet = 1.0f;
+    private float _cardHolderOffSet = 100f;
     private Vector2 _cardHolderAttachPos;
     void Start()
     {
@@ -20,13 +20,13 @@ public class CardHandArea : MonoBehaviour
     {
         foreach (RectTransform i in this.transform) 
         {
-            i.anchoredPosition = new Vector2(i.anchoredPosition.x-this._cardHolderOffSet, i.anchoredPosition.y);
+            i.anchoredPosition = new Vector2(i.anchoredPosition.x - this._cardHolderOffSet, 0);
         }
     }
     public Vector2  Attach() 
     {
         shift();
-        _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x - _cardHolderOffSet, _cardHolderAttachPos.y);
+        _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x + this._cardHolderOffSet, 0);
         return _cardHolderAttachPos;
     }
 }
