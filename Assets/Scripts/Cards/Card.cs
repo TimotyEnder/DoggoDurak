@@ -13,8 +13,13 @@ public class Card : MonoBehaviour
     {
         
     }
-    void Setup() 
+    public void OnDraw() 
     {
+        RectTransform thisRect = this.GetComponent<RectTransform>();
+        GameObject CardHolder = GameObject.Find("CardHandArea");
+        CardHandArea cardHandArea = CardHolder.GetComponent<CardHandArea>();
+        thisRect.anchoredPosition = cardHandArea.Attach();
+        this.GetComponent<RectTransform>().SetParent(CardHolder.GetComponent<RectTransform>());
 
     }
 }

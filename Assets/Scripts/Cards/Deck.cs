@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Deck : MonoBehaviour
+public class Deck : MonoBehaviour, IPointerDownHandler
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField]
+    private GameObject _card;
     void Start()
     {
         
@@ -13,8 +16,15 @@ public class Deck : MonoBehaviour
     {
         
     }
-    void OnMouseDown()
+    void Draw() 
     {
+        Debug.Log("Pressed");
+        GameObject CardDrawn=Instantiate(_card);
+        CardDrawn.GetComponent<Card>().OnDraw();
+    }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Draw();
     }
 }
