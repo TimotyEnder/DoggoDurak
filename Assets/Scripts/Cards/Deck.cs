@@ -9,6 +9,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField]
     private GameObject _card;
+    [SerializeField]
     private List<CardInfo> _deck;
     void Start()
     {

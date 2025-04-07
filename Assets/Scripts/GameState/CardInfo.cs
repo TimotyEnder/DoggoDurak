@@ -1,9 +1,9 @@
 using UnityEngine;
-
+[System.Serializable]
 public class CardInfo
 {
-    private string _suit;
-    private int number;
+    [SerializeField]  private string _suit;
+    [SerializeField]  private int number;
 
     public CardInfo(string suit, int number) 
     {
