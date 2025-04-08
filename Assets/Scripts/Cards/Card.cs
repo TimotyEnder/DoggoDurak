@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Windows.Speech;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -10,13 +13,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private RectTransform _thisRect;
     private GameObject _cardHolder;
     private CardHandArea _cardHandArea;
+    private Canvas _canvas;
+    
     void Start()
     {
-        _thisRect = this.GetComponent<RectTransform>();
-        _cardHolder = GameObject.Find("CardHandArea");
-        _cardHandArea = _cardHolder.GetComponent<CardHandArea>();
+       InitGameComponents();
     }
+    void InitGameComponents() 
+    {
+        _cardHolder = GameObject.Find("CardHandArea");
+        _cardHandArea = _cardHolder?.GetComponent<CardHandArea>();
+        _thisRect = this.GetComponent<RectTransform>();
 
+        // init canvas
+    }
     // Update is called once per frame
     void Update()
     {
@@ -27,22 +37,41 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnDraw() 
     {
-        _cardHolder = GameObject.Find("CardHandArea");
-        _cardHandArea = _cardHolder.GetComponent<CardHandArea>();
+        InitGameComponents();
         this.GetComponent<RectTransform>().SetParent(_cardHolder.GetComponent<RectTransform>());
         _thisRect.anchoredPosition = _cardHandArea.AttachCard();
         //cardHandArea.RestackHand();
         this.GetComponent<RectTransform>().SetSiblingIndex(0);
     }
-    public void OnPointerEnter(PointerEventData eventData) 
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        //this._thisRect.SetSiblingIndex(0);
-       // this._thisRect.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        if (TopPointer(eventData)) 
+        {
+            // sorting order, bitch :)
+            this._thisRect.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-       // this._cardHandArea.RestackHand();
-       // this._thisRect.localScale = new Vector3(1f, 1f, 1f);
+        this._thisRect.localScale = new Vector3(1f, 1f, 1f);
+    }
+    private bool TopPointer(PointerEventData ped) 
+    {
+        List<RaycastResult>  results= new List<RaycastResult>();
+        EventSystem.current.RaycastAll(ped, results);
+        foreach(RaycastResult result in results) 
+        {
+            if (result.gameObject == this.gameObject)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        return false;
+
     }
 }
 
