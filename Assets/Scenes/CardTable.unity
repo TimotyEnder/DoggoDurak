@@ -524,6 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _card: {fileID: 2056351905119703546, guid: 5f79580e3eb6c8b48858d2d80bfb618f, type: 3}
+  _deck: []
 --- !u!1 &1876879813
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 102.48}
+  m_AnchoredPosition: {x: -42, y: 102.48}
   m_SizeDelta: {x: 182.6834, y: 204.9591}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915048516
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df384028a0c902439922debad557577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHandSpacing: 1000
+  _maxHandSpacing: 700
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
