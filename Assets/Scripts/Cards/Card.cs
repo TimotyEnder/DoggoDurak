@@ -13,31 +13,42 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private RectTransform _thisRect;
     private GameObject _cardHolder;
     private CardHandArea _cardHandArea;
-    private Canvas _canvas;
-    
+    private int _oldSiblingIndex;
+    private GameObject _cardImage;
+
+
     void Start()
     {
        InitGameComponents();
     }
     void InitGameComponents() 
     {
+        //card holder init
         _cardHolder = GameObject.Find("CardHandArea");
         _cardHandArea = _cardHolder?.GetComponent<CardHandArea>();
+
+        //RectTransform is commonly used so we init it
         _thisRect = this.GetComponent<RectTransform>();
 
-        // init canvas
+
+        //sibling index
+        this._oldSiblingIndex = -1;
+
     }
     // Update is called once per frame
     void Update()
     {
     }
-    public void DrawCardImage(string cardChars) 
+    public void DrawCardImage(string cardChars)
     {
-        this.GetComponent<Image>().sprite = Resources.Load<Sprite>("Grafics/Cards/" + cardChars);
+        InitGameComponents();
+        _cardImage = _thisRect.Find("CardImage").gameObject;
+        Debug.Log(_cardImage.ToString());
+        Sprite cardSprite= Resources.Load<Sprite>("Grafics/Cards/" + cardChars); 
+        _cardImage.GetComponent<Image>().sprite=cardSprite;
     }
     public void OnDraw() 
     {
-        InitGameComponents();
         this.GetComponent<RectTransform>().SetParent(_cardHolder.GetComponent<RectTransform>());
         _thisRect.anchoredPosition = _cardHandArea.AttachCard();
         //cardHandArea.RestackHand();
@@ -47,13 +58,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (TopPointer(eventData)) 
         {
-            // sorting order, bitch :)
-            this._thisRect.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            _oldSiblingIndex = _thisRect.GetSiblingIndex();
+            _thisRect.SetAsLastSibling();
+            _cardImage.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        this._thisRect.localScale = new Vector3(1f, 1f, 1f);
+        if (_oldSiblingIndex != -1) 
+        {
+            _thisRect.SetSiblingIndex(_oldSiblingIndex);
+        }
+        _cardImage.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
     }
     private bool TopPointer(PointerEventData ped) 
     {
@@ -61,13 +77,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         EventSystem.current.RaycastAll(ped, results);
         foreach(RaycastResult result in results) 
         {
-            if (result.gameObject == this.gameObject)
+            if (result.gameObject.GetComponent<Card>()!=null) 
             {
-                return true;
-            }
-            else 
-            {
-                return false;
+                if (result.gameObject == this.gameObject)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         return false;
