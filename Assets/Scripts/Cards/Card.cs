@@ -26,7 +26,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     {
         //card holder init
         _cardHolder = GameObject.Find("CardHandArea");
-        _cardHandArea = _cardHolder?.GetComponent<CardHandArea>();
+        _cardHandArea = _cardHolder.GetComponent<CardHandArea>();
 
         //RectTransform is commonly used so we init it
         _thisRect = this.GetComponent<RectTransform>();
