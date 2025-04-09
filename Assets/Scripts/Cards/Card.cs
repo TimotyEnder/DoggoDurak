@@ -16,13 +16,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     private int _oldSiblingIndex;
     private GameObject _cardImage;
     private Canvas _canvas;
+    private RectTransform _cardImageRect;
+    private bool _isDragging = false;
 
 
     void Start()
     {
-       InitGameComponents();
     }
-    void InitGameComponents() 
+    void Awake( ) 
     {
         //card holder init
         _cardHolder = GameObject.Find("CardHandArea");
@@ -35,32 +36,35 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         //sibling index
         this._oldSiblingIndex = -1;
 
-    }
+        //canvas
+        _canvas = GameObject.Find("UI").GetComponent<Canvas>();
+
+        //Card Image
+        _cardImage = _thisRect.Find("CardImage").gameObject;
+        _cardImageRect = _cardImage.GetComponent<RectTransform>();
+    }   
     // Update is called once per frame
     void Update()
     {
     }
     public void DrawCardImage(string cardChars)
     {
-        InitGameComponents();
-        _cardImage = _thisRect.Find("CardImage").gameObject;
         Sprite cardSprite= Resources.Load<Sprite>("Grafics/Cards/" + cardChars); 
         _cardImage.GetComponent<Image>().sprite=cardSprite;
     }
     public void OnDraw() 
     {
-        this.GetComponent<RectTransform>().SetParent(_cardHolder.GetComponent<RectTransform>());
+        _thisRect.SetParent(_cardHolder.GetComponent<RectTransform>());
         _thisRect.anchoredPosition = _cardHandArea.AttachCard();
-        //cardHandArea.RestackHand();
-        this.GetComponent<RectTransform>().SetSiblingIndex(0);
+        _thisRect.SetSiblingIndex(0);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (TopPointer(eventData)) 
         {
-            _oldSiblingIndex = _thisRect.GetSiblingIndex();
-            _thisRect.SetAsLastSibling();
-            _cardImage.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+              _oldSiblingIndex = _thisRect.GetSiblingIndex();
+              _thisRect.SetAsLastSibling();
+              _cardImageRect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -69,7 +73,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         {
             _thisRect.SetSiblingIndex(_oldSiblingIndex);
         }
-        _cardImage.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        _cardImageRect.localScale = new Vector3(1f, 1f, 1f);
     }
     private bool TopPointer(PointerEventData ped)
     {
@@ -95,7 +99,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _canvas = GameObject.Find("UI").GetComponent<Canvas>();
+        _isDragging = true;
+        _thisRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
+        _cardHandArea.DettachCard();
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -103,7 +109,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-
+        RectTransform playArea = GameObject.Find("PlayArea").GetComponent<RectTransform>();
+        if (RectTransformUtility.RectangleContainsScreenPoint(playArea, eventData.position)) 
+        {
+            _isDragging = false;
+        }
+        else 
+        {
+            _thisRect.SetParent(_cardHolder.GetComponent<RectTransform>());
+            _thisRect.anchoredPosition = _cardHandArea.AttachCard();
+            this.GetComponent<RectTransform>().SetSiblingIndex(0);
+            _isDragging = false;
+        }
     }
 }
 

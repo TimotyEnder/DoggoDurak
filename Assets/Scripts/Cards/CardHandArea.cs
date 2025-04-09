@@ -68,6 +68,13 @@ public class CardHandArea : MonoBehaviour
         RealignCardsInHand();
         return _cardHolderAttachPos;
     }
+    public void DettachCard() 
+    {
+        this._cardsInHand--;
+        this._cardHolderOffSet = GetCardSpacing();
+        _cardHolderAttachPos = new Vector2(-this._cardHolderOffSet / 2 + ((this._cardHolderOffSet / 2 * (_cardsInHand))), 0);
+        RealignCardsInHand();
+    }
     float GetCardSpacing()
     {
         float neededWidth = (this._cardsInHand - 1) * this._cardHolderIdealOffSet;
