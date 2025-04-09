@@ -14,8 +14,8 @@ public class CardHandArea : MonoBehaviour
     private int _handSize;
     void Start()
     {
-        _cardHolderOffSet = 150;
-        _cardHolderIdealOffSet = 150;
+        _cardHolderOffSet = 80;
+        _cardHolderIdealOffSet = 80;
         _cardHolderAttachPos = new Vector2(0, 0);
         _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x - (this._cardHolderOffSet / 2), 0);
     }
