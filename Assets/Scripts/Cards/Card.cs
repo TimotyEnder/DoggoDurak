@@ -10,6 +10,7 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBeginDragHandler,IDragHandler, IEndDragHandler
 
 {
+    private CardInfo _cardInfo;
     private RectTransform _thisRect;
     private GameObject _cardHandArea;
     private RectTransform _cardHandAreaRect;
@@ -58,9 +59,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     void Update()
     {
     }
-    public void DrawCardImage(string cardChars)
+    public void MakeCard(CardInfo card)
     {
-        Sprite cardSprite= Resources.Load<Sprite>("Grafics/Cards/" + cardChars); 
+        this._cardInfo = card;
+        Sprite cardSprite= Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo.getSuit()+_cardInfo.getNumber().ToString()); 
         _cardImage.GetComponent<Image>().sprite=cardSprite;
     }
     public void OnDraw() 

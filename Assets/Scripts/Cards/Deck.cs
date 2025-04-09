@@ -62,7 +62,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
         //Card Visual Handling
         GameObject CardDrawn = Instantiate(_card);
-        CardDrawn.GetComponent<Card>().DrawCardImage(cardtoDraw.getSuit()+cardtoDraw.getNumber().ToString());
+        CardDrawn.GetComponent<Card>().MakeCard(cardtoDraw);
         CardDrawn.GetComponent<Card>().OnDraw();
     }
 
