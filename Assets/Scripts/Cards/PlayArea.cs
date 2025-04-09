@@ -28,7 +28,7 @@ public class PlayArea : MonoBehaviour
     {
         
     }
-    void RealignCardsInHand()
+    void RealignCardsInPlay()
     {
         foreach (RectTransform i in this.transform)
         {
@@ -46,7 +46,7 @@ public class PlayArea : MonoBehaviour
         this._cardsInPlay++;
         this._playAreaOffSet = GetCardSpacing();
         _playAreaAttachPos = new Vector2(-this._playAreaOffSet / 2 + ((this._playAreaOffSet / 2 * (_cardsInPlay))), 0);
-        RealignCardsInHand();
+        RealignCardsInPlay();
         return _playAreaAttachPos;
     }
     float GetCardSpacing()
@@ -54,11 +54,11 @@ public class PlayArea : MonoBehaviour
         float neededWidth = (this._cardsInPlay - 1) * this._playAreaIdealOffSet;
         return (neededWidth <= this._maxHandSpacing) ? this._playAreaIdealOffSet : (this._maxHandSpacing / (this._cardsInPlay - 1));
     }
-    public int GetCardsInHand()
+    public int GetCardsInPlay()
     {
         return this._cardsInPlay;
     }
-    public int GetHandSize()
+    public int GetAreaSize()
     {
         return this._playAreaSize;
     }
