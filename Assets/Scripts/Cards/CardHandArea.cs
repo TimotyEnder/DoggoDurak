@@ -7,23 +7,45 @@ public class CardHandArea : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private float _cardHolderOffSet;
     private float _cardHolderIdealOffSet;
-    [SerializeField]
     private float _maxHandSpacing;
     private Vector2 _cardHolderAttachPos;
     private int _cardsInHand;
     private int _handSize;
+    //canvas scaling
+    private RectTransform _canvasRect;
+    private Canvas _canvas;
+    private float _oldCanvasWidth;
     void Start()
     {
         _cardHolderOffSet = 80;
         _cardHolderIdealOffSet = 80;
         _cardHolderAttachPos = new Vector2(0, 0);
         _cardHolderAttachPos = new Vector2(_cardHolderAttachPos.x - (this._cardHolderOffSet / 2), 0);
+        _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();
+        _canvas = GameObject.Find("UI").GetComponent<Canvas>();
+        _oldCanvasWidth= _canvasRect.rect.width;
+        _maxHandSpacing = _canvasRect.rect.width * 0.6f;
+        Canvas.willRenderCanvases += OnCanvasWillRender;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+    void OnDestroy()
+    {
+        Canvas.willRenderCanvases -= OnCanvasWillRender;
+    }
+    public void OnCanvasWillRender() 
+    {
+        if (_oldCanvasWidth != _canvasRect.rect.width)
+        {
+            _maxHandSpacing = _canvasRect.rect.width * 0.6f;
+            this._cardHolderOffSet = GetCardSpacing();
+            _cardHolderAttachPos = new Vector2(-this._cardHolderOffSet / 2 + ((this._cardHolderOffSet / 2 * (_cardsInHand))), 0);
+            RealignCardsInHand();
+            _oldCanvasWidth = _canvasRect.rect.width;
+        }
     }
     void  RealignCardsInHand() 
     {

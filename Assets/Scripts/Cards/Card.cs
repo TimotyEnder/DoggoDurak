@@ -43,7 +43,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         InitGameComponents();
         _cardImage = _thisRect.Find("CardImage").gameObject;
-        Debug.Log(_cardImage.ToString());
         Sprite cardSprite= Resources.Load<Sprite>("Grafics/Cards/" + cardChars); 
         _cardImage.GetComponent<Image>().sprite=cardSprite;
     }
