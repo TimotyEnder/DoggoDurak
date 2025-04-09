@@ -7,14 +7,15 @@ using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBeginDragHandler,IDragHandler, IEndDragHandler
+
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private RectTransform _thisRect;
     private GameObject _cardHolder;
     private CardHandArea _cardHandArea;
     private int _oldSiblingIndex;
     private GameObject _cardImage;
+    private Canvas _canvas;
 
 
     void Start()
@@ -70,13 +71,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
         _cardImage.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
     }
-    private bool TopPointer(PointerEventData ped) 
+    private bool TopPointer(PointerEventData ped)
     {
-        List<RaycastResult>  results= new List<RaycastResult>();
+        List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(ped, results);
-        foreach(RaycastResult result in results) 
+        foreach (RaycastResult result in results)
         {
-            if (result.gameObject.GetComponent<Card>()!=null) 
+            if (result.gameObject.GetComponent<Card>() != null)
             {
                 if (result.gameObject == this.gameObject)
                 {
@@ -89,6 +90,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
         }
         return false;
+
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        _canvas = GameObject.Find("UI").GetComponent<Canvas>();
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        _thisRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+    }
+    void IEndDragHandler.OnEndDrag(PointerEventData eventData)
+    {
 
     }
 }
