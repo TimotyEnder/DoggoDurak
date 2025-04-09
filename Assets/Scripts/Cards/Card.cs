@@ -75,6 +75,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         _thisRect.SetParent(_playAreaRect);
         _thisRect.anchoredPosition= _playAreaScript.AttachCard();
         _thisRect.SetSiblingIndex(0);
+        _thisRect.localScale = Vector3.one*0.8f;
+        _cardImageRect.localScale = Vector3.one*0.8f;
         _played=true;
     }
     public void OnPointerEnter(PointerEventData eventData)
@@ -83,7 +85,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         {
               _oldSiblingIndex = _thisRect.GetSiblingIndex();
               _thisRect.SetAsLastSibling();
-              _cardImageRect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            _cardImageRect.localScale = Vector3.one * 1.3f;
         }
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -92,7 +94,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         {
             _thisRect.SetSiblingIndex(_oldSiblingIndex);
         }
-        _cardImageRect.localScale = new Vector3(1f, 1f, 1f);
+        _cardImageRect.localScale = Vector3.one;
     }
     private bool TopPointer(PointerEventData ped)
     {
