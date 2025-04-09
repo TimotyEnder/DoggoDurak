@@ -11,13 +11,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
 
 {
     private RectTransform _thisRect;
-    private GameObject _cardHolder;
-    private CardHandArea _cardHandArea;
+    private GameObject _cardHandArea;
+    private RectTransform _cardHandAreaRect;
+    private CardHandArea _cardHandAreaScript;
     private int _oldSiblingIndex;
     private GameObject _cardImage;
     private Canvas _canvas;
     private RectTransform _cardImageRect;
     private bool _isDragging = false;
+    private GameObject _playArea;
+    private RectTransform _playAreaRect;
+    private PlayArea _playAreaScript;
+    private bool _played;
 
 
     void Start()
@@ -25,9 +30,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     }
     void Awake( ) 
     {
-        //card holder init
-        _cardHolder = GameObject.Find("CardHandArea");
-        _cardHandArea = _cardHolder.GetComponent<CardHandArea>();
+        //card hand area
+        _cardHandArea = GameObject.Find("CardHandArea");
+        _cardHandAreaScript = _cardHandArea.GetComponent<CardHandArea>();
+        _cardHandAreaRect = _cardHandArea.GetComponent<RectTransform>();
 
         //RectTransform is commonly used so we init it
         _thisRect = this.GetComponent<RectTransform>();
@@ -42,6 +48,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         //Card Image
         _cardImage = _thisRect.Find("CardImage").gameObject;
         _cardImageRect = _cardImage.GetComponent<RectTransform>();
+
+        //Play Area
+        _playArea = GameObject.Find("PlayArea");
+        _playAreaRect = _playArea.GetComponent<RectTransform>();
+        _playAreaScript = _playArea.GetComponent<PlayArea>();
     }   
     // Update is called once per frame
     void Update()
@@ -54,9 +65,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     }
     public void OnDraw() 
     {
-        _thisRect.SetParent(_cardHolder.GetComponent<RectTransform>());
-        _thisRect.anchoredPosition = _cardHandArea.AttachCard();
+        _played = false;
+        _thisRect.SetParent(_cardHandAreaRect);
+        _thisRect.anchoredPosition = _cardHandAreaScript.AttachCard();
         _thisRect.SetSiblingIndex(0);
+    }
+    public void OnPlay() 
+    {
+        _thisRect.SetParent(_playAreaRect);
+        _thisRect.anchoredPosition= _playAreaScript.AttachCard();
+        _thisRect.SetSiblingIndex(0);
+        _played=true;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -99,26 +118,27 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (_played) { return; }
         _isDragging = true;
         _thisRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
-        _cardHandArea.DettachCard();
+        _cardHandAreaScript.DettachCard();
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (_played) { return; }
         _thisRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        RectTransform playArea = GameObject.Find("PlayArea").GetComponent<RectTransform>();
-        if (RectTransformUtility.RectangleContainsScreenPoint(playArea, eventData.position)) 
+        if (_played) { return; }
+        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position)) 
         {
+            OnPlay();
             _isDragging = false;
         }
         else 
         {
-            _thisRect.SetParent(_cardHolder.GetComponent<RectTransform>());
-            _thisRect.anchoredPosition = _cardHandArea.AttachCard();
-            this.GetComponent<RectTransform>().SetSiblingIndex(0);
+            OnDraw();
             _isDragging = false;
         }
     }
