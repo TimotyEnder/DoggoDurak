@@ -4,14 +4,12 @@ using UnityEngine.Rendering.Universal;
 
 public class CardHandArea : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private float _cardHolderOffSet;
     private float _cardHolderIdealOffSet;
     private float _maxHandSpacing;
     private Vector2 _cardHolderAttachPos;
     private int _cardsInHand;
     private int _handSize;
-    //canvas scaling
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;

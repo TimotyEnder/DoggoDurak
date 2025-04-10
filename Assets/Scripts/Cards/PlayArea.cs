@@ -1,18 +1,20 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayArea : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private float _playAreaOffSet;
     private float _playAreaIdealOffSet;
     private float _maxHandSpacing;
     private Vector2 _playAreaAttachPos;
     private int _cardsInPlay;
     private int _playAreaSize;
-    //canvas scaling
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;
+    [SerializeField]
+    private int _turnState = 0; //0 your turn to attack, _turnState>0 enemy (_turnState) is attacking
     void Start()
     {
         _playAreaOffSet = 80;
@@ -61,5 +63,20 @@ public class PlayArea : MonoBehaviour
     public int GetAreaSize()
     {
         return this._playAreaSize;
+    }
+    public int GetTurnState()
+    {
+        return this._turnState;
+    }
+    public int GetCardSelected(Vector2 screenPoint)
+    {
+        foreach (RectTransform child in this.transform) 
+        {
+            if (RectTransformUtility.RectangleContainsScreenPoint(child,screenPoint))
+            {
+                return child.GetSiblingIndex();
+            }
+        }
+        return -1;
     }
 }

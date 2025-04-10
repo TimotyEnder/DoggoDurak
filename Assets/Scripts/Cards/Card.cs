@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +12,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
 
 {
     private CardInfo _cardInfo;
-    private RectTransform _thisRect;
+    private RectTransform _cardRect;
     private GameObject _cardHandArea;
     private RectTransform _cardHandAreaRect;
     private CardHandArea _cardHandAreaScript;
@@ -37,7 +38,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         _cardHandAreaRect = _cardHandArea.GetComponent<RectTransform>();
 
         //RectTransform is commonly used so we init it
-        _thisRect = this.GetComponent<RectTransform>();
+        _cardRect = this.GetComponent<RectTransform>();
 
 
         //sibling index
@@ -47,7 +48,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
 
         //Card Image
-        _cardImage = _thisRect.Find("CardImage").gameObject;
+        _cardImage = _cardRect.Find("CardImage").gameObject;
         _cardImageRect = _cardImage.GetComponent<RectTransform>();
 
         //Play Area
@@ -55,7 +56,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
         _playAreaRect = _playArea.GetComponent<RectTransform>();
         _playAreaScript = _playArea.GetComponent<PlayArea>();
     }   
-    // Update is called once per frame
     void Update()
     {
     }
@@ -68,25 +68,42 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     public void OnDraw() 
     {
         _played = false;
-        _thisRect.SetParent(_cardHandAreaRect);
-        _thisRect.anchoredPosition = _cardHandAreaScript.AttachCard();
-        _thisRect.SetSiblingIndex(0);
+        _cardRect.SetParent(_cardHandAreaRect);
+        _cardRect.anchoredPosition = _cardHandAreaScript.AttachCard();
+        _cardRect.SetSiblingIndex(0);
     }
-    public void OnPlay() 
+    public void OnPlay(Vector2 screenPoint) 
     {
-        _thisRect.SetParent(_playAreaRect);
-        _thisRect.anchoredPosition= _playAreaScript.AttachCard();
-        _thisRect.SetSiblingIndex(0);
-        _thisRect.localScale = Vector3.one*0.8f;
-        _cardImageRect.localScale = Vector3.one*0.8f;
-        _played=true;
+        int cardDefendingIndex = _playAreaScript.GetCardSelected(screenPoint);
+        if (_playAreaScript.GetTurnState()==0) 
+        {
+            _cardRect.SetParent(_playAreaRect);
+            _cardRect.anchoredPosition = _playAreaScript.AttachCard();
+            _cardRect.SetSiblingIndex(0);
+            _cardRect.localScale = Vector3.one * 0.8f;
+            _cardImageRect.localScale = Vector3.one * 0.8f;
+            _played = true;
+        }
+        else if(cardDefendingIndex != -1)
+        {
+            _cardRect.anchoredPosition = _playAreaRect.GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetDefendPosition();//hehe
+            _cardRect.SetParent(_playAreaRect);
+            _cardRect.SetAsFirstSibling();
+            _cardRect.localScale = Vector3.one * 0.8f;
+            _cardImageRect.localScale = Vector3.one * 0.8f;
+            _played = true;
+        }
+        else 
+        {
+            OnDraw();
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (TopPointer(eventData)) 
         {
-              _oldSiblingIndex = _thisRect.GetSiblingIndex();
-              _thisRect.SetAsLastSibling();
+              _oldSiblingIndex = _cardRect.GetSiblingIndex();
+              _cardRect.SetAsLastSibling();
             _cardImageRect.localScale = Vector3.one * 1.3f;
         }
     }
@@ -94,7 +111,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     {
         if (_oldSiblingIndex != -1) 
         {
-            _thisRect.SetSiblingIndex(_oldSiblingIndex);
+            _cardRect.SetSiblingIndex(_oldSiblingIndex);
         }
         _cardImageRect.localScale = Vector3.one;
     }
@@ -124,20 +141,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     {
         if (_played) { return; }
         _isDragging = true;
-        _thisRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
+        _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         _cardHandAreaScript.DettachCard();
     }
     public void OnDrag(PointerEventData eventData)
     {
         if (_played) { return; }
-        _thisRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+        _cardRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
         if (_played) { return; }
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position)) 
         {
-            OnPlay();
+            OnPlay(eventData.position);
             _isDragging = false;
         }
         else 
@@ -145,6 +162,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
             OnDraw();
             _isDragging = false;
         }
+    }
+    public Vector2 GetDefendPosition() 
+    {
+        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y-5f);
     }
 }
 
