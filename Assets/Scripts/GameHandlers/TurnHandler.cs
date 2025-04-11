@@ -35,4 +35,16 @@ public class TurnHandler : MonoBehaviour
     {
         return _turnState;
     }
+    public void EndTurn()
+    {
+        if (_turnState == 0) 
+        {
+            _turnState = 1;
+        }
+        else 
+        {
+            _turnState = 0;
+        }
+        _turnStateToggle.Toggle();
+    }
 }

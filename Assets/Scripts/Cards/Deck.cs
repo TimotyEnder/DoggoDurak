@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,8 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     private GameObject _card;
     [SerializeField]
     private List<CardInfo> _deck;
+
+    private TurnHandler _turnHandler;
     public void initDeck() 
     {
         _deck = new List<CardInfo>();
@@ -44,10 +47,9 @@ public class Deck : MonoBehaviour, IPointerDownHandler
             }
         }
     }
-    // Update is called once per frame
-    void Update()
+    void Start() 
     {
-        
+        _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();   
     }
     void Draw() 
     {
@@ -68,7 +70,10 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
+        if(_turnHandler.GetTurnState()==0)
+        {
+          _turnHandler.EndTurn();
+        }
     }
     private IEnumerator DrawHandRoutine() 
     {
