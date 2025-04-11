@@ -20,6 +20,7 @@ public class TurnHandler : MonoBehaviour
     private void InitSetup()
     {
         _turnStateToggle.Toggle();
+        _trumpIndicator.SelectTrump();
         _trumpIndicator.Appear();
         _deck.initDeck();
         _deck.DrawHand();
