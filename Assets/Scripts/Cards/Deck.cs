@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,11 +11,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     private GameObject _card;
     [SerializeField]
     private List<CardInfo> _deck;
-    void Start()
-    {
-        initDeck();
-    }
-    void initDeck() 
+    public void initDeck() 
     {
         _deck = new List<CardInfo>();
         for(int i=0;i<4;i++) 
@@ -64,9 +61,23 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         CardDrawn.GetComponent<Card>().MakeCard(cardtoDraw);
         CardDrawn.GetComponent<Card>().OnDraw();
     }
+    public void DrawHand()
+    {
+          StartCoroutine(DrawHandRoutine());      
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
 
+    }
+    private IEnumerator DrawHandRoutine() 
+    {
+        CardHandArea cardHand= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
+        int  toDraw= cardHand.GetHandSize() - cardHand.GetCardsInHand(); 
+        for (int i = 0; i <toDraw; i++) 
+        {
+            Draw();
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

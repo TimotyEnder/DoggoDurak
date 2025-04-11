@@ -8,8 +8,10 @@ public class CardHandArea : MonoBehaviour
     private float _cardHolderIdealOffSet;
     private float _maxHandSpacing;
     private Vector2 _cardHolderAttachPos;
-    private int _cardsInHand;
-    private int _handSize;
+    [SerializeField]
+    private int _cardsInHand = 0;
+    [SerializeField]
+    private int _handSize = 6;
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;
@@ -60,6 +62,7 @@ public class CardHandArea : MonoBehaviour
     }
     public Vector2  AttachCard() 
     {
+        Debug.Log("Drawn");
         this._cardsInHand++;
         this._cardHolderOffSet = GetCardSpacing();
         _cardHolderAttachPos = new Vector2(-this._cardHolderOffSet/2 + ((this._cardHolderOffSet/2*(_cardsInHand))), 0);
