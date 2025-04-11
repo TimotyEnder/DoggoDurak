@@ -11,7 +11,7 @@ public class TurnStateToggle : MonoBehaviour
     void Start()
     {
         _def = true;
-        _atkPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x-55f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
+        _atkPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x-125f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
         _defPos = this.gameObject.GetComponent<RectTransform>().anchoredPosition;
         
     }

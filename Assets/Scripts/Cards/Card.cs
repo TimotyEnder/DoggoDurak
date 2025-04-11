@@ -104,8 +104,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().Defend();
             _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
             _cardRect.SetAsFirstSibling();
-            _cardRect.localScale = Vector3.one * 1.5f;
-            _cardImageRect.localScale = Vector3.one * 1.5f;
+            _cardRect.localScale = Vector3.one * 0.8f;
+            _cardImageRect.localScale = Vector3.one * 0.8f;
             _played = true;
         }
         else
@@ -180,7 +180,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public Vector2 GetDefendPosition()
     {
-        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y - 0.005f);
+        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y - 20f);
     }
     public CardInfo GetCard()
     {
