@@ -13,8 +13,7 @@ public class PlayArea : MonoBehaviour
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;
-    [SerializeField]
-    private int _turnState = 0; //0 your turn to attack, _turnState>0 enemy (_turnState) is attacking
+    private TurnHandler _turnHandler;
     void Start()
     {
         _playAreaOffSet = 80;
@@ -25,6 +24,7 @@ public class PlayArea : MonoBehaviour
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
         _oldCanvasWidth= _canvasRect.rect.width;
         _maxHandSpacing = _canvasRect.rect.width * 0.6f;
+        _turnHandler=  GameObject.Find("TurnHandler").GetComponent<TurnHandler>();  
     }
     void Update()
     {
@@ -64,15 +64,11 @@ public class PlayArea : MonoBehaviour
     {
         return this._playAreaSize;
     }
-    public int GetTurnState()
-    {
-        return this._turnState;
-    }
-    public int GetCardSelected(Vector2 screenPoint)
+    public int GetCardDefending(Vector2 screenPoint)
     {
         foreach (RectTransform child in this.transform.Find("PlayedCards")) 
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(child,screenPoint))
+            if (RectTransformUtility.RectangleContainsScreenPoint(child,screenPoint)  && !child.gameObject.GetComponent<Card>().IsDefended())
             {
                 return child.GetSiblingIndex();
             }
