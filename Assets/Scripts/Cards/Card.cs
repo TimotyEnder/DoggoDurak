@@ -98,7 +98,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _played = true;
         }
         //Defending, not your turn
-        else if (cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCard(), cardToDefend))
+        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCard(), cardToDefend))
         {
             _cardRect.anchoredPosition = _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetDefendPosition();//hehe
             _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().Defend();
