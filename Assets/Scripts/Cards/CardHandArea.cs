@@ -62,7 +62,6 @@ public class CardHandArea : MonoBehaviour
     }
     public Vector2  AttachCard() 
     {
-        Debug.Log("Drawn");
         this._cardsInHand++;
         this._cardHolderOffSet = GetCardSpacing();
         _cardHolderAttachPos = new Vector2(-this._cardHolderOffSet/2 + ((this._cardHolderOffSet/2*(_cardsInHand))), 0);
