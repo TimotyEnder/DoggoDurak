@@ -32,12 +32,12 @@ public class PlayArea : MonoBehaviour
     }
     void RealignCardsInPlay()
     {
-        foreach (RectTransform i in this.transform)
+        foreach (RectTransform i in this.transform.Find("PlayedCards"))
         {
             i.anchoredPosition = new Vector2(0, 0);
         }
         float it = 1;
-        foreach (RectTransform i in this.transform)
+        foreach (RectTransform i in this.transform.Find("PlayedCards"))
         {
             i.anchoredPosition = new Vector2(_playAreaAttachPos.x - (_playAreaOffSet * it), 0);
             it++;
@@ -70,7 +70,7 @@ public class PlayArea : MonoBehaviour
     }
     public int GetCardSelected(Vector2 screenPoint)
     {
-        foreach (RectTransform child in this.transform) 
+        foreach (RectTransform child in this.transform.Find("PlayedCards")) 
         {
             if (RectTransformUtility.RectangleContainsScreenPoint(child,screenPoint))
             {

@@ -75,19 +75,21 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     public void OnPlay(Vector2 screenPoint) 
     {
         int cardDefendingIndex = _playAreaScript.GetCardSelected(screenPoint);
+        //playing cards  as it is your turn
         if (_playAreaScript.GetTurnState()==0) 
         {
-            _cardRect.SetParent(_playAreaRect);
+            _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
             _cardRect.anchoredPosition = _playAreaScript.AttachCard();
             _cardRect.SetSiblingIndex(0);
             _cardRect.localScale = Vector3.one * 0.8f;
             _cardImageRect.localScale = Vector3.one * 0.8f;
             _played = true;
         }
+        //Defending, not your turn
         else if(cardDefendingIndex != -1)
         {
-            _cardRect.anchoredPosition = _playAreaRect.GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetDefendPosition();//hehe
-            _cardRect.SetParent(_playAreaRect);
+            _cardRect.anchoredPosition = _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetDefendPosition();//hehe
+            _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
             _cardRect.SetAsFirstSibling();
             _cardRect.localScale = Vector3.one * 0.8f;
             _cardImageRect.localScale = Vector3.one * 0.8f;
@@ -165,7 +167,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IBe
     }
     public Vector2 GetDefendPosition() 
     {
-        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y-5f);
+        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y-0.005f);
+    }
+    public CardInfo GetCard() 
+    {
+        return this._cardInfo;
     }
 }
 
