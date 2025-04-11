@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -74,5 +75,27 @@ public class PlayArea : MonoBehaviour
             }
         }
         return -1;
+    }
+    public bool CanAttackWithCard(CardInfo card) 
+    {
+        if (this.transform.Find("PlayedCards").childCount == 0) { return true; }
+        else 
+        {
+            foreach (RectTransform child in this.transform.Find("PlayedCards")) 
+            {
+                if (child.gameObject.GetComponent<Card>().GetCard().getNumber() == card.getNumber()) 
+                {
+                    return true;
+                }
+            }
+            foreach (RectTransform child in this.transform.Find("DefendedCards"))
+            {
+                if (child.gameObject.GetComponent<Card>().GetCard().getNumber() == card.getNumber())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -83,7 +83,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         int cardDefendingIndex = _playAreaScript.GetCardDefending(screenPoint);
         //playing cards  as it is your turn
-        if (_turnHandler.GetTurnState() == 0)
+        if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCard()))
         {
             _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
             _cardRect.anchoredPosition = _playAreaScript.AttachCard();
