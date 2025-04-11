@@ -15,6 +15,7 @@ public class PlayArea : MonoBehaviour
     private Canvas _canvas;
     private float _oldCanvasWidth;
     private TurnHandler _turnHandler;
+    private RuleHandler _ruleHandler;
     void Start()
     {
         _playAreaOffSet = 80;
@@ -25,7 +26,8 @@ public class PlayArea : MonoBehaviour
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
         _oldCanvasWidth= _canvasRect.rect.width;
         _maxHandSpacing = _canvasRect.rect.width * 0.6f;
-        _turnHandler=  GameObject.Find("TurnHandler").GetComponent<TurnHandler>();  
+        _turnHandler=  GameObject.Find("TurnHandler").GetComponent<TurnHandler>(); 
+        _ruleHandler= GameObject.Find("RuleHandler").GetComponent<RuleHandler>();   
     }
     void Update()
     {
@@ -95,6 +97,21 @@ public class PlayArea : MonoBehaviour
                     return true;
                 }
             }
+            return false;
+        }
+    }
+    public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard) 
+    {
+        if (defendedCard.getSuit() == defendingCard.getSuit())
+        {
+            return defendingCard.getNumber() > defendedCard.getNumber();
+        }
+        else if (defendingCard.getSuit() == _ruleHandler.GetTrumpSuit()) 
+        {
+            return true;    
+        }
+        else
+        {
             return false;
         }
     }

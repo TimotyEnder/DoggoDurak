@@ -8,19 +8,21 @@ public class TurnHandler : MonoBehaviour
     private Deck _deck;
     private TurnStateToggle _turnStateToggle;
     private TrumpCardIndicator _trumpIndicator;
+    private RuleHandler _ruleHandler;
     void Start()
     {
         //initialising
         _deck = GameObject.Find("Deck").GetComponent<Deck>();
         _turnStateToggle= GameObject.Find("TurnStateToggle").GetComponent<TurnStateToggle>();   
         _trumpIndicator= GameObject.Find("TrumpCardIndicator").GetComponent<TrumpCardIndicator>(); 
+        _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>(); 
         //Init Setup
         InitSetup();
     }
     private void InitSetup()
     {
         _turnStateToggle.Toggle();
-        _trumpIndicator.SelectTrump();
+        _ruleHandler.SetTrumpSuit(_trumpIndicator.SelectTrump());
         _trumpIndicator.Appear();
         _deck.initDeck();
         _deck.DrawHand();

@@ -82,6 +82,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void OnPlay(Vector2 screenPoint)
     {
         int cardDefendingIndex = _playAreaScript.GetCardDefending(screenPoint);
+        CardInfo cardToDefend = null;
+        if (cardDefendingIndex!=-1) 
+        {
+            cardToDefend= _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetCard();
+        }
         //playing cards  as it is your turn
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCard()))
         {
@@ -93,7 +98,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _played = true;
         }
         //Defending, not your turn
-        else if (cardDefendingIndex != -1)
+        else if (cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCard(), cardToDefend))
         {
             _cardRect.anchoredPosition = _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetDefendPosition();//hehe
             _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().Defend();
