@@ -18,8 +18,8 @@ public class PlayArea : MonoBehaviour
     private RuleHandler _ruleHandler;
     void Start()
     {
-        _playAreaOffSet = 80;
-        _playAreaIdealOffSet = 80;
+        _playAreaOffSet = 100;
+        _playAreaIdealOffSet = 100;
         _playAreaAttachPos = new Vector2(0, 0);
         _playAreaAttachPos = new Vector2(_playAreaAttachPos.x - (this._playAreaOffSet / 2), 0);
         _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();
