@@ -15,6 +15,7 @@ public class CardHandArea : MonoBehaviour
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;
+    private RectTransform _cardHandRect;
     void Start()
     {
         _cardHolderOffSet = 80;
@@ -26,6 +27,7 @@ public class CardHandArea : MonoBehaviour
         _oldCanvasWidth= _canvasRect.rect.width;
         _maxHandSpacing = _canvasRect.rect.width * 0.6f;
         Canvas.willRenderCanvases += OnCanvasWillRender;
+        //_cardHandRect = this.gameObject.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -47,26 +49,37 @@ public class CardHandArea : MonoBehaviour
             _oldCanvasWidth = _canvasRect.rect.width;
         }
     }
-    void  RealignCardsInHand() 
+    public void  RealignCardsInHand() 
     {
         foreach (RectTransform i in this.transform)
         {
-            i.anchoredPosition = new Vector2(0, 0);
+            i.anchoredPosition = Vector3.zero;
+            i.eulerAngles= Vector3.zero;
         }
         float it = 1;
+        int index = 0;
+        float fanAngle = 20f; // Total spread angle in degrees
+        float startAngle = -fanAngle / 2f;
+        float angleStep = fanAngle / (_cardsInHand - 1);
+        Vector2 startPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x + ((_cardHolderOffSet * _cardsInHand)/2), 0);
         foreach (RectTransform i in this.transform) 
         {
-            i.anchoredPosition = new Vector2(_cardHolderAttachPos.x - (_cardHolderOffSet * it), 0);
+            //rotation
+            float angle = startAngle + (index * angleStep);
+            i.eulerAngles = new Vector3(0, 0, angle);
+            //position
+            float x = startPos.x - (_cardHolderOffSet * it);
+            float y = Mathf.Abs(angle) * -2f;
+            i.anchoredPosition = new Vector2(x, y);
+            //iterate
+            index++;
             it++;
         }
     }
-    public Vector2  AttachCard() 
+    public void  AttachCard() 
     {
         this._cardsInHand++;
         this._cardHolderOffSet = GetCardSpacing();
-        _cardHolderAttachPos = new Vector2(-this._cardHolderOffSet/2 + ((this._cardHolderOffSet/2*(_cardsInHand))), 0);
-        RealignCardsInHand();
-        return _cardHolderAttachPos;
     }
     public void DettachCard() 
     {

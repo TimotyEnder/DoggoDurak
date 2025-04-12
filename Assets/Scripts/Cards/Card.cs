@@ -76,8 +76,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
-        _cardRect.anchoredPosition = _cardHandAreaScript.AttachCard();
         _cardRect.SetSiblingIndex(0);
+        _cardHandAreaScript.AttachCard();
+        _cardHandAreaScript.RealignCardsInHand();
     }
     public void OnPlay(Vector2 screenPoint)
     {
@@ -162,6 +163,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void OnDrag(PointerEventData eventData)
     {
         if (_played) { return; }
+        _cardRect.eulerAngles = Vector3.zero;
         _cardRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
