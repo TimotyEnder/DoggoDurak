@@ -7,7 +7,6 @@ public class CardHandArea : MonoBehaviour
 {
     [SerializeField]
     private float _maxHandSpacing;
-    private Vector2 _cardHolderAttachPos;
     [SerializeField]
     private int _cardsInHand = 0;
     [SerializeField]
