@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PlayArea : MonoBehaviour
     private float _oldCanvasWidth;
     private TurnHandler _turnHandler;
     private RuleHandler _ruleHandler;
+    private List<CardInfo> _cardsPlayed;
     void Start()
     {
         _playAreaOffSet = 120;
