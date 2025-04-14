@@ -96,6 +96,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _cardRect.SetSiblingIndex(0);
             _cardRect.localScale = Vector3.one * 0.8f;
             _cardImageRect.localScale = Vector3.one * 0.8f;
+            _playAreaScript.AddtoPlayedCards(this);
             _played = true;
         }
         //Defending, not your turn
@@ -107,6 +108,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _cardRect.SetAsFirstSibling();
             _cardRect.localScale = Vector3.one * 0.8f;
             _cardImageRect.localScale = Vector3.one * 0.8f;
+            _playAreaScript.AddtoDefendedWithCards(this);
             _played = true;
         }
         else

@@ -17,7 +17,8 @@ public class PlayArea : MonoBehaviour
     private float _oldCanvasWidth;
     private TurnHandler _turnHandler;
     private RuleHandler _ruleHandler;
-    private List<CardInfo> _cardsPlayed;
+    private List<Card> _cardsPlayed;
+    private List<Card> _cardsDefendedWith;
     void Start()
     {
         _playAreaOffSet = 120;
@@ -35,6 +36,15 @@ public class PlayArea : MonoBehaviour
     {
         
     }
+    public void AddtoPlayedCards(Card card) 
+    {
+        _cardsPlayed.Add(card); 
+    }
+    public void AddtoDefendedWithCards(Card card) 
+    {
+        _cardsDefendedWith.Add(card);
+    }
+    public
     void RealignCardsInPlay()
     {
         foreach (RectTransform i in this.transform.Find("PlayedCards"))
