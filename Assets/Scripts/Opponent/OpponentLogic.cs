@@ -19,6 +19,7 @@ public class OpponentLogic : MonoBehaviour
     private OpponentHand _handUI;
     private TurnHandler _turnHandler;
     private PlayArea _playArea;
+    private RuleHandler _ruleHandler;
     private void Start()
     {
         _life = 40;
@@ -27,8 +28,8 @@ public class OpponentLogic : MonoBehaviour
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         _lifeTotalUI.SetHealth(_life);
+        _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         initDeck();
-        StartCoroutine(DrawHandRoutine());
     }
     public void initDeck()
     {
@@ -64,7 +65,8 @@ public class OpponentLogic : MonoBehaviour
             }
         }
     }
-    bool CheckForPlays() 
+    //check once for available plays
+    bool CheckPlay() 
     {
         //if Enemy attacking check for available attacks
         if (_turnHandler.GetTurnState() > 0)
@@ -73,6 +75,8 @@ public class OpponentLogic : MonoBehaviour
             {
                 if (_playArea.CanAttackWithCard(cardInHand))
                 {
+                    _hand.Remove(cardInHand);
+                    _handUI.RemoveCard();
                     GameObject CardToAttack = Instantiate(cardMaker);
                     CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
                     CardToAttack.GetComponent<Card>().AttackWith();
@@ -106,15 +110,33 @@ public class OpponentLogic : MonoBehaviour
             return false;
         }
     }
-    void Attack() 
+    public void CheckForPlays() 
     {
-        //choose lower card that is not trump suit and attack with it.
+        while (CheckPlay()) { }
+    }
+    public void Attack() 
+    {
+        CardInfo lowerCard = _hand[0];
+        foreach(CardInfo card in _hand) 
+        {
+            if (lowerCard.getSuit() == _ruleHandler.GetTrumpSuit() && card.getSuit() != _ruleHandler.GetTrumpSuit())
+            {
+                lowerCard = card;
+            }
+            else if (card.getNumber() < lowerCard.getNumber()) 
+            {
+                lowerCard = card;
+            }
+        }
+        GameObject CardToAttack = Instantiate(cardMaker);
+        CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
+        CardToAttack.GetComponent<Card>().AttackWith();
     }
     void Update()
     {
         
     }
-    private IEnumerator DrawHandRoutine()
+    public  IEnumerator DrawHandRoutine()
     {
         int toDraw = _handSize-_hand.Count;
         for (int i = 0; i < toDraw; i++)
@@ -135,6 +157,6 @@ public class OpponentLogic : MonoBehaviour
     public IEnumerator EnemyPlay() 
     {
         yield return new WaitForSeconds(1);
-        while (CheckForPlays()) { }
+        CheckForPlays();
     }
 }

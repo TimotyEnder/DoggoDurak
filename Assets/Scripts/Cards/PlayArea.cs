@@ -137,4 +137,27 @@ public class PlayArea : MonoBehaviour
             return false;
         }
     }
+    public void Wipe() 
+    {
+        _cardsDefendedWith = new List<Card>();
+        _cardsPlayed = new List<Card>();
+        _cardsInPlay = 0;
+        foreach (RectTransform child in this.transform.Find("PlayedCards"))
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (RectTransform child in this.transform.Find("DefendedCards"))
+        {
+            Destroy(child.gameObject);
+        }
+    }
+    public void RealignDefendingCards()
+    {
+        int index = 0;
+        foreach (RectTransform child in this.transform.Find("DefendedCards"))
+        {
+            child.anchoredPosition= this.transform.Find("PlayedCards").GetChild(index).GetComponent<Card>().GetDefendPosition();
+            index++;
+        }
+    }
 }

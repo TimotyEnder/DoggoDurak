@@ -52,8 +52,6 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     void Start() 
     {
         _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
-        initDeck();
-        DrawHand();
     }
     void Draw() 
     {
@@ -67,16 +65,12 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         CardDrawn.GetComponent<Card>().MakeCard(cardtoDraw);
         CardDrawn.GetComponent<Card>().OnDraw();
     }
-    public void DrawHand()
-    {
-          StartCoroutine(DrawHandRoutine());      
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         _turnHandler.EndTurn();
     }
-    private IEnumerator DrawHandRoutine() 
+    public IEnumerator DrawHandRoutine() 
     {
         CardHandArea cardHand= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         int  toDraw= cardHand.GetHandSize() - cardHand.GetCardsInHand(); 
