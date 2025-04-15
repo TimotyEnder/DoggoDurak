@@ -137,6 +137,24 @@ public class PlayArea : MonoBehaviour
             return false;
         }
     }
+    public bool CanReverseWithCard(Card card) 
+    {
+        if (_cardsDefendedWith.Count > 0)
+        {
+            return false;
+        }
+        else 
+        {
+            foreach (Card cardPlayed in _cardsPlayed) 
+            {
+                if (card.GetCard().getNumber() != cardPlayed.GetCard().getNumber()) 
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
     public void Wipe() 
     {
         _cardsDefendedWith = new List<Card>();

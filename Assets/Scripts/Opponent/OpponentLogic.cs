@@ -79,7 +79,7 @@ public class OpponentLogic : MonoBehaviour
                     _handUI.RemoveCard();
                     GameObject CardToAttack = Instantiate(cardMaker);
                     CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
-                    CardToAttack.GetComponent<Card>().AttackWith();
+                    CardToAttack.GetComponent<Card>().PlayCard();
                     return true;
                 }
             }
@@ -130,7 +130,7 @@ public class OpponentLogic : MonoBehaviour
         }
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
-        CardToAttack.GetComponent<Card>().AttackWith();
+        CardToAttack.GetComponent<Card>().PlayCard();
     }
     void Update()
     {

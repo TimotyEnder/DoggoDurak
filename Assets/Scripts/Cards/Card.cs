@@ -95,7 +95,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         //playing cards  as it is your turn
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCard()))
         {
-            AttackWith();
+            PlayCard();
             StartCoroutine(_opponent.EnemyPlay());
         }
         //Defending, not your turn
@@ -104,12 +104,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
             StartCoroutine(_opponent.EnemyPlay());
         }
+        //reverse
+        else if (_playAreaScript.CanReverseWithCard(this)) 
+        {
+            PlayCard();
+            _turnHandler.Reverse();
+            StartCoroutine(_opponent.EnemyPlay());
+        }
         else
         {
             OnDraw();
         }
     }
-    public void AttackWith() 
+    public void PlayCard() 
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
         _cardRect.anchoredPosition = _playAreaScript.AttachCard();
