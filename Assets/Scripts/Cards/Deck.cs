@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 
 public class Deck : MonoBehaviour, IPointerDownHandler
@@ -14,6 +15,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     private List<CardInfo> _deck;
 
     private TurnHandler _turnHandler;
+
     public void initDeck() 
     {
         _deck = new List<CardInfo>();
@@ -49,7 +51,9 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     }
     void Start() 
     {
-        _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();   
+        _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        initDeck();
+        DrawHand();
     }
     void Draw() 
     {

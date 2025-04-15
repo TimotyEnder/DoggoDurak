@@ -7,6 +7,7 @@ public class TurnHandler : MonoBehaviour
 
     private Deck _deck;
     private TurnStateToggle _turnStateToggle;
+    private bool _toggled;//player Attacking
     private TrumpCardIndicator _trumpIndicator;
     private RuleHandler _ruleHandler;
     void Start()
@@ -22,14 +23,46 @@ public class TurnHandler : MonoBehaviour
     private void InitSetup()
     {
         _turnStateToggle.Toggle();
+        _toggled = true;
         _ruleHandler.SetTrumpSuit(_trumpIndicator.SelectTrump());
         _trumpIndicator.Appear();
-        _deck.initDeck();
-        _deck.DrawHand();
     }
     void Update()
     {
         
+    }
+    void Turn() 
+    {
+        if (_turnState == 0)
+        {
+            if (!_toggled)
+            {
+                _turnStateToggle.Toggle();
+                _toggled = true;
+            }
+        }
+        else 
+        {
+            if (_toggled)
+            {
+                _turnStateToggle.Toggle();
+                _toggled = false;
+            }
+        }
+    }
+    public void EndTurn() 
+    {
+
+        //Damage
+        if (_turnState == 0)
+        {
+            _turnState = 1;
+        }
+        else
+        {
+            _turnState = 0;
+        }
+        Turn();
     }
     public int GetTurnState() 
     {

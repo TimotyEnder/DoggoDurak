@@ -96,6 +96,10 @@ public class OpponentLogic : MonoBehaviour
             return false;
         }
     }
+    void Attack() 
+    {
+        //choose lower card that is not trump suit and attack with it.
+    }
     void Update()
     {
         
