@@ -76,6 +76,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
+        _cardRect.localScale = Vector3.one;
         _cardRect.SetSiblingIndex(0);
         _cardHandAreaScript.AttachCard();
         _cardHandAreaScript.RealignCardsInHand();

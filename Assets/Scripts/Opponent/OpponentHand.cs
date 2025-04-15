@@ -19,13 +19,6 @@ public class OpponentHand : MonoBehaviour
     void Start()
     {
         _canvas= GameObject.Find("UI").GetComponent<RectTransform>();   
-
-        //debug
-        for(int i=0;i<6;i++) 
-        {
-            AddCard();
-        }
-        RemoveCard();
     }
     void Update()
     {

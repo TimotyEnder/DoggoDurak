@@ -9,17 +9,16 @@ public class LifeTotal : MonoBehaviour
     private TextMeshProUGUI _hpText;
     void Start()
     {
-        _hpText = this.gameObject.GetComponent<TextMeshProUGUI>();
-        _hp = 40;
-        UpdateHealth();
-    }
-    void Update()
-    {
-        
     }
     void UpdateHealth() 
     {
+        _hpText = this.gameObject.GetComponent<TextMeshProUGUI>();
         _hpText.text = _hp.ToString();
+    }
+    public void SetHealth(int val) 
+    {
+        _hp = val;
+        UpdateHealth();
     }
     public void Damage(int damage) 
     {
