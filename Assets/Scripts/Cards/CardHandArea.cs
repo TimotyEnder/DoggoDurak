@@ -16,10 +16,10 @@ public class CardHandArea : MonoBehaviour
     private float _oldCanvasWidth;
     private RectTransform _cardHandRect;
     [SerializeField]
-    private float _angleDelta = 30f;
-    private float _idealAngleDelta = 30f;
+    private float _angleDelta = 25f;
+    private float _idealAngleDelta = 25f;
     [SerializeField]
-    private float radius = 150f;
+    private float radius = 200f;
     void Start()
     {
         _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();

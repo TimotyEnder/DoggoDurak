@@ -94,8 +94,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
             _cardRect.anchoredPosition = _playAreaScript.AttachCard();
             _cardRect.SetSiblingIndex(0);
-            _cardRect.localScale = Vector3.one * 0.8f;
-            _cardImageRect.localScale = Vector3.one * 0.8f;
+            _cardRect.localScale = Vector3.one * 0.9f;
+            _cardImageRect.localScale = Vector3.one * 0.9f;
             _playAreaScript.AddtoPlayedCards(this);
             _played = true;
         }
@@ -106,8 +106,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().Defend();
             _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
             _cardRect.SetAsFirstSibling();
-            _cardRect.localScale = Vector3.one * 0.8f;
-            _cardImageRect.localScale = Vector3.one * 0.8f;
+            _cardRect.localScale = Vector3.one * 0.9f;
+            _cardImageRect.localScale = Vector3.one * 0.9f;
             _playAreaScript.AddtoDefendedWithCards(this);
             _played = true;
         }
@@ -184,7 +184,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public Vector2 GetDefendPosition()
     {
-        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y -0.5f);
+        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y -20f);
     }
     public CardInfo GetCard()
     {

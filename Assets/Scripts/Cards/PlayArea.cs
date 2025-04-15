@@ -21,6 +21,8 @@ public class PlayArea : MonoBehaviour
     private List<Card> _cardsDefendedWith;
     void Start()
     {
+        _cardsDefendedWith = new List<Card>();  
+        _cardsPlayed = new List<Card>();    
         _playAreaOffSet = 120;
         _playAreaIdealOffSet = 120;
         _playAreaAttachPos = new Vector2(0, 0);
