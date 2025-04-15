@@ -54,6 +54,8 @@ public class TurnHandler : MonoBehaviour
     {
 
         //Damage
+
+        //Change Turn State
         if (_turnState == 0)
         {
             _turnState = 1;
@@ -67,17 +69,5 @@ public class TurnHandler : MonoBehaviour
     public int GetTurnState() 
     {
         return _turnState;
-    }
-    public void EndTurn()
-    {
-        if (_turnState == 0) 
-        {
-            _turnState = 1;
-        }
-        else 
-        {
-            _turnState = 0;
-        }
-        _turnStateToggle.Toggle();
     }
 }
