@@ -70,10 +70,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(_turnHandler.GetTurnState()==0)
-        {
-          _turnHandler.EndTurn();
-        }
+        //maybe  show deck remaining on click idk
     }
     private IEnumerator DrawHandRoutine() 
     {

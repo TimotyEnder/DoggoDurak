@@ -15,11 +15,15 @@ public class OpponentLogic : MonoBehaviour
 
     private LifeTotal _lifeTotalUI;
     public OpponentHand _handUI;
+    public TurnHandler _turnHandler;
+    public PlayArea _playArea;
     private void Start()
     {
         _life = 40;
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
         _handUI = GameObject.Find("OpponentHand").GetComponent<OpponentHand>();
+        _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         _lifeTotalUI.SetHealth(_life);
         initDeck();
         StartCoroutine(DrawHandRoutine());
@@ -58,6 +62,40 @@ public class OpponentLogic : MonoBehaviour
             }
         }
     }
+    bool CheckForPlays() 
+    {
+        //if Enemy attacking check for available attacks
+        if (_turnHandler.GetTurnState() > 0)
+        {
+            foreach (CardInfo card in _hand)
+            {
+                if (_playArea.CanAttackWithCard(card))
+                {
+                    //attack with card
+                    return true;
+                }
+            }
+            return false;
+        }
+        else 
+        {
+            foreach (Card card in _playArea.GetCardsPlayed()) 
+            {
+                if (!card.IsDefended()) 
+                {
+                    foreach (CardInfo cardInHand in _hand) 
+                    {
+                        if (_playArea.CardCanDefendCard(cardInHand, card.GetCard())) 
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
     void Update()
     {
         
@@ -79,5 +117,10 @@ public class OpponentLogic : MonoBehaviour
         CardInfo cardtoDraw = _deck[cardDrawIndex];
         _deck.Remove(cardtoDraw);
         _hand.Add(cardtoDraw);
+    }
+    public IEnumerator EnemyPlay() 
+    {
+        yield return new WaitForSeconds(1);
+        while (CheckForPlays()) { }
     }
 }

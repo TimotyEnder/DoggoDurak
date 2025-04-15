@@ -46,6 +46,14 @@ public class PlayArea : MonoBehaviour
     {
         _cardsDefendedWith.Add(card);
     }
+    public List<Card> GetDefendedWith() 
+    {
+        return _cardsDefendedWith;
+    }
+    public List<Card> GetCardsPlayed()
+    {
+        return _cardsPlayed;
+    }
     public
     void RealignCardsInPlay()
     {
