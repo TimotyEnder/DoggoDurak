@@ -92,30 +92,38 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         //playing cards  as it is your turn
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCard()))
         {
-            _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
-            _cardRect.anchoredPosition = _playAreaScript.AttachCard();
-            _cardRect.SetSiblingIndex(0);
-            _cardRect.localScale = Vector3.one * 0.9f;
-            _cardImageRect.localScale = Vector3.one * 0.9f;
-            _playAreaScript.AddtoPlayedCards(this);
-            _played = true;
+            AttackWith();
         }
         //Defending, not your turn
         else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCard(), cardToDefend))
         {
-            _cardRect.anchoredPosition = _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetDefendPosition();//hehe
-            _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().Defend();
-            _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
-            _cardRect.SetAsFirstSibling();
-            _cardRect.localScale = Vector3.one * 0.9f;
-            _cardImageRect.localScale = Vector3.one * 0.9f;
-            _playAreaScript.AddtoDefendedWithCards(this);
-            _played = true;
+            DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
         }
         else
         {
             OnDraw();
         }
+    }
+    public void AttackWith() 
+    {
+        _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
+        _cardRect.anchoredPosition = _playAreaScript.AttachCard();
+        _cardRect.SetSiblingIndex(0);
+        _cardRect.localScale = Vector3.one * 0.9f;
+        _cardImageRect.localScale = Vector3.one * 0.9f;
+        _playAreaScript.AddtoPlayedCards(this);
+        _played = true;
+    }
+    public void DefendCard(Card card) 
+    {
+        _cardRect.anchoredPosition = card.GetDefendPosition();//hehe
+        card.Defend();
+        _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
+        _cardRect.SetAsFirstSibling();
+        _cardRect.localScale = Vector3.one * 0.9f;
+        _cardImageRect.localScale = Vector3.one * 0.9f;
+        _playAreaScript.AddtoDefendedWithCards(this);
+        _played = true;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
