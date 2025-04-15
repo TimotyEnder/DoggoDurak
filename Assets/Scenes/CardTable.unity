@@ -1068,7 +1068,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 53.79712, y: 0}
+  m_AnchoredPosition: {x: 53.796875, y: 0}
   m_SizeDelta: {x: 100, y: 142.089}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1235802268
@@ -1150,9 +1150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0efeef182858a24199fba35ea331d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardMaker: {fileID: 9024197703662086752, guid: 5f79580e3eb6c8b48858d2d80bfb618f, type: 3}
   _hand: []
   _deck: []
-  _handUI: {fileID: 0}
 --- !u!4 &1311001220
 Transform:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -69, y: 89.642}
+  m_AnchoredPosition: {x: -69, y: 89.64209}
   m_SizeDelta: {x: 92.1089, y: 126.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1392843568

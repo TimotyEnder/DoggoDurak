@@ -7,6 +7,8 @@ using UnityEngine;
 public class OpponentLogic : MonoBehaviour
 {
     [SerializeField]
+    private GameObject cardMaker;
+    [SerializeField]
     private List<CardInfo> _hand;
     [SerializeField]
     private List<CardInfo> _deck;
@@ -14,9 +16,9 @@ public class OpponentLogic : MonoBehaviour
     private int _life;
 
     private LifeTotal _lifeTotalUI;
-    public OpponentHand _handUI;
-    public TurnHandler _turnHandler;
-    public PlayArea _playArea;
+    private OpponentHand _handUI;
+    private TurnHandler _turnHandler;
+    private PlayArea _playArea;
     private void Start()
     {
         _life = 40;
@@ -67,16 +69,19 @@ public class OpponentLogic : MonoBehaviour
         //if Enemy attacking check for available attacks
         if (_turnHandler.GetTurnState() > 0)
         {
-            foreach (CardInfo card in _hand)
+            foreach (CardInfo cardInHand in _hand)
             {
-                if (_playArea.CanAttackWithCard(card))
+                if (_playArea.CanAttackWithCard(cardInHand))
                 {
-                    //attack with card
+                    GameObject CardToAttack = Instantiate(cardMaker);
+                    CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
+                    CardToAttack.GetComponent<Card>().AttackWith();
                     return true;
                 }
             }
             return false;
         }
+        //If Enemy defending check for available defends
         else 
         {
             foreach (Card card in _playArea.GetCardsPlayed()) 
@@ -87,6 +92,11 @@ public class OpponentLogic : MonoBehaviour
                     {
                         if (_playArea.CardCanDefendCard(cardInHand, card.GetCard())) 
                         {
+                            _hand.Remove(cardInHand);
+                            _handUI.RemoveCard();
+                            GameObject CardToDefend = Instantiate(cardMaker);
+                            CardToDefend.GetComponent<Card>().MakeCard(cardInHand);
+                            CardToDefend.GetComponent<Card>().DefendCard(card);
                             return true;
                         }
                     }
@@ -106,7 +116,7 @@ public class OpponentLogic : MonoBehaviour
     }
     private IEnumerator DrawHandRoutine()
     {
-        int toDraw = _handSize;
+        int toDraw = _handSize-_hand.Count;
         for (int i = 0; i < toDraw; i++)
         {
             Draw();

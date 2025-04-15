@@ -27,6 +27,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private bool _played;
     private TurnHandler _turnHandler;
     private bool _defended;
+    private OpponentLogic _opponent;
 
 
     void Start()
@@ -62,6 +63,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         //Defended
         _defended = false;
+        //Opponent
+        _opponent = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
     }
     void Update()
     {
@@ -93,11 +96,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCard()))
         {
             AttackWith();
+            StartCoroutine(_opponent.EnemyPlay());
         }
         //Defending, not your turn
         else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCard(), cardToDefend))
         {
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
+            StartCoroutine(_opponent.EnemyPlay());
         }
         else
         {
@@ -116,12 +121,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void DefendCard(Card card) 
     {
-        _cardRect.anchoredPosition = card.GetDefendPosition();//hehe
-        card.Defend();
         _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
         _cardRect.SetAsFirstSibling();
         _cardRect.localScale = Vector3.one * 0.9f;
         _cardImageRect.localScale = Vector3.one * 0.9f;
+        _cardRect.anchoredPosition = card.GetDefendPosition();//hehe
+        card.Defend();
         _playAreaScript.AddtoDefendedWithCards(this);
         _played = true;
     }
