@@ -30,4 +30,5 @@ public class LifeTotal : MonoBehaviour
         _hp += amount;
         UpdateHealth();
     }
+    public int GetHealth() {  return _hp; }
 }
