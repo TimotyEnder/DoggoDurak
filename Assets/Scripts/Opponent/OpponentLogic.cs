@@ -82,15 +82,21 @@ public class OpponentLogic : MonoBehaviour
             }
             return false;
         }
-        //If Enemy defending check for available defends
-        else 
+        else
         {
-            foreach (Card card in _playArea.GetCardsPlayed()) 
+            foreach (Card card in _playArea.GetCardsPlayed())
             {
-                if (!card.IsDefended()) 
+                if (_playArea.CanReverseWithCard(card)) 
                 {
-                    CardInfo smallestCardThatDefends= null;
-                    foreach (CardInfo cardInHand in _hand) 
+                    card.PlayCard();
+                    _turnHandler.Reverse();
+                    return true;
+                }
+                //blocking if cant reverse
+                else if (!card.IsDefended())
+                {
+                    CardInfo smallestCardThatDefends = null;
+                    foreach (CardInfo cardInHand in _hand)
                     {
                         if (_playArea.CardCanDefendCard(cardInHand, card.GetCard()))
                         {
@@ -104,7 +110,7 @@ public class OpponentLogic : MonoBehaviour
                             }
                         }
                     }
-                    if(smallestCardThatDefends!=null)
+                    if (smallestCardThatDefends != null)
                     {
                         _hand.Remove(smallestCardThatDefends);
                         _handUI.RemoveCard();
