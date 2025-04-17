@@ -134,7 +134,7 @@ public class TurnHandler : MonoBehaviour
                 {
                     _opponentHp.Damage(card.GetCard().getNumber());
                 }
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.75f);
                 card.transform.eulerAngles = Vector3.zero;
            }
         }

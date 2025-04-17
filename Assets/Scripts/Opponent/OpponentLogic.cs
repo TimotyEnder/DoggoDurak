@@ -89,17 +89,29 @@ public class OpponentLogic : MonoBehaviour
             {
                 if (!card.IsDefended()) 
                 {
+                    CardInfo smallestCardThatDefends= null;
                     foreach (CardInfo cardInHand in _hand) 
                     {
-                        if (_playArea.CardCanDefendCard(cardInHand, card.GetCard())) 
+                        if (_playArea.CardCanDefendCard(cardInHand, card.GetCard()))
                         {
-                            _hand.Remove(cardInHand);
-                            _handUI.RemoveCard();
-                            GameObject CardToDefend = Instantiate(cardMaker);
-                            CardToDefend.GetComponent<Card>().MakeCard(cardInHand);
-                            CardToDefend.GetComponent<Card>().DefendCard(card);
-                            return true;
+                            if (smallestCardThatDefends == null)
+                            {
+                                smallestCardThatDefends = cardInHand;
+                            }
+                            else if (smallestCardThatDefends.getNumber() > cardInHand.getNumber())
+                            {
+                                smallestCardThatDefends = cardInHand;
+                            }
                         }
+                    }
+                    if(smallestCardThatDefends!=null)
+                    {
+                        _hand.Remove(smallestCardThatDefends);
+                        _handUI.RemoveCard();
+                        GameObject CardToDefend = Instantiate(cardMaker);
+                        CardToDefend.GetComponent<Card>().MakeCard(smallestCardThatDefends);
+                        CardToDefend.GetComponent<Card>().DefendCard(card);
+                        return true;
                     }
                     return false;
                 }
