@@ -23,9 +23,11 @@ public class LifeTotal : MonoBehaviour
     public void Damage(int damage) 
     {
         _hp -=damage;
+        UpdateHealth();
     }
     public void Heal(int amount)
     {
         _hp += amount;
+        UpdateHealth();
     }
 }

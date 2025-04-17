@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnHandler : MonoBehaviour
@@ -12,6 +14,8 @@ public class TurnHandler : MonoBehaviour
     private RuleHandler _ruleHandler;
     private PlayArea _playArea;
     private OpponentLogic _opponent;
+    private LifeTotal _playerHp;
+    private LifeTotal _opponentHp;
     void Start()
     {
         //initialising
@@ -21,6 +25,8 @@ public class TurnHandler : MonoBehaviour
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         _opponent = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
+        _playerHp= GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>(); 
+        _opponentHp = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
         //Init Setup
         InitSetup();
     }
@@ -32,6 +38,8 @@ public class TurnHandler : MonoBehaviour
         _trumpIndicator.Appear();
         _opponent.initDeck();
         _playerDeck.initDeck();
+        _playerHp.SetHealth(40);
+        _opponentHp.SetHealth(40);
         Turn();
     }
     void Update()
@@ -60,11 +68,14 @@ public class TurnHandler : MonoBehaviour
             _opponent.Attack();
         }
     }
-    public void EndTurn() 
+    public void StartEndTurn() 
     {
         _opponent.CheckForPlays();
         //Damage Co-Routine
-
+        StartCoroutine(DamageRoutine());
+    }
+    public void FinishEndTurn() 
+    {
         //Wipe Cards
         _playArea.Wipe();
         //Change Turn State
@@ -108,5 +119,25 @@ public class TurnHandler : MonoBehaviour
                 _toggled = false;
             }
         }
+    }
+    private IEnumerator DamageRoutine() 
+    {
+        foreach (Card card in _playArea.GetCardsPlayed()) 
+        {
+           if(!card.IsDefended()){ 
+                card.transform.eulerAngles = new Vector3(0, 0, 10f);
+                if (_turnState>0)
+                {
+                    _playerHp.Damage(card.GetCard().getNumber());
+                }
+                else 
+                {
+                    _opponentHp.Damage(card.GetCard().getNumber());
+                }
+                    yield return new WaitForSeconds(0.5f);
+                card.transform.eulerAngles = Vector3.zero;
+           }
+        }
+        FinishEndTurn();
     }
 }

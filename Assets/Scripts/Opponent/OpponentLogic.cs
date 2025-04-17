@@ -13,7 +13,6 @@ public class OpponentLogic : MonoBehaviour
     [SerializeField]
     private List<CardInfo> _deck;
     private int _handSize = 6;
-    private int _life;
 
     private LifeTotal _lifeTotalUI;
     private OpponentHand _handUI;
@@ -22,12 +21,10 @@ public class OpponentLogic : MonoBehaviour
     private RuleHandler _ruleHandler;
     private void Start()
     {
-        _life = 40;
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
         _handUI = GameObject.Find("OpponentHand").GetComponent<OpponentHand>();
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
-        _lifeTotalUI.SetHealth(_life);
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         initDeck();
     }
