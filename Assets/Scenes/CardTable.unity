@@ -2129,6 +2129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trumpSuit: 
+  _endMatchScreen: {fileID: 1157967479}
+  _victory: {fileID: 1573178089}
+  _defeat: {fileID: 1227590066}
 --- !u!4 &1985245447
 Transform:
   m_ObjectHideFlags: 0
