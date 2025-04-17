@@ -27,6 +27,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private bool _played;
     private TurnHandler _turnHandler;
     private bool _defended;
+    private Card _cardDefending;
     private OpponentLogic _opponent;
 
 
@@ -105,7 +106,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             StartCoroutine(_opponent.EnemyPlay());
         }
         //reverse
-        else if (_playAreaScript.CanReverseWithCard(this)) 
+        else if (_playAreaScript.CanReverseWithCard(this._cardInfo)) 
         {
             PlayCard();
             _turnHandler.Reverse();
@@ -135,7 +136,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.localScale = Vector3.one * 0.9f;
         _cardImageRect.localScale = Vector3.one * 0.9f;
         _cardRect.anchoredPosition = card.GetDefendPosition();//hehe
-        card.Defend();
+        card.Defend(this);
         _playAreaScript.AddtoDefendedWithCards(this);
         _played = true;
     }
@@ -213,9 +214,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         return this._cardInfo;
     }
-    public void Defend() 
+    public void Defend(Card defendedWith) 
     {
-        this._defended = true;  
+        _defended = true;  
+        _cardDefending = defendedWith;  
+    }
+    public Card GetCardDefending() 
+    {
+        return _cardDefending;
     }
     public bool IsDefended() 
     {

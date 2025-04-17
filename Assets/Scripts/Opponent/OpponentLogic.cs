@@ -86,19 +86,24 @@ public class OpponentLogic : MonoBehaviour
         {
             foreach (Card card in _playArea.GetCardsPlayed())
             {
-                if (_playArea.CanReverseWithCard(card)) 
-                {
-                    card.PlayCard();
-                    _turnHandler.Reverse();
-                    return true;
-                }
-                //blocking if cant reverse
-                else if (!card.IsDefended())
+                if (!card.IsDefended())
                 {
                     CardInfo smallestCardThatDefends = null;
                     foreach (CardInfo cardInHand in _hand)
                     {
-                        if (_playArea.CardCanDefendCard(cardInHand, card.GetCard()))
+                        //reverse if possible
+                        if (_playArea.CanReverseWithCard(cardInHand))
+                        {
+                            _hand.Remove(cardInHand);
+                            _handUI.RemoveCard();
+                            GameObject CardToReverse = Instantiate(cardMaker);
+                            CardToReverse.GetComponent<Card>().MakeCard(cardInHand);
+                            CardToReverse.GetComponent<Card>().PlayCard();
+                            _turnHandler.Reverse();
+                            return true;
+                        }
+                        //Defending if cannot reverse
+                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCard()))
                         {
                             if (smallestCardThatDefends == null)
                             {

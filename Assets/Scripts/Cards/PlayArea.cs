@@ -137,7 +137,7 @@ public class PlayArea : MonoBehaviour
             return false;
         }
     }
-    public bool CanReverseWithCard(Card card) 
+    public bool CanReverseWithCard(CardInfo card) 
     {
         if (_cardsDefendedWith.Count > 0)
         {
@@ -147,7 +147,7 @@ public class PlayArea : MonoBehaviour
         {
             foreach (Card cardPlayed in _cardsPlayed) 
             {
-                if (card.GetCard().getNumber() != cardPlayed.GetCard().getNumber()) 
+                if (card.getNumber() != cardPlayed.GetCard().getNumber()) 
                 {
                     return false;
                 }
@@ -172,10 +172,15 @@ public class PlayArea : MonoBehaviour
     public void RealignDefendingCards()
     {
         int index = 0;
-        foreach (RectTransform child in this.transform.Find("DefendedCards"))
+        foreach (RectTransform cardTransform in this.transform.Find("PlayedCards"))
         {
-            child.anchoredPosition= this.transform.Find("PlayedCards").GetChild(index).GetComponent<Card>().GetDefendPosition();
-            index++;
+            Card card= cardTransform.GetComponent<Card>();
+            if (card.IsDefended()) 
+            {
+                Card Defendor = card.GetCardDefending();
+                RectTransform defendorRect= Defendor.gameObject.GetComponent<RectTransform>();
+                defendorRect.anchoredPosition= card.GetDefendPosition();
+            }
         }
     }
 }
