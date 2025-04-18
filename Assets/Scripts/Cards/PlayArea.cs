@@ -19,6 +19,8 @@ public class PlayArea : MonoBehaviour
     private RuleHandler _ruleHandler;
     private List<Card> _cardsPlayed;
     private List<Card> _cardsDefendedWith;
+    private CardHandArea _playerHand;
+    private OpponentLogic _opponentHand;
     void Start()
     {
         _cardsDefendedWith = new List<Card>();  
@@ -32,7 +34,9 @@ public class PlayArea : MonoBehaviour
         _oldCanvasWidth= _canvasRect.rect.width;
         _maxHandSpacing = _canvasRect.rect.width * 0.6f;
         _turnHandler=  GameObject.Find("TurnHandler").GetComponent<TurnHandler>(); 
-        _ruleHandler= GameObject.Find("RuleHandler").GetComponent<RuleHandler>();   
+        _ruleHandler= GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
+        _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
+        _opponentHand= GameObject.Find("Opponent").GetComponent<OpponentLogic>(); 
     }
     void Update()
     {
@@ -100,10 +104,44 @@ public class PlayArea : MonoBehaviour
         }
         return -1;
     }
+    int UnblockedCardsAmount() 
+    {
+        int amount = 0;
+        foreach (Card card in _cardsPlayed) 
+        {
+            if (!card.IsDefended()) 
+            {
+                amount++;
+            }
+        }
+        return amount;
+    }
+    bool CanAtackWithAnotherCard() 
+    {
+        if (_turnHandler.GetTurnState() == 0)
+        {
+            return UnblockedCardsAmount() < _playerHand.GetCardsInHand();
+        }
+        else 
+        {
+            return UnblockedCardsAmount() < _opponentHand.GetCardsInHand();
+        }
+    }
+    bool CanReverseWithAnotherCard()
+    {
+        if (_turnHandler.GetTurnState() == 1)
+        {
+            return UnblockedCardsAmount() < _playerHand.GetCardsInHand();
+        }
+        else
+        {
+            return UnblockedCardsAmount() < _opponentHand.GetCardsInHand();
+        }
+    }
     public bool CanAttackWithCard(CardInfo card) 
     {
         if (this.transform.Find("PlayedCards").childCount == 0) { return true; }
-        else 
+        else if(CanAtackWithAnotherCard()) 
         {
             foreach (RectTransform child in this.transform.Find("PlayedCards")) 
             {
@@ -121,6 +159,7 @@ public class PlayArea : MonoBehaviour
             }
             return false;
         }
+        return false;
     }
     public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard) 
     {
@@ -143,7 +182,7 @@ public class PlayArea : MonoBehaviour
         {
             return false;
         }
-        else 
+        else if(CanReverseWithAnotherCard())
         {
             foreach (Card cardPlayed in _cardsPlayed) 
             {
@@ -154,6 +193,7 @@ public class PlayArea : MonoBehaviour
             }
             return true;
         }
+        return false;
     }
     public void Wipe() 
     {

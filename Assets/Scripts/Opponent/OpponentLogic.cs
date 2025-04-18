@@ -179,4 +179,8 @@ public class OpponentLogic : MonoBehaviour
         yield return new WaitForSeconds(1);
         CheckForPlays();
     }
+    public int GetCardsInHand() 
+    {
+        return _hand.Count; 
+    }
 }
