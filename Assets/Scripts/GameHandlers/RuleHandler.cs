@@ -32,12 +32,12 @@ public class RuleHandler : MonoBehaviour
         {
             Init();
         }
-        if (_playerHp.GetHealth() < 0)
+        if (_playerHp.GetHealth() <= 0)
         {
             _endMatchScreen.SetActive(true);
             _defeat.SetActive(true);
         }
-        else if (_opponentHp.GetHealth() < 0) 
+        else if (_opponentHp.GetHealth() <= 0) 
         {
             _endMatchScreen.SetActive(true);
             _victory.SetActive(true);
