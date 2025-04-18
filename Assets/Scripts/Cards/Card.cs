@@ -183,7 +183,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_played) { return; }
         _isDragging = true;
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
-        _cardHandAreaScript.DettachCard();
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -196,6 +195,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_played) { return; }
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
+            _cardHandAreaScript.DettachCard();
             OnPlay(eventData.position);
             _isDragging = false;
         }
