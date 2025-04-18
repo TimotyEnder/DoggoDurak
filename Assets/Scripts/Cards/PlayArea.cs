@@ -57,14 +57,14 @@ public class PlayArea : MonoBehaviour
     public
     void RealignCardsInPlay()
     {
-        foreach (RectTransform i in this.transform.Find("PlayedCards"))
+        foreach (Card i in _cardsPlayed)
         {
-            i.anchoredPosition = new Vector2(0, 0);
+            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         }
         float it = 1;
-        foreach (RectTransform i in this.transform.Find("PlayedCards"))
+        foreach (Card i in _cardsPlayed)
         {
-            i.anchoredPosition = new Vector2(_playAreaAttachPos.x - (_playAreaOffSet * it), 0);
+            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(_playAreaAttachPos.x - (_playAreaOffSet * it), 0);
             it++;
         }
     }
