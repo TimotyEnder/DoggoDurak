@@ -71,9 +71,12 @@ public class TurnHandler : MonoBehaviour
     }
     public void StartEndTurn() 
     {
-        _opponent.CheckForPlays();
-        //Damage Co-Routine
-        StartCoroutine(DamageRoutine());
+        if (_playArea.GetCardsInPlay()>0) 
+        {
+            _opponent.CheckForPlays();
+            //Damage Co-Routine
+            StartCoroutine(DamageRoutine());
+        }
     }
     public void FinishEndTurn() 
     {

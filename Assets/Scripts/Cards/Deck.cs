@@ -68,7 +68,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _turnHandler.StartEndTurn();
+        //use for deck view i guess
     }
     public IEnumerator DrawHandRoutine() 
     {
