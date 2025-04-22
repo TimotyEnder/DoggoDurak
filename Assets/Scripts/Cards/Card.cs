@@ -194,8 +194,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_played) { return; }
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
-            _cardHandAreaScript.DettachCard();
             _cardHandAreaScript.RemoveFromCards(this);
+            _cardHandAreaScript.DettachCard();
             OnPlay(eventData.position);
             _isDragging = false;
         }
