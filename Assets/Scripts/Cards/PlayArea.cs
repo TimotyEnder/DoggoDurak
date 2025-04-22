@@ -71,6 +71,7 @@ public class PlayArea : MonoBehaviour
             i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(_playAreaAttachPos.x - (_playAreaOffSet * it), 0);
             it++;
         }
+        RealignDefendingCards();
     }
     public Vector2 AttachCard()
     {

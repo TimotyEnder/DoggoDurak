@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -20,6 +21,8 @@ public class CardHandArea : MonoBehaviour
     private float _idealAngleDelta = 25f;
     [SerializeField]
     private float radius = 200f;
+    [SerializeField]
+    private List<Card> _cards;
     void Start()
     {
         _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();
@@ -33,25 +36,35 @@ public class CardHandArea : MonoBehaviour
     }
     public void RealignCardsInHand()
     {
-        foreach (RectTransform i in this.transform)
+        foreach (Card i in _cards)
         {
-            i.anchoredPosition = Vector3.zero;
-            i.eulerAngles = Vector3.zero;
+            i.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            i.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
         }
         float midpoint =(_cardsInHand-1)/2f;
         _angleDelta = GetCardSpacing();
         int index = 0;
         Vector3 center = this.gameObject.GetComponent<RectTransform>().anchoredPosition;
-        foreach (RectTransform i in this.transform)
+        foreach (Card i in _cards)
         {
             float angle = _angleDelta * (midpoint - index);
             i.transform.eulerAngles= new Vector3(0, 0, angle);
             angle *= -Mathf.Deg2Rad;
             float x = Mathf.Sin(angle) * radius;
             float y = Mathf.Cos(angle) * radius;
-            i.anchoredPosition= new Vector3(center.x + x, center.y + y, 0); 
+            i.GetComponent<RectTransform>().anchoredPosition= new Vector3(center.x + x, center.y + y, 0); 
             index++;
         }
+    }
+    public void OrderByRank()
+    {
+        _cards.Sort((a, b) => (a.GetCard().getNumber()==b.GetCard().getNumber())? a.GetCard().getSuitNumber().CompareTo(b.GetCard().getSuitNumber()):a.GetCard().getNumber().CompareTo(b.GetCard().getNumber()));
+        RealignCardsInHand();
+    }
+    public void OrderBySuit()
+    {
+        _cards.Sort((a, b) => a.GetCard().getSuitNumber().CompareTo(b.GetCard().getSuitNumber()));
+        RealignCardsInHand();
     }
     public void  AttachCard() 
     {
@@ -74,5 +87,21 @@ public class CardHandArea : MonoBehaviour
     public int GetHandSize()
     {
         return this._handSize;
+    }
+    public void AddToCards(Card card) 
+    {
+        if (_cards == null) 
+        {
+            _cards = new List<Card>();
+        }
+        _cards.Add(card);
+    }
+    public void RemoveFromCards(Card card)
+    {
+        if (_cards == null)
+        {
+            _cards = new List<Card>();
+        }
+        _cards.Remove(card); 
     }
 }

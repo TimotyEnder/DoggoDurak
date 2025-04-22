@@ -83,6 +83,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.localScale = Vector3.one;
         _cardRect.SetSiblingIndex(0);
         _cardHandAreaScript.AttachCard();
+        _cardHandAreaScript.AddToCards(this);
         _cardHandAreaScript.RealignCardsInHand();
     }
     public void OnPlay(Vector2 screenPoint)
@@ -125,8 +126,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardImageRect.localScale = Vector3.one * 0.9f;
         _playAreaScript.AddtoPlayedCards(this);
         _played = true;
-        //realign defendors 
-        _playAreaScript.RealignDefendingCards();
     }
     public void DefendCard(Card card) 
     {
@@ -196,6 +195,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
             _cardHandAreaScript.DettachCard();
+            _cardHandAreaScript.RemoveFromCards(this);
             OnPlay(eventData.position);
             _isDragging = false;
         }
