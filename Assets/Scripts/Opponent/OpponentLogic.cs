@@ -28,6 +28,10 @@ public class OpponentLogic : MonoBehaviour
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         initDeck();
     }
+    public int GetCardsInHand()
+    {
+        return _hand.Count;
+    }
     public void initDeck()
     {
         _deck = new List<CardInfo>();
@@ -130,10 +134,6 @@ public class OpponentLogic : MonoBehaviour
             return false;
         }
     }
-    public void CheckForPlays() 
-    {
-        while (CheckPlay()) { }
-    }
     public void Attack() 
     {
         CardInfo lowerCard = _hand[0];
@@ -177,10 +177,13 @@ public class OpponentLogic : MonoBehaviour
     public IEnumerator EnemyPlay() 
     {
         yield return new WaitForSeconds(1);
-        CheckForPlays();
+        StartCoroutine(CheckForPlaysRoutine());
     }
-    public int GetCardsInHand() 
+    public IEnumerator CheckForPlaysRoutine()
     {
-        return _hand.Count; 
+        while (CheckPlay()) 
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
     }
 }
