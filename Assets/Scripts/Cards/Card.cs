@@ -121,10 +121,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void PlayCard() 
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
-        _cardRect.anchoredPosition = _playAreaScript.AttachCard();
         _cardRect.localScale = Vector3.one * 0.9f;
         _cardImageRect.localScale = Vector3.one * 0.9f;
         _playAreaScript.AddtoPlayedCards(this);
+        _playAreaScript.AttachCard();
         _played = true;
     }
     public void DefendCard(Card card) 

@@ -69,6 +69,8 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         //use for deck view i guess
+        //debug 
+        GameObject.Find("PlayArea").GetComponent<PlayArea>().RealignCardsInPlay();
     }
     public IEnumerator DrawHandRoutine() 
     {

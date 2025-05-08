@@ -17,6 +17,7 @@ public class PlayArea : MonoBehaviour
     private float _oldCanvasWidth;
     private TurnHandler _turnHandler;
     private RuleHandler _ruleHandler;
+    [SerializeField]
     private List<Card> _cardsPlayed;
     private List<Card> _cardsDefendedWith;
     private CardHandArea _playerHand;
@@ -44,7 +45,7 @@ public class PlayArea : MonoBehaviour
     }
     public void AddtoPlayedCards(Card card) 
     {
-        _cardsPlayed.Add(card); 
+        _cardsPlayed.Insert(0, card);
     }
     public void AddtoDefendedWithCards(Card card) 
     {
@@ -61,25 +62,24 @@ public class PlayArea : MonoBehaviour
     public
     void RealignCardsInPlay()
     {
+        Vector2 initPosition = new Vector2(((_cardsPlayed.Count+1)*_playAreaOffSet)/2, 0);
         foreach (Card i in _cardsPlayed)
         {
-            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+            i.gameObject.GetComponent<RectTransform>().anchoredPosition = initPosition;
         }
         float it = 1;
         foreach (Card i in _cardsPlayed)
         {
-            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(_playAreaAttachPos.x - (_playAreaOffSet * it), 0);
+            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(initPosition.x - (_playAreaOffSet * it), 0);
             it++;
         }
         RealignDefendingCards();
     }
-    public Vector2 AttachCard()
+    public void AttachCard()
     {
         this._cardsInPlay++;
         this._playAreaOffSet = GetCardSpacing();
-        _playAreaAttachPos = new Vector2(-this._playAreaOffSet / 2 + ((this._playAreaOffSet / 2 * (_cardsInPlay))), 0);
         RealignCardsInPlay();
-        return _playAreaAttachPos;
     }
     float GetCardSpacing()
     {
