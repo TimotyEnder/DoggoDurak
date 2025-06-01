@@ -347,7 +347,6 @@ GameObject:
   - component: {fileID: 619878773}
   - component: {fileID: 619878772}
   - component: {fileID: 619878771}
-  - component: {fileID: 619878770}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -375,20 +374,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -73}
   m_SizeDelta: {x: 149.4291, y: 64.195}
   m_Pivot: {x: 0.5, y: 0.4999999}
---- !u!114 &619878770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619878768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eee4a091fc0740f4fb95c76f4544804e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _endTurnButton: {fileID: 0}
-  _turnHandler: {fileID: 0}
 --- !u!114 &619878771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,7 +844,6 @@ GameObject:
   - component: {fileID: 1496443245}
   - component: {fileID: 1496443244}
   - component: {fileID: 1496443243}
-  - component: {fileID: 1496443242}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -887,20 +871,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.00001812}
   m_SizeDelta: {x: 149.4291, y: 64.195}
   m_Pivot: {x: 0.5, y: 0.4999999}
---- !u!114 &1496443242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496443240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eee4a091fc0740f4fb95c76f4544804e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _endTurnButton: {fileID: 0}
-  _turnHandler: {fileID: 0}
 --- !u!114 &1496443243
 MonoBehaviour:
   m_ObjectHideFlags: 0
