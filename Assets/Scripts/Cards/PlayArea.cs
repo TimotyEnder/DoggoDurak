@@ -147,14 +147,14 @@ public class PlayArea : MonoBehaviour
         {
             foreach (RectTransform child in this.transform.Find("PlayedCards")) 
             {
-                if (child.gameObject.GetComponent<Card>().GetCard().getNumber() == card.getNumber()) 
+                if (child.gameObject.GetComponent<Card>().GetCard().number == card.number) 
                 {
                     return true;
                 }
             }
             foreach (RectTransform child in this.transform.Find("DefendedCards"))
             {
-                if (child.gameObject.GetComponent<Card>().GetCard().getNumber() == card.getNumber())
+                if (child.gameObject.GetComponent<Card>().GetCard().number == card.number)
                 {
                     return true;
                 }
@@ -165,11 +165,11 @@ public class PlayArea : MonoBehaviour
     }
     public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard) 
     {
-        if (defendedCard.getSuit() == defendingCard.getSuit())
+        if (defendedCard._suit == defendingCard._suit)
         {
-            return defendingCard.getNumber() > defendedCard.getNumber();
+            return defendingCard.number > defendedCard.number;
         }
-        else if (defendingCard.getSuit() == _ruleHandler.GetTrumpSuit()) 
+        else if (defendingCard._suit == _ruleHandler.GetTrumpSuit()) 
         {
             return true;    
         }
@@ -188,7 +188,7 @@ public class PlayArea : MonoBehaviour
         {
             foreach (Card cardPlayed in _cardsPlayed) 
             {
-                if (card.getNumber() != cardPlayed.GetCard().getNumber()) 
+                if (card.number != cardPlayed.GetCard().number) 
                 {
                     return false;
                 }

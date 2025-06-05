@@ -46,6 +46,10 @@ public class GameHandler : MonoBehaviour
             _state=_saveManager.Value.Load();
         }
     }
+    public GameState GetGameState() 
+    {
+        return _state;
+    }
     void Update()
     {
         

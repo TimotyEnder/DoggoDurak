@@ -44,15 +44,10 @@ public class GameState
         _day = 0;
         _encounter = 0;
     }
-    [SerializeField]
-    private List<CardInfo> _deck;
-    [SerializeField]
-    private int _gold;
-    [SerializeField]
-    private int _life;
-    [SerializeField]
-    private int _day;
-    [SerializeField]
-    private int _encounter;
+    public List<CardInfo> _deck;
+    public int _gold;
+    public int _life;
+    public  int _day;
+    public int _encounter;
 
 }

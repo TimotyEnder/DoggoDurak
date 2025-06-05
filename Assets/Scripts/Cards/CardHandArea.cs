@@ -58,12 +58,12 @@ public class CardHandArea : MonoBehaviour
     }
     public void OrderByRank()
     {
-        _cards.Sort((a, b) => (a.GetCard().getNumber()==b.GetCard().getNumber())? a.GetCard().getSuitNumber().CompareTo(b.GetCard().getSuitNumber()):a.GetCard().getNumber().CompareTo(b.GetCard().getNumber()));
+        _cards.Sort((a, b) => (a.GetCard().number == b.GetCard().number) ? a.GetCard()._suitNumber.CompareTo(b.GetCard()._suitNumber):a.GetCard().number.CompareTo(b.GetCard().number));
         RealignCardsInHand();
     }
     public void OrderBySuit()
     {
-        _cards.Sort((a, b) => a.GetCard().getSuitNumber().CompareTo(b.GetCard().getSuitNumber()));
+        _cards.Sort((a, b) => a.GetCard()._suitNumber.CompareTo(b.GetCard()._suitNumber));
         RealignCardsInHand();
     }
     public void  AttachCard() 

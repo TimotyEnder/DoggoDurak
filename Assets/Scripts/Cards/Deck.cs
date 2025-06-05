@@ -16,38 +16,9 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     private TurnHandler _turnHandler;
 
-    public void initDeck() 
+    public void loadDeck() 
     {
-        _deck = new List<CardInfo>();
-        for(int i=0;i<4;i++) 
-        {
-            switch(i) {
-            case 0:
-                    for (int j = 6; j < 15; j++) 
-                    {
-                        _deck.Add(new CardInfo("C", j));
-                    }
-                    break;
-            case 1:
-                    for (int j = 6; j < 15; j++)
-                    {
-                        _deck.Add(new CardInfo("S", j));
-                    }
-                    break;
-            case 2:
-                    for (int j = 6; j < 15; j++)
-                    {
-                        _deck.Add(new CardInfo("D", j));
-                    }
-                    break;
-            case 3:
-                    for (int j = 6; j < 15; j++)
-                    {
-                        _deck.Add(new CardInfo("H", j));
-                    }
-                    break;
-            }
-        }
+        _deck = GameHandler.Instance.GetGameState()._deck;
     }
     void Start() 
     {

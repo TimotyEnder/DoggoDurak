@@ -37,8 +37,8 @@ public class TurnHandler : MonoBehaviour
         _ruleHandler.SetTrumpSuit(_trumpIndicator.SelectTrump());
         _trumpIndicator.Appear();
         _opponent.initDeck();
-        _playerDeck.initDeck();
-        _playerHp.SetHealth(40);
+        _playerDeck.loadDeck();
+        _playerHp.SetHealth(GameHandler.Instance.GetGameState()._life);
         _opponentHp.SetHealth(40);
         Turn();
     }
@@ -132,11 +132,11 @@ public class TurnHandler : MonoBehaviour
                 card.transform.eulerAngles = new Vector3(0, 0, 10f);
                 if (_turnState>0)
                 {
-                    _playerHp.Damage(card.GetCard().getNumber());
+                    _playerHp.Damage(card.GetCard().number);
                 }
                 else 
                 {
-                    _opponentHp.Damage(card.GetCard().getNumber());
+                    _opponentHp.Damage(card.GetCard().number);
                 }
                     yield return new WaitForSeconds(0.75f);
                 card.transform.eulerAngles = Vector3.zero;

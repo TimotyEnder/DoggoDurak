@@ -3,30 +3,15 @@ using UnityEngine;
 [Serializable]
 public class CardInfo
 {
-    [SerializeField]  
-    private string _suit;
-    [SerializeField]
-    private int _suitNumber;
-    [SerializeField]  
-    private int number;
+    public  string _suit;
+    public  int _suitNumber;
+    public int number;
 
     public CardInfo(string suit, int number) 
     {
         this._suit = suit;
         this._suitNumber = SuitNumber(suit);
         this.number = number;
-    }
-    public string getSuit() 
-    {
-        return _suit;
-    }
-    public int getNumber()
-    {
-        return number;
-    }
-    public int getSuitNumber() 
-    {
-        return _suitNumber; //for sorting
     }
     int SuitNumber(string suit) 
     {
