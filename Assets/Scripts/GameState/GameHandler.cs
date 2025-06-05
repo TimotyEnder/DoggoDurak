@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class GameHandler : MonoBehaviour
     {
         _state = new GameState();
         _saveManager.Value.Save(_state);
+        Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
     {
@@ -45,6 +47,10 @@ public class GameHandler : MonoBehaviour
         {
             _state=_saveManager.Value.Load();
         }
+    }
+    public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
+    {
+        SceneManager.LoadScene(1);
     }
     public GameState GetGameState() 
     {

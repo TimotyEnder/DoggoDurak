@@ -40,7 +40,7 @@ public class GameState
             }
         }
         _gold = 0;
-        _life = 0;
+        _life = 100;
         _day = 0;
         _encounter = 0;
     }

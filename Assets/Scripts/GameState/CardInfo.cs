@@ -13,7 +13,7 @@ public class CardInfo
         this._suitNumber = SuitNumber(suit);
         this._number = number;
     }
-    int SuitNumber(string suit) 
+    int SuitNumber(string suit)  //inherent suit  ordering structure here
     {
         switch (suit)
         {
