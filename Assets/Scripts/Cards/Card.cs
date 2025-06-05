@@ -73,7 +73,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void MakeCard(CardInfo card)
     {
         this._cardInfo = card;
-        Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo.number.ToString());
+        Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
         _cardImage.GetComponent<Image>().sprite = cardSprite;
     }
     public void OnDraw()

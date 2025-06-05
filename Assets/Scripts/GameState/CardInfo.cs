@@ -5,13 +5,13 @@ public class CardInfo
 {
     public  string _suit;
     public  int _suitNumber;
-    public int number;
+    public int _number;
 
     public CardInfo(string suit, int number) 
     {
         this._suit = suit;
         this._suitNumber = SuitNumber(suit);
-        this.number = number;
+        this._number = number;
     }
     int SuitNumber(string suit) 
     {

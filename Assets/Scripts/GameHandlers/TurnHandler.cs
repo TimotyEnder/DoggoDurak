@@ -132,11 +132,11 @@ public class TurnHandler : MonoBehaviour
                 card.transform.eulerAngles = new Vector3(0, 0, 10f);
                 if (_turnState>0)
                 {
-                    _playerHp.Damage(card.GetCard().number);
+                    _playerHp.Damage(card.GetCard()._number);
                 }
                 else 
                 {
-                    _opponentHp.Damage(card.GetCard().number);
+                    _opponentHp.Damage(card.GetCard()._number);
                 }
                     yield return new WaitForSeconds(0.75f);
                 card.transform.eulerAngles = Vector3.zero;

@@ -147,14 +147,14 @@ public class PlayArea : MonoBehaviour
         {
             foreach (RectTransform child in this.transform.Find("PlayedCards")) 
             {
-                if (child.gameObject.GetComponent<Card>().GetCard().number == card.number) 
+                if (child.gameObject.GetComponent<Card>().GetCard()._number == card._number) 
                 {
                     return true;
                 }
             }
             foreach (RectTransform child in this.transform.Find("DefendedCards"))
             {
-                if (child.gameObject.GetComponent<Card>().GetCard().number == card.number)
+                if (child.gameObject.GetComponent<Card>().GetCard()._number == card._number)
                 {
                     return true;
                 }
@@ -167,7 +167,7 @@ public class PlayArea : MonoBehaviour
     {
         if (defendedCard._suit == defendingCard._suit)
         {
-            return defendingCard.number > defendedCard.number;
+            return defendingCard._number > defendedCard._number;
         }
         else if (defendingCard._suit == _ruleHandler.GetTrumpSuit()) 
         {
@@ -188,7 +188,7 @@ public class PlayArea : MonoBehaviour
         {
             foreach (Card cardPlayed in _cardsPlayed) 
             {
-                if (card.number != cardPlayed.GetCard().number) 
+                if (card._number != cardPlayed.GetCard()._number) 
                 {
                     return false;
                 }

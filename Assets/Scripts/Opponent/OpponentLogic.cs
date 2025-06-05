@@ -113,7 +113,7 @@ public class OpponentLogic : MonoBehaviour
                             {
                                 smallestCardThatDefends = cardInHand;
                             }
-                            else if (smallestCardThatDefends.number > cardInHand.number)
+                            else if (smallestCardThatDefends._number > cardInHand._number)
                             {
                                 smallestCardThatDefends = cardInHand;
                             }
@@ -143,7 +143,7 @@ public class OpponentLogic : MonoBehaviour
             {
                 lowerCard = card;
             }
-            else if (card.number < lowerCard.number) 
+            else if (card._number < lowerCard._number) 
             {
                 lowerCard = card;
             }
