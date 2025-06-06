@@ -40,5 +40,7 @@ public class DefaultEncounter : Encounter
         _health = 40;
         _trumpSuit = 'R';
         _icon = null;
+        _boss = false;
+        _day = 0;
     }
 }

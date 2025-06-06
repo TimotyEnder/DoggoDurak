@@ -6,19 +6,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Encounter", menuName = "Scriptable Objects/Encounter")]
 public abstract class Encounter : ScriptableObject
 {
-    protected int day;
+    protected int _day;
     protected List<CardInfo> _deck;
     protected int _health;
     protected int _goldReward;
     protected char _trumpSuit;
     [SerializeField]
     protected  Sprite _icon;
+    protected bool _boss;
     //additional rewards implement here
 
     public abstract void InitEncounter();
     public int GetDay() 
     {
-        return day;
+        return _day;
     }
     public List<CardInfo> GetDeck()
     {
@@ -35,5 +36,9 @@ public abstract class Encounter : ScriptableObject
     public char GetTrumpSuit() 
     {
         return _trumpSuit;
+    }
+    public bool isBoss() 
+    {
+        return _boss;
     }
 }
