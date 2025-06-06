@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+[CreateAssetMenu(fileName = "DefaultEncounter", menuName = "Encounters/Default")]
 public class DefaultEncounter : Encounter
 {
     public override void InitEncounter()

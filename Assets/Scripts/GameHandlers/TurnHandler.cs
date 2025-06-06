@@ -39,7 +39,7 @@ public class TurnHandler : MonoBehaviour
         _opponent.initDeck();
         _playerDeck.loadDeck();
         _playerHp.SetHealth(GameHandler.Instance.GetGameState()._health);
-        _opponentHp.SetHealth(40);
+        _opponentHp.SetHealth(GameHandler.Instance.GetCurrEncounter().GetHealth());
         Turn();
     }
     void Update()

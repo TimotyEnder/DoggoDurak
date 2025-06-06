@@ -9,13 +9,15 @@ public class EncounterManager
     private List<Encounter> _bossEncounters;
     public EncounterManager() 
     {
+        _encounters= new List<List<Encounter>>();
+        _bossEncounters= new List<Encounter>();
         var loadedEncounters = Resources.LoadAll<Encounter>("Encounters");
         foreach(var e in loadedEncounters) 
         {
-
+            e.InitEncounter();
             if (!e.isBoss())
             {
-                while (e.GetDay() > _encounters.Count)
+                while (e.GetDay() >= _encounters.Count)
                 {
                     _encounters.Add(new List<Encounter>());
                 }
@@ -26,5 +28,13 @@ public class EncounterManager
                 _bossEncounters.Add(e);
             }
         }
+    }
+    public Encounter RandomEncounter(int day) 
+    {
+        if (day < _encounters.Count && _encounters[day].Count>0) 
+        {
+            return _encounters[day][Random.Range(0, _encounters[day].Count)]; 
+        }
+        return null;
     }
 }

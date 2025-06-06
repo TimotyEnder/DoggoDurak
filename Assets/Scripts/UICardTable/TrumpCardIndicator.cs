@@ -29,14 +29,32 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
         _trumps.Add("Spades");
         _trumps.Add("Hearts");
     }
-    public string SelectTrump() 
+    public string SelectTrump()
     {
         InitTrumps();
-        int trumpSelected = Random.Range(0, _trumps.Count);
+        int trumpSelected = -1;
+        switch (GameHandler.Instance.GetCurrEncounter().GetTrumpSuit()) 
+        {
+            case 'C':
+                trumpSelected = 0;
+                break;
+            case 'D':
+                trumpSelected = 1;
+                break;
+            case 'S':
+                trumpSelected = 2;
+                break;
+            case 'H':
+                trumpSelected = 3;
+                break;
+            default:
+                 trumpSelected = Random.Range(0, _trumps.Count);
+                break;
+        }
         string trumpStringSelected = _trumps[trumpSelected];
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Trumps/" + trumpStringSelected);
         this.gameObject.GetComponent<Image>().sprite = cardSprite;
-        return trumpStringSelected.Substring(0,1);
+        return trumpStringSelected.Substring(0, 1);
     }
     public void Appear()
     {
