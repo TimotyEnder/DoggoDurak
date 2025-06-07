@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CardTable.unity
     guid: f8b7346aec0321340a5c5ead1996f36f
+  - enabled: 1
+    path: Assets/Scenes/Rest.unity
+    guid: 22a4980bb6eb0eb43a976c98e8a7e45b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
