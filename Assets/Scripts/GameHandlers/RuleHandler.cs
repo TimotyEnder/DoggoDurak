@@ -34,11 +34,13 @@ public class RuleHandler : MonoBehaviour
         }
         if (_playerHp.GetHealth() <= 0)
         {
+            _playerHp.reportHealth();
             _endMatchScreen.SetActive(true);
             _defeat.SetActive(true);
         }
         else if (_opponentHp.GetHealth() <= 0) 
         {
+            _playerHp.reportHealth();
             _endMatchScreen.SetActive(true);
             _victory.SetActive(true);
         }

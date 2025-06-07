@@ -79,4 +79,8 @@ public class GameHandler : MonoBehaviour
     {
         return _currentEncounter;
     }
+    public void SetHealth(int health) 
+    {
+        _state._health = health;
+    }
 }
