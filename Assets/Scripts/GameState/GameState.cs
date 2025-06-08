@@ -9,6 +9,7 @@ public class GameState
     public List<CardInfo> _deck;
     public int _gold;
     public int _health;
+    public int _maxhealth;
     public int _day;
     public int _encounter;
     public GameState() 
@@ -46,6 +47,7 @@ public class GameState
         }
         _gold = 0;
         _health = 100;
+        _maxhealth = 100;
         _day = 0;
         _encounter = 0;
     }

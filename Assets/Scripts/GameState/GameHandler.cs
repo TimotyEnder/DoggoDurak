@@ -54,11 +54,11 @@ public class GameHandler : MonoBehaviour
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
         _saveManager.Value.Save(_state);
-        if (_state._encounter == -1) 
+        if ((_state._encounter+1)%3==0) //every three encounters you have a rest
         {
-            //resting area load also
+            SceneManager.LoadScene(2);
         }
-        else if (_state._encounter < 3)
+        else if (_state._encounter < 6)
         {
             _state._encounter++;
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
@@ -67,7 +67,7 @@ public class GameHandler : MonoBehaviour
         else
         {
             _state._day++;
-            _state._encounter = -1;
+            _state._encounter = 0;
             //load resting area
         }
     }
@@ -82,5 +82,9 @@ public class GameHandler : MonoBehaviour
     public void SetHealth(int health) 
     {
         _state._health = health;
+        if (_state._health > _state._maxhealth) 
+        {
+            _state._health= _state._maxhealth;
+        }
     }
 }
