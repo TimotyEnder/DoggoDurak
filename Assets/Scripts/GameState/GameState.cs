@@ -12,6 +12,8 @@ public class GameState
     public int _maxhealth;
     public int _day;
     public int _encounter;
+    public int _restPoints;
+    public int _maxrestPoints;
     public GameState() 
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -50,6 +52,8 @@ public class GameState
         _maxhealth = 100;
         _day = 0;
         _encounter = 0;
+        _restPoints = 3;
+        _maxrestPoints = 3;
     }
 
 }

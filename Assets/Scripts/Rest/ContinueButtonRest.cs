@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ContinueButtonCardTable : MonoBehaviour
+public class ContinueButtonRest: MonoBehaviour
 {
     private Button _continueButton;
     void Start()
@@ -12,13 +12,7 @@ public class ContinueButtonCardTable : MonoBehaviour
     }
     void ContinueButtonOnClick()
     {
-        if (GameHandler.Instance.GetGameState()._health>0)
-        {
-            GameHandler.Instance.Next();
-        }
-        else 
-        {
-            SceneManager.LoadScene(0);
-        }
+        GameHandler.Instance.GetGameState()._restPoints = GameHandler.Instance.GetGameState()._maxrestPoints;
+        GameHandler.Instance.Next();
     }
 }
