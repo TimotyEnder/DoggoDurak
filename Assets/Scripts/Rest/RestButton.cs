@@ -1,16 +1,26 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RestButton : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Button _restButton;
     void Start()
     {
-        
+        _restButton = this.gameObject.GetComponent<Button>();
+        _restButton.onClick.AddListener(RestButtonOnClick);
     }
-
-    // Update is called once per frame
-    void Update()
+    void RestButtonOnClick()
     {
-        
+        if (GameHandler.Instance.GetGameState()._restPoints > GameHandler.Instance.GetGameState()._restRpointCost)
+        {
+            GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._restRpointCost;
+            GameHandler.Instance.GetGameState()._health += Mathf.RoundToInt(GameHandler.Instance.GetGameState()._maxhealth * 0.5f);
+            GameObject.Find("RestHandler").GetComponent<RestHandler>().UpdateRestUI();
+        }
+        else 
+        {
+            //add red color blink to indicate operation impossible
+        }
     }
 }

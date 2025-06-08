@@ -10,8 +10,12 @@ public class RestHandler : MonoBehaviour
     void Start()
     { 
         _lifeTotal= GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>();
+        _restPointsText= GameObject.Find("RestPointsText").GetComponent<TextMeshProUGUI>();
+        UpdateRestUI();
+    }
+    public void UpdateRestUI()
+    {
+        _restPointsText.text = "R:" + GameHandler.Instance.GetGameState()._restPoints.ToString();
         _lifeTotal.SetHealth(GameHandler.Instance.GetGameState()._health);
-        _restPointsText= GameObject.Find("RestPointsText").GetComponent<TextMeshProUGUI>(); 
-        _restPointsText.text= "R:"+GameHandler.Instance.GetGameState()._restPoints.ToString();
     }
 }

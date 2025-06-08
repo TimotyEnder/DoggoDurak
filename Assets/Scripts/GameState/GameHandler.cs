@@ -53,6 +53,7 @@ public class GameHandler : MonoBehaviour
     }
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
+        //_state._encounter = 2; //debug
         _saveManager.Value.Save(_state);
         if ((_state._encounter+1)%3==0) //every three encounters you have a rest
         {
