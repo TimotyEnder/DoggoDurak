@@ -88,4 +88,12 @@ public class GameHandler : MonoBehaviour
             _state._health= _state._maxhealth;
         }
     }
+    public void Heal(int amount) 
+    {
+        SetHealth(_state._health+amount);
+        if(GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
+        {
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().SetHealth(_state._health);
+        }
+    }
 }
