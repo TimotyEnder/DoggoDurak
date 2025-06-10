@@ -12,9 +12,10 @@ public class BurnCardMod : CardModifier
 
     public void OnPlayedCard(Card card)
     {
+        GameHandler.Instance.Damage(1); //treat x = 1 for all X effects and just add more to a cards effect list.
     }
 
-    public void OnReverse()
+    public void OnReverse(Card card)
     {
     }
 }

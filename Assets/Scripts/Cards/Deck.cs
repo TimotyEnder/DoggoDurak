@@ -24,7 +24,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     {
         _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
     }
-    void Draw() 
+    public void Draw() 
     {
         //CardInfo handling
         int cardDrawIndex = Random.Range(0, _deck.Count);
@@ -41,7 +41,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     {
         //use for deck view i guess
         //debug 
-        GameObject.Find("PlayArea").GetComponent<PlayArea>().RealignCardsInPlay();
+        //GameObject.Find("PlayArea").GetComponent<PlayArea>().RealignCardsInPlay();
     }
     public IEnumerator DrawHandRoutine() 
     {

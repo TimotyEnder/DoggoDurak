@@ -14,10 +14,10 @@ public class DrawCardMod : CardModifier
 
     public void OnPlayedCard(Card card)
     {
-
+        GameHandler.Instance.Draw(1);
     }
 
-    public void OnReverse()
+    public void OnReverse(Card card)
     {
 
     }

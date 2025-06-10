@@ -14,10 +14,10 @@ public class CrippleCardMod : CardModifier
 
     public void OnPlayedCard(Card card)
     {
-
+        //add discarding cards in opponent to implement
     }
 
-    public void OnReverse()
+    public void OnReverse(Card card)
     {
 
     }
