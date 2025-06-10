@@ -144,6 +144,14 @@ public class OpponentLogic : MonoBehaviour
         _deck.Remove(cardtoDraw);
         _hand.Add(cardtoDraw);
     }
+    public void Discard() 
+    {
+        if (_hand.Count>0) 
+        {
+            _hand.RemoveAt(Random.Range(0, _hand.Count));
+            _handUI.RemoveCard();
+        }
+    }
     public IEnumerator EnemyPlay() 
     {
         yield return new WaitForSeconds(1);

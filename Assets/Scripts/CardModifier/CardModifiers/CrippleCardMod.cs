@@ -14,7 +14,7 @@ public class CrippleCardMod : CardModifier
 
     public void OnPlayedCard(Card card)
     {
-        //add discarding cards in opponent to implement
+        GameHandler.Instance.OpponentDiscard(1);
     }
 
     public void OnReverse(Card card)

@@ -113,4 +113,14 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
+    public void OpponentDiscard(int amount) 
+    {
+        if (GameObject.Find("Opponent").GetComponent<OpponentLogic>() != null)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                GameObject.Find("Opponent").GetComponent<OpponentLogic>().Discard();
+            }
+        }
+    }
 }
