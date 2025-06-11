@@ -1,15 +1,21 @@
 using UnityEngine;
 
-public class DrawCardMod : CardModifier
+public class SpikyCardMod : CardModifier
 {
     public void OnAquire()
     {
-
     }
 
     public void OnBeingDefended(Card cardDefendingThis)
     {
-
+        if (!cardDefendingThis.GetCard()._opponentCard)
+        {
+            GameHandler.Instance.DamagePlayer(1);
+        }
+        else
+        {
+            GameHandler.Instance.DamageOpponent(1);
+        }
     }
 
     public void OnDefendCard(Card defendee, Card defended)
@@ -19,11 +25,9 @@ public class DrawCardMod : CardModifier
 
     public void OnPlayedCard(Card card)
     {
-        GameHandler.Instance.Draw(1);
     }
 
     public void OnReverse(Card card)
     {
-
     }
 }

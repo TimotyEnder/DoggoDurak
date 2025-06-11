@@ -7,6 +7,11 @@ public class BounceCardMod : CardModifier
 
     }
 
+    public void OnBeingDefended(Card cardDefendingThis)
+    {
+
+    }
+
     public void OnDefendCard(Card defendee, Card defended)
     {
         if (!defendee.GetCard()._opponentCard)

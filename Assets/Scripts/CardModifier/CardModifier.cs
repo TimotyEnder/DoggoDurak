@@ -6,5 +6,6 @@ public interface CardModifier
     public void OnDefendCard(Card defendee, Card defended);
     public void OnPlayedCard(Card card);
     public void OnReverse(Card card);
+    public void OnBeingDefended(Card cardDefendingThis);
 
 }

@@ -6,6 +6,11 @@ public class BurnCardMod : CardModifier
     {
     }
 
+    public void OnBeingDefended(Card cardDefendingThis)
+    {
+
+    }
+
     public void OnDefendCard(Card defendee, Card defended)
     {
     }

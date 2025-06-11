@@ -56,6 +56,7 @@ public class CardInfo
         {"Parry", new ParryCardMod()},
         {"Draw", new DrawCardMod()},
         {"Cripple", new CrippleCardMod()},
+        {"Spiky", new SpikyCardMod()},
     };
     public void OnAquire() 
     {
@@ -83,6 +84,13 @@ public class CardInfo
         foreach (CardModifierContainer c in _modifiers)
         {
             modifierStringToType.GetValueOrDefault(c.ModType).OnReverse(card);
+        }
+    }
+    public void OnBeingDefended(Card cardDefendingThis)
+    {
+        foreach (CardModifierContainer c in _modifiers)
+        {
+            modifierStringToType.GetValueOrDefault(c.ModType).OnBeingDefended(cardDefendingThis);
         }
     }
     public void addModifier(string ModType) 

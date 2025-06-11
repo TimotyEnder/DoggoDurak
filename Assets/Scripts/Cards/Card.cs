@@ -219,7 +219,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void Defend(Card defendedWith) 
     {
         _defended = true;  
-        _cardDefending = defendedWith;  
+        _cardDefending = defendedWith;
+        _cardInfo.OnBeingDefended(defendedWith);
     }
     public Card GetCardDefending() 
     {
