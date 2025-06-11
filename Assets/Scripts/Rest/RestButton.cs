@@ -15,7 +15,7 @@ public class RestButton : MonoBehaviour
         if (GameHandler.Instance.GetGameState()._restPoints > GameHandler.Instance.GetGameState()._restRpointCost)
         {
             GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._restRpointCost;
-            GameHandler.Instance.GetGameState()._health += Mathf.RoundToInt(GameHandler.Instance.GetGameState()._maxhealth * 0.5f);
+            GameHandler.Instance.SetHealth(Mathf.RoundToInt(GameHandler.Instance.GetGameState()._maxhealth * 0.5f));
             GameObject.Find("RestHandler").GetComponent<RestHandler>().UpdateRestUI();
         }
         else 
