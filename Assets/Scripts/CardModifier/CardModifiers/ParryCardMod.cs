@@ -19,6 +19,13 @@ public class ParryCardMod : CardModifier
 
     public void OnReverse(Card card)
     {
-        GameHandler.Instance.Damage(card.GetCard()._number);
+        if (!card.GetCard()._opponentCard)
+        {
+            GameHandler.Instance.DamageOpponent(card.GetCard()._number);
+        }
+        else 
+        {
+            GameHandler.Instance.DamagePlayer(card.GetCard()._number);
+        }
     }
 }

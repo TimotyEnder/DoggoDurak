@@ -9,7 +9,14 @@ public class RestoringCardMod : CardModifier
 
     public void OnDefendCard(Card defendee, Card defended)
     {
-        GameHandler.Instance.Heal(Mathf.Abs(defendee.GetCard()._number - defended.GetCard()._number));
+        if (!defendee.GetCard()._opponentCard)
+        {
+            GameHandler.Instance.HealPlayer(Mathf.Abs(defendee.GetCard()._number - defended.GetCard()._number));
+        }
+        else 
+        {
+            GameHandler.Instance.HealOpponent(Mathf.Abs(defendee.GetCard()._number - defended.GetCard()._number));
+        }
     }
 
     public void OnPlayedCard(Card card)

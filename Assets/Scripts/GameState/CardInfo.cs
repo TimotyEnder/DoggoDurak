@@ -9,6 +9,7 @@ public class CardInfo
     public  int _suitNumber;
     public int _number;
     public List<CardModifierContainer> _modifiers;
+    public bool _opponentCard;
 
     public CardInfo(string suit, int number) 
     {
@@ -16,6 +17,15 @@ public class CardInfo
         this._suitNumber = SuitNumber(suit);
         this._number = number;
         this._modifiers= new List<CardModifierContainer>();  
+        this._opponentCard=false;
+    }
+    public CardInfo(string suit, int number, bool opp) //to initialize enemy cards
+    {
+        this._suit = suit;
+        this._suitNumber = SuitNumber(suit);
+        this._number = number;
+        this._modifiers = new List<CardModifierContainer>();
+        this._opponentCard = opp;
     }
     int SuitNumber(string suit)  //inherent suit  ordering structure here
     {
