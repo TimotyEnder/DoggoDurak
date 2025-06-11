@@ -26,6 +26,7 @@ public class GameState
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("C", j));
+
                     }
                     break;
                 case 1:

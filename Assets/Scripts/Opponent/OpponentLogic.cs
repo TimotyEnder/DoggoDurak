@@ -73,6 +73,7 @@ public class OpponentLogic : MonoBehaviour
                             GameObject CardToReverse = Instantiate(cardMaker);
                             CardToReverse.GetComponent<Card>().MakeCard(cardInHand);
                             CardToReverse.GetComponent<Card>().PlayCard();
+                            CardToReverse.GetComponent<Card>().GetCard().OnReverse(CardToReverse.GetComponent<Card>());
                             _turnHandler.Reverse();
                             return true;
                         }

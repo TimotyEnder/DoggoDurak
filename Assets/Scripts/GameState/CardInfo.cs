@@ -75,4 +75,8 @@ public class CardInfo
             modifierStringToType.GetValueOrDefault(c.ModType).OnReverse(card);
         }
     }
+    public void addModifier(string ModType) 
+    {
+        _modifiers.Add(new CardModifierContainer(ModType));
+    }
 }
