@@ -1,5 +1,7 @@
+
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
@@ -29,6 +31,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private bool _defended;
     private Card _cardDefending;
     private OpponentLogic _opponent;
+    //visual modifiers
+    private GameObject _bounceOverlay;
+    private GameObject _burnOverlay;
+    private TextMeshProUGUI _burnText;
+    private GameObject _crippleOverlay;
+    private GameObject _drawOverlay;
+    private TextMeshProUGUI _drawText;
+    private GameObject _parryOverlay;
+    private GameObject _restoringOverlay;
+    private TextMeshProUGUI _restoringText;
+    private GameObject _spikyOverlay;
 
 
     void Start()
@@ -66,6 +79,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _defended = false;
         //Opponent
         _opponent = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
+
     }
     void Update()
     {
@@ -74,7 +88,62 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         this._cardInfo = card;
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
+        transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
+        UpdateModifiers();
+    }
+    public void UpdateModifiers() 
+    {
+        //cardModifiers
+        _restoringOverlay = transform.Find("CardImage/RestoringMod").gameObject;
+        _restoringText = _restoringOverlay.transform.Find("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
+        _bounceOverlay = transform.Find("CardImage/BounceMod").gameObject;
+        _burnOverlay = transform.Find("CardImage/BurnMod").gameObject;
+        _burnText = _burnOverlay.transform.Find("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
+        _crippleOverlay = transform.Find("CardImage/CrippleMod").gameObject;
+        _drawOverlay = transform.Find("CardImage/DrawMod").gameObject;
+        _drawText = _drawOverlay.transform.Find("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
+        _parryOverlay = transform.Find("CardImage/ParryMod").gameObject;
+        _spikyOverlay = transform.Find("CardImage/SpikyMod").gameObject;
+
+        _restoringOverlay.SetActive(false);
+        _bounceOverlay.SetActive(false);
+        _burnOverlay.SetActive(false);
+        _parryOverlay.SetActive(false);
+        _drawOverlay.SetActive(false);
+        _crippleOverlay.SetActive(false);
+        _spikyOverlay.SetActive(false);
+
+        foreach (KeyValuePair<string,int> c in _cardInfo._modifierStacks) 
+        {
+            switch(c.Key) 
+            {
+                case "Restoring":
+                    _restoringOverlay.SetActive(true);
+                    _restoringText.text = "+";
+                    break;
+                case "Bounce":
+                    _bounceOverlay.SetActive(true);
+                    break;
+                case "Burn":
+                    _burnOverlay.SetActive(true);
+                    _burnText.text = c.Value.ToString();
+                    break;
+                case "Parry":
+                    _parryOverlay.SetActive(true);
+                    break;
+                case "Draw":
+                    _drawOverlay.SetActive(true);
+                    _drawText.text = c.Value.ToString();
+                    break;
+                case "Cripple":
+                    _crippleOverlay.SetActive(true);
+                    break;
+                case "Spiky":
+                    _spikyOverlay.SetActive(true);
+                    break;
+            }
+        }
     }
     public void OnDraw()
     {

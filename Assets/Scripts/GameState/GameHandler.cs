@@ -90,10 +90,9 @@ public class GameHandler : MonoBehaviour
     }
     public void HealPlayer(int amount) //any healing effects should be handled by this
     {
-        SetHealth(_state._health+amount);
         if(GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
         {
-            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().SetHealth(_state._health);
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
     }
     public void HealOpponent(int amount) //any healing effects should be handled by this
@@ -112,10 +111,9 @@ public class GameHandler : MonoBehaviour
     }
     public void DamagePlayer(int amount) //any effects damaging the player should go through this
     {
-        SetHealth(_state._health - amount);
         if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
-            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().SetHealth(_state._health);
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
         }
     }
     public void Draw(int amount) 

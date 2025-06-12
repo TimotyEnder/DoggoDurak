@@ -49,6 +49,10 @@ public class GameState
                     break;
             }
         }
+        foreach (CardInfo info in _deck) 
+        {
+            info.addModifier("Spiky");
+        }
         _gold = 0;
         _health = 100;
         _maxhealth = 100;

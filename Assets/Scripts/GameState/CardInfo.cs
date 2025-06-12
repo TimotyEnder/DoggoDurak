@@ -10,6 +10,7 @@ public class CardInfo
     public int _number;
     public List<CardModifierContainer> _modifiers;
     public bool _opponentCard;
+    public Dictionary<string, int> _modifierStacks;
 
     public CardInfo(string suit, int number) 
     {
@@ -18,6 +19,7 @@ public class CardInfo
         this._number = number;
         this._modifiers= new List<CardModifierContainer>();  
         this._opponentCard=false;
+        this._modifierStacks=new Dictionary<string, int>();
     }
     public CardInfo(string suit, int number, bool opp) //to initialize enemy cards
     {
@@ -26,6 +28,7 @@ public class CardInfo
         this._number = number;
         this._modifiers = new List<CardModifierContainer>();
         this._opponentCard = opp;
+        this._modifierStacks = new Dictionary<string, int>();
     }
     int SuitNumber(string suit)  //inherent suit  ordering structure here
     {
@@ -96,5 +99,10 @@ public class CardInfo
     public void addModifier(string ModType) 
     {
         _modifiers.Add(new CardModifierContainer(ModType));
+        if (!_modifierStacks.ContainsKey(ModType))
+        {
+            _modifierStacks[ModType] = 0;
+        }
+        _modifierStacks[ModType] += 1;
     }
 }
