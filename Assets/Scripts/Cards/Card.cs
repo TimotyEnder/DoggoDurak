@@ -114,6 +114,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _crippleOverlay.SetActive(false);
         _spikyOverlay.SetActive(false);
 
+        _cardInfo.UpdateModifiers();
+
         foreach (KeyValuePair<string,int> c in _cardInfo._modifierStacks) 
         {
             switch(c.Key) 

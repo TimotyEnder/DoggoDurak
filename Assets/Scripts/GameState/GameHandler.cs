@@ -49,6 +49,7 @@ public class GameHandler : MonoBehaviour
         if (HasSave()) 
         {
             _state=_saveManager.Value.Load();
+            Next();
         }
     }
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next

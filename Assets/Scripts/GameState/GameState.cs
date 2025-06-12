@@ -51,7 +51,7 @@ public class GameState
         }
         foreach (CardInfo info in _deck) 
         {
-            info.addModifier("Spiky");
+            info.addModifier("Restoring");
         }
         _gold = 0;
         _health = 100;

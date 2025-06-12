@@ -105,4 +105,16 @@ public class CardInfo
         }
         _modifierStacks[ModType] += 1;
     }
+    public void UpdateModifiers() 
+    {
+        _modifierStacks.Clear();
+        foreach(CardModifierContainer c in _modifiers) 
+        {
+            if(!_modifierStacks.ContainsKey(c.ModType))
+            {
+                _modifierStacks[c.ModType] = 0;
+            }
+            _modifierStacks[c.ModType] += 1;
+        }
+    }
 }
