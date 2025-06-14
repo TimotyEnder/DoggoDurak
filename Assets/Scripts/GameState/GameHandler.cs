@@ -108,6 +108,7 @@ public class GameHandler : MonoBehaviour
         if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+            GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
         }
     }
     public void DamagePlayer(int amount) //any effects damaging the player should go through this
@@ -115,6 +116,7 @@ public class GameHandler : MonoBehaviour
         if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+            GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
         }
     }
     public void Draw(int amount) 
