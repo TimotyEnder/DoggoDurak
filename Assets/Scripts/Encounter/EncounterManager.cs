@@ -15,7 +15,7 @@ public class EncounterManager
         foreach(var e in loadedEncounters) 
         {
             e.InitEncounter();
-            if (!e.isBoss())
+            if (!e.IsBoss())
             {
                 while (e.GetDay() >= _encounters.Count)
                 {

@@ -6,38 +6,38 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Encounter", menuName = "Resources/Encounter")]
 public abstract class Encounter : ScriptableObject
 {
-    [SerializeField] protected int _day;
-    [SerializeField] protected List<CardInfo> _deck;
-    [SerializeField] protected int _health;
-    [SerializeField] protected int _goldReward;
-    [SerializeField] protected char _trumpSuit;
-    [SerializeField] protected  Sprite _icon;
-    [SerializeField] protected bool _boss;
+    [SerializeField] protected int day;
+    [SerializeField] protected List<CardInfo> deck;
+    [SerializeField] protected int health;
+    [SerializeField] protected int goldReward;
+    [SerializeField] protected char trumpSuit;
+    [SerializeField] protected  Sprite icon;
+    [SerializeField] protected bool boss;
     //additional rewards implement here
 
     public abstract void InitEncounter();
     public int GetDay() 
     {
-        return _day;
+        return day;
     }
     public List<CardInfo> GetDeck()
     {
-        return _deck;
+        return deck;
     }
     public int GetReward() 
     {
-        return _goldReward;
+        return goldReward;
     }
     public int GetHealth() 
     { 
-        return _health;
+        return health;
     }
     public char GetTrumpSuit() 
     {
-        return _trumpSuit;
+        return trumpSuit;
     }
-    public bool isBoss() 
+    public bool IsBoss() 
     {
-        return _boss;
+        return boss;
     }
 }

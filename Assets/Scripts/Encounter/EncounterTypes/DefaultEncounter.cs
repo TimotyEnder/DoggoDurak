@@ -5,7 +5,7 @@ public class DefaultEncounter : Encounter
 {
     public override void InitEncounter()
     {
-        _deck = new List<CardInfo>(); //standart durak deck initialization
+        deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 4; i++)
         {
             switch (i)
@@ -13,34 +13,34 @@ public class DefaultEncounter : Encounter
                 case 0:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("C", j,true));
+                        deck.Add(new CardInfo("C", j,true));
                     }
                     break;
                 case 1:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("S", j,true));
+                        deck.Add(new CardInfo("S", j,true));
                     }
                     break;
                 case 2:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("D", j, true));
+                        deck.Add(new CardInfo("D", j, true));
                     }
                     break;
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("H", j,true));
+                        deck.Add(new CardInfo("H", j,true));
                     }
                     break;
             }
         }
-        _goldReward = 0;
-        _health = 40;
-        _trumpSuit = 'R';
-        _icon = null;
-        _boss = false;
-        _day = 0;
+        goldReward = 0;
+        health = 40;
+        trumpSuit = 'R';
+        icon = null;
+        boss = false;
+        day = 0;
     }
 }

@@ -5,7 +5,7 @@ public class DebugEncounter : Encounter
 {
     public override void InitEncounter()
     {
-        _deck = new List<CardInfo>(); //standart durak deck initialization
+        deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 4; i++)
         {
             switch (i)
@@ -13,34 +13,34 @@ public class DebugEncounter : Encounter
                 case 0:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("C", 10));
+                        deck.Add(new CardInfo("C", 10));
                     }
                     break;
                 case 1:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("S", 10));
+                        deck.Add(new CardInfo("S", 10));
                     }
                     break;
                 case 2:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("D", 10));
+                        deck.Add(new CardInfo("D", 10));
                     }
                     break;
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("H", 10));
+                        deck.Add(new CardInfo("H", 10));
                     }
                     break;
             }
         }
-        _goldReward = 0;
-        _health = 69;
-        _trumpSuit = 'S';
-        _icon = null;
-        _boss = false;
-        _day = 0;
+        goldReward = 0;
+        health = 69;
+        trumpSuit = 'S';
+        icon = null;
+        boss = false;
+        day = 0;
     }
 }
