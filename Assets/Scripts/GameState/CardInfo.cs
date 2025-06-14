@@ -5,21 +5,21 @@ using UnityEngine;
 [Serializable]
 public class CardInfo
 {
-    public  string _suit;
-    public  int _suitNumber;
+    public string _suit;
+    public int _suitNumber;
     public int _number;
     public List<CardModifierContainer> _modifiers;
     public bool _opponentCard;
     public Dictionary<string, int> _modifierStacks;
 
-    public CardInfo(string suit, int number) 
+    public CardInfo(string suit, int number)
     {
         this._suit = suit;
         this._suitNumber = SuitNumber(suit);
         this._number = number;
-        this._modifiers= new List<CardModifierContainer>();  
-        this._opponentCard=false;
-        this._modifierStacks=new Dictionary<string, int>();
+        this._modifiers = new List<CardModifierContainer>();
+        this._opponentCard = false;
+        this._modifierStacks = new Dictionary<string, int>();
     }
     public CardInfo(string suit, int number, bool opp) //to initialize enemy cards
     {
@@ -61,6 +61,16 @@ public class CardInfo
         {"Cripple", new CrippleCardMod()},
         {"Spiky", new SpikyCardMod()},
     };
+    private static Dictionary<string, int> modifierMaxCopies = new Dictionary<string, int>  //-1 equals infinite copies
+    {
+        {"Restoring", 1},
+        {"Bounce", 1},
+        {"Burn", -1},
+        {"Parry", 1},
+        {"Draw", -1},
+        {"Cripple", -1},
+        {"Spiky", -1},
+    };
     public void OnAquire() 
     {
         foreach(CardModifierContainer c in _modifiers) 
@@ -98,12 +108,15 @@ public class CardInfo
     }
     public void addModifier(string ModType) 
     {
-        _modifiers.Add(new CardModifierContainer(ModType));
-        if (!_modifierStacks.ContainsKey(ModType))
+        if (modifierMaxCopies[ModType]==-1 || !_modifierStacks.ContainsKey(ModType) || _modifierStacks[ModType] < modifierMaxCopies[ModType]) 
         {
-            _modifierStacks[ModType] = 0;
+            _modifiers.Add(new CardModifierContainer(ModType));
+            if (!_modifierStacks.ContainsKey(ModType))
+            {
+                _modifierStacks[ModType] = 0;
+            }
+            _modifierStacks[ModType] += 1;
         }
-        _modifierStacks[ModType] += 1;
     }
     public void UpdateModifiers() 
     {

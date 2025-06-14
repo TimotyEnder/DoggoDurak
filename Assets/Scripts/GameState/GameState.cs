@@ -51,7 +51,8 @@ public class GameState
         }
         foreach (CardInfo info in _deck) 
         {
-            info.addModifier("Restoring");
+            info.addModifier("Bounce");
+            info.addModifier("Bounce");
         }
         _gold = 0;
         _health = 100;
