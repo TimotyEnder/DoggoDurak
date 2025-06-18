@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CrippleMod_0: 7311969977732687052
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
