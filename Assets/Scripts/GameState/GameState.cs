@@ -7,7 +7,9 @@ using UnityEngine;
 public class GameState
 {
     public List<CardInfo> _deck;
+    [NonSerialized]
     public List<Item> _items;
+    [SerializeField]
     private List<ItemContainer> _serializableItems;
     public int _gold;
     public int _health;
@@ -59,6 +61,13 @@ public class GameState
         _restPoints = 3;
         _maxrestPoints = 3;
         _restRpointCost = 1; //cost to use rest action in the rest tab
+        _items= new List<Item>();
+        _serializableItems = new List<ItemContainer>();
+
+        //debug
+        Item defItem = ScriptableObject.CreateInstance<DefaultItem>();
+        defItem.InitItem();
+        this.AddItem(defItem);
     }
     public void SaveItems() 
     {
@@ -83,8 +92,9 @@ public class GameState
         }
         OnLoad();
     }
-    public void AddItem(Item item) 
+    public void AddItem(Item item) //assumes item has been initialized with InitItem()
     {
+        item.OnAquire();
         _items.Add(item);
     }
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
@@ -94,14 +104,6 @@ public class GameState
         foreach (Item item in _items)
         {
             item.OnLoad();
-        }
-    }
-    //when picked up
-    public void OnAquire() 
-    {
-        foreach (Item item in _items)
-        {
-            item.OnAquire();
         }
     }
     public void OnDefendCard(Card defendee, Card defended) 
