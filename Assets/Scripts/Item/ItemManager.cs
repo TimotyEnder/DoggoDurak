@@ -32,7 +32,9 @@ public class ItemManager
     {
         if (rarity < _items.Count && _items[rarity].Count > 0)
         {
-            return _items[rarity][Random.Range(0, _items[rarity].Count)];
+            Item itemReturned = Object.Instantiate(_items[rarity][Random.Range(0, _items[rarity].Count)]);
+            itemReturned.InitItem();
+            return itemReturned;
         }
         return null;
     }

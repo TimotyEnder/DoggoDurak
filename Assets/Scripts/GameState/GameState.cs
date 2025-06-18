@@ -60,8 +60,6 @@ public class GameState
         _maxrestPoints = 3;
         _restRpointCost = 1; //cost to use rest action in the rest tab
     }
-    //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
-    // and life total does it in it's OnLoad()
     public void SaveItems() 
     {
         _serializableItems.Clear();
@@ -85,7 +83,13 @@ public class GameState
         }
         OnLoad();
     }
-    public  void OnLoad() 
+    public void AddItem(Item item) 
+    {
+        _items.Add(item);
+    }
+    //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
+    // and life total does it in it's OnLoad()
+    public void OnLoad() 
     {
         foreach (Item item in _items)
         {
