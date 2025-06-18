@@ -2,17 +2,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DefaulItem", menuName = "Items/Default")]
 public class DefaultItem : Item
 {
-    public override void InitItem()
+    public override void OnLoad()
     {
         rarity = 0;
         boss = false;
     }
 
     public override void OnAquire()
-    {
-    }
-
-    public override void OnBeingDefended(Card cardDefendingThis)
     {
     }
 

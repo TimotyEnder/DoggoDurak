@@ -12,7 +12,7 @@ public class ItemManager
         var loadedItems = Resources.LoadAll<Item>("Items");
         foreach (var i in loadedItems)
         {
-            i.InitItem();
+            i.OnLoad();
             if (!i.IsBoss())
             {
                 while (i.GetRarity() >= _items.Count)

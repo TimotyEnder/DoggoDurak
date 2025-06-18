@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameState
 {
     public List<CardInfo> _deck;
+    public List<ItemContainer> _items; 
     public int _gold;
     public int _health;
     public int _maxhealth;
@@ -58,5 +59,46 @@ public class GameState
         _maxrestPoints = 3;
         _restRpointCost = 1; //cost to use rest action in the rest tab
     }
-
+    public static Dictionary<String, Item> NameToItem = new Dictionary<String, Item>() 
+    {
+        {"Default", new DefaultItem() } //remove later if necessary
+    };
+    //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
+    // and life total does it in it's OnLoad()
+    public  void OnLoad() 
+    {
+        foreach (ItemContainer item in _items)
+        {
+            NameToItem[item.ItemName].OnLoad();
+        }
+    }
+    //when picked up
+    public void OnAquire() 
+    {
+        foreach (ItemContainer item in _items)
+        {
+            NameToItem[item.ItemName].OnAquire();
+        }
+    }
+    public void OnDefendCard(Card defendee, Card defended) 
+    {
+        foreach (ItemContainer item in _items)
+        {
+            NameToItem[item.ItemName].OnDefendCard(defendee, defended);
+        }
+    }
+    public void OnPlayedCard(Card card) 
+    {
+        foreach (ItemContainer item in _items)
+        {
+            NameToItem[item.ItemName].OnPlayedCard(card);
+        }
+    }
+    public  void OnReverse(Card card) 
+    {
+        foreach (ItemContainer item in _items)
+        {
+            NameToItem[item.ItemName].OnReverse(card);
+        }
+    }
 }
