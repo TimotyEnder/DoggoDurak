@@ -7,7 +7,8 @@ using UnityEngine;
 public class GameState
 {
     public List<CardInfo> _deck;
-    public List<ItemContainer> _items; 
+    public List<Item> _items;
+    private List<ItemContainer> _serializableItems;
     public int _gold;
     public int _health;
     public int _maxhealth;
@@ -59,46 +60,65 @@ public class GameState
         _maxrestPoints = 3;
         _restRpointCost = 1; //cost to use rest action in the rest tab
     }
-    public static Dictionary<String, Item> NameToItem = new Dictionary<String, Item>() 
-    {
-        {"Default", new DefaultItem() } //remove later if necessary
-    };
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
     // and life total does it in it's OnLoad()
+    public void SaveItems() 
+    {
+        _serializableItems.Clear();
+        foreach (Item item in _items)
+        {
+            _serializableItems.Add(new ItemContainer(item.GetId(), JsonUtility.ToJson(item)));
+        }
+    }
+    public void LoadItems() 
+    {
+        _items.Clear();
+        foreach (ItemContainer iCont in _serializableItems)
+        {
+            // Get the base ScriptableObject (pre-loaded in Resources/Items/)
+            Item item = Resources.Load<Item>($"Items/{iCont.ItemID}");
+            Item runtimeItem = ScriptableObject.CreateInstance(item.GetType()) as Item;
+            // Create a runtime instance and apply saved data
+            JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeItem);
+
+            _items.Add(item);
+        }
+        OnLoad();
+    }
     public  void OnLoad() 
     {
-        foreach (ItemContainer item in _items)
+        foreach (Item item in _items)
         {
-            NameToItem[item.ItemName].OnLoad();
+            item.OnLoad();
         }
     }
     //when picked up
     public void OnAquire() 
     {
-        foreach (ItemContainer item in _items)
+        foreach (Item item in _items)
         {
-            NameToItem[item.ItemName].OnAquire();
+            item.OnAquire();
         }
     }
     public void OnDefendCard(Card defendee, Card defended) 
     {
-        foreach (ItemContainer item in _items)
+        foreach (Item item in _items)
         {
-            NameToItem[item.ItemName].OnDefendCard(defendee, defended);
+            item.OnDefendCard(defendee, defended);
         }
     }
     public void OnPlayedCard(Card card) 
     {
-        foreach (ItemContainer item in _items)
+        foreach (Item item in _items)
         {
-            NameToItem[item.ItemName].OnPlayedCard(card);
+            item.OnPlayedCard(card);
         }
     }
     public  void OnReverse(Card card) 
     {
-        foreach (ItemContainer item in _items)
+        foreach (Item item in _items)
         {
-            NameToItem[item.ItemName].OnReverse(card);
+            item.OnReverse(card);
         }
     }
 }

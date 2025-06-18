@@ -3,9 +3,12 @@ using UnityEngine;
 [Serializable]
 public class ItemContainer
 {
-    public ItemContainer(string ItemName)
+    public string ItemID;
+    public string SerializedData;
+
+    public ItemContainer(string itemID, string serializedData)
     {
-        this.ItemName = ItemName;
+        ItemID = itemID;
+        SerializedData = serializedData;
     }
-    public string ItemName;
 }

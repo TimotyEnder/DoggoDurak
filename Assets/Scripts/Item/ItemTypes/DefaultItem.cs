@@ -2,10 +2,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DefaulItem", menuName = "Items/Default")]
 public class DefaultItem : Item
 {
-    public override void OnLoad()
+    public override void InitItem()
     {
         rarity = 0;
         boss = false;
+        ItemId = "DefaulItem";
+    }
+    public override void OnLoad()
+    {
+
     }
 
     public override void OnAquire()
@@ -22,5 +27,6 @@ public class DefaultItem : Item
 
     public override void OnReverse(Card card)
     {
+
     }
 }

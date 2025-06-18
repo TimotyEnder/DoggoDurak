@@ -12,18 +12,19 @@ public class ItemManager
         var loadedItems = Resources.LoadAll<Item>("Items");
         foreach (var i in loadedItems)
         {
-            i.OnLoad();
-            if (!i.IsBoss())
+            Item runtimeItem = Object.Instantiate(i); // Create a safe copy
+            runtimeItem.InitItem();
+            if (!runtimeItem.IsBoss())
             {
-                while (i.GetRarity() >= _items.Count)
+                while (runtimeItem.GetRarity() >= _items.Count)
                 {
                     _items.Add(new List<Item>());
                 }
-                _items[i.GetRarity()].Add(i);
+                _items[runtimeItem.GetRarity()].Add(runtimeItem);
             }
             else
             {
-                _bossItems.Add(i);
+                _bossItems.Add(runtimeItem);
             }
         }
     }

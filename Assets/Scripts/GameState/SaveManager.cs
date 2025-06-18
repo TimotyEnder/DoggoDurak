@@ -5,6 +5,7 @@ public class SaveManager : MonoBehaviour
 {
     public void Save(GameState gameState) 
     {
+        gameState.SaveItems();
         string JSONGameState = JsonUtility.ToJson(gameState,true);
         string path = Path.Combine(Application.persistentDataPath, "SaveGame.json");
         File.WriteAllText(path, JSONGameState);
@@ -17,6 +18,7 @@ public class SaveManager : MonoBehaviour
             string path = Path.Combine(Application.persistentDataPath, "SaveGame.json");
             string JSONloaded=File.ReadAllText(path);
             GameState gameState = JsonUtility.FromJson<GameState>(JSONloaded);
+            gameState.LoadItems();
             return gameState;
         }
         else {  return null; }
