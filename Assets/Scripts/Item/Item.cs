@@ -3,9 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
 public abstract class Item : ScriptableObject
 {
+    [SerializeField]
     protected int rarity; //0 commmon, 1 uncommon, 2 rare , 3 legendary
+    [SerializeField]
     protected bool boss;
-    protected string ItemId;
+    protected string ItemId;//serialized already in the item container
 
     public abstract void InitItem();
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
