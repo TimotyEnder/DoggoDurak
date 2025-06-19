@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager
 {
     public void Save(GameState gameState) 
     {

@@ -87,7 +87,7 @@ public class GameState
             Item runtimeItem = ScriptableObject.CreateInstance(item.GetType()) as Item;
             // Create a runtime instance and apply saved data
             JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeItem);
-
+            item.InitItem();
             _items.Add(item);
         }
         OnLoad();
