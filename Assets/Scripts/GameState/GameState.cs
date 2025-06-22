@@ -64,6 +64,10 @@ public class GameState
         _items= new List<Item>();
         _serializableItems = new List<ItemContainer>();
 
+        foreach (CardInfo c in _deck) 
+        {
+            c.addModifier("Burn");
+        }
         //debug
         Item defItem = ScriptableObject.CreateInstance<DefaultItem>();
         defItem.InitItem();

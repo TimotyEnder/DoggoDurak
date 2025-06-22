@@ -182,6 +182,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             PlayCard();
             _cardInfo.OnReverse(this);
+            GameHandler.Instance.GetGameState().OnReverse(this);
             _turnHandler.Reverse();
             StartCoroutine(_opponent.EnemyPlay());
         }
@@ -199,6 +200,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _playAreaScript.AttachCard();
         _played = true;
         _cardInfo.OnPlayedCard(this);
+        GameHandler.Instance.GetGameState().OnPlayedCard(this);
     }
     public void DefendCard(Card card) 
     {
@@ -211,6 +213,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _playAreaScript.AddtoDefendedWithCards(this);
         _played = true;
         _cardInfo.OnDefendCard(this, card);
+        GameHandler.Instance.GetGameState().OnDefendCard(this, card);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
