@@ -11,7 +11,7 @@ public class GameState
     public List<Item> _items;
     [SerializeField]
     private List<ItemContainer> _serializableItems;
-    public int _gold;
+    public int _rubles;
     public int _health;
     public int _maxhealth;
     public int _day;
@@ -53,7 +53,7 @@ public class GameState
                     break;
             }
         }
-        _gold = 0;
+        _rubles = 0;
         _health = 100;
         _maxhealth = 100;
         _day = 0;
@@ -66,7 +66,7 @@ public class GameState
 
         foreach (CardInfo c in _deck) 
         {
-            c.addModifier("Burn");
+            //c.addModifier("Burn");
         }
         //debug
         Item defItem = ScriptableObject.CreateInstance<DefaultItem>();

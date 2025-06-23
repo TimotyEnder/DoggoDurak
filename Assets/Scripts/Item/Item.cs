@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Item : ScriptableObject
 {
     [SerializeField]
-    protected int rarity; //0 commmon, 1 uncommon, 2 rare , 3 legendary
+    protected int rarity; //0 commmon, 1 rare, 2 legendary
     [SerializeField]
     protected bool boss;
     protected string ItemId;//serialized already in the item container
