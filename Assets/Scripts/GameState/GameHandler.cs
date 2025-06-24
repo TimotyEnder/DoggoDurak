@@ -46,10 +46,10 @@ public class GameHandler : MonoBehaviour
         /*foreach (CardInfo c in _state._deck)
         {
             c.addModifier("Restoring");
-        }
-        Item debugItem = ScriptableObject.CreateInstance<DoggoSnack>();
+        }*/
+        Item debugItem = ScriptableObject.CreateInstance<HotPaws>();
         debugItem.InitItem();
-        _state.AddItem(debugItem);*/
+        _state.AddItem(debugItem);
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
