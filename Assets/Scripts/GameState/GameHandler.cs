@@ -42,6 +42,14 @@ public class GameHandler : MonoBehaviour
     {
         _state = new GameState();
         _saveManager.Value.Save(_state);
+        //debug
+        /*foreach (CardInfo c in _state._deck)
+        {
+            c.addModifier("Restoring");
+        }
+        Item debugItem = ScriptableObject.CreateInstance<DoggoSnack>();
+        debugItem.InitItem();
+        _state.AddItem(debugItem);*/
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -91,14 +99,14 @@ public class GameHandler : MonoBehaviour
     }
     public void HealPlayer(int amount) //any healing effects should be handled by this
     {
-        if(GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
+        if(GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
     }
     public void HealOpponent(int amount) //any healing effects should be handled by this
     {
-        if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+        if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }

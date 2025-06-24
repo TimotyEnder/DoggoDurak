@@ -63,15 +63,6 @@ public class GameState
         _restRpointCost = 1; //cost to use rest action in the rest tab
         _items= new List<Item>();
         _serializableItems = new List<ItemContainer>();
-
-        foreach (CardInfo c in _deck) 
-        {
-            //c.addModifier("Burn");
-        }
-        //debug
-        Item defItem = ScriptableObject.CreateInstance<DefaultItem>();
-        defItem.InitItem();
-        this.AddItem(defItem);
     }
     public void SaveItems() 
     {
