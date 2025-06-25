@@ -13,9 +13,16 @@ public class DachaDoorstep : Item
     {
         for (int i = 0; i < 3; i++)
         {
-            GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)].addModifier("Bounce");
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            if (!cardToMod._modifierStacks.ContainsKey("Bounce"))
+            {
+                cardToMod.addModifier("Bounce");
+            }
+            else
+            {
+                i--;
+            }
         }
-    }
 
     public override void OnDefendCard(Card defendee, Card defended)
     {

@@ -13,7 +13,15 @@ public class BabushkasBorsh : Item
     {
         for (int i = 0; i < 3; i++)
         {
-            GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)].addModifier("Restoring");
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            if (!cardToMod._modifierStacks.ContainsKey("Restoring"))
+            {
+                cardToMod.addModifier("Restoring");
+            }
+            else 
+            {
+                i--;
+            }
         }
     }
 
