@@ -47,7 +47,7 @@ public class GameHandler : MonoBehaviour
         {
             c.addModifier("Restoring");
         }*/
-        Item debugItem = ScriptableObject.CreateInstance<HotPaws>();
+        Item debugItem = ScriptableObject.CreateInstance<ClippedClaws>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Next();
