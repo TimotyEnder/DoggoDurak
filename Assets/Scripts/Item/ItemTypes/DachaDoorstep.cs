@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "DachaDoorstep", menuName = "Items/Common/DachaDoorstep")]
 public class DachaDoorstep : Item
@@ -11,19 +13,26 @@ public class DachaDoorstep : Item
 
     public override void OnAquire()
     {
-        for (int i = 0; i < 3; i++)
+        int cardsModded = 0;
+        int it = 0;
+        int amountToMod = 3;
+        string modifier = "Bounce";
+        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amountToMod) 
         {
             CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
-            if (!cardToMod._modifierStacks.ContainsKey("Bounce"))
+            if (!cardToMod._modifierStacks.ContainsKey(modifier))
             {
-                cardToMod.addModifier("Bounce");
+                cardToMod.AddModifier(modifier);
+                cardsModded++;
             }
-            else
-            {
-                i--;
-            }
+            it++;
         }
-
+        for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
+        {
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            cardToMod.AddModifier(modifier);
+        }
+    }
     public override void OnDefendCard(Card defendee, Card defended)
     {
     }

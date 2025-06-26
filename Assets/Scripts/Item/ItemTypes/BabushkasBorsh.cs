@@ -11,17 +11,24 @@ public class BabushkasBorsh : Item
 
     public override void OnAquire()
     {
-        for (int i = 0; i < 3; i++)
+        int cardsModded = 0;
+        int it = 0;
+        int amountToMod = 3;
+        string modifier = "Restoring";
+        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amountToMod)
         {
             CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
-            if (!cardToMod._modifierStacks.ContainsKey("Restoring"))
+            if (!cardToMod._modifierStacks.ContainsKey(modifier))
             {
-                cardToMod.addModifier("Restoring");
+                cardToMod.AddModifier(modifier);
+                cardsModded++;
             }
-            else 
-            {
-                i--;
-            }
+            it++;
+        }
+        for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
+        {
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            cardToMod.AddModifier(modifier);
         }
     }
 

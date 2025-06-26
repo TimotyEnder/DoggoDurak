@@ -106,7 +106,7 @@ public class CardInfo
             modifierStringToType.GetValueOrDefault(c.ModType).OnBeingDefended(cardDefendingThis);
         }
     }
-    public void addModifier(string ModType) 
+    public void AddModifier(string ModType) 
     {
         if (modifierMaxCopies[ModType]==-1 || !_modifierStacks.ContainsKey(ModType) || _modifierStacks[ModType] < modifierMaxCopies[ModType]) 
         {
