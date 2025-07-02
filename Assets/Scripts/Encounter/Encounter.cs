@@ -9,7 +9,7 @@ public abstract class Encounter : ScriptableObject
     [SerializeField] protected int day;
     [SerializeField] protected List<CardInfo> deck;
     [SerializeField] protected int health;
-    [SerializeField] protected int goldReward;
+    [SerializeField] protected int goldRewardMod;
     [SerializeField] protected char trumpSuit;
     [SerializeField] protected  Sprite icon;
     [SerializeField] protected bool boss;
@@ -26,7 +26,7 @@ public abstract class Encounter : ScriptableObject
     }
     public int GetReward() 
     {
-        return goldReward;
+        return goldRewardMod;
     }
     public int GetHealth() 
     { 

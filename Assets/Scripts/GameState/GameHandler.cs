@@ -47,9 +47,11 @@ public class GameHandler : MonoBehaviour
         {
             c.addModifier("Restoring");
         }*/
+        /*
         Item debugItem = ScriptableObject.CreateInstance<DachaDoorstep>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
+        */
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button

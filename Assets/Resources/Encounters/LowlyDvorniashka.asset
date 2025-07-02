@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10453fb2e0a101e4590e9703feabdb0d, type: 3}
-  m_Name: DefaultEncounter
+  m_Script: {fileID: 11500000, guid: b08c28040d3d9f04383cd11caf54aafb, type: 3}
+  m_Name: LowlyDvorniashka
   m_EditorClassIdentifier: 
-  _day: 0
-  _deck: []
-  _health: 0
-  _goldReward: 0
-  _trumpSuit: 0
-  _icon: {fileID: 0}
-  _boss: 0
+  day: 0
+  deck: []
+  health: 0
+  goldRewardMod: 0
+  trumpSuit: 0
+  icon: {fileID: 0}
+  boss: 0

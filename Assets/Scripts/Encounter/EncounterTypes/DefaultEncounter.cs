@@ -36,7 +36,7 @@ public class DefaultEncounter : Encounter
                     break;
             }
         }
-        goldReward = 0;
+        goldRewardMod = 0;
         health = 40;
         trumpSuit = 'R';
         icon = null;
