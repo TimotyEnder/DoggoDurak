@@ -36,8 +36,8 @@ public class TurnHandler : MonoBehaviour
         _toggled = true;
         _ruleHandler.SetTrumpSuit(_trumpIndicator.SelectTrump());
         _trumpIndicator.Appear();
-        _opponent.initDeck();
-        _playerDeck.loadDeck();
+        _opponent.LoadDeck();
+        _playerDeck.LoadDeck();
         _playerHp.SetHealth(GameHandler.Instance.GetGameState()._health);
         _opponentHp.SetHealth(GameHandler.Instance.GetCurrEncounter().GetHealth());
         Turn();

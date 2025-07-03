@@ -16,7 +16,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     private TurnHandler _turnHandler;
 
-    public void loadDeck() 
+    public void LoadDeck() 
     {
         _deck = GameHandler.Instance.GetGameState()._deck;
     }
@@ -49,7 +49,14 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         int  toDraw= cardHand.GetHandSize() - cardHand.GetCardsInHand(); 
         for (int i = 0; i <toDraw; i++) 
         {
-            Draw();
+            if (_deck.Count > 0)
+            {
+                Draw();
+            }
+            else 
+            {
+                LoadDeck();
+            }
             yield return new WaitForSeconds(0.1f);
         }
     }

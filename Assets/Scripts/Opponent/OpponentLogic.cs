@@ -26,13 +26,13 @@ public class OpponentLogic : MonoBehaviour
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
-        initDeck();
+        LoadDeck();
     }
     public int GetCardsInHand()
     {
         return _hand.Count;
     }
-    public void initDeck()
+    public void LoadDeck()
     {
         _deck = GameHandler.Instance.GetCurrEncounter().GetDeck();
     }
@@ -133,8 +133,15 @@ public class OpponentLogic : MonoBehaviour
         int toDraw = _handSize-_hand.Count;
         for (int i = 0; i < toDraw; i++)
         {
-            Draw();
-            _handUI.AddCard();
+            if (_deck.Count > 0)
+            {
+                Draw();
+                _handUI.AddCard();
+            }
+            else 
+            {
+                LoadDeck();
+            }
             yield return new WaitForSeconds(0.1f);
         }
     }
