@@ -56,7 +56,7 @@ public class LowlyAgileDvorniashka : Encounter
             cardToMod.AddModifier(modifier);
         }
         goldRewardMod = 1;
-        health = 69;
+        health = 20;
         trumpSuit = 'R';
         icon = null;
         boss = false;

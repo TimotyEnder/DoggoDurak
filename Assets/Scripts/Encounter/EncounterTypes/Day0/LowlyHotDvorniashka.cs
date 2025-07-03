@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "LowlySpikyDvorniashka", menuName = "Encounters/Day0/LowlySpikyDvorniashka")]
-public class LowlySpikyDvorniashka : Encounter
+[CreateAssetMenu(fileName = "LowlyHotDvorniashka", menuName = "Encounters/Day0/LowlyHotDvorniashka")]
+public class LowlyHotDvorniashka:Encounter
 {
     public override void InitEncounter()
     {
@@ -36,15 +36,15 @@ public class LowlySpikyDvorniashka : Encounter
                     break;
             }
         }
-        foreach (CardInfo c in deck)
+        foreach (CardInfo c in deck) 
         {
-            if (c._number % 2 != 0)
+            if (c._number%2==0)
             {
-                c.AddModifier("Spiky");
+                c.AddModifier("Burn");
             }
         }
         goldRewardMod = 1;
-        health = 69;
+        health = 20;
         trumpSuit = 'R';
         icon = null;
         boss = false;

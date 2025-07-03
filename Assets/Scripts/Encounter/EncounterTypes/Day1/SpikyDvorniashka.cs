@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "LowlyHotDvorniashka", menuName = "Encounters/Day0/LowlyHotDvorniashka")]
-public class LowlyHotDvorniashka:Encounter
+[CreateAssetMenu(fileName = "SpikyDvorniashka", menuName = "Encounters/Day1/SpikyDvorniashka")]
+public class SpikyDvorniashka : Encounter
 {
     public override void InitEncounter()
     {
@@ -11,40 +11,40 @@ public class LowlyHotDvorniashka:Encounter
             switch (i)
             {
                 case 0:
-                    for (int j = 6; j < 10; j++)
+                    for (int j = 6; j < 12; j++)
                     {
                         deck.Add(new CardInfo("C", j, true));
                     }
                     break;
                 case 1:
-                    for (int j = 6; j < 10; j++)
+                    for (int j = 6; j < 12; j++)
                     {
                         deck.Add(new CardInfo("S", j, true));
                     }
                     break;
                 case 2:
-                    for (int j = 6; j < 10; j++)
+                    for (int j = 6; j < 12; j++)
                     {
                         deck.Add(new CardInfo("D", j, true));
                     }
                     break;
                 case 3:
-                    for (int j = 6; j < 10; j++)
+                    for (int j = 6; j < 12; j++)
                     {
                         deck.Add(new CardInfo("H", j, true));
                     }
                     break;
             }
         }
-        foreach (CardInfo c in deck) 
+        foreach (CardInfo c in deck)
         {
-            if (c._number%2==0)
+            if (c._number % 2 != 0)
             {
-                c.AddModifier("Burn");
+                c.AddModifier("Spiky");
             }
         }
-        goldRewardMod = 1;
-        health = 69;
+        goldRewardMod = 1.5f;
+        health = 40;
         trumpSuit = 'R';
         icon = null;
         boss = false;
