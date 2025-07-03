@@ -13,13 +13,13 @@ public class LowlyBlackDvorniashka : Encounter
                 case 0:
                     for (int j = 6; j < 11; j++)
                     {
-                        deck.Add(new CardInfo("S", 10, true));
+                        deck.Add(new CardInfo("S", j, true));
                     }
                     break;
                 case 1:
                     for (int j = 6; j < 11; j++)
                     {
-                        deck.Add(new CardInfo("C", 10, true));
+                        deck.Add(new CardInfo("C", j, true));
                     }
                     break;
             }

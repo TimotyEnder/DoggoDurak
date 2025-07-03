@@ -13,13 +13,13 @@ public class LowlyRedDvorniashka:Encounter
                 case 0:
                     for (int j = 6; j < 11; j++)
                     {
-                        deck.Add(new CardInfo("H", 10,true));
+                        deck.Add(new CardInfo("H", j,true));
                     }
                     break;
                 case 1:
                     for (int j = 6; j < 11; j++)
                     {
-                        deck.Add(new CardInfo("D", 10, true));
+                        deck.Add(new CardInfo("D", j, true));
                     }
                     break;
             }
