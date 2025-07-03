@@ -56,6 +56,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
             else 
             {
                 LoadDeck();
+                Draw();
             }
             yield return new WaitForSeconds(0.1f);
         }

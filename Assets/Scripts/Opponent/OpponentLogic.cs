@@ -141,6 +141,8 @@ public class OpponentLogic : MonoBehaviour
             else 
             {
                 LoadDeck();
+                Draw();
+                _handUI.AddCard();
             }
             yield return new WaitForSeconds(0.1f);
         }
