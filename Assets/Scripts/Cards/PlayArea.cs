@@ -213,7 +213,6 @@ public class PlayArea : MonoBehaviour
     }
     public void RealignDefendingCards()
     {
-        int index = 0;
         foreach (RectTransform cardTransform in this.transform.Find("PlayedCards"))
         {
             Card card= cardTransform.GetComponent<Card>();
