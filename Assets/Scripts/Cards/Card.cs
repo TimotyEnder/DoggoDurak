@@ -178,7 +178,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             StartCoroutine(_opponent.EnemyPlay());
         }
         //reverse
-        else if (_playAreaScript.CanReverseWithCard(this._cardInfo)) 
+        else if (_playAreaScript.CanReverseWithCard(this._cardInfo) && _turnHandler.GetTurnState() != 0) 
         {
             PlayCard();
             _cardInfo.OnReverse(this);

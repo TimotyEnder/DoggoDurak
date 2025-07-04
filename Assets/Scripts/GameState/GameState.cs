@@ -24,7 +24,7 @@ public class GameState
         _deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 4; i++)
         {
-            switch (i)
+            /*switch (i)
             {
                 case 0:
                     for (int j = 6; j < 15; j++)
@@ -49,6 +49,35 @@ public class GameState
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("H", j));
+                    }
+                    break;
+            }*/
+            //debug
+            switch (i)
+            {
+                case 0:
+                    for (int j = 6; j < 15; j++)
+                    {
+                        _deck.Add(new CardInfo("C", 14));
+
+                    }
+                    break;
+                case 1:
+                    for (int j = 6; j < 15; j++)
+                    {
+                        _deck.Add(new CardInfo("S", 14));
+                    }
+                    break;
+                case 2:
+                    for (int j = 6; j < 15; j++)
+                    {
+                        _deck.Add(new CardInfo("D", 14));
+                    }
+                    break;
+                case 3:
+                    for (int j = 6; j < 15; j++)
+                    {
+                        _deck.Add(new CardInfo("H", 14));
                     }
                     break;
             }

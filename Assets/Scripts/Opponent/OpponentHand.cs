@@ -13,6 +13,7 @@ public class OpponentHand : MonoBehaviour
     private float _idealAngleDelta = 30f;
     [SerializeField]
     private float radius = 150f;
+    [SerializeField]
     private int _cardsInHand;
     private RectTransform _canvas;
     private List<GameObject> _cards = new List<GameObject>(); // Track cards manually
