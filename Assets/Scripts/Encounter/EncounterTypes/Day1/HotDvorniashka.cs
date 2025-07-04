@@ -48,6 +48,6 @@ public class HotDvorniashka : Encounter
         trumpSuit = 'R';
         icon = null;
         boss = false;
-        day = 0;
+        day = 1;
     }
 }

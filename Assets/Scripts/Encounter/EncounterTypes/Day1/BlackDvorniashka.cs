@@ -29,6 +29,6 @@ public class BlackDvorniashka : Encounter
         trumpSuit = 'D';
         icon = null;
         boss = false;
-        day = 0;
+        day = 1;
     }
 }
