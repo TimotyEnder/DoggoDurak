@@ -18,7 +18,11 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     public void LoadDeck() 
     {
-        _deck = GameHandler.Instance.GetGameState()._deck;
+        _deck = new List<CardInfo>();
+        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
+        {
+            _deck.Add(c);
+        }
     }
     void Start() 
     {
