@@ -34,7 +34,11 @@ public class OpponentLogic : MonoBehaviour
     }
     public void LoadDeck()
     {
-        _deck = GameHandler.Instance.GetCurrEncounter().GetDeck();
+        _deck = new List<CardInfo>();
+        foreach (CardInfo c in GameHandler.Instance.GetCurrEncounter().GetDeck())
+        {
+            _deck.Add(c);
+        }
     }
     //check once for available plays
     bool CheckPlay() 
