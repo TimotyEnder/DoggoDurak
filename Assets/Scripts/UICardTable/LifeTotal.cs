@@ -28,6 +28,10 @@ public class LifeTotal : MonoBehaviour
     public void Heal(int amount)
     {
         _hp += amount;
+        if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
+        {
+            _hp = GameHandler.Instance.GetGameState()._maxhealth;
+        }
         UpdateHealth();
     }
     public int GetHealth() 

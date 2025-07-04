@@ -122,4 +122,11 @@ public class GameState
             item.OnReverse(card);
         }
     }
+    public void OnHeal(int amount) 
+    {
+        foreach (Item item in _items)
+        {
+            item.OnHeal(amount);
+        }
+    }
 }

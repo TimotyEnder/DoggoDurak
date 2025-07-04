@@ -37,6 +37,11 @@ public class DachaDoorstep : Item
     {
     }
 
+    public override void OnHeal(int amount)
+    {
+
+    }
+
     public override void OnLoad()
     {
     }

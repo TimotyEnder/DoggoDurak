@@ -99,11 +99,16 @@ public class GameHandler : MonoBehaviour
             _state._health= _state._maxhealth;
         }
     }
-    public void HealPlayer(int amount) //any healing effects should be handled by this
+    //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
+    public void HealPlayer(int amount, bool healFromEffect=false) //any healing effects should be handled by this
     {
         if(GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
+        }
+        if (!healFromEffect) 
+        {
+            _state.OnHeal(amount);
         }
     }
     public void HealOpponent(int amount) //any healing effects should be handled by this
