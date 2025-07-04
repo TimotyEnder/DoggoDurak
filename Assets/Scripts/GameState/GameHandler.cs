@@ -99,6 +99,10 @@ public class GameHandler : MonoBehaviour
             _state._health= _state._maxhealth;
         }
     }
+    public void GameStateHeal(int amount) //heal directly to savefile, used when resting
+    {
+        SetHealth(_state._health + amount);
+    }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
     public void HealPlayer(int amount, bool healFromEffect=false) //any healing effects should be handled by this
     {
