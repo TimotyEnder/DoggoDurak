@@ -43,15 +43,15 @@ public class GameHandler : MonoBehaviour
         _state = new GameState();
         _saveManager.Value.Save(_state);
         //debug
-        /*foreach (CardInfo c in _state._deck)
+        foreach (CardInfo c in _state._deck)
         {
-            c.addModifier("Restoring");
-        }*/
-        /*
-        Item debugItem = ScriptableObject.CreateInstance<DachaDoorstep>();
+            c.AddModifier("Burn");
+        }
+        //debug
+
+        Item debugItem = ScriptableObject.CreateInstance<MolotovKibble>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
-        */
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button

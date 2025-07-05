@@ -31,7 +31,7 @@ public class MolotovKibble : Item
 
     public override void OnPlayedCard(Card card)
     {
-        if (card.GetCard()._modifierStacks["Burn"] > 0) 
+        if (card.GetCard()._modifierStacks.ContainsKey("Burn"))
         {
             int posibility = Random.Range(1, 100);
             if (posibility <= 25) 
