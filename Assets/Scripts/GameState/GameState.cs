@@ -19,6 +19,7 @@ public class GameState
     public int _restPoints;
     public int _maxrestPoints;
     public int _restRpointCost;
+    public int _handSize;
     public GameState() 
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -61,6 +62,7 @@ public class GameState
         _restPoints = 3;
         _maxrestPoints = 3;
         _restRpointCost = 1; //cost to use rest action in the rest tab
+        _handSize = 6;
         _items= new List<Item>();
         _serializableItems = new List<ItemContainer>();
     }

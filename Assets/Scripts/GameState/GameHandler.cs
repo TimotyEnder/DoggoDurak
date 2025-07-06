@@ -45,11 +45,11 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            c.AddModifier("Burn");
+            //c.AddModifier("Burn");
         }
         //debug
 
-        Item debugItem = ScriptableObject.CreateInstance<MolotovKibble>();
+        Item debugItem = ScriptableObject.CreateInstance<TheBreadlineBargain>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Next();

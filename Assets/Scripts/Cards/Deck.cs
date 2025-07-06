@@ -50,7 +50,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     public IEnumerator DrawHandRoutine() 
     {
         CardHandArea cardHand= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        int  toDraw= cardHand.GetHandSize() - cardHand.GetCardsInHand(); 
+        int  toDraw= GameHandler.Instance.GetGameState()._handSize - cardHand.GetCardsInHand(); 
         for (int i = 0; i <toDraw; i++) 
         {
             if (_deck.Count > 0)

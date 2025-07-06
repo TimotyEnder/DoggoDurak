@@ -10,8 +10,6 @@ public class CardHandArea : MonoBehaviour
     private float _maxHandSpacing;
     [SerializeField]
     private int _cardsInHand = 0;
-    [SerializeField]
-    private int _handSize = 6;
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;
@@ -83,10 +81,6 @@ public class CardHandArea : MonoBehaviour
     public int GetCardsInHand() 
     {
         return this._cardsInHand;
-    }
-    public int GetHandSize()
-    {
-        return this._handSize;
     }
     public void AddToCards(Card card) 
     {
