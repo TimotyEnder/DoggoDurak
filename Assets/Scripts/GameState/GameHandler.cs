@@ -49,7 +49,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem = ScriptableObject.CreateInstance<GrilledSteak>();
+        Item debugItem = ScriptableObject.CreateInstance<TsarsCrown>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Next();
