@@ -22,6 +22,7 @@ public class PlayArea : MonoBehaviour
     private List<Card> _cardsDefendedWith;
     private CardHandArea _playerHand;
     private OpponentLogic _opponentHand;
+    private Discard _discard;
     void Start()
     {
         _cardsDefendedWith = new List<Card>();  
@@ -38,6 +39,7 @@ public class PlayArea : MonoBehaviour
         _ruleHandler= GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         _opponentHand= GameObject.Find("Opponent").GetComponent<OpponentLogic>(); 
+        _discard= GameObject.Find("Discard").GetComponent<Discard>();
     }
     void Update()
     {
@@ -199,6 +201,14 @@ public class PlayArea : MonoBehaviour
     }
     public void Wipe() 
     {
+        foreach (Card card in _cardsDefendedWith) 
+        {
+            _discard.AddCard(card.GetCard());
+        }
+        foreach (Card card in _cardsPlayed)
+        {
+            _discard.AddCard(card.GetCard());
+        }
         _cardsDefendedWith = new List<Card>();
         _cardsPlayed = new List<Card>();
         _cardsInPlay = 0;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class OpponentLogic : MonoBehaviour
     private TurnHandler _turnHandler;
     private PlayArea _playArea;
     private RuleHandler _ruleHandler;
+
+    private Discard _discard;
     private void Start()
     {
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
@@ -26,6 +29,7 @@ public class OpponentLogic : MonoBehaviour
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
+        _discard = GameObject.Find("Discard").GetComponent<Discard>();
         LoadDeck();
     }
     public int GetCardsInHand()
@@ -39,6 +43,10 @@ public class OpponentLogic : MonoBehaviour
         {
             _deck.Add(c);
         }
+    }
+    public void LoadDiscard()
+    {
+        _deck = _discard.GetOpponentDiscard();
     }
     //check once for available plays
     bool CheckPlay() 
@@ -144,7 +152,7 @@ public class OpponentLogic : MonoBehaviour
             }
             else 
             {
-                LoadDeck();
+                LoadDiscard();
                 Draw();
                 _handUI.AddCard();
             }
@@ -163,7 +171,9 @@ public class OpponentLogic : MonoBehaviour
     {
         if (_hand.Count>0) 
         {
-            _hand.RemoveAt(Random.Range(0, _hand.Count));
+            int RandomIndex = Random.Range(0, _hand.Count);
+            _discard.AddCard(_deck[RandomIndex]); //add to discard pile if a card is discarded
+            _hand.RemoveAt(RandomIndex);
             _handUI.RemoveCard();
         }
     }

@@ -15,18 +15,25 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     private List<CardInfo> _deck;
 
     private TurnHandler _turnHandler;
+    private Discard _discard;
 
-    public void LoadDeck() 
+   
+    void Start() 
+    {
+        _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        _discard = GameObject.Find("Discard").GetComponent<Discard>();
+    }
+    public void LoadDeck()
     {
         _deck = new List<CardInfo>();
-        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
+        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
             _deck.Add(c);
         }
     }
-    void Start() 
+    public void LoadDiscard()
     {
-        _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        _deck = _discard.GetPlayerDiscard();
     }
     public void Draw() 
     {
@@ -59,7 +66,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
             }
             else 
             {
-                LoadDeck();
+                LoadDiscard();
                 Draw();
             }
             yield return new WaitForSeconds(0.1f);
