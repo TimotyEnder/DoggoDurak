@@ -48,10 +48,10 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Burn");
         }
         //debug
-        /*
-        Item debugItem = ScriptableObject.CreateInstance<TsarsCrown>();
+        
+        Item debugItem = ScriptableObject.CreateInstance<BabushkasSlipper>();
         debugItem.InitItem();
-        _state.AddItem(debugItem);*/
+        _state.AddItem(debugItem);
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
