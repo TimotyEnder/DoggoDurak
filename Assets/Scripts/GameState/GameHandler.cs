@@ -49,7 +49,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
         
-        Item debugItem = ScriptableObject.CreateInstance<TheOligarchsPreviledge>();
+        Item debugItem = ScriptableObject.CreateInstance<BlackCaviar>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Next();
