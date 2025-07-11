@@ -33,6 +33,12 @@ public class DachaDoorstep : Item
             cardToMod.AddModifier(modifier);
         }
     }
+
+    public override void OnDamageOpponent(int amount)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnDefendCard(Card defendee, Card defended)
     {
     }

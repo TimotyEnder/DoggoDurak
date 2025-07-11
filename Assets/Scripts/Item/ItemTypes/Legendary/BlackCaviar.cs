@@ -24,6 +24,11 @@ public class BlackCaviar : Item
         }
     }
 
+    public override void OnDamageOpponent(int amount)
+    {
+        
+    }
+
     public override void OnDefendCard(Card defendee, Card defended)
     {
 

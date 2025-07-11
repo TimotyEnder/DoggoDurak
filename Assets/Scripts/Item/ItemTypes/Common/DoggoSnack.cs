@@ -15,6 +15,11 @@ public class DoggoSnack : Item
         GameHandler.Instance.HealPlayer(GameHandler.Instance.GetGameState()._maxhealth);
     }
 
+    public override void OnDamageOpponent(int amount)
+    {
+   
+    }
+
     public override void OnDefendCard(Card defendee, Card defended)
     {
     }

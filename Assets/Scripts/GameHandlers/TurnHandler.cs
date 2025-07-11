@@ -137,8 +137,13 @@ public class TurnHandler : MonoBehaviour
                 else 
                 {
                     _opponentHp.Damage(card.GetCard()._number);
+                    
                 }
                     yield return new WaitForSeconds(0.75f);
+                if (_turnState == 0) 
+                {
+                    GameHandler.Instance.GetGameState().OnDamageOpponent(card.GetCard()._number);
+                }
                 card.transform.eulerAngles = Vector3.zero;
            }
         }

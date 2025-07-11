@@ -1,28 +1,29 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "DoctorsSausage", menuName = "Items/Rare/DoctorsSausage")]
-public class DoctorsSausage : Item
+[CreateAssetMenu(fileName = "Balalaika", menuName = "Items/Legendary/Balalaika")]
+public class Balalaika : Item
 {
+    private int _timesDamageDone;
     public override void InitItem()
     {
-        this.rarity = 1;
+        this.rarity = 2;
         this.boss = false;
-        this.ItemId = "DoctorsSausage";
+        this.ItemId = "Balalaika";
+        this._timesDamageDone = 0;
     }
 
     public override void OnAquire()
     {
-        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
-        {
-            if (c._number < 14) 
-            {
-                c._number++;
-            }
-        }
+
     }
 
     public override void OnDamageOpponent(int amount)
     {
-        
+        _timesDamageDone++;
+        if (this._timesDamageDone >= 3) 
+        {
+            GameHandler.Instance.DamageOpponent(amount * 2,true);
+            //every third attack triple damage
+        }
     }
 
     public override void OnDefendCard(Card defendee, Card defended)

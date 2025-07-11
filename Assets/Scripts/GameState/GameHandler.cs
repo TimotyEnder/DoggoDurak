@@ -45,11 +45,11 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            //c.AddModifier("Burn");
+            c.AddModifier("Burn");
         }
         //debug
         
-        Item debugItem = ScriptableObject.CreateInstance<KGBConnections>();
+        Item debugItem = ScriptableObject.CreateInstance<Balalaika>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Next();
@@ -104,13 +104,13 @@ public class GameHandler : MonoBehaviour
         SetHealth(_state._health + amount);
     }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
-    public void HealPlayer(int amount, bool healFromEffect=false) //any healing effects should be handled by this
+    public void HealPlayer(int amount, bool fromEffect=false) //any healing effects should be handled by this
     {
         if(GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
-        if (!healFromEffect) 
+        if (!fromEffect) 
         {
             _state.OnHeal(amount);
         }
@@ -122,12 +122,16 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
     }
-    public void DamageOpponent(int amount) //any effects damaging the enemy should go through this
+    public void DamageOpponent(int amount, bool fromEffect=false) //any effects damaging the enemy should go through this
     {
         if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount);
             GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+        }
+        if (!fromEffect) 
+        {
+            _state.OnDamageOpponent(amount);
         }
     }
     public void DamagePlayer(int amount) //any effects damaging the player should go through this

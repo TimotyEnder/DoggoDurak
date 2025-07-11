@@ -131,4 +131,11 @@ public class GameState
             item.OnHeal(amount);
         }
     }
+    public void OnDamageOpponent(int amount)
+    {
+        foreach (Item item in _items)
+        {
+            item.OnDamageOpponent(amount);
+        }
+    }
 }

@@ -15,6 +15,11 @@ public class TheBreadlineBargain : Item
         GameHandler.Instance.GetGameState()._handSize += 1;
     }
 
+    public override void OnDamageOpponent(int amount)
+    {
+        
+    }
+
     public override void OnDefendCard(Card defendee, Card defended)
     {
 

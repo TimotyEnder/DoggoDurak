@@ -19,6 +19,7 @@ public abstract class Item : ScriptableObject
     public abstract void OnPlayedCard(Card card);
     public abstract void OnReverse(Card card);
     public abstract void OnHeal(int amount);
+    public abstract void OnDamageOpponent(int amount);
     public bool IsBoss() 
     {
         return boss;
