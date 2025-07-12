@@ -167,6 +167,14 @@ public class PlayArea : MonoBehaviour
     }
     public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard) 
     {
+        if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._blackCardsSameSuit && defendedCard._suitNumber > 1 && defendingCard._suitNumber > 1) 
+        {
+            return defendingCard._number > defendedCard._number;
+        }
+        if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._redCardsSameSuit && defendedCard._suitNumber < 2 && defendingCard._suitNumber < 2)
+        {
+            return defendingCard._number > defendedCard._number;
+        }
         if (defendedCard._suit == defendingCard._suit)
         {
             return defendingCard._number > defendedCard._number;

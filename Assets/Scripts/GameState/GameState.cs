@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 [Serializable]
@@ -20,6 +21,8 @@ public class GameState
     public int _maxrestPoints;
     public int _restRpointCost;
     public int _handSize;
+    public bool _redCardsSameSuit;
+    public bool _blackCardsSameSuit;
     public GameState() 
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -65,6 +68,8 @@ public class GameState
         _handSize = 6;
         _items= new List<Item>();
         _serializableItems = new List<ItemContainer>();
+        _redCardsSameSuit = false;
+        _blackCardsSameSuit= false;
     }
     public void SaveItems() 
     {

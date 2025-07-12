@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
     private Lazy<SaveManager> _saveManager= new Lazy<SaveManager>(); //elegant fix to start init issue
     private EncounterManager _encounterManager;
     private Encounter _currentEncounter;
+    
     public static GameHandler Instance 
     {
         get
@@ -49,7 +50,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
         
-        Item debugItem = ScriptableObject.CreateInstance<Balalaika>();
+        Item debugItem = ScriptableObject.CreateInstance<RedStar>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Next();
