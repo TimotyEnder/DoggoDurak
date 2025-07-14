@@ -2,7 +2,7 @@ using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemContainer : MonoBehaviour
+public class InventoryItem : MonoBehaviour
 {
     private Item _item;
     private Image _itemImage;
