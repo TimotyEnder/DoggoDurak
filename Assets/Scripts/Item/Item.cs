@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
@@ -8,6 +9,9 @@ public abstract class Item : ScriptableObject
     [SerializeField]
     protected bool boss;
     protected string ItemId;//serialized already in the item container
+    protected Sprite Icon;
+    protected bool isActive;
+    protected string ToolBarText;
 
     public abstract void InitItem();
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
@@ -20,6 +24,12 @@ public abstract class Item : ScriptableObject
     public abstract void OnReverse(Card card);
     public abstract void OnHeal(int amount);
     public abstract void OnDamageOpponent(int amount);
+    public abstract void OnActivate();
+
+    public void LoadIcon(string icon) 
+    {
+        this.Icon= Resources.Load<Sprite>("ItemIcons/"+icon);
+    }
     public bool IsBoss() 
     {
         return boss;

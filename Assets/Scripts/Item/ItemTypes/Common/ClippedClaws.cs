@@ -9,6 +9,11 @@ public class ClippedClaws : Item
         this.ItemId = "ClippedClaws";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
         int cardsModded = 0;

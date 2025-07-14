@@ -9,6 +9,11 @@ public class TsarsCrown:Item
         this.ItemId = "TsarsCrown";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 

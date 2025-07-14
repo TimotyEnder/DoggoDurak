@@ -9,6 +9,11 @@ public class FluffyUshanka : Item
         this.ItemId = "FluffyUshanka";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
 

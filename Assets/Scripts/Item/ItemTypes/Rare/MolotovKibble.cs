@@ -9,6 +9,11 @@ public class MolotovKibble : Item
         this.ItemId = "MolotovKibble";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
 

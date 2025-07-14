@@ -9,6 +9,11 @@ public class RedStar : Item
         this.ItemId = "RedStar";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
         GameHandler.Instance.GetGameState()._redCardsSameSuit = true;

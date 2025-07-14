@@ -11,6 +11,11 @@ public class DachaDoorstep : Item
         this.ItemId = "DachaDoorstep";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
         int cardsModded = 0;

@@ -9,6 +9,11 @@ public class RedCaviar : Item
         this.ItemId = "RedCaviar";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck)

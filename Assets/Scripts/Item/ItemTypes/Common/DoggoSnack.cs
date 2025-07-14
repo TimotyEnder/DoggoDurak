@@ -9,6 +9,11 @@ public class DoggoSnack : Item
         this.ItemId = "DoggoSnack";
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
         GameHandler.Instance.GetGameState()._maxhealth += 10;

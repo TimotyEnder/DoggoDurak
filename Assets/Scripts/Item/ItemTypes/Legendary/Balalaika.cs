@@ -11,6 +11,11 @@ public class Balalaika : Item
         this._timesDamageDone = 0;
     }
 
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnAquire()
     {
 
