@@ -6,12 +6,13 @@ using TMPro;
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private string _tooltipText = "Test";
-    public  GameObject _tooltipPrefab; // A prefab of a default tooptip assigned in inspector
+    [SerializeField]
+    private   GameObject _tooltipPrefab; // A prefab of a default tooptip assigned in inspector
 
     private GameObject _currentTooltip;
 
     private float ttPadding = 5;
-
+    [SerializeField]
     private Canvas canvas;
 
     public void Start()
@@ -36,7 +37,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Vector3 min = canvas.worldCamera.WorldToViewportPoint(corners[0]);
         Vector3 max = canvas.worldCamera.WorldToViewportPoint(corners[2]);
 
-        if (!(max.x < 0 || min.x > 1 || max.y < 0 || min.y > 1))
+        if ((max.x < 0 || min.x > 1 || max.y < 0 || min.y > 1))
         {
             ttRect.position = myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.x + (myRect.rect.height) + 10), 0);
         }
@@ -52,5 +53,20 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void SetToolTipText(string text) 
     {
         this._tooltipText = text;
+    }
+    private bool IsFullyOnScreen(RectTransform rectTransform)
+    {
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        foreach (Vector3 corner in corners)
+        {
+            Vector3 viewportPos = canvas.worldCamera.WorldToViewportPoint(corner);
+            if (viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
