@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -23,27 +24,53 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Create tooltip
-        _currentTooltip = Instantiate(_tooltipPrefab, transform.parent); // Or another appropriate parent
-
-        // Position it (example - above the element)
+        _currentTooltip = Instantiate(_tooltipPrefab, transform.parent);
         RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
         RectTransform myRect = GetComponent<RectTransform>();
 
-        ttRect.position = myRect.position + new Vector3(0, (ttRect.rect.height*ttRect.localScale.x+(myRect.rect.height)+10), 0);//simple but we have to multiply but scale as preferred size is set by the backgorund itself (+4 just to have a small amount of pixels in between to not cause probelms on pointer exit)
-        //if tooltip offscfeen show it in the bottom
-
-        Vector3[] corners = new Vector3[4];
-        ttRect.GetWorldCorners(corners);
-        Vector3 min = canvas.worldCamera.WorldToViewportPoint(corners[0]);
-        Vector3 max = canvas.worldCamera.WorldToViewportPoint(corners[2]);
-
-        if ((max.x < 0 || min.x > 1 || max.y < 0 || min.y > 1))
-        {
-            ttRect.position = myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.x + (myRect.rect.height) + 10), 0);
-        }
-        // Set text
+        // Set text first (this may affect the tooltip's size)
         TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
         ttText.text = _tooltipText;
+
+        // Force update the layout to get proper size
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ttRect);
+
+        // Calculate possible positions
+        Vector3[] preferredPositions = new Vector3[]
+        {
+        // Above
+        myRect.position + new Vector3(0, (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        // Below
+        myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        // Right
+        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), 0, 0),
+        // Left
+        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), 0, 0),
+        // Top-Left
+        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+         // Top-Right
+        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        // Botttom-Left
+        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+         // Bottom-Right
+        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0)
+        };
+
+        // Try each position until we find one that fits
+        foreach (var pos in preferredPositions)
+        {
+            ttRect.position = pos;
+            if (WithinScreenBounds(ttRect))
+            {
+                break;
+            }
+        }
+        
+        // Final fallback - center on screen if all else fails
+        if (!WithinScreenBounds(ttRect))
+        {
+            ttRect.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
+        }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -54,19 +81,14 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         this._tooltipText = text;
     }
-    private bool IsFullyOnScreen(RectTransform rectTransform)
+    private bool WithinScreenBounds(RectTransform rectTransform)
     {
         Vector3[] corners = new Vector3[4];
         rectTransform.GetWorldCorners(corners);
 
-        foreach (Vector3 corner in corners)
-        {
-            Vector3 viewportPos = canvas.worldCamera.WorldToViewportPoint(corner);
-            if (viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
-            {
-                return false;
-            }
-        }
-        return true;
+        return corners.All(c =>
+            c.x >= 0 && c.x <= Screen.width &&
+            c.y >= 0 && c.y <= Screen.height
+        );
     }
 }
