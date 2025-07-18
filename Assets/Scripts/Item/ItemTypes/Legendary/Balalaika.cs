@@ -7,7 +7,7 @@ public class Balalaika : Item
     {
         this.rarity = 2;
         this.boss = false;
-        this.ItemId = "Balalaika";
+        this.itemId = "Balalaika";
         this._timesDamageDone = 0;
     }
 

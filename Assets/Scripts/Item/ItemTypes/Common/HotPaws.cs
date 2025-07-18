@@ -6,7 +6,7 @@ public class HotPaws : Item
     {
         this.rarity = 0;
         this.boss = false;
-        this.ItemId = "HotPaws";
+        this.itemId = "HotPaws";
     }
 
     public override void OnActivate()

@@ -6,7 +6,7 @@ public class GrilledSteak : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.ItemId = "GrilledSteak";
+        this.itemId = "GrilledSteak";
     }
 
     public override void OnActivate()

@@ -6,7 +6,7 @@ public class SiberianBearHuntingSuit : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.ItemId = "SiberianBearHuntingSuit";
+        this.itemId = "SiberianBearHuntingSuit";
     }
 
     public override void OnActivate()

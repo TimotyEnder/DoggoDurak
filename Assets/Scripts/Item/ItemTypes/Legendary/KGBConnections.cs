@@ -6,7 +6,7 @@ public class KGBConnections : Item
     {
         this.rarity = 2;
         this.boss = false;
-        this.ItemId = "KGBConnections";
+        this.itemId = "KGBConnections";
     }
 
     public override void OnActivate()

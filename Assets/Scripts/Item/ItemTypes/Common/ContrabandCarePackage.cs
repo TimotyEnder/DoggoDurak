@@ -6,7 +6,7 @@ public class ContrabandCarePackage : Item
     {
         this.rarity = 0;
         this.boss = false;
-        this.ItemId = "ContrabandCarePackage";
+        this.itemId = "ContrabandCarePackage";
     }
 
     public override void OnActivate()

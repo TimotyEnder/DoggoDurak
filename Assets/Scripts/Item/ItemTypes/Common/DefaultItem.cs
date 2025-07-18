@@ -6,7 +6,7 @@ public class DefaultItem : Item
     {
         rarity = 0;
         boss = false;
-        ItemId = "DefaultItem";
+        itemId = "DefaultItem";
     }
     public override void OnLoad()
     {

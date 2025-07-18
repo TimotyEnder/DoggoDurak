@@ -6,7 +6,7 @@ public class ClippedClaws : Item
     {
         this.rarity = 0;
         this.boss = false;
-        this.ItemId = "ClippedClaws";
+        this.itemId = "ClippedClaws";
     }
 
     public override void OnActivate()

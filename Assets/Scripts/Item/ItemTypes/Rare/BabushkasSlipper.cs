@@ -6,7 +6,7 @@ public class BabushkasSlipper : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.ItemId = "BabushkasSlipper";
+        this.itemId = "BabushkasSlipper";
     }
 
     public override void OnActivate()

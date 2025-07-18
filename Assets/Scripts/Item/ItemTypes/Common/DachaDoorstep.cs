@@ -8,7 +8,7 @@ public class DachaDoorstep : Item
     {
         this.rarity = 0;
         this.boss = false;
-        this.ItemId = "DachaDoorstep";
+        this.itemId = "DachaDoorstep";
     }
 
     public override void OnActivate()

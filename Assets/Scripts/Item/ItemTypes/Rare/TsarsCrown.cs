@@ -6,7 +6,7 @@ public class TsarsCrown:Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.ItemId = "TsarsCrown";
+        this.itemId = "TsarsCrown";
     }
 
     public override void OnActivate()

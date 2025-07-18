@@ -6,7 +6,7 @@ public class MolotovKibble : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.ItemId = "MolotovKibble";
+        this.itemId = "MolotovKibble";
     }
 
     public override void OnActivate()

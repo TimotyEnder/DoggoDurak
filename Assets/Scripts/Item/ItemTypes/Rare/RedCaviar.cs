@@ -6,7 +6,7 @@ public class RedCaviar : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.ItemId = "RedCaviar";
+        this.itemId = "RedCaviar";
     }
 
     public override void OnActivate()

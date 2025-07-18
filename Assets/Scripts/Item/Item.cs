@@ -9,7 +9,7 @@ public abstract class Item : ScriptableObject
     protected int rarity; //0 commmon, 1 rare, 2 legendary
     [SerializeField]
     protected bool boss;
-    protected string ItemId;//serialized already in the item container
+    protected string itemId;//serialized already in the item container
     protected Sprite Icon;
     protected bool isActive;
     protected string toolTipDesc;
@@ -41,11 +41,15 @@ public abstract class Item : ScriptableObject
     }
     public string GetId() 
     {
-        return ItemId;
+        return itemId;
     }
     public string GetItemToolTip() 
     {
-        return $"<size=24><align=center>{ItemId}</align></size>\n" +
+        return $"<size=24><align=center>{itemId}</align></size>\n" +
                $"<size=14><align=left>{toolTipDesc}</align></size>";
+    }
+    public Sprite GetIcon() 
+    {
+        return Icon;
     }
 }
