@@ -1,4 +1,5 @@
 using System;
+using Unity.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
@@ -11,7 +12,7 @@ public abstract class Item : ScriptableObject
     protected string ItemId;//serialized already in the item container
     protected Sprite Icon;
     protected bool isActive;
-    protected string ToolBarText;
+    protected string toolTipDesc;
 
     public abstract void InitItem();
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
@@ -41,5 +42,10 @@ public abstract class Item : ScriptableObject
     public string GetId() 
     {
         return ItemId;
+    }
+    public string GetItemToolTip() 
+    {
+        return $"<size=24><align=center>{ItemId}</align></size>\n" +
+               $"<size=14><align=left>{toolTipDesc}</align></size>";
     }
 }

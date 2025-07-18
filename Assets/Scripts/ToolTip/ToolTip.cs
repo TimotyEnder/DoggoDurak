@@ -3,10 +3,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private string _tooltipText = "Test";
+    private string _tooltipText = $"<size=6><align=center>Name</align></size>\n" +
+                                  $"<size=3><align=left>description</align></size>";
     [SerializeField]
     private   GameObject _tooltipPrefab; // A prefab of a default tooptip assigned in inspector
 
