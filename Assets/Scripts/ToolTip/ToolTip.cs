@@ -14,7 +14,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private GameObject _currentTooltip;
 
-    private float ttPadding = 5;
+    private float ttPadding = 20;
     [SerializeField]
     private Canvas canvas;
 
@@ -26,7 +26,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Create tooltip
-        _currentTooltip = Instantiate(_tooltipPrefab, transform.parent);
+        _currentTooltip = Instantiate(_tooltipPrefab, transform.parent.parent);
         RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
         RectTransform myRect = GetComponent<RectTransform>();
 
@@ -41,19 +41,19 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Vector3[] preferredPositions = new Vector3[]
         {
         // Above
-        myRect.position + new Vector3(0, (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        myRect.position + new Vector3(0, (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPadding), 0),
         // Below
-        myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPadding), 0),
         // Right
-        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), 0, 0),
+        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPadding), 0, 0),
         // Left
-        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), 0, 0),
+        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPadding), 0, 0),
         // Top-Left
-        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPadding), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPadding), 0),
          // Top-Right
-        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPadding), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPadding), 0),
         // Botttom-Left
-        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0),
+        myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPadding), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPadding), 0),
          // Bottom-Right
         myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + 20), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + 20), 0)
         };

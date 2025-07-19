@@ -45,11 +45,15 @@ public abstract class Item : ScriptableObject
     }
     public string GetItemToolTip() 
     {
-        return $"<size=24><align=center>{itemId}</align></size>\n" +
-               $"<size=14><align=left>{toolTipDesc}</align></size>";
+        return $"<size=6><align=center>{itemId}</align></size>\n" +
+               $"<size=3><align=left>{toolTipDesc}</align></size>";
     }
     public Sprite GetIcon() 
     {
         return Icon;
+    }
+    public bool IsActive() 
+    {
+        return isActive;
     }
 }
