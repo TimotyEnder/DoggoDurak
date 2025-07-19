@@ -7,6 +7,7 @@ public class RedStar : Item
         this.rarity = 3;
         this.boss = true;
         this.itemId = "RedStar";
+        this.toolTipDesc = "Red cards are counted as the same suit";
     }
 
     public override void OnActivate()

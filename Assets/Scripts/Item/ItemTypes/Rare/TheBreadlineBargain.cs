@@ -8,6 +8,7 @@ public class TheBreadlineBargain : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "TheBreadlineBargain";
+        this.toolTipDesc = "+1 hand size";
     }
 
     public override void OnActivate()

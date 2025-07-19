@@ -7,6 +7,7 @@ public class BlackCaviar : Item
         this.rarity = 2;
         this.boss = false;
         this.itemId = "BlackCaviar";
+        this.toolTipDesc = "+2 value to all black cards";
     }
 
     public override void OnActivate()

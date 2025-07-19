@@ -9,6 +9,7 @@ public class Balalaika : Item
         this.boss = false;
         this.itemId = "Balalaika";
         this._timesDamageDone = 0;
+        this.toolTipDesc = "Every third intance of damage you deal is tripled";
     }
 
     public override void OnActivate()

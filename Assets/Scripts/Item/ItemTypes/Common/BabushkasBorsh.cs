@@ -7,6 +7,7 @@ public class BabushkasBorsh : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "BabushkasBorsh";
+        this.toolTipDesc = "3 random cards gain Restoring (Defend with this card to gain health equal to the difference of values between the defending and defended cards,)";
     }
 
     public override void OnActivate()

@@ -7,6 +7,7 @@ public class SiberianBearHuntingSuit : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "SiberianBearHuntingSuit";
+        this.toolTipDesc = "Odd numbered cards gain Spiky 1(When this card is defended deal 1 damage for each spiky modifier of the card to the defending player.)";
     }
 
     public override void OnActivate()

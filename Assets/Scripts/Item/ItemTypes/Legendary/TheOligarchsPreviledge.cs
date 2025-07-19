@@ -7,6 +7,7 @@ public class TheOligarchsPreviledge : Item
         this.rarity = 2;
         this.boss = false;
         this.itemId = "TheOligarchsPreviledge";
+        this.toolTipDesc = "+2 hand size";
     }
 
     public override void OnActivate()

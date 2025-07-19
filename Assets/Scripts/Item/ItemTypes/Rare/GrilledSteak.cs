@@ -7,6 +7,7 @@ public class GrilledSteak : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "GrilledSteak";
+        this.toolTipDesc = "Doubles max health";
     }
 
     public override void OnActivate()
@@ -16,7 +17,7 @@ public class GrilledSteak : Item
 
     public override void OnAquire()
     {
-        GameHandler.Instance.GetGameState()._maxhealth += 50;
+        GameHandler.Instance.GetGameState()._maxhealth *= 2;
         GameHandler.Instance.SetHealth(GameHandler.Instance.GetGameState()._maxhealth);
         //incase picked up while in card table
         GameHandler.Instance.HealPlayer(GameHandler.Instance.GetGameState()._maxhealth);

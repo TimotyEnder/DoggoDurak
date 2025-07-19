@@ -7,6 +7,7 @@ public class DefaultItem : Item
         rarity = 0;
         boss = false;
         itemId = "DefaultItem";
+        this.toolTipDesc = "How the fuck are you seeing this?";
     }
     public override void OnLoad()
     {

@@ -7,6 +7,7 @@ public class FluffyUshanka : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "FluffyUshanka";
+        this.toolTipDesc = "Every time you heal, heal 5 more health";
     }
 
     public override void OnActivate()
