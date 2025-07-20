@@ -9,12 +9,13 @@ public class ItemInventoryGrid:MonoBehaviour
     {
         UpdateItemGrid();
     }
-    public void Update()
-    {
-        
-    }
+
     public void UpdateItemGrid() 
     {
+        foreach (Transform child in transform) 
+        {
+            Destroy(child);
+        }
         foreach (Item i in GameHandler.Instance.GetGameState()._items)
         {
             if (!i.IsActive())
