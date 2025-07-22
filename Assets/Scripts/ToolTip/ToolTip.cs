@@ -26,7 +26,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Create tooltip
-        _currentTooltip = Instantiate(_tooltipPrefab, transform.parent.parent);
+        _currentTooltip = Instantiate(_tooltipPrefab,GameObject.FindGameObjectWithTag("Canvas").transform);
         RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
         RectTransform myRect = GetComponent<RectTransform>();
 
