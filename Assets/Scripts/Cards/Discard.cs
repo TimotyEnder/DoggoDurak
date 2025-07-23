@@ -1,15 +1,30 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Discard : MonoBehaviour
 {
     List<CardInfo> _playerCards;
     List<CardInfo> _opponentCards;
+    [SerializeField]
+    private Button _discardButton;
+    [SerializeField]
+    private Button _discardExitButton;
+    [SerializeField]
+    private GameObject _discardPanel;
+    [SerializeField]
+    private GameObject _discardContent;
+    [SerializeField]
+    private GameObject _cardPrefab;
     public void Start()
     {
         _opponentCards = new List<CardInfo>();
-        _playerCards = new List<CardInfo>();    
+        _playerCards = new List<CardInfo>();
+        //On Click config
+        _discardButton.onClick.AddListener(UpdateDiscardContent);
+        _discardExitButton.onClick.AddListener(() => _discardPanel.SetActive(false));
     }
     public void AddCard(CardInfo card) 
     {
@@ -43,5 +58,19 @@ public class Discard : MonoBehaviour
 
 
         return returnList;
+    }
+    public void UpdateDiscardContent() 
+    {
+        _discardPanel.SetActive(true);
+
+        foreach (Transform card in _discardContent.transform) 
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (CardInfo cInfo in _playerCards) 
+        {
+           GameObject cardMade= Instantiate(_cardPrefab,_discardContent.transform);
+           cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
+        }
     }
 }

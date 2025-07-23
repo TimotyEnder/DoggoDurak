@@ -22,7 +22,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _cardImage;
     private Canvas _canvas;
     private RectTransform _cardImageRect;
-    private bool _isDragging = false;
+    private bool _isInteractable;
     private GameObject _playArea;
     private RectTransform _playAreaRect;
     private PlayArea _playAreaScript;
@@ -84,13 +84,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     void Update()
     {
     }
-    public void MakeCard(CardInfo card)
+    public void MakeCard(CardInfo card, bool Draggable=true)
     {
         this._cardInfo = card;
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
-        UpdateModifiers();
+        if (!Draggable)
+        {
+            this._isInteractable = false;
+        }
+        else { this._isInteractable = true; }
+            UpdateModifiers();
     }
     public void UpdateModifiers() 
     {
@@ -217,7 +222,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (TopPointer(eventData))
+        if (TopPointer(eventData) && _isInteractable)
         {
             _oldSiblingIndex = _cardRect.GetSiblingIndex();
             _cardRect.SetAsLastSibling();
@@ -226,7 +231,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_oldSiblingIndex != -1)
+        if (_oldSiblingIndex != -1 && _isInteractable)
         {
             _cardRect.SetSiblingIndex(_oldSiblingIndex);
         }
@@ -256,9 +261,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_played) { return; }
-        _isDragging = true;
-        _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
+        if(_isInteractable)
+        {
+            if (_played) { return; }
+            _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -274,12 +281,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _cardHandAreaScript.RemoveFromCards(this);
             _cardHandAreaScript.DettachCard();
             OnPlay(eventData.position);
-            _isDragging = false;
+            _isInteractable = false;
         }
         else
         {
             OnDraw();
-            _isDragging = false;
         }
     }
     public Vector2 GetDefendPosition()
