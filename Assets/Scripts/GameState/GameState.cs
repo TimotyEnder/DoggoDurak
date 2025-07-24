@@ -21,6 +21,8 @@ public class GameState
     public int _maxrestPoints;
     public int _restRpointCost;
     public int _handSize;
+    public int _maxRewardSelection;
+    public int _rareItemRewardDropRate;//  out of 100;
     public bool _redCardsSameSuit;
     public bool _blackCardsSameSuit;
     public GameState() 
@@ -70,6 +72,8 @@ public class GameState
         _serializableItems = new List<ItemContainer>();
         _redCardsSameSuit = false;
         _blackCardsSameSuit= false;
+        _maxRewardSelection = 3;
+        _rareItemRewardDropRate = 10;
     }
     public void SaveItems() 
     {

@@ -34,6 +34,10 @@ public class ItemManager
         {
             Item itemReturned = Object.Instantiate(_items[rarity][Random.Range(0, _items[rarity].Count)]);
             itemReturned.InitItem();
+            if (rarity > 0) 
+            {
+                _items[rarity].Remove(itemReturned);// no other item rarity apart from common stacks so you should remove it from drop table 
+            }
             return itemReturned;
         }
         return null;

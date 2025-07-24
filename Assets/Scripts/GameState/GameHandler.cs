@@ -1,5 +1,6 @@
 using System;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,8 +9,10 @@ public class GameHandler : MonoBehaviour
     private static GameHandler _instance;
     private GameState _state;
     private Lazy<SaveManager> _saveManager= new Lazy<SaveManager>(); //elegant fix to start init issue
+    private Lazy<RewardManager> _rewardManager= new Lazy<RewardManager>();
     private EncounterManager _encounterManager;
     private Encounter _currentEncounter;
+    private Reward _currentReward;
     
     public static GameHandler Instance 
     {
@@ -94,6 +97,14 @@ public class GameHandler : MonoBehaviour
     public Encounter GetCurrEncounter() 
     {
         return _currentEncounter;
+    }
+    public Reward GetCurrReward() 
+    {
+        return _currentReward;
+    }
+    public void GenerateReward() 
+    {
+        _currentReward = _rewardManager.Value.GenerateReward();
     }
     public void SetHealth(int health) 
     {

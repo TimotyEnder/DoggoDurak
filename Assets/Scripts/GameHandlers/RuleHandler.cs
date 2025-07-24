@@ -41,6 +41,7 @@ public class RuleHandler : MonoBehaviour
         else if (_opponentHp.GetHealth() <= 0) 
         {
             GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
+            GameHandler.Instance.GenerateReward();
             _playerHp.reportHealth();
             _endMatchScreen.SetActive(true);
             _victory.SetActive(true);
