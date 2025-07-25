@@ -45,7 +45,7 @@ public abstract class Item : ScriptableObject
     }
     public string GetItemToolTip() 
     {
-        return $"<size=6><align=center>{itemId}</align></size>\n" +
+        return $"<size=4><align=center>{itemId}</align></size>\n" +
                $"<size=3><align=left>{toolTipDesc}</align></size>";
     }
     public Sprite GetIcon() 
