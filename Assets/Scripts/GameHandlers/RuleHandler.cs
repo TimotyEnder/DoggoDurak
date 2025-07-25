@@ -12,6 +12,8 @@ public class RuleHandler : MonoBehaviour
     private GameObject _defeat;
     private LifeTotal _playerHp;
     private LifeTotal _opponentHp;
+    [SerializeField]
+    private RewardItemGrid _rewardItemGrid;
     void Init()
     {
 
@@ -45,6 +47,7 @@ public class RuleHandler : MonoBehaviour
             _playerHp.reportHealth();
             _endMatchScreen.SetActive(true);
             _victory.SetActive(true);
+            _rewardItemGrid.SetRewardGrid();
         }
     }
     // Update is called once per frame

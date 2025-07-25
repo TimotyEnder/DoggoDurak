@@ -53,12 +53,12 @@ public class GameHandler : MonoBehaviour
         }
         //debug
         
-        Item debugItem = ScriptableObject.CreateInstance<RedStar>();
+        /*Item debugItem = ScriptableObject.CreateInstance<RedStar>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
         Item debugItem2 = ScriptableObject.CreateInstance<BlackStar>();
         debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        _state.AddItem(debugItem2);*/
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button

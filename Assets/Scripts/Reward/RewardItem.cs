@@ -8,11 +8,13 @@ public class RewardItem : MonoBehaviour
     private ToolTip _toolTip;
     private Image _bgColor;
     private Button _button;
+    private RewardItemGrid _grid;
 
     private void Start()
     {
         _button = transform.Find("Button").GetComponent<Button>();
         _button.onClick.AddListener(OnClickActiveItem);
+        _grid= GameObject.Find("RewardItemGrid").GetComponent<RewardItemGrid>(); 
     }
 
     public void AssignItem(Item item)
@@ -41,6 +43,7 @@ public class RewardItem : MonoBehaviour
     private void OnClickActiveItem()
     {
         GameHandler.Instance.GetGameState().AddItem(this._item);
+        _grid.ChoiceHappened();
         Destroy(this.gameObject);
     }
 }

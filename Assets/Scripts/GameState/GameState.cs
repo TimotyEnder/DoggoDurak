@@ -22,6 +22,7 @@ public class GameState
     public int _restRpointCost;
     public int _handSize;
     public int _maxRewardSelection;
+    public int _maxRewardChoices;
     public int _rareItemRewardDropRate;//  out of 100;
     public bool _redCardsSameSuit;
     public bool _blackCardsSameSuit;
@@ -73,6 +74,7 @@ public class GameState
         _redCardsSameSuit = false;
         _blackCardsSameSuit= false;
         _maxRewardSelection = 3;
+        _maxRewardChoices = 1;
         _rareItemRewardDropRate = 10;
     }
     public void SaveItems() 
@@ -102,6 +104,24 @@ public class GameState
     {
         item.OnAquire();
         _items.Add(item);
+        GameObject itemInventory = GameObject.Find("ItemInventory");
+        GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
+        if (activeItemInventory != null) 
+        {
+            ActiveItemInventoryGrid aIscript = activeItemInventory.GetComponent<ActiveItemInventoryGrid>();
+            if (aIscript != null)
+            {
+                aIscript.UpdateItemGrid();
+            }
+        }
+        if (itemInventory != null)
+        {
+            ItemInventoryGrid Iscript = itemInventory.GetComponent<ItemInventoryGrid>();
+            if (Iscript != null) 
+            {
+                Iscript.UpdateItemGrid();
+            }
+        }
     }
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
     // and life total does it in it's OnLoad()
