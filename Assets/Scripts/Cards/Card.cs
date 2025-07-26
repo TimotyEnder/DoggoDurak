@@ -90,12 +90,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
-        if (!Draggable)
-        {
-            this._isInteractable = false;
-        }
-        else { this._isInteractable = true; }
-            UpdateModifiers();
+        _isInteractable = Draggable;
+        UpdateModifiers();
     }
     public void UpdateModifiers() 
     {

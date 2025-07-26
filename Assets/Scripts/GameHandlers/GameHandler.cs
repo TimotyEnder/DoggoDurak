@@ -12,6 +12,7 @@ public class GameHandler : MonoBehaviour
     private Lazy<RewardManager> _rewardManager= new Lazy<RewardManager>();
     private EncounterManager _encounterManager;
     private Encounter _currentEncounter;
+    [SerializeField]
     private Reward _currentReward;
     
     public static GameHandler Instance 
