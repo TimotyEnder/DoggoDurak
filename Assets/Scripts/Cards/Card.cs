@@ -22,6 +22,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _cardImage;
     private Canvas _canvas;
     private RectTransform _cardImageRect;
+    [SerializeField]
     private bool _isInteractable;
     private GameObject _playArea;
     private RectTransform _playAreaRect;
@@ -277,7 +278,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _cardHandAreaScript.RemoveFromCards(this);
             _cardHandAreaScript.DettachCard();
             OnPlay(eventData.position);
-            _isInteractable = false;
         }
         else
         {
