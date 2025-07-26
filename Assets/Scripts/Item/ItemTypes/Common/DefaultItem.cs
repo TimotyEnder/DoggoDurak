@@ -44,6 +44,6 @@ public class DefaultItem : Item
 
     public override void OnActivate()
     {
-        throw new System.NotImplementedException();
+
     }
 }

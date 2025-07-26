@@ -12,7 +12,7 @@ public class BabushkasBorsh : Item
 
     public override void OnActivate()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnAquire()
