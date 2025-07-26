@@ -33,7 +33,7 @@ public class ItemManager
         List<Item> itemsDropped = new List<Item>();    
         if (rarity < _items.Count && _items[rarity].Count > 0)
         {
-            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _items[rarity].Count, amount);
+            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _items[rarity].Count-1, amount);
             foreach(int i in randomInts) 
             {
                 Item itemReturned = Object.Instantiate(_items[rarity][i]);

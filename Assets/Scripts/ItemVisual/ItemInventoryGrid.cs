@@ -14,7 +14,7 @@ public class ItemInventoryGrid:MonoBehaviour
     {
         foreach (Transform child in transform) 
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
         foreach (Item i in GameHandler.Instance.GetGameState()._items)
         {
