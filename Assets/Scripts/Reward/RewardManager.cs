@@ -13,18 +13,16 @@ public class RewardManager
 
     public Reward GenerateReward() 
     {
-        List<Item> itemsDropped=new List<Item>();
-        for (int i = 0; i < GameHandler.Instance.GetGameState()._maxRewardSelection; i++) 
+    List<Item> itemsDropped=new List<Item>();
+        int roll = Random.Range(1, 100);
+        if (roll <= GameHandler.Instance.GetGameState()._rareItemRewardDropRate)
         {
-            int roll = Random.Range(1, 100);
-            if (roll <= GameHandler.Instance.GetGameState()._rareItemRewardDropRate)
-            {
-                itemsDropped.Add(_itemManager.RandomItemWithRarity(1));
-            }
-            else 
-            {
-                itemsDropped.Add(_itemManager.RandomItemWithRarity(0));
-            }
+            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(1, 1));
+            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection-1));
+        }
+        else 
+        {
+            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection));
         }
         Reward toReturn = new Reward(itemsDropped, 0);
         return toReturn;

@@ -42,7 +42,7 @@ public class DachaDoorstep : Item
 
     public override void OnDamageOpponent(int amount)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnDefendCard(Card defendee, Card defended)

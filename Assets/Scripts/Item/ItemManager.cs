@@ -28,18 +28,23 @@ public class ItemManager
             }
         }
     }
-    public Item RandomItemWithRarity(int rarity)
+    public List<Item> RandomItemsWithRarity(int rarity, int amount=1)
     {
+        List<Item> itemsDropped = new List<Item>();    
         if (rarity < _items.Count && _items[rarity].Count > 0)
         {
-            Item itemReturned = Object.Instantiate(_items[rarity][Random.Range(0, _items[rarity].Count)]);
-            itemReturned.InitItem();
-            if (rarity > 0) 
+            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _items[rarity].Count, amount);
+            foreach(int i in randomInts) 
             {
-                _items[rarity].Remove(itemReturned);// no other item rarity apart from common stacks so you should remove it from drop table 
+                Item itemReturned = Object.Instantiate(_items[rarity][i]);
+                itemReturned.InitItem();
+                if (rarity > 0)
+                {
+                    _items[rarity].Remove(itemReturned);// no other item rarity apart from common stacks so you should remove it from drop table 
+                }
+                itemsDropped.Add(itemReturned);
             }
-            return itemReturned;
         }
-        return null;
+        return itemsDropped;
     }
 }
