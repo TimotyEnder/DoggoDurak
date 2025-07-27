@@ -1,4 +1,5 @@
 using System.Diagnostics.Contracts;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class InventoryItem : MonoBehaviour
     private Sprite _itemIcon;
     private ToolTip _toolTip;
     private Image _bgImage;
+    [SerializeField]
+    private TextMeshProUGUI _stackText;
     
     void Update()
     {
@@ -36,5 +39,10 @@ public class InventoryItem : MonoBehaviour
                 break;
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());
+    }
+    public void SetStackNum(int stacks) 
+    {
+        _stackText.gameObject.SetActive(true);
+        _stackText.text = stacks.ToString();
     }
 }

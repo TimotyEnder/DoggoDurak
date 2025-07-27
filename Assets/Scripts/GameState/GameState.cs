@@ -26,6 +26,7 @@ public class GameState
     public int _rareItemRewardDropRate;//  out of 100;
     public bool _redCardsSameSuit;
     public bool _blackCardsSameSuit;
+    public Dictionary<string, int> _itemStacks;
     public GameState() 
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -76,6 +77,18 @@ public class GameState
         _maxRewardSelection = 3;
         _maxRewardChoices = 1;
         _rareItemRewardDropRate = 10;
+        _itemStacks = new Dictionary<string, int>();
+    }
+    private void addItemStack(Item item) 
+    {
+        if (_itemStacks.ContainsKey(item.name))
+        {
+            _itemStacks[item.name]++;
+        }
+        else 
+        {
+            _itemStacks.Add(item.name, 1);
+        }
     }
     public void SaveItems() 
     {
@@ -97,6 +110,7 @@ public class GameState
             JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeItem);
             item.InitItem();
             _items.Add(item);
+            addItemStack(item);
         }
         OnLoad();
     }
@@ -104,6 +118,7 @@ public class GameState
     {
         item.OnAquire();
         _items.Add(item);
+        addItemStack(item);
         GameObject itemInventory = GameObject.Find("ItemInventory");
         GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
         if (activeItemInventory != null) 
