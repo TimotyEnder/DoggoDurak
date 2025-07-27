@@ -93,6 +93,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardImage.GetComponent<Image>().sprite = cardSprite;
         _isInteractable = Draggable;
         UpdateModifiers();
+        this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
     public void UpdateModifiers() 
     {

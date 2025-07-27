@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
@@ -71,6 +72,35 @@ public class CardInfo
         {"Cripple", -1},
         {"Spiky", -1},
     };
+    private static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
+    {
+        {"Restoring", "Defend with this card to gain health equal to the difference of values between the defending and defended cards."},
+        {"Bounce", "When defending, this card does  damage  equal  to the difference of values between the defending and defended cards."},
+        {"Burn", "Deal 1 damage for each burn modifier on the card."},
+        {"Parry", "Reverse with this card to deal that cards value as damage."},
+        {"Draw", "Draws 1 card for each draw modifier on the card when played."},
+        {"Cripple", "Makes opponent discard 1 card for each cripple modifier on the card when played."},
+        {"Spiky", "When this card is defended deal 1 damage for each spiky modifier of the card to the defending player."},
+    };
+    private static Dictionary<string, string> suitFullName = new Dictionary<string, string>
+    {
+        {"C"," of Clubs"},
+        {"D"," of Diamonds"},
+        {"H"," of Hearts"},
+        {"S"," of Spades"}
+    };
+    private static Dictionary<int, string> numberFullName = new Dictionary<int, string>
+    {
+        {6,"Six"},
+        {7,"Seven"},
+        {8,"Eight"},
+        {9,"Nine"},
+        {10,"Ten"},
+        {11,"Jack"},
+        {12,"Queen"},
+        {13,"King"},
+        {14,"Ace"},
+    };
     public void OnAquire() 
     {
         foreach(CardModifierContainer c in _modifiers) 
@@ -129,5 +159,15 @@ public class CardInfo
             }
             _modifierStacks[c.ModType] += 1;
         }
+    }
+    public string CompileTooltipDescription() 
+    {
+        string returnString = "";
+        returnString += "<size=4><align=center>"+ numberFullName[_number] + suitFullName[_suit] + "</align></size>" + "\n";
+        foreach (KeyValuePair<string, int> entry in _modifierStacks) 
+        {
+            returnString+= "<size=2><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size> \n";
+        }
+        return returnString;
     }
 }
