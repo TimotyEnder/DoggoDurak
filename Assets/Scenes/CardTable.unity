@@ -4390,7 +4390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.000023484, y: 125.1001}
+  m_AnchoredPosition: {x: 767, y: 904}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657738342
@@ -4988,8 +4988,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 1.8984, y: 50}
-  m_SizeDelta: {x: 182.6834, y: 47.156}
+  m_AnchoredPosition: {x: -0.2969, y: -308}
+  m_SizeDelta: {x: 182.6834, y: 88.651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915048516
 MonoBehaviour:
@@ -5043,8 +5043,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHandSpacing: 150
   _cardsInHand: 0
-  _angleDelta: 25
-  radius: 200
+  _angleDelta: 8
+  _idealAngleDelta: 8
+  radius: 800
   _cards: []
 --- !u!1 &1985245445
 GameObject:

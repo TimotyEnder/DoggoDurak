@@ -15,10 +15,11 @@ public class CardHandArea : MonoBehaviour
     private float _oldCanvasWidth;
     private RectTransform _cardHandRect;
     [SerializeField]
-    private float _angleDelta = 25f;
-    private float _idealAngleDelta = 25f;
+    private float _angleDelta;
     [SerializeField]
-    private float radius = 200f;
+    private float _idealAngleDelta;
+    [SerializeField]
+    private float radius;
     [SerializeField]
     private List<Card> _cards;
     void Start()
