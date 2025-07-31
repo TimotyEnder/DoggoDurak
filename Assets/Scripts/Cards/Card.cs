@@ -276,10 +276,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         if (_played) { return; }
+        _cardHandAreaScript.RemoveFromCards(this);
+        _cardHandAreaScript.DettachCard();
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
-            _cardHandAreaScript.RemoveFromCards(this);
-            _cardHandAreaScript.DettachCard();
             OnPlay(eventData.position);
         }
         else
