@@ -43,6 +43,7 @@ public class RewardItem : MonoBehaviour
     private void OnClickActiveItem()
     {
         GameHandler.Instance.GetGameState().AddItem(this._item);
+        GetComponent<ToolTip>().SetTooltipActiveState(false);
         _grid.ChoiceHappened();
         Destroy(this.gameObject);
     }
