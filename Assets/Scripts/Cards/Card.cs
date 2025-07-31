@@ -261,6 +261,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         if(_isInteractable)
         {
+            GetComponent<ToolTip>().SetTooltipActiveState(false);
             if (_played) { return; }
             _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         }
@@ -273,6 +274,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
+        GetComponent<ToolTip>().SetTooltipActiveState(true);
         if (_played) { return; }
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
