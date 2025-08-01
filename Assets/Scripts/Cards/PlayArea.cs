@@ -212,10 +212,12 @@ public class PlayArea : MonoBehaviour
         foreach (Card card in _cardsDefendedWith) 
         {
             _discard.AddCard(card.GetCard());
+            card.gameObject.GetComponent<ToolTip>().SetTooltipActiveState(false);
         }
         foreach (Card card in _cardsPlayed)
         {
             _discard.AddCard(card.GetCard());
+            card.gameObject.GetComponent<ToolTip>().SetTooltipActiveState(false);
         }
         _cardsDefendedWith = new List<Card>();
         _cardsPlayed = new List<Card>();
