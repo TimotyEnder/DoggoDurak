@@ -72,6 +72,16 @@ public class CardInfo
         {"Cripple", -1},
         {"Spiky", -1},
     };
+    private static Dictionary<string, string> modifierColors = new Dictionary<string, string> 
+    {
+        {"Restoring", "green"},
+        {"Bounce", "blue"},
+        {"Burn", "orange"},
+        {"Parry","black"},
+        {"Draw", "grey"},
+        {"Cripple", "purple"},
+        {"Spiky", "yellow"},
+    };
     private static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
     {
         {"Restoring", "Defend with this card to gain health equal to the difference of values between the defending and defended cards."},
@@ -166,7 +176,7 @@ public class CardInfo
         returnString += "<size=4><align=center>"+ numberFullName[_number] + suitFullName[_suit] + "</align></size>" + "\n";
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
-            returnString+= "<size=2><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size> \n";
+            returnString+= $"<color={modifierColors[entry.Key]}>"+"<size=2><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
         }
         return returnString;
     }
