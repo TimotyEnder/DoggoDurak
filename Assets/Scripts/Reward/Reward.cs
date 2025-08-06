@@ -6,11 +6,11 @@ using UnityEngine;
 public class Reward
 {
     public List<Item> items;
-    public int goldReward;
+    public int rubleReward;
 
     public Reward(List<Item> items, int goldReward)
     {
         this.items = items;
-        this.goldReward = goldReward;
+        this.rubleReward = goldReward;
     }
 }

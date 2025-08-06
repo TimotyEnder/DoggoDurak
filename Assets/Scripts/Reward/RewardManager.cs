@@ -5,10 +5,12 @@ using UnityEngine;
 public class RewardManager
 {
     private ItemManager _itemManager;
+    private CurrencyManager _currencyManager;
 
     public RewardManager() 
     {
         _itemManager = new ItemManager();
+        _currencyManager = new CurrencyManager();
     }
 
     public Reward GenerateReward() 
@@ -24,7 +26,7 @@ public class RewardManager
         {
             itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection));
         }
-        Reward toReturn = new Reward(itemsDropped, 0);
+        Reward toReturn = new Reward(itemsDropped, _currencyManager.GetCurrency());
         return toReturn;
     }
 }
