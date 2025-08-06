@@ -5,6 +5,7 @@ using TMPro;
 using System.Linq;
 using static UnityEditor.Progress;
 using UnityEngine.Rendering;
+using Unity.VisualScripting;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -34,6 +35,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
              // Create tooltip
             _currentTooltip = Instantiate(_tooltipPrefab,GameObject.FindGameObjectWithTag("Canvas").transform);
             RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
+            RectTransform ttImageRect = _currentTooltip.transform.Find("ToolTipBackground").GetComponent<RectTransform>();
             RectTransform myRect = GetComponent<RectTransform>();
             ToolTipScaler ttScript= _currentTooltip.GetComponentInChildren<ToolTipScaler>();
         
@@ -50,21 +52,21 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Vector3[] preferredPositions = new Vector3[]
             {
             // Above
-            myRect.position + new Vector3(0, (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPaddingY), 0),
+            myRect.position + new Vector3(0, (ttRect.rect.height * ttRect.localScale.y + ttImageRect.rect.height + ttPaddingY), 0),
             // Below
-            myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPaddingY), 0),
+            myRect.position + new Vector3(0, -(ttRect.rect.height * ttRect.localScale.y + ttImageRect.rect.height + ttPaddingY), 0),
             // Right
-            myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPaddingX), 0, 0),
+            myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + ttImageRect.rect.width + ttPaddingX), 0, 0),
             // Left
-            myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPaddingX), 0, 0),
+            myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + ttImageRect.rect.width + ttPaddingX), 0, 0),
             // Top-Left
-            myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPaddingX), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPaddingY), 0),
+            myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + ttImageRect.rect.width + ttPaddingX), (ttRect.rect.height * ttRect.localScale.y + ttImageRect.rect.height + ttPaddingY), 0),
              // Top-Right
-            myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPaddingX), (ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPaddingY), 0),
+            myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + ttImageRect.rect.width + ttPaddingX), (ttRect.rect.height * ttRect.localScale.y + ttImageRect.rect.height + ttPaddingY), 0),
             // Botttom-Left
-            myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPaddingX), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPaddingY), 0),
+            myRect.position + new Vector3(-(ttRect.rect.width * ttRect.localScale.x + ttImageRect.rect.width + ttPaddingX), -(ttRect.rect.height * ttRect.localScale.y + ttImageRect.rect.height + ttPaddingY), 0),
              // Bottom-Right
-            myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + myRect.rect.width + ttPaddingX), -(ttRect.rect.height * ttRect.localScale.y + myRect.rect.height + ttPaddingY), 0)
+            myRect.position + new Vector3((ttRect.rect.width * ttRect.localScale.x + ttImageRect.rect.width + ttPaddingX), -(ttRect.rect.height * ttRect.localScale.y + ttImageRect.rect.height + ttPaddingY), 0)
             };
 
             // Try each position until we find one that fits
