@@ -109,6 +109,7 @@ public class GameHandler : MonoBehaviour
     }
     public void SetHealth(int health) 
     {
+        _state._lastHealth = _state._health;
         _state._health = health;
         if (_state._health > _state._maxhealth) 
         {

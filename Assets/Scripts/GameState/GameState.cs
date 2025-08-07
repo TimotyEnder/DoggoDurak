@@ -14,6 +14,7 @@ public class GameState
     private List<ItemContainer> _serializableItems;
     public int _rubles;
     public int _health;
+    public int _lastHealth;
     public int _maxhealth;
     public int _day;
     public int _encounter;
@@ -63,6 +64,7 @@ public class GameState
         }
         _rubles = 0;
         _health = 100;
+        _lastHealth = _health;
         _maxhealth = 100;
         _day = 0;
         _encounter = 0;

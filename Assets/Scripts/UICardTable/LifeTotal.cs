@@ -41,5 +41,6 @@ public class LifeTotal : MonoBehaviour
     public void reportHealth() 
     {
         GameHandler.Instance.SetHealth(_hp);
+
     }
 }

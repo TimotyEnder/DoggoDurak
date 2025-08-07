@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RuleHandler : MonoBehaviour
@@ -14,6 +15,7 @@ public class RuleHandler : MonoBehaviour
     private LifeTotal _opponentHp;
     [SerializeField]
     private RewardItemGrid _rewardItemGrid;
+    private bool GameStateFinished = false;
     void Init()
     {
 
@@ -30,24 +32,28 @@ public class RuleHandler : MonoBehaviour
     }
     public void CheckGameState() 
     {
-        if (_playerHp == null) 
+        if(!GameStateFinished)
         {
-            Init();
-        }
-        if (_playerHp.GetHealth() <= 0)
-        {
-            _playerHp.reportHealth();
-            _endMatchScreen.SetActive(true);
-            _defeat.SetActive(true);
-        }
-        else if (_opponentHp.GetHealth() <= 0) 
-        {
-            GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
-            _playerHp.reportHealth(); //this has to happen before reward because CurrencyCalculators rely on _health being already updated!
-            GameHandler.Instance.GenerateReward();
-            _endMatchScreen.SetActive(true);
-            _victory.SetActive(true);
-            _rewardItemGrid.SetRewardGrid();
+            if (_playerHp == null) 
+            {
+                Init();
+            }
+            if (_playerHp.GetHealth() <= 0)
+            {
+                _playerHp.reportHealth();
+                _endMatchScreen.SetActive(true);
+                _defeat.SetActive(true);
+            }
+            else if (_opponentHp.GetHealth() <= 0)
+            {
+                GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
+                _playerHp.reportHealth(); //this has to happen before reward because CurrencyCalculators rely on _health being already updated!
+                GameHandler.Instance.GenerateReward();
+                _endMatchScreen.SetActive(true);
+                _victory.SetActive(true);
+                _rewardItemGrid.SetRewardGrid();
+                GameStateFinished = true;
+            }
         }
     }
     // Update is called once per frame
