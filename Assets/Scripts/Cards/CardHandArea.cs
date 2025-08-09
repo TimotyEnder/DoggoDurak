@@ -57,12 +57,12 @@ public class CardHandArea : MonoBehaviour
     }
     public void OrderByRank()
     {
-        _cards.Sort((a, b) => (a.GetCard()._number == b.GetCard()._number) ? a.GetCard()._suitNumber.CompareTo(b.GetCard()._suitNumber):a.GetCard()._number.CompareTo(b.GetCard()._number));
+        _cards.Sort((a, b) => (a.GetCardInfo()._number == b.GetCardInfo()._number) ? a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber):a.GetCardInfo()._number.CompareTo(b.GetCardInfo()._number));
         RealignCardsInHand();
     }
     public void OrderBySuit()
     {
-        _cards.Sort((a, b) => a.GetCard()._suitNumber.CompareTo(b.GetCard()._suitNumber));
+        _cards.Sort((a, b) => a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber));
         RealignCardsInHand();
     }
     public void  AttachCard() 
@@ -98,5 +98,31 @@ public class CardHandArea : MonoBehaviour
             _cards = new List<Card>();
         }
         _cards.Remove(card); 
+    }
+    public bool HasMorePlays() 
+    {
+        PlayArea pa= GameObject.Find("PlayArea").GetComponent<PlayArea>();
+        TurnHandler th= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        if (pa != null) 
+        {
+            foreach (Card card in this._cards)
+            {
+                if ((pa.CanReverseWithCard(card.GetCardInfo()) || pa.CanAttackWithCard(card.GetCardInfo())) && th.GetTurnState()==0)
+                {
+                    return true;
+                }
+                if(th.GetTurnState()!=0)
+                {
+                    foreach (Card pcard in pa.GetCardsPlayed())
+                    {
+                        if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

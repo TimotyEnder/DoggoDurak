@@ -21,6 +21,8 @@ public class OpponentLogic : MonoBehaviour
     private PlayArea _playArea;
     private RuleHandler _ruleHandler;
 
+    private bool endTurnCaused = false;//flag to stop end turn infinite loop 
+
     private Discard _discard;
     private void Start()
     {
@@ -85,13 +87,13 @@ public class OpponentLogic : MonoBehaviour
                             GameObject CardToReverse = Instantiate(cardMaker);
                             CardToReverse.GetComponent<Card>().MakeCard(cardInHand);
                             CardToReverse.GetComponent<Card>().PlayCard();
-                            CardToReverse.GetComponent<Card>().GetCard().OnReverse(CardToReverse.GetComponent<Card>());
+                            CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
                             GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
                             _turnHandler.Reverse();
                             return true;
                         }
                         //Defending if cannot reverse
-                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCard()))
+                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()))
                         {
                             if (smallestCardThatDefends == null)
                             {
@@ -188,5 +190,15 @@ public class OpponentLogic : MonoBehaviour
         {
             yield return new WaitForSeconds(0.25f);
         }
+        CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
+        if (!endTurnCaused && cha != null && !cha.HasMorePlays()) 
+        {
+            endTurnCaused = true;
+            _turnHandler.StartEndTurn();
+        }
+    }
+    public void resetEndTunFlag() 
+    {
+        endTurnCaused = false;
     }
 }

@@ -166,16 +166,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         CardInfo cardToDefend = null;
         if (cardDefendingIndex!=-1) 
         {
-            cardToDefend= _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetCard();
+            cardToDefend= _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetCardInfo();
         }
         //playing cards  as it is your turn
-        if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCard()))
+        if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo()))
         {
             PlayCard();
             StartCoroutine(_opponent.EnemyPlay());
         }
         //Defending, not your turn
-        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCard(), cardToDefend))
+        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend))
         {
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
             StartCoroutine(_opponent.EnemyPlay());
@@ -291,7 +291,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y - (this.GetComponent<RectTransform>().rect.height*0.5f));
     }
-    public CardInfo GetCard()
+    public CardInfo GetCardInfo()
     {
         return this._cardInfo;
     }

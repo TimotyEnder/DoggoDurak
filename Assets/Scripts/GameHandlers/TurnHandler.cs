@@ -49,6 +49,7 @@ public class TurnHandler : MonoBehaviour
     void Turn() 
     {
         _ruleHandler.CheckGameState();
+        _opponent.resetEndTunFlag();
         StartCoroutine(_playerDeck.DrawHandRoutine());
         StartCoroutine(_opponent.DrawHandRoutine());
         if (_turnState == 0)
@@ -132,17 +133,17 @@ public class TurnHandler : MonoBehaviour
                 card.transform.eulerAngles = new Vector3(0, 0, 10f);
                 if (_turnState>0)
                 {
-                    _playerHp.Damage(card.GetCard()._number);
+                    _playerHp.Damage(card.GetCardInfo()._number);
                 }
                 else 
                 {
-                    _opponentHp.Damage(card.GetCard()._number);
+                    _opponentHp.Damage(card.GetCardInfo()._number);
                     
                 }
                     yield return new WaitForSeconds(0.75f);
                 if (_turnState == 0) 
                 {
-                    GameHandler.Instance.GetGameState().OnDamageOpponent(card.GetCard()._number);
+                    GameHandler.Instance.GetGameState().OnDamageOpponent(card.GetCardInfo()._number);
                 }
                 card.transform.eulerAngles = Vector3.zero;
            }

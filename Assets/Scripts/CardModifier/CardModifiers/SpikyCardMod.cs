@@ -8,7 +8,7 @@ public class SpikyCardMod : CardModifier
 
     public void OnBeingDefended(Card cardDefendingThis)
     {
-        if (!cardDefendingThis.GetCard()._opponentCard)
+        if (!cardDefendingThis.GetCardInfo()._opponentCard)
         {
             GameHandler.Instance.DamagePlayer(1);
         }

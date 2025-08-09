@@ -13,13 +13,13 @@ public class RestoringCardMod : CardModifier
 
     public void OnDefendCard(Card defendee, Card defended)
     {
-        if (!defendee.GetCard()._opponentCard)
+        if (!defendee.GetCardInfo()._opponentCard)
         {
-            GameHandler.Instance.HealPlayer(Mathf.Abs(defendee.GetCard()._number - defended.GetCard()._number));
+            GameHandler.Instance.HealPlayer(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number));
         }
         else 
         {
-            GameHandler.Instance.HealOpponent(Mathf.Abs(defendee.GetCard()._number - defended.GetCard()._number));
+            GameHandler.Instance.HealOpponent(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number));
         }
     }
 

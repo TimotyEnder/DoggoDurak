@@ -149,14 +149,14 @@ public class PlayArea : MonoBehaviour
         {
             foreach (RectTransform child in this.transform.Find("PlayedCards")) 
             {
-                if (child.gameObject.GetComponent<Card>().GetCard()._number == card._number) 
+                if (child.gameObject.GetComponent<Card>().GetCardInfo()._number == card._number) 
                 {
                     return true;
                 }
             }
             foreach (RectTransform child in this.transform.Find("DefendedCards"))
             {
-                if (child.gameObject.GetComponent<Card>().GetCard()._number == card._number)
+                if (child.gameObject.GetComponent<Card>().GetCardInfo()._number == card._number)
                 {
                     return true;
                 }
@@ -198,7 +198,7 @@ public class PlayArea : MonoBehaviour
         {
             foreach (Card cardPlayed in _cardsPlayed) 
             {
-                if (card._number != cardPlayed.GetCard()._number) 
+                if (card._number != cardPlayed.GetCardInfo()._number) 
                 {
                     return false;
                 }
@@ -211,12 +211,12 @@ public class PlayArea : MonoBehaviour
     {
         foreach (Card card in _cardsDefendedWith) 
         {
-            _discard.AddCard(card.GetCard());
+            _discard.AddCard(card.GetCardInfo());
             card.gameObject.GetComponent<ToolTip>().SetTooltipActiveState(false);
         }
         foreach (Card card in _cardsPlayed)
         {
-            _discard.AddCard(card.GetCard());
+            _discard.AddCard(card.GetCardInfo());
             card.gameObject.GetComponent<ToolTip>().SetTooltipActiveState(false);
         }
         _cardsDefendedWith = new List<Card>();

@@ -17,7 +17,7 @@ public class BurnCardMod : CardModifier
 
     public void OnPlayedCard(Card card)
     {
-        if (!card.GetCard()._opponentCard)
+        if (!card.GetCardInfo()._opponentCard)
         {
             GameHandler.Instance.DamageOpponent(1); //treat x = 1 for all X effects and just add more to a cards effect list.
         }
