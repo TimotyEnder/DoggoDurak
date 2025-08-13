@@ -21,6 +21,7 @@ public class GameState
     public int _restPoints;
     public int _maxrestPoints;
     public int _restRpointCost;
+    public int _shopRpointCost;
     public int _handSize;
     public int _maxRewardSelection;
     public int _maxRewardChoices;
@@ -70,7 +71,8 @@ public class GameState
         _encounter = 0;
         _restPoints = 3;
         _maxrestPoints = 3;
-        _restRpointCost = 1; //cost to use rest action in the rest tab
+        _restRpointCost = 1;//cost to use rest action in the rest tab
+        _shopRpointCost = 2;//cost to use shop action in the rest tab
         _handSize = 6;
         _items= new List<Item>();
         _serializableItems = new List<ItemContainer>();
