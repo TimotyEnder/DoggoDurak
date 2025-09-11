@@ -1,6 +1,8 @@
 using System;
+using System.Text.RegularExpressions;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Windows;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
 public abstract class Item : ScriptableObject
@@ -45,8 +47,14 @@ public abstract class Item : ScriptableObject
     }
     public string GetItemToolTip() 
     {
-        return $"<size=4><align=center>{itemId}</align></size>\n" +
+        return $"<size=4><align=center>{GetSpacedItemId()}</align></size>\n" +
                $"<size=3><align=left>{toolTipDesc}</align></size>";
+    }
+    private string GetSpacedItemId() 
+    {
+        return Regex.Replace(this.itemId,
+           "([a-z])([A-Z])|([A-Z])([A-Z][a-z])",
+           "$1$3 $2$4");
     }
     public Sprite GetIcon() 
     {
