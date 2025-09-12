@@ -8,24 +8,24 @@ public class GameHandler : MonoBehaviour
 {
     private static GameHandler _instance;
     private GameState _state;
-    private Lazy<SaveManager> _saveManager= new Lazy<SaveManager>(); //elegant fix to start init issue
-    private Lazy<RewardManager> _rewardManager= new Lazy<RewardManager>();
+    private Lazy<SaveManager> _saveManager = new Lazy<SaveManager>(); //elegant fix to start init issue
+    private Lazy<RewardManager> _rewardManager = new Lazy<RewardManager>();
     private EncounterManager _encounterManager;
     private Encounter _currentEncounter;
     [SerializeField]
     private Reward _currentReward;
-    
-    public static GameHandler Instance 
+
+    public static GameHandler Instance
     {
         get
         {
-            if (_instance == null) 
+            if (_instance == null)
             {
                 _instance = FindFirstObjectByType<GameHandler>();
-                if( _instance == null ) 
+                if (_instance == null)
                 {
-                    GameObject singleton= new GameObject(typeof(GameHandler).Name);
-                    _instance= singleton.AddComponent<GameHandler>(); 
+                    GameObject singleton = new GameObject(typeof(GameHandler).Name);
+                    _instance = singleton.AddComponent<GameHandler>();
                     DontDestroyOnLoad(singleton);
                 }
 
@@ -39,11 +39,11 @@ public class GameHandler : MonoBehaviour
         DontDestroyOnLoad(this);
         _encounterManager = new EncounterManager();
     }
-    public bool HasSave() 
+    public bool HasSave()
     {
         return _saveManager.Value.Load() != null;
     }
-    public void NewGame() 
+    public void NewGame()
     {
         _state = new GameState();
         _saveManager.Value.Save(_state);
@@ -53,7 +53,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Burn");
         }
         //debug
-        
+
         /*Item debugItem = ScriptableObject.CreateInstance<RedStar>();
         debugItem.InitItem();
         _state.AddItem(debugItem);
@@ -64,9 +64,9 @@ public class GameHandler : MonoBehaviour
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
     {
-        if (HasSave()) 
+        if (HasSave())
         {
-            _state=_saveManager.Value.Load();
+            _state = _saveManager.Value.Load();
             Next();
         }
     }
@@ -75,7 +75,7 @@ public class GameHandler : MonoBehaviour
         //_state._encounter = 2; //debug
         _saveManager.Value.Save(_state);
         _state._encounter++;
-        if ((_state._encounter)%4==0 && _state._encounter>0) //every three encounters you have a rest
+        if ((_state._encounter) % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
             SceneManager.LoadScene(2);
         }
@@ -91,29 +91,29 @@ public class GameHandler : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
-    public GameState GetGameState() 
+    public GameState GetGameState()
     {
         return _state;
     }
-    public Encounter GetCurrEncounter() 
+    public Encounter GetCurrEncounter()
     {
         return _currentEncounter;
     }
-    public Reward GetCurrReward() 
+    public Reward GetCurrReward()
     {
         return _currentReward;
     }
-    public void GenerateReward() 
+    public void GenerateReward()
     {
         _currentReward = _rewardManager.Value.GenerateReward();
     }
-    public void SetHealth(int health) 
+    public void SetHealth(int health)
     {
         _state._lastHealth = _state._health;
         _state._health = health;
-        if (_state._health > _state._maxhealth) 
+        if (_state._health > _state._maxhealth)
         {
-            _state._health= _state._maxhealth;
+            _state._health = _state._maxhealth;
         }
     }
     public void GameStateHeal(int amount) //heal directly to savefile, used when resting
@@ -121,13 +121,13 @@ public class GameHandler : MonoBehaviour
         SetHealth(_state._health + amount);
     }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
-    public void HealPlayer(int amount, bool fromEffect=false) //any healing effects should be handled by this
+    public void HealPlayer(int amount, bool fromEffect = false) //any healing effects should be handled by this
     {
-        if(GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>()!=null) 
+        if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
-        if (!fromEffect) 
+        if (!fromEffect)
         {
             _state.OnHeal(amount);
         }
@@ -139,14 +139,14 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
     }
-    public void DamageOpponent(int amount, bool fromEffect=false) //any effects damaging the enemy should go through this
+    public void DamageOpponent(int amount, bool fromEffect = false) //any effects damaging the enemy should go through this
     {
         if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount);
             GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
         }
-        if (!fromEffect) 
+        if (!fromEffect)
         {
             _state.OnDamageOpponent(amount);
         }
@@ -159,17 +159,17 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
         }
     }
-    public void Draw(int amount) 
+    public void Draw(int amount)
     {
         if (GameObject.Find("Deck").GetComponent<Deck>() != null)
         {
-            for (int i = 0; i < amount; i++) 
+            for (int i = 0; i < amount; i++)
             {
                 GameObject.Find("Deck").GetComponent<Deck>().Draw();
             }
         }
     }
-    public void OpponentDiscard(int amount) 
+    public void OpponentDiscard(int amount)
     {
         if (GameObject.Find("Opponent").GetComponent<OpponentLogic>() != null)
         {
@@ -179,4 +179,5 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
+
 }
