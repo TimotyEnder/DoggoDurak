@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,7 @@ public class RewardItem : MonoBehaviour
         if (itemPrice > 0) 
         {
             this.price = itemPrice;
+            this.transform.Find("PriceText").GetComponent<TextMeshProUGUI>().text = itemPrice.ToString();   
         }
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
