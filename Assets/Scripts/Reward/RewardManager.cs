@@ -29,4 +29,8 @@ public class RewardManager
         Reward toReturn = new Reward(itemsDropped, _currencyManager.GetCurrency());
         return toReturn;
     }
+    public List<Item> ShopReward(int rarity,int amount) 
+    {
+        return _itemManager.RandomItemsWithRarity(rarity, amount);
+    }
 }

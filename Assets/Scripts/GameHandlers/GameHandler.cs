@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
@@ -106,6 +108,23 @@ public class GameHandler : MonoBehaviour
     public void GenerateReward()
     {
         _currentReward = _rewardManager.Value.GenerateReward();
+    }
+    public List<Item> GetShopItems() 
+    {
+        List<Item> itemsToReturn = new List<Item>();
+        for(int i=0;i<GameHandler.Instance.GetGameState()._itemsShownInShop;i++) 
+        {
+            int random = UnityEngine.Random.Range(1, 100);
+            if (random <= GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate)
+            {
+                itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, 1));
+            }
+            else 
+            {
+                itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1, 1));
+            }
+        }
+        return itemsToReturn;   
     }
     public void SetHealth(int health)
     {

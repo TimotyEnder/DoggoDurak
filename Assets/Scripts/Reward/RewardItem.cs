@@ -9,14 +9,16 @@ public class RewardItem : MonoBehaviour
     private ToolTip _toolTip;
     private Image _bgColor;
     private Button _button;
-    private RewardItemGrid _grid;
+    private RewardItemGrid _rewgrid;
+    [SerializeField]
+    private TextMeshProUGUI _priceText;
     private int price = 0;
 
     private void Start()
     {
         _button = transform.Find("Button").GetComponent<Button>();
         _button.onClick.AddListener(OnClickActiveItem);
-        _grid= GameObject.Find("RewardItemGrid").GetComponent<RewardItemGrid>(); 
+        _rewgrid= GameObject.Find("RewardItemGrid").GetComponent<RewardItemGrid>();
     }
 
     public void AssignItem(Item item, int itemPrice=0)
@@ -24,7 +26,8 @@ public class RewardItem : MonoBehaviour
         if (itemPrice > 0) 
         {
             this.price = itemPrice;
-            this.transform.Find("PriceText").GetComponent<TextMeshProUGUI>().text = itemPrice.ToString();   
+            _priceText.gameObject.SetActive(true);
+            _priceText.text = itemPrice.ToString();   
         }
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
@@ -53,7 +56,7 @@ public class RewardItem : MonoBehaviour
         {
             GameHandler.Instance.GetGameState().AddItem(this._item);
             GetComponent<ToolTip>().SetTooltipActiveState(false);
-            _grid.ChoiceHappened();
+            if (price==0 && _rewgrid != null) { _rewgrid.ChoiceHappened(); }
             if(price>0) { GameHandler.Instance.GetGameState()._rubles-=price; } 
             Destroy(this.gameObject);
         }

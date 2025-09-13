@@ -8,6 +8,8 @@ public class ShopButton:MonoBehaviour
     private GameObject _shopPanel;
     [SerializeField]
     private Button _shopCloseButton;
+    [SerializeField]
+    private ShopItemContent _shopItemContent; 
     private bool _shopPayedFor;
     private Button _shopButton;
 
@@ -24,6 +26,7 @@ public class ShopButton:MonoBehaviour
                 {
                     GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._shopRpointCost;
                     _shopPanel.SetActive(true);
+                    _shopItemContent.SetRewardGrid();
                 }
             }
             else 
