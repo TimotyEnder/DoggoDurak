@@ -25,6 +25,7 @@ public class ShopButton:MonoBehaviour
                 if (GameHandler.Instance.GetGameState()._restPoints >= GameHandler.Instance.GetGameState()._shopRpointCost)
                 {
                     GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._shopRpointCost;
+                    GameObject.Find("RestHandler").GetComponent<RestHandler>().UpdateRestUI();
                     _shopPanel.SetActive(true);
                     _shopItemContent.SetRewardGrid();
                 }

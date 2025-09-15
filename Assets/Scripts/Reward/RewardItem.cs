@@ -52,12 +52,19 @@ public class RewardItem : MonoBehaviour
     }
     private void OnClickActiveItem()
     {
-        if (price==0 || price>0 && GameHandler.Instance.GetGameState()._rubles>price) 
+        if (price==0 || price>0 && GameHandler.Instance.GetGameState()._rubles>=price) 
         {
             GameHandler.Instance.GetGameState().AddItem(this._item);
             GetComponent<ToolTip>().SetTooltipActiveState(false);
-            if (price==0 && _rewgrid != null) { _rewgrid.ChoiceHappened(); }
-            if(price>0) { GameHandler.Instance.GetGameState()._rubles-=price; } 
+            if (price==0 && _rewgrid != null) 
+            {
+                 _rewgrid.ChoiceHappened(); 
+            }
+            if(price>0) 
+            { 
+                GameHandler.Instance.GetGameState()._rubles-=price; 
+                GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+            } 
             Destroy(this.gameObject);
         }
     }
