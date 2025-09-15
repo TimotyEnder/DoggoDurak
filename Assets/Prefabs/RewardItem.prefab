@@ -398,8 +398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipPrefab: {fileID: 4632961686527916025, guid: 08c80ec62ebc805419c712486f2c5b3d, type: 3}
-  ttPaddingX: 0
-  ttPaddingY: 0
+  ttPaddingX: 100
+  ttPaddingY: 100
   canvas: {fileID: 0}
 --- !u!1 &7533121254872429403
 GameObject:
