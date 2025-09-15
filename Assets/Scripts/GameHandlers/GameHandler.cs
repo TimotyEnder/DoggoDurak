@@ -112,18 +112,17 @@ public class GameHandler : MonoBehaviour
     public List<Item> GetShopItems() 
     {
         List<Item> itemsToReturn = new List<Item>();
-        for(int i=0;i<GameHandler.Instance.GetGameState()._itemsShownInShop;i++) 
+        int legendaryItemsInShop = 0;
+        for (int i = 0; i < GameHandler.Instance.GetGameState()._itemsShownInShop; i++)
         {
             int random = UnityEngine.Random.Range(1, 100);
             if (random <= GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate)
             {
-                itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, 1));
-            }
-            else 
-            {
-                itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1, 1));
+                legendaryItemsInShop++;
             }
         }
+        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, legendaryItemsInShop));
+        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1,_state._itemsShownInShop - legendaryItemsInShop));
         return itemsToReturn;   
     }
     public void SetHealth(int health)
