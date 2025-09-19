@@ -31,10 +31,11 @@ public class DeckPanel : MonoBehaviour
         {
             Destroy(card.gameObject);
         }
-        foreach (CardInfo cInfo in GameHandler.Instance.GetGameState()._deck) 
+        foreach (CardInfo cInfo in GameHandler.Instance.GetGameState()._deck)
         {
-           GameObject cardMade= Instantiate(_cardPrefab,_deckContent.transform);
-           cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
+            GameObject cardMade = Instantiate(_cardPrefab, _deckContent.transform);
+            cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
+            Debug.Log("Created 1 card");
         }
     }
 }

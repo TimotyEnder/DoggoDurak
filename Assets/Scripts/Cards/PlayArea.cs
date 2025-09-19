@@ -11,7 +11,7 @@ public class PlayArea : MonoBehaviour
     private float _maxHandSpacing;
     private Vector2 _playAreaAttachPos;
     private int _cardsInPlay;
-    private int _playAreaSize;
+    private int _playAreaSize = 0;
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;

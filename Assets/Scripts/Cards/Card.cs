@@ -52,8 +52,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         //card hand area
         _cardHandArea = GameObject.Find("CardHandArea");
-        _cardHandAreaScript = _cardHandArea.GetComponent<CardHandArea>();
-        _cardHandAreaRect = _cardHandArea.GetComponent<RectTransform>();
+        if (_cardHandArea != null)
+        {
+            _cardHandAreaScript = _cardHandArea.GetComponent<CardHandArea>();
+            _cardHandAreaRect = _cardHandArea.GetComponent<RectTransform>();
+        }
 
         //RectTransform is commonly used so we init it
         _cardRect = this.GetComponent<RectTransform>();
@@ -63,16 +66,26 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         this._oldSiblingIndex = -1;
 
         //canvas
-        _canvas = GameObject.Find("UI").GetComponent<Canvas>();
+        GameObject _tempcanvas = GameObject.Find("UI");
+        if (_tempcanvas != null)
+        {
+            _canvas = _tempcanvas.GetComponent<Canvas>();
+        }
 
         //Card Image
         _cardImage = _cardRect.Find("CardImage").gameObject;
-        _cardImageRect = _cardImage.GetComponent<RectTransform>();
+        if (_cardImage != null)
+        {
+            _cardImageRect = _cardImage.GetComponent<RectTransform>();
+        }
 
         //Play Area
         _playArea = GameObject.Find("PlayArea");
-        _playAreaRect = _playArea.GetComponent<RectTransform>();
-        _playAreaScript = _playArea.GetComponent<PlayArea>();
+        if (_playArea != null)
+        {
+            _playAreaRect = _playArea.GetComponent<RectTransform>();
+            _playAreaScript = _playArea.GetComponent<PlayArea>();
+        }
 
         //turn handler
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
@@ -81,9 +94,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         //Opponent
         _opponent = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
 
-    }
-    void Update()
-    {
     }
     public void MakeCard(CardInfo card, bool Draggable=true)
     {
