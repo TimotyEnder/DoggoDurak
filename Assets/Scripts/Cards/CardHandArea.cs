@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -103,16 +104,29 @@ public class CardHandArea : MonoBehaviour
     {
         PlayArea pa= GameObject.Find("PlayArea").GetComponent<PlayArea>();
         TurnHandler th= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
-        if (pa != null) 
+        Debug.Log("automatic turn end checking!");
+        if (pa != null)
         {
             foreach (Card card in this._cards)
             {
-                if ((pa.CanReverseWithCard(card.GetCardInfo()) || pa.CanAttackWithCard(card.GetCardInfo())) && th.GetTurnState()==0)
+                if ((pa.CanReverseWithCard(card.GetCardInfo()) || pa.CanAttackWithCard(card.GetCardInfo())) && th.GetTurnState() == 0)
                 {
                     return true;
                 }
-                if(th.GetTurnState()!=0)
+                if (th.GetTurnState() != 0)
                 {
+                    bool allDefended = true; //check if all card have been defended
+                    foreach (Card pcard in pa.GetCardsPlayed())
+                    {
+                        if (!pcard.IsDefended())
+                        {
+                            allDefended = false;
+                        }
+                    }
+                    if (allDefended)
+                    {
+                        return false;
+                    }
                     foreach (Card pcard in pa.GetCardsPlayed())
                     {
                         if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()))
