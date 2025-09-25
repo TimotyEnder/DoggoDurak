@@ -31,7 +31,8 @@ public class GameState
     public bool _blackCardsSameSuit;
     public Dictionary<string, int> _itemStacks;
     public int _itemsShownInShop;
-    public GameState() 
+    public int _maxCardModsInShop;
+    public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 4; i++)
@@ -76,15 +77,16 @@ public class GameState
         _restRpointCost = 1;//cost to use rest action in the rest tab
         _shopRpointCost = 2;//cost to use shop action in the rest tab
         _handSize = 6;
-        _items= new List<Item>();
+        _items = new List<Item>();
         _serializableItems = new List<ItemContainer>();
         _redCardsSameSuit = false;
-        _blackCardsSameSuit= false;
+        _blackCardsSameSuit = false;
         _maxRewardSelection = 3;
         _maxRewardChoices = 1;
         _rareItemRewardDropRate = 10;
         _legendaryItemInshopDropRate = 10;
         _itemsShownInShop = 8;
+        _maxCardModsInShop = 3;
         _itemStacks = new Dictionary<string, int>();
     }
     private void addItemStack(Item item) 

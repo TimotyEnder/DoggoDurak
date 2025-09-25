@@ -535,6 +535,7 @@ MonoBehaviour:
   _shopPanel: {fileID: 1593585910}
   _shopCloseButton: {fileID: 486677718}
   _shopItemContent: {fileID: 1485221226}
+  _shopCardGrid: {fileID: 1949360981}
 --- !u!1 &127826531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1475,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1150766975}
   m_HandleRect: {fileID: 1150766974}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4238,6 +4239,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949360980}
+  - component: {fileID: 1949360981}
+  - component: {fileID: 1949360982}
   m_Layer: 5
   m_Name: CardGridLayout
   m_TagString: Untagged
@@ -4261,9 +4264,46 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -123.56665, y: -414.2324}
-  m_SizeDelta: {x: 1062.8668, y: 230.4648}
+  m_AnchoredPosition: {x: -123.56665, y: -437.0163}
+  m_SizeDelta: {x: 1062.867, y: 184.897}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1949360981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949360979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ebcf7841a2126a79080c2ec423109b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardPrefab: {fileID: 9024197703662086752, guid: 5f79580e3eb6c8b48858d2d80bfb618f, type: 3}
+--- !u!114 &1949360982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949360979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 50, y: 50}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &1963990281
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,7 +4476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.24743652, y: 31.118988}
+  m_AnchoredPosition: {x: 0.24743652, y: 31.119019}
   m_SizeDelta: {x: 0.50415, y: -288.993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1983503270

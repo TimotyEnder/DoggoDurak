@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using NUnit.Framework.Internal.Commands;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager.Requests;
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerClickHandler
 
 {
     private CardInfo _cardInfo;
@@ -24,6 +25,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private RectTransform _cardImageRect;
     [SerializeField]
     private bool _isInteractable;
+    private int _cost;
+    [SerializeField]
+    private TextMeshProUGUI _costText;
     private GameObject _playArea;
     private RectTransform _playAreaRect;
     private PlayArea _playAreaScript;
@@ -88,20 +92,33 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
 
         //turn handler
-        _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        GameObject turnHandlerObj = GameObject.Find("TurnHandler");
+        if (turnHandlerObj != null)
+        {
+            _turnHandler = turnHandlerObj.GetComponent<TurnHandler>();
+        }
         //Defended
         _defended = false;
         //Opponent
-        _opponent = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
-
+        GameObject opponentObj = GameObject.Find("Opponent");
+        if (opponentObj != null)
+        {
+            _opponent = opponentObj.GetComponent<OpponentLogic>();
+        }
     }
-    public void MakeCard(CardInfo card, bool Draggable=true)
+    public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
     {
         this._cardInfo = card;
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
-        _isInteractable = Draggable;
+        _isInteractable = IsInteractable;
+        _cost = Cost;
+        if (_cost > 0)
+        {
+            _costText.gameObject.SetActive(true);
+            _costText.text = _cost.ToString();
+        }
         UpdateModifiers();
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
@@ -318,6 +335,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public bool IsDefended() 
     {
         return _defended;   
+    }
+
+    public void OnPointerClick(PointerEventData eventData) //this is to handle buyable cards
+    {
+        if (!_isInteractable && _cost > 0 && GameHandler.Instance.GetGameState()._rubles >= _cost)
+        {
+            GameHandler.Instance.GetGameState()._rubles -= _cost;
+            GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+            GameHandler.Instance.GetGameState()._deck.Add(GetCardInfo());
+            GetComponent<ToolTip>().SetTooltipActiveState(false);
+            Destroy(this.gameObject);
+        }
     }
 }
 

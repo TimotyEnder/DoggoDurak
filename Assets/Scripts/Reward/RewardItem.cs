@@ -18,7 +18,11 @@ public class RewardItem : MonoBehaviour
     {
         _button = transform.Find("Button").GetComponent<Button>();
         _button.onClick.AddListener(OnClickActiveItem);
-        _rewgrid= GameObject.Find("RewardItemGrid").GetComponent<RewardItemGrid>();
+        GameObject rewObj = GameObject.Find("RewardItemGrid");
+        if (rewObj != null)
+        {
+            _rewgrid = rewObj.GetComponent<RewardItemGrid>();
+        }
     }
 
     public void AssignItem(Item item, int itemPrice=0)

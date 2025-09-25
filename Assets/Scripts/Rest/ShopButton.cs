@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,9 @@ public class ShopButton:MonoBehaviour
     [SerializeField]
     private Button _shopCloseButton;
     [SerializeField]
-    private ShopItemContent _shopItemContent; 
+    private ShopItemContent _shopItemContent;
+    [SerializeField]
+    private ShopCardGrid _shopCardGrid;
     private bool _shopPayedFor;
     private Button _shopButton;
 
@@ -28,6 +31,7 @@ public class ShopButton:MonoBehaviour
                     GameObject.Find("RestHandler").GetComponent<RestHandler>().UpdateRestUI();
                     _shopPanel.SetActive(true);
                     _shopItemContent.SetRewardGrid();
+                    _shopCardGrid.SetCardGrid();
                 }
             }
             else 

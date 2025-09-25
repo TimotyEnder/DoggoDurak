@@ -32,21 +32,17 @@ public class PrivatizedCheckVoucher : Item
 
     public override void OnHeal(int amount)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnLoad()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnPlayedCard(Card card)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnReverse(Card card)
     {
-        throw new System.NotImplementedException();
     }
 }

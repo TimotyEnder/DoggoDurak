@@ -52,6 +52,24 @@ public class CardInfo
                 break;
         }
     }
+    static public string RandomSuit()
+    {
+        int random = UnityEngine.Random.Range(1, 4);
+        switch (random)
+        {
+            case 1:
+                return "H";
+            case 2:
+                return "D";
+            case 3:
+                return "S";
+            case 4:
+                return "C";
+            default:
+                return "ERROR";
+         }
+        
+    }
     private static Dictionary<string, CardModifier> modifierStringToType = new Dictionary<string, CardModifier>
     {
         {"Restoring", new RestoringCardMod()},
@@ -62,7 +80,7 @@ public class CardInfo
         {"Cripple", new CrippleCardMod()},
         {"Spiky", new SpikyCardMod()},
     };
-    private static Dictionary<string, int> modifierMaxCopies = new Dictionary<string, int>  //-1 equals infinite copies
+    public static Dictionary<string, int> modifierMaxCopies = new Dictionary<string, int>  //-1 equals infinite copies
     {
         {"Restoring", 1},
         {"Bounce", 1},
