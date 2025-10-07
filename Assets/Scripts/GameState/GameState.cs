@@ -43,6 +43,7 @@ public class GameState
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("C", j));
+                        _deck.Add(new CardInfo("C", j));
 
                     }
                     break;
@@ -50,18 +51,21 @@ public class GameState
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("S", j));
+                        _deck.Add(new CardInfo("C", j));
                     }
                     break;
                 case 2:
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("D", j));
+                        _deck.Add(new CardInfo("C", j));
                     }
                     break;
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("H", j));
+                        _deck.Add(new CardInfo("C", j));
                     }
                     break;
             }
