@@ -40,6 +40,7 @@ public class ShopButton:MonoBehaviour
             else 
             {
                 _shopPanel.SetActive(true);
+                _discardOptButton.UpdateCostText();
             }
         });
 

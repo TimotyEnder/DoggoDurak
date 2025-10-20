@@ -674,7 +674,7 @@ MonoBehaviour:
   _shopCloseButton: {fileID: 486677718}
   _shopItemContent: {fileID: 1485221226}
   _shopCardGrid: {fileID: 1949360981}
-  _discardOptButton: {fileID: 0}
+  _discardOptButton: {fileID: 1829435939}
 --- !u!1 &175366852
 GameObject:
   m_ObjectHideFlags: 0
