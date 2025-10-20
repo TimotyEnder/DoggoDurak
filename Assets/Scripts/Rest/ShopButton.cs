@@ -13,6 +13,8 @@ public class ShopButton:MonoBehaviour
     private ShopItemContent _shopItemContent;
     [SerializeField]
     private ShopCardGrid _shopCardGrid;
+    [SerializeField]
+    private DiscardOptionPanel _discardOptButton;
     private bool _shopPayedFor;
     private Button _shopButton;
 
@@ -32,6 +34,7 @@ public class ShopButton:MonoBehaviour
                     _shopPanel.SetActive(true);
                     _shopItemContent.SetRewardGrid();
                     _shopCardGrid.SetCardGrid();
+                    _discardOptButton.UpdateCostText();
                 }
             }
             else 
