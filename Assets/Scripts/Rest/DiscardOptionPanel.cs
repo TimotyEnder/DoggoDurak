@@ -37,11 +37,11 @@ public class DiscardOptionPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _disContent.transform);
             cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
-            Debug.Log("Created 1 card");
         }
     }
     public void UpdateCostText()
     {
         _costText.text = GameHandler.Instance.GetGameState()._discardingCardInShopCost.ToString();
     }   
+    
 }

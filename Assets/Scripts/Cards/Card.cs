@@ -339,6 +339,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
     public void OnPointerClick(PointerEventData eventData) //this is to handle buyable cards
     {
+
         if (!_isInteractable && _cost > 0 && GameHandler.Instance.GetGameState()._rubles >= _cost)
         {
             GameHandler.Instance.GetGameState()._rubles -= _cost;
@@ -346,6 +347,24 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             GameHandler.Instance.GetGameState()._deck.Add(GetCardInfo());
             GetComponent<ToolTip>().SetTooltipActiveState(false);
             Destroy(this.gameObject);
+        }
+        else
+        {
+            GameObject disOpt = GameObject.Find("DiscardButton");
+            if (disOpt != null)
+            {
+                DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
+                if(GameHandler.Instance.GetGameState()._rubles>=GameHandler.Instance.GetGameState()._discardingCardInShopCost)
+                {
+                    GameHandler.Instance.GetGameState()._rubles -= GameHandler.Instance.GetGameState()._discardingCardInShopCost;
+                    GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+                    GameHandler.Instance.GetGameState()._deck.Remove(GetCardInfo());
+                    GetComponent<ToolTip>().SetTooltipActiveState(false);
+                    disOptScript.UpdateDeckContent();
+                    Destroy(this.gameObject);
+                }
+
+            }
         }
     }
 }
