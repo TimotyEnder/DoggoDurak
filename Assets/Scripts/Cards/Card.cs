@@ -360,6 +360,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                     GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
                     GameHandler.Instance.GetGameState()._deck.Remove(GetCardInfo());
                     GetComponent<ToolTip>().SetTooltipActiveState(false);
+                    GameHandler.Instance.GetGameState()._discardingCardInShopCost++;
+                    disOptScript.UpdateCostText();
                     disOptScript.UpdateDeckContent();
                     Destroy(this.gameObject);
                 }

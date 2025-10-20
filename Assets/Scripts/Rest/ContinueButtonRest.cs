@@ -13,6 +13,7 @@ public class ContinueButtonRest: MonoBehaviour
     void ContinueButtonOnClick()
     {
         GameHandler.Instance.GetGameState()._restPoints = GameHandler.Instance.GetGameState()._maxrestPoints;
+        GameHandler.Instance.GetGameState()._discardingCardInShopCost = GameHandler.Instance.GetGameState()._startingDiscardInShopCost;
         GameHandler.Instance.Next();
     }
 }

@@ -33,6 +33,8 @@ public class GameState
     public int _itemsShownInShop;
     public int _maxCardModsInShop;
     public int _discardingCardInShopCost;
+
+    public int _startingDiscardInShopCost;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -90,6 +92,7 @@ public class GameState
         _maxCardModsInShop = 3;
         _itemStacks = new Dictionary<string, int>();
         _discardingCardInShopCost = 5;
+        _startingDiscardInShopCost = 5;
     }
     private void addItemStack(Item item) 
     {
