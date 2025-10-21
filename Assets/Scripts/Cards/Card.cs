@@ -344,7 +344,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             GameHandler.Instance.GetGameState()._rubles -= _cost;
             GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
-            GameHandler.Instance.GetGameState()._deck.Add(GetCardInfo());
+            GameHandler.Instance.AddCardToDeck(this.GetCardInfo());
             GetComponent<ToolTip>().SetTooltipActiveState(false);
             Destroy(this.gameObject);
         }

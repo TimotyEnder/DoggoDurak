@@ -26,7 +26,6 @@ public class DeckPanel : MonoBehaviour
     public void UpdateDeckContent() 
     {
         _deckPanel.SetActive(true);
-        GameHandler.Instance.SortDeck(); 
 
         foreach (Transform card in _deckContent.transform) 
         {
