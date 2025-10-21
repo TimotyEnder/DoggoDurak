@@ -28,7 +28,7 @@ public class DiscardOptionPanel : MonoBehaviour
     public void UpdateDeckContent()
     {
         _disPanel.SetActive(true);
-
+        GameHandler.Instance.SortDeck();
         foreach (Transform card in _disContent.transform)
         {
             Destroy(card.gameObject);

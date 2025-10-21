@@ -200,6 +200,10 @@ public class GameHandler : MonoBehaviour
     public void ReAddItems(List<Item> items)
     {
         _rewardManager.Value.ReAddItems(items);
-    }   
+    }
+    public void SortDeck()
+    {
+        _state._deck.Sort((a, b) => a._suitNumber == b._suitNumber?a._number.CompareTo(b._number):a._suitNumber.CompareTo(b._suitNumber));
+    }
 
 }
