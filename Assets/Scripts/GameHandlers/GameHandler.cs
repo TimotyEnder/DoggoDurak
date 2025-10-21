@@ -197,5 +197,9 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
+    public void ReAddItems(List<Item> items)
+    {
+        _rewardManager.Value.ReAddItems(items);
+    }   
 
 }

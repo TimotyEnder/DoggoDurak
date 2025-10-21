@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,5 +21,17 @@ public class ShopItemContent : MonoBehaviour
         {
             Destroy(rwItemTransform.gameObject);
         }
+    }
+    public void ReRoll()
+    {
+        List<Item> toReturnItems = new List<Item>();
+        foreach (Transform rwItemTransform in this.transform)
+        {
+            Item toReturn = rwItemTransform.GetComponent<RewardItem>().GetAssignedItem();
+            toReturnItems.Add(toReturn);
+        }
+        GameHandler.Instance.ReAddItems(toReturnItems);
+        RemoveAllGrid();
+        SetRewardGrid();
     }
 }

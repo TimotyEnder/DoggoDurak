@@ -28,13 +28,13 @@ public class ItemManager
             }
         }
     }
-    public List<Item> RandomItemsWithRarity(int rarity, int amount=1)
+    public List<Item> RandomItemsWithRarity(int rarity, int amount = 1)
     {
-        List<Item> itemsDropped = new List<Item>();    
+        List<Item> itemsDropped = new List<Item>();
         if (rarity < _items.Count && _items[rarity].Count > 0)
         {
-            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _items[rarity].Count-1, amount);
-            foreach(int i in randomInts) 
+            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _items[rarity].Count - 1, amount);
+            foreach (int i in randomInts)
             {
                 Item itemReturned = Object.Instantiate(_items[rarity][i]);
                 itemReturned.InitItem();
@@ -46,5 +46,19 @@ public class ItemManager
             }
         }
         return itemsDropped;
+    }
+    public void ReAddItems(List<Item> items)
+    {
+        foreach (var item in items)
+        {
+            if (!item.IsBoss())
+            {
+                _items[item.GetRarity()].Add(item);
+            }
+             else
+            {
+                _bossItems.Add(item);
+            }
+        }
     }
 }

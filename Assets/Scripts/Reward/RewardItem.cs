@@ -24,6 +24,10 @@ public class RewardItem : MonoBehaviour
             _rewgrid = rewObj.GetComponent<RewardItemGrid>();
         }
     }
+    public Item GetAssignedItem()
+    {
+        return _item;
+    }
 
     public void AssignItem(Item item, int itemPrice=0)
     {
