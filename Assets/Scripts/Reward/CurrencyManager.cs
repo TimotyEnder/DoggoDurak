@@ -9,6 +9,10 @@ public class CurrencyManager
         _currCurrencyCalculator = new List<CurrencyCalculator>();
         _currCurrencyCalculator.Add(new DefaultCC());
     }
+    public void AddCurrencyCalculator(CurrencyCalculator cc) 
+    {
+        _currCurrencyCalculator.Add(cc);
+    }
     public int GetCurrency() 
     {
         int total = 0;
@@ -18,10 +22,14 @@ public class CurrencyManager
         }
         return total;
     }
-    public string GetCurrencyExplanationText() 
+    public string GetCurrencyExplanationText()
     {
-        //implement later
-        return null;
+        string explanation = "";
+        foreach (CurrencyCalculator c in _currCurrencyCalculator)
+        {
+            explanation += c.GetExplanationText() + c.CalculateCurrency().ToString() + "\n";
+        }
+        return explanation;
     }
 
 }

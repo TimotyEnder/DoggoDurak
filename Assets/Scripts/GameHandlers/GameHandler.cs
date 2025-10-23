@@ -212,4 +212,8 @@ public class GameHandler : MonoBehaviour
         _state._deck.Add(card);
         SortDeck();
     }
+    public void AddCurrencyCalculator(CurrencyCalculator cc) 
+    {
+        _rewardManager.Value.AddCurrencyCalculator(cc);
+    }   
 }

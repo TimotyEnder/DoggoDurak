@@ -37,4 +37,8 @@ public class RewardManager
     {
         _itemManager.ReAddItems(items);
     }
+    public void AddCurrencyCalculator(CurrencyCalculator cc) 
+    {
+        _currencyManager.AddCurrencyCalculator(cc);
+    }
 }
