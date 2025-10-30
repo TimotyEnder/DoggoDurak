@@ -49,6 +49,7 @@ public class LowlySpikyDvorniashka : Encounter
         icon = null;
         boss = false;
         day = 0;
+        description = "A lowly  Dvorniashka with a spiked collar";
     }
 
     public override void OnDamagePlayer(int amount)

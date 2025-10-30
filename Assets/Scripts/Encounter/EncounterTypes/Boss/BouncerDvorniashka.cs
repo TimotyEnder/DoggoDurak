@@ -48,6 +48,7 @@ public class BouncerDvorniashka : Encounter
         icon = null;
         boss = true;
         day = 0;
+        description = "A Bouncer that looks tough.";
     }
 
     public override void OnDamagePlayer(int amount)

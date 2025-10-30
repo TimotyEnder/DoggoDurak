@@ -61,6 +61,7 @@ public class RestoringDvorniashka : Encounter
         icon = null;
         boss = false;
         day = 1;
+        description = "A medic Dvorniashka.";
     }
 
     public override void OnDamagePlayer(int amount)

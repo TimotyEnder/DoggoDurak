@@ -49,6 +49,7 @@ public class HotDvorniashka : Encounter
         icon = null;
         boss = false;
         day = 1;
+        description = "A hot Dvorniashka that burns with its claws.";
     }
 
     public override void OnDamagePlayer(int amount)

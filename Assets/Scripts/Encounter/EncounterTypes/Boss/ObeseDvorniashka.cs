@@ -46,6 +46,7 @@ public class ObeseDvorniashka : Encounter
         icon = null;
         boss = true;
         day = 0;
+        description = "An obese Corgi that has mountains of food around it.";
     }
 
     public override void OnDamagePlayer(int amount)

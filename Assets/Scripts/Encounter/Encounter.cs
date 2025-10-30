@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ public abstract class Encounter : ScriptableObject
     [SerializeField] protected char trumpSuit;
     [SerializeField] protected  Sprite icon;
     [SerializeField] protected bool boss;
+    protected string description;
     //additional rewards implement here
 
     public abstract void InitEncounter();
@@ -41,8 +43,12 @@ public abstract class Encounter : ScriptableObject
     {
         return trumpSuit;
     }
-    public bool IsBoss() 
+    public bool IsBoss()
     {
         return boss;
+    }
+    public string GetDescription()
+    {
+        return description;
     }
 }

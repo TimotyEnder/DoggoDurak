@@ -61,6 +61,7 @@ public class AgileDvorniashka : Encounter
         icon = null;
         boss = false;
         day = 1;
+        description = "An agile Dvorniashka that uses parry to avoid damage.";
     }
 
     public override void OnDamagePlayer(int amount)

@@ -47,6 +47,7 @@ public class Bear : Encounter
         icon = null;
         boss = true;
         day = 0;
+        description = "A... BEAR!?";
     }
 
     public override void OnDamagePlayer(int amount)

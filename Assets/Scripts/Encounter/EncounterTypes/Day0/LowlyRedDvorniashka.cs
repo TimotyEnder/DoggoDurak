@@ -30,6 +30,7 @@ public class LowlyRedDvorniashka:Encounter
         icon = null;
         boss = false;
         day = 0;
+        description = "A lowly red furred Dvorniashka.";
     }
 
     public override void OnDamagePlayer(int amount)

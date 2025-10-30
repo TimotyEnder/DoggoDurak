@@ -46,6 +46,7 @@ public class SwiftDvorniashka : Encounter
         icon = null;
         boss = true;
         day = 0;
+        description = "A swift slim Dvorniashka that parries all strikes with ease.";
     }
 
     public override void OnDamagePlayer(int amount)

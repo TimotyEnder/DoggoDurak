@@ -61,6 +61,7 @@ public class LowlyRestoringDvorniashka: Encounter
         icon = null;
         boss = false;
         day = 0;
+        description = "A lowly medic Dvorniashka.";
     }
 
     public override void OnDamagePlayer(int amount)

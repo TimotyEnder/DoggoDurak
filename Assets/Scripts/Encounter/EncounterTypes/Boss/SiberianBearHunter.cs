@@ -31,6 +31,7 @@ public class SiberianBearHunter : Encounter
         icon = null;
         boss = true;
         day = 0;
+        description = "A black furred hunter wearing  Siberian Bearhunting Armor with incredible dagerous spikes";
     }
 
     public override void OnDamagePlayer(int amount)

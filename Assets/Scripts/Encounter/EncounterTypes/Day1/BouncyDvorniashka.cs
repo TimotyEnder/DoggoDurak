@@ -61,6 +61,7 @@ public class BouncyDvorniashka : Encounter
         icon = null;
         boss = false;
         day = 1;
+        description = "A bouncy Dvorniashka.";
     }
 
     public override void OnDamagePlayer(int amount)

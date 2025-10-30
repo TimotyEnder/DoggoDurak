@@ -30,6 +30,7 @@ public class BlackDvorniashka : Encounter
         icon = null;
         boss = false;
         day = 1;
+        description = "A black furred Dvorniashka.";
     }
 
     public override void OnDamagePlayer(int amount)

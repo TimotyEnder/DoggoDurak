@@ -42,6 +42,7 @@ public class Dvorniashka : Encounter
         icon = null;
         boss = false;
         day = 1;
+        description = "A standard Dvorniashka.";
     }
 
     public override void OnDamagePlayer(int amount)
