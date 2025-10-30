@@ -17,6 +17,13 @@ public class ShopItemContent : MonoBehaviour
     }
     public void RemoveAllGrid()
     {
+         List<Item> toReturnItems = new List<Item>();
+        foreach (Transform rwItemTransform in this.transform)
+        {
+            Item toReturn = rwItemTransform.GetComponent<RewardItem>().GetAssignedItem();
+            toReturnItems.Add(toReturn);
+        }
+        GameHandler.Instance.ReAddItems(toReturnItems);
         foreach (Transform rwItemTransform in this.transform)
         {
             Destroy(rwItemTransform.gameObject);
@@ -24,13 +31,6 @@ public class ShopItemContent : MonoBehaviour
     }
     public void ReRoll()
     {
-        List<Item> toReturnItems = new List<Item>();
-        foreach (Transform rwItemTransform in this.transform)
-        {
-            Item toReturn = rwItemTransform.GetComponent<RewardItem>().GetAssignedItem();
-            toReturnItems.Add(toReturn);
-        }
-        GameHandler.Instance.ReAddItems(toReturnItems);
         RemoveAllGrid();
         SetRewardGrid();
     }
