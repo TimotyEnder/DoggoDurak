@@ -218,7 +218,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             }
             else
             {
-                //play encounter on card Reversed
+                GameHandler.Instance.GetCurrEncounter().OnReverse(this);
             }
             _turnHandler.Reverse();
             StartCoroutine(_opponent.EnemyPlay());
@@ -243,7 +243,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         else
         {
-            //play encounter on card Played
+            GameHandler.Instance.GetCurrEncounter().OnPlayedCard(this);
         }
     }
     public void DefendCard(Card card) 
@@ -263,7 +263,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         else
         {
-            //play encounter on card Defended
+            GameHandler.Instance.GetCurrEncounter().OnDefendCard(this, card);
         }
     }
     public void OnPointerEnter(PointerEventData eventData)

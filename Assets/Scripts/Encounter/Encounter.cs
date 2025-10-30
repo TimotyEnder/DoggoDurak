@@ -16,6 +16,11 @@ public abstract class Encounter : ScriptableObject
     //additional rewards implement here
 
     public abstract void InitEncounter();
+
+    public abstract void OnPlayedCard(Card card);
+    public abstract void OnDefendCard(Card card, Card defendedWith);
+    public abstract void OnReverse(Card card);
+    public abstract void OnDamagePlayer(int amount);
     public int GetDay() 
     {
         return day;

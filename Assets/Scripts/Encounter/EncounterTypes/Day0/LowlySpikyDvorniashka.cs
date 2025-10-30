@@ -50,4 +50,24 @@ public class LowlySpikyDvorniashka : Encounter
         boss = false;
         day = 0;
     }
+
+    public override void OnDamagePlayer(int amount)
+    {
+        
+    }
+
+    public override void OnDefendCard(Card card, Card defendedWith)
+    {
+        
+    }
+
+    public override void OnPlayedCard(Card card)
+    {
+        
+    }
+
+    public override void OnReverse(Card card)
+    {
+        
+    }
 }
