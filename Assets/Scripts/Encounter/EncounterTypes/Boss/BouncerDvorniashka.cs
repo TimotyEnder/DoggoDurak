@@ -38,12 +38,9 @@ public class BouncerDvorniashka : Encounter
         }
         foreach (CardInfo c in deck) 
         {
-            if (c._number%2==0)
-            {
-                c.AddModifier("Bounce");
-                c.AddModifier("Burn");
-                c.AddModifier("Burn");
-            }
+            c.AddModifier("Bounce");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
         }
         goldRewardMod = 2.0f;
         health = 100;

@@ -38,10 +38,7 @@ public class SwiftDvorniashka : Encounter
         }
         foreach (CardInfo c in deck) 
         {
-            if (c._number%2==0)
-            {
-                c.AddModifier("Parry");
-            }
+            c.AddModifier("Parry");
         }
         goldRewardMod = 2.0f;
         health = 100;
