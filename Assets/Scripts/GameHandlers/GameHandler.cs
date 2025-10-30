@@ -169,12 +169,16 @@ public class GameHandler : MonoBehaviour
             _state.OnDamageOpponent(amount);
         }
     }
-    public void DamagePlayer(int amount) //any effects damaging the player should go through this
+    public void DamagePlayer(int amount,bool fromEffect = false) //any effects damaging the player should go through this
     {
         if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
             GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+        }
+        if (!fromEffect)
+        {
+            _state.OnDamageOpponent(amount);
         }
     }
     public void Draw(int amount)
