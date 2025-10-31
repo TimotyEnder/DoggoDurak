@@ -15,12 +15,13 @@ public class CurrencyManager
     }
     public int GetCurrency() 
     {
-        int total = 0;
+        float total = 0;
         foreach (CurrencyCalculator c in _currCurrencyCalculator) 
         {
             total += c.CalculateCurrency();
         }
-        return total;
+        total *= GameHandler.Instance.GetCurrEncounter().GetRewardMod();
+        return (int)total;
     }
     public string GetCurrencyExplanationText()
     {

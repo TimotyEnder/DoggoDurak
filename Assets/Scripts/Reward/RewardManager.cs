@@ -7,22 +7,22 @@ public class RewardManager
     private ItemManager _itemManager;
     private CurrencyManager _currencyManager;
 
-    public RewardManager() 
+    public RewardManager()
     {
         _itemManager = new ItemManager();
         _currencyManager = new CurrencyManager();
     }
 
-    public Reward GenerateReward() 
+    public Reward GenerateReward()
     {
-    List<Item> itemsDropped=new List<Item>();
+        List<Item> itemsDropped = new List<Item>();
         int roll = Random.Range(1, 100);
         if (roll <= GameHandler.Instance.GetGameState()._rareItemRewardDropRate)
         {
             itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(1, 1));
-            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection-1));
+            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection - 1));
         }
-        else 
+        else
         {
             itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection));
         }
@@ -37,8 +37,12 @@ public class RewardManager
     {
         _itemManager.ReAddItems(items);
     }
-    public void AddCurrencyCalculator(CurrencyCalculator cc) 
+    public void AddCurrencyCalculator(CurrencyCalculator cc)
     {
         _currencyManager.AddCurrencyCalculator(cc);
+    }
+    public string GetCurrencyExplanationText() 
+    {
+        return _currencyManager.GetCurrencyExplanationText();
     }
 }

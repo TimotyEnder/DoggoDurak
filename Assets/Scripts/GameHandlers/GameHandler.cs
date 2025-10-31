@@ -219,5 +219,9 @@ public class GameHandler : MonoBehaviour
     public void AddCurrencyCalculator(CurrencyCalculator cc) 
     {
         _rewardManager.Value.AddCurrencyCalculator(cc);
-    }   
+    }
+    public string GetCurrencyExplanationText() 
+    {
+        return _rewardManager.Value.GetCurrencyExplanationText();
+    }
 }

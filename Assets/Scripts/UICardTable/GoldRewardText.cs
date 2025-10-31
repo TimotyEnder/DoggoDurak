@@ -11,6 +11,7 @@ public class GoldRewardText : MonoBehaviour
     }
     public void UpdateGoldRewardText() 
     {
-        _goldText.text=GameHandler.Instance.GetCurrReward().rubleReward.ToString();
+        
+        _goldText.text=GameHandler.Instance.GetCurrencyExplanationText()+"\n"+"Reward Modifier: "+GameHandler.Instance.GetCurrEncounter().GetRewardMod()+"\n"+"Total: "+GameHandler.Instance.GetCurrReward().rubleReward.ToString();
     }
 }

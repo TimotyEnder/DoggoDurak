@@ -31,7 +31,7 @@ public abstract class Encounter : ScriptableObject
     {
         return deck;
     }
-    public float GetReward() 
+    public float GetRewardMod() 
     {
         return goldRewardMod;
     }
