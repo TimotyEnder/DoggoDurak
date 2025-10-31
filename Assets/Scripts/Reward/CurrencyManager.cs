@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CurrencyManager
@@ -28,7 +28,7 @@ public class CurrencyManager
         string explanation = "";
         foreach (CurrencyCalculator c in _currCurrencyCalculator)
         {
-            explanation += c.GetExplanationText() + c.CalculateCurrency().ToString() + "\n";
+            explanation += c.GetExplanationText() + c.CalculateCurrency().ToString() + " Rubles\n";
         }
         return explanation;
     }
