@@ -28,7 +28,7 @@ public class CurrencyManager
         string explanation = "";
         foreach (CurrencyCalculator c in _currCurrencyCalculator)
         {
-            explanation += c.GetExplanationText() + c.CalculateCurrency().ToString() + " Rubles\n";
+            explanation += c.GetExplanationText() + c.CalculateCurrency().ToString() + " ₽\n";
         }
         return explanation;
     }
