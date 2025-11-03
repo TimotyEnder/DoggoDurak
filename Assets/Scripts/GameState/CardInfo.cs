@@ -2,6 +2,8 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using UnityEngine;
 [Serializable]
 public class CardInfo
@@ -12,6 +14,7 @@ public class CardInfo
     public List<CardModifierContainer> _modifiers;
     public bool _opponentCard;
     public Dictionary<string, int> _modifierStacks;
+    public Card _card;
 
     public CardInfo(string suit, int number)
     {
@@ -30,6 +33,10 @@ public class CardInfo
         this._modifiers = new List<CardModifierContainer>();
         this._opponentCard = opp;
         this._modifierStacks = new Dictionary<string, int>();
+    }
+    public void AssignCard(Card card) 
+    {
+        _card = card;
     }
     int SuitNumber(string suit)  //inherent suit  ordering structure here
     {
@@ -129,39 +136,64 @@ public class CardInfo
         {13,"King"},
         {14,"Ace"},
     };
-    public void OnAquire() 
+    public async  void OnAquire() 
     {
         foreach(CardModifierContainer c in _modifiers) 
         {
+            if (_card != null) 
+            {
+                _card.Bling();
+            }
             modifierStringToType.GetValueOrDefault(c.ModType).OnAquire();
+            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
-    public void OnDefendCard(Card defendee, Card defended) 
+    public async void OnDefendCard(Card defendee, Card defended) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
-            modifierStringToType.GetValueOrDefault(c.ModType).OnDefendCard(defendee, defended);
+            if (_card != null)
+            {
+                _card.Bling();
+            }
+            modifierStringToType.GetValueOrDefault(c.ModType).OnDefendCard(defendee,defended);
+            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
-    public void OnPlayedCard(Card card) 
+    public async void OnPlayedCard(Card card) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
+            if (_card != null)
+            {
+                _card.Bling();
+            }
             modifierStringToType.GetValueOrDefault(c.ModType).OnPlayedCard(card);
+            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
-    public void OnReverse(Card card) 
+    public async void OnReverse(Card card) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
+            if (_card != null)
+            {
+                _card.Bling();
+            }
             modifierStringToType.GetValueOrDefault(c.ModType).OnReverse(card);
+            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
-    public void OnBeingDefended(Card cardDefendingThis)
+    public async void OnBeingDefended(Card cardDefendingThis)
     {
         foreach (CardModifierContainer c in _modifiers)
         {
+            if (_card != null)
+            {
+                _card.Bling();
+            }
             modifierStringToType.GetValueOrDefault(c.ModType).OnBeingDefended(cardDefendingThis);
+            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
     public void AddModifier(string ModType) 
@@ -197,5 +229,13 @@ public class CardInfo
             returnString+= $"<color={modifierColors[entry.Key]}>"+"<size=2><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
         }
         return returnString;
+    }
+    public async Task DelayFloat(float milliseconds)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        while (stopwatch.Elapsed.TotalMilliseconds < milliseconds)
+        {
+            await Task.Yield();
+        }
     }
 }

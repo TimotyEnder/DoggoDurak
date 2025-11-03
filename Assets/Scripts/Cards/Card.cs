@@ -5,6 +5,7 @@ using NUnit.Framework.Internal.Commands;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager.Requests;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -47,6 +48,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _restoringOverlay;
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
+    private Animator _animator;
 
 
     void Start()
@@ -105,10 +107,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             _opponent = opponentObj.GetComponent<OpponentLogic>();
         }
+
+        _animator=this.gameObject.GetComponent<Animator>();
     }
     public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
     {
         this._cardInfo = card;
+        card.AssignCard(this);
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
@@ -121,6 +126,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         UpdateModifiers();
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
+    }
+    public void Bling() 
+    {
+        if (_animator != null) 
+        {
+            _animator.SetTrigger("Bling");
+        }
+    }
+    public float GetAnimSpeed() 
+    {
+        return _animator.speed;
     }
     public void UpdateModifiers() 
     {
