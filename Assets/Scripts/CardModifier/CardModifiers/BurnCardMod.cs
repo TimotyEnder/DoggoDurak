@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class BurnCardMod : CardModifier
 {
-    public void OnAquire()
+    public bool OnAquire()
     {
+        return false;
     }
 
-    public void OnBeingDefended(Card cardDefendingThis)
+    public bool OnBeingDefended(Card cardDefendingThis)
     {
-
+        return false;
     }
 
-    public void OnDefendCard(Card defendee, Card defended)
+    public bool OnDefendCard(Card defendee, Card defended)
     {
+        return false;
     }
 
-    public void OnPlayedCard(Card card)
+    public bool OnPlayedCard(Card card)
     {
         if (!card.GetCardInfo()._opponentCard)
         {
@@ -25,9 +27,11 @@ public class BurnCardMod : CardModifier
         {
             GameHandler.Instance.DamagePlayer(1); //treat x = 1 for all X effects and just add more to a cards effect list.
         }
+        return true;
     }
 
-    public void OnReverse(Card card)
+    public bool OnReverse(Card card)
     {
+        return false;
     }
 }

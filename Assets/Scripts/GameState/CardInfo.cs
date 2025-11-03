@@ -140,60 +140,70 @@ public class CardInfo
     {
         foreach(CardModifierContainer c in _modifiers) 
         {
-            if (_card != null) 
+            if(modifierStringToType.GetValueOrDefault(c.ModType).OnAquire())
             {
-                _card.Bling();
+                if (_card != null)
+                {
+                    _card.Bling();
+                }
+                await DelayFloat(150 * _card.GetAnimSpeed());
             }
-            modifierStringToType.GetValueOrDefault(c.ModType).OnAquire();
-            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
     public async void OnDefendCard(Card defendee, Card defended) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
-            if (_card != null)
+            if (modifierStringToType.GetValueOrDefault(c.ModType).OnDefendCard(defendee, defended)) 
             {
-                _card.Bling();
+                if (_card != null)
+                {
+                    _card.Bling();
+                }
+                await DelayFloat(150 * _card.GetAnimSpeed());
             }
-            modifierStringToType.GetValueOrDefault(c.ModType).OnDefendCard(defendee,defended);
-            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
     public async void OnPlayedCard(Card card) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
-            if (_card != null)
+            if (modifierStringToType.GetValueOrDefault(c.ModType).OnPlayedCard(card)) 
             {
-                _card.Bling();
+                if (_card != null)
+                {
+                    _card.Bling();
+                }
+                await DelayFloat(150 * _card.GetAnimSpeed());
             }
-            modifierStringToType.GetValueOrDefault(c.ModType).OnPlayedCard(card);
-            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
     public async void OnReverse(Card card) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
-            if (_card != null)
+            if (modifierStringToType.GetValueOrDefault(c.ModType).OnReverse(card)) 
             {
-                _card.Bling();
+                if (_card != null)
+                {
+                    _card.Bling();
+                }
+                await DelayFloat(150 * _card.GetAnimSpeed());
             }
-            modifierStringToType.GetValueOrDefault(c.ModType).OnReverse(card);
-            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
     public async void OnBeingDefended(Card cardDefendingThis)
     {
         foreach (CardModifierContainer c in _modifiers)
         {
-            if (_card != null)
+            if (modifierStringToType.GetValueOrDefault(c.ModType).OnBeingDefended(cardDefendingThis)) 
             {
-                _card.Bling();
+                if (_card != null)
+                {
+                    _card.Bling();
+                }
+                await DelayFloat(150 * _card.GetAnimSpeed());
             }
-            modifierStringToType.GetValueOrDefault(c.ModType).OnBeingDefended(cardDefendingThis);
-            await DelayFloat(150 * _card.GetAnimSpeed());
         }
     }
     public void AddModifier(string ModType) 

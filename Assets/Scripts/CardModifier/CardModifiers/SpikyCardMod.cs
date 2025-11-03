@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class SpikyCardMod : CardModifier
 {
-    public void OnAquire()
+    public bool OnAquire()
     {
+        return false;
     }
 
-    public void OnBeingDefended(Card cardDefendingThis)
+    public bool OnBeingDefended(Card cardDefendingThis)
     {
         if (!cardDefendingThis.GetCardInfo()._opponentCard)
         {
@@ -16,18 +17,21 @@ public class SpikyCardMod : CardModifier
         {
             GameHandler.Instance.DamageOpponent(1);
         }
+        return true;
     }
 
-    public void OnDefendCard(Card defendee, Card defended)
+    public bool OnDefendCard(Card defendee, Card defended)
     {
-
+        return false;
     }
 
-    public void OnPlayedCard(Card card)
+    public bool OnPlayedCard(Card card)
     {
+        return false;
     }
 
-    public void OnReverse(Card card)
+    public bool OnReverse(Card card)
     {
+        return false;
     }
 }

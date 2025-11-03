@@ -2,10 +2,10 @@ using UnityEngine;
 
 public interface CardModifier
 {
-    public void OnAquire();
-    public void OnDefendCard(Card defendee, Card defended);
-    public void OnPlayedCard(Card card);
-    public void OnReverse(Card card);
-    public void OnBeingDefended(Card cardDefendingThis);
+    public bool OnAquire();
+    public bool OnDefendCard(Card defendee, Card defended);
+    public bool OnPlayedCard(Card card);
+    public bool OnReverse(Card card);
+    public bool OnBeingDefended(Card cardDefendingThis);
 
 }

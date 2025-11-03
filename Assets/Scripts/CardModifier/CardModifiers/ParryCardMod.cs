@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class ParryCardMod : CardModifier
 {
-    public void OnAquire()
+    public bool OnAquire()
     {
-
+        return false;
     }
 
-    public void OnBeingDefended(Card cardDefendingThis)
+    public bool OnBeingDefended(Card cardDefendingThis)
     {
-
+        return false;
     }
 
-    public void OnDefendCard(Card defendee, Card defended)
+    public bool OnDefendCard(Card defendee, Card defended)
     {
-
+        return false;
     }
 
-    public void OnPlayedCard(Card card)
+    public bool OnPlayedCard(Card card)
     {
-
+        return false;
     }
 
-    public void OnReverse(Card card)
+    public bool OnReverse(Card card)
     {
         if (!card.GetCardInfo()._opponentCard)
         {
@@ -32,5 +32,6 @@ public class ParryCardMod : CardModifier
         {
             GameHandler.Instance.DamagePlayer(card.GetCardInfo()._number);
         }
+        return true;
     }
 }

@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class BounceCardMod : CardModifier
 {
-    public void OnAquire()
+    public bool OnAquire()
     {
-
+        return false;
     }
 
-    public void OnBeingDefended(Card cardDefendingThis)
+    public bool OnBeingDefended(Card cardDefendingThis)
     {
-
+        return false;
     }
 
-    public void OnDefendCard(Card defendee, Card defended)
+    public bool OnDefendCard(Card defendee, Card defended)
     {
         if (!defendee.GetCardInfo()._opponentCard)
         {
@@ -22,15 +22,16 @@ public class BounceCardMod : CardModifier
         {
             GameHandler.Instance.DamagePlayer(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number));
         }
+        return true;
     }
 
-    public void OnPlayedCard(Card card)
+    public bool OnPlayedCard(Card card)
     {
-
+        return false;
     }
 
-    public void OnReverse(Card card)
+    public bool OnReverse(Card card)
     {
-
+        return false;
     }
 }
