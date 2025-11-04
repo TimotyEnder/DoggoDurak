@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class LifeTotal : MonoBehaviour
 {
     private int _hp;
     private TextMeshProUGUI _hpText;
+    public GameObject damageTextPrefab;
     void Start()
     {
     }
@@ -22,7 +24,11 @@ public class LifeTotal : MonoBehaviour
     }
     public void Damage(int damage) 
     {
-        _hp -=damage;
+        _hp -= damage;
+        TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
+        StartCoroutine(DestroyDamageText(damageText));
+        damageText.text = damage.ToString();
+        damageText.fontSize = _hpText.fontSize;
         UpdateHealth();
     }
     public void Heal(int amount)
@@ -38,9 +44,14 @@ public class LifeTotal : MonoBehaviour
     {
         return _hp;
     }
-    public void reportHealth() 
+    public void reportHealth()
     {
         GameHandler.Instance.SetHealth(_hp);
 
+    }
+    public IEnumerator DestroyDamageText(TextMeshProUGUI DamageText)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(DamageText.gameObject);
     }
 }

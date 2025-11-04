@@ -4144,6 +4144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08a67ed4cfa8b49ab0e2bf32bb2756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 9184229622983044126, guid: a585a073ff18ed440bbf97e52f21295b, type: 3}
 --- !u!114 &1556838759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4191,8 +4192,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.06
-  m_fontSizeBase: 47.06
+  m_fontSize: 52.5
+  m_fontSizeBase: 52.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

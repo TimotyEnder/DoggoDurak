@@ -1965,6 +1965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08a67ed4cfa8b49ab0e2bf32bb2756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 9184229622983044126, guid: a585a073ff18ed440bbf97e52f21295b, type: 3}
 --- !u!1 &810362421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4603,6 +4604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08a67ed4cfa8b49ab0e2bf32bb2756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 9184229622983044126, guid: a585a073ff18ed440bbf97e52f21295b, type: 3}
 --- !u!1 &1675318718
 GameObject:
   m_ObjectHideFlags: 0

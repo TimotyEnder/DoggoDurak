@@ -153,7 +153,7 @@ MonoBehaviour:
   typewriterStartsAutomatically: 0
   animationLoop: 0
   timeScale: 0
-  _text: 99
+  _text: <fade d=0>99</fade>
   useDynamicScaling: 1
   referenceFontSize: 10
   isResettingTimeOnNewText: 1
