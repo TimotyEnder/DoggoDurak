@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class CrippleCardMod : CardModifier
 {
-    public bool OnAquire()
+    public override bool OnAquire()
     {
         return false;
     }
 
-    public bool OnBeingDefended(Card cardDefendingThis)
+    public override bool OnBeingDefended(Card cardDefendingThis)
     {
         return false;
     }
 
-    public bool OnDefendCard(Card defendee, Card defended)
+    public override bool OnDefendCard(Card defendee, Card defended)
     {
         return false;
     }
 
-    public bool OnPlayedCard(Card card)
+    public override bool OnPlayedCard(Card card)
     {
         GameHandler.Instance.OpponentDiscard(1);
         return true;
     }
 
-    public bool OnReverse(Card card)
+    public override bool OnReverse(Card card)
     {
         return false;
     }

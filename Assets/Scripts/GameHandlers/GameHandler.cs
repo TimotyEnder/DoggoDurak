@@ -52,7 +52,7 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            //c.AddModifier("Burn");
+            c.AddModifier("Burn");
         }
         //debug
 
@@ -150,12 +150,13 @@ public class GameHandler : MonoBehaviour
             _state.OnHeal(amount);
         }
     }
-    public void HealOpponent(int amount) //any healing effects should be handled by this
+    public void HealOpponent(int amount,bool fromEffect=false) //any healing effects should be handled by this
     {
         if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Heal(amount);
         }
+        //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
     public void DamageOpponent(int amount, bool fromEffect = false) //any effects damaging the enemy should go through this
     {

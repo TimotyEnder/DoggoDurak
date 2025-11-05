@@ -1,11 +1,37 @@
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public interface CardModifier
+public abstract class CardModifier
 {
-    public bool OnAquire();
-    public bool OnDefendCard(Card defendee, Card defended);
-    public bool OnPlayedCard(Card card);
-    public bool OnReverse(Card card);
-    public bool OnBeingDefended(Card cardDefendingThis);
+    public abstract bool OnAquire();
+    public abstract bool OnDefendCard(Card defendee, Card defended);
+    public abstract bool OnPlayedCard(Card card);
+    public abstract bool OnReverse(Card card);
+    public abstract bool OnBeingDefended(Card cardDefendingThis);
 
+    public async void DelayedDamage(int amount, bool player)
+    {
+        await DelayHandler.DelayFloat(DelayHandler.DelayTimeModifierEffect);
+        if (player)
+        {
+            GameHandler.Instance.DamagePlayer(amount, true);
+        }
+        else
+        {
+            GameHandler.Instance.DamageOpponent(amount, true);
+        }
+    }
+    public async void  DelayedHeal(int amount,bool player)
+    {
+        await DelayHandler.DelayFloat(DelayHandler.DelayTimeModifierEffect);
+        if (player)
+        {
+            GameHandler.Instance.HealPlayer(amount);
+        }
+        else
+        {
+            GameHandler.Instance.HealOpponent(amount);
+        }
+    }
 }

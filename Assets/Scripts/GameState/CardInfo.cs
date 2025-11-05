@@ -146,7 +146,7 @@ public class CardInfo
                 {
                     _card.Bling();
                 }
-                await DelayFloat(150 * _card.GetAnimSpeed());
+                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
         }
     }
@@ -160,7 +160,7 @@ public class CardInfo
                 {
                     _card.Bling();
                 }
-                await DelayFloat(150 * _card.GetAnimSpeed());
+                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
         }
     }
@@ -174,7 +174,7 @@ public class CardInfo
                 {
                     _card.Bling();
                 }
-                await DelayFloat(150 * _card.GetAnimSpeed());
+                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
         }
     }
@@ -188,7 +188,7 @@ public class CardInfo
                 {
                     _card.Bling();
                 }
-                await DelayFloat(150 * _card.GetAnimSpeed());
+                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
         }
     }
@@ -202,7 +202,7 @@ public class CardInfo
                 {
                     _card.Bling();
                 }
-                await DelayFloat(150 * _card.GetAnimSpeed());
+                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
         }
     }
@@ -239,13 +239,5 @@ public class CardInfo
             returnString+= $"<color={modifierColors[entry.Key]}>"+"<size=2><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
         }
         return returnString;
-    }
-    public async Task DelayFloat(float milliseconds)
-    {
-        var stopwatch = Stopwatch.StartNew();
-        while (stopwatch.Elapsed.TotalMilliseconds < milliseconds)
-        {
-            await Task.Yield();
-        }
     }
 }

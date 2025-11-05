@@ -2,35 +2,35 @@ using UnityEngine;
 
 public class SpikyCardMod : CardModifier
 {
-    public bool OnAquire()
+    public override bool OnAquire()
     {
         return false;
     }
 
-    public bool OnBeingDefended(Card cardDefendingThis)
+    public override bool OnBeingDefended(Card cardDefendingThis)
     {
         if (!cardDefendingThis.GetCardInfo()._opponentCard)
         {
-            GameHandler.Instance.DamagePlayer(1);
+            DelayedDamage(1,true);
         }
         else
         {
-            GameHandler.Instance.DamageOpponent(1);
+            DelayedDamage(1,false);
         }
         return true;
     }
 
-    public bool OnDefendCard(Card defendee, Card defended)
+    public override bool OnDefendCard(Card defendee, Card defended)
     {
         return false;
     }
 
-    public bool OnPlayedCard(Card card)
+    public override bool OnPlayedCard(Card card)
     {
         return false;
     }
 
-    public bool OnReverse(Card card)
+    public override bool OnReverse(Card card)
     {
         return false;
     }
