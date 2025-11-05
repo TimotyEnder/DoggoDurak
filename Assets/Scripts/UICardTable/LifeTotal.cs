@@ -9,6 +9,7 @@ public class LifeTotal : MonoBehaviour
     private int _hp;
     private TextMeshProUGUI _hpText;
     public GameObject damageTextPrefab;
+    public GameObject healTextPrefab;
     void Start()
     {
     }
@@ -26,7 +27,7 @@ public class LifeTotal : MonoBehaviour
     {
         _hp -= damage;
         TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
-        StartCoroutine(DestroyDamageText(damageText));
+        StartCoroutine(DestroyText(damageText));
         damageText.text = damage.ToString();
         damageText.fontSize = _hpText.fontSize;
         UpdateHealth();
@@ -34,6 +35,10 @@ public class LifeTotal : MonoBehaviour
     public void Heal(int amount)
     {
         _hp += amount;
+        TextMeshProUGUI healText = Instantiate(healTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
+        StartCoroutine(DestroyText(healText));
+        healText.text = amount.ToString();
+        healText.fontSize = _hpText.fontSize;
         if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
         {
             _hp = GameHandler.Instance.GetGameState()._maxhealth;
@@ -49,7 +54,7 @@ public class LifeTotal : MonoBehaviour
         GameHandler.Instance.SetHealth(_hp);
 
     }
-    public IEnumerator DestroyDamageText(TextMeshProUGUI DamageText)
+    public IEnumerator DestroyText(TextMeshProUGUI DamageText)
     {
         yield return new WaitForSeconds(0.5f);
         Destroy(DamageText.gameObject);

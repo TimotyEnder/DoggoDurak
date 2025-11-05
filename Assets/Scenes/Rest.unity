@@ -4145,6 +4145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTextPrefab: {fileID: 9184229622983044126, guid: a585a073ff18ed440bbf97e52f21295b, type: 3}
+  healTextPrefab: {fileID: 7556633476567445011, guid: 95f1995f1091dfc48a1eae38d136ae27, type: 3}
 --- !u!114 &1556838759
 MonoBehaviour:
   m_ObjectHideFlags: 0
