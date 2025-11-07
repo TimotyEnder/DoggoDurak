@@ -168,7 +168,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             Debug.Log("Spawned");
             Vector2 randDirMod = Random.insideUnitCircle.normalized;// random dir vector with mag = 1
             Rigidbody2D rbInst = instancedText.GetComponent<Rigidbody2D>();;
-            rbInst.linearVelocity = randDirMod * 250f;
+            rbInst.linearVelocity = randDirMod * (_canvas.pixelRect.width*0.15f);
             StartCoroutine(ModTextEffectCoroutine(instancedText));
         }
 
