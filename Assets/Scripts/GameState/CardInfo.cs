@@ -145,6 +145,7 @@ public class CardInfo
                 if (_card != null)
                 {
                     _card.Bling();
+                    _card.SpawnModifierEffect(c);
                 }
                 await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
@@ -159,6 +160,7 @@ public class CardInfo
                 if (_card != null)
                 {
                     _card.Bling();
+                    _card.SpawnModifierEffect(c);
                 }
                 await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
@@ -173,6 +175,7 @@ public class CardInfo
                 if (_card != null)
                 {
                     _card.Bling();
+                    _card.SpawnModifierEffect(c);
                 }
                 await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
@@ -187,6 +190,7 @@ public class CardInfo
                 if (_card != null)
                 {
                     _card.Bling();
+                    _card.SpawnModifierEffect(c);
                 }
                 await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }
@@ -201,6 +205,7 @@ public class CardInfo
                 if (_card != null)
                 {
                     _card.Bling();
+                    _card.SpawnModifierEffect(c);
                 }
                 await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
             }

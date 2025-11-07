@@ -1,5 +1,7 @@
 
+using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using NUnit.Framework.Internal.Commands;
 using TMPro;
@@ -11,6 +13,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerClickHandler
 
@@ -49,7 +53,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
     private Animator _animator;
-
+    [SerializeField]
+    //text prefabs for card modifier effects
+    private GameObject burnTextPrefab;
 
     void Start()
     {
@@ -127,12 +133,51 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         UpdateModifiers();
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
-    public void Bling() 
+    public void Bling()
     {
-        if (_animator != null) 
+        if (_animator != null)
         {
             _animator.SetTrigger("Bling");
         }
+    }
+    public void SpawnModifierEffect(CardModifierContainer c)
+    {
+        GameObject instancedText = null;
+        Debug.Log(c.ModType);
+        switch (c.ModType)
+        {
+            case "Restoring":
+                break;
+            case "Bounce":
+                break;
+            case "Burn":
+                Debug.Log("Burn");
+                instancedText = Instantiate(burnTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                break;
+            case "Parry":
+                break;
+            case "Draw":
+                break;
+            case "Cripple":
+                break;
+            case "Spiky":
+                break;
+        }
+        if (instancedText != null)
+        {
+            Debug.Log("Spawned");
+            Vector2 randDirMod = Random.insideUnitCircle.normalized;// random dir vector with mag = 1
+            Rigidbody2D rbInst = instancedText.GetComponent<Rigidbody2D>();;
+            rbInst.linearVelocity = randDirMod * 250f;
+            StartCoroutine(ModTextEffectCoroutine(instancedText));
+        }
+
+    }
+    public IEnumerator ModTextEffectCoroutine(GameObject textEff)
+    {
+        yield return new WaitForSeconds(0.5f);
+        textEff.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        Destroy(textEff, 1f);
     }
     public float GetAnimSpeed() 
     {

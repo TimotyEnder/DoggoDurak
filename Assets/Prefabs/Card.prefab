@@ -1248,6 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInteractable: 0
   _costText: {fileID: 3093851328778071292}
+  burnTextPrefab: {fileID: 4823107440753234521, guid: 85f8ef2f29fb9544682e748b4074579e, type: 3}
 --- !u!114 &3679259362940423515
 MonoBehaviour:
   m_ObjectHideFlags: 0
