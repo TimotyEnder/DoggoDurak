@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public abstract class CardModifier
@@ -12,7 +12,7 @@ public abstract class CardModifier
 
     public async void DelayedDamage(int amount, bool player)
     {
-        await DelayHandler.DelayFloat(DelayHandler.DelayTimeModifierEffect);
+        await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeDamage()));
         if (player)
         {
             GameHandler.Instance.DamagePlayer(amount, true);
@@ -24,7 +24,7 @@ public abstract class CardModifier
     }
     public async void  DelayedHeal(int amount,bool player)
     {
-        await DelayHandler.DelayFloat(DelayHandler.DelayTimeModifierEffect);
+        await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeDamage()));
         if (player)
         {
             GameHandler.Instance.HealPlayer(amount);

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 [Serializable]
 public class CardInfo
@@ -147,7 +147,7 @@ public class CardInfo
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }
         }
     }
@@ -162,13 +162,14 @@ public class CardInfo
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }
         }
     }
-    public async void OnPlayedCard(Card card) 
+    public async void OnPlayedCard(Card card)
     {
-        foreach (CardModifierContainer c in _modifiers)
+        var modifiersCopy = new List<CardModifierContainer>(_modifiers);
+        foreach (CardModifierContainer c in modifiersCopy)
         {
             if (modifierStringToType.GetValueOrDefault(c.ModType).OnPlayedCard(card)) 
             {
@@ -177,7 +178,7 @@ public class CardInfo
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }
         }
     }
@@ -192,7 +193,7 @@ public class CardInfo
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }
         }
     }
@@ -207,7 +208,7 @@ public class CardInfo
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await DelayHandler.DelayFloat(150 * _card.GetAnimSpeed());
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }
         }
     }
