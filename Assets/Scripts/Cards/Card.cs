@@ -53,9 +53,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
     private Animator _animator;
-    [SerializeField]
     //text prefabs for card modifier effects
+    [SerializeField]
     private GameObject burnTextPrefab;
+    [SerializeField]
+    private GameObject restoringTextPrefab;
 
     void Start()
     {
@@ -147,6 +149,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         switch (c.ModType)
         {
             case "Restoring":
+                Debug.Log("Restoring");
+                instancedText = Instantiate(restoringTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Bounce":
                 break;
