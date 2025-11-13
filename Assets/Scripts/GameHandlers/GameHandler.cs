@@ -52,7 +52,13 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            c.AddModifier("Restoring");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
+            c.AddModifier("Burn");
         }
         //debug
 
