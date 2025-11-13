@@ -11,6 +11,6 @@ public class DefaultCC : CurrencyCalculator
 
     public override string GetExplanationText()
     {
-        return "Health lost: " + (GameHandler.Instance.GetGameState()._lastHealth - GameHandler.Instance.GetGameState()._health).ToString()+" = ";
+        return "Health lost: " + (Mathf.Abs(GameHandler.Instance.GetGameState()._lastHealth - GameHandler.Instance.GetGameState()._health)).ToString()+" = ";
     }
 }
