@@ -172,15 +172,15 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             Debug.Log("Spawned");
             Vector2 randDirMod = GetSemiCircleNormVect();
             Rigidbody2D rbInst = instancedText.GetComponent<Rigidbody2D>();;
-            rbInst.linearVelocity = randDirMod * (_canvas.pixelRect.width*0.15f);
+            rbInst.linearVelocity = randDirMod * (_canvas.pixelRect.width*0.20f);
             StartCoroutine(ModTextEffectCoroutine(instancedText));
         }
 
     }
     private Vector2 GetSemiCircleNormVect()
     {
-        float startAngle=30f;
-        float endAngle=150f;
+        float startAngle=40f;
+        float endAngle=140f;
         Vector2 toRet=Random.insideUnitCircle.normalized;
          // Get its angle and magnitude
         float originalAngle = Mathf.Atan2(toRet.y, toRet.x);
