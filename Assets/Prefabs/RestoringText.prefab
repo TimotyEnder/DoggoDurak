@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517498855258597378}
   - component: {fileID: 1601348487950596406}
+  - component: {fileID: 6171069089895078642}
   m_Layer: 5
   m_Name: RestoringText
   m_TagString: Untagged
@@ -233,6 +234,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6171069089895078642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891914230666183998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1373cbcf72bb914896df535b8b04ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5832232917452742501
 GameObject:
   m_ObjectHideFlags: 0

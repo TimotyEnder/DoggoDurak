@@ -173,7 +173,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             Vector2 randDirMod = GetSemiCircleNormVect();
             Rigidbody2D rbInst = instancedText.GetComponent<Rigidbody2D>();;
             rbInst.linearVelocity = randDirMod * (_canvas.pixelRect.width*0.15f);
-            StartCoroutine(ModTextEffectCoroutine(instancedText));
+            StartCoroutine(instancedText.GetComponent<ModifierText>().DoYourThing(this.GetCardInfo()));//yep the function is called do your thing deal with it lol 
         }
 
     }
@@ -191,12 +191,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         float targetAngle = Mathf.Lerp(startAngle * Mathf.Deg2Rad, endAngle * Mathf.Deg2Rad, normalizedAngle);
         toRet=new Vector2(Mathf.Cos(targetAngle), Mathf.Sin(targetAngle)).normalized;
         return toRet;
-    }
-    public IEnumerator ModTextEffectCoroutine(GameObject textEff)
-    {
-        yield return new WaitForSeconds(0.5f);
-        textEff.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        Destroy(textEff, 1f);
     }
     public float GetAnimSpeed() 
     {
