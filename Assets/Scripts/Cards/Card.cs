@@ -179,8 +179,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     private Vector2 GetSemiCircleNormVect()
     {
-        float startAngle=40f;
-        float endAngle=140f;
+        float startAngle=30f;
+        float endAngle=150f;
         Vector2 toRet=Random.insideUnitCircle.normalized;
          // Get its angle and magnitude
         float originalAngle = Mathf.Atan2(toRet.y, toRet.x);
