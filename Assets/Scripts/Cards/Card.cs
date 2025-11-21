@@ -58,6 +58,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject burnTextPrefab;
     [SerializeField]
     private GameObject restoringTextPrefab;
+    [SerializeField]
+    private GameObject bounceTextPrefab;
+    [SerializeField]
+    private GameObject spikyTextPrefab;
+    [SerializeField]
+    private GameObject cripplingTextPrefab;
+    [SerializeField]
+    private GameObject parryTextPrefab;
+    [SerializeField]
+    private GameObject drawTextPrefab;
 
     void Start()
     {
