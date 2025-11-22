@@ -163,44 +163,35 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 instancedText = Instantiate(restoringTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Bounce":
+                Debug.Log("Bounce");
+                instancedText = Instantiate(bounceTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Burn":
                 Debug.Log("Burn");
                 instancedText = Instantiate(burnTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Parry":
+                Debug.Log("Parry");
+                instancedText = Instantiate(parryTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Draw":
+                Debug.Log("Draw");
+                instancedText = Instantiate(drawTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Cripple":
+                Debug.Log("Cripple");
+                instancedText = Instantiate(cripplingTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                 break;
             case "Spiky":
-                break;
+                Debug.Log("Spiky");
+                instancedText = Instantiate(spikyTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                break; 
         }
         if (instancedText != null)
         {
-            Debug.Log("Spawned");
-            Vector2 randDirMod = GetSemiCircleNormVect();
-            Rigidbody2D rbInst = instancedText.GetComponent<Rigidbody2D>();;
-            rbInst.linearVelocity = randDirMod * (_canvas.pixelRect.width*0.15f);
-            StartCoroutine(instancedText.GetComponent<ModifierText>().DoYourThing(this.GetCardInfo()));//yep the function is called do your thing deal with it lol 
+            StartCoroutine(instancedText.GetComponent<ModifierText>().DoYourThing(this.GetCardInfo(),_canvas));//yep the function is called do your thing deal with it lol 
         }
 
-    }
-    private Vector2 GetSemiCircleNormVect()
-    {
-        float startAngle=30f;
-        float endAngle=150f;
-        Vector2 toRet=Random.insideUnitCircle.normalized;
-         // Get its angle and magnitude
-        float originalAngle = Mathf.Atan2(toRet.y, toRet.x);
-        float magnitude = toRet.magnitude;
-    
-        // Remap angle to our semicircle segment
-        float normalizedAngle = (originalAngle + Mathf.PI) / (2f * Mathf.PI); // Convert to 0-1
-        float targetAngle = Mathf.Lerp(startAngle * Mathf.Deg2Rad, endAngle * Mathf.Deg2Rad, normalizedAngle);
-        toRet=new Vector2(Mathf.Cos(targetAngle), Mathf.Sin(targetAngle)).normalized;
-        return toRet;
     }
     public float GetAnimSpeed() 
     {
