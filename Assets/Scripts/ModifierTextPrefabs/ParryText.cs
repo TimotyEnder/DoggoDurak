@@ -1,16 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
-public class ParryText : MonoBehaviour
+public class ParryText : ModifierText
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override IEnumerator DoYourThing(CardInfo cardInfo)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

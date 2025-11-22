@@ -1,16 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
-public class CrippleText : MonoBehaviour
+public class CrippleText : ModifierText
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override IEnumerator DoYourThing(CardInfo cardInfo)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

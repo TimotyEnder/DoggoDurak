@@ -1248,8 +1248,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInteractable: 0
   _costText: {fileID: 3093851328778071292}
-  burnTextPrefab: {fileID: 4823107440753234521, guid: 85f8ef2f29fb9544682e748b4074579e, type: 3}
-  restoringTextPrefab: {fileID: 4891914230666183998, guid: 166b7db68dbe60dcbaa1c4d14c63d8ec, type: 3}
+  burnTextPrefab: {fileID: 2424543069410599753, guid: 3d81cbfb8e95fe44791bcb2dbc0c3dcd, type: 3}
+  restoringTextPrefab: {fileID: 2919352896825218704, guid: 82bf3c6f3878d1d4a87e4851333df2b2, type: 3}
+  bounceTextPrefab: {fileID: 7176347781019584437, guid: e69acdd2c8c265742b219ad2690da66b, type: 3}
+  spikyTextPrefab: {fileID: 4762754795486634899, guid: f8e0639f22346d44f8f8a351e68f46df, type: 3}
+  cripplingTextPrefab: {fileID: 3117037092606373501, guid: aab88024b5bcc5943a3d75bc7dba6a3e, type: 3}
+  parryTextPrefab: {fileID: 8990485995031706129, guid: 016005817db6b59468b8c29115e46998, type: 3}
+  drawTextPrefab: {fileID: 5337278189223182718, guid: 9dd824b06bf039e4e8d1e582af91ab8f, type: 3}
 --- !u!114 &3679259362940423515
 MonoBehaviour:
   m_ObjectHideFlags: 0
