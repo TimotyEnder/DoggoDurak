@@ -54,7 +54,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
     private Animator _animator;
-    private bool _tryToHighLightCard=false; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
+    private bool _tryToHighlightCard=true; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
     //text prefabs for card modifier effects
     [SerializeField]
     private GameObject burnTextPrefab;
@@ -346,43 +346,50 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (TopPointer(eventData) && _isInteractable)
-        {
-            _oldSiblingIndex = _cardRect.GetSiblingIndex();
-            _cardRect.SetAsLastSibling();
-            _cardImageRect.localScale = Vector3.one * 1.3f;
-        }
+        _tryToHighlightCard = true;
+        StartCoroutine(CheckTopPointerUntilExit(eventData));
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        _tryToHighlightCard = false;
+        StopAllCoroutines(); // Stop the checking coroutine
+        
         if (_oldSiblingIndex != -1 && _isInteractable)
         {
             _cardRect.SetSiblingIndex(_oldSiblingIndex);
         }
         _cardImageRect.localScale = Vector3.one;
     }
-    private bool TopPointer(PointerEventData ped)
+    private IEnumerator CheckTopPointerUntilExit(PointerEventData ped)
+    {
+        while (_tryToHighlightCard)
+        {
+            if (IsTopPointer(ped) && _isInteractable)
+            {
+                _oldSiblingIndex = _cardRect.GetSiblingIndex();
+                _cardRect.SetAsLastSibling();
+                _cardImageRect.localScale = Vector3.one * 1.3f;
+            }
+            
+            // Wait for next frame before checking again
+            yield return null;
+        }
+    }
+    private bool IsTopPointer(PointerEventData ped)
     {
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(ped, results);
+        
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.GetComponent<Card>() != null)
             {
-                if (result.gameObject == this.gameObject)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.gameObject == this.gameObject;
             }
         }
+        
         return false;
-
     }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
         if(_isInteractable)
