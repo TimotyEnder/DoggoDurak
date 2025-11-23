@@ -239,10 +239,17 @@ public class CardInfo
     public string CompileTooltipDescription() 
     {
         string returnString = "";
-        returnString += "<size=16><align=center>"+ numberFullName[_number] + suitFullName[_suit] + "</align></size>" + "\n";
+        returnString += "<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+ numberFullName[_number] + suitFullName[_suit] + "</align></size>" + "\n";
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
-            returnString+= $"<color={modifierColors[entry.Key]}>"+"<size=12><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
+            if(modifierMaxCopies[entry.Key]==1)
+            {
+                returnString+= $"<color={modifierColors[entry.Key]}>"+"<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + entry.Key + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
+            }
+            else
+            {
+                returnString+= $"<color={modifierColors[entry.Key]}>"+"<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + entry.Key + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
+            }
         }
         return returnString;
     }
