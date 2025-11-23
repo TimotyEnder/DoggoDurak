@@ -146,6 +146,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         UpdateModifiers();
         //this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
         this.GetComponent<SimpleTooltip>().infoLeft=_cardInfo.CompileTooltipDescription();
+        this.GetComponent<SimpleTooltip>().infoRight="<size="+SettingsState.ToolTipFontSizeText+">Card</size>";
     }
     public void Bling()
     {

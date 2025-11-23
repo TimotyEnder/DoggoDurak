@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Unity.Collections;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.Windows;
 public abstract class Item : ScriptableObject
 {
     [SerializeField]
-    protected int rarity; //0 commmon, 1 rare, 2 legendary
+    protected int rarity; //0 commmon, 1 rare, 2 legendary, 3 boss
     [SerializeField]
     protected bool boss;
     protected string itemId;//serialized already in the item container
@@ -47,8 +48,8 @@ public abstract class Item : ScriptableObject
     }
     public string GetItemToolTip() 
     {
-        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>{GetSpacedItemId()}</align></size>\n" +
-               $"<size="+SettingsState.ToolTipFontSizeText+"><align=left>{toolTipDesc}</align></size>";
+        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+GetSpacedItemId()+"</align></size>\n" +
+               $"<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+toolTipDesc+"</align></size>";
     }
     private string GetSpacedItemId() 
     {
@@ -64,4 +65,11 @@ public abstract class Item : ScriptableObject
     {
         return isActive;
     }
+    public  static Dictionary<int, string> rarityIntToWord = new Dictionary<int, string>
+    {
+        {0,"Common"},
+        {1,"Rare"},
+        {2,"Legendary"},
+        {3,"Boss"},
+    };
 }

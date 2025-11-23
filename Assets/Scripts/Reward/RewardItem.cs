@@ -57,6 +57,7 @@ public class RewardItem : MonoBehaviour
                 break;
         }
         _toolTip.infoLeft = item.GetItemToolTip();
+        //_toolTip.infoRight="<size="+SettingsState.ToolTipFontSizeText+">"+Item.rarityIntToWord[item.GetRarity()]+" Item"+"</size>";
     }
     private void OnClickActiveItem()
     {

@@ -39,6 +39,7 @@ public class InventoryItem : MonoBehaviour
                 break;
         }
         _toolTip.infoLeft=item.GetItemToolTip();
+        //_toolTip.infoRight="<size="+SettingsState.ToolTipFontSizeText+">"+Item.rarityIntToWord[item.GetRarity()]+" Item"+"</size>";
     }
     public void SetStackNum(int stacks) 
     {
