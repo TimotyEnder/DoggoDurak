@@ -10,6 +10,7 @@ using UnityEditor.PackageManager.Requests;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
@@ -126,8 +127,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             _opponent = opponentObj.GetComponent<OpponentLogic>();
         }
-
         _animator=this.gameObject.GetComponent<Animator>();
+        //tooltip padding
+        GetComponent<ToolTip>().changePadding((int)(_canvas.pixelRect.width*0.20f), (int)(_canvas.pixelRect.height*0.20f));
     }
     public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
     {

@@ -140,6 +140,11 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private bool _enabled = true;
     private bool _shouldExist=true;
 
+    public void changePadding(int x, int y)
+    {
+        ttPaddingY=y;
+        ttPaddingX=x;
+    }
     public async void OnPointerEnter(PointerEventData eventData)
     {
         if (_enabled && _currentTooltip == null)

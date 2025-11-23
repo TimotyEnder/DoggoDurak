@@ -58,6 +58,7 @@ public class GameHandler : MonoBehaviour
             c.AddModifier("Draw");
             c.AddModifier("Parry");
             c.AddModifier("Cripple");
+            c.AddModifier("Bounce");
         }
         //debug
 
