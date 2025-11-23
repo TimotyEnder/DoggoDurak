@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using System;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -14,9 +15,9 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     private GameObject _currentTooltip;
     [SerializeField]
-    private float ttPaddingX = 10f;
+    private float ttPaddingX;
     [SerializeField]
-    private float ttPaddingY = 10f;
+    private float ttPaddingY;
     [SerializeField]
     private float displayWaitSeconds=0.05f;
     [SerializeField]
@@ -65,100 +66,93 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     private void PositionTooltip()
+{
+    if (_currentTooltip == null) return;
+
+    RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
+    RectTransform ttBgRect= _currentTooltip.transform.Find("ToolTipBackground").GetComponent<RectTransform>();
+    RectTransform myRect = GetComponent<RectTransform>();
+    
+    // Use RectTransform.rect for reliable size calculations
+    float ttWidth = ttBgRect.rect.width;
+    float ttHeight = ttBgRect.rect.height;
+    float myWidth = myRect.rect.width;
+    float myHeight = myRect.rect.height;
+
+    // Convert to screen space if needed, or use local positions
+    Vector3 myCenter = myRect.position;
+    
+    // Define positions relative to the tooltip's pivot (usually center)
+    Vector3[] preferredPositions = new Vector3[]
     {
-        if (_currentTooltip == null) return;
+        // Above - center aligned horizontally
+        new Vector3(
+            myCenter.x,
+            myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+            0
+        ),
+        // Below - center aligned horizontally
+        new Vector3(
+            myCenter.x,
+            myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+            0
+        ),
+        // Right - center aligned vertically
+        new Vector3(
+            myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+            myCenter.y,
+            0
+        ),
+        // Left - center aligned vertically
+        new Vector3(
+            myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+            myCenter.y,
+            0
+        ),
+        // Top Left - center aligned vertically
+        new Vector3(
+            myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+            myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+            0
+        ),
+        // Top Right - center aligned vertically
+        new Vector3(
+            myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+            myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+            0
+        ),
+        // Bottom Left - center aligned vertically
+        new Vector3(
+            myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+            myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+            0
+        ),
+        // Bottom Right - center aligned vertically
+        new Vector3(
+            myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+            myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+            0
+        )
+    };
 
-        RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
-        RectTransform myRect = GetComponent<RectTransform>();
-        
-        // Convert rect transforms to screen space
-        Vector3[] myCorners = new Vector3[4];
-        myRect.GetWorldCorners(myCorners);
-        
-        Vector3[] ttCorners = new Vector3[4];
-        ttRect.GetWorldCorners(ttCorners);
-        
-        // Get the actual sizes in screen space
-        float ttWidth = ttCorners[2].x - ttCorners[0].x;
-        float ttHeight = ttCorners[1].y - ttCorners[0].y;
-        float myWidth = myCorners[2].x - myCorners[0].x;
-        float myHeight = myCorners[1].y - myCorners[0].y;
-
-        // Get the center position of this UI element
-        Vector3 myCenter = myRect.position;
-        
-        // Define positions with proper spacing - using the center as reference point
-        Vector3[] preferredPositions = new Vector3[]
+    // Try each position until we find one that fits
+    bool foundPosition = false;
+    foreach (var pos in preferredPositions)
+    {
+        ttRect.position = pos;
+        if (IsFullyWithinScreenBounds(ttRect))
         {
-            // Above - center aligned horizontally
-            new Vector3(
-                myCenter.x,
-                myCorners[1].y + ttPaddingY + (ttHeight * ttRect.pivot.y),
-                0
-            ),
-            // Below - center aligned horizontally
-            new Vector3(
-                myCenter.x,
-                myCorners[0].y - ttPaddingY - (ttHeight * (1 - ttRect.pivot.y)),
-                0
-            ),
-            // Right - center aligned vertically
-            new Vector3(
-                myCorners[2].x + ttPaddingX + (ttWidth * ttRect.pivot.x),
-                myCenter.y,
-                0
-            ),
-            // Left - center aligned vertically
-            new Vector3(
-                myCorners[0].x - ttPaddingX - (ttWidth * (1 - ttRect.pivot.x)),
-                myCenter.y,
-                0
-            ),
-            // Top-Right (aligned to top-right corner of element)
-            new Vector3(
-                myCorners[2].x + ttPaddingX + (ttWidth * ttRect.pivot.x),
-                myCorners[1].y + ttPaddingY + (ttHeight * ttRect.pivot.y),
-                0
-            ),
-            // Top-Left (aligned to top-left corner of element)
-            new Vector3(
-                myCorners[0].x - ttPaddingX - (ttWidth * (1 - ttRect.pivot.x)),
-                myCorners[1].y + ttPaddingY + (ttHeight * ttRect.pivot.y),
-                0
-            ),
-            // Bottom-Right (aligned to bottom-right corner of element)
-            new Vector3(
-                myCorners[2].x + ttPaddingX + (ttWidth * ttRect.pivot.x),
-                myCorners[0].y - ttPaddingY - (ttHeight * (1 - ttRect.pivot.y)),
-                0
-            ),
-            // Bottom-Left (aligned to bottom-left corner of element)
-            new Vector3(
-                myCorners[0].x - ttPaddingX - (ttWidth * (1 - ttRect.pivot.x)),
-                myCorners[0].y - ttPaddingY - (ttHeight * (1 - ttRect.pivot.y)),
-                0
-            )
-        };
-
-        // Try each position until we find one that fits
-        bool foundPosition = false;
-        foreach (var pos in preferredPositions)
-        {
-            ttRect.position = pos;
-            if (IsFullyWithinScreenBounds(ttRect))
-            {
-                foundPosition = true;
-                break;
-            }
-        }
-
-        // Final fallback - adjust to fit on screen
-        if (!foundPosition)
-        {
-            AdjustToScreenBounds(ttRect);
+            foundPosition = true;
+            break;
         }
     }
 
+    // Final fallback - adjust to fit on screen
+    if (!foundPosition)
+    {
+        AdjustToScreenBounds(ttRect);
+    }
+}
     private bool IsFullyWithinScreenBounds(RectTransform rectTransform)
     {
         Vector3[] corners = new Vector3[4];
@@ -224,6 +218,11 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             Destroy(_currentTooltip);
             _currentTooltip = null;
+            GameObject[] zombieToolTips= GameObject.FindGameObjectsWithTag("ToolTip"); //if in anyway any tooltips somehow were not destroyed, destroy them
+            foreach(GameObject zombie in  zombieToolTips)
+            {
+                Destroy(zombie);
+            }
         }
     }
 }

@@ -129,7 +129,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         _animator=this.gameObject.GetComponent<Animator>();
         //tooltip padding
-        GetComponent<ToolTip>().changePadding((int)(_canvas.pixelRect.width*0.01f), (int)(_canvas.pixelRect.height*0.20f));
+        //GetComponent<ToolTip>().changePadding((int)(_canvas.pixelRect.width*0.01f), (int)(_canvas.pixelRect.height*0.05f));
     }
     public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
     {
