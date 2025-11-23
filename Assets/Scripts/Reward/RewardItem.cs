@@ -6,7 +6,7 @@ public class RewardItem : MonoBehaviour
 {
     private Item _item;
     private Sprite _itemIcon;
-    private ToolTip _toolTip;
+    private SimpleTooltip _toolTip;
     private Image _bgColor;
     private Button _button;
     private RewardItemGrid _rewgrid;
@@ -37,7 +37,7 @@ public class RewardItem : MonoBehaviour
             _priceText.gameObject.SetActive(true);
             _priceText.text = itemPrice.ToString();   
         }
-        _toolTip = GetComponent<ToolTip>();
+        _toolTip = GetComponent<SimpleTooltip>();
         this._item = item;
         this._itemIcon = item.GetIcon();
         _bgColor = this.transform.Find("Button").GetComponent<Image>();
@@ -56,7 +56,7 @@ public class RewardItem : MonoBehaviour
                 _bgColor.color = ColorScheme.BossItemRed;
                 break;
         }
-        _toolTip.SetToolTipText(item.GetItemToolTip());
+        _toolTip.infoLeft = item.GetItemToolTip();
     }
     private void OnClickActiveItem()
     {

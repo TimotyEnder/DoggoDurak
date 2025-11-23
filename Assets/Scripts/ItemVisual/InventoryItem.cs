@@ -8,7 +8,7 @@ public class InventoryItem : MonoBehaviour
 {
     private Item _item;
     private Sprite _itemIcon;
-    private ToolTip _toolTip;
+    private SimpleTooltip _toolTip;
     private Image _bgImage;
     [SerializeField]
     private TextMeshProUGUI _stackText;
@@ -19,7 +19,7 @@ public class InventoryItem : MonoBehaviour
     }
     public void AssignItem(Item item) 
     {
-        _toolTip = GetComponent<ToolTip>();
+        _toolTip = GetComponent<SimpleTooltip>();
         this._item = item;
         this._itemIcon = item.GetIcon();
         _bgImage = this.transform.Find("InventoryItemBG").GetComponent<Image>();
@@ -38,7 +38,7 @@ public class InventoryItem : MonoBehaviour
                 _bgImage.color = ColorScheme.BossItemRed;
                 break;
         }
-        _toolTip.SetToolTipText(item.GetItemToolTip());
+        _toolTip.infoLeft=item.GetItemToolTip();
     }
     public void SetStackNum(int stacks) 
     {

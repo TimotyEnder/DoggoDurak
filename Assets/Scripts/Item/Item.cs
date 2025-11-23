@@ -47,8 +47,8 @@ public abstract class Item : ScriptableObject
     }
     public string GetItemToolTip() 
     {
-        return $"<size=4><align=center>{GetSpacedItemId()}</align></size>\n" +
-               $"<size=3><align=left>{toolTipDesc}</align></size>";
+        return $"<size=16><align=center>{GetSpacedItemId()}</align></size>\n" +
+               $"<size=12><align=left>{toolTipDesc}</align></size>";
     }
     private string GetSpacedItemId() 
     {

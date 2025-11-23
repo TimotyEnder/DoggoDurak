@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 541827716026197982}
   - component: {fileID: 7091762297512148864}
   - component: {fileID: 9094903679826957242}
+  - component: {fileID: 9757072553702182}
   m_Layer: 5
   m_Name: RewardItem
   m_TagString: Untagged
@@ -402,6 +403,21 @@ MonoBehaviour:
   ttPaddingY: 25
   displayWaitSeconds: 0.05
   canvas: {fileID: 0}
+--- !u!114 &9757072553702182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939668591657792557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: Hello
+  infoRight: 
 --- !u!1 &7533121254872429403
 GameObject:
   m_ObjectHideFlags: 0
