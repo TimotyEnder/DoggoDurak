@@ -53,6 +53,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
     private Animator _animator;
+    private bool _tryToHighLightCard=false; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
     //text prefabs for card modifier effects
     [SerializeField]
     private GameObject burnTextPrefab;

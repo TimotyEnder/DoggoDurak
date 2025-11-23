@@ -315,6 +315,11 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             Destroy(_currentTooltip);
             _currentTooltip = null;
+            GameObject[] zombieToolTips= GameObject.FindGameObjectsWithTag("ToolTip"); //if in anyway any tooltips somehow were not destroyed, destroy them
+            foreach(GameObject zombie in  zombieToolTips)
+            {
+                Destroy(zombie);
+            }
         }
     }
 
