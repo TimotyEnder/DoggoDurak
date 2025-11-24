@@ -16,6 +16,8 @@ public class STController : MonoBehaviour
     private int _showInFrames = -1;
     private bool _showNow = false;
     private float _defaultWidth;
+
+    private Vector3 _oldMouse;
     
     private void Awake()
     {
@@ -79,19 +81,18 @@ public class STController : MonoBehaviour
         float newWidth = currentWidth;
         float newHeight = currentHeight;
 
-        // Calculate overflow amounts
-        float overflowTop = maxY - Screen.height;
-        float overflowRight = maxX - Screen.width;
-
-        float defaultWidthDiff=_rect.sizeDelta.x-Math.Abs(_rect.sizeDelta.x-_defaultWidth);
-
-        if(overflowTop<=0 && _rect.sizeDelta.x>_defaultWidth && (overflowTop+defaultWidthDiff)>=0)
+        if(Input.mousePosition!=_oldMouse)
         {
-            _rect.sizeDelta=new Vector2(defaultWidthDiff,_rect.sizeDelta.y);
-        }
-        if(overflowTop>0 && overflowRight<=0)
-        {
-            _rect.sizeDelta=new Vector2(_rect.sizeDelta.x+overflowTop,_rect.sizeDelta.y-overflowTop);
+            _rect.sizeDelta=new Vector2(_defaultWidth,_rect.sizeDelta.y);
+            // Calculate overflow amounts
+            float overflowTop = maxY - Screen.height;
+            float overflowRight = maxX - Screen.width;
+
+            if(overflowTop>0 && overflowRight<=0)
+            {
+                _rect.sizeDelta=new Vector2(_rect.sizeDelta.x+overflowTop,_rect.sizeDelta.y-overflowTop);
+            }
+            _oldMouse=Input.mousePosition;
         }
     }
 
