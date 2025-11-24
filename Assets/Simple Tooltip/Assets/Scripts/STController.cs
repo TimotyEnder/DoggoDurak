@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class STController : MonoBehaviour
 {
     public enum TextAlign { Left, Right };
 
-    private Image panel;
-    private TextMeshProUGUI toolTipTextLeft;
-    private TextMeshProUGUI toolTipTextRight;
-    private RectTransform rect;
-    private int showInFrames = -1;
-    private bool showNow = false;
+    private Image _panel;
+    private TextMeshProUGUI _toolTipTextLeft;
+    private TextMeshProUGUI _toolTipTextRight;
+    private RectTransform _rect;
+    private int _showInFrames = -1;
+    private bool _showNow = false;
+    private float _defaultWidth;
     
     private void Awake()
     {
@@ -22,79 +24,114 @@ public class STController : MonoBehaviour
         for(int i = 0; i < tmps.Length; i++)
         {
             if (tmps[i].name == "_left")
-                toolTipTextLeft = tmps[i];
+                _toolTipTextLeft = tmps[i];
 
             if (tmps[i].name == "_right")
-                toolTipTextRight = tmps[i];
+                _toolTipTextRight = tmps[i];
         }
 
         // Keep a reference for the panel image and transform
-        panel = GetComponent<Image>();
-        rect = GetComponent<RectTransform>();
-
+        _panel = GetComponent<Image>();
+        _rect = GetComponent<RectTransform>();
+        _defaultWidth= _rect.sizeDelta.x;
         // Hide at the start
         HideTooltip();
     }
 
     void Update()
     {
-        ResizeToMatchText();
+        if(_showNow){
+            ResizeToMatchText();
+        }
         UpdateShow();
     }
 
     private void ResizeToMatchText()
     {
         // Find the biggest height between both text layers
-        var bounds = toolTipTextLeft.textBounds;
-        float biggestY = toolTipTextLeft.textBounds.size.y;
-        float rightY = toolTipTextRight.textBounds.size.y;
+        var bounds = _toolTipTextLeft.textBounds;
+        float biggestY = _toolTipTextLeft.textBounds.size.y;
+        float rightY = _toolTipTextRight.textBounds.size.y;
         if (rightY > biggestY)
             biggestY = rightY;
 
         // Dont forget to add the margins
-        var margins = toolTipTextLeft.margin.y * 2;
+        var margins = _toolTipTextLeft.margin.y * 2;
 
         // Update the height of the tooltip panel
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, biggestY + margins);
+        _rect.sizeDelta = new Vector2(_rect.sizeDelta.x, biggestY + margins);
+
+        PreventScreenOverflow();
+    }
+    private void PreventScreenOverflow()
+    {
+        
+        Vector3[] corners = new Vector3[4];
+        _rect.GetWorldCorners(corners);
+
+        float maxY = Mathf.Max(corners[0].y, corners[1].y, corners[2].y, corners[3].y);
+        float minY = Mathf.Min(corners[0].y, corners[1].y, corners[2].y, corners[3].y);
+        float maxX = Mathf.Max(corners[0].x, corners[1].x, corners[2].x, corners[3].x);
+        float minX = Mathf.Min(corners[0].x, corners[1].x, corners[2].x, corners[3].x);
+
+        float currentWidth = _rect.sizeDelta.x;
+        float currentHeight = _rect.sizeDelta.y;
+        float newWidth = currentWidth;
+        float newHeight = currentHeight;
+
+        // Calculate overflow amounts
+        float overflowTop = maxY - Screen.height;
+        float overflowRight = maxX - Screen.width;
+
+        float defaultWidthDiff=_rect.sizeDelta.x-Math.Abs(_rect.sizeDelta.x-_defaultWidth);
+
+        if(overflowTop<=0 && _rect.sizeDelta.x>_defaultWidth && (overflowTop+defaultWidthDiff)>=0)
+        {
+            _rect.sizeDelta=new Vector2(defaultWidthDiff,_rect.sizeDelta.y);
+        }
+        if(overflowTop>0 && overflowRight<=0)
+        {
+            _rect.sizeDelta=new Vector2(_rect.sizeDelta.x+overflowTop,_rect.sizeDelta.y-overflowTop);
+        }
     }
 
     private void UpdateShow()
     {
-        if (showInFrames == -1)
+        if (_showInFrames == -1)
             return;
 
-        if (showInFrames == 0)
-            showNow = true;
+        if (_showInFrames == 0)
+            _showNow = true;
 
-        if (showNow)
+        if (_showNow)
         {
-            rect.anchoredPosition = Input.mousePosition;
+            _rect.anchoredPosition = Input.mousePosition;
         }
 
-        showInFrames -= 1;
+        _showInFrames -= 1;
     }
 
     public void SetRawText(string text, TextAlign align = TextAlign.Left)
     {
         // Doesn't change style, just the text
         if(align == TextAlign.Left)
-            toolTipTextLeft.text = text;
+            _toolTipTextLeft.text = text;
         if (align == TextAlign.Right)
-            toolTipTextRight.text = text;
+            _toolTipTextRight.text = text;
         ResizeToMatchText();
     }
 
     public void SetCustomStyledText(string text, SimpleTooltipStyle style, TextAlign align = TextAlign.Left)
     {
         // Update the panel sprite and color
-        panel.sprite = style.slicedSprite;
-        panel.color = style.color;
+        _panel.sprite = style.slicedSprite;
+        _panel.color = style.color;
 
         // Update the font asset, size and default color
-        toolTipTextLeft.font = style.fontAsset;
-        toolTipTextLeft.color = style.defaultColor;
-        toolTipTextRight.font = style.fontAsset;
-        toolTipTextRight.color = style.defaultColor;
+        _toolTipTextLeft.font = style.fontAsset;
+        _toolTipTextLeft.color = style.defaultColor;
+        _toolTipTextRight.font = style.fontAsset;
+        _toolTipTextRight.color = style.defaultColor;
 
         // Convert all tags to TMPro markup
         var styles = style.fontStyles;
@@ -109,9 +146,9 @@ public class STController : MonoBehaviour
             text = text.Replace(styles[i].tag, addTags);
         }
         if (align == TextAlign.Left)
-            toolTipTextLeft.text = text;
+            _toolTipTextLeft.text = text;
         if (align == TextAlign.Right)
-            toolTipTextRight.text = text;
+            _toolTipTextRight.text = text;
         ResizeToMatchText();
     }
 
@@ -127,14 +164,14 @@ public class STController : MonoBehaviour
     {
         // After 2 frames, showNow will be set to TRUE
         // after that the frame count wont matter
-        if (showInFrames == -1)
-            showInFrames = 2;
+        if (_showInFrames == -1)
+            _showInFrames = 2;
     }
 
     public void HideTooltip()
     {
-        showInFrames = -1;
-        showNow = false;
-        rect.anchoredPosition = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+        _showInFrames = -1;
+        _showNow = false;
+        _rect.anchoredPosition = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
     }
 }

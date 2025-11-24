@@ -100,12 +100,12 @@ public class CardInfo
     private static Dictionary<string, string> modifierColors = new Dictionary<string, string> 
     {
         {"Restoring", "green"},
-        {"Bounce", "blue"},
-        {"Burn", "orange"},
+        {"Bounce", "orange"},
+        {"Burn", "yellow"},
         {"Parry","black"},
-        {"Draw", "grey"},
+        {"Draw", "red"},
         {"Cripple", "purple"},
-        {"Spiky", "yellow"},
+        {"Spiky", "grey"},
     };
     private static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
     {

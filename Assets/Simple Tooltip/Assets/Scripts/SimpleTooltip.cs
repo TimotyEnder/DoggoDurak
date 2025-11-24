@@ -128,6 +128,6 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         // There were no colliders found when the component is added so we'll add a box collider by default
         // If you are making a 2D game you can change this to a BoxCollider2D for convenience
         // You can obviously still swap it manually in the editor but this should speed up development
-        gameObject.AddComponent<BoxCollider>();
+        gameObject.AddComponent<BoxCollider2D>();
     }
 }
