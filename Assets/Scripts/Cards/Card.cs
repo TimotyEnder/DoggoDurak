@@ -395,6 +395,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if(_isInteractable)
         {
             if (_played) { return; }
+            GetComponent<SimpleTooltip>().toolTipEnabledStatus(false);
             _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         }
     }
@@ -407,6 +408,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
         if (_played) { return; }
+        GetComponent<SimpleTooltip>().toolTipEnabledStatus(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))

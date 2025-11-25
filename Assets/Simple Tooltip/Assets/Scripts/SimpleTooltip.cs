@@ -15,6 +15,8 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private bool isUIObject = false;
     private bool showing = false;
 
+    private bool toolTipEnabled=true;
+
     private void Awake()
     {
         eventSystem = FindObjectOfType<EventSystem>();
@@ -38,7 +40,14 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!simpleTooltipStyle)
             simpleTooltipStyle = Resources.Load<SimpleTooltipStyle>("STDefault");
     }
-
+    public void toolTipEnabledStatus(bool status)
+    {
+        toolTipEnabled=status;
+        if(!toolTipEnabled)
+        {
+            HideTooltip();
+        }
+    }
     private void Update()
     {
         if (!cursorInside)
@@ -65,7 +74,10 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 return;
             }
         }
-        ShowTooltip();
+        if(toolTipEnabled)
+        {
+            ShowTooltip();
+        }
     }
 
     private void OnMouseExit()
@@ -79,7 +91,10 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (!isUIObject)
             return;
-        ShowTooltip();
+        if(toolTipEnabled)
+        {
+            ShowTooltip();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)

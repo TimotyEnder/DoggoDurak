@@ -15,10 +15,7 @@ public class STController : MonoBehaviour
     private RectTransform _rect;
     private int _showInFrames = -1;
     private bool _showNow = false;
-    private float _defaultWidth;
 
-    private Vector3 _oldMouse;
-    
     private void Awake()
     {
         // Load up both text layers
@@ -35,16 +32,13 @@ public class STController : MonoBehaviour
         // Keep a reference for the panel image and transform
         _panel = GetComponent<Image>();
         _rect = GetComponent<RectTransform>();
-        _defaultWidth= _rect.sizeDelta.x;
         // Hide at the start
         HideTooltip();
     }
 
     void Update()
     {
-        if(_showNow){
-            ResizeToMatchText();
-        }
+        ResizeToMatchText();  // Only resize when mouse moves
         UpdateShow();
     }
 
@@ -59,38 +53,8 @@ public class STController : MonoBehaviour
 
         // Dont forget to add the margins
         var margins = _toolTipTextLeft.margin.y * 2;
-
         // Update the height of the tooltip panel
         _rect.sizeDelta = new Vector2(_rect.sizeDelta.x, biggestY + margins);
-
-        PreventScreenOverflow();
-    }
-    private void PreventScreenOverflow()
-    {
-        
-        Vector3[] corners = new Vector3[4];
-        _rect.GetWorldCorners(corners);
-
-        float maxY = Mathf.Max(corners[0].y, corners[1].y, corners[2].y, corners[3].y);
-        float minY = Mathf.Min(corners[0].y, corners[1].y, corners[2].y, corners[3].y);
-        float maxX = Mathf.Max(corners[0].x, corners[1].x, corners[2].x, corners[3].x);
-        float minX = Mathf.Min(corners[0].x, corners[1].x, corners[2].x, corners[3].x);
-
-        float currentWidth = _rect.sizeDelta.x;
-        float currentHeight = _rect.sizeDelta.y;
-        float newWidth = currentWidth;
-        float newHeight = currentHeight;
-        //Vector3.Lerp(currentScale, targetScale, Time.deltaTime * speed);
-        _rect.sizeDelta=Vector2.Lerp(_rect.sizeDelta,new Vector2(_defaultWidth,_rect.sizeDelta.y),Time.deltaTime * 1);
-        // Calculate overflow amounts
-        float overflowTop = maxY - Screen.height;
-        float overflowRight = maxX - Screen.width;
-
-        if(overflowTop>0 && overflowRight<=0)
-        {
-            _rect.sizeDelta=Vector2.Lerp(_rect.sizeDelta,new Vector2(_rect.sizeDelta.x+overflowTop,_rect.sizeDelta.y-overflowTop),Time.deltaTime * 1);
-        }
-        _oldMouse=Input.mousePosition;
     }
 
     private void UpdateShow()
