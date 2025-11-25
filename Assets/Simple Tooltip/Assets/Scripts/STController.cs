@@ -80,20 +80,17 @@ public class STController : MonoBehaviour
         float currentHeight = _rect.sizeDelta.y;
         float newWidth = currentWidth;
         float newHeight = currentHeight;
+        //Vector3.Lerp(currentScale, targetScale, Time.deltaTime * speed);
+        _rect.sizeDelta=Vector2.Lerp(_rect.sizeDelta,new Vector2(_defaultWidth,_rect.sizeDelta.y),Time.deltaTime * 1);
+        // Calculate overflow amounts
+        float overflowTop = maxY - Screen.height;
+        float overflowRight = maxX - Screen.width;
 
-        if(Input.mousePosition!=_oldMouse)
+        if(overflowTop>0 && overflowRight<=0)
         {
-            _rect.sizeDelta=new Vector2(_defaultWidth,_rect.sizeDelta.y);
-            // Calculate overflow amounts
-            float overflowTop = maxY - Screen.height;
-            float overflowRight = maxX - Screen.width;
-
-            if(overflowTop>0 && overflowRight<=0)
-            {
-                _rect.sizeDelta=new Vector2(_rect.sizeDelta.x+overflowTop,_rect.sizeDelta.y-overflowTop);
-            }
-            _oldMouse=Input.mousePosition;
+            _rect.sizeDelta=Vector2.Lerp(_rect.sizeDelta,new Vector2(_rect.sizeDelta.x+overflowTop,_rect.sizeDelta.y-overflowTop),Time.deltaTime * 1);
         }
+        _oldMouse=Input.mousePosition;
     }
 
     private void UpdateShow()
