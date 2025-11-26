@@ -16,6 +16,8 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private bool showing = false;
 
     private bool toolTipEnabled=true;
+    [SerializeField]
+    private GameObject _toolTipPrefab;
 
     private void Awake()
     {
@@ -26,6 +28,7 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!tooltipController)
         {
             tooltipController = AddTooltipPrefabToScene();
+             Debug.Log("Tooltip Controller: "+tooltipController);
         }
         if (!tooltipController)
         {
@@ -56,9 +59,11 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         tooltipController.ShowTooltip();
     }
 
-    public static STController AddTooltipPrefabToScene()
+    public  STController AddTooltipPrefabToScene()
     {
-        return Instantiate(Resources.Load<GameObject>("SimpleTooltip")).GetComponentInChildren<STController>();
+        GameObject instance=Instantiate(_toolTipPrefab);
+        Debug.Log("GameObject: "+instance);
+        return instance.GetComponentInChildren<STController>(true);
     }
 
     private void OnMouseOver()

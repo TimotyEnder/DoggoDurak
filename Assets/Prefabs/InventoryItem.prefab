@@ -354,3 +354,4 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: 
   infoRight: 
+  _toolTipPrefab: {fileID: 4334789946841606976, guid: 8037e05bad2415743ba7093be0b35598, type: 3}
