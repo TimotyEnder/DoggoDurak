@@ -1291,6 +1291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
   ttPaddingX: 0
-  ttPaddingY: 0
+  ttPaddingY: 70
   displayWaitSeconds: 0.05
   canvas: {fileID: 0}
