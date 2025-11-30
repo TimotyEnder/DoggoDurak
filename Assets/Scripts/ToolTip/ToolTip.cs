@@ -30,7 +30,6 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ttPaddingY=y;
         ttPaddingX=x;
     }
-    
     public async void OnPointerEnter(PointerEventData eventData)
     {
         if (_enabled && _currentTooltip == null)
@@ -39,80 +38,121 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             //wait a bit for the card to appear
             await UniTask.Delay(System.TimeSpan.FromSeconds(displayWaitSeconds));
             // Create tooltip
-            _currentTooltip = Instantiate(_tooltipPrefab,this.transform.position,Quaternion.identity,this.transform);
+            _currentTooltip = Instantiate(_tooltipPrefab, GameObject.FindGameObjectWithTag("Canvas").transform);
             if(!_shouldExist)
             {
                  Destroy(_currentTooltip);
                  _currentTooltip = null;
             }
-            else
+            
+            // Set text first
+            TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
+            ttText.text = _tooltipText;
+            
+            // Scale the background to fit text
+            ToolTipScaler ttScript = _currentTooltip.GetComponentInChildren<ToolTipScaler>();
+            if (ttScript != null)
             {
-                // Set text first
-                TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
-                ttText.text = _tooltipText;
-                
-                // Scale the background to fit text
-                ToolTipScaler ttScript = _currentTooltip.GetComponentInChildren<ToolTipScaler>();
-                if (ttScript != null)
-                {
-                    ttScript.ScaleImageToText();
-                }
-                
-                // Force layout rebuild to get proper sizes
-                Canvas.ForceUpdateCanvases();
-                LayoutRebuilder.ForceRebuildLayoutImmediate(_currentTooltip.GetComponent<RectTransform>());
-                
-                // Position the tooltip
-                PositionTooltip();
+                ttScript.ScaleImageToText();
             }
+            
+            // Force layout rebuild to get proper sizes
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_currentTooltip.GetComponent<RectTransform>());
+            
+            // Position the tooltip
+            PositionTooltip();
         }
     }
 
     private void PositionTooltip()
+{
+    if (_currentTooltip == null) return;
+
+    RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
+    RectTransform ttBgRect= _currentTooltip.transform.Find("ToolTipBackground").GetComponent<RectTransform>();
+    RectTransform myRect = GetComponent<RectTransform>();
+    
+    // Use RectTransform.rect for reliable size calculations
+    float ttWidth = ttBgRect.rect.width;
+    float ttHeight = ttBgRect.rect.height;
+    float myWidth = myRect.rect.width;
+    float myHeight = myRect.rect.height;
+
+    // Convert to screen space if needed, or use local positions
+    Vector3 myCenter = myRect.position;
+    
+    // Define positions relative to the tooltip's pivot (usually center)
+    Vector3[] preferredPositions = new Vector3[]
     {
-        if (_currentTooltip == null) return;
+        // Above - center aligned horizontally
+        new Vector3(
+            myCenter.x,
+            myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+            0
+        ),
+        // Below - center aligned horizontally
+        new Vector3(
+            myCenter.x,
+            myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+            0
+        ),
+        // Right - center aligned vertically
+        new Vector3(
+            myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+            myCenter.y,
+            0
+        ),
+        // Left - center aligned vertically
+        new Vector3(
+            myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+            myCenter.y,
+            0
+        ),
+        // Top Left - center aligned vertically
+        new Vector3(
+            myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+            myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+            0
+        ),
+        // Top Right - center aligned vertically
+        new Vector3(
+            myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+            myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+            0
+        ),
+        // Bottom Left - center aligned vertically
+        new Vector3(
+            myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+            myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+            0
+        ),
+        // Bottom Right - center aligned vertically
+        new Vector3(
+            myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+            myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+            0
+        )
+    };
 
-        RectTransform ttRect = _currentTooltip.GetComponent<RectTransform>();
-        RectTransform myRect= this.gameObject.GetComponent<RectTransform>();
-        
-        // Define positions in canvas local space by aligning edges
-        Vector2[] preferredPositions = new Vector2[]
+    // Try each position until we find one that fits
+    bool foundPosition = false;
+    foreach (var pos in preferredPositions)
+    {
+        ttRect.position = pos;
+        if (IsFullyWithinScreenBounds(ttRect))
         {
-            // Above - align bottom-left of tooltip to top-left of card
-            new Vector2(
-                0,  // card top-left x
-                (ttRect.rect.height/2)+ (myRect.rect.height/2)// above card top edge
-            ),
-            // Below - align top-left of tooltip to bottom-left of card  
-            new Vector2(
-                0,  // card top-left x
-                -((ttRect.rect.height/2)+(myRect.rect.height/2))// above card top edge
-            ),
-            // Right - align bottom-left of tooltip to bottom-right of card
-            new Vector2(
-                (ttRect.rect.width/2)+ (myRect.rect.width/2),  // right of card right edge
-                0  // card top-right y
-            ),
-            // Left - align bottom-right of tooltip to bottom-left of card
-            new Vector2(
-                -((ttRect.rect.height/2)+(myRect.rect.height/2)),  // left of card left edge
-                0 // card bottom-left y
-            )
-        };
-
-        // Try each position
-        bool foundPosition = false;
-        foreach (var pos in preferredPositions)
-        {
-            ttRect.localPosition = new Vector3(pos.x, pos.y, 0);
-            if (IsFullyWithinScreenBounds(ttRect))
-            {
-                foundPosition = true;
-                break;
-            }
+            foundPosition = true;
+            break;
         }
     }
 
+    // Final fallback - adjust to fit on screen
+    if (!foundPosition)
+    {
+        AdjustToScreenBounds(ttRect);
+    }
+}
     private bool IsFullyWithinScreenBounds(RectTransform rectTransform)
     {
         Vector3[] corners = new Vector3[4];
@@ -130,40 +170,25 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Vector3[] corners = new Vector3[4];
         rectTransform.GetWorldCorners(corners);
         
-        // Get the canvas
-        Canvas canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        float ttWidth = corners[2].x - corners[0].x;
+        float ttHeight = corners[1].y - corners[0].y;
         
-        // Convert corners to canvas local space for adjustment
-        Vector2[] localCorners = new Vector2[4];
-        for (int i = 0; i < 4; i++)
-        {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, corners[i], null, out localCorners[i]);
-        }
+        Vector3 currentPos = rectTransform.position;
+        Vector3 adjustedPos = currentPos;
         
-        float ttWidth = Mathf.Abs(localCorners[2].x - localCorners[0].x);
-        float ttHeight = Mathf.Abs(localCorners[1].y - localCorners[0].y);
-        
-        Vector3 currentLocalPos = rectTransform.localPosition;
-        Vector3 adjustedLocalPos = currentLocalPos;
-        
-        // Get canvas bounds in local space
-        Vector3[] canvasCorners = new Vector3[4];
-        canvasRect.GetLocalCorners(canvasCorners);
-        
-        // Adjust X position in local space
-        if (localCorners[0].x < canvasCorners[0].x)
-            adjustedLocalPos.x += canvasCorners[0].x - localCorners[0].x + ttPaddingX;
-        else if (localCorners[2].x > canvasCorners[2].x)
-            adjustedLocalPos.x -= localCorners[2].x - canvasCorners[2].x + ttPaddingX;
+        // Adjust X position - keep the padding in mind
+        if (corners[0].x < 0)
+            adjustedPos.x += -corners[0].x + ttPaddingX;
+        else if (corners[2].x > Screen.width)
+            adjustedPos.x -= corners[2].x - Screen.width + ttPaddingX;
             
-        // Adjust Y position in local space
-        if (localCorners[0].y < canvasCorners[0].y)
-            adjustedLocalPos.y += canvasCorners[0].y - localCorners[0].y + ttPaddingY;
-        else if (localCorners[1].y > canvasCorners[1].y)
-            adjustedLocalPos.y -= localCorners[1].y - canvasCorners[1].y + ttPaddingY;
+        // Adjust Y position - keep the padding in mind
+        if (corners[0].y < 0)
+            adjustedPos.y += -corners[0].y + ttPaddingY;
+        else if (corners[1].y > Screen.height)
+            adjustedPos.y -= corners[1].y - Screen.height + ttPaddingY;
             
-        rectTransform.localPosition = adjustedLocalPos;
+        rectTransform.position = adjustedPos;
     }
 
     public void OnPointerExit(PointerEventData eventData)
