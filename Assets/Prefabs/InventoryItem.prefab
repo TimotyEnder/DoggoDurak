@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3925943536559471770}
   - component: {fileID: 5161779310839885114}
-  - component: {fileID: 2369123908576082459}
+  - component: {fileID: 4430766234040038767}
   m_Layer: 5
   m_Name: InventoryItem
   m_TagString: Untagged
@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stackText: {fileID: 2561464006274312856}
---- !u!114 &2369123908576082459
+--- !u!114 &4430766234040038767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,9 +348,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4732124155259917557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
-  infoLeft: 
-  infoRight: 
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  ttPaddingX: 0
+  ttPaddingY: 0
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 0}

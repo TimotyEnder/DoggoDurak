@@ -1168,7 +1168,7 @@ GameObject:
   - component: {fileID: 2879040147244479006}
   - component: {fileID: 6097108225265103838}
   - component: {fileID: 9176361097048513517}
-  - component: {fileID: 77717305865357318}
+  - component: {fileID: 8963155758808601126}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -1277,7 +1277,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &77717305865357318
+--- !u!114 &8963155758808601126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1286,9 +1286,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9024197703662086752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
-  infoLeft: Hello
-  infoRight: 
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  ttPaddingX: 0
+  ttPaddingY: 0
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 0}

@@ -144,9 +144,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _costText.text = _cost.ToString();
         }
         UpdateModifiers();
-        //this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
-        this.GetComponent<SimpleTooltip>().infoLeft=_cardInfo.CompileTooltipDescription();
-        this.GetComponent<SimpleTooltip>().infoRight="<size="+SettingsState.ToolTipFontSizeText+">Card</size>";
+        this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
     public void Bling()
     {
@@ -395,7 +393,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if(_isInteractable)
         {
             if (_played) { return; }
-            GetComponent<SimpleTooltip>().toolTipEnabledStatus(false);
+            GetComponent<ToolTip>().SetTooltipActiveState(false);
             _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         }
     }
@@ -408,7 +406,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
         if (_played) { return; }
-        GetComponent<SimpleTooltip>().toolTipEnabledStatus(true);
+        GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
