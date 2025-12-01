@@ -14,9 +14,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private GameObject _tooltipPrefab;
     
     private GameObject _currentTooltip;
-    [SerializeField]
     private float ttPaddingX;
-    [SerializeField]
     private float ttPaddingY;
     [SerializeField]
     private float displayWaitSeconds=0.05f;
@@ -38,6 +36,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             //wait a bit for the card to appear
             await UniTask.Delay(System.TimeSpan.FromSeconds(displayWaitSeconds));
             // Create tooltip
+            ttPaddingY=Screen.height*0.02f;
             _currentTooltip = Instantiate(_tooltipPrefab, GameObject.FindGameObjectWithTag("Canvas").transform);
             if(!_shouldExist)
             {
@@ -142,16 +141,12 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ttRect.position = pos;
         if (IsFullyWithinScreenBounds(ttRect))
         {
+            Debug.Log(pos+"Is fully withing screen bounds");
             foundPosition = true;
             break;
         }
     }
 
-    // Final fallback - adjust to fit on screen
-    if (!foundPosition)
-    {
-        AdjustToScreenBounds(ttRect);
-    }
 }
     private bool IsFullyWithinScreenBounds(RectTransform rectTransform)
     {
@@ -163,32 +158,6 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             c.x >= 0 && c.x <= Screen.width - safeMargin &&
             c.y >= 0 && c.y <= Screen.height - safeMargin
         );
-    }
-
-    private void AdjustToScreenBounds(RectTransform rectTransform)
-    {
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
-        
-        float ttWidth = corners[2].x - corners[0].x;
-        float ttHeight = corners[1].y - corners[0].y;
-        
-        Vector3 currentPos = rectTransform.position;
-        Vector3 adjustedPos = currentPos;
-        
-        // Adjust X position - keep the padding in mind
-        if (corners[0].x < 0)
-            adjustedPos.x += -corners[0].x + ttPaddingX;
-        else if (corners[2].x > Screen.width)
-            adjustedPos.x -= corners[2].x - Screen.width + ttPaddingX;
-            
-        // Adjust Y position - keep the padding in mind
-        if (corners[0].y < 0)
-            adjustedPos.y += -corners[0].y + ttPaddingY;
-        else if (corners[1].y > Screen.height)
-            adjustedPos.y -= corners[1].y - Screen.height + ttPaddingY;
-            
-        rectTransform.position = adjustedPos;
     }
 
     public void OnPointerExit(PointerEventData eventData)

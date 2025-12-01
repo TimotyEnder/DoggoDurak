@@ -24,6 +24,7 @@ public class ToolTipScaler : MonoBehaviour
 
     public void ScaleImageToText()
     {
+        textRectTransform.sizeDelta = new Vector2(Screen.width*0.2f,textRectTransform.sizeDelta.y); 
         textRectTransform.sizeDelta = new Vector2(textRectTransform.sizeDelta.x, targetText.GetPreferredValues().y); 
         if (targetText == null || textRectTransform == null) return;
 
