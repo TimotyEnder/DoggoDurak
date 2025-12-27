@@ -19,6 +19,8 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private float ttPaddingX;
     private float ttPaddingY;
     [SerializeField]
+    private float _myRectScale=2f;
+    [SerializeField]
     private float displayWaitSeconds=0.05f;
     [SerializeField]
     private Canvas canvas;
@@ -41,8 +43,8 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             // Create tooltip
             GameObject canvas= GameObject.FindGameObjectWithTag("Canvas");
             RectTransform canvasRect = canvas.GetComponent<RectTransform>();
-            ttPaddingY=canvasRect.rect.height*0.02f;
-            ttPaddingX=canvasRect.rect.width*0.02f;
+            ttPaddingY=0;
+            ttPaddingX=0;
             _currentTooltip = Instantiate(_tooltipPrefab, GameObject.FindGameObjectWithTag("Canvas").transform);
             if(!_shouldExist)
             {
@@ -93,49 +95,49 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             // Above - center aligned horizontally
             new Vector3(
                 myCenter.x,
-                myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + ttPaddingY,
                 0
             ),
             // Below - center aligned horizontally
             new Vector3(
                 myCenter.x,
-                myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - ttPaddingY,
                 0
             ),
             // Right - center aligned vertically
             new Vector3(
-                myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
+                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + ttPaddingX,
                 myCenter.y,
                 0
             ),
             // Left - center aligned vertically
             new Vector3(
-                myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
+                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - ttPaddingX,
                 myCenter.y,
                 0
             ),
             // Top Left - center aligned vertically
             new Vector3(
-                myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
-                myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - ttPaddingX,
+                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + ttPaddingY,
                 0
             ),
             // Top Right - center aligned vertically
             new Vector3(
-                myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
-                myCenter.y + (myHeight/2) + (ttHeight/2) + ttPaddingY,
+                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + ttPaddingX,
+                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + ttPaddingY,
                 0
             ),
             // Bottom Left - center aligned vertically
             new Vector3(
-                myCenter.x - (myWidth/2) - (ttWidth/2) - ttPaddingX,
-                myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - ttPaddingX,
+                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - ttPaddingY,
                 0
             ),
             // Bottom Right - center aligned vertically
             new Vector3(
-                myCenter.x + (myWidth/2) + (ttWidth/2) + ttPaddingX,
-                myCenter.y - (myHeight/2) - (ttHeight/2) - ttPaddingY,
+                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + ttPaddingX,
+                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - ttPaddingY,
                 0
             )
         };
