@@ -4,5 +4,5 @@ using UnityEngine;
 public static class SettingsState
 {
     public static int ToolTipFontSizeTitle=(int)(Screen.width*0.02f);
-    public static int ToolTipFontSizeText=(int)(Screen.width*0.014f);
+    public static int ToolTipFontSizeText=(int)(Screen.width*0.01f);
 }

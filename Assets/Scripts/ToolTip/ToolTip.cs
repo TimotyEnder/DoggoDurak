@@ -39,6 +39,9 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             await UniTask.Delay(System.TimeSpan.FromSeconds(displayWaitSeconds));
             // Create tooltip
             ttPaddingY=Screen.height*0.02f;
+            ttPaddingY=Screen.height*0.02f;
+            //_currentTooltip = FindAnyObjectByType<GameObject>(FindObjectsInactive.Include);
+            //_currentTooltip.SetActive(true);
             _currentTooltip = Instantiate(_tooltipPrefab, GameObject.FindGameObjectWithTag("Canvas").transform);
             if(!_shouldExist)
             {
@@ -172,6 +175,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         _shouldExist=false;
+        //_currentTooltip.SetActive(false);
         if (_currentTooltip != null)
         {
             Destroy(_currentTooltip);
