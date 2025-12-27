@@ -37,11 +37,12 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             _shouldExist=true;
             //wait a bit for the card to appear
             await UniTask.Delay(System.TimeSpan.FromSeconds(displayWaitSeconds));
+
             // Create tooltip
-            ttPaddingY=Screen.height*0.02f;
-            ttPaddingY=Screen.height*0.02f;
-            //_currentTooltip = FindAnyObjectByType<GameObject>(FindObjectsInactive.Include);
-            //_currentTooltip.SetActive(true);
+            GameObject canvas= GameObject.FindGameObjectWithTag("Canvas");
+            RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+            ttPaddingY=canvasRect.rect.height*0.02f;
+            ttPaddingX=canvasRect.rect.width*0.02f;
             _currentTooltip = Instantiate(_tooltipPrefab, GameObject.FindGameObjectWithTag("Canvas").transform);
             if(!_shouldExist)
             {
@@ -49,23 +50,23 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                  _currentTooltip = null;
             }
             
-            // Set text first
-            TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
-            ttText.text = _tooltipText;
-            
-            // Scale the background to fit text
-            ToolTipScaler ttScript = _currentTooltip.GetComponentInChildren<ToolTipScaler>();
-            if (ttScript != null)
-            {
-                ttScript.ScaleImageToText();
+            if(_currentTooltip!=null){
+                //set text
+                TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
+                ttText.text = _tooltipText;
+                // Scale the background to fit text
+                ToolTipScaler ttScript = _currentTooltip.GetComponentInChildren<ToolTipScaler>();
+                if (ttScript != null)
+                {
+                    ttScript.ScaleImageToText();
+                }
+                    // Force layout rebuild to get proper sizes
+                Canvas.ForceUpdateCanvases();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(_currentTooltip.GetComponent<RectTransform>());
+                
+                // Position the tooltip
+                PositionTooltip();
             }
-            
-            // Force layout rebuild to get proper sizes
-            Canvas.ForceUpdateCanvases();
-            LayoutRebuilder.ForceRebuildLayoutImmediate(_currentTooltip.GetComponent<RectTransform>());
-            
-            // Position the tooltip
-            PositionTooltip();
         }
     }
 

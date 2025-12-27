@@ -3,6 +3,6 @@ using UnityEngine;
 [Serializable]
 public static class SettingsState
 {
-    public static int ToolTipFontSizeTitle=(int)(Screen.width*0.02f);
-    public static int ToolTipFontSizeText=(int)(Screen.width*0.01f);
+    public static int ToolTipFontSizeTitle=(int)(20);
+    public static int ToolTipFontSizeText=(int)(18);
 }
