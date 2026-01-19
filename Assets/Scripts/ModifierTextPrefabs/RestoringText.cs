@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RestoringText : ModifierText
 {
-    public override IEnumerator DoYourThing(CardInfo cardInfo,Canvas _canvas)
+    public override IEnumerator ExecuteBehaviour(CardInfo cardInfo,Canvas _canvas)
     {
         Vector2 randDirMod = this.GetSemiCircleNormVect();
         Rigidbody2D rbInst = this.gameObject.GetComponent<Rigidbody2D>();;

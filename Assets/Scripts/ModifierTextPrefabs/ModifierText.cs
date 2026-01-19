@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class ModifierText : MonoBehaviour
 {
-    public abstract IEnumerator DoYourThing(CardInfo cardInfo, Canvas _canvas);
+    public abstract IEnumerator ExecuteBehaviour(CardInfo cardInfo, Canvas _canvas);
 
     protected Vector2 GetSemiCircleNormVect()
     {
@@ -19,5 +19,9 @@ public abstract class ModifierText : MonoBehaviour
         float targetAngle = Mathf.Lerp(startAngle * Mathf.Deg2Rad, endAngle * Mathf.Deg2Rad, normalizedAngle);
         toRet=new Vector2(Mathf.Cos(targetAngle), Mathf.Sin(targetAngle)).normalized;
         return toRet;
+    }
+    public void Init(CardInfo cardInfo, Canvas _canvas)
+    {
+        StartCoroutine(this.ExecuteBehaviour(cardInfo,_canvas));
     }
 }

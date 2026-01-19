@@ -190,7 +190,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         if (instancedText != null)
         {
-            StartCoroutine(instancedText.GetComponent<ModifierText>().DoYourThing(this.GetCardInfo(),_canvas));//yep the function is called do your thing deal with it lol 
+            instancedText.GetComponent<ModifierText>().Init(this.GetCardInfo(),_canvas);
         }
 
     }
