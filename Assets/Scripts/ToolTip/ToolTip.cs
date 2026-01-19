@@ -27,11 +27,8 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private bool _enabled = true;
     private bool _shouldExist=true;
 
-    public void changePadding(int x, int y)
-    {
-        ttPaddingY=y;
-        ttPaddingX=x;
-    }
+    private CanvasScaler _canvasScaler;
+    private float _canvasScaleFactor = 1f;
     public async void OnPointerEnter(PointerEventData eventData)
     {
         if (_enabled && _currentTooltip == null)
@@ -43,6 +40,12 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             // Create tooltip
             GameObject canvas= GameObject.FindGameObjectWithTag("Canvas");
             RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+            if (canvas != null)
+            {
+                _canvasScaler = canvas.GetComponent<CanvasScaler>();
+                Canvas canvasC = canvas.GetComponent<Canvas>();
+                _canvasScaleFactor = canvasC.scaleFactor;
+            }
             ttPaddingY=0;
             ttPaddingX=0;
             _currentTooltip = Instantiate(_tooltipPrefab, GameObject.FindGameObjectWithTag("Canvas").transform);
@@ -81,13 +84,15 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         RectTransform myRect = GetComponent<RectTransform>();
         
         // Use RectTransform.rect for reliable size calculations
-        float ttWidth = ttBgRect.rect.width;
-        float ttHeight = ttBgRect.rect.height;
-        float myWidth = myRect.rect.width;
-        float myHeight = myRect.rect.height;
+        float ttWidth = ttBgRect.rect.width*_canvasScaleFactor;
+        float ttHeight = ttBgRect.rect.height*_canvasScaleFactor;
+        float myWidth = myRect.rect.width*_canvasScaleFactor;
+        float myHeight = myRect.rect.height*_canvasScaleFactor;
 
         // Convert to screen space if needed, or use local positions
         Vector3 myCenter = myRect.position;
+        float scaledPaddingX = ttPaddingX * _canvasScaleFactor;
+        float scaledPaddingY = ttPaddingY * _canvasScaleFactor;
         
         // Define positions relative to the tooltip's pivot (usually center)
         Vector3[] preferredPositions = new Vector3[]
@@ -95,49 +100,49 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             // Above - center aligned horizontally
             new Vector3(
                 myCenter.x,
-                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + ttPaddingY,
+                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
                 0
             ),
             // Below - center aligned horizontally
             new Vector3(
                 myCenter.x,
-                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - ttPaddingY,
+                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
                 0
             ),
             // Right - center aligned vertically
             new Vector3(
-                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + ttPaddingX,
+                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
                 myCenter.y,
                 0
             ),
             // Left - center aligned vertically
             new Vector3(
-                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - ttPaddingX,
+                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
                 myCenter.y,
                 0
             ),
             // Top Left - center aligned vertically
             new Vector3(
-                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - ttPaddingX,
-                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + ttPaddingY,
+                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
+                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
                 0
             ),
             // Top Right - center aligned vertically
             new Vector3(
-                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + ttPaddingX,
-                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + ttPaddingY,
+                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
+                myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
                 0
             ),
             // Bottom Left - center aligned vertically
             new Vector3(
-                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - ttPaddingX,
-                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - ttPaddingY,
+                myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
+                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
                 0
             ),
             // Bottom Right - center aligned vertically
             new Vector3(
-                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + ttPaddingX,
-                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - ttPaddingY,
+                myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
+                myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
                 0
             )
         };
