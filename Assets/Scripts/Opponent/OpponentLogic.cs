@@ -179,17 +179,22 @@ public class OpponentLogic : MonoBehaviour
             _handUI.RemoveCard();
         }
     }
+    private int _coroutineCounter = 0;
+  
     public IEnumerator EnemyPlay() 
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForEndOfFrame();
         StartCoroutine(CheckForPlaysRoutine());
     }
+    
     public IEnumerator CheckForPlaysRoutine()
     {
+        yield return new WaitForSecondsRealtime(0.5f);  
         while (CheckPlay()) 
         {
             yield return new WaitForSeconds(0.25f);
         }
+        Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         if (!endTurnCaused && cha != null && !cha.HasMorePlays()) 
         {

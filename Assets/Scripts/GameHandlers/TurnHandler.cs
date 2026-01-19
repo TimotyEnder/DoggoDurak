@@ -16,6 +16,7 @@ public class TurnHandler : MonoBehaviour
     private OpponentLogic _opponent;
     private LifeTotal _playerHp;
     private LifeTotal _opponentHp;
+    private bool _turnEndStarted=false;
     void Start()
     {
         //initialising
@@ -72,8 +73,9 @@ public class TurnHandler : MonoBehaviour
     }
     public void StartEndTurn() 
     {
-        if (_playArea.GetCardsInPlay()>0) 
+        if (_playArea.GetCardsInPlay()>0 &&!_turnEndStarted) 
         {
+            _turnEndStarted=true;
             StartCoroutine(_opponent.CheckForPlaysRoutine());
             //Damage Co-Routine
             StartCoroutine(DamageRoutine());
@@ -82,6 +84,7 @@ public class TurnHandler : MonoBehaviour
     public void FinishEndTurn() 
     {
         //Wipe Cards
+        _turnEndStarted=false;
         _playArea.Wipe();
         //Change Turn State
         if (_turnState == 0)

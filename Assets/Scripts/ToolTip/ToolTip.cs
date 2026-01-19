@@ -153,7 +153,6 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ttRect.position = pos;
             if (IsFullyWithinScreenBounds(ttRect))
             {
-                Debug.Log(pos+"Is fully within screen bounds");
                 break;
             }
         }
@@ -171,7 +170,6 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             // Convert world corner to screen point for overlay canvas
             Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(null, corner);
             
-            Debug.Log($"Screen point: {screenPoint.x}, {screenPoint.y}");
             
             if (!screenRect.Contains(screenPoint))
             {
