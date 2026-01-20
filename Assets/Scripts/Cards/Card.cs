@@ -70,6 +70,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject parryTextPrefab;
     [SerializeField]
     private GameObject drawTextPrefab;
+    private RuleHandler _rh;
 
     void Start()
     {
@@ -128,6 +129,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _opponent = opponentObj.GetComponent<OpponentLogic>();
         }
         _animator=this.gameObject.GetComponent<Animator>();
+
+        GameObject rhObj= GameObject.Find("RuleHandler");
+        if(rhObj!=null)
+        {
+            _rh=rhObj.GetComponent<RuleHandler>();
+        }
     }
     public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
     {
@@ -156,37 +163,39 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void SpawnModifierEffect(CardModifierContainer c)
     {
         GameObject instancedText = null;
-        Debug.Log(c.ModType);
-        switch (c.ModType)
-        {
-            case "Restoring":
-                Debug.Log("Restoring");
-                instancedText = Instantiate(restoringTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break;
-            case "Bounce":
-                Debug.Log("Bounce");
-                instancedText = Instantiate(bounceTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break;
-            case "Burn":
-                Debug.Log("Burn");
-                instancedText = Instantiate(burnTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break;
-            case "Parry":
-                Debug.Log("Parry");
-                instancedText = Instantiate(parryTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break;
-            case "Draw":
-                Debug.Log("Draw");
-                instancedText = Instantiate(drawTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break;
-            case "Cripple":
-                Debug.Log("Cripple");
-                instancedText = Instantiate(cripplingTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break;
-            case "Spiky":
-                Debug.Log("Spiky");
-                instancedText = Instantiate(spikyTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                break; 
+        
+        if(_rh.CanEffectsSpawn()){
+            switch (c.ModType)
+            {
+                case "Restoring":
+                    Debug.Log("Restoring");
+                    instancedText = Instantiate(restoringTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break;
+                case "Bounce":
+                    Debug.Log("Bounce");
+                    instancedText = Instantiate(bounceTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break;
+                case "Burn":
+                    Debug.Log("Burn");
+                    instancedText = Instantiate(burnTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break;
+                case "Parry":
+                    Debug.Log("Parry");
+                    instancedText = Instantiate(parryTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break;
+                case "Draw":
+                    Debug.Log("Draw");
+                    instancedText = Instantiate(drawTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break;
+                case "Cripple":
+                    Debug.Log("Cripple");
+                    instancedText = Instantiate(cripplingTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break;
+                case "Spiky":
+                    Debug.Log("Spiky");
+                    instancedText = Instantiate(spikyTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break; 
+            }
         }
         if (instancedText != null)
         {

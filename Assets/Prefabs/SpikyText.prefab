@@ -5122,7 +5122,7 @@ GameObject:
   - component: {fileID: 1475546099593201795}
   m_Layer: 5
   m_Name: SpikyText
-  m_TagString: Untagged
+  m_TagString: ModEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

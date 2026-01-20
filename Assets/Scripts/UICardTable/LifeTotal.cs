@@ -10,8 +10,15 @@ public class LifeTotal : MonoBehaviour
     private TextMeshProUGUI _hpText;
     public GameObject damageTextPrefab;
     public GameObject healTextPrefab;
+
+    private RuleHandler _rh;
     void Start()
     {
+        GameObject rhObj= GameObject.Find("RuleHandler");
+        if(rhObj!=null)
+        {
+            _rh = rhObj.GetComponent<RuleHandler>();
+        }
     }
     void UpdateHealth() 
     {
@@ -25,25 +32,31 @@ public class LifeTotal : MonoBehaviour
     }
     public void Damage(int damage) 
     {
-        _hp -= damage;
-        TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
-        StartCoroutine(DestroyText(damageText));
-        damageText.text = damage.ToString();
-        damageText.fontSize = _hpText.fontSize;
-        UpdateHealth();
+        if(_rh.CanEffectsSpawn())
+        {
+            _hp -= damage;
+            TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
+            StartCoroutine(DestroyText(damageText));
+            damageText.text = damage.ToString();
+            damageText.fontSize = _hpText.fontSize;
+            UpdateHealth();
+        }
     }
     public void Heal(int amount)
     {
-        _hp += amount;
-        TextMeshProUGUI healText = Instantiate(healTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
-        StartCoroutine(DestroyText(healText));
-        healText.text = amount.ToString();
-        healText.fontSize = _hpText.fontSize;
-        if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
+        if(_rh.CanEffectsSpawn())
         {
-            _hp = GameHandler.Instance.GetGameState()._maxhealth;
+            _hp += amount;
+            TextMeshProUGUI healText = Instantiate(healTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
+            StartCoroutine(DestroyText(healText));
+            healText.text = amount.ToString();
+            healText.fontSize = _hpText.fontSize;
+            if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
+            {
+                _hp = GameHandler.Instance.GetGameState()._maxhealth;
+            }
+            UpdateHealth();
         }
-        UpdateHealth();
     }
     public int GetHealth() 
     {

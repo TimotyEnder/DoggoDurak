@@ -5122,7 +5122,7 @@ GameObject:
   - component: {fileID: 1093139215508161905}
   m_Layer: 5
   m_Name: ParryText
-  m_TagString: Untagged
+  m_TagString: ModEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

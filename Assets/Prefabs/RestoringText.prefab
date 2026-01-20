@@ -4896,7 +4896,7 @@ GameObject:
   - component: {fileID: 8439569825201876023}
   m_Layer: 5
   m_Name: RestoringText
-  m_TagString: Untagged
+  m_TagString: ModEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

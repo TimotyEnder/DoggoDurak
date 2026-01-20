@@ -4896,7 +4896,7 @@ GameObject:
   - component: {fileID: 333265237981647947}
   m_Layer: 0
   m_Name: BurnText
-  m_TagString: Untagged
+  m_TagString: ModEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
