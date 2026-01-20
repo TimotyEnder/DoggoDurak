@@ -69,7 +69,7 @@ public class GameHandler : MonoBehaviour
             c.AddModifier("Burn");
             c.AddModifier("Burn");
             c.AddModifier("Burn");
-            c.AddModifier("Burn");
+            
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
