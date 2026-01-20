@@ -10,7 +10,14 @@ public class BounceText : ModifierText
         rbInst.linearVelocity = randDirMod * (_canvas.pixelRect.width*0.15f);
         yield return new WaitForSeconds(0.5f);
         rbInst.linearVelocity = Vector2.zero;
-        Destroy(this.gameObject, 1f);
+        if(!cardInfo._opponentCard)
+        {
+            this.MoveTowards(GameObject.Find("OpponentsLifeTotal"));
+        }
+        else
+        {
+            this.MoveTowards(GameObject.Find("PlayerLifeTotal"));
+        }
     }
 
 }

@@ -24,4 +24,33 @@ public abstract class ModifierText : MonoBehaviour
     {
         StartCoroutine(this.ExecuteBehaviour(cardInfo,_canvas));
     }
+    protected void MoveTowards(GameObject destination)
+    {
+        StartCoroutine(MoveTowardsCoroutine(destination));
+    }
+    protected IEnumerator MoveTowardsCoroutine(GameObject destination)
+        {
+            Vector2 initialPosition = transform.position;
+            Vector2 targetPosition = destination.transform.position;
+            float totalDistance = Vector2.Distance(initialPosition, targetPosition);
+            
+            while (transform.position != (Vector3)targetPosition)
+            {
+                // Calculate progress (0 to 1)
+                float currentDistance = Vector2.Distance(transform.position, targetPosition);
+                float progress = 1 - (currentDistance / totalDistance);
+                
+                // Move with speed that varies based on progress
+                // Using Lerp for smoother movement, or MoveTowards for linear
+                transform.position = Vector2.MoveTowards(
+                    transform.position, 
+                    targetPosition, 
+                    5f * progress * Time.deltaTime
+                );
+                
+                yield return null; // Wait for next frame
+            }
+            
+            Destroy(gameObject);
+        }
 }
