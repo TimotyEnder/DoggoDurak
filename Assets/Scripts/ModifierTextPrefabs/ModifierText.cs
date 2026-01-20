@@ -29,28 +29,42 @@ public abstract class ModifierText : MonoBehaviour
         StartCoroutine(MoveTowardsCoroutine(destination));
     }
     protected IEnumerator MoveTowardsCoroutine(GameObject destination)
+    {
+        Vector2 initialPosition = transform.position;
+        Vector2 targetPosition = destination.transform.position;
+        float totalDistance = Vector2.Distance(initialPosition, targetPosition);
+        
+        // Get the Rigidbody2D component
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        
+        // Make sure we have a Rigidbody2D
+        if (rb == null)
         {
-            Vector2 initialPosition = transform.position;
-            Vector2 targetPosition = destination.transform.position;
-            float totalDistance = Vector2.Distance(initialPosition, targetPosition);
+            Debug.LogError("No Rigidbody2D found on object!");
+            yield break;
+        }
+        
+        Debug.Log("MoveTowards with Rigidbody2D");
+        
+        while (Vector2.Distance(transform.position, targetPosition) > 10f)
+        {
             
-            while (transform.position != (Vector3)targetPosition)
-            {
-                // Calculate progress (0 to 1)
-                float currentDistance = Vector2.Distance(transform.position, targetPosition);
-                float progress = 1 - (currentDistance / totalDistance);
-                
-                // Move with speed that varies based on progress
-                // Using Lerp for smoother movement, or MoveTowards for linear
-                transform.position = Vector2.MoveTowards(
-                    transform.position, 
-                    targetPosition, 
-                    5f * progress * Time.deltaTime
-                );
-                
-                yield return null; // Wait for next frame
-            }
+            // Calculate direction to target
+            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+            
+            // Calculate current distance and progress
+            float currentDistance = Vector2.Distance(transform.position, targetPosition);
+            float progress = (1 - (currentDistance / totalDistance))+0.1f;
+            // Set velocity (speed increases with progress)
+            float speed = 1000f* progress;
+            rb.linearVelocity = direction * speed;
+            
+            yield return null;
+        }
+        
+            // Stop movement when we reach the destination
+            rb.linearVelocity = Vector2.zero;
             
             Destroy(gameObject);
         }
-}
+    }
