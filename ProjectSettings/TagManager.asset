@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Canvas
   - ToolTip
+  - ModEffect
   layers:
   - Default
   - TransparentFX
