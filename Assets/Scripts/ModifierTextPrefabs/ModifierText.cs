@@ -33,38 +33,18 @@ public abstract class ModifierText : MonoBehaviour
         Vector2 initialPosition = transform.position;
         Vector2 targetPosition = destination.transform.position;
         float totalDistance = Vector2.Distance(initialPosition, targetPosition);
-        
-        // Get the Rigidbody2D component
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         
-        // Make sure we have a Rigidbody2D
-        if (rb == null)
+        while (Vector2.Distance(transform.position, targetPosition) > 20f)
         {
-            Debug.LogError("No Rigidbody2D found on object!");
-            yield break;
-        }
-        
-        Debug.Log("MoveTowards with Rigidbody2D");
-        
-        while (Vector2.Distance(transform.position, targetPosition) > 10f)
-        {
-            
-            // Calculate direction to target
             Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-            
-            // Calculate current distance and progress
             float currentDistance = Vector2.Distance(transform.position, targetPosition);
             float progress = (1 - (currentDistance / totalDistance))+0.1f;
-            // Set velocity (speed increases with progress)
             float speed = 1000f* progress;
             rb.linearVelocity = direction * speed;
             
             yield return null;
         }
-        
-            // Stop movement when we reach the destination
-            rb.linearVelocity = Vector2.zero;
-            
             Destroy(gameObject);
         }
     }
