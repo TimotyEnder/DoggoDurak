@@ -40,7 +40,7 @@ public abstract class ModifierText : MonoBehaviour
             Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
             float currentDistance = Vector2.Distance(transform.position, targetPosition);
             float progress = (1 - (currentDistance / totalDistance))+0.1f;
-            float speed = 1000f* progress;
+            float speed = 2000f* progress;
             rb.linearVelocity = direction * speed;
             
             yield return null;
