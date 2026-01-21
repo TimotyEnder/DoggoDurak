@@ -253,4 +253,8 @@ public class CardInfo
         }
         return returnString;
     }
+    public override string ToString()
+    {
+        return numberFullName[_number] + suitFullName[_suit];
+    }
 }

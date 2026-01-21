@@ -131,7 +131,7 @@ public class CardHandArea : MonoBehaviour
                     }
                     foreach (Card pcard in pa.GetCardsPlayed())
                     {
-                        if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()))
+                        if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()) && !pcard.IsDefended())
                         {
                             Debug.Log("Current Card"+card.GetCardInfo()+"Can Defend:"+pcard.GetCardInfo());
                             return true;
