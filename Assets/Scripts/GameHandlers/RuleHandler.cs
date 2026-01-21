@@ -27,6 +27,10 @@ public class RuleHandler : MonoBehaviour
     {
         return _modEffectsSpawn;
     }
+    public void SetEffectsSpawn(bool set)
+    {
+        _modEffectsSpawn=set;
+    }
     public void SetTrumpSuit(string suit) 
     {
         _trumpSuit = suit;  

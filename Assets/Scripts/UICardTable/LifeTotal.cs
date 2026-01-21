@@ -32,31 +32,28 @@ public class LifeTotal : MonoBehaviour
     }
     public void Damage(int damage) 
     {
+        _hp -= damage;
         if(_rh.CanEffectsSpawn())
         {
-            _hp -= damage;
             TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
             StartCoroutine(DestroyText(damageText));
             damageText.text = damage.ToString();
             damageText.fontSize = _hpText.fontSize;
-            UpdateHealth();
         }
+        UpdateHealth();
     }
     public void Heal(int amount)
     {
-        if(_rh.CanEffectsSpawn())
+        _hp += amount;
+        TextMeshProUGUI healText = Instantiate(healTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
+        StartCoroutine(DestroyText(healText));
+        healText.text = amount.ToString();
+        healText.fontSize = _hpText.fontSize;
+        if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
         {
-            _hp += amount;
-            TextMeshProUGUI healText = Instantiate(healTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
-            StartCoroutine(DestroyText(healText));
-            healText.text = amount.ToString();
-            healText.fontSize = _hpText.fontSize;
-            if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
-            {
-                _hp = GameHandler.Instance.GetGameState()._maxhealth;
-            }
-            UpdateHealth();
+            _hp = GameHandler.Instance.GetGameState()._maxhealth;
         }
+        UpdateHealth();
     }
     public int GetHealth() 
     {
