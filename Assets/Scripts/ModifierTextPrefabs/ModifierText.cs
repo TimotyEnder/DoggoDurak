@@ -35,7 +35,7 @@ public abstract class ModifierText : MonoBehaviour
         float totalDistance = Vector2.Distance(initialPosition, targetPosition);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         
-        while (Vector2.Distance(transform.position, targetPosition) > 20f)
+        while (Vector2.Distance(transform.position, targetPosition) > 30f)
         {
             Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
             float currentDistance = Vector2.Distance(transform.position, targetPosition);
