@@ -71,6 +71,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     [SerializeField]
     private GameObject drawTextPrefab;
     private RuleHandler _rh;
+    private CanvasScaler _cScaler;
 
     void Start()
     {
@@ -97,6 +98,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_tempcanvas != null)
         {
             _canvas = _tempcanvas.GetComponent<Canvas>();
+            _cScaler = _tempcanvas.GetComponent<CanvasScaler>();
         }
 
         //Card Image
