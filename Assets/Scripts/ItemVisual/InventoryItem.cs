@@ -26,16 +26,16 @@ public class InventoryItem : MonoBehaviour
         switch (item.GetRarity()) 
         {
             case 0:
-                _bgImage.color = ColorScheme.CommonItemGreen;
+                _bgImage.color = ColorScheme.CommonItem;
                 break;
             case 1:
-                _bgImage.color = ColorScheme.RareItemBlue;
+                _bgImage.color = ColorScheme.RareItem;
                 break;
             case 2:
-                _bgImage.color = ColorScheme.LegendaryItemGold;
+                _bgImage.color = ColorScheme.LegendaryItem;
                 break;
             case 3:
-                _bgImage.color = ColorScheme.BossItemRed;
+                _bgImage.color = ColorScheme.BossItem;
                 break;
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());

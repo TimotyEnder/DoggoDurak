@@ -44,16 +44,16 @@ public class RewardItem : MonoBehaviour
         switch (item.GetRarity())
         {
             case 0:
-                _bgColor.color = ColorScheme.CommonItemGreen;
+                _bgColor.color = ColorScheme.CommonItem;
                 break;
             case 1:
-                _bgColor.color = ColorScheme.RareItemBlue;
+                _bgColor.color = ColorScheme.RareItem;
                 break;
             case 2:
-                _bgColor.color = ColorScheme.LegendaryItemGold;
+                _bgColor.color = ColorScheme.LegendaryItem;
                 break;
             case 3:
-                _bgColor.color = ColorScheme.BossItemRed;
+                _bgColor.color = ColorScheme.BossItem;
                 break;
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());
