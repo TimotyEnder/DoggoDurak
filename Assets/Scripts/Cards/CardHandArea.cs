@@ -100,6 +100,20 @@ public class CardHandArea : MonoBehaviour
         }
         _cards.Remove(card); 
     }
+    public void GreyOutAllCards() 
+    {
+        foreach (Card card in this._cards) 
+        {
+            card.GreyOut();
+        }
+    }
+    public void GreyInAllCards()
+    {
+        foreach (Card card in this._cards)
+        {
+            card.GreyIn();
+        }
+    }
     public bool HasMorePlays() 
     {
         PlayArea pa= GameObject.Find("PlayArea").GetComponent<PlayArea>();

@@ -22,6 +22,8 @@ public class OpponentLogic : MonoBehaviour
     private RuleHandler _ruleHandler;
 
     private bool endTurnCaused = false;//flag to stop end turn infinite loop 
+    private bool _enemyPlaying = false;
+    private CardHandArea _cardHandArea;
 
     private Discard _discard;
     private void Start()
@@ -32,11 +34,16 @@ public class OpponentLogic : MonoBehaviour
         _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         _discard = GameObject.Find("Discard").GetComponent<Discard>();
+        _cardHandArea = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         LoadDeck();
     }
     public int GetCardsInHand()
     {
         return _hand.Count;
+    }
+    public bool IsEnemyPlaying() 
+    {
+        return _enemyPlaying;
     }
     public void LoadDeck()
     {
@@ -179,10 +186,10 @@ public class OpponentLogic : MonoBehaviour
             _handUI.RemoveCard();
         }
     }
-    private int _coroutineCounter = 0;
-  
     public IEnumerator EnemyPlay() 
     {
+        _enemyPlaying = true;
+        _cardHandArea.GreyInAllCards();
         yield return new WaitForEndOfFrame();
         StartCoroutine(CheckForPlaysRoutine());
     }
@@ -192,7 +199,7 @@ public class OpponentLogic : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);  
         while (CheckPlay()) 
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.5f);
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
@@ -201,6 +208,8 @@ public class OpponentLogic : MonoBehaviour
             endTurnCaused = true;
             _turnHandler.StartEndTurn();
         }
+        _enemyPlaying = false;
+        _cardHandArea.GreyOutAllCards();
     }
     public void resetEndTunFlag() 
     {

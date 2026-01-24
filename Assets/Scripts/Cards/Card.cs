@@ -155,6 +155,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         UpdateModifiers();
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
+    public void GreyIn()
+    {
+        _cardImage.GetComponent<Image>().color = Color.grey;
+    }
+    public void GreyOut()
+    {
+        _cardImage.GetComponent<Image>().color = Color.white;
+    }
     public void Bling()
     {
         if (_animator != null)
@@ -416,7 +424,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        if (_played) { return; }
+        if (_played && !_opponent.IsEnemyPlaying()) { return; }
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
