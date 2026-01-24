@@ -31,6 +31,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private float _canvasScaleFactor = 1f;
     public async void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Pointer entered tooltip area");
         if (_enabled && _currentTooltip == null)
         {
             _shouldExist=true;

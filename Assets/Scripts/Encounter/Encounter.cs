@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -50,5 +51,16 @@ public abstract class Encounter : ScriptableObject
     public string GetDescription()
     {
         return description;
+    }
+    public string GetTooltipText()
+    {
+        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+GetSpacedEncounterName()+"</align></size>\n" +
+               $"<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+this.description+"</align></size>";
+    }  
+    private string GetSpacedEncounterName() 
+    {
+        return Regex.Replace(this.name,
+           "([a-z])([A-Z])|([A-Z])([A-Z][a-z])",
+           "$1$3 $2$4");
     }
 }
