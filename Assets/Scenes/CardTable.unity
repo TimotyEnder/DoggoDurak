@@ -2456,8 +2456,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHandSpacing: 150
   _opCard: {fileID: 222406006657575629, guid: 3d69c07dbece03e4c833b53aea10eae8, type: 3}
-  _angleDelta: 30
-  radius: 125
+  _angleDelta: 20
+  radius: 70
   _cardsInHand: 0
 --- !u!1 &1049460848
 GameObject:
