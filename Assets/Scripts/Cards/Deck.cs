@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using System;
 
 
 public class Deck : MonoBehaviour, IPointerDownHandler
@@ -16,6 +17,8 @@ public class Deck : MonoBehaviour, IPointerDownHandler
 
     private TurnHandler _turnHandler;
     private Discard _discard;
+    [SerializeField]
+    private GameObject cardDrawParticlePrefab;
 
    
     void Start() 
@@ -37,15 +40,37 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     }
     public void Draw() 
     {
-        //CardInfo handling
-        int cardDrawIndex = Random.Range(0, _deck.Count);
-        CardInfo cardtoDraw= _deck[cardDrawIndex];
+        // CardInfo handling
+        int cardDrawIndex = UnityEngine.Random.Range(0, _deck.Count);
+        CardInfo cardtoDraw = _deck[cardDrawIndex];
         _deck.Remove(cardtoDraw);
 
-        //Card Visual Handling
+        // Card draw particle with callback
+        RectTransform target = GameObject.Find("DrawToHere").GetComponent<RectTransform>();
+        StartCoroutine(DrawParticleRoutine(target, () => 
+        {
+            // This callback runs after the coroutine completes
+            OnDrawParticleComplete(cardtoDraw);
+        }));
+    }
+
+    private void OnDrawParticleComplete(CardInfo cardtoDraw)
+    {
+        // Card Visual Handling
         GameObject CardDrawn = Instantiate(_card);
         CardDrawn.GetComponent<Card>().MakeCard(cardtoDraw);
         CardDrawn.GetComponent<Card>().OnDraw();
+    }
+    private IEnumerator DrawParticleRoutine(RectTransform target, Action onComplete)
+    {
+        GameObject particle = Instantiate(cardDrawParticlePrefab, this.transform.position, Quaternion.Euler(0, 0, 0), GameObject.FindGameObjectWithTag("Canvas").transform);
+        CardDrawParticle particleScript = particle.GetComponent<CardDrawParticle>();
+        particleScript.SetTarget(target);
+        while (particle != null)
+        {
+            yield return null;
+        }
+        onComplete?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
