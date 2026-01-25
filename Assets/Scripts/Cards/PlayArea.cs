@@ -220,13 +220,20 @@ public class PlayArea : MonoBehaviour
         _cardsDefendedWith = new List<Card>();
         _cardsPlayed = new List<Card>();
         _cardsInPlay = 0;
+        List<Card> cardsToMove = new List<Card>();
+
         foreach (RectTransform child in this.transform.Find("PlayedCards"))
         {
-            Destroy(child.gameObject);
+            cardsToMove.Add(child.gameObject.GetComponent<Card>());
         }
         foreach (RectTransform child in this.transform.Find("DefendedCards"))
         {
-            Destroy(child.gameObject);
+            cardsToMove.Add(child.gameObject.GetComponent<Card>());
+        }
+
+        foreach (Card card in cardsToMove)
+        {
+            card.MoveTowardsToDiscard();
         }
     }
     public void RealignDefendingCards()

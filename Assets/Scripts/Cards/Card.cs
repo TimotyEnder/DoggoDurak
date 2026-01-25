@@ -395,7 +395,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void OnPointerExit(PointerEventData eventData)
     {
         _tryToHighlightCard = false;
-        StopAllCoroutines(); // Stop the checking coroutine
+        StopCoroutine(CheckTopPointerUntilExit(eventData)); // Stop the checking coroutine
         
         if (_oldSiblingIndex != -1 && _isInteractable)
         {
@@ -485,7 +485,38 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         return _defended;   
     }
-
+    public void MoveTowardsToDiscard()
+    {
+        _isInteractable = false; 
+        Vector2 target = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetDiscardPileCardPosition();
+        UnityEngine.Quaternion rotation = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetRandomRotation();  
+        GetComponent<ToolTip>().SetTooltipActiveState(false);
+        _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>()); 
+        StartCoroutine(MoveTowardsCoroutine(target, rotation));
+    }
+    private IEnumerator MoveTowardsCoroutine(Vector2 target, UnityEngine.Quaternion? rotation=null)
+    {
+        float speed = 2000f;
+        while (Vector2.Distance(_cardRect.anchoredPosition, target) > 0.01f)
+        {
+            float distance = Vector2.Distance(_cardRect.anchoredPosition, target);
+            float step = speed * Time.deltaTime;
+            
+            // Prevent overshoot by limiting step to remaining distance
+            if (step > distance)
+            {
+                step = distance;
+            }
+            
+            _cardRect.anchoredPosition = Vector2.MoveTowards(_cardRect.anchoredPosition, target, step);
+            yield return null;
+        }
+        _cardRect.SetAsFirstSibling();
+        if (rotation != null)
+        {
+            _cardRect.rotation = (UnityEngine.Quaternion)rotation;
+        }
+    }
     public void OnPointerClick(PointerEventData eventData) //this is to handle buyable cards
     {
 
