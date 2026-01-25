@@ -131,6 +131,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _opponent = opponentObj.GetComponent<OpponentLogic>();
         }
         _animator=this.gameObject.GetComponent<Animator>();
+        _animator.applyRootMotion = false;
+        _animator.SetFloat("RotationControl", 0f);
 
         GameObject rhObj= GameObject.Find("RuleHandler");
         if(rhObj!=null)
@@ -155,6 +157,23 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         UpdateModifiers();
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
+    public void SetAnimatable(bool state)
+    {
+        if(_animator.enabled==false)
+        {
+            _animator.enabled=true; 
+        }
+        if(!state)
+        {
+          _animator.applyRootMotion = false;
+          _animator.SetFloat("RotationControl", 0f);
+        }
+        else
+        {
+            _animator.applyRootMotion = true;
+            _animator.SetFloat("RotationControl", 1f);
+        }
+    }
     public void GreyIn()
     {
         _cardImage.GetComponent<Image>().color = Color.grey;
@@ -170,6 +189,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _animator.SetTrigger("Bling");
         }
     }
+    public void Hit()
+    {
+        if (_animator != null)
+        {
+            _animator.SetTrigger("Hit");
+        }
+    }   
     public void SpawnModifierEffect(CardModifierContainer c)
     {
         GameObject instancedText = null;

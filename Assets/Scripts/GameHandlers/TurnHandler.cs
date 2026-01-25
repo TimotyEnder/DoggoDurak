@@ -133,7 +133,8 @@ public class TurnHandler : MonoBehaviour
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
            if(!card.IsDefended()){ 
-                card.transform.eulerAngles = new Vector3(0, 0, 10f);
+                card.SetAnimatable(true);
+                card.Hit();
                 if (_turnState > 0)
                 {
                     _playerHp.Damage(card.GetCardInfo()._number);
@@ -146,7 +147,7 @@ public class TurnHandler : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(0.75f);
-                card.transform.eulerAngles = Vector3.zero;
+                card.SetAnimatable(false);
            }
         }
         FinishEndTurn();
