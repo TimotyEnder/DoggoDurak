@@ -137,6 +137,15 @@ public class GameHandler : MonoBehaviour
             _state._health = _state._maxhealth;
         }
     }
+    public void IncreaseMaxHealth(int amount)
+    {
+        _state._maxhealth+=amount;
+        GameObject maxHpText=GameObject.Find("MaxPlayerHealthText");
+        if(maxHpText!=null)
+        {
+            maxHpText.GetComponent<MaxPlayerHealthText>().Increase(amount);
+        }
+    }
     public void GameStateHeal(int amount) //heal directly to savefile, used when resting
     {
         SetHealth(_state._health + amount);
