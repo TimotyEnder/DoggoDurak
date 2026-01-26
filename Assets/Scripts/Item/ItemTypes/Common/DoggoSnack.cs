@@ -18,7 +18,6 @@ public class DoggoSnack : Item
     public override void OnAquire()
     {
         GameHandler.Instance.GetGameState()._maxhealth += 10;
-        GameHandler.Instance.HealPlayer(GameHandler.Instance.GetGameState()._maxhealth);
     }
 
     public override void OnDamageOpponent(int amount)

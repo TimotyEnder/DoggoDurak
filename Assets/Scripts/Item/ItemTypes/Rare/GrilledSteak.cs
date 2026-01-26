@@ -18,9 +18,6 @@ public class GrilledSteak : Item
     public override void OnAquire()
     {
         GameHandler.Instance.GetGameState()._maxhealth *= 2;
-        GameHandler.Instance.SetHealth(GameHandler.Instance.GetGameState()._maxhealth);
-        //incase picked up while in card table
-        GameHandler.Instance.HealPlayer(GameHandler.Instance.GetGameState()._maxhealth);
     }
 
     public override void OnDamageOpponent(int amount)
