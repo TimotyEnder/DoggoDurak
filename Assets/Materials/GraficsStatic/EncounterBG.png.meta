@@ -986,7 +986,40 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      EncounterBG_0: 7907157167783719320
+      EncounterBG_1: 495658020195700384
+      EncounterBG_10: 1644415159354295193
+      EncounterBG_11: -6386803711000483594
+      EncounterBG_12: -3442783563615430709
+      EncounterBG_13: -2748155447666346358
+      EncounterBG_14: -950025870022331691
+      EncounterBG_15: -3870579583571313848
+      EncounterBG_16: -1941410572948790618
+      EncounterBG_17: 3480582113083924948
+      EncounterBG_18: -3770667143950110260
+      EncounterBG_19: 4348606715240893273
+      EncounterBG_2: 3805340502513521019
+      EncounterBG_20: 6529162060982091591
+      EncounterBG_21: 2270083972091306623
+      EncounterBG_22: 357863717107181350
+      EncounterBG_23: -1136183909147343657
+      EncounterBG_24: 1539367905398571526
+      EncounterBG_25: -5406951598600598305
+      EncounterBG_26: -8320620940565040095
+      EncounterBG_27: -684695891675796452
+      EncounterBG_28: 1298020177025385219
+      EncounterBG_29: -2462795527320157186
+      EncounterBG_3: -4985298695572311932
+      EncounterBG_30: 4487213096424064751
+      EncounterBG_31: 863994424772691830
+      EncounterBG_32: 6242296821435647803
+      EncounterBG_4: 685812454542926046
+      EncounterBG_5: 1672731952472415604
+      EncounterBG_6: -1750623581586303287
+      EncounterBG_7: 4045614898498828095
+      EncounterBG_8: 8985564501000236663
+      EncounterBG_9: 4178125381597973343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +12,7 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     private Vector2 _revealPos;
     private Vector2 _hoverPos;
     private List<string> _trumps=new List<string>();
+    private int _trumpSelected;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,28 +35,29 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     public string SelectTrump()
     {
         InitTrumps();
-        int trumpSelected = -1;
+        _trumpSelected = -1;
         switch (GameHandler.Instance.GetCurrEncounter().GetTrumpSuit()) 
         {
             case 'C':
-                trumpSelected = 0;
+                _trumpSelected = 0;
                 break;
             case 'D':
-                trumpSelected = 1;
+                _trumpSelected = 1;
                 break;
             case 'S':
-                trumpSelected = 2;
+                _trumpSelected = 2;
                 break;
             case 'H':
-                trumpSelected = 3;
+                _trumpSelected = 3;
                 break;
             default:
-                 trumpSelected = Random.Range(0, _trumps.Count);
+                 _trumpSelected = Random.Range(0, _trumps.Count);
                 break;
         }
-        string trumpStringSelected = _trumps[trumpSelected];
+        string trumpStringSelected = _trumps[_trumpSelected];
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Trumps/" + trumpStringSelected);
         this.gameObject.GetComponent<Image>().sprite = cardSprite;
+        this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
         return trumpStringSelected.Substring(0, 1);
     }
     public void Appear()
@@ -93,5 +97,9 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     {
         this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
         StartCoroutine(MoveToPosition(_revealPos, 0.2f, 5));
+    }
+    public string GetToolTip()
+    {
+        return  $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=left>"+"The trump suit is "+_trumps[_trumpSelected]+"</align></size>";
     }
 }

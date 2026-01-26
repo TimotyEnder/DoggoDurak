@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e4443b843ce5bf943ac15bfbad80ca08
+guid: fd55c1fcd3124db4790c3d45e35b7c52
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2191744416559672542
-    second: DefaultEncounterProfile_0
+      213: 3562644579012902445
+    second: EncounterBorder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DefaultEncounterProfile_0
+      name: EncounterBorder_0
       rect:
         serializedVersion: 2
-        x: 41
+        x: 0
         y: 0
-        width: 999
-        height: 1073
+        width: 1080
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 223d384c01c5591e0800000000000000
-      internalID: -2191744416559672542
+      spriteID: d2ef8017e5e017130800000000000000
+      internalID: 3562644579012902445
       vertices: []
       indices: 
       edges: []
@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      EncounterBorder_0: 3562644579012902445
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

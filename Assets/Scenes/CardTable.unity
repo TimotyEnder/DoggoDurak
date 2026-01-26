@@ -3598,6 +3598,7 @@ GameObject:
   - component: {fileID: 1235802269}
   - component: {fileID: 1235802268}
   - component: {fileID: 1235802270}
+  - component: {fileID: 1235802271}
   m_Layer: 5
   m_Name: TrumpCardIndicator
   m_TagString: Untagged
@@ -3674,6 +3675,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1510e74d92b1aa74194649e61a78a732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1235802271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235802266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 32215553}
 --- !u!1 &1311001218
 GameObject:
   m_ObjectHideFlags: 0
