@@ -211,11 +211,11 @@ public class PlayArea : MonoBehaviour
     {
         foreach (Card card in _cardsDefendedWith) 
         {
-            _discard.AddCard(card.GetCardInfo());
+            _discard.AddCard(card);
         }
         foreach (Card card in _cardsPlayed)
         {
-            _discard.AddCard(card.GetCardInfo());
+            _discard.AddCard(card);
         }
         _cardsDefendedWith = new List<Card>();
         _cardsPlayed = new List<Card>();

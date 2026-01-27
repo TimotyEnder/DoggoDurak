@@ -60,6 +60,7 @@ public class RuleHandler : MonoBehaviour
                 _modEffectsSpawn=false;
                 WipeModEffects();
                 GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
+                //GameObject.Find("Discard").GetComponent<Discard>().WipeDiscard();  maybe replace by discard cards returning to the deck one by one?
                 _playerHp.reportHealth(); //this has to happen before reward because CurrencyCalculators rely on _health being already updated!
                 GameHandler.Instance.GenerateReward();
                 _endMatchScreen.SetActive(true);

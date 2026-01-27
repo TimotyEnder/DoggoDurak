@@ -56,6 +56,10 @@ public class CardHandArea : MonoBehaviour
             index++;
         }
     }
+    public List<Card> GetCards() 
+    {
+        return this._cards;
+    }   
     public void OrderByRank()
     {
         _cards.Sort((a, b) => (a.GetCardInfo()._number == b.GetCardInfo()._number) ? a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber):a.GetCardInfo()._number.CompareTo(b.GetCardInfo()._number));

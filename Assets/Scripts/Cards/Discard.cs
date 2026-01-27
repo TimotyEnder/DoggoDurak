@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class Discard : MonoBehaviour
 {
-    List<CardInfo> _playerCards;
-    List<CardInfo> _opponentCards;
+    List<Card> _playerCards;
+    List<Card> _opponentCards;
     [SerializeField]
     private Button _discardButton;
     [SerializeField]
@@ -20,15 +20,15 @@ public class Discard : MonoBehaviour
     private GameObject _cardPrefab;
     public void Start()
     {
-        _opponentCards = new List<CardInfo>();
-        _playerCards = new List<CardInfo>();
+        _opponentCards = new List<Card>();
+        _playerCards = new List<Card>();
         //On Click config
         _discardButton.onClick.AddListener(UpdateDiscardContent);
         _discardExitButton.onClick.AddListener(() => _discardPanel.SetActive(false));
     }
-    public void AddCard(CardInfo card) 
+    public void AddCard(Card card) 
     {
-        if (card._opponentCard)
+        if (card.GetCardInfo()._opponentCard)
         {
             _opponentCards.Add(card);
         }
@@ -37,10 +37,17 @@ public class Discard : MonoBehaviour
             _playerCards.Add(card);
         }
     }
-    public List<CardInfo> GetOpponentDiscard() 
+    public void WipeDiscard()
+    {  
+        foreach (Card c in _playerCards)
+        {
+            Destroy(c.gameObject);
+        }
+    }   
+    public List<Card> GetOpponentDiscard() 
     {
         // Create a new list with the same elements (shallow copy)
-        List<CardInfo> returnList = new List<CardInfo>(_opponentCards);
+        List<Card> returnList = new List<Card>(_opponentCards);
 
         // Clear the original list
         _opponentCards.Clear();
@@ -48,14 +55,10 @@ public class Discard : MonoBehaviour
 
         return returnList;
     }
-    public List<CardInfo> GetPlayerDiscard()
+    public List<Card> GetPlayerDiscard()
     {
         // Create a new list with the same elements (shallow copy)
-        List<CardInfo> returnList = new List<CardInfo>(_playerCards);
-
-        // Clear the original list
-        _playerCards.Clear();
-
+        List<Card> returnList = new List<Card>(_playerCards);
 
         return returnList;
     }
@@ -67,10 +70,10 @@ public class Discard : MonoBehaviour
         {
             Destroy(card.gameObject);
         }
-        foreach (CardInfo cInfo in _playerCards) 
+        foreach (Card card in _playerCards) 
         {
            GameObject cardMade= Instantiate(_cardPrefab,_discardContent.transform);
-           cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
+           cardMade.GetComponent<Card>().MakeCard(card.GetCardInfo(), false); //make an undraggable card
         }
     }
 }

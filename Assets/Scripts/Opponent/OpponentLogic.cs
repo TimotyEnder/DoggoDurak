@@ -55,7 +55,11 @@ public class OpponentLogic : MonoBehaviour
     }
     public void LoadDiscard()
     {
-        _deck = _discard.GetOpponentDiscard();
+        _deck = new List<CardInfo>();
+        foreach(Card c in _discard.GetOpponentDiscard())
+        {
+            _deck.Add(c.GetCardInfo());
+        }
     }
     //check once for available plays
     bool CheckPlay() 
@@ -181,7 +185,7 @@ public class OpponentLogic : MonoBehaviour
         if (_hand.Count>0) 
         {
             int RandomIndex = Random.Range(0, _hand.Count);
-            _discard.AddCard(_deck[RandomIndex]); //add to discard pile if a card is discarded
+            _discard.AddCard(_cardHandArea.GetCards()[RandomIndex]); //add to discard pile if a card is discarded
             _hand.RemoveAt(RandomIndex);
             _handUI.RemoveCard();
         }

@@ -36,7 +36,11 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     }
     public void LoadDiscard()
     {
-        _deck = _discard.GetPlayerDiscard();
+        _deck = new List<CardInfo>();
+        foreach(Card c in _discard.GetPlayerDiscard())
+        {
+            _deck.Add(c.GetCardInfo());
+        }
     }
     public void Draw() 
     {
