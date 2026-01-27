@@ -106,9 +106,9 @@ public class CardHandArea : MonoBehaviour
     }
     public void GreyOutAllCards() 
     {
-        foreach (Card card in this._cards) 
+        foreach (GameObject card in GameObject.FindGameObjectsWithTag("Card")) 
         {
-            card.GreyOut();
+            card.GetComponent<Card>().GreyOut();
         }
     }
     public void GreyInAllCards()

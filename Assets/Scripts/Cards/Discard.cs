@@ -15,7 +15,9 @@ public class Discard : MonoBehaviour
     [SerializeField]
     private GameObject _discardPanel;
     [SerializeField]
-    private GameObject _discardContent;
+    private GameObject _playerDiscardContent;
+    [SerializeField]
+    private GameObject _opponentDiscardContent;
     [SerializeField]
     private GameObject _cardPrefab;
     public void Start()
@@ -66,13 +68,18 @@ public class Discard : MonoBehaviour
     {
         _discardPanel.SetActive(true);
 
-        foreach (Transform card in _discardContent.transform) 
+        foreach (Transform card in _playerDiscardContent.transform) 
         {
             Destroy(card.gameObject);
         }
         foreach (Card card in _playerCards) 
         {
-           GameObject cardMade= Instantiate(_cardPrefab,_discardContent.transform);
+           GameObject cardMade= Instantiate(_cardPrefab,_playerDiscardContent.transform);
+           cardMade.GetComponent<Card>().MakeCard(card.GetCardInfo(), false); //make an undraggable card
+        }
+        foreach (Card card in _opponentCards) 
+        {
+           GameObject cardMade= Instantiate(_cardPrefab,_opponentDiscardContent.transform);
            cardMade.GetComponent<Card>().MakeCard(card.GetCardInfo(), false); //make an undraggable card
         }
     }
