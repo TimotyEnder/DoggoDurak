@@ -11,6 +11,6 @@ public class RubleText : MonoBehaviour
     }
     public void UpdateRubleAmount() 
     {
-        _rubleText.text = GameHandler.Instance.GetGameState()._rubles.ToString()+"₽";
+        _rubleText.text = GameHandler.Instance.GetGameState()._rubles.ToString()+_rubleText.text.Substring(_rubleText.text.Length-1);
     }
 }
