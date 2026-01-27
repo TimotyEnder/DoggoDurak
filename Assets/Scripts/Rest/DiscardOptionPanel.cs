@@ -23,6 +23,7 @@ public class DiscardOptionPanel : MonoBehaviour
         //On Click config
         _disButton.onClick.AddListener(UpdateDeckContent);
         _disExitButton.onClick.AddListener(() => _disPanel.SetActive(false));
+        _costText.text = GameHandler.Instance.GetGameState()._discardingCardInShopCost.ToString();
     }
 
     public void UpdateDeckContent()
