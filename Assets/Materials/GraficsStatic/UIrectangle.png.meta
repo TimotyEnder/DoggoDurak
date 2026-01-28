@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UIrectangle_0: 8773235983228947194
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
