@@ -1,19 +1,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using NUnit.Framework.Internal.Commands;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager.Requests;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
-using UnityEngine.Windows.Speech;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 

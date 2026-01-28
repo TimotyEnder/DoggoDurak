@@ -2,11 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-using System.Linq;
 using Cysharp.Threading.Tasks;
-using System;
-using UnityEngine.U2D;
-using UnityEditor.Rendering;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
