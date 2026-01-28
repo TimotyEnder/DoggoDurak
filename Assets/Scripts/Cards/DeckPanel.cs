@@ -13,7 +13,13 @@ public class DeckPanel : MonoBehaviour
     [SerializeField]
     private GameObject _deckPanel;
     [SerializeField]
-    private GameObject _deckContent;
+    private GameObject _clubCont;
+    [SerializeField]
+    private GameObject _diamondCont;
+    [SerializeField]
+    private GameObject _heartCont;
+    [SerializeField]
+    private GameObject _spadeCont;
     [SerializeField]
     private GameObject _cardPrefab;
     public void Start()
@@ -27,15 +33,46 @@ public class DeckPanel : MonoBehaviour
     {
         _deckPanel.SetActive(true);
 
-        foreach (Transform card in _deckContent.transform) 
+        foreach (Transform card in _clubCont.transform) 
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (Transform card in _diamondCont.transform) 
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (Transform card in _heartCont.transform) 
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (Transform card in _spadeCont.transform) 
         {
             Destroy(card.gameObject);
         }
         foreach (CardInfo cInfo in GameHandler.Instance.GetGameState()._deck)
         {
-            GameObject cardMade = Instantiate(_cardPrefab, _deckContent.transform);
+            GameObject cardMade = MakeAndPlace(cInfo);
             cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
-            Debug.Log("Created 1 card");
         }
+    }
+    public GameObject MakeAndPlace(CardInfo c)
+    {
+        GameObject cardMade=null;
+        switch(c._suit)
+        {
+            case "C":
+                cardMade = Instantiate(_cardPrefab, _clubCont.transform);
+                break;
+            case "D":
+                cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
+                break;
+            case "H":
+                cardMade = Instantiate(_cardPrefab, _heartCont.transform);
+                break;
+            case "S":
+                cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
+                break;
+        }
+        return cardMade;
     }
 }
