@@ -6,14 +6,14 @@ public class CardDrawParticle : MonoBehaviour
     private Vector2 _initPos;
     private RectTransform _myRect;   
     private Vector2 _prevPos;
-    private float _currentSpeed = 0f;
+    private float _currentSpeed = 5000;
     private float _acceleration = 10000f; 
     
     public void SetTarget(Transform target)
     {
         _target = target;
         _initPos = _myRect.anchoredPosition;
-        _currentSpeed = 0f; 
+        _currentSpeed = 5000f; 
     }  
     
     private void Awake()
