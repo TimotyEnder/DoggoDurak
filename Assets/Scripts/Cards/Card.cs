@@ -186,16 +186,30 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         if (_animator != null)
         {
-            _animator.SetTrigger("Bling");
+            StartCoroutine(BlingRoutine());
         }
+    }
+    private IEnumerator BlingRoutine()
+    {
+        SetAnimatable(true);
+        _animator.SetTrigger("Bling");
+        yield return new WaitForSeconds(0.15f);
+        SetAnimatable(false);
     }
     public void Hit()
     {
         if (_animator != null)
         {
-            _animator.SetTrigger("Hit");
+            StartCoroutine(HitRoutine());
         }
-    }   
+    } 
+    private IEnumerator HitRoutine()
+    {
+        SetAnimatable(true);
+        _animator.SetTrigger("Hit");
+        yield return new WaitForSeconds(0.20f);
+        SetAnimatable(false);
+    }  
     public void SpawnModifierEffect(CardModifierContainer c)
     {
         GameObject instancedText = null;
