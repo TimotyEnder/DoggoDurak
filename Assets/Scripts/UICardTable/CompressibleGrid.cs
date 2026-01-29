@@ -30,8 +30,6 @@ public class CompressibleGrid : MonoBehaviour
     
     void Update()
     {
-        // Update only when needed (when children change or layout changes)
-        // You might want to optimize this based on your specific needs
         UpdateGridSpacing();
     }
     
@@ -43,7 +41,6 @@ public class CompressibleGrid : MonoBehaviour
         int childCount = transform.childCount;
         if (childCount == 0) return;
         
-        // Set constraint based on selection
         switch (constraintType)
         {
             case ConstraintType.FixedColumnCount:
@@ -60,27 +57,20 @@ public class CompressibleGrid : MonoBehaviour
         gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         gridLayout.constraintCount = constraintCount;
         
-        // Calculate how many rows we'll have
         int rowCount = Mathf.CeilToInt((float)childCount / constraintCount);
         
-        // Calculate available width (minus padding)
         float availableWidth = rectTransform.rect.width 
             - gridLayout.padding.left 
             - gridLayout.padding.right;
         
-        // Calculate how much space all cells would take without spacing
         float totalCellWidth = gridLayout.cellSize.x * constraintCount;
         
-        // Calculate required spacing to fit everything
         float requiredSpacing = (availableWidth - totalCellWidth) / (constraintCount - 1);
         
-        // Clamp the spacing between min and max
         requiredSpacing = Mathf.Clamp(requiredSpacing, minSpacing, maxSpacing);
         
-        // Apply the spacing
         gridLayout.spacing = new Vector2(requiredSpacing, gridLayout.spacing.y);
         
-        // Also adjust vertical spacing if we have multiple rows
         if (rowCount > 1)
         {
             float availableHeight = rectTransform.rect.height 
@@ -90,7 +80,6 @@ public class CompressibleGrid : MonoBehaviour
             float totalCellHeight = gridLayout.cellSize.y * rowCount;
             float requiredVerticalSpacing = (availableHeight - totalCellHeight) / (rowCount - 1);
             
-            // Keep vertical spacing at maxSpacing or adjust if you want
             requiredVerticalSpacing = Mathf.Clamp(requiredVerticalSpacing, minSpacing, maxSpacing);
             gridLayout.spacing = new Vector2(gridLayout.spacing.x, requiredVerticalSpacing);
         }
@@ -101,27 +90,21 @@ public class CompressibleGrid : MonoBehaviour
         gridLayout.constraint = GridLayoutGroup.Constraint.FixedRowCount;
         gridLayout.constraintCount = constraintCount;
         
-        // Calculate how many columns we'll have per row
         int columnsPerRow = Mathf.CeilToInt((float)childCount / constraintCount);
         
-        // Calculate available width
         float availableWidth = rectTransform.rect.width 
             - gridLayout.padding.left 
             - gridLayout.padding.right;
         
-        // Calculate required horizontal spacing
         float totalCellWidth = gridLayout.cellSize.x * columnsPerRow;
         float requiredSpacing = (availableWidth - totalCellWidth) / (columnsPerRow - 1);
         
-        // Clamp the spacing
         requiredSpacing = Mathf.Clamp(requiredSpacing, minSpacing, maxSpacing);
         
-        // Apply spacing
         gridLayout.spacing = new Vector2(requiredSpacing, gridLayout.spacing.y);
     }
     
-    // Call this when you manually add/remove children
-    public void RefreshLayout()
+    public void RefreshLayout() //incase the grid changes dynamically
     {
         UpdateGridSpacing();
         LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
