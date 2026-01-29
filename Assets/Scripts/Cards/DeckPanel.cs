@@ -22,11 +22,20 @@ public class DeckPanel : MonoBehaviour
     private GameObject _spadeCont;
     [SerializeField]
     private GameObject _cardPrefab;
+
+    private List<CardInfo> _clubs;
+    private List<CardInfo> _diamonds;
+    private List<CardInfo> _hearts;
+    private  List<CardInfo> _spades;   
     public void Start()
     {
         //On Click config
         _deckButton.onClick.AddListener(UpdateDeckContent);
         _deckExitButton.onClick.AddListener(() => _deckPanel.SetActive(false));
+        _clubs=new List<CardInfo>();
+        _diamonds=new List<CardInfo>();
+        _hearts=new List<CardInfo>();
+        _spades=new List<CardInfo>();
     }
     
     public void UpdateDeckContent() 
@@ -51,28 +60,58 @@ public class DeckPanel : MonoBehaviour
         }
         foreach (CardInfo cInfo in GameHandler.Instance.GetGameState()._deck)
         {
-            GameObject cardMade = MakeAndPlace(cInfo);
-            cardMade.GetComponent<Card>().MakeCard(cInfo, false); //make an undraggable card
+            PlaceInCorrectArray(cInfo);
         }
+        MakeCards();
+        _clubs=new List<CardInfo>();
+        _diamonds=new List<CardInfo>();
+        _hearts=new List<CardInfo>();
+        _spades=new List<CardInfo>();
     }
-    public GameObject MakeAndPlace(CardInfo c)
+    public void PlaceInCorrectArray(CardInfo c)
     {
         GameObject cardMade=null;
         switch(c._suit)
         {
             case "C":
-                cardMade = Instantiate(_cardPrefab, _clubCont.transform);
+                _clubs.Add(c);  
                 break;
             case "D":
-                cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
+                _diamonds.Add(c);
                 break;
             case "H":
-                cardMade = Instantiate(_cardPrefab, _heartCont.transform);
+                _hearts.Add(c);
                 break;
             case "S":
-                cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
+                _spades.Add(c);
                 break;
         }
-        return cardMade;
+    }
+    public void MakeCards()
+    {
+        _clubs.Sort((x, y) => x._number.CompareTo(y._number));
+        _diamonds.Sort((x, y) => x._number.CompareTo(y._number));
+        _hearts.Sort((x, y) => x._number.CompareTo(y._number));
+        _spades.Sort((x, y) => x._number.CompareTo(y._number));
+        foreach(CardInfo c in _clubs)
+        {
+            GameObject cardMade = Instantiate(_cardPrefab, _clubCont.transform);
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+        }
+        foreach(CardInfo c in _diamonds)
+        {
+            GameObject cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+        }
+        foreach(CardInfo c in _hearts)
+        {
+            GameObject cardMade = Instantiate(_cardPrefab, _heartCont.transform);
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+        }
+        foreach(CardInfo c in _spades)
+        {
+            GameObject cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+        }
     }
 }
