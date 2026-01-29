@@ -4191,15 +4191,15 @@ RectTransform:
   - {fileID: 945143574}
   - {fileID: 1408694358}
   - {fileID: 22990869}
-  - {fileID: 1593585911}
   - {fileID: 1478490729}
   - {fileID: 1985592782}
-  - {fileID: 618693686}
   - {fileID: 464594058}
   - {fileID: 1851761755}
   - {fileID: 111042734}
   - {fileID: 1885863646}
   - {fileID: 703601307}
+  - {fileID: 618693686}
+  - {fileID: 1593585911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
