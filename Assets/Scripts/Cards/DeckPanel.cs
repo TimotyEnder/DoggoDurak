@@ -94,11 +94,12 @@ public class DeckPanel : MonoBehaviour
         _hearts.Sort((x, y) => x._number.CompareTo(y._number));
         _spades.Sort((x, y) => x._number.CompareTo(y._number));
         Deck _deck= GetComponent<Deck>();
+        CardHandArea handArea= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         foreach(CardInfo c in _clubs)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _clubCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c))
+            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
@@ -107,7 +108,7 @@ public class DeckPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c))
+            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
@@ -116,7 +117,7 @@ public class DeckPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _heartCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c))
+            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
@@ -125,7 +126,7 @@ public class DeckPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c))
+            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
