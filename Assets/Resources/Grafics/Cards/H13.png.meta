@@ -3,8 +3,8 @@ guid: 5577624ccf2d20f4a83d6c0fecba0881
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -111649486326267610
-    second: HK_0
+      213: -3401802324323861815
+    second: H13_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,7 +152,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HK_0
+      name: H13_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6210b2c3267537ef0800000000000000
-      internalID: -111649486326267610
+      spriteID: 9caf39e3fce5ac0d0800000000000000
+      internalID: -3401802324323861815
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      HK_0: -111649486326267610
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

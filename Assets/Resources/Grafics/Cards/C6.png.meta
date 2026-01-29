@@ -155,9 +155,9 @@ TextureImporter:
       name: C6_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 750
+        width: 749
         height: 1050
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -186,8 +186,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      C6_0: 218358209648195828
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
