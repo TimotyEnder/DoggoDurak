@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 using System;
 
 
-public class Deck : MonoBehaviour, IPointerDownHandler
+public class Deck : MonoBehaviour
 {
     [SerializeField]
     private GameObject _card;
@@ -25,6 +25,10 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     {
         _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         _discard = GameObject.Find("Discard").GetComponent<Discard>();
+    }
+    public List<CardInfo> GetDeck()
+    {
+        return _deck;
     }
     public void LoadDeck()
     {
@@ -75,13 +79,6 @@ public class Deck : MonoBehaviour, IPointerDownHandler
             yield return null;
         }
         onComplete?.Invoke();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //use for deck view i guess
-        //debug 
-        //GameObject.Find("PlayArea").GetComponent<PlayArea>().RealignCardsInPlay();
     }
     public IEnumerator DrawHandRoutine() 
     {

@@ -93,25 +93,42 @@ public class DeckPanel : MonoBehaviour
         _diamonds.Sort((x, y) => x._number.CompareTo(y._number));
         _hearts.Sort((x, y) => x._number.CompareTo(y._number));
         _spades.Sort((x, y) => x._number.CompareTo(y._number));
+        Deck _deck= GetComponent<Deck>();
         foreach(CardInfo c in _clubs)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _clubCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+            if(!_deck.GetDeck().Contains(c))
+            {
+                cardMade.GetComponent<Card>().GreyIn();
+            }
         }
         foreach(CardInfo c in _diamonds)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+            if(!_deck.GetDeck().Contains(c))
+            {
+                cardMade.GetComponent<Card>().GreyIn();
+            }
         }
         foreach(CardInfo c in _hearts)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _heartCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+            if(!_deck.GetDeck().Contains(c))
+            {
+                cardMade.GetComponent<Card>().GreyIn();
+            }
         }
         foreach(CardInfo c in _spades)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+            if(!_deck.GetDeck().Contains(c))
+            {
+                cardMade.GetComponent<Card>().GreyIn();
+            }
         }
     }
 }
