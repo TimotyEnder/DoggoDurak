@@ -100,6 +100,6 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     }
     public string GetToolTip()
     {
-        return  $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=left>"+"The trump suit is "+_trumps[_trumpSelected]+"</align></size>";
+        return  $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+"The trump suit is "+_trumps[_trumpSelected]+"</align></size>";
     }
 }
