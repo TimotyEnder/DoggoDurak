@@ -9,13 +9,13 @@ public class OpponentEncounterBG : MonoBehaviour
         switch(GameHandler.Instance.GetCurrEncounter().GetDay())
         {
             case 0:
-                GetComponent<Image>().color = ColorScheme.Day1Encounter;
+                GetComponent<Image>().color = StylisticClass.Day1Encounter;
                 break;
             case 1:
-                GetComponent<Image>().color = ColorScheme.Day2Encounter;
+                GetComponent<Image>().color = StylisticClass.Day2Encounter;
                 break;
             case 2:
-                GetComponent<Image>().color = ColorScheme.Day3Encounter;
+                GetComponent<Image>().color = StylisticClass.Day3Encounter;
                 break;
             default:
                 GetComponent<Image>().color = Color.white; // Default color
@@ -23,7 +23,7 @@ public class OpponentEncounterBG : MonoBehaviour
         }
         if(GameHandler.Instance.GetCurrEncounter().IsBoss())
         {
-            GetComponent<Image>().color = ColorScheme.BossEncounter;
+            GetComponent<Image>().color = StylisticClass.BossEncounter;
         }
     }
 }

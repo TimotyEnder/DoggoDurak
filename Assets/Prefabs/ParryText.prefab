@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PARRY
+  m_text: <rainb>PARRY</rainb>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e202cb3709325a89ea2f9ad5ec951e41, type: 2}
   m_sharedMaterial: {fileID: 7521065424381619334, guid: e202cb3709325a89ea2f9ad5ec951e41, type: 2}
@@ -152,7 +152,7 @@ MonoBehaviour:
   typewriterStartsAutomatically: 0
   animationLoop: 0
   timeScale: 0
-  _text: PARRY
+  _text: <rainb>PARRY</rainb>
   useDynamicScaling: 1
   referenceFontSize: 10
   isResettingTimeOnNewText: 1

@@ -24,16 +24,16 @@ public class ActiveItem:MonoBehaviour
         switch (item.GetRarity())
         {
             case 0:
-                _bgColor.color = ColorScheme.CommonItem;
+                _bgColor.color = StylisticClass.CommonItem;
                 break;
             case 1:
-                _bgColor.color = ColorScheme.RareItem;
+                _bgColor.color = StylisticClass.RareItem;
                 break;
             case 2:
-                _bgColor.color = ColorScheme.LegendaryItem;
+                _bgColor.color = StylisticClass.LegendaryItem;
                 break;
             case 3:
-                _bgColor.color = ColorScheme.BossItem;
+                _bgColor.color = StylisticClass.BossItem;
                 break;
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());
