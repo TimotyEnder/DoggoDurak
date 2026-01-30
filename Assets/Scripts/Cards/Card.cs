@@ -252,10 +252,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         //cardModifiers
         _restoringOverlay = transform.Find("CardImage/RestoringMod").gameObject;
-        _restoringText = _restoringOverlay.transform.Find("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
         _bounceOverlay = transform.Find("CardImage/BounceMod").gameObject;
         _burnOverlay = transform.Find("CardImage/BurnMod").gameObject;
-        _burnText = _burnOverlay.transform.Find("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
         _crippleOverlay = transform.Find("CardImage/CrippleMod").gameObject;
         _drawOverlay = transform.Find("CardImage/DrawMod").gameObject;
         _drawText = _drawOverlay.transform.Find("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
@@ -278,14 +276,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             {
                 case "Restoring":
                     _restoringOverlay.SetActive(true);
-                    _restoringText.text = "+";
                     break;
                 case "Bounce":
                     _bounceOverlay.SetActive(true);
                     break;
                 case "Burn":
                     _burnOverlay.SetActive(true);
-                    _burnText.text = c.Value.ToString();
                     break;
                 case "Parry":
                     _parryOverlay.SetActive(true);
