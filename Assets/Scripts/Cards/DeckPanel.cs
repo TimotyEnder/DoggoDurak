@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class DeckPanel : MonoBehaviour
 {
@@ -93,13 +94,23 @@ public class DeckPanel : MonoBehaviour
         _diamonds.Sort((x, y) => x._number.CompareTo(y._number));
         _hearts.Sort((x, y) => x._number.CompareTo(y._number));
         _spades.Sort((x, y) => x._number.CompareTo(y._number));
-        Deck _deck= GetComponent<Deck>();
-        CardHandArea handArea= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
+        List<CardInfo> _deck= new List<CardInfo>();
+        GameObject deckObj= GameObject.Find("Deck");
+        if(deckObj!=null)
+        {
+            _deck=deckObj.GetComponent<Deck>().GetDeck();
+        }
+        else
+        {
+            _deck=GameHandler.Instance.GetGameState()._deck;
+        }
+        GameObject handAreaObj= GameObject.Find("CardHandArea");    
+        CardHandArea handArea= handAreaObj!=null ? handAreaObj.GetComponent<CardHandArea>() : null;
         foreach(CardInfo c in _clubs)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _clubCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
+            if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
@@ -108,7 +119,7 @@ public class DeckPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
+            if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
@@ -117,7 +128,7 @@ public class DeckPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _heartCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
+            if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
@@ -126,7 +137,7 @@ public class DeckPanel : MonoBehaviour
         {
             GameObject cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
-            if(!_deck.GetDeck().Contains(c) && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
+            if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
