@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 
 public class Deck : MonoBehaviour
@@ -19,13 +21,20 @@ public class Deck : MonoBehaviour
     private Discard _discard;
     [SerializeField]
     private GameObject cardDrawParticlePrefab;
+    [SerializeField]
+    TextMeshProUGUI _deckSizeText;
 
    
     void Start() 
     {
         _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         _discard = GameObject.Find("Discard").GetComponent<Discard>();
+        UpdateDeckSizeText();
     }
+    private void UpdateDeckSizeText()
+    {
+        _deckSizeText.text = _deck.Count.ToString() + "/" + GameHandler.Instance.GetGameState()._deck.Count.ToString();
+    }   
     public List<CardInfo> GetDeck()
     {
         return _deck;
@@ -52,6 +61,7 @@ public class Deck : MonoBehaviour
         int cardDrawIndex = UnityEngine.Random.Range(0, _deck.Count);
         CardInfo cardtoDraw = _deck[cardDrawIndex];
         _deck.Remove(cardtoDraw);
+        UpdateDeckSizeText();  
 
         // Card draw particle with callback
         RectTransform target = GameObject.Find("DrawToHere").GetComponent<RectTransform>();
