@@ -1297,6 +1297,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9006580510242114278, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
   m_PrefabInstance: {fileID: 399872904}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &450192977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1573752384427365582, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
+  m_PrefabInstance: {fileID: 399872904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &451421711
 GameObject:
   m_ObjectHideFlags: 0
@@ -6027,6 +6038,10 @@ PrefabInstance:
       propertyPath: _spadeCont
       value: 
       objectReference: {fileID: 399872907}
+    - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
+      propertyPath: _statsText
+      value: 
+      objectReference: {fileID: 450192977}
     - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
       propertyPath: _deckContent
       value: 

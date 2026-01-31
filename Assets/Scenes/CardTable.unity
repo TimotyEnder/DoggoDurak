@@ -2777,6 +2777,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1061460573}
     - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
+      propertyPath: _statsText
+      value: 
+      objectReference: {fileID: 4000948003385491180}
+    - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
       propertyPath: _deckContent
       value: 
       objectReference: {fileID: 0}
@@ -7350,6 +7354,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 32215554}
     m_Modifications:
+    - target: {fileID: 6001465025509287565, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
+      propertyPath: m_Name
+      value: StatTxt
+      objectReference: {fileID: 0}
     - target: {fileID: 6320916371475653897, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7439,6 +7447,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
+--- !u!114 &4000948003385491180 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1573752384427365582, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
+  m_PrefabInstance: {fileID: 4000948003385491179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
