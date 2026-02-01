@@ -236,7 +236,7 @@ public class CardInfo
     }
     public void UpdateModifiers() 
     {
-        _modifierStacks.Clear();
+        _modifierStacks= new Dictionary<string, int>();
         foreach(CardModifierContainer c in _modifiers) 
         {
             if(!_modifierStacks.ContainsKey(c.ModType))

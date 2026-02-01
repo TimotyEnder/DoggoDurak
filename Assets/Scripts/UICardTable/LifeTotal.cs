@@ -22,6 +22,7 @@ public class LifeTotal : MonoBehaviour
     }
     void UpdateHealth() 
     {
+        Debug.Log("Updating Health UI to " + _hp.ToString());
         _hpText = this.gameObject.GetComponent<TextMeshProUGUI>();
         _hpText.text = _hp.ToString();
     }

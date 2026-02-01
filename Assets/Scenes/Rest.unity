@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shopContent: {fileID: 1485221226}
+  _playerLifeTotal: {fileID: 111042735}
 --- !u!1 &41241948
 GameObject:
   m_ObjectHideFlags: 0

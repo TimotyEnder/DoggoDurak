@@ -27,8 +27,16 @@ public class Deck : MonoBehaviour
    
     void Start() 
     {
-        _turnHandler= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
-        _discard = GameObject.Find("Discard").GetComponent<Discard>();
+        GameObject _turnHandlerObj= GameObject.Find("TurnHandler"); 
+        if(_turnHandlerObj!=null)
+        {
+            _turnHandler = _turnHandlerObj.GetComponent<TurnHandler>();
+        }
+        GameObject _discardObj= GameObject.Find("Discard"); 
+        if(_discardObj!=null)
+        {
+            _discard = _discardObj.GetComponent<Discard>();
+        }
         UpdateDeckSizeText();
     }
     private void UpdateDeckSizeText()
