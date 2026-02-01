@@ -139,7 +139,8 @@ public class PlayArea : MonoBehaviour
         }
         else
         {
-            return UnblockedCardsAmount() < _opponentHand.GetCardsInHand();
+            return true;
+            // UnblockedCardsAmount() < _opponentHand.GetCardsInHand();
         }
     }
     public bool CanAttackWithCard(CardInfo card) 

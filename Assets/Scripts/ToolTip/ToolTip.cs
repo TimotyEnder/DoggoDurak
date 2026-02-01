@@ -55,6 +55,10 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if(_currentTooltip!=null){
                 //set text
                 TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
+                ttText.richText = true; // Enable rich text
+                ttText.fontMaterial.EnableKeyword("OUTLINE_ON");
+                ttText.outlineWidth = 0.2f; // Base outline width
+                ttText.outlineColor = Color.black; // Base outline color
                 ttText.text = _tooltipText;
                 // Scale the background to fit text
                 ToolTipScaler ttScript = _currentTooltip.GetComponentInChildren<ToolTipScaler>();
