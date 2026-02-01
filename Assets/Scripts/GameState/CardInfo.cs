@@ -134,6 +134,13 @@ public class CardInfo
         {"H"," of Hearts"},
         {"S"," of Spades"}
     };
+    private static Dictionary<string, string> suitToColor = new Dictionary<string, string>
+    {
+        {"C","black"},
+        {"D","red"},
+        {"H","red"},
+        {"S","black"}
+    };
     private static Dictionary<int, string> numberFullName = new Dictionary<int, string>
     {
         {6,"Six"},
@@ -249,7 +256,7 @@ public class CardInfo
     public string CompileTooltipDescription() 
     {
         string returnString = "";
-        returnString += "<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+ numberFullName[_number] + suitFullName[_suit] + "</align></size>" + "\n";
+        returnString += "<size="+SettingsState.ToolTipFontSizeTitle+"><color="+suitToColor[_suit]+"><align=center>"+ numberFullName[_number] + suitFullName[_suit] + "</align></size>" + "\n";
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
             if(modifierMaxCopies[entry.Key]==1)
