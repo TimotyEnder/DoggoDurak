@@ -7,7 +7,7 @@ public class SausagesWithHren : Item
         this.rarity = 2;
         this.boss = false;
         this.itemId = "SausagesWithHren";
-        this.toolTipDesc = "All cards in your deck gain Bounce(When defending, this card deals damage equal to the difference of values between the defending and defended cards)";
+        this.toolTipDesc = "All cards in your deck gain "+StylisticClass.BounceColor+StylisticClass.BounceString+"(When defending, this card deals damage equal to the difference of values between the defending and defended cards)</color>";
     }
 
     public override void OnActivate()

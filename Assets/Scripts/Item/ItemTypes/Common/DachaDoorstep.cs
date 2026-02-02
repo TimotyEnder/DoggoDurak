@@ -9,7 +9,7 @@ public class DachaDoorstep : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "DachaDoorstep";
-        this.toolTipDesc = "3 random cards gain Bounce (When defending, this card does  damage  equal  to the difference of values between the defending and defended cards,)";
+        this.toolTipDesc = "3 random cards gain "+StylisticClass.BounceColor+" Bounce (When defending, this card does  damage  equal  to the difference of values between the defending and defended cards,)";
     }
 
     public override void OnActivate()

@@ -7,7 +7,7 @@ public class BabushkasSlipper : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "BabushkasSlipper";
-        this.toolTipDesc = "Even numbered cards gain Parry(Reverse with this card to deal that cards value as damage)";
+        this.toolTipDesc = "Even numbered cards gain"+StylisticClass.ParryColor+StylisticClass.ParryString+"(Reverse with this card to deal that cards value as damage)";
     }
 
     public override void OnActivate()

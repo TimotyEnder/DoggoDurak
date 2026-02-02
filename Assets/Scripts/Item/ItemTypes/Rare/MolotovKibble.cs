@@ -7,7 +7,7 @@ public class MolotovKibble : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "MolotovKibble";
-        this.toolTipDesc = "If you played a card with at least one Burn modifier there is a 25% chance another card in your draw pile gains Burn 1(Deal 1 damage for each burn modifier on the card,)";
+        this.toolTipDesc = "If you played a card with at least one "+StylisticClass.BrunColor+StylisticClass.BurnString+"</color> modifier there is a 25% chance another card in your draw pile gains "+StylisticClass.BrunColor+StylisticClass.BurnString+" 1(Deal 1 damage for each burn modifier on the card,)</color>";
     }
 
     public override void OnActivate()

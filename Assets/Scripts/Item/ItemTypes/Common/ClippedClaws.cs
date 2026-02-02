@@ -7,7 +7,7 @@ public class ClippedClaws : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "ClippedClaws";
-        this.toolTipDesc = "5 random cards gain Spiky 1 (When this card is defended deal 1 damage for each spiky modifier of the card to the defending player)";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.SpikyColor+StylisticClass.SpikyString+" 1 (When this card is defended deal 1 damage for each spiky modifier of the card to the defending player)</color>";
     }
 
     public override void OnActivate()

@@ -99,13 +99,13 @@ public class CardInfo
     };
     public static Dictionary<string, string> modifierColors = new Dictionary<string, string> 
     {
-        {"Restoring", "green"},
-        {"Bounce", "orange"},
-        {"Burn", "yellow"},
-        {"Parry","white"},
-        {"Draw", "red"},
-        {"Cripple", "purple"},
-        {"Spiky", "grey"},
+        {"Restoring", StylisticClass.RestoringColor},
+        {"Bounce", StylisticClass.BounceColor},
+        {"Burn", StylisticClass.BrunColor},
+        {"Parry",StylisticClass.ParryColor},
+        {"Draw", StylisticClass.DrawColor},
+        {"Cripple", StylisticClass.CrippleColor},
+        {"Spiky", StylisticClass.SpikyColor},
     };
     private static Dictionary<string, string> modifierToStyleString = new Dictionary<string, string> 
     {
@@ -261,11 +261,11 @@ public class CardInfo
         {
             if(modifierMaxCopies[entry.Key]==1)
             {
-                returnString+= $"<color={modifierColors[entry.Key]}>"+"<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
             }
             else
             {
-                returnString+= $"<color={modifierColors[entry.Key]}>"+"<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+ modifierToStyleString[entry.Key] + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")"+"</align></size></color> \n";
             }
         }
         return returnString;
