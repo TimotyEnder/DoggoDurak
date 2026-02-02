@@ -13,7 +13,7 @@ public static class StylisticClass
     public static Color Day3Encounter = new Color(0.333f, 0, 0.569f);
     public static Color BossEncounter = new Color(0.345098f, 0.2784314f, 0);
     //modifier strings
-    public static String BounceString="<bounce  a=0.4>BOUNCE</bounce>";
+    public static String BounceString="<bounce a=0.4>BOUNCE</bounce>";
     public static String BurnString= "<shake d=0.8 a=1>BURN</shake>";
     public static String CrippleString="<wave>CRIPPLE</wave>";
     public static String DrawString="<dangle>DRAW</dangle>";

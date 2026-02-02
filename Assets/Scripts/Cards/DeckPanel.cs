@@ -155,13 +155,13 @@ public class DeckPanel : MonoBehaviour
         toRet+="<color=red>"+"Hearts: "+_hearts.Count+"</color>"+"\n";
         toRet+="<color=white>"+"Spades: "+_spades.Count+"</color>"+"\n";
         toRet+="\nModifiers in Deck:\n";
-        toRet+="<color="+CardInfo.modifierColors["Bounce"]+">"+StylisticClass.BounceString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=>card._modifierStacks.ContainsKey("Bounce") && card._modifierStacks["Bounce"]>0).Count+"</color>"+"\n";
-        toRet+="<color="+CardInfo.modifierColors["Burn"]+">"+StylisticClass.BurnString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Burn") && card._modifierStacks["Burn"]>0).Count+"</color>"+"\n";
-        toRet+="<color="+CardInfo.modifierColors["Cripple"]+">"+StylisticClass.CrippleString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Cripple") && card._modifierStacks["Cripple"]>0).Count+"</color>"+"\n";
-        toRet+="<color="+CardInfo.modifierColors["Draw"]+">"+StylisticClass.DrawString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Draw") && card._modifierStacks["Draw"]>0).Count+"</color>"+"\n";
-        toRet+="<color="+CardInfo.modifierColors["Parry"]+">"+StylisticClass.ParryString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Parry") && card._modifierStacks["Parry"]>0).Count+"</color>"+"\n";
-        toRet+="<color="+CardInfo.modifierColors["Restoring"]+">"+StylisticClass.RestoringString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Restoring") && card._modifierStacks["Restoring"]>0).Count+"</color>"+"\n";
-        toRet+="<color="+CardInfo.modifierColors["Spiky"]+">"+StylisticClass.SpikyString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Spiky") && card._modifierStacks["Spiky"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Bounce"]+StylisticClass.BounceString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=>card._modifierStacks.ContainsKey("Bounce") && card._modifierStacks["Bounce"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Burn"]+StylisticClass.BurnString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Burn") && card._modifierStacks["Burn"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Cripple"]+StylisticClass.CrippleString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Cripple") && card._modifierStacks["Cripple"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Draw"]+StylisticClass.DrawString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Draw") && card._modifierStacks["Draw"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Parry"]+StylisticClass.ParryString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Parry") && card._modifierStacks["Parry"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Restoring"]+StylisticClass.RestoringString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Restoring") && card._modifierStacks["Restoring"]>0).Count+"</color>"+"\n";
+        toRet+=CardInfo.modifierColors["Spiky"]+StylisticClass.SpikyString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Spiky") && card._modifierStacks["Spiky"]>0).Count+"</color>"+"\n";
         return toRet;
     }
 }
