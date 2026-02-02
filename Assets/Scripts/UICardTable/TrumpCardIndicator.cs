@@ -13,6 +13,7 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     private Vector2 _hoverPos;
     private List<string> _trumps=new List<string>();
     private int _trumpSelected;
+    private bool _appeared=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +36,7 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     public string SelectTrump()
     {
         InitTrumps();
+        this.GetComponent<ToolTip>().SetTooltipActiveState(false);
         _trumpSelected = -1;
         switch (GameHandler.Instance.GetCurrEncounter().GetTrumpSuit()) 
         {
@@ -57,13 +59,23 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
         string trumpStringSelected = _trumps[_trumpSelected];
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Trumps/" + trumpStringSelected);
         this.gameObject.GetComponent<Image>().sprite = cardSprite;
-        this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
         return trumpStringSelected.Substring(0, 1);
     }
     public void Appear()
     {
-       StartCoroutine(MoveToPosition(_revealPos, 0.5f,5f));
+        StartCoroutine(TrumpAppear());
     }
+    private IEnumerator TrumpAppear()
+    {
+        RectTransform myRect = GetComponent<RectTransform>();
+        myRect.anchoredPosition = new Vector2(-962,0);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(MoveToPosition(_revealPos, 0.5f,5f));
+        this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
+        this.GetComponent<ToolTip>().SetTooltipActiveState(true);
+        _appeared=true;
+    }
+
     public IEnumerator MoveToPosition(Vector2 targetPosition, float duration, float targetRotationZ = 0f)
     {
         RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
@@ -90,13 +102,13 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-       this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one * 1.3f;
-        StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10));
+      if(_appeared){ this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one * 1.3f;
+        StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10));}
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
-        StartCoroutine(MoveToPosition(_revealPos, 0.2f, 5));
+       if(_appeared){this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
+        StartCoroutine(MoveToPosition(_revealPos, 0.2f, 5));}
     }
     public string GetToolTip()
     {
