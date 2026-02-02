@@ -150,10 +150,10 @@ public class DeckPanel : MonoBehaviour
     {
         string toRet="";
         toRet+="Deck Size: "+GameHandler.Instance.GetGameState()._deck.Count+"\n";
-        toRet+="<color=black>"+"Clubs: "+_clubs.Count+"</color>"+"\n"; 
+        toRet+="<color=white>"+"Clubs: "+_clubs.Count+"</color>"+"\n"; 
         toRet+="<color=red>"+"Diamonds: "+_diamonds.Count+"</color>"+"\n";
         toRet+="<color=red>"+"Hearts: "+_hearts.Count+"</color>"+"\n";
-        toRet+="<color=black>"+"Spades: "+_spades.Count+"</color>"+"\n";
+        toRet+="<color=white>"+"Spades: "+_spades.Count+"</color>"+"\n";
         toRet+="\nModifiers in Deck:\n";
         toRet+="<color="+CardInfo.modifierColors["Bounce"]+">"+StylisticClass.BounceString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=>card._modifierStacks.ContainsKey("Bounce") && card._modifierStacks["Bounce"]>0).Count+"</color>"+"\n";
         toRet+="<color="+CardInfo.modifierColors["Burn"]+">"+StylisticClass.BurnString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Burn") && card._modifierStacks["Burn"]>0).Count+"</color>"+"\n";

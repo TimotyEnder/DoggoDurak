@@ -135,7 +135,7 @@ public class PlayArea : MonoBehaviour
     {
         if (_turnHandler.GetTurnState() == 1)
         {
-            return UnblockedCardsAmount() < _playerHand.GetCardsInHand();
+            return UnblockedCardsAmount() <= _playerHand.GetCardsInHand();
         }
         else
         {
@@ -197,6 +197,7 @@ public class PlayArea : MonoBehaviour
         }
         else if(CanReverseWithAnotherCard())
         {
+            Debug.Log("Can Reverse");
             foreach (Card cardPlayed in _cardsPlayed) 
             {
                 if (card._number != cardPlayed.GetCardInfo()._number) 

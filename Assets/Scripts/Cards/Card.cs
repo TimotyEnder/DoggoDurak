@@ -157,12 +157,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if(!state)
         {
           _animator.applyRootMotion = false;
-          _animator.SetFloat("RotationControl", 0f);
         }
         else
         {
             _animator.applyRootMotion = true;
-            _animator.SetFloat("RotationControl", 1f);
         }
     }
     public void GreyIn()
@@ -532,13 +530,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         else
         {
             GameObject disOpt = GameObject.Find("DiscardButton");
-            if (disOpt != null)
+            if (!_isInteractable && disOpt != null)
             {
                 DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
                 if(GameHandler.Instance.GetGameState()._rubles>=GameHandler.Instance.GetGameState()._discardingCardInShopCost)
                 {
                     GameHandler.Instance.GetGameState()._rubles -= GameHandler.Instance.GetGameState()._discardingCardInShopCost;
                     GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+                    Debug.Log("Card Removed");
                     GameHandler.Instance.GetGameState()._deck.Remove(GetCardInfo());
                     GetComponent<ToolTip>().SetTooltipActiveState(false);
                     GameHandler.Instance.GetGameState()._discardingCardInShopCost++;
