@@ -7,7 +7,7 @@ public class HotPaws : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "HotPaws";
-        this.toolTipDesc = "5 random cards gain "+StylisticClass.BrunColor+StylisticClass.BurnString+" 1(Deal 1 damage for each burn modifier on the card)</color>";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.BurnColor+StylisticClass.BurnString+" 1(Deal 1 damage for each burn modifier on the card)</color>";
     }
 
     public override void OnActivate()

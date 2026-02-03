@@ -101,7 +101,7 @@ public class CardInfo
     {
         {"Restoring", StylisticClass.RestoringColor},
         {"Bounce", StylisticClass.BounceColor},
-        {"Burn", StylisticClass.BrunColor},
+        {"Burn", StylisticClass.BurnColor},
         {"Parry",StylisticClass.ParryColor},
         {"Draw", StylisticClass.DrawColor},
         {"Cripple", StylisticClass.CrippleColor},

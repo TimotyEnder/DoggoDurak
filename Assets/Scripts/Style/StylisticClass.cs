@@ -23,7 +23,7 @@ public static class StylisticClass
     
     //modifier colors
     public static String BounceColor="<color=orange>";
-    public static String BrunColor="<color=yellow>";
+    public static String BurnColor="<color=yellow>";
     public static String CrippleColor="<color=purple>";
     public static String DrawColor="<color=red>";
     public static String ParryColor="<color=white>";
