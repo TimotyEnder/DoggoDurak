@@ -7,7 +7,7 @@ public class ContrabandCarePackage : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "ContrabandCarePackage";
-        this.toolTipDesc = "2 random cards gain Draw 1 (Draws 1 card for each draw modifier on the card)";
+        this.toolTipDesc = "2 random cards gain "+StylisticClass.DrawColor+StylisticClass.DrawString+" 1 (Draws 1 card for each draw modifier on the card)</color>";
     }
 
     public override void OnActivate()
