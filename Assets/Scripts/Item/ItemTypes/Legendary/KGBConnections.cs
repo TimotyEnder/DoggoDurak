@@ -7,7 +7,7 @@ public class KGBConnections : Item
         this.rarity = 2;
         this.boss = false;
         this.itemId = "KGBConnections";
-        this.toolTipDesc = "All face crads gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+" 1(Makes opponent discard 1 card for each cripple modifier on the card)</color>";
+        this.toolTipDesc = "All face crads gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+" 1 (Makes opponent discard 1 card for each cripple modifier on the card)</color>";
     }
 
     public override void OnActivate()
