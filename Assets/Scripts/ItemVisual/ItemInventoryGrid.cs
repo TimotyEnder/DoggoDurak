@@ -7,7 +7,7 @@ public class ItemInventoryGrid:MonoBehaviour
     [SerializeField]
     private GameObject inventoryItemPrefab;
 
-    private void Start()
+    void Start()
     {
         UpdateItemGrid();
     }
