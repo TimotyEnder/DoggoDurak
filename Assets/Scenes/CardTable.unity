@@ -403,13 +403,13 @@ RectTransform:
   - {fileID: 1018655494}
   - {fileID: 2064420795}
   - {fileID: 771855886}
+  - {fileID: 201153239}
   - {fileID: 1157967480}
   - {fileID: 2122585954}
   - {fileID: 1405566947}
   - {fileID: 912686531}
   - {fileID: 344730296}
   - {fileID: 1264474682}
-  - {fileID: 201153239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2805,6 +2805,7 @@ GameObject:
   - component: {fileID: 806323019}
   - component: {fileID: 806323021}
   - component: {fileID: 806323020}
+  - component: {fileID: 806323022}
   m_Layer: 5
   m_Name: ProgressIndicator
   m_TagString: Untagged
@@ -2828,8 +2829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -284.41794, y: -0.00014814358}
-  m_SizeDelta: {x: 52.2322, y: 54.028}
+  m_AnchoredPosition: {x: -284.42, y: -0.00014814358}
+  m_SizeDelta: {x: 568, y: 54.028}
   m_Pivot: {x: -0.00000067055225, y: 0.5}
 --- !u!114 &806323020
 MonoBehaviour:
@@ -2869,6 +2870,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806323018}
   m_CullTransparentMesh: 1
+--- !u!114 &806323022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806323018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b2da25477f6fde48da5f1a9d97fbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myRect: {fileID: 806323019}
 --- !u!1 &810362421
 GameObject:
   m_ObjectHideFlags: 0

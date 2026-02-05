@@ -84,7 +84,7 @@ public class GameHandler : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
-        else if (_state._encounter < 11)
+        else if (_state._encounter < 12)
         {
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
@@ -92,7 +92,7 @@ public class GameHandler : MonoBehaviour
         else
         {
             _state._day++;
-            _state._encounter = 0;
+            _state._encounter = 1;
             SceneManager.LoadScene(1);
         }
     }
