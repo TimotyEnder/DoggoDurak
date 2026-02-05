@@ -46,6 +46,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _spikyOverlay;
     private Animator _animator;
     private bool _tryToHighlightCard=true; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
+    private RuleHandler _rh;
+    private CanvasScaler _cScaler;
+    private bool _grey=false; //make greyed out card undraggable.
+    
     //text prefabs for card modifier effects
     [SerializeField]
     private GameObject burnTextPrefab;
@@ -61,9 +65,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject parryTextPrefab;
     [SerializeField]
     private GameObject drawTextPrefab;
-    private RuleHandler _rh;
-    private CanvasScaler _cScaler;
-
     void Start()
     {
     }
@@ -165,10 +166,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void GreyIn()
     {
+        _grey=true;
         _cardImage.GetComponent<Image>().color = Color.grey;
     }
     public void GreyOut()
     {
+        _grey=false;
         _cardImage.GetComponent<Image>().color = Color.white;
     }
     public void Bling()
@@ -436,22 +439,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(_isInteractable)
-        {
-            if (_played) { return; }
-            GetComponent<ToolTip>().SetTooltipActiveState(false);
-            _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
-        }
+        if (_played || _grey ||!_isInteractable) { return; } //return early in this method fails the drag.
+        GetComponent<ToolTip>().SetTooltipActiveState(false);
+        _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (_played) { return; }
+         if (_played || _grey ||!_isInteractable) { return; }
         _cardRect.eulerAngles = Vector3.zero;
         _cardRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        if (_played && !_opponent.IsEnemyPlaying()) { return; }
+        if (_played && !_opponent.IsEnemyPlaying()|| _grey ||!_isInteractable) { return; }
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
