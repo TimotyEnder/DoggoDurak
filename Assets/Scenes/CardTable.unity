@@ -5012,6 +5012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1510e74d92b1aa74194649e61a78a732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trumpTextPrefab: {fileID: 7200800098840245384, guid: 035a7ff00c4697a439dff3fe23f3a245, type: 3}
 --- !u!114 &1235802271
 MonoBehaviour:
   m_ObjectHideFlags: 0

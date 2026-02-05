@@ -12,8 +12,11 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     private Vector2 _revealPos;
     private Vector2 _hoverPos;
     private List<string> _trumps=new List<string>();
+    private List<string> _trumpColors=new List<string>(){"Black","Red","Black","Red"};
     private int _trumpSelected;
     private bool _appeared=false;
+    [SerializeField]
+    GameObject _trumpTextPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -69,6 +72,9 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     {
         RectTransform myRect = GetComponent<RectTransform>();
         myRect.anchoredPosition = new Vector2(-962,0);
+        GameObject trumpTxt= Instantiate(_trumpTextPrefab, this.transform.parent);
+        trumpTxt.GetComponent<TrumpSuitText>().SetText(GetTrumpText());
+         trumpTxt.GetComponent<TrumpSuitText>().Init(null, this.gameObject.GetComponentInParent<Canvas>());
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(MoveToPosition(_revealPos, 0.5f,5f));
         this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
@@ -112,6 +118,10 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     }
     public string GetToolTip()
     {
-        return  $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+"The trump suit is "+_trumps[_trumpSelected]+"</align></size>";
+        return  $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+"The trump suit is "+"<color="+_trumpColors[_trumpSelected]+">"+_trumps[_trumpSelected]+ "!</color></align></size>";
+    }
+    public string GetTrumpText()
+    {
+        return  $"<align=center>"+"The trump suit is "+"<color="+_trumpColors[_trumpSelected]+">"+_trumps[_trumpSelected]+ "!</color></align></size>";
     }
 }
