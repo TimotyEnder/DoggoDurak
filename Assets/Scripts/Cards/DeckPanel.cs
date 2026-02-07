@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
@@ -33,7 +34,7 @@ public class DeckPanel : MonoBehaviour
     public void Start()
     {
         //On Click config
-        _deckButton.onClick.AddListener(UpdateDeckContent);
+        _deckButton.onClick.AddListener(()=> { if(!_deckPanel.activeSelf){ UpdateDeckContent(); }});
         _deckExitButton.onClick.AddListener(() => _deckPanel.SetActive(false));
         _clubs=new List<CardInfo>();
         _diamonds=new List<CardInfo>();
