@@ -37,4 +37,12 @@ public class EncounterManager
         }
         return null;
     }
+    public Encounter RandomBossEncounter() 
+    {
+        if (_bossEncounters.Count > 0) 
+        {
+            return _bossEncounters[Random.Range(0, _bossEncounters.Count)];
+        }
+        return null;
+    }
 }

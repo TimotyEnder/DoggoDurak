@@ -80,9 +80,14 @@ public class GameHandler : MonoBehaviour
         //_state._encounter = 2; //debug
         _saveManager.Value.Save(_state);
         _state._encounter++;
-        if ((_state._encounter) % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
+        if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
             SceneManager.LoadScene(2);
+        }
+        else if(_state._encounter==11) 
+        {
+            _currentEncounter = _encounterManager.RandomBossEncounter();
+            SceneManager.LoadScene(1);
         }
         else if (_state._encounter < 12)
         {
@@ -93,6 +98,7 @@ public class GameHandler : MonoBehaviour
         {
             _state._day++;
             _state._encounter = 1;
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
     }
