@@ -22,12 +22,12 @@ public static class StylisticClass
     public static String SpikyString= "<swing>SPIKY</swing>";
     
     //modifier colors
-public static string BounceColor = "<color=#FFA500FF>";    // Orange (with full alpha)
-public static string BurnColor = "<color=#FFFF00FF>";      // Yellow (with full alpha)
-public static string CrippleColor = "<color=#7500C4>";   // Purple (with full alpha)
+public static string BounceColor = "<color=#FFA500FF>";    
+public static string BurnColor = "<color=#FFFF00FF>";      
+public static string CrippleColor = "<color=#7500C4>";  
 public static string DrawColor = "<color=#E00000>";    
 public static string ParryColor = "<color=#FFFAFA>";     
-public static string RestoringColor = "<color=#027514>"; 
+public static string RestoringColor = "<color=#01bb1e>"; 
 public static string SpikyColor = "<color=#999999>";     
 
 
