@@ -124,7 +124,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         _animator=this.gameObject.GetComponent<Animator>();
         _animator.applyRootMotion = false;
-        _animator.SetFloat("RotationControl", 0f);
 
         GameObject rhObj= GameObject.Find("RuleHandler");
         if(rhObj!=null)

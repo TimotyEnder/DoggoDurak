@@ -122,13 +122,14 @@ public class PlayArea : MonoBehaviour
     bool CanAtackWithAnotherCard() 
     {
         int unblockedCardsNum = UnblockedCardsAmount();
-        if (_turnHandler.GetTurnState() == 0)
-        {
-            return (unblockedCardsNum + 1 <= _opponentHand.GetCardsInHand());
-        }
-        else 
+        if (_turnHandler.GetTurnState() == 1)
         {
             return (unblockedCardsNum + 1 <= _playerHand.GetCardsInHand());
+        }
+        else
+        {
+            return true;
+            //return (unblockedCardsNum + 1 <= _opponentHand.GetCardsInHand());
         }
     }
     bool CanReverseWithAnotherCard()
