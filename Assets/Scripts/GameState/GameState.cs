@@ -34,6 +34,7 @@ public class GameState
     public int _startingDiscardInShopCost;
     public int _shopRerollCost;
     public int _startingShopRerollCost;
+    public float _randomBossEncounterChance;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -94,6 +95,7 @@ public class GameState
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
         _startingShopRerollCost = 5;
+        _randomBossEncounterChance = 10;
     }
     private void addItemStack(Item item) 
     {

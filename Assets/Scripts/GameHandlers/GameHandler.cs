@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -91,8 +89,16 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
-            SceneManager.LoadScene(1);
+            if(UnityEngine.Random.Range(0,100)<_state._randomBossEncounterChance) 
+            {
+                _currentEncounter = _encounterManager.RandomBossEncounter();
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+                SceneManager.LoadScene(1);
+            }
         }
         else
         {

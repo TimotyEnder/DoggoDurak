@@ -128,6 +128,9 @@ public class CardHandArea : MonoBehaviour
             foreach (Card card in this._cards)
             {
                 Debug.Log("Concidering Card: "+ card.GetCardInfo()._suit+ card.GetCardInfo()._number);
+                Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
+                Debug.Log("Can Attack With Card: " + pa.CanAttackWithCard(card.GetCardInfo()));
+                Debug.Log("Turn State: " + th.GetTurnState());
                 if ((pa.CanReverseWithCard(card.GetCardInfo()) || pa.CanAttackWithCard(card.GetCardInfo())) && th.GetTurnState() == 0)
                 {
                     Debug.Log("Can Reverse Or Attack With Card");
