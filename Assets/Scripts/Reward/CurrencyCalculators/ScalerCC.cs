@@ -12,6 +12,6 @@ public class ScalerCC : CurrencyCalculator
 
     public override string GetExplanationText()
     {
-        return "Scaler: 5 x" + Modifier.ToString("F2") + " = ";
+        return "Offshore Account: 2 x" + Modifier.ToString("F2") + " = ";
     }
 }

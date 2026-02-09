@@ -6,7 +6,7 @@ public class OffShoreAccount : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.itemId = "OffShoreAccount";
+        this.itemId = "OffshoreAccount";
         this.toolTipDesc = "You now gain an amount of rubles that increases with the amount of encounters played";
     }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.DualShock;
 [CreateAssetMenu(fileName = "TheBreadlineBargain", menuName = "Items/Rare/TheBreadlineBargain")]
 public class TheBreadlineBargain : Item
 {

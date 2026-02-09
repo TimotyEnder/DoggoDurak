@@ -62,7 +62,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<OffShoreAccount>();
+        //Item debugItem2 = ScriptableObject.CreateInstance<MMMRecruitmentLetter>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         Next();
