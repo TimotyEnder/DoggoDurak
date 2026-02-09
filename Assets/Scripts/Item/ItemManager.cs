@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemManager
@@ -34,6 +35,8 @@ public class ItemManager
         if (rarity < _items.Count && _items[rarity].Count > 0)
         {
             int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _items[rarity].Count - 1, amount);
+            //if not enough rare items give player option to buy more common items
+            int[] randomIntsCommon=RandomPlus.GenerateUniqueRandomNumbers(0, _items[0].Count - 1, amount);
             List<Item> toRem= new List<Item>();
             foreach (int i in randomInts)
             {
@@ -44,6 +47,12 @@ public class ItemManager
                     toRem.Add(_items[rarity][i]);
                     Debug.Log("I removed is:"+_items[rarity][i]);
                 }
+                itemsDropped.Add(itemReturned);
+            }
+            for(int i=0;i<amount-randomInts.Count();i++)
+            {
+                Item itemReturned = Object.Instantiate(_items[0][randomIntsCommon[i]]);
+                itemReturned.InitItem();
                 itemsDropped.Add(itemReturned);
             }
             foreach(Item i in toRem)

@@ -12,7 +12,7 @@ public class ShopItemContent : MonoBehaviour
         foreach (Item rwItem in GameHandler.Instance.GetShopItems())
         {
             GameObject rwInstance = Instantiate(_rewardItemPrefab, this.transform);
-            rwInstance.GetComponent<RewardItem>().AssignItem(rwItem,rwItem.GetRarity()*5);
+            rwInstance.GetComponent<RewardItem>().AssignItem(rwItem,(rwItem.GetRarity()+1)*5);
         }
     }
     public void RemoveAllGrid()
