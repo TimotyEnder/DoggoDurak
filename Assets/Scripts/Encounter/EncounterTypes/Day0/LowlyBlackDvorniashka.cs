@@ -25,7 +25,7 @@ public class LowlyBlackDvorniashka : Encounter
             }
         }
         goldRewardMod = 1;
-        health = 20;
+        SetHealth();
         trumpSuit = 'H';
         icon = null;
         boss = false;

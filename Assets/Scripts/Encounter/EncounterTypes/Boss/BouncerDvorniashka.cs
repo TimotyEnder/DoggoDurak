@@ -43,7 +43,7 @@ public class BouncerDvorniashka : Encounter
             c.AddModifier("Burn");
         }
         goldRewardMod = 2.0f;
-        health = 100;
+        SetHealth();
         trumpSuit = 'R';
         icon = null;
         boss = true;

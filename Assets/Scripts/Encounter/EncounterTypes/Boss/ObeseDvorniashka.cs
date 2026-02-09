@@ -41,7 +41,7 @@ public class ObeseDvorniashka : Encounter
             c.AddModifier("Restoring");
         }
         goldRewardMod = 2.0f;
-        health = 100;
+        SetHealth();
         trumpSuit = 'R';
         icon = null;
         boss = true;

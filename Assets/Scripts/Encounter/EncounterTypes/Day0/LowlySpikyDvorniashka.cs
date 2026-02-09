@@ -44,7 +44,7 @@ public class LowlySpikyDvorniashka : Encounter
             }
         }
         goldRewardMod = 1;
-        health = 20;
+        SetHealth();
         trumpSuit = 'R';
         icon = null;
         boss = false;

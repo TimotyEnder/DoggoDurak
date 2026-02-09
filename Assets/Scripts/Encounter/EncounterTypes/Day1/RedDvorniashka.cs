@@ -25,7 +25,7 @@ public class RedDvorniashka : Encounter
             }
         }
         goldRewardMod = 1.5f;
-        health = 40;
+        SetHealth();
         trumpSuit = 'S';
         icon = null;
         boss = false;

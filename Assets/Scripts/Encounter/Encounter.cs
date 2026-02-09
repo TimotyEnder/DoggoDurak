@@ -63,4 +63,22 @@ public abstract class Encounter : ScriptableObject
            "([a-z])([A-Z])|([A-Z])([A-Z][a-z])",
            "$1$3 $2$4");
     }
+    protected void SetHealth()
+    {
+        if(this.boss)
+        {
+            this.health= 100+50*GameHandler.Instance.GetGameState()._day;
+            return;
+        }
+        switch(this.day)
+        {
+            case 0:
+                this.health=40;
+                break;
+            case 1:
+                this.health=60;
+                break;
+        }
+        
+    }
 }

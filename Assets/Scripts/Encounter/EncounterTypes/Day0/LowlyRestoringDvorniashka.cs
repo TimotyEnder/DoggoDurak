@@ -56,7 +56,7 @@ public class LowlyRestoringDvorniashka: Encounter
             cardToMod.AddModifier(modifier);
         }
         goldRewardMod = 1;
-        health = 20;
+        SetHealth();
         trumpSuit = 'R';
         icon = null;
         boss = false;

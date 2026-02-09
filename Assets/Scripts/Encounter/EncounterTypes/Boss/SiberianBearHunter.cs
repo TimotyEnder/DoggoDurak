@@ -26,7 +26,7 @@ public class SiberianBearHunter : Encounter
             }
         }
         goldRewardMod = 2.0f;
-        health = 100;
+        SetHealth();
         trumpSuit = 'D';
         icon = null;
         boss = true;
