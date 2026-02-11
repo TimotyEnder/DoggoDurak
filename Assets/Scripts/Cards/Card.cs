@@ -149,6 +149,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _costText.text = _cost.ToString();
         }
         UpdateModifiers();
+        _cardRect.localScale = Vector3.one;
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
     public void SetAnimatable(bool state)
@@ -369,8 +370,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void PlayCard() 
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
-        _cardRect.localScale = Vector3.one * 0.9f;
-        _cardImageRect.localScale = Vector3.one * 0.9f;
+        _cardImageRect.localScale = Vector3.one;
+        _cardRect.localScale = Vector3.one;
         _playAreaScript.AddtoPlayedCards(this);
         _playAreaScript.AttachCard();
         _played = true;
@@ -388,8 +389,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
         _cardRect.SetAsFirstSibling();
-        _cardRect.localScale = Vector3.one * 0.9f;
-        _cardImageRect.localScale = Vector3.one * 0.9f;
+        _cardImageRect.localScale = Vector3.one;
+        _cardRect.localScale = Vector3.one;
         _cardRect.anchoredPosition = card.GetDefendPosition();//hehe
         card.Defend(this);
         _playAreaScript.AddtoDefendedWithCards(this);
@@ -416,10 +417,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         StopCoroutine(CheckTopPointerUntilExit(eventData)); // Stop the checking coroutine
         SetAnimatable(false);
         _playedSelectAnim=false;
-        _cardHandAreaScript.RealignCardsInHand();
-        if(_played)
+        _cardRect.eulerAngles=Vector3.zero;
+        if(_cardHandAreaScript!=null)
         {
-            _cardRect.eulerAngles=Vector3.zero;
+            _cardHandAreaScript.RealignCardsInHand();
         }
         if (_oldSiblingIndex != -1 && _isInteractable)
         {
