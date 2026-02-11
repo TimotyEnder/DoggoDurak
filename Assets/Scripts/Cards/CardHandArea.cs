@@ -88,12 +88,45 @@ public class CardHandArea : MonoBehaviour
     {
         return this._cardsInHand;
     }
-    public void AddToCards(Card card, Vector2 screenPoint) 
+    public void AddToCards(Card card) 
     {
         if (_cards == null) 
         {
             _cards = new List<Card>();
         }
+        _cards.Add(card);
+    }
+    public void AddToCards(Card card, Vector2 screenPoint) //overload for in hand card rearranging
+    {
+        if (_cards == null) 
+        {
+            _cards = new List<Card>();
+        }
+        
+        if (_cards.Count == 0)
+        {
+            _cards.Add(card);
+            return;
+        }
+        
+        if (screenPoint.x < _cards[0].GetComponent<RectTransform>().position.x)
+        {
+            _cards.Insert(0, card);
+            return;
+        }
+        
+        for(int i = 0; i < _cards.Count - 1; i++)
+        {
+            float currentCardX = _cards[i].GetComponent<RectTransform>().position.x;
+            float nextCardX = _cards[i + 1].GetComponent<RectTransform>().position.x;
+            
+            if (screenPoint.x > currentCardX && screenPoint.x < nextCardX)
+            {
+                _cards.Insert(i + 1, card);
+                return; 
+            }
+        }
+        
         _cards.Add(card);
     }
     public void RemoveFromCards(Card card)

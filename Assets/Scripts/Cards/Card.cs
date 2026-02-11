@@ -305,14 +305,24 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             }
         }
     }
-    public void OnDraw(Vector2 ScreenPoint = default)
+    public void OnDraw()
     {
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
         _cardRect.localScale = Vector3.one;
         _cardRect.SetSiblingIndex(0);
         _cardHandAreaScript.AttachCard();
-        _cardHandAreaScript.AddToCards(this,ScreenPoint);
+        _cardHandAreaScript.AddToCards(this);
+        _cardHandAreaScript.RealignCardsInHand();
+    }
+     public void OnDraw(Vector2 screenPoint)
+    {
+        _played = false;
+        _cardRect.SetParent(_cardHandAreaRect);
+        _cardRect.localScale = Vector3.one;
+        _cardRect.SetSiblingIndex(0);
+        _cardHandAreaScript.AttachCard();
+        _cardHandAreaScript.AddToCards(this,screenPoint);
         _cardHandAreaScript.RealignCardsInHand();
     }
     public void OnPlay(Vector2 screenPoint)
