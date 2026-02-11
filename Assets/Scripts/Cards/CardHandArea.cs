@@ -131,7 +131,7 @@ public class CardHandArea : MonoBehaviour
                 Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
                 Debug.Log("Can Attack With Card: " + pa.CanAttackWithCard(card.GetCardInfo()));
                 Debug.Log("Turn State: " + th.GetTurnState());
-                if ((pa.CanReverseWithCard(card.GetCardInfo()) || pa.CanAttackWithCard(card.GetCardInfo())) && th.GetTurnState() == 0)
+                if (pa.CanReverseWithCard(card.GetCardInfo()) || (pa.CanAttackWithCard(card.GetCardInfo()) && th.GetTurnState() == 0))
                 {
                     Debug.Log("Can Reverse Or Attack With Card");
                     return true;
