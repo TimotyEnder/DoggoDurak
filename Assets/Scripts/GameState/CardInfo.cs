@@ -121,10 +121,10 @@ public class CardInfo
     {
         {"Restoring", "Defend with this card to gain health equal to the difference of values between the defending and defended cards."},
         {"Bounce", "When defending, this card does  damage  equal  to the difference of values between the defending and defended cards."},
-        {"Burn", "Deal 1 damage for each burn modifier on the card."},
+        {"Burn", "When attacking deal 1 damage for each burn modifier on the card."},
         {"Parry", "Reverse with this card to deal that cards value as damage."},
-        {"Draw", "Draws 1 card for each draw modifier on the card when played."},
-        {"Cripple", "Makes opponent discard 1 card for each cripple modifier on the card when played."},
+        {"Draw", "When attacking draws 1 card for each draw modifier on the card."},
+        {"Cripple", "When attacking makes opponent discard 1 card for each cripple modifier on the card."},
         {"Spiky", "When this card is defended deal 1 damage for each spiky modifier of the card to the defending player."},
     };
     private static Dictionary<string, string> suitFullName = new Dictionary<string, string>
