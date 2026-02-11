@@ -88,7 +88,7 @@ public class CardHandArea : MonoBehaviour
     {
         return this._cardsInHand;
     }
-    public void AddToCards(Card card) 
+    public void AddToCards(Card card, Vector2 screenPoint) 
     {
         if (_cards == null) 
         {
