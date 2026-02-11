@@ -49,6 +49,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private RuleHandler _rh;
     private CanvasScaler _cScaler;
     private bool _grey=false; //make greyed out card undraggable.
+    private bool _playedSelectAnim=false;
+    public Vector3 _oldEuAngle;
     
     //text prefabs for card modifier effects
     [SerializeField]
@@ -157,6 +159,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if(!state)
         {
           _animator.applyRootMotion = false;
+          _animator.enabled=false;
         }
         else
         {
@@ -393,13 +396,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void OnPointerEnter(PointerEventData eventData)
     {
         _tryToHighlightCard = true;
+        _oldEuAngle=_cardRect.eulerAngles;
         StartCoroutine(CheckTopPointerUntilExit(eventData));
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         _tryToHighlightCard = false;
         StopCoroutine(CheckTopPointerUntilExit(eventData)); // Stop the checking coroutine
-        
+        SetAnimatable(false);
+        _playedSelectAnim=false;
+        _cardHandAreaScript.RealignCardsInHand();
+        if(_played)
+        {
+            _cardRect.eulerAngles=Vector3.zero;
+        }
         if (_oldSiblingIndex != -1 && _isInteractable)
         {
             _cardRect.SetSiblingIndex(_oldSiblingIndex);
@@ -410,11 +420,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         while (_tryToHighlightCard)
         {
-            if (IsTopPointer(ped) && _isInteractable)
+            if (IsTopPointer(ped))
             {
-                _oldSiblingIndex = _cardRect.GetSiblingIndex();
-                _cardRect.SetAsLastSibling();
+                if(_isInteractable){
+                    _oldSiblingIndex = _cardRect.GetSiblingIndex();
+                    _cardRect.SetAsLastSibling();
+                }
                 _cardImageRect.localScale = Vector3.one * 1.3f;
+                if(!_playedSelectAnim)
+                {
+                    _playedSelectAnim=true;
+                    SetAnimatable(true);
+                    _animator.SetTrigger("Select");
+                    yield return new WaitForSeconds(0.05f);
+                }
             }
             
             // Wait for next frame before checking again

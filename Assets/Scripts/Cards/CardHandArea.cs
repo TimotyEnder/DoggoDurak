@@ -48,7 +48,7 @@ public class CardHandArea : MonoBehaviour
         foreach (Card i in _cards)
         {
             float angle = _angleDelta * (midpoint - index);
-            i.transform.eulerAngles= new Vector3(0, 0, angle);
+            i.GetComponent<RectTransform>().eulerAngles= new Vector3(0, 0, angle);
             angle *= -Mathf.Deg2Rad;
             float x = Mathf.Sin(angle) * radius;
             float y = Mathf.Cos(angle) * radius;
