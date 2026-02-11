@@ -68,6 +68,11 @@ public abstract class Encounter : ScriptableObject
         if(this.boss)
         {
             this.health= 100+50*GameHandler.Instance.GetGameState()._day;
+            if(GameHandler.Instance.GetGameState()._encounter!=11)
+            {
+                //random boss encoutner less health;
+                this.health/=3;
+            }
             return;
         }
         switch(this.day)

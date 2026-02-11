@@ -33,7 +33,7 @@ public class GameHandler : MonoBehaviour
             return _instance;
         }
     }
-    void Start()
+    void Awake()
     {
         _instance = this;
         DontDestroyOnLoad(this);
@@ -89,7 +89,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            if(UnityEngine.Random.Range(0,100)<_state._randomBossEncounterChance) 
+            if(_state._encounter>3&&UnityEngine.Random.Range(0,100)<_state._randomBossEncounterChance) 
             {
                 _currentEncounter = _encounterManager.RandomBossEncounter();
                 SceneManager.LoadScene(1);
