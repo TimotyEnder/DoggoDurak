@@ -75,6 +75,10 @@ public class GameHandler : MonoBehaviour
     }
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
+        if(_encounterManager==null)
+        {
+            _encounterManager = new EncounterManager();
+        }
         //_state._encounter = 2; //debug
         _saveManager.Value.Save(_state);
         _state._encounter++;
