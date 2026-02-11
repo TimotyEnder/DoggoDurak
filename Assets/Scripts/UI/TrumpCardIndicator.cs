@@ -12,7 +12,7 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     private Vector2 _revealPos;
     private Vector2 _hoverPos;
     private List<string> _trumps=new List<string>();
-    private List<string> _trumpColors=new List<string>(){"Black","Red","Black","Red"};
+    private List<string> _trumpColors=new List<string>(){"White","Red","White","Red"};
     private int _trumpSelected;
     private bool _appeared=false;
     [SerializeField]
