@@ -18,7 +18,9 @@ public class ActiveItemInventoryGrid : MonoBehaviour
         {
             if (i.IsActive())
             {
-                GameObject IIintance = Instantiate(activeInventoryItemPrefab, this.transform);
+                GameObject IIintance = Instantiate(activeInventoryItemPrefab);
+                IIintance.transform.SetParent(this.transform);
+                IIintance.transform.localScale = Vector3.one;
                 ActiveItem IIscript = IIintance.GetComponent<ActiveItem>();
                 IIscript.AssignItem(i);
             }
