@@ -1,26 +1,23 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActiveItem:MonoBehaviour
+public class ActiveItem:MonoBehaviour,IPointerClickHandler
 {
     private Item _item;
+    [SerializeField]
     private Sprite _itemIcon;
     private ToolTip _toolTip;
+    [SerializeField]
     private Image _bgColor;
-    private Button _button;
 
-    private void Start()
-    {
-        _button=transform.Find("Button").GetComponent<Button>();
-        _button.onClick.AddListener(OnClickActiveItem);
-    }
+
 
     public void AssignItem(Item item)
     {
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
         this._itemIcon = item.GetIcon();
-        _bgColor = this.transform.Find("Button").GetComponent<Image>();
         switch (item.GetRarity())
         {
             case 0:
@@ -38,8 +35,11 @@ public class ActiveItem:MonoBehaviour
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());
     }
-    private void OnClickActiveItem() 
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        _item.OnActivate();
+        Debug.Log("Clicked active item");
+        _item.Activate();
     }
+
 }

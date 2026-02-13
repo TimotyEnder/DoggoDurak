@@ -60,9 +60,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<MMMRecruitmentLetter>();
-        //debugItem2.InitItem();
-        //_state.AddItem(debugItem2);
+        Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
+        debugItem2.InitItem();
+        _state.AddItem(debugItem2);
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -82,6 +82,7 @@ public class GameHandler : MonoBehaviour
         //_state._encounter = 2; //debug
         _saveManager.Value.Save(_state);
         _state._encounter++;
+        _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
             SceneManager.LoadScene(2);
@@ -225,6 +226,32 @@ public class GameHandler : MonoBehaviour
                 GameObject.Find("Opponent").GetComponent<OpponentLogic>().Discard();
             }
         }
+    }
+    public void PlayerDiscard(int index, int amount=1)
+    {
+        Debug.Log("Discarding card at index: " + index+" amount: "+amount);
+        GameObject CardHandArea= GameObject.Find("CardHandArea");
+        if (CardHandArea != null)
+        {
+            CardHandArea cardHScript = CardHandArea.GetComponent<CardHandArea>();
+            if (cardHScript != null)
+            {
+                cardHScript.Discard(index,amount);
+            }
+        }
+    }
+    public int GetCardsInHand()
+    {
+        GameObject CardHandArea = GameObject.Find("CardHandArea");
+        if (CardHandArea != null)
+        {
+            CardHandArea cardHScript = CardHandArea.GetComponent<CardHandArea>();
+            if (cardHScript != null)
+            {
+                return cardHScript.GetCards().Count;
+            }
+        }
+        return 0;
     }
     public void ReAddItems(List<Item> items)
     {

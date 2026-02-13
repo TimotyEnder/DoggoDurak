@@ -197,4 +197,20 @@ public class CardHandArea : MonoBehaviour
         }
         return false;
     }
+    public void Discard(int index, int amount=1)
+    {
+        if(index<_cards.Count)
+        {
+            for(int i=0; i<amount; i++)
+            {
+                if(index< _cards.Count && index>=0)
+                {
+                    GameObject cardToDiscard = _cards[index].gameObject;
+                    _cards.RemoveAt(index);
+                    cardToDiscard.GetComponent<Card>().MoveTowardsToDiscard();
+                    DettachCard();
+                }
+            }
+        }
+    }
 }

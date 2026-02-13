@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Text.RegularExpressions;
 using Unity.Collections;
 using UnityEngine;
@@ -15,6 +16,7 @@ public abstract class Item : ScriptableObject
     protected string itemId;//serialized already in the item container
     protected Sprite Icon;
     protected bool isActive;
+    protected bool _hasBeenActivated=false;
     protected string toolTipDesc;
 
     public abstract void InitItem();
@@ -30,6 +32,21 @@ public abstract class Item : ScriptableObject
     public abstract void OnDamageOpponent(int amount);
     public abstract void OnActivate();
 
+    public void Activate() 
+    {
+        if (isActive && !_hasBeenActivated)
+        {
+            _hasBeenActivated = true;
+            OnActivate();
+        }
+    }
+    public void ResetActivation() 
+    {
+        if(isActive)
+        {
+            _hasBeenActivated = false;
+        }
+    }
     public void LoadIcon(string icon) 
     {
         this.Icon= Resources.Load<Sprite>("ItemIcons/"+icon);

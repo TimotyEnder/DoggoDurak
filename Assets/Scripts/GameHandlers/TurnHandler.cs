@@ -151,6 +151,7 @@ public class TurnHandler : MonoBehaviour
 
                 yield return new WaitForSeconds(0.75f);
                 card.SetAnimatable(false);
+                card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }
         }
         FinishEndTurn();

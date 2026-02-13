@@ -97,6 +97,13 @@ public class GameState
         _startingShopRerollCost = 5;
         _randomBossEncounterChance = 10;
     }
+    public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
+    {
+        foreach (Item item in _items)
+        {
+            item.ResetActivation();
+        }
+    }
     private void addItemStack(Item item) 
     {
         if (_itemStacks.ContainsKey(item.name))
