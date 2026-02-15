@@ -89,6 +89,7 @@ public class TurnHandler : MonoBehaviour
         //Wipe Cards
         _turnEndStarted=false;
         _playArea.Wipe();
+        GameHandler.Instance.GetPlayPermissionManager().ResetPermissions();
         //Change Turn State
         if (_turnState == 0)
         {

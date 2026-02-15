@@ -77,7 +77,7 @@ public class CardInfo
          }
         
     }
-    private static Dictionary<string, CardModifier> modifierStringToType = new Dictionary<string, CardModifier>
+    public static Dictionary<string, CardModifier> modifierStringToType = new Dictionary<string, CardModifier>
     {
         {"Restoring", new RestoringCardMod()},
         {"Bounce", new BounceCardMod()},

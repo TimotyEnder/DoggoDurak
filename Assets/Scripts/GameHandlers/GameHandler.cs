@@ -14,7 +14,7 @@ public class GameHandler : MonoBehaviour
     private Encounter _currentEncounter;
     [SerializeField]
     private Reward _currentReward;
-
+    private  PlayPermissionManager  _playPermissionManager;
     public static GameHandler Instance
     {
         get
@@ -35,9 +35,8 @@ public class GameHandler : MonoBehaviour
     }
     void Awake()
     {
-        _instance = this;
         DontDestroyOnLoad(this);
-        _encounterManager = new EncounterManager();
+        _playPermissionManager = new PlayPermissionManager();
     }
     public bool HasSave()
     {
@@ -47,6 +46,7 @@ public class GameHandler : MonoBehaviour
     {
         _state = new GameState();
         _saveManager.Value.Save(_state);
+        _encounterManager = new EncounterManager();
         //debug
         foreach (CardInfo c in _state._deck)
         {
@@ -276,4 +276,13 @@ public class GameHandler : MonoBehaviour
     {
         return _rewardManager.Value.GetCurrencyExplanationText();
     }
+
+    public bool CanPlayCard(CardInfo card, int turnState) 
+    {
+        return _playPermissionManager.CanPlayCard(card, turnState);
+    } 
+    public PlayPermissionManager GetPlayPermissionManager() 
+    {
+        return _playPermissionManager;
+    }  
 }

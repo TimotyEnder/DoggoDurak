@@ -485,7 +485,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
-        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
+        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position) && GameHandler.Instance.CanPlayCard(this.GetCardInfo(), _turnHandler.GetTurnState()))
         {
             OnPlay(eventData.position);
         }
