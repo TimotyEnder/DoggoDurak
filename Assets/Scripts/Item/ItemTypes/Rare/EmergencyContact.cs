@@ -1,5 +1,6 @@
 using System.Diagnostics;
-
+using UnityEngine;
+[CreateAssetMenu(fileName = "EmergencyContact", menuName = "Items/Active-Rare/EmergencyContact")]
 public class EmergencyContact : Item
 {
     public EmergencyContact()
@@ -8,7 +9,7 @@ public class EmergencyContact : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "EmergencyContact";
-        this.toolTipDesc = "<color=red>ACTIVATE:</color> Discard right-most card, draw 1 card and heal 5 hp.";
+        this.toolTipDesc = StylisticClass.ActivateString+" Discard right-most card, draw 1 card and heal 5 hp.";
     }
 
     public override void InitItem()

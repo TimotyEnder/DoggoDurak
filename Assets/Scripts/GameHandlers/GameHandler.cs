@@ -60,9 +60,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
-        //debugItem2.InitItem();
-        //_state.AddItem(debugItem2);
+        Item debugItem2 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        debugItem2.InitItem();
+        _state.AddItem(debugItem2);
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -276,15 +276,21 @@ public class GameHandler : MonoBehaviour
     {
         return _rewardManager.Value.GetCurrencyExplanationText();
     }
-
-    public bool CanPlayCard(CardInfo card, int turnState) 
+    //0 player 1 opponent.
+    public bool CanPlayCard(CardInfo card, int target) 
     {
-        return _playPermissionManager.CanPlayCard(card, turnState);
+        return _playPermissionManager.CanPlayCard(card, target);
     } 
-    public PlayPermissionManager GetPlayPermissionManager() 
+    public void  ResetPlayPermissions() 
     {
-        return _playPermissionManager;
+         _playPermissionManager.ResetPermissions();
+         UIupdatePlayPermissions();
     }  
+    public void SetPlayPermissions(string[]perms, bool forPlayer,bool forEnemy)
+    {
+        _playPermissionManager.SetPermissions(perms,forPlayer,forEnemy);
+        UIupdatePlayPermissions();
+    }
     public void UIupdatePlayPermissions()
     {
         GameObject cardHandArea= GameObject.Find("CardHandArea");

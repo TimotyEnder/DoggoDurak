@@ -69,7 +69,7 @@ public class OpponentLogic : MonoBehaviour
         {
             foreach (CardInfo cardInHand in _hand)
             {
-                if (_playArea.CanAttackWithCard(cardInHand))
+                if (_playArea.CanAttackWithCard(cardInHand) && GameHandler.Instance.CanPlayCard(cardInHand,1))
                 {
                     _hand.Remove(cardInHand);
                     _handUI.RemoveCard();
@@ -91,7 +91,7 @@ public class OpponentLogic : MonoBehaviour
                     foreach (CardInfo cardInHand in _hand)
                     {
                         //reverse if possible
-                        if (_playArea.CanReverseWithCard(cardInHand))
+                        if (_playArea.CanReverseWithCard(cardInHand) && GameHandler.Instance.CanPlayCard(cardInHand,1))
                         {
                             _hand.Remove(cardInHand);
                             _handUI.RemoveCard();
@@ -104,7 +104,7 @@ public class OpponentLogic : MonoBehaviour
                             return true;
                         }
                         //Defending if cannot reverse
-                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()))
+                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()) && GameHandler.Instance.CanPlayCard(cardInHand,1))
                         {
                             if (smallestCardThatDefends == null)
                             {
