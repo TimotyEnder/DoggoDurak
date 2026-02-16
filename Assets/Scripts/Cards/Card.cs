@@ -70,6 +70,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject parryTextPrefab;
     [SerializeField]
     private GameObject drawTextPrefab;
+    private PassButton _passButton;
     void Start()
     {
     }
@@ -134,6 +135,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if(rhObj!=null)
         {
             _rh=rhObj.GetComponent<RuleHandler>();
+        }
+        GameObject passBtnObj= GameObject.Find("PassButton");
+        if(passBtnObj!=null)
+        {
+            _passButton= passBtnObj.GetComponent<PassButton>();
         }
     }
     public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
@@ -351,13 +357,23 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo()))
         {
             PlayCard();
-            StartCoroutine(_opponent.EnemyPlay());
+            if(_cardHandAreaScript.GetCardsInHand()==0)
+            {
+                _passButton.SetJiggle(false);
+                StartCoroutine(_opponent.EnemyPlay());
+            }
+            _passButton.SetJiggle(true);
         }
         //Defending, not your turn
         else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend))
         {
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
-            StartCoroutine(_opponent.EnemyPlay());
+            if(_cardHandAreaScript.GetCardsInHand()==0)
+            {
+                _passButton.SetJiggle(false);
+                StartCoroutine(_opponent.EnemyPlay());
+            }
+            _passButton.SetJiggle(true);
         }
         //reverse
         else if (_playAreaScript.CanReverseWithCard(this._cardInfo) && _turnHandler.GetTurnState() != 0) 

@@ -1640,8 +1640,9 @@ GameObject:
   - component: {fileID: 555036491}
   - component: {fileID: 555036490}
   - component: {fileID: 555036493}
+  - component: {fileID: 555036494}
   m_Layer: 5
-  m_Name: EndTurnButton
+  m_Name: PassButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1761,8 +1762,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee4a091fc0740f4fb95c76f4544804e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _endTurnButton: {fileID: 0}
-  _turnHandler: {fileID: 0}
+  _passTurnButton: {fileID: 555036490}
+  _opp: {fileID: 1311001219}
+  _anim: {fileID: 555036494}
+--- !u!95 &555036494
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555036488}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de575c58fe3a95324857314249e8c706, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &561356417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4560,7 +4584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: END TURN
+  m_text: PASS!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c51a6605183ff84ba9463e37f60f0c2, type: 2}
   m_sharedMaterial: {fileID: 8239948856178332880, guid: 1c51a6605183ff84ba9463e37f60f0c2, type: 2}

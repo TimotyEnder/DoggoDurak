@@ -107,6 +107,10 @@ public class PlayArea : MonoBehaviour
         }
         return -1;
     }
+    public int GetNumCardsBlocking()
+    {
+        return this.transform.Find("DefendedCards").childCount;
+    }
     int UnblockedCardsAmount() 
     {
         int amount = 0;

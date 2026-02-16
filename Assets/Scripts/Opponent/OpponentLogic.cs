@@ -199,7 +199,8 @@ public class OpponentLogic : MonoBehaviour
     }
     
     public IEnumerator CheckForPlaysRoutine()
-    {
+    { 
+        int oldTurnState= _turnHandler.GetTurnState(); //this is so if the player chooses not to defend the turn gets ended
         yield return new WaitForSecondsRealtime(0.5f);  
         while (CheckPlay()) 
         {
@@ -207,7 +208,7 @@ public class OpponentLogic : MonoBehaviour
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        if (!endTurnCaused && cha != null && !cha.HasMorePlays()) 
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays()&& oldTurnState==0 || oldTurnState==1)) 
         {
             endTurnCaused = true;
             _turnHandler.StartEndTurn();
