@@ -35,6 +35,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private Card _cardDefending;
     private OpponentLogic _opponent;
     //visual modifiers
+    [SerializeField]
+    private GameObject _notPermissible;
     private GameObject _bounceOverlay;
     private GameObject _burnOverlay;
     private TextMeshProUGUI _burnText;
@@ -177,6 +179,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         _grey=false;
         _cardImage.GetComponent<Image>().color = Color.white;
+    }
+    public void CheckPlayPermission()
+    {
+        if(!GameHandler.Instance.CanPlayCard(this.GetCardInfo(),0))
+        {
+            _notPermissible.SetActive(true);
+        }
+        else
+        {
+            _notPermissible.SetActive(false);
+        }
     }
     public void Bling()
     {
@@ -485,7 +498,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
-        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position) && GameHandler.Instance.CanPlayCard(this.GetCardInfo(), _turnHandler.GetTurnState()))
+        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position) && GameHandler.Instance.CanPlayCard(this.GetCardInfo(), (GetCardInfo()._opponentCard?1:0)))
         {
             OnPlay(eventData.position);
         }

@@ -16,6 +16,7 @@ public class TurnHandler : MonoBehaviour
     private OpponentLogic _opponent;
     private LifeTotal _playerHp;
     private LifeTotal _opponentHp;
+    private CardHandArea _playerHand;
     private bool _turnEndStarted=false;
     void Start()
     {
@@ -28,6 +29,7 @@ public class TurnHandler : MonoBehaviour
         _opponent = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
         _playerHp= GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>(); 
         _opponentHp = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
+        _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         //Init Setup
         InitSetup();
     }
@@ -90,6 +92,7 @@ public class TurnHandler : MonoBehaviour
         _turnEndStarted=false;
         _playArea.Wipe();
         GameHandler.Instance.GetPlayPermissionManager().ResetPermissions();
+        GameHandler.Instance.UIupdatePlayPermissions();
         //Change Turn State
         if (_turnState == 0)
         {

@@ -151,6 +151,13 @@ public class CardHandArea : MonoBehaviour
             card.GreyIn();
         }
     }
+    public void CheckPlayPermissionHand()
+    {
+        foreach(Card card in this._cards)
+        {
+            card.CheckPlayPermission();
+        }
+    }
     public bool HasMorePlays() 
     {
         PlayArea pa= GameObject.Find("PlayArea").GetComponent<PlayArea>();

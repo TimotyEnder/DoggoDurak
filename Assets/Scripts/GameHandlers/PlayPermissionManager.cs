@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class PlayPermissionManager 
 {
-    //number-> suit-> turnState-> boolean representing if card can be played this turn.
+    //number-> suit-> 0=player 1=enemy-> boolean representing if card can be played 
     public  Dictionary<int, Dictionary<string, bool[]>> _playPermissionsCard;
     public Dictionary<string, bool[]> _playPermissionsModifier;
     public PlayPermissionManager()

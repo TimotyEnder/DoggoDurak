@@ -285,4 +285,12 @@ public class GameHandler : MonoBehaviour
     {
         return _playPermissionManager;
     }  
+    public void UIupdatePlayPermissions()
+    {
+        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        if (cardHandArea != null)
+        {
+            cardHandArea.GetComponent<CardHandArea>().CheckPlayPermissionHand();
+        }
+    }
 }
