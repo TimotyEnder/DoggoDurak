@@ -9,6 +9,7 @@ public class TheMirDirective : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "TheMirDirective";
+        this.persistent=true;
         this.toolTipDesc = StylisticClass.ActivateString+" Diamonds cannot be played this turn.";
     }
 

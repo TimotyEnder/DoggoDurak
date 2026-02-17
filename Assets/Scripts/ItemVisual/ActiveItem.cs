@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -40,10 +41,22 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        StartCoroutine(OnPress());
+    }
+    private IEnumerator OnPress()
+    {
         _anim.SetTrigger("Click");
         _item.Activate();
+        yield return new WaitForSeconds(0.2f);
+        if(_item.IsPersistent())
+        {
+            _anim.SetBool("Active",true);
+        }
     }
-
+    public void ResetAnim() 
+    {
+        _anim.SetBool("Active",false);
+    }   
     public void OnPointerEnter(PointerEventData eventData)
     {
          _anim.SetTrigger("Hover");

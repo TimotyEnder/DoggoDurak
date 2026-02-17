@@ -197,6 +197,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if(!GameHandler.Instance.CanPlayCard(this.GetCardInfo(),0))
         {
             _notPermissible.SetActive(true);
+            Bling();
         }
         else
         {

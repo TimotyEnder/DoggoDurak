@@ -8,6 +8,7 @@ public class ThePtyuchFold : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "ThePtyuchFold";
+        this.persistent=true;
         this.toolTipDesc = StylisticClass.ActivateString+" Clubs cannot be played this turn.";
     }
 

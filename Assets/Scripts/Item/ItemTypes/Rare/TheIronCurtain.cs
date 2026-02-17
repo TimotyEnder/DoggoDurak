@@ -9,6 +9,7 @@ public class TheIronCurtain : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "TheIronCurtain";
+        this.persistent=true;
         this.toolTipDesc = StylisticClass.ActivateString+" Spades cannot be played this turn.";
     }
 

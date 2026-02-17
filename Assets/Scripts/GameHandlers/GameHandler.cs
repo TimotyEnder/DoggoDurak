@@ -303,4 +303,11 @@ public class GameHandler : MonoBehaviour
             cardHandArea.GetComponent<CardHandArea>().CheckPlayPermissionHand();
         }
     }
+    public void ResetPersistentItemsAnim()
+    {
+        foreach (Transform item in GameObject.Find("ActiveItemInventory").transform)
+        {
+            item.gameObject.GetComponent<ActiveItem>().ResetAnim();
+        }
+    }
 }

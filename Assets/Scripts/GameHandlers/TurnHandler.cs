@@ -91,6 +91,7 @@ public class TurnHandler : MonoBehaviour
         _turnEndStarted=false;
         _playArea.Wipe();
         GameHandler.Instance.ResetPlayPermissions();
+        GameHandler.Instance.ResetPersistentItemsAnim();
         //Change Turn State
         if (_turnState == 0)
         {

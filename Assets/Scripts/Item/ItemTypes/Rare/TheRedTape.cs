@@ -9,6 +9,7 @@ public class TheRedTape : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "TheRedTape";
+        this.persistent=true;
         this.toolTipDesc = StylisticClass.ActivateString+" Hearts cannot be played this turn.";
     }
 

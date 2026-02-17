@@ -16,6 +16,7 @@ public abstract class Item : ScriptableObject
     protected string itemId;//serialized already in the item container
     protected Sprite Icon;
     protected bool isActive;
+    protected bool persistent=false;// if true the effect of the item is something that affects the entire turn. important for animations.
     protected bool _hasBeenActivated=false;
     protected string toolTipDesc;
 
@@ -82,6 +83,10 @@ public abstract class Item : ScriptableObject
     {
         return isActive;
     }
+    public bool  IsPersistent() 
+    {
+        return persistent;
+    }   
     public  static Dictionary<int, string> rarityIntToWord = new Dictionary<int, string>
     {
         {0,"Common"},
