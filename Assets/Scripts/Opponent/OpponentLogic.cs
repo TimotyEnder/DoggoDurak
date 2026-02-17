@@ -25,7 +25,7 @@ public class OpponentLogic : MonoBehaviour
     private bool endTurnCaused = false;//flag to stop end turn infinite loop 
     private bool _enemyPlaying = false;
     private CardHandArea _cardHandArea;
-
+    private bool _doublePass=false; //if you pass once the enemy gets to put more cards down and then if you press pass again you will not defend.
     private Discard _discard;
     private void Start()
     {
@@ -208,14 +208,18 @@ public class OpponentLogic : MonoBehaviour
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays())) 
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass && _turnHandler.GetTurnState()!=0)) 
         {
             endTurnCaused = true;
             _turnHandler.StartEndTurn();
         }
-        
+        _doublePass=true;
         _enemyPlaying = false;
         _cardHandArea.GreyOutAllCards();
+    }
+    public void resetDoublePass()
+    {
+        _doublePass=false;
     }
     public void resetEndTurnFlag() 
     {

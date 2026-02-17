@@ -357,6 +357,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo()))
         {
             PlayCard();
+            _opponent.resetDoublePass();
             if(_cardHandAreaScript.GetCardsInHand()==0)
             {
                 _passButton.SetJiggle(false);
@@ -368,6 +369,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend))
         {
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
+            _opponent.resetDoublePass();
             if(_cardHandAreaScript.GetCardsInHand()==0)
             {
                 _passButton.SetJiggle(false);
@@ -379,6 +381,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         else if (_playAreaScript.CanReverseWithCard(this._cardInfo) && _turnHandler.GetTurnState() != 0) 
         {
             PlayCard();
+            _opponent.resetDoublePass();
             _cardInfo.OnReverse(this);
             if (!_cardInfo._opponentCard)
             {
