@@ -291,6 +291,10 @@ public class GameHandler : MonoBehaviour
         _playPermissionManager.SetPermissions(perms,forPlayer,forEnemy);
         UIupdatePlayPermissions();
     }
+    public void EncounterSetPlayPermissions()
+    {
+        _currentEncounter.SetPlayPermissions();
+    }
     public void UIupdatePlayPermissions()
     {
         GameObject cardHandArea= GameObject.Find("CardHandArea");

@@ -52,6 +52,7 @@ public class TurnHandler : MonoBehaviour
     void Turn() 
     {
         _ruleHandler.CheckGameState();
+        GameHandler.Instance.EncounterSetPlayPermissions();
         _opponent.resetEndTurnFlag();
         StartCoroutine(_playerDeck.DrawHandRoutine());
         StartCoroutine(_opponent.DrawHandRoutine());
