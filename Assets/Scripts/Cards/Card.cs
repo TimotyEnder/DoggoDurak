@@ -208,7 +208,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         SetAnimatable(true);
         _animator.SetTrigger("Bling");
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.2f);
         SetAnimatable(false);
     }
     public void Hit()
