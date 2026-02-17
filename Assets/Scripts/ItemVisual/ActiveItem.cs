@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActiveItem:MonoBehaviour,IPointerClickHandler
+public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
 {
     private Item _item;
     [SerializeField]
@@ -10,6 +10,8 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler
     private ToolTip _toolTip;
     [SerializeField]
     private Image _bgColor;
+    [SerializeField]
+    private Animator _anim;
 
 
 
@@ -38,8 +40,12 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Clicked active item");
+        _anim.SetTrigger("Click");
         _item.Activate();
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+         _anim.SetTrigger("Hover");
+    }
 }
