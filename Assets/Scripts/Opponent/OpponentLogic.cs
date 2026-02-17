@@ -213,7 +213,10 @@ public class OpponentLogic : MonoBehaviour
             endTurnCaused = true;
             _turnHandler.StartEndTurn();
         }
-        _doublePass=true;
+        else
+        {
+            _doublePass=true;
+        }
         _enemyPlaying = false;
         _cardHandArea.GreyOutAllCards();
     }
