@@ -150,7 +150,7 @@ public class TurnHandler : MonoBehaviour
                     GameHandler.Instance.GetGameState().OnDamageOpponent(card.GetCardInfo()._number);
                 }
 
-                yield return new WaitForSeconds(0.75f);
+                yield return new WaitForSeconds(0.8f);
                 card.SetAnimatable(false);
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }
