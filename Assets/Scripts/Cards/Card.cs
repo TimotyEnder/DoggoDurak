@@ -48,6 +48,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
     private Animator _animator;
+    private int _animationsCurrent=0;
     private bool _tryToHighlightCard=true; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
     private RuleHandler _rh;
     private CanvasScaler _cScaler;
@@ -168,11 +169,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         if(!state)
         {
-          _animator.applyRootMotion = false;
-          _animator.enabled=false;
+            _animationsCurrent--;
+            if(_animationsCurrent==0)
+            {
+                _animator.applyRootMotion = false;
+                _animator.enabled=false;
+            }
         }
         else
         {
+            _animationsCurrent++;
             _animator.applyRootMotion = true;
         }
     }
@@ -347,6 +353,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void OnPlay(Vector2 screenPoint)
     {
+        Debug.Log("On play turn state: "+_turnHandler.GetTurnState());
         int cardDefendingIndex = _playAreaScript.GetCardDefending(screenPoint);
         CardInfo cardToDefend = null;
         if (cardDefendingIndex!=-1) 
@@ -356,6 +363,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         //playing cards  as it is your turn
         if (_turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo()))
         {
+            Debug.Log("Able to attack");
             PlayCard();
             _opponent.resetDoublePass();
             if(_cardHandAreaScript.GetCardsInHand()==0)
@@ -368,6 +376,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         //Defending, not your turn
         else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend))
         {
+            Debug.Log("Able to defend");
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
             _opponent.resetDoublePass();
             if(_cardHandAreaScript.GetCardsInHand()==0)
@@ -380,6 +389,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         //reverse
         else if (_playAreaScript.CanReverseWithCard(this._cardInfo) && _turnHandler.GetTurnState() != 0) 
         {
+            Debug.Log("Able to reverse");
             PlayCard();
             _opponent.resetDoublePass();
             _cardInfo.OnReverse(this);
