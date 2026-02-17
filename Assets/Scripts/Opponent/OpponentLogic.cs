@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using TMPro;
@@ -200,7 +201,6 @@ public class OpponentLogic : MonoBehaviour
     
     public IEnumerator CheckForPlaysRoutine()
     { 
-        int oldTurnState= _turnHandler.GetTurnState(); //this is so if the player chooses not to defend the turn gets ended
         yield return new WaitForSecondsRealtime(0.5f);  
         while (CheckPlay()) 
         {
@@ -208,15 +208,16 @@ public class OpponentLogic : MonoBehaviour
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays()&& oldTurnState==0 || oldTurnState==1)) 
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays())) 
         {
             endTurnCaused = true;
             _turnHandler.StartEndTurn();
         }
+        
         _enemyPlaying = false;
         _cardHandArea.GreyOutAllCards();
     }
-    public void resetEndTunFlag() 
+    public void resetEndTurnFlag() 
     {
         endTurnCaused = false;
     }
