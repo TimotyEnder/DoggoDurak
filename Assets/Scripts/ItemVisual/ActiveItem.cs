@@ -20,8 +20,13 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
     {
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
+        SelectColor();
         this._itemIcon = item.GetIcon();
-        switch (item.GetRarity())
+        _toolTip.SetToolTipText(item.GetItemToolTip());
+    }
+    public void SelectColor()
+    {
+         switch (_item.GetRarity())
         {
             case 0:
                 _bgColor.color = StylisticClass.CommonItem;
@@ -36,9 +41,7 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
                 _bgColor.color = StylisticClass.BossItem;
                 break;
         }
-        _toolTip.SetToolTipText(item.GetItemToolTip());
     }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         StartCoroutine(OnPress());
@@ -46,15 +49,20 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
     private IEnumerator OnPress()
     {
         _anim.SetTrigger("Click");
-        _item.Activate();
+        if(!_item.Activate())
+        {
+            _bgColor.color=StylisticClass.ActiveItemUseInvalid;
+        }
         yield return new WaitForSeconds(0.2f);
-        if(_item.IsPersistent())
+        SelectColor();
+        if(_item.IsPersistent() && !_item.hasBeenActivated())
         {
             _anim.SetBool("Active",true);
         }
     }
     public void ResetAnim() 
     {
+        Debug.Log("Reset anim");
         _anim.SetBool("Active",false);
     }   
     public void OnPointerEnter(PointerEventData eventData)

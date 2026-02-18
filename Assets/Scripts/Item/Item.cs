@@ -33,13 +33,22 @@ public abstract class Item : ScriptableObject
     public abstract void OnDamageOpponent(int amount);
     public abstract void OnActivate();
 
-    public void Activate() 
+    public bool Activate() 
     {
         if (isActive && !_hasBeenActivated)
         {
             _hasBeenActivated = true;
             OnActivate();
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+    public bool hasBeenActivated()
+    {
+        return _hasBeenActivated;
     }
     public void ResetActivation() 
     {
