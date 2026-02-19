@@ -197,6 +197,11 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void SetToolTipText(string text) 
     {
         this._tooltipText = text;
+        if(_currentTooltip!=null)
+        {
+            TextMeshProUGUI ttText = _currentTooltip.GetComponentInChildren<TextMeshProUGUI>();
+            ttText.text = _tooltipText;
+        }
     }
 
     public void SetTooltipActiveState(bool active) 

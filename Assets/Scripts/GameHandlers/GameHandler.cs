@@ -60,7 +60,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        Item debugItem2 = ScriptableObject.CreateInstance<StraysLuckyCoin>();
         debugItem2.InitItem();
         _state.AddItem(debugItem2);
         Next();
