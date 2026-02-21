@@ -117,7 +117,7 @@ public class CardInfo
         {"Cripple", StylisticClass.CrippleString},
         {"Spiky", StylisticClass.SpikyString},
     };
-    private static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
+    public  static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
     {
         {"Restoring", "Defend with this card to gain health equal to the difference of values between the defending and defended cards."},
         {"Bounce", "When defending, this card does  damage  equal  to the difference of values between the defending and defended cards."},
