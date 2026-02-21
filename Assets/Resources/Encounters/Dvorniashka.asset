@@ -12,10 +12,155 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf6501dc3ab42c438148795fd53f7d4, type: 3}
   m_Name: Dvorniashka
   m_EditorClassIdentifier: 
-  day: 0
-  deck: []
-  health: 0
-  goldRewardMod: 0
-  trumpSuit: 0
+  day: 1
+  deck:
+  - _suit: C
+    _suitNumber: 3
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 7
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 9
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 10
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 11
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 7
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 9
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 10
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 11
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 7
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 9
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 10
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 11
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 7
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 9
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 10
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 11
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  health: 60
+  goldRewardMod: 1.5
+  trumpSuit: 82
   icon: {fileID: 0}
   boss: 0
+  encounterName: Dvorniashka

@@ -27,6 +27,10 @@ public class OpponentLogic : MonoBehaviour
     private CardHandArea _cardHandArea;
     private bool[] _doublePass={false,false}; //if you pass once the enemy gets to put more cards down and then if you press pass again you will not defend.
     private Discard _discard;
+    [SerializeField]
+    private TextMeshProUGUI _responseText;
+    private bool _noResponse=true; //if the enemy has no response to the players attack, this is set to true and the response text is set to "No Response" at the end of the player's turn. This is reset at the start of the enemy's turn.
+    private bool  _noResponseWritten=false;
     private void Start()
     {
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
@@ -77,6 +81,8 @@ public class OpponentLogic : MonoBehaviour
                     GameObject CardToAttack = Instantiate(cardMaker);
                     CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
                     CardToAttack.GetComponent<Card>().PlayCard();
+                    AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+" with:"+cardInHand.CompileCondencedModifiers());
+                    _noResponse=false;
                     return true;
                 }
             }
@@ -102,6 +108,8 @@ public class OpponentLogic : MonoBehaviour
                             CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
                             GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
                             _turnHandler.Reverse();
+                           AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+" with:"+cardInHand.CompileCondencedModifiers());
+                            _noResponse=false;
                             return true;
                         }
                         //Defending if cannot reverse
@@ -124,6 +132,8 @@ public class OpponentLogic : MonoBehaviour
                         GameObject CardToDefend = Instantiate(cardMaker);
                         CardToDefend.GetComponent<Card>().MakeCard(smallestCardThatDefends);
                         CardToDefend.GetComponent<Card>().DefendCard(card);
+                        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ card.GetCardInfo().CompileCardName() + " with: "+smallestCardThatDefends.CompileCardName()+" with:"+smallestCardThatDefends.CompileCondencedModifiers());
+                        _noResponse=false;
                         return true;
                     }
                     return false;
@@ -134,6 +144,7 @@ public class OpponentLogic : MonoBehaviour
     }
     public void Attack() 
     {
+        WipeResponseText();
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
@@ -149,10 +160,7 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
         CardToAttack.GetComponent<Card>().PlayCard();
-    }
-    void Update()
-    {
-        
+         AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+" with:"+lowerCard.CompileCondencedModifiers());
     }
     public  IEnumerator DrawHandRoutine()
     {
@@ -195,6 +203,7 @@ public class OpponentLogic : MonoBehaviour
     {
         _enemyPlaying = true;
         _cardHandArea.GreyInAllCards();
+        WipeResponseText();
         yield return new WaitForEndOfFrame();
         StartCoroutine(CheckForPlaysRoutine());
     }
@@ -205,6 +214,11 @@ public class OpponentLogic : MonoBehaviour
         while (CheckPlay()) 
         {
             yield return new WaitForSeconds(0.5f);
+        }
+        if(_noResponse && !_noResponseWritten)
+        {
+            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no response!");
+            _noResponseWritten = true;
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
@@ -218,6 +232,7 @@ public class OpponentLogic : MonoBehaviour
             _doublePass[_turnHandler.GetTurnState()]=true;
         }
         _enemyPlaying = false;
+        _noResponse=true;  
         _cardHandArea.GreyOutAllCards();
     }
     public void resetDoublePass()
@@ -228,4 +243,13 @@ public class OpponentLogic : MonoBehaviour
     {
         endTurnCaused = false;
     }
+    private void WipeResponseText() 
+    {
+        _responseText.text = "";
+        _noResponseWritten=false; 
+    } 
+    private void AddToResponseText(string textToAdd) 
+    {
+        _responseText.text += "<wave  a=0.1>" + textToAdd + "</wave>\n";
+    }  
 }

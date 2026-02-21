@@ -10,12 +10,117 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14e2b383f8e872448b389f781434075e, type: 3}
-  m_Name: LowlySpikyDvorniashka
+  m_Name: Lowly Spiky Dvorniashka
   m_EditorClassIdentifier: 
   day: 0
-  deck: []
-  health: 0
-  goldRewardMod: 0
-  trumpSuit: 0
+  deck:
+  - _suit: C
+    _suitNumber: 3
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 7
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 9
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 7
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 9
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 7
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: D
+    _suitNumber: 1
+    _number: 9
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 7
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: H
+    _suitNumber: 0
+    _number: 9
+    _modifiers:
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  health: 40
+  goldRewardMod: 1
+  trumpSuit: 82
   icon: {fileID: 0}
   boss: 0
+  encounterName: Lowly Spiky Dvorniashka

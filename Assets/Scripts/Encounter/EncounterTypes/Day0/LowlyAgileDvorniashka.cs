@@ -6,6 +6,7 @@ public class LowlyAgileDvorniashka : Encounter
     public override void InitEncounter()
     {
         deck = new List<CardInfo>(); //standart durak deck initialization
+        encounterName = "Lowly Agile Dvorniashka";
         for (int i = 0; i < 4; i++)
         {
             switch (i)

@@ -127,7 +127,7 @@ public class CardInfo
         {"Cripple", "When attacking makes opponent discard 1 card for each cripple modifier on the card."},
         {"Spiky", "When this card is defended deal 1 damage for each spiky modifier of the card to the defending player."},
     };
-    private static Dictionary<string, string> suitFullName = new Dictionary<string, string>
+    public static Dictionary<string, string> suitFullName = new Dictionary<string, string>
     {
         {"C"," of Clubs"},
         {"D"," of Diamonds"},
@@ -141,7 +141,7 @@ public class CardInfo
         {"H","<color=red>"},
         {"S","<color=white>"}
     };
-    private static Dictionary<int, string> numberFullName = new Dictionary<int, string>
+    public static Dictionary<int, string> numberFullName = new Dictionary<int, string>
     {
         {6,"Six"},
         {7,"Seven"},
@@ -256,7 +256,7 @@ public class CardInfo
     public string CompileTooltipDescription() 
     {
         string returnString = "";
-        returnString += "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColor[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+_number+"dmg)</align></color></size>"+ "\n";
+        returnString += CompileCardName()+"\n";
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
             if(modifierMaxCopies[entry.Key]==1)
@@ -269,6 +269,26 @@ public class CardInfo
             }
         }
         return returnString;
+    }
+    public string CompileCardName()
+    {
+        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColor[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+_number+"dmg)</align></color></size>";
+    }
+    public string CompileCondencedModifiers()
+    {
+        string returnString = "<align=center>";
+        foreach (KeyValuePair<string, int> entry in _modifierStacks) 
+        {
+            if(modifierMaxCopies[entry.Key]==1)
+            {
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] +" ";
+            }
+            else
+            {
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+ modifierToStyleString[entry.Key] + " ";
+            }
+        }
+        return returnString+"</align>";
     }
     public override string ToString() // for debug purposes
     {

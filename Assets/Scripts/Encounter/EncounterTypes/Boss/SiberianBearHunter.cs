@@ -5,6 +5,7 @@ public class SiberianBearHunter : Encounter
 {
     public override void InitEncounter()
     {
+        encounterName = "Siberian Bear Hunter";
         deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 1; i++)
         {

@@ -5,6 +5,7 @@ public class RestoringDvorniashka : Encounter
 {
    public override void InitEncounter()
     {
+        encounterName = "Restoring Dvorniashka";
         deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 4; i++)
         {

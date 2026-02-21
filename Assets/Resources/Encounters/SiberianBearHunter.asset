@@ -10,12 +10,157 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5db2941b34fdcea1f8f2b3dce5a518f2, type: 3}
-  m_Name: SiberianBearHunter
+  m_Name: Siberian Bear Hunter
   m_EditorClassIdentifier: 
   day: 0
-  deck: []
-  health: 0
-  goldRewardMod: 0
-  trumpSuit: 0
+  deck:
+  - _suit: S
+    _suitNumber: 2
+    _number: 6
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 7
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 8
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 9
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 10
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 11
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 12
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 13
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 14
+    _modifiers:
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    - ModType: Spiky
+    _opponentCard: 1
+    _card: {fileID: 0}
+  health: 33
+  goldRewardMod: 2
+  trumpSuit: 68
   icon: {fileID: 0}
-  boss: 0
+  boss: 1
+  encounterName: Siberian Bear Hunter

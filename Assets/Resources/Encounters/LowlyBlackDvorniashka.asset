@@ -10,12 +10,73 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d3a539a1363574b83bd2151c0931f9, type: 3}
-  m_Name: LowlyBlackDvorniashka
+  m_Name: Lowly Black Dvorniashka
   m_EditorClassIdentifier: 
   day: 0
-  deck: []
-  health: 0
-  goldRewardMod: 0
-  trumpSuit: 0
+  deck:
+  - _suit: S
+    _suitNumber: 2
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 7
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 9
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: S
+    _suitNumber: 2
+    _number: 10
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 6
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 7
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 8
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 9
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  - _suit: C
+    _suitNumber: 3
+    _number: 10
+    _modifiers: []
+    _opponentCard: 1
+    _card: {fileID: 0}
+  health: 40
+  goldRewardMod: 1
+  trumpSuit: 72
   icon: {fileID: 0}
   boss: 0
+  encounterName: Lowly Black Dvorniashka

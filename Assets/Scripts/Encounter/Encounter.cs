@@ -15,6 +15,7 @@ public abstract class Encounter : ScriptableObject
     [SerializeField] protected char trumpSuit;
     [SerializeField] protected  Sprite icon;
     [SerializeField] protected bool boss;
+    [SerializeField] protected string encounterName;
     protected string description;
     //additional rewards implement here
 
@@ -25,6 +26,10 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnReverse(Card card);
     public abstract void OnDamagePlayer(int amount);
     public void SetPlayPermissions(){}
+    public string GetEncounterName() 
+    {
+        return encounterName;
+    }
     public int GetDay() 
     {
         return day;

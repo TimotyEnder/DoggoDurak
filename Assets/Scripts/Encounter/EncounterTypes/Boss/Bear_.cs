@@ -6,6 +6,7 @@ public class Bear : Encounter
     int DamageInstante = 0;
     public override void InitEncounter()
     {
+        encounterName = "Bear?!";
         deck = new List<CardInfo>(); //standart durak deck initialization
         for (int i = 0; i < 4; i++)
         {
