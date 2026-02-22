@@ -111,7 +111,7 @@ public class PlayArea : MonoBehaviour
     {
         return this.transform.Find("DefendedCards").childCount;
     }
-    int UnblockedCardsAmount() 
+    public int UnblockedCardsAmount() 
     {
         int amount = 0;
         foreach (Card card in _cardsPlayed) 

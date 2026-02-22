@@ -108,7 +108,7 @@ public class OpponentLogic : MonoBehaviour
                             CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
                             GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
                             _turnHandler.Reverse();
-                           AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+" with:"+cardInHand.CompileCondencedModifiers());
+                            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+" with:"+cardInHand.CompileCondencedModifiers());
                             _noResponse=false;
                             return true;
                         }
@@ -222,7 +222,7 @@ public class OpponentLogic : MonoBehaviour
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()])) 
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()] || _turnHandler.GetTurnState()==1 && _playArea.UnblockedCardsAmount()==0)) 
         {
             endTurnCaused = true;
             _turnHandler.StartEndTurn();

@@ -281,11 +281,11 @@ public class CardInfo
         {
             if(modifierMaxCopies[entry.Key]==1)
             {
-                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] +" ";
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] +" </color>";
             }
             else
             {
-                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+ modifierToStyleString[entry.Key] + " ";
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+ modifierToStyleString[entry.Key] + " </color>";
             }
         }
         return returnString+"</align>";
