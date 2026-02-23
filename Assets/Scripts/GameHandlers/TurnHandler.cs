@@ -91,7 +91,7 @@ public class TurnHandler : MonoBehaviour
         _turnEndStarted=false;
         _playArea.Wipe();
         GameHandler.Instance.ResetPlayPermissions();
-        GameHandler.Instance.ResetPersistentItemsAnim();
+        GameHandler.Instance.ResetPersistentItems();
         //Change Turn State
         if (_turnState == 0)
         {
@@ -143,12 +143,12 @@ public class TurnHandler : MonoBehaviour
                 card.Hit();
                 if (_turnState > 0)
                 {
-                    _playerHp.Damage(card.GetCardInfo()._number);
+                    GameHandler.Instance.DamagePlayer(card.GetCardInfo()._number);
                     GameHandler.Instance.GetCurrEncounter().OnDamagePlayer(card.GetCardInfo()._number);
                 }
                 else
                 {
-                    _opponentHp.Damage(card.GetCardInfo()._number);
+                    GameHandler.Instance.DamageOpponent(card.GetCardInfo()._number);
                     GameHandler.Instance.GetGameState().OnDamageOpponent(card.GetCardInfo()._number);
                 }
 

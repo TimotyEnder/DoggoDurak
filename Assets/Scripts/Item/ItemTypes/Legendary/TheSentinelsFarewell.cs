@@ -1,6 +1,6 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "Muzzle", menuName = "Items/Active-Legendary/Muzzle")]
-public class Muzzle : Item
+[CreateAssetMenu(fileName = "TheSentinel'sFarewell", menuName = "Items/Active-Legendary/TheSentinel'sFarewell")]
+public class TheSentinelsFarewell : Item
 {
     public override void InitItem()
     {
@@ -8,13 +8,13 @@ public class Muzzle : Item
         this.boss = false;
         this.isActive=true;
         this.persistent=true;
-        this.itemId = "Muzzle";
-        this.toolTipDesc =StylisticClass.ActivateString+"opponent cannot play face cards this turn.";
+        this.itemId = "TheSentinel'sFarewell";
+        this.toolTipDesc =StylisticClass.ActivateString+" set your hp to 1, it cannot be lowered this turn.";
     }
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[]{"C11","C12","C13","C14","D11","D12","D13","D14","H11","H12","H13","H14","S11","S12","S13","S14"},false,true);
+        GameHandler.Instance.SentinelsFarewell();
     }
 
     public override void OnAquire()

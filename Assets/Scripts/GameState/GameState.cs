@@ -35,6 +35,7 @@ public class GameState
     public int _shopRerollCost;
     public int _startingShopRerollCost;
     public float _randomBossEncounterChance;
+    public bool[] _undamagable; //0 player 1 enemy
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -96,6 +97,7 @@ public class GameState
         _shopRerollCost = 5;
         _startingShopRerollCost = 5;
         _randomBossEncounterChance = 10;
+        _undamagable=new bool[]{false,false};
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {

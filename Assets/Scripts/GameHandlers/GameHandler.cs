@@ -60,7 +60,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<Muzzle>();
+        //Item debugItem2 = ScriptableObject.CreateInstance<TheSentinelsFarewell>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
@@ -157,6 +157,11 @@ public class GameHandler : MonoBehaviour
         {
             _state._health = _state._maxhealth;
         }
+        if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+        {
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().SetHealth(health);
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdateHealthUI();
+        }
     }
     public void IncreaseMaxHealth(int amount)
     {
@@ -189,26 +194,46 @@ public class GameHandler : MonoBehaviour
     }
     public void DamageOpponent(int amount, bool fromEffect = false) //any effects damaging the enemy should go through this
     {
-        if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+        if(_state._undamagable[1])
         {
-            GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-            GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+            if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+            {
+                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().ShowNoDamage();
+            }
         }
-        if (!fromEffect)
+        else
         {
-            _state.OnDamageOpponent(amount);
+            if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+            {
+                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+            }
+            if (!fromEffect)
+            {
+                _state.OnDamageOpponent(amount);
+            }
         }
     }
     public void DamagePlayer(int amount,bool fromEffect = false) //any effects damaging the player should go through this
     {
-        if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+        if(_state._undamagable[0])
         {
-            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-            GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+            if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+            {
+                GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().ShowNoDamage();
+            }
         }
-        if (!fromEffect)
+        else
         {
-            _state.OnDamageOpponent(amount);
+            if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+            {
+                GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+            }
+            if (!fromEffect)
+            {
+                _state.OnDamageOpponent(amount);
+            }
         }
     }
     public void Draw(int amount)
@@ -307,11 +332,18 @@ public class GameHandler : MonoBehaviour
             cardHandArea.GetComponent<CardHandArea>().CheckPlayPermissionHand();
         }
     }
-    public void ResetPersistentItemsAnim()
+    public void ResetPersistentItems()
     {
         foreach (Transform item in GameObject.Find("ActiveItemInventory").transform)
         {
             item.gameObject.GetComponent<ActiveItem>().ResetAnim();
         }
+        _state._undamagable=new bool[]{false,false};
+    }
+    //effefts that happens because of the Legendary active item with this name
+    public void SentinelsFarewell()
+    {
+        SetHealth(1);
+        _state._undamagable[0]=true;
     }
 }

@@ -20,7 +20,7 @@ public class LifeTotal : MonoBehaviour
             _rh = rhObj.GetComponent<RuleHandler>();
         }
     }
-    void UpdateHealth() 
+    public void UpdateHealthUI() 
     {
         _hpText = this.gameObject.GetComponent<TextMeshProUGUI>();
         _hpText.text = _hp.ToString();
@@ -28,7 +28,7 @@ public class LifeTotal : MonoBehaviour
     public void SetHealth(int val) 
     {
         _hp = val;
-        UpdateHealth();
+        UpdateHealthUI();
     }
     public void Damage(int damage) 
     {
@@ -40,7 +40,7 @@ public class LifeTotal : MonoBehaviour
             damageText.text = damage.ToString();
             damageText.fontSize = _hpText.fontSize;
         }
-        UpdateHealth();
+        UpdateHealthUI();
     }
     public void Heal(int amount)
     {
@@ -53,7 +53,17 @@ public class LifeTotal : MonoBehaviour
         {
             _hp = GameHandler.Instance.GetGameState()._maxhealth;
         }
-        UpdateHealth();
+        UpdateHealthUI();
+    }
+    public void ShowNoDamage() //for effects that prevent damage.
+    {
+        if(_rh.CanEffectsSpawn())
+        {
+            TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
+            StartCoroutine(DestroyText(damageText));
+            damageText.text = "Cannot Be Damaged!";
+            damageText.fontSize = _hpText.fontSize*0.4f;
+        }
     }
     public int GetHealth() 
     {
