@@ -56,7 +56,7 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
         _toolTip.SetToolTipText(_item.GetItemToolTip()); //basically for Stay's coin
         yield return new WaitForSeconds(0.2f);
         SelectColor();
-        if(_item.IsPersistent() && !_item.hasBeenActivated())
+        if(_item.IsPersistent())
         {
             _anim.SetBool("Active",true);
         }
