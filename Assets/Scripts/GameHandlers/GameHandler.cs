@@ -98,16 +98,8 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            if(_state._encounter>3&&UnityEngine.Random.Range(0,100)<_state._randomBossEncounterChance) 
-            {
-                _currentEncounter = _encounterManager.RandomBossEncounter();
+             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
                 SceneManager.LoadScene(1);
-            }
-            else
-            {
-                _currentEncounter = _encounterManager.RandomEncounter(_state._day);
-                SceneManager.LoadScene(1);
-            }
         }
         else
         {

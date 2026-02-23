@@ -17,8 +17,21 @@ public abstract class Encounter : ScriptableObject
     [SerializeField] protected bool boss;
     [SerializeField] protected string encounterName;
     protected string description;
-    //additional rewards implement here
 
+    private bool HasRules= false;
+    private string Rules;
+    //additional rewards implement here
+    public  string GetRules()
+    {
+        if(HasRules)
+        {
+            return Rules;
+        }
+        else
+        {
+            return "NONE";
+        }
+    }
     public abstract void InitEncounter();
 
     public abstract void OnPlayedCard(Card card);
@@ -26,6 +39,7 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnReverse(Card card);
     public abstract void OnDamagePlayer(int amount);
     public void SetPlayPermissions(){}
+
     public string GetEncounterName() 
     {
         return encounterName;
@@ -73,23 +87,77 @@ public abstract class Encounter : ScriptableObject
     {
         if(this.boss)
         {
-            this.health= 100+50*GameHandler.Instance.GetGameState()._day;
-            if(GameHandler.Instance.GetGameState()._encounter!=11)
-            {
-                //random boss encoutner less health;
-                this.health/=3;
-            }
-            return;
+            this.health= 200*(day+1);
         }
-        switch(this.day)
+        else
         {
-            case 0:
-                this.health=40;
-                break;
-            case 1:
-                this.health=60;
-                break;
+            this.health = 50 +(50*day);
         }
-        
+    }
+    protected void AddRandomModifierToDeck(int amountToMod, string modifier)
+    {
+        int cardsModded = 0;
+        int it = 0;
+        string modifierToUse = modifier;
+        while (it < deck.Count && cardsModded < amountToMod)
+        {
+            CardInfo cardToMod = deck[UnityEngine.Random.Range(0, deck.Count - 1)];
+            if (!cardToMod._modifierStacks.ContainsKey(modifier))
+            {
+                cardToMod.AddModifier(modifier);
+                cardsModded++;
+            }
+            it++;
+        }
+        for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
+        {
+            CardInfo cardToMod = deck[UnityEngine.Random.Range(0, deck.Count - 1)];
+            cardToMod.AddModifier(modifier);
+        }
+    }
+    protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    if(Clubs)
+                    {
+                        for (int j = 6; j < upToNum; j++)
+                        {
+                            deck.Add(new CardInfo("C", j, true));
+                        }
+                    }
+                    break;
+                case 1:
+                    if(Spades)
+                    {
+                        for (int j = 6; j < upToNum; j++)
+                        {
+                            deck.Add(new CardInfo("S", j, true));
+                        }
+                    }
+                    break;
+                case 2:
+                    if(Diamonds)
+                    {
+                        for (int j = 6; j < upToNum; j++)
+                        {
+                            deck.Add(new CardInfo("D", j, true));
+                        }
+                    }
+                    break;
+                case 3:
+                    if(Hearts)
+                    {
+                        for (int j = 6; j < upToNum; j++)
+                        {
+                            deck.Add(new CardInfo("H", j, true));
+                        }
+                    }
+                    break;
+            }
+        }
     }
 }
