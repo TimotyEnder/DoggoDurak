@@ -158,6 +158,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _costText.text = _cost.ToString();
         }
         UpdateModifiers();
+        CheckPlayPermission();
         _cardRect.localScale = Vector3.one;
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
