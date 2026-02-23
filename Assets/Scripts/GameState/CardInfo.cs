@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System.Runtime.InteropServices.WindowsRuntime;
 [Serializable]
 public class CardInfo
 {
@@ -277,6 +278,10 @@ public class CardInfo
     public string CompileCondencedModifiers()
     {
         string returnString = "<align=center>";
+        if(_modifiers.Count>0)
+        {
+            returnString+=" with: ";
+        }
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
             if(modifierMaxCopies[entry.Key]==1)

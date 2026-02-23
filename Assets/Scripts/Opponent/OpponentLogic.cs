@@ -81,7 +81,7 @@ public class OpponentLogic : MonoBehaviour
                     GameObject CardToAttack = Instantiate(cardMaker);
                     CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
                     CardToAttack.GetComponent<Card>().PlayCard();
-                    AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+" with:"+cardInHand.CompileCondencedModifiers());
+                    AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
                     _noResponse=false;
                     return true;
                 }
@@ -108,7 +108,7 @@ public class OpponentLogic : MonoBehaviour
                             CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
                             GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
                             _turnHandler.Reverse();
-                            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+" with:"+cardInHand.CompileCondencedModifiers());
+                            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
                             _noResponse=false;
                             return true;
                         }
@@ -132,7 +132,7 @@ public class OpponentLogic : MonoBehaviour
                         GameObject CardToDefend = Instantiate(cardMaker);
                         CardToDefend.GetComponent<Card>().MakeCard(smallestCardThatDefends);
                         CardToDefend.GetComponent<Card>().DefendCard(card);
-                        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ card.GetCardInfo().CompileCardName() + " with: "+smallestCardThatDefends.CompileCardName()+" with:"+smallestCardThatDefends.CompileCondencedModifiers());
+                        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ card.GetCardInfo().CompileCardName() +card.GetCardInfo().CompileCardName()+ " with: "+smallestCardThatDefends.CompileCardName()+smallestCardThatDefends.CompileCondencedModifiers());
                         _noResponse=false;
                         return true;
                     }
