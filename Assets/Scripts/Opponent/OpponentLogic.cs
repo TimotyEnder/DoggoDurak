@@ -222,7 +222,8 @@ public class OpponentLogic : MonoBehaviour
         }
         Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()] || _turnHandler.GetTurnState()==1 && _playArea.UnblockedCardsAmount()==0)) 
+        Debug.Log("Unblocked: "+ _playArea.UnblockedCardsAmount());
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()])) 
         {
             endTurnCaused = true;
             _turnHandler.StartEndTurn();
