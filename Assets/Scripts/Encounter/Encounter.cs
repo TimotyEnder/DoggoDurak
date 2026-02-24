@@ -115,6 +115,21 @@ public abstract class Encounter : ScriptableObject
             cardToMod.AddModifier(modifier);
         }
     }
+     protected void UpgradeRandomCardsInDeck(int amountToMod, int upgradeAmount)
+    {
+        int cardsUpgraded = 0;
+        int it = 0;
+        while (it < deck.Count && cardsUpgraded < amountToMod)
+        {
+            CardInfo cardToMod = deck[UnityEngine.Random.Range(0, deck.Count - 1)];
+            if (cardToMod._number < 14) // Ensure card number doesn't exceed 14 (Ace is 14)
+            {
+                cardToMod._number += upgradeAmount;
+                cardsUpgraded++;
+            }
+            it++;
+        }
+    }
     protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts)
     {
         for (int i = 0; i < 4; i++)
