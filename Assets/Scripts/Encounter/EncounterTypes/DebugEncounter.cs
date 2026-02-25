@@ -73,4 +73,9 @@ public class DebugEncounter : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }

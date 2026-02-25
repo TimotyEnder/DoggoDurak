@@ -51,4 +51,9 @@ public class SpikedShepherded : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }

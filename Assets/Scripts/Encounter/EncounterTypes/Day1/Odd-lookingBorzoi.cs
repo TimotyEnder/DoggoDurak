@@ -57,4 +57,9 @@ public class OddlookingBorzoi : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }

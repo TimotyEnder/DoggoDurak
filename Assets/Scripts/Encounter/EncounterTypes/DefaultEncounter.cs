@@ -73,4 +73,9 @@ public class DefaultEncounter : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }

@@ -54,4 +54,9 @@ public class FurtiveFSBInformant : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }

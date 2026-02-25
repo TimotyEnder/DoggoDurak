@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new SpikedShepherded();
+        _currentEncounter= new MilitsiyaMalinois();
         _currentEncounter.InitEncounter();
         Next();
     }

@@ -57,4 +57,9 @@ public class EventemperedTerrier : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }

@@ -52,7 +52,7 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnDamagePlayer(int amount);
     public abstract void OnDamageOpponent(int amount);
     public abstract void OnTurnEnd(int turnState);
-    public void SetPlayPermissions(){}
+    public abstract void SetPlayPermissions();
 
     public string GetEncounterName() 
     {

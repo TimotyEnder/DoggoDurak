@@ -57,4 +57,9 @@ public class CrazedCommunist : Encounter
     {
         
     }
+
+    public override void SetPlayPermissions()
+    {
+        
+    }
 }
