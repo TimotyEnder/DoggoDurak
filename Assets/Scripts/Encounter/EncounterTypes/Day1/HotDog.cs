@@ -21,6 +21,11 @@ public class HotDog : Encounter
         AddRule("The opponent recieves "+StylisticClass.DamageNumber(5)+"at the end of the turn"); //0
     }
 
+    public override void OnDamageOpponent(int amount)
+    {
+        
+    }
+
     public override void OnDamagePlayer(int amount)
     {
         

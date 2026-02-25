@@ -20,6 +20,11 @@ public class DramaticUnionDemocrat : Encounter
         AddRule("Each time you play a "+StylisticClass.HighLight+"red card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
     }
 
+    public override void OnDamageOpponent(int amount)
+    {
+        
+    }
+
     public override void OnDamagePlayer(int amount)
     {
         

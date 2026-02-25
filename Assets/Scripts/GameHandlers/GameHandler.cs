@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new OddlookingBorzoi();
+        _currentEncounter= new SpikedShepherded();
         _currentEncounter.InitEncounter();
         Next();
     }
@@ -202,6 +202,7 @@ public class GameHandler : MonoBehaviour
             if (!fromEffect)
             {
                 _state.OnDamageOpponent(amount);
+                _currentEncounter.OnDamageOpponent(amount);
             }
         }
     }

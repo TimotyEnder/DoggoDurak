@@ -9,7 +9,7 @@ public class EventemperedTerrier : Encounter
     {
         day=0;
         boss=false;
-        trumpSuit = 'H';
+        trumpSuit = 'R';
         icon = null;
         encounterName = "Even-tempered Terrier";
         goldRewardMod = 1f;
@@ -18,6 +18,11 @@ public class EventemperedTerrier : Encounter
         this.description="Hates odd looking chaps!";
         hasRules=true;
         AddRule("Each time you play an "+StylisticClass.HighLight+"odd numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
+    }
+
+    public override void OnDamageOpponent(int amount)
+    {
+        
     }
 
     public override void OnDamagePlayer(int amount)

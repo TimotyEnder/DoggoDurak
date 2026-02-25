@@ -50,6 +50,7 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnDefendCard(Card card, Card defendedWith);
     public abstract void OnReverse(Card card);
     public abstract void OnDamagePlayer(int amount);
+    public abstract void OnDamageOpponent(int amount);
     public abstract void OnTurnEnd(int turnState);
     public void SetPlayPermissions(){}
 
@@ -111,7 +112,6 @@ public abstract class Encounter : ScriptableObject
     {
         int cardsModded = 0;
         int it = 0;
-        string modifierToUse = modifier;
         while (it < deck.Count && cardsModded < amountToMod)
         {
             CardInfo cardToMod = deck[UnityEngine.Random.Range(0, deck.Count - 1)];
@@ -124,7 +124,7 @@ public abstract class Encounter : ScriptableObject
         }
         for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
         {
-            CardInfo cardToMod = deck[UnityEngine.Random.Range(0, deck.Count - 1)];
+            CardInfo cardToMod = deck[UnityEngine.Random.Range(0, deck.Count)];
             cardToMod.AddModifier(modifier);
         }
     }

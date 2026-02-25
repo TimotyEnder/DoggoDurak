@@ -44,6 +44,11 @@ public class DefaultEncounter : Encounter
         day = 0;
     }
 
+    public override void OnDamageOpponent(int amount)
+    {
+        
+    }
+
     public override void OnDamagePlayer(int amount)
     {
         
