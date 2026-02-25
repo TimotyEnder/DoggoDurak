@@ -19,7 +19,7 @@ public class SiberianBearHuntingSuit : Item
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
         {
-            if (c._number % 2 != 0 && c._number<11) 
+            if (c.IsOdd()) 
             {
                 c.AddModifier("Spiky");
             }

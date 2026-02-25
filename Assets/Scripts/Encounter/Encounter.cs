@@ -143,7 +143,7 @@ public abstract class Encounter : ScriptableObject
             it++;
         }
     }
-    protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts)
+    protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts, bool OnlyEven=false, bool OnlyOdd=false)
     {
         this.deck= new List<CardInfo>();
         for (int i = 0; i < 4; i++)
@@ -155,7 +155,10 @@ public abstract class Encounter : ScriptableObject
                     {
                         for (int j = 6; j < upToNum+1; j++)
                         {
-                            deck.Add(new CardInfo("C", j, true));
+                            if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
+                            {
+                               deck.Add(new CardInfo("C", j, true));
+                            }
                         }
                     }
                     break;
@@ -164,7 +167,10 @@ public abstract class Encounter : ScriptableObject
                     {
                         for (int j = 6; j < upToNum+1; j++)
                         {
-                            deck.Add(new CardInfo("S", j, true));
+                            if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
+                            {
+                                deck.Add(new CardInfo("S", j, true));
+                            }
                         }
                     }
                     break;
@@ -173,7 +179,10 @@ public abstract class Encounter : ScriptableObject
                     {
                         for (int j = 6; j < upToNum+1; j++)
                         {
-                            deck.Add(new CardInfo("D", j, true));
+                            if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
+                            {
+                                deck.Add(new CardInfo("D", j, true));
+                            }
                         }
                     }
                     break;
@@ -182,7 +191,10 @@ public abstract class Encounter : ScriptableObject
                     {
                         for (int j = 6; j < upToNum+1; j++)
                         {
-                            deck.Add(new CardInfo("H", j, true));
+                            if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
+                            {
+                                deck.Add(new CardInfo("H", j, true));
+                            }
                         }
                     }
                     break;
