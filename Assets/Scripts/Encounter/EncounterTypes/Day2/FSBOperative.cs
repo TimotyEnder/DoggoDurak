@@ -1,0 +1,64 @@
+using System.Data;
+using Unity.VisualScripting;
+using System.Collections.Generic;
+using UnityEngine;
+[CreateAssetMenu(fileName = "FSBOperative", menuName = "Encounters/Day2/FSBOperative")]
+public class FSBOperative : Encounter
+{
+    public override void InitEncounter()
+    {
+        day=1;
+        boss=false;
+        trumpSuit = 'R';
+        icon = null;
+        encounterName = "FSB Operative";
+        goldRewardMod = 1.5f;
+        SetHealth();
+        initDeck(12,true,true,true,true);
+        foreach(CardInfo card in deck)
+        {
+            if(card.IsOdd())
+            {
+                card.AddModifier("Parry");
+            }
+        }
+        this.description="An FSB operative, showing face is unsafe here.";
+        hasRules=true;
+        AddRule("Face cards cannot be played,"); //0
+    }
+
+    public override void OnDamageOpponent(int amount)
+    {
+        
+    }
+
+    public override void OnDamagePlayer(int amount)
+    {
+        
+    }
+
+    public override void OnDefendCard(Card card, Card defendedWith)
+    {
+        
+    }
+
+    public override void OnPlayedCard(Card card)
+    {
+        
+    }
+
+    public override void OnReverse(Card card)
+    {
+        
+    }
+
+    public override void OnTurnEnd(int turnState)
+    {
+    }
+
+    public override void SetPlayPermissions()
+    {
+        GameHandler.Instance.SetPlayPermissions(new string[]{"C11","C12","C13","C14","H11","H12","H13","H14","S11","S12","S13","S14","D11","D12","D13","D14"},true, true);
+        ShakeRule(0);
+    }
+}
