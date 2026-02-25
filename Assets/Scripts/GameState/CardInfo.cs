@@ -43,10 +43,19 @@ public class CardInfo
     {
         return _suit=="S" || _suit=="C";
     }
-        public bool IsRed()
+    public bool IsRed()
     {
         return _suit=="D" || _suit=="H";
     }
+    public bool IsEven()
+    {
+        return _number<11 && (_number%2)==0;
+    }
+    public bool IsOdd()
+    {
+        return _number<11 && (_number%2)!=0;
+    }
+
     public void AssignCard(Card card) 
     {
         _card = card;
