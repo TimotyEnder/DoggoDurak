@@ -298,7 +298,7 @@ public class GameHandler : MonoBehaviour
         return _rewardManager.Value.GetCurrencyExplanationText();
     }
     //0 player 1 opponent.
-    public bool CanPlayCard(CardInfo card, int target) 
+    public bool CanPlayCardPermission(CardInfo card, int target) 
     {
         return _playPermissionManager.CanPlayCard(card, target);
     } 

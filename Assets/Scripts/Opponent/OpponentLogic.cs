@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
@@ -74,7 +75,7 @@ public class OpponentLogic : MonoBehaviour
         {
             foreach (CardInfo cardInHand in _hand)
             {
-                if (_playArea.CanAttackWithCard(cardInHand) && GameHandler.Instance.CanPlayCard(cardInHand,1))
+                if (_playArea.CanAttackWithCard(cardInHand) && GameHandler.Instance.CanPlayCardPermission(cardInHand,1))
                 {
                     _hand.Remove(cardInHand);
                     _handUI.RemoveCard();
@@ -96,9 +97,10 @@ public class OpponentLogic : MonoBehaviour
                 {
                     CardInfo smallestCardThatDefends = null;
                     foreach (CardInfo cardInHand in _hand)
-                    {
+                    {   
+                        Debug.Log("Can play card to defend? "+GameHandler.Instance.CanPlayCardPermission(cardInHand,1) + " Can card defend? "+ _playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()));
                         //reverse if possible
-                        if (_playArea.CanReverseWithCard(cardInHand) && GameHandler.Instance.CanPlayCard(cardInHand,1))
+                        if (_playArea.CanReverseWithCard(cardInHand) && GameHandler.Instance.CanPlayCardPermission(cardInHand,1))
                         {
                             _hand.Remove(cardInHand);
                             _handUI.RemoveCard();
@@ -113,7 +115,7 @@ public class OpponentLogic : MonoBehaviour
                             return true;
                         }
                         //Defending if cannot reverse
-                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()) && GameHandler.Instance.CanPlayCard(cardInHand,1))
+                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()) && GameHandler.Instance.CanPlayCardPermission(cardInHand,1))
                         {
                             if (smallestCardThatDefends == null)
                             {
@@ -148,9 +150,9 @@ public class OpponentLogic : MonoBehaviour
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
-           if(GameHandler.Instance.CanPlayCard(card,1))
+           if(GameHandler.Instance.CanPlayCardPermission(card,1))
             {
-                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.CanPlayCard(lowerCard,1))
+                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.CanPlayCardPermission(lowerCard,1))
                 {
                 lowerCard = card;
                 }
@@ -160,7 +162,7 @@ public class OpponentLogic : MonoBehaviour
                 }
             }
         }
-        if(GameHandler.Instance.CanPlayCard(lowerCard,1))
+        if(GameHandler.Instance.CanPlayCardPermission(lowerCard,1))
         {
             GameObject CardToAttack = Instantiate(cardMaker);
             CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
@@ -171,6 +173,7 @@ public class OpponentLogic : MonoBehaviour
         {
             endTurnCaused = true;
             AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no eligible cards to play!");
+           Debug.Log("Start end turn from attack:");
             _turnHandler.StartEndTurn();
         }
     }
@@ -225,7 +228,7 @@ public class OpponentLogic : MonoBehaviour
         List<CardInfo> cardsToRemove = new List<CardInfo>();
         foreach (CardInfo card in _hand)
         {
-            if (!GameHandler.Instance.CanPlayCard(card, 1))
+            if (!GameHandler.Instance.CanPlayCardPermission(card, 1))
             {
                 cardsToRemove.Add(card);
             } 
@@ -244,7 +247,7 @@ public class OpponentLogic : MonoBehaviour
         StartCoroutine(CheckForPlaysRoutine());
     }
     
-    public IEnumerator CheckForPlaysRoutine()
+    public IEnumerator CheckForPlaysRoutine( bool fromTurnEnd=false)
     { 
         yield return new WaitForSecondsRealtime(0.5f);  
         while (CheckPlay()) 
@@ -256,11 +259,14 @@ public class OpponentLogic : MonoBehaviour
             AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no response!");
             _noResponseWritten = true;
         }
-        Debug.Log("Enemy Turn Routine!");
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()])) 
+        Debug.Log("Enemy Turn Routine! Has more plays?:"+cha.HasMorePlays() +" Double Pass?:"+_doublePass[_turnHandler.GetTurnState()]);
+
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()]) && !fromTurnEnd) 
         {
+            Debug.Log("Enemy Turn Routine! Ending Turn!");
             endTurnCaused = true;
+            Debug.Log("Start end turn from check played:");
             _turnHandler.StartEndTurn();
         }
         else

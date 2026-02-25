@@ -23,11 +23,13 @@ public class CardHandArea : MonoBehaviour
     private float radius;
     [SerializeField]
     private List<Card> _cards;
+    private Discard _discard;
     void Start()
     {
         _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
         _oldCanvasWidth= _canvasRect.rect.width;
+        _discard = GameObject.Find("Discard").GetComponent<Discard>();
     }
 
     // Update is called once per frame
@@ -156,7 +158,7 @@ public class CardHandArea : MonoBehaviour
         List<Card> cardsToRemove = new List<Card>();
         foreach (Card card in this._cards)
         {
-            if (!GameHandler.Instance.CanPlayCard(card.GetCardInfo(), 0))
+            if (!GameHandler.Instance.CanPlayCardPermission(card.GetCardInfo(), 0))
             {
                 cardsToRemove.Add(card);
             } 
@@ -177,12 +179,12 @@ public class CardHandArea : MonoBehaviour
     {
         PlayArea pa= GameObject.Find("PlayArea").GetComponent<PlayArea>();
         TurnHandler th= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
-        Debug.Log("automatic turn end checking!");
+        Debug.Log("HasMorePPlays Called");
         if (pa != null)
         {
             foreach (Card card in this._cards)
             {
-                if (GameHandler.Instance.CanPlayCard(card.GetCardInfo(), 0))
+                if (GameHandler.Instance.CanPlayCardPermission(card.GetCardInfo(), 0))
                 {
                     Debug.Log("Concidering Card: "+ card.GetCardInfo()._suit+ card.GetCardInfo()._number);
                     Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
@@ -230,9 +232,10 @@ public class CardHandArea : MonoBehaviour
             {
                 if(index< _cards.Count && index>=0)
                 {
-                    GameObject cardToDiscard = _cards[index].gameObject;
+                    Card cardToDiscard = _cards[index];
+                    _discard.AddCard(cardToDiscard);
                     _cards.RemoveAt(index);
-                    cardToDiscard.GetComponent<Card>().MoveTowardsToDiscard();
+                    cardToDiscard.MoveTowardsToDiscard();
                     DettachCard();
                 }
             }

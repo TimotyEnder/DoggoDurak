@@ -73,13 +73,15 @@ public class TurnHandler : MonoBehaviour
             }
             _opponent.Attack();
         }
+
     }
     public void StartEndTurn() 
     {
-        if (_playArea.GetCardsInPlay()>0 &&!_turnEndStarted) 
+        Debug.Log("Start End Turn! Checking if turn end conditions are met! Cards in play: "+_playArea.GetCardsInPlay()+" Has more plays?:"+_playerHand.HasMorePlays());
+        if ((_playArea.GetCardsInPlay()>0 || !_playerHand.HasMorePlays()) &&!_turnEndStarted) 
         {
             _turnEndStarted=true;
-            StartCoroutine(_opponent.CheckForPlaysRoutine());
+            StartCoroutine(_opponent.CheckForPlaysRoutine(true));//this is to prevent a turn end inside a turn end.
             //Damage Co-Routine
             StartCoroutine(DamageRoutine());
 

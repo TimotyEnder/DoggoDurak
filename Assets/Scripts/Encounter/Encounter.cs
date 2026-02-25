@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -143,7 +144,7 @@ public abstract class Encounter : ScriptableObject
             it++;
         }
     }
-    protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts, bool OnlyEven=false, bool OnlyOdd=false)
+    protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts, bool OnlyEven=false, bool OnlyOdd=false, int from = 6)
     {
         this.deck= new List<CardInfo>();
         for (int i = 0; i < 4; i++)
@@ -153,7 +154,7 @@ public abstract class Encounter : ScriptableObject
                 case 0:
                     if(Clubs)
                     {
-                        for (int j = 6; j < upToNum+1; j++)
+                        for (int j = from; j < upToNum+1; j++)
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
@@ -165,7 +166,7 @@ public abstract class Encounter : ScriptableObject
                 case 1:
                     if(Spades)
                     {
-                        for (int j = 6; j < upToNum+1; j++)
+                        for (int j = from; j < upToNum+1; j++)
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
@@ -177,7 +178,7 @@ public abstract class Encounter : ScriptableObject
                 case 2:
                     if(Diamonds)
                     {
-                        for (int j = 6; j < upToNum+1; j++)
+                        for (int j = from; j < upToNum+1; j++)
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
@@ -189,7 +190,7 @@ public abstract class Encounter : ScriptableObject
                 case 3:
                     if(Hearts)
                     {
-                        for (int j = 6; j < upToNum+1; j++)
+                        for (int j = from; j < upToNum+1; j++)
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {

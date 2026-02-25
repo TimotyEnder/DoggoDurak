@@ -195,14 +195,29 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void CheckPlayPermission()
     {
-        if(!GameHandler.Instance.CanPlayCard(this.GetCardInfo(),0))
+       if(_cardInfo._opponentCard)
         {
-            _notPermissible.SetActive(true);
-            Bling();
+            if(!GameHandler.Instance.CanPlayCardPermission(this.GetCardInfo(),1))
+            {
+                _notPermissible.SetActive(true);
+                Bling();
+            }
+            else
+            {
+                _notPermissible.SetActive(false);
+            }
         }
         else
         {
-            _notPermissible.SetActive(false);
+            if(!GameHandler.Instance.CanPlayCardPermission(this.GetCardInfo(),0))
+            {
+                _notPermissible.SetActive(true);
+                Bling();
+            }
+            else
+            {
+                _notPermissible.SetActive(false);
+            }
         }
     }
     public void Bling()
@@ -397,10 +412,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _cardInfo.OnReverse(this);
             if (!_cardInfo._opponentCard)
             {
-                Debug.Log(GameHandler.Instance.GetGameState());
                 GameHandler.Instance.GetGameState().OnReverse(this);
             }
-            Debug.Log(GameHandler.Instance.GetGameState());
             GameHandler.Instance.GetCurrEncounter().OnReverse(this);
             _turnHandler.Reverse();
             StartCoroutine(_opponent.EnemyPlay());
@@ -423,7 +436,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             GameHandler.Instance.GetGameState().OnPlayedCard(this);
         }
-        Debug.Log(GameHandler.Instance.GetGameState());
         GameHandler.Instance.GetCurrEncounter().OnPlayedCard(this);
     }
     public void DefendCard(Card card) 
@@ -524,7 +536,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
-        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position) && GameHandler.Instance.CanPlayCard(this.GetCardInfo(), (GetCardInfo()._opponentCard?1:0)))
+        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position) && GameHandler.Instance.CanPlayCardPermission(this.GetCardInfo(), (GetCardInfo()._opponentCard?1:0)))
         {
             OnPlay(eventData.position);
         }
