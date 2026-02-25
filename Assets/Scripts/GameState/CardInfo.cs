@@ -39,6 +39,14 @@ public class CardInfo
     {
         return _number<14 && _number>10;
     }
+    public bool IsBlack()
+    {
+        return _suit=="S" || _suit=="C";
+    }
+        public bool IsRed()
+    {
+        return _suit=="D" || _suit=="H";
+    }
     public void AssignCard(Card card) 
     {
         _card = card;
