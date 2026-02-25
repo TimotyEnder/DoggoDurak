@@ -33,6 +33,12 @@ public static class StylisticClass
 
     // common text elements
     public static string ActivateString="<color=red>ACTIVATE:</color>";
+    public static string HighLight="<b>";
+    public static string HighLightClose="</b>";
+    public static string DamageNumber(int damage)
+    {
+        return " <b>"+damage+"DMG"+"</b>";
+    }
 
     //active items
     public static Color ActiveItemUseInvalid= new Color(0.678f, 0.012f, 0.098f);

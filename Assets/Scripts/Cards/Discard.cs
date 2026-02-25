@@ -60,8 +60,15 @@ public class Discard : MonoBehaviour
     public List<Card> GetPlayerDiscard()
     {
         // Create a new list with the same elements (shallow copy)
-        List<Card> returnList = new List<Card>(_playerCards);
-
+        List<Card> returnList;
+        if(_playerCards!=null)
+        { 
+             returnList= new List<Card>(_playerCards);
+        }
+        else
+        {
+            returnList= new List<Card>();
+        }
         return returnList;
     }
     public void UpdateDiscardContent() 

@@ -18,19 +18,31 @@ public abstract class Encounter : ScriptableObject
     [SerializeField] protected string encounterName;
     protected string description;
 
-    private bool HasRules= false;
-    private string Rules;
+    protected bool hasRules= false;
+    protected List<string> rules;
     //additional rewards implement here
-    public  string GetRules()
+    public  List<string> GetRules()
     {
-        if(HasRules)
+        if(hasRules)
         {
-            return Rules;
+            return rules;
         }
         else
         {
-            return "NONE";
+            return null;
         }
+    }
+    protected void AddRule(string rule)
+    {
+        if(this.rules==null)
+        {
+            rules= new List<string>();
+        }
+        this.rules.Add(rule);
+    }
+    protected void  ShakeRule(int index) //used to help the played understand why the result of an encounter rule happened, shakes the UI when a rule is applied
+    {
+        //implement
     }
     public abstract void InitEncounter();
 
@@ -132,6 +144,7 @@ public abstract class Encounter : ScriptableObject
     }
     protected void initDeck(int upToNum, bool Clubs, bool Spades, bool Diamonds, bool Hearts)
     {
+        this.deck= new List<CardInfo>();
         for (int i = 0; i < 4; i++)
         {
             switch (i)
@@ -139,7 +152,7 @@ public abstract class Encounter : ScriptableObject
                 case 0:
                     if(Clubs)
                     {
-                        for (int j = 6; j < upToNum; j++)
+                        for (int j = 6; j < upToNum+1; j++)
                         {
                             deck.Add(new CardInfo("C", j, true));
                         }
@@ -148,7 +161,7 @@ public abstract class Encounter : ScriptableObject
                 case 1:
                     if(Spades)
                     {
-                        for (int j = 6; j < upToNum; j++)
+                        for (int j = 6; j < upToNum+1; j++)
                         {
                             deck.Add(new CardInfo("S", j, true));
                         }
@@ -157,7 +170,7 @@ public abstract class Encounter : ScriptableObject
                 case 2:
                     if(Diamonds)
                     {
-                        for (int j = 6; j < upToNum; j++)
+                        for (int j = 6; j < upToNum+1; j++)
                         {
                             deck.Add(new CardInfo("D", j, true));
                         }
@@ -166,7 +179,7 @@ public abstract class Encounter : ScriptableObject
                 case 3:
                     if(Hearts)
                     {
-                        for (int j = 6; j < upToNum; j++)
+                        for (int j = 6; j < upToNum+1; j++)
                         {
                             deck.Add(new CardInfo("H", j, true));
                         }

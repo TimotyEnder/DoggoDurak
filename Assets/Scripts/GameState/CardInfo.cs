@@ -35,6 +35,10 @@ public class CardInfo
         this._opponentCard = opp;
         this._modifierStacks = new Dictionary<string, int>();
     }
+    public bool IsFace()
+    {
+        return _number<14 && _number>10;
+    }
     public void AssignCard(Card card) 
     {
         _card = card;
@@ -120,13 +124,13 @@ public class CardInfo
     };
     public  static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
     {
-        {"Restoring", "Defend with this card to gain health equal to the difference of values between the defending and defended cards."},
-        {"Bounce", "When defending, this card does  damage  equal  to the difference of values between the defending and defended cards."},
-        {"Burn", "When attacking deal 1 damage for each burn modifier on the card."},
-        {"Parry", "Reverse with this card to deal that cards value as damage."},
-        {"Draw", "When attacking draws 1 card for each draw modifier on the card."},
-        {"Cripple", "When attacking makes opponent discard 1 card for each cripple modifier on the card."},
-        {"Spiky", "When this card is defended deal 1 damage for each spiky modifier of the card to the defending player."},
+        {"Restoring", " (Defend with this card to gain health equal to the difference of values between the defending and defended cards.) "},
+        {"Bounce", " (When defending, this card does  damage  equal  to the difference of values between the defending and defended cards.) "},
+        {"Burn", " (When attacking deal "+StylisticClass.DamageNumber(1)+" for each burn modifier on the card.) "},
+        {"Parry", "(Reverse with this card to deal that cards value as damage.) "},
+        {"Draw", " (When attacking draws 1 card for each draw modifier on the card.) "},
+        {"Cripple", " (When attacking makes opponent discard 1 card for each cripple modifier on the card.) "},
+        {"Spiky", " (When this card is defended deal "+StylisticClass.DamageNumber(1)+" for each spiky modifier of the card to the defending player.) "},
     };
     public static Dictionary<string, string> suitFullName = new Dictionary<string, string>
     {
@@ -135,7 +139,7 @@ public class CardInfo
         {"H"," of Hearts"},
         {"S"," of Spades"}
     };
-    private static Dictionary<string, string> suitToColor = new Dictionary<string, string>
+    public static Dictionary<string, string> suitToColor = new Dictionary<string, string>
     {
         {"C","<color=white>"},
         {"D","<color=red>"},
@@ -262,11 +266,11 @@ public class CardInfo
         {
             if(modifierMaxCopies[entry.Key]==1)
             {
-                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key] + " (" + modifierToDescription[entry.Key] + ")</align></size></color> \n";
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>" + modifierToStyleString[entry.Key]  + modifierToDescription[entry.Key] + "</align></size></color> \n";
             }
             else
             {
-                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+ modifierToStyleString[entry.Key] + " " + entry.Value + " (" + modifierToDescription[entry.Key] + ")"+"</align></size></color> \n";
+                returnString+= $"{modifierColors[entry.Key]}<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+ modifierToStyleString[entry.Key] + " " + entry.Value  + modifierToDescription[entry.Key]+"</align></size></color> \n";
             }
         }
         return returnString;

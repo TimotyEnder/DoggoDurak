@@ -9,7 +9,7 @@ public class ThePtyuchFold : Item
         this.isActive=true;
         this.itemId = "ThePtyuchFold";
         this.persistent=true;
-        this.toolTipDesc = StylisticClass.ActivateString+" Clubs cannot be played this turn.";
+        this.toolTipDesc = StylisticClass.ActivateString+CardInfo.suitToColor["C"]+" Clubs cannot be played this turn.";
     }
 
     public override void OnActivate()

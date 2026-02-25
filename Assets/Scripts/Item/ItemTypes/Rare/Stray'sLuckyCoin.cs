@@ -15,7 +15,7 @@ public class StraysLuckyCoin : Item
     }
     public void UpdateToolTip() //this is  necesarry because the tooltip gets modified
     {
-         this.toolTipDesc = StylisticClass.ActivateString+"A chance to either have two random cards discarded from you hand <b>("+(100-failPercentage)+"%)</b> or making the opponent discard 3 cards <b>("+(failPercentage)+"%)</b>. A given outcome increases its possibility to happen in the future.";
+         this.toolTipDesc = StylisticClass.ActivateString+"Flip A Coin. Crest: have two random cards discarded from you hand <b>("+(100-failPercentage)+"%)</b>  Grate: make the opponent discard 3 cards <b>("+(failPercentage)+"%)</b>. A given outcome increases its possibility to happen in the future.";
     }
 
     public override void OnActivate()
