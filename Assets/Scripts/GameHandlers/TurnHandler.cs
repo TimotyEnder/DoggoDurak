@@ -80,9 +80,9 @@ public class TurnHandler : MonoBehaviour
         {
             _turnEndStarted=true;
             StartCoroutine(_opponent.CheckForPlaysRoutine());
-
             //Damage Co-Routine
             StartCoroutine(DamageRoutine());
+
         }
     }
     public void FinishEndTurn() 
@@ -136,6 +136,8 @@ public class TurnHandler : MonoBehaviour
     }
     private IEnumerator DamageRoutine() 
     {
+        GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
+        yield return new WaitForSeconds(0.5f);
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
            if(!card.IsDefended()){ 

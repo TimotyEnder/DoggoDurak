@@ -63,4 +63,9 @@ public class DefaultEncounter : Encounter
     {
         
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

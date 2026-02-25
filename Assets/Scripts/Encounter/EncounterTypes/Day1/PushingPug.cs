@@ -2,8 +2,8 @@ using System.Data;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "FurtiveFSBInformant", menuName = "Encounters/Day1/FurtiveFSBInformant")]
-public class FurtiveFSBInformant : Encounter
+[CreateAssetMenu(fileName = "PushingPug", menuName = "Encounters/Day1/PushingPug")]
+public class PushingPug : Encounter
 {
     public override void InitEncounter()
     {
@@ -11,14 +11,14 @@ public class FurtiveFSBInformant : Encounter
         boss=false;
         trumpSuit = 'R';
         icon = null;
-        encounterName = "Furtive FSB Informant";
+        encounterName = "Pushing Pug";
         goldRewardMod = 1f;
         SetHealth();
         initDeck(10,true,true,true,true);
-        AddRandomModifierToDeck(5,"Parry");
-        this.description="A Furtive FSB Informant.";
+        AddRandomModifierToDeck(5,"Restoring");
+        this.description="A Pushy Pug.";
         hasRules=true;
-        AddRule("Each time you play a "+StylisticClass.HighLight+"face card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+        AddRule("Defending player receives "+StylisticClass.DamageNumber(1)+" for each unblocked card."); //0
     }
 
     public override void OnDamagePlayer(int amount)
@@ -33,11 +33,7 @@ public class FurtiveFSBInformant : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsFace())
-        {
-            GameHandler.Instance.DamagePlayer(4,true);
-            ShakeRule(0);
-        }
+        
     }
 
     public override void OnReverse(Card card)
@@ -47,6 +43,15 @@ public class FurtiveFSBInformant : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
-        
+        int unblockedCards= GameHandler.Instance.GetUnblockedCards();
+        if(turnState==0)
+        {
+            GameHandler.Instance.DamageOpponent(unblockedCards,true);
+        }
+        else
+        {
+            GameHandler.Instance.DamagePlayer(unblockedCards,true);
+        }
+        ShakeRule(0);
     }
 }

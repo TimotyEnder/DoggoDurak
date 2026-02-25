@@ -14,7 +14,8 @@ public class TheSentinelsFarewell : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SentinelsFarewell();
+        GameHandler.Instance.SetHealth(1);
+        GameHandler.Instance.GetGameState()._undamagable[0]=true;
     }
 
     public override void OnAquire()

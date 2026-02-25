@@ -84,4 +84,9 @@ public class AgileDvorniashka : Encounter
     {
         
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

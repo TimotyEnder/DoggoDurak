@@ -50,6 +50,7 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnDefendCard(Card card, Card defendedWith);
     public abstract void OnReverse(Card card);
     public abstract void OnDamagePlayer(int amount);
+    public abstract void OnTurnEnd(int turnState);
     public void SetPlayPermissions(){}
 
     public string GetEncounterName() 

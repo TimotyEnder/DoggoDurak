@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new FurtiveFSBInformant();
+        _currentEncounter= new PushingPug();
         _currentEncounter.InitEncounter();
         Next();
     }
@@ -331,10 +331,16 @@ public class GameHandler : MonoBehaviour
         }
         _state._undamagable=new bool[]{false,false};
     }
-    //effefts that happens because of the Legendary active item with this name
-    public void SentinelsFarewell()
+    public int GetUnblockedCards()
     {
-        SetHealth(1);
-        _state._undamagable[0]=true;
+        GameObject playArea= GameObject.Find("PlayArea");
+        if(playArea!=null)
+        {
+            return playArea.GetComponent<PlayArea>().UnblockedCardsAmount();
+        }
+        else
+        {
+            return -1;
+        }
     }
 }
