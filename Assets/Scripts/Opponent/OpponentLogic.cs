@@ -150,20 +150,29 @@ public class OpponentLogic : MonoBehaviour
         {
            if(GameHandler.Instance.CanPlayCard(card,1))
             {
-                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit())
+                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.CanPlayCard(lowerCard,1))
                 {
                 lowerCard = card;
                 }
                 else if (card._number < lowerCard._number) 
                 {
-                lowerCard = card;
+                    lowerCard = card;
                 }
             }
         }
-        GameObject CardToAttack = Instantiate(cardMaker);
-        CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
-        CardToAttack.GetComponent<Card>().PlayCard();
-         AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+" with:"+lowerCard.CompileCondencedModifiers());
+        if(GameHandler.Instance.CanPlayCard(lowerCard,1))
+        {
+            GameObject CardToAttack = Instantiate(cardMaker);
+            CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
+            CardToAttack.GetComponent<Card>().PlayCard();
+            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+" with:"+lowerCard.CompileCondencedModifiers());
+        }
+        else
+        {
+            endTurnCaused = true;
+            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no eligible cards to play!");
+            _turnHandler.StartEndTurn();
+        }
     }
     public  IEnumerator DrawHandRoutine()
     {
