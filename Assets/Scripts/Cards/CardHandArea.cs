@@ -182,36 +182,39 @@ public class CardHandArea : MonoBehaviour
         {
             foreach (Card card in this._cards)
             {
-                Debug.Log("Concidering Card: "+ card.GetCardInfo()._suit+ card.GetCardInfo()._number);
-                Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
-                Debug.Log("Can Attack With Card: " + pa.CanAttackWithCard(card.GetCardInfo()));
-                Debug.Log("Turn State: " + th.GetTurnState());
-                if (pa.CanReverseWithCard(card.GetCardInfo()) || (pa.CanAttackWithCard(card.GetCardInfo()) && th.GetTurnState() == 0))
+                if (GameHandler.Instance.CanPlayCard(card.GetCardInfo(), 0))
                 {
-                    Debug.Log("Can Reverse Or Attack With Card");
-                    return true;
-                }
-                if (th.GetTurnState() != 0)
-                {
-                    bool allDefended = true; //check if all card have been defended
-                    foreach (Card pcard in pa.GetCardsPlayed())
+                    Debug.Log("Concidering Card: "+ card.GetCardInfo()._suit+ card.GetCardInfo()._number);
+                    Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
+                    Debug.Log("Can Attack With Card: " + pa.CanAttackWithCard(card.GetCardInfo()));
+                    Debug.Log("Turn State: " + th.GetTurnState());
+                    if (pa.CanReverseWithCard(card.GetCardInfo()) || (pa.CanAttackWithCard(card.GetCardInfo()) && th.GetTurnState() == 0))
                     {
-                        if (!pcard.IsDefended())
+                        Debug.Log("Can Reverse Or Attack With Card");
+                        return true;
+                    }
+                    if (th.GetTurnState() != 0)
+                    {
+                        bool allDefended = true; //check if all card have been defended
+                        foreach (Card pcard in pa.GetCardsPlayed())
                         {
-                            allDefended = false;
+                            if (!pcard.IsDefended())
+                            {
+                                allDefended = false;
+                            }
                         }
-                    }
-                    if (allDefended)
-                    {
-                        Debug.Log("All Defended");
-                        return false;
-                    }
-                    foreach (Card pcard in pa.GetCardsPlayed())
-                    {
-                        if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()) && !pcard.IsDefended())
+                        if (allDefended)
                         {
-                            Debug.Log("Current Card "+card.GetCardInfo()+"Can Defend: "+pcard.GetCardInfo());
-                            return true;
+                            Debug.Log("All Defended");
+                            return false;
+                        }
+                        foreach (Card pcard in pa.GetCardsPlayed())
+                        {
+                            if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()) && !pcard.IsDefended())
+                            {
+                                Debug.Log("Current Card "+card.GetCardInfo()+"Can Defend: "+pcard.GetCardInfo());
+                                return true;
+                            }
                         }
                     }
                 }
