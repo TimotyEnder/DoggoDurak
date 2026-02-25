@@ -92,7 +92,7 @@ public abstract class Encounter : ScriptableObject
     }  
     private string GetSpacedEncounterName() 
     {
-        return Regex.Replace(this.name,
+        return Regex.Replace(this.encounterName,
            "([a-z])([A-Z])|([A-Z])([A-Z][a-z])",
            "$1$3 $2$4");
     }

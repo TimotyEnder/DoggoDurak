@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new CrazedCommunist();
+        _currentEncounter= new DramaticUnionDemocrat();
         _currentEncounter.InitEncounter();
         Next();
     }
