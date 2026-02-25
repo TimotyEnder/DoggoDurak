@@ -151,6 +151,21 @@ public class CardHandArea : MonoBehaviour
             card.GreyIn();
         }
     }
+    public void ClearHandFromUnplayableCards()
+    {
+        List<Card> cardsToRemove = new List<Card>();
+        foreach (Card card in this._cards)
+        {
+            if (!GameHandler.Instance.CanPlayCard(card.GetCardInfo(), 0))
+            {
+                cardsToRemove.Add(card);
+            } 
+        }
+        foreach (Card card in cardsToRemove)
+        {
+           Discard(this._cards.IndexOf(card), 1);
+        }
+    }
     public void CheckPlayPermissionHand()
     {
         foreach(Card card in this._cards)

@@ -90,6 +90,8 @@ public class TurnHandler : MonoBehaviour
         //Wipe Cards
         _turnEndStarted=false;
         _playArea.Wipe();
+        _playerHand.ClearHandFromUnplayableCards();
+        _opponent.ClearUnplayableCards();
         GameHandler.Instance.ResetPlayPermissions();
         GameHandler.Instance.ResetPersistentItems();
         //Change Turn State

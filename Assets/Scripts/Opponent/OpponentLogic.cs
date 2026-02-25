@@ -148,13 +148,16 @@ public class OpponentLogic : MonoBehaviour
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
-            if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit())
+           if(GameHandler.Instance.CanPlayCard(card,1))
             {
+                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit())
+                {
                 lowerCard = card;
-            }
-            else if (card._number < lowerCard._number) 
-            {
+                }
+                else if (card._number < lowerCard._number) 
+                {
                 lowerCard = card;
+                }
             }
         }
         GameObject CardToAttack = Instantiate(cardMaker);
@@ -197,6 +200,30 @@ public class OpponentLogic : MonoBehaviour
             _discard.AddCard(_cardHandArea.GetCards()[RandomIndex]); //add to discard pile if a card is discarded
             _hand.RemoveAt(RandomIndex);
             _handUI.RemoveCard();
+        }
+    }
+    public void DiscardAt(int index) 
+    {
+        if (_hand.Count>0 && index < _hand.Count) 
+        {
+            _discard.AddCard(_cardHandArea.GetCards()[index]); //add to discard pile if a card is discarded
+            _hand.RemoveAt(index);
+            _handUI.RemoveCard();
+        }
+    }
+    public void ClearUnplayableCards() 
+    {
+        List<CardInfo> cardsToRemove = new List<CardInfo>();
+        foreach (CardInfo card in _hand)
+        {
+            if (!GameHandler.Instance.CanPlayCard(card, 1))
+            {
+                cardsToRemove.Add(card);
+            } 
+        }
+        foreach (CardInfo card in cardsToRemove)
+        {
+            DiscardAt(_hand.IndexOf(card));
         }
     }
     public IEnumerator EnemyPlay() 
