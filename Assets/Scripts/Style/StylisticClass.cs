@@ -39,6 +39,7 @@ public static class StylisticClass
     {
         return " <b>"+damage+"DMG"+"</b>";
     }
+    public static string Debuffed="<b>Debuffed (Cannot defend and deal zero damage)</b>";
 
     //active items
     public static Color ActiveItemUseInvalid= new Color(0.678f, 0.012f, 0.098f);

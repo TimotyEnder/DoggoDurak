@@ -197,7 +197,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
        if(_cardInfo._opponentCard)
         {
-            if(!GameHandler.Instance.CanPlayCardPermission(this.GetCardInfo(),1))
+            if(!GameHandler.Instance.IsCardnotDebuffed(this.GetCardInfo(),1))
             {
                 _notPermissible.SetActive(true);
                 Bling();
@@ -209,7 +209,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         else
         {
-            if(!GameHandler.Instance.CanPlayCardPermission(this.GetCardInfo(),0))
+            if(!GameHandler.Instance.IsCardnotDebuffed(this.GetCardInfo(),0))
             {
                 _notPermissible.SetActive(true);
                 Bling();
@@ -391,7 +391,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _passButton.SetJiggle(true);
         }
         //Defending, not your turn
-        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend))
+        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend) && GameHandler.Instance.IsCardnotDebuffed(this.GetCardInfo(),0))
         {
             Debug.Log("Able to defend");
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
@@ -536,7 +536,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
-        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position) && GameHandler.Instance.CanPlayCardPermission(this.GetCardInfo(), (GetCardInfo()._opponentCard?1:0)))
+        if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
             OnPlay(eventData.position);
         }

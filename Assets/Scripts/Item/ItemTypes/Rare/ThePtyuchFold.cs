@@ -14,7 +14,7 @@ public class ThePtyuchFold : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[] {"C"},true,true);
+        GameHandler.Instance.SetDebuffs(new string[] {"C"},true,true);
     }
 
     public override void OnAquire()

@@ -15,7 +15,7 @@ public class TheRedTape : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[] {"H"},true,true);
+        GameHandler.Instance.SetDebuffs(new string[] {"H"},true,true);
     }
 
     public override void OnAquire()

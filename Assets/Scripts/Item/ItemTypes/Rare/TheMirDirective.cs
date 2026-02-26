@@ -15,7 +15,7 @@ public class TheMirDirective : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[] {"D"},true,true);
+        GameHandler.Instance.SetDebuffs(new string[] {"D"},true,true);
     }
 
     public override void OnAquire()

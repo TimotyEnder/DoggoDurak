@@ -14,7 +14,7 @@ public class GameHandler : MonoBehaviour
     private Encounter _currentEncounter;
     [SerializeField]
     private Reward _currentReward;
-    private  PlayPermissionManager  _playPermissionManager;
+    private  DebuffManager  _debuffManager;
     public static GameHandler Instance
     {
         get
@@ -36,7 +36,7 @@ public class GameHandler : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        _playPermissionManager = new PlayPermissionManager();
+        _debuffManager = new DebuffManager();
     }
     public bool HasSave()
     {
@@ -298,25 +298,25 @@ public class GameHandler : MonoBehaviour
         return _rewardManager.Value.GetCurrencyExplanationText();
     }
     //0 player 1 opponent.
-    public bool CanPlayCardPermission(CardInfo card, int target) 
+    public bool IsCardnotDebuffed(CardInfo card, int target) 
     {
-        return _playPermissionManager.CanPlayCard(card, target);
+        return _debuffManager.CanPlayCard(card, target);
     } 
-    public void  ResetPlayPermissions() 
+    public void  ResetDebuffs() 
     {
-         _playPermissionManager.ResetPermissions();
-         UIupdatePlayPermissions();
+         _debuffManager.ResetPermissions();
+         UIupdateDebuffs();
     }  
-    public void SetPlayPermissions(string[]perms, bool forPlayer,bool forEnemy)
+    public void SetDebuffs(string[]perms, bool forPlayer,bool forEnemy)
     {
-        _playPermissionManager.SetPermissions(perms,forPlayer,forEnemy);
-        UIupdatePlayPermissions();
+        _debuffManager.SetPermissions(perms,forPlayer,forEnemy);
+        UIupdateDebuffs();
     }
-    public void EncounterSetPlayPermissions()
+    public void EncounterSetDebuffs()
     {
         _currentEncounter.SetPlayPermissions();
     }
-    public void UIupdatePlayPermissions()
+    public void UIupdateDebuffs()
     {
         GameObject cardHandArea= GameObject.Find("CardHandArea");
         if (cardHandArea != null)

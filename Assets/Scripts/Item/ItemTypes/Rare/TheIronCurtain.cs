@@ -15,7 +15,7 @@ public class TheIronCurtain : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[] {"S"},true,true);
+        GameHandler.Instance.SetDebuffs(new string[] {"S"},true,true);
     }
 
     public override void OnAquire()

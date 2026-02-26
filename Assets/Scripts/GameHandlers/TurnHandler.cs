@@ -52,7 +52,7 @@ public class TurnHandler : MonoBehaviour
     void Turn() 
     {
         _ruleHandler.CheckGameState();
-        GameHandler.Instance.EncounterSetPlayPermissions();
+        GameHandler.Instance.EncounterSetDebuffs();
         _opponent.resetEndTurnFlag();
         StartCoroutine(_playerDeck.DrawHandRoutine());
         StartCoroutine(_opponent.DrawHandRoutine());
@@ -92,9 +92,8 @@ public class TurnHandler : MonoBehaviour
         //Wipe Cards
         _turnEndStarted=false;
         _playArea.Wipe();
-        _playerHand.ClearHandFromUnplayableCards();
-        _opponent.ClearUnplayableCards();
-        GameHandler.Instance.ResetPlayPermissions();
+        GameHandler.Instance.ResetDebuffs();
+
         GameHandler.Instance.ResetPersistentItems();
         //Change Turn State
         if (_turnState == 0)
@@ -147,15 +146,20 @@ public class TurnHandler : MonoBehaviour
            if(!card.IsDefended()){ 
                 card.SetAnimatable(true);
                 card.Hit();
+                int damage=0;
+                if(GameHandler.Instance.IsCardnotDebuffed(card.GetCardInfo(), card.GetCardInfo()._opponentCard ? 1 : 0))
+                {
+                    damage = card.GetCardInfo()._number;
+                }
                 if (_turnState > 0)
                 {
-                    GameHandler.Instance.DamagePlayer(card.GetCardInfo()._number);
-                    GameHandler.Instance.GetCurrEncounter().OnDamagePlayer(card.GetCardInfo()._number);
+                    GameHandler.Instance.DamagePlayer(damage);
+                    GameHandler.Instance.GetCurrEncounter().OnDamagePlayer(damage);
                 }
                 else
                 {
-                    GameHandler.Instance.DamageOpponent(card.GetCardInfo()._number);
-                    GameHandler.Instance.GetGameState().OnDamageOpponent(card.GetCardInfo()._number);
+                    GameHandler.Instance.DamageOpponent(damage);
+                    GameHandler.Instance.GetGameState().OnDamageOpponent(damage);
                 }
 
                 yield return new WaitForSeconds(0.8f);

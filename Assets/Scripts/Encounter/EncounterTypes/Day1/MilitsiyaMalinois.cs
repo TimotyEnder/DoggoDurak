@@ -20,7 +20,7 @@ public class MilitsiyaMalinois : Encounter
         this.description="Enforces the law!";
         _numberCannotBePlayed=Random.Range(6,11);
         hasRules=true;
-        AddRule("You cannot play cards with the number "+StylisticClass.HighLight+_numberCannotBePlayed+StylisticClass.HighLightClose); //0
+        AddRule("Cards with the number "+StylisticClass.HighLight+_numberCannotBePlayed+StylisticClass.HighLightClose +" are "+StylisticClass.Debuffed); //0
     }
     public override void OnDamageOpponent(int amount)
     {
@@ -52,7 +52,7 @@ public class MilitsiyaMalinois : Encounter
 
     public override void SetPlayPermissions()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[]{"C"+_numberCannotBePlayed,"D"+_numberCannotBePlayed,"H"+_numberCannotBePlayed,"S"+_numberCannotBePlayed},true,false);
+        GameHandler.Instance.SetDebuffs(new string[]{"C"+_numberCannotBePlayed,"D"+_numberCannotBePlayed,"H"+_numberCannotBePlayed,"S"+_numberCannotBePlayed},true,true);
         ShakeRule(0);
     }
 }

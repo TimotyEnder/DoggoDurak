@@ -14,7 +14,7 @@ public class Muzzle : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[]{"C11","C12","C13","C14","D11","D12","D13","D14","H11","H12","H13","H14","S11","S12","S13","S14"},false,true);
+        GameHandler.Instance.SetDebuffs(new string[]{"C11","C12","C13","C14","D11","D12","D13","D14","H11","H12","H13","H14","S11","S12","S13","S14"},false,true);
     }
 
     public override void OnAquire()

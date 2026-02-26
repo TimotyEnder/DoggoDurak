@@ -153,21 +153,6 @@ public class CardHandArea : MonoBehaviour
             card.GreyIn();
         }
     }
-    public void ClearHandFromUnplayableCards()
-    {
-        List<Card> cardsToRemove = new List<Card>();
-        foreach (Card card in this._cards)
-        {
-            if (!GameHandler.Instance.CanPlayCardPermission(card.GetCardInfo(), 0))
-            {
-                cardsToRemove.Add(card);
-            } 
-        }
-        foreach (Card card in cardsToRemove)
-        {
-           Discard(this._cards.IndexOf(card), 1);
-        }
-    }
     public void CheckPlayPermissionHand()
     {
         foreach(Card card in this._cards)
@@ -184,7 +169,7 @@ public class CardHandArea : MonoBehaviour
         {
             foreach (Card card in this._cards)
             {
-                if (GameHandler.Instance.CanPlayCardPermission(card.GetCardInfo(), 0))
+                if (GameHandler.Instance.IsCardnotDebuffed(card.GetCardInfo(), 0))
                 {
                     Debug.Log("Concidering Card: "+ card.GetCardInfo()._suit+ card.GetCardInfo()._number);
                     Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));

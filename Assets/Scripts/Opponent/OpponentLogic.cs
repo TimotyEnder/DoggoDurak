@@ -75,7 +75,7 @@ public class OpponentLogic : MonoBehaviour
         {
             foreach (CardInfo cardInHand in _hand)
             {
-                if (_playArea.CanAttackWithCard(cardInHand) && GameHandler.Instance.CanPlayCardPermission(cardInHand,1))
+                if (_playArea.CanAttackWithCard(cardInHand))
                 {
                     _hand.Remove(cardInHand);
                     _handUI.RemoveCard();
@@ -98,9 +98,9 @@ public class OpponentLogic : MonoBehaviour
                     CardInfo smallestCardThatDefends = null;
                     foreach (CardInfo cardInHand in _hand)
                     {   
-                        Debug.Log("Can play card to defend? "+GameHandler.Instance.CanPlayCardPermission(cardInHand,1) + " Can card defend? "+ _playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()));
+                        Debug.Log("Can play card to defend? "+GameHandler.Instance.IsCardnotDebuffed(cardInHand,1) + " Can card defend? "+ _playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()));
                         //reverse if possible
-                        if (_playArea.CanReverseWithCard(cardInHand) && GameHandler.Instance.CanPlayCardPermission(cardInHand,1))
+                        if (_playArea.CanReverseWithCard(cardInHand))
                         {
                             _hand.Remove(cardInHand);
                             _handUI.RemoveCard();
@@ -115,7 +115,7 @@ public class OpponentLogic : MonoBehaviour
                             return true;
                         }
                         //Defending if cannot reverse
-                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()) && GameHandler.Instance.CanPlayCardPermission(cardInHand,1))
+                        else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()) && GameHandler.Instance.IsCardnotDebuffed(cardInHand,1))
                         {
                             if (smallestCardThatDefends == null)
                             {
@@ -150,9 +150,9 @@ public class OpponentLogic : MonoBehaviour
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
-           if(GameHandler.Instance.CanPlayCardPermission(card,1))
+           if(GameHandler.Instance.IsCardnotDebuffed(card,1))
             {
-                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.CanPlayCardPermission(lowerCard,1))
+                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.IsCardnotDebuffed(lowerCard,1))
                 {
                 lowerCard = card;
                 }
@@ -162,7 +162,7 @@ public class OpponentLogic : MonoBehaviour
                 }
             }
         }
-        if(GameHandler.Instance.CanPlayCardPermission(lowerCard,1))
+        if(GameHandler.Instance.IsCardnotDebuffed(lowerCard,1))
         {
             GameObject CardToAttack = Instantiate(cardMaker);
             CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
@@ -221,21 +221,6 @@ public class OpponentLogic : MonoBehaviour
             _discard.AddCard(_cardHandArea.GetCards()[index]); //add to discard pile if a card is discarded
             _hand.RemoveAt(index);
             _handUI.RemoveCard();
-        }
-    }
-    public void ClearUnplayableCards() 
-    {
-        List<CardInfo> cardsToRemove = new List<CardInfo>();
-        foreach (CardInfo card in _hand)
-        {
-            if (!GameHandler.Instance.CanPlayCardPermission(card, 1))
-            {
-                cardsToRemove.Add(card);
-            } 
-        }
-        foreach (CardInfo card in cardsToRemove)
-        {
-            DiscardAt(_hand.IndexOf(card));
         }
     }
     public IEnumerator EnemyPlay() 

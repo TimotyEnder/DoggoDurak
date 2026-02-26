@@ -4,12 +4,12 @@ using System.Diagnostics;
 using UnityEngine.InputSystem.Controls;
 
 [Serializable]
-public class PlayPermissionManager 
+public class DebuffManager 
 {
     //number-> suit-> 0=player 1=enemy-> boolean representing if card can be played 
     public  Dictionary<int, Dictionary<string, bool[]>> _playPermissionsCard;
     public Dictionary<string, bool[]> _playPermissionsModifier;
-    public PlayPermissionManager()
+    public DebuffManager()
     {
         ResetPermissions();
     }

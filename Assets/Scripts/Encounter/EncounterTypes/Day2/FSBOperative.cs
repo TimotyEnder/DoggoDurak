@@ -24,7 +24,7 @@ public class FSBOperative : Encounter
         }
         this.description="An FSB operative, showing face is unsafe here.";
         hasRules=true;
-        AddRule("You cannot play face cards"); //0
+        AddRule("Your face cards are "+StylisticClass.Debuffed); //0
     }
 
     public override void OnDamageOpponent(int amount)
@@ -58,7 +58,7 @@ public class FSBOperative : Encounter
 
     public override void SetPlayPermissions()
     {
-        GameHandler.Instance.SetPlayPermissions(new string[]{"C11","C12","C13","H11","H12","H13","S11","S12","S13","D11","D12","D13"},true, false);
+        GameHandler.Instance.SetDebuffs(new string[]{"C11","C12","C13","H11","H12","H13","S11","S12","S13","D11","D12","D13"},true, false);
         ShakeRule(0);
     }
 }
