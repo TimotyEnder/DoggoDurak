@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -64,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new FSBOperative();
+        _currentEncounter= new PripyatPoodle();
         _currentEncounter.InitEncounter();
         Next();
     }
@@ -201,10 +202,17 @@ public class GameHandler : MonoBehaviour
             }
             if (!fromEffect)
             {
-                _state.OnDamageOpponent(amount);
-                _currentEncounter.OnDamageOpponent(amount);
+                DelayedOnDamageOpponentAsync(amount).Forget();
             }
         }
+    }
+    private async UniTaskVoid DelayedOnDamageOpponentAsync(int amount)
+    {
+        // Wait for next frame to ensure UI animations complete
+        await UniTask.Delay(200);
+        
+        _state.OnDamageOpponent(amount);
+        _currentEncounter.OnDamageOpponent(amount);
     }
     public void DamagePlayer(int amount,bool fromEffect = false) //any effects damaging the player should go through this
     {
@@ -224,10 +232,17 @@ public class GameHandler : MonoBehaviour
             }
             if (!fromEffect)
             {
-                _state.OnDamageOpponent(amount);
+               DelayedOnDamagePlayerAsync(amount).Forget();
             }
         }
     }
+    private async UniTaskVoid DelayedOnDamagePlayerAsync(int amount)
+    {
+        // Wait for next frame to ensure UI animations complete
+        await UniTask.NextFrame();
+        _currentEncounter.OnDamagePlayer(amount);
+    }
+
     public void Draw(int amount)
     {
         if (GameObject.Find("Deck").GetComponent<Deck>() != null)
@@ -346,10 +361,11 @@ public class GameHandler : MonoBehaviour
     }
     public void ShakeRule(int index) 
     {
-        GameObject ruleHandler= GameObject.Find("RuleContent");
+        GameObject ruleHandler= GameObject.Find("RulesUIBox");
+        Debug.Log("Shaking rule at index: " + index);
         if(ruleHandler!=null)
         {
-            ruleHandler.GetComponent<RuleBoxUI>().ShakeRule(index);
+            ruleHandler.GetComponentInChildren<RuleBoxUI>().ShakeRule(index);
         }
     }
 }
