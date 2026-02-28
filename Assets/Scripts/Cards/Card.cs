@@ -520,19 +520,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_played || _grey ||!_isInteractable) { return; } //return early in this method fails the drag.
+        if (_played || _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; } //return early in this method fails the drag.
         GetComponent<ToolTip>().SetTooltipActiveState(false);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
     }
     public void OnDrag(PointerEventData eventData)
     {
-         if (_played || _grey ||!_isInteractable) { return; }
+         if (_played || _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; }
         _cardRect.eulerAngles = Vector3.zero;
         _cardRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        if (_played && !_opponent.IsEnemyPlaying()|| _grey ||!_isInteractable) { return; }
+        if (_played && !_opponent.IsEnemyPlaying()|| _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; }
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();

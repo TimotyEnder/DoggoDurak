@@ -169,4 +169,8 @@ public class TurnHandler : MonoBehaviour
         }
         FinishEndTurn();
     }
+    public bool IsTurnEnding() 
+    {
+        return _turnEndStarted;
+    }   
 }
