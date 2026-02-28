@@ -43,7 +43,7 @@ public abstract class Encounter : ScriptableObject
     }
     protected void  ShakeRule(int index) //used to help the played understand why the result of an encounter rule happened, shakes the UI when a rule is applied
     {
-        //implement
+        GameHandler.Instance.ShakeRule(index);
     }
     public abstract void InitEncounter();
 

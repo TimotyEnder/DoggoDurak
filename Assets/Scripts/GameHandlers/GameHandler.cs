@@ -344,4 +344,12 @@ public class GameHandler : MonoBehaviour
             return -1;
         }
     }
+    public void ShakeRule(int index) 
+    {
+        GameObject ruleHandler= GameObject.Find("RuleContent");
+        if(ruleHandler!=null)
+        {
+            ruleHandler.GetComponent<RuleBoxUI>().ShakeRule(index);
+        }
+    }
 }
