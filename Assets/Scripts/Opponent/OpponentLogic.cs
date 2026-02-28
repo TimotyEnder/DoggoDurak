@@ -32,6 +32,8 @@ public class OpponentLogic : MonoBehaviour
     private TextMeshProUGUI _responseText;
     private bool _noResponse=true; //if the enemy has no response to the players attack, this is set to true and the response text is set to "No Response" at the end of the player's turn. This is reset at the start of the enemy's turn.
     private bool  _noResponseWritten=false;
+
+    private bool _justReverse=false; //flag to check if the enemy just reversed, so it lets you defend even tho you have not defended yet.
     private void Start()
     {
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
@@ -109,6 +111,7 @@ public class OpponentLogic : MonoBehaviour
                             CardToReverse.GetComponent<Card>().PlayCard();
                             CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
                             GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
+                            _justReverse=true;
                             _turnHandler.Reverse();
                             AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
                             _noResponse=false;
@@ -247,17 +250,16 @@ public class OpponentLogic : MonoBehaviour
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         Debug.Log("Enemy Turn Routine! Has more plays?:"+cha.HasMorePlays() +" Double Pass?:"+_doublePass[_turnHandler.GetTurnState()]);
 
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()]) && !fromTurnEnd) 
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()] || (_turnHandler.GetTurnState()==1 && _playArea.UnblockedCardsAmount()==_playArea.GetCardsInPlay() && !_justReverse)) && !fromTurnEnd) 
         {
-            Debug.Log("Enemy Turn Routine! Ending Turn!");
             endTurnCaused = true;
-            Debug.Log("Start end turn from check played:");
             _turnHandler.StartEndTurn();
         }
         else
         {
             _doublePass[_turnHandler.GetTurnState()]=true;
         }
+        _justReverse=false;
         _enemyPlaying = false;
         _noResponse=true;  
         _cardHandArea.GreyOutAllCards();
