@@ -15,11 +15,11 @@ public abstract class CardModifier
         await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeDamage()));
         if (player)
         {
-            GameHandler.Instance.DamagePlayer(amount, true);
+            GameHandler.Instance.DamagePlayer(amount);
         }
         else
         {
-            GameHandler.Instance.DamageOpponent(amount, true);
+            GameHandler.Instance.DamageOpponent(amount);
         }
     }
     public async void  DelayedHeal(int amount,bool player)

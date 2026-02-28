@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new PripyatPoodle();
+        _currentEncounter= new RavenousRottweiler();
         _currentEncounter.InitEncounter();
         Next();
     }
