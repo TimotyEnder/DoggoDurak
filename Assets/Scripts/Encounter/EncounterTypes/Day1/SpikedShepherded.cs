@@ -21,6 +21,16 @@ public class SpikedShepherded : Encounter
         AddRule("The opponent recieves double damage"); //0
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         GameHandler.Instance.DamageOpponent(amount,true);

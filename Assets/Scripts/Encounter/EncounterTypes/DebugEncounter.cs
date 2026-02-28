@@ -44,6 +44,16 @@ public class DebugEncounter : Encounter
         day = 0;
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         

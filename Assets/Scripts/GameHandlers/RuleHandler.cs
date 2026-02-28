@@ -16,7 +16,11 @@ public class RuleHandler : MonoBehaviour
     [SerializeField]
     private RewardItemGrid _rewardItemGrid;
     private bool GameStateFinished = false;
-    private bool _modEffectsSpawn=true;
+    private bool _modEffectsSpawn;
+    void Awake()
+    {
+            _modEffectsSpawn=true;
+    }
     void Init()
     {
 

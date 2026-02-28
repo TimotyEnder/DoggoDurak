@@ -68,7 +68,9 @@ public class Deck : MonoBehaviour
         // CardInfo handling
         int cardDrawIndex = UnityEngine.Random.Range(0, _deck.Count);
         CardInfo cardtoDraw = _deck[cardDrawIndex];
+        GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
         _deck.Remove(cardtoDraw);
+        
         UpdateDeckSizeText();  
 
         // Card draw particle with callback

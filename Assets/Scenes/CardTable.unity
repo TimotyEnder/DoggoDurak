@@ -393,6 +393,7 @@ RectTransform:
   - {fileID: 1675318719}
   - {fileID: 717612834}
   - {fileID: 1431600465}
+  - {fileID: 2061037396}
   - {fileID: 1814349665}
   - {fileID: 229046926}
   - {fileID: 1413642518}
@@ -409,7 +410,6 @@ RectTransform:
   - {fileID: 1157967480}
   - {fileID: 908364351}
   - {fileID: 2122585954}
-  - {fileID: 2061037396}
   - {fileID: 1405566947}
   - {fileID: 912686531}
   - {fileID: 344730296}

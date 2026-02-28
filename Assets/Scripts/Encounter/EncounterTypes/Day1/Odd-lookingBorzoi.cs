@@ -20,6 +20,16 @@ public class OddlookingBorzoi : Encounter
         AddRule("Each time you play an "+StylisticClass.HighLight+"even numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         

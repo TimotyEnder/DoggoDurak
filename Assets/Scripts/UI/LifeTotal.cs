@@ -12,7 +12,7 @@ public class LifeTotal : MonoBehaviour
     public GameObject healTextPrefab;
 
     private RuleHandler _rh;
-    void Start()
+    void Awake()
     {
         GameObject rhObj= GameObject.Find("RuleHandler");
         if(rhObj!=null)

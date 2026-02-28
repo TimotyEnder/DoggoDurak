@@ -206,6 +206,7 @@ public class OpponentLogic : MonoBehaviour
         CardInfo cardtoDraw = _deck[cardDrawIndex];
         _deck.Remove(cardtoDraw);
         _hand.Add(cardtoDraw);
+        GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
     }
     public void Discard() 
     {
@@ -213,6 +214,7 @@ public class OpponentLogic : MonoBehaviour
         {
             int RandomIndex = Random.Range(0, _hand.Count);
             _discard.AddCard(_cardHandArea.GetCards()[RandomIndex]); //add to discard pile if a card is discarded
+            GameHandler.Instance.GetCurrEncounter().OnCardDiscarded(_hand[RandomIndex]);
             _hand.RemoveAt(RandomIndex);
             _handUI.RemoveCard();
         }

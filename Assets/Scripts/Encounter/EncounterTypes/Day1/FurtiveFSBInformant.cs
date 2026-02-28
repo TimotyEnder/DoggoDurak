@@ -21,6 +21,16 @@ public class FurtiveFSBInformant : Encounter
         AddRule("Each time you play a "+StylisticClass.HighLight+"face card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         

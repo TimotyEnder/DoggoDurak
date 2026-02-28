@@ -21,6 +21,16 @@ public class PushingPug : Encounter
         AddRule("Defending player receives "+StylisticClass.DamageNumber(1)+" for each unblocked card."); //0
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         

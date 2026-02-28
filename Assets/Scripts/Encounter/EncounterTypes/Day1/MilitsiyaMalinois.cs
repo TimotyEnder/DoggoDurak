@@ -22,6 +22,17 @@ public class MilitsiyaMalinois : Encounter
         hasRules=true;
         AddRule("Cards with the number "+StylisticClass.HighLight+_numberCannotBePlayed+StylisticClass.HighLightClose +" are "+StylisticClass.Debuffed); //0
     }
+
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         

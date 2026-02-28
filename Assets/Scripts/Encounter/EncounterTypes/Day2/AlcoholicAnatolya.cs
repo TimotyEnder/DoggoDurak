@@ -2,8 +2,8 @@ using System.Data;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "FSBOperative", menuName = "Encounters/Day2/FSBOperative")]
-public class FSBOperative : Encounter
+[CreateAssetMenu(fileName = "AlcoholicAnatolya", menuName = "Encounters/Day2/AlcoholicAnatolya")]
+public class AlcoholicAnatolya : Encounter
 {
     public override void InitEncounter()
     {
@@ -11,7 +11,7 @@ public class FSBOperative : Encounter
         boss=false;
         trumpSuit = 'R';
         icon = null;
-        encounterName = "FSB Operative";
+        encounterName = "Alcoholic Anatolya";
         goldRewardMod = 1.5f;
         SetHealth();
         initDeck(12,true,true,true,true);
@@ -22,19 +22,36 @@ public class FSBOperative : Encounter
                 card.AddModifier("Parry");
             }
         }
-        this.description="An FSB operative, showing face is unsafe here.";
+        this.description="Is would be disrespectful to not accept his toast...s... every turn.";
         hasRules=true;
-        AddRule("Your face cards are "+StylisticClass.Debuffed); //0
+        AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card discarded"); //0
+        AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card drawn"); //1
     }
 
     public override void OnCardDiscarded(CardInfo card)
     {
-        
+        if (card._opponentCard)
+        {
+            GameHandler.Instance.DamageOpponent(2);
+        }
+        else
+        {
+            GameHandler.Instance.DamagePlayer(2);
+        }
+        ShakeRule(0);
     }
 
     public override void OnCardDrawn(CardInfo card)
     {
-        
+        if (card._opponentCard)
+        {
+            GameHandler.Instance.DamageOpponent(2);
+        }
+        else
+        {
+            GameHandler.Instance.DamagePlayer(2);
+        }
+        ShakeRule(1);
     }
 
     public override void OnDamageOpponent(int amount)
@@ -68,7 +85,5 @@ public class FSBOperative : Encounter
 
     public override void SetPlayPermissions()
     {
-        GameHandler.Instance.SetDebuffs(new string[]{"C11","C12","C13","H11","H12","H13","S11","S12","S13","D11","D12","D13"},true, false);
-        ShakeRule(0);
     }
 }

@@ -27,6 +27,16 @@ public class MunchingMastiff : Encounter
         AddRule("The opponent restores 2hp and the end of each turn."); //0
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         

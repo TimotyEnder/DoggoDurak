@@ -21,6 +21,16 @@ public class PripyatPoodle : Encounter
         AddRule("The opponent recieves double damage."); //1
     }
 
+    public override void OnCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnCardDrawn(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount)
     {
         GameHandler.Instance.DamageOpponent(amount,true);
