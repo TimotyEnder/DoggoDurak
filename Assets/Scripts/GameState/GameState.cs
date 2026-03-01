@@ -37,7 +37,7 @@ public class GameState
     public float _randomBossEncounterChance;
     public bool[] _undamagable; //0 player 1 enemy
 
-    public int _opponetnDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
+    public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -100,7 +100,7 @@ public class GameState
         _startingShopRerollCost = 5;
         _randomBossEncounterChance = 10;
         _undamagable=new bool[]{false,false};
-        _opponetnDamageReduction = 0;
+        _opponentsDamageReduction = 0;
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {

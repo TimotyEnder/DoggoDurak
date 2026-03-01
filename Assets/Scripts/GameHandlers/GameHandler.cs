@@ -79,6 +79,7 @@ public class GameHandler : MonoBehaviour
     }
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
+        ResetEncounterGamestateAttributes();
         if(_encounterManager==null)
         {
             _encounterManager = new EncounterManager();
@@ -197,12 +198,12 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
             {
-                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponetnDamageReduction);
+                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponentsDamageReduction);
                 GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
             }
             if (!fromEffect)
             {
-                DelayedOnDamageOpponentAsync(amount-_state._opponetnDamageReduction,fromMod).Forget();
+                DelayedOnDamageOpponentAsync(amount-_state._opponentsDamageReduction,fromMod).Forget();
             }
         }
     }
@@ -368,5 +369,9 @@ public class GameHandler : MonoBehaviour
         {
             ruleHandler.GetComponentInChildren<RuleBoxUI>().ShakeRule(index);
         }
+    }
+    public void ResetEncounterGamestateAttributes() 
+    {
+        _state._opponentsDamageReduction = 0;
     }
 }
