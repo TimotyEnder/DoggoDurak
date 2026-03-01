@@ -18,9 +18,12 @@ public class FurtiveFSBInformant : Encounter
         AddRandomModifierToDeck(5,"Parry");
         this.description="A Furtive FSB Informant.";
         hasRules=true;
-        AddRule("Each time you play a "+StylisticClass.HighLight+"face card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+        
     }
-
+    public override void AddRules()
+    {
+      AddRule("Each time you play a "+StylisticClass.HighLight+"face card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

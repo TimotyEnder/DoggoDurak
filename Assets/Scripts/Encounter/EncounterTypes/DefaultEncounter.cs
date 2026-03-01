@@ -93,4 +93,8 @@ public class DefaultEncounter : Encounter
     {
         
     }
+
+    public override void AddRules()
+    {
+    }
 }

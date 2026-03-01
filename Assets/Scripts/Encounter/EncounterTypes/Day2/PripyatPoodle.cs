@@ -17,10 +17,13 @@ public class PripyatPoodle : Encounter
         initDeck(12,true,true,true,true);
         this.description="A poodle with straight hair?! He looks weak but I am starting to feel sick.";
         hasRules=true;
-        AddRule("At the end of the turn you recieve" +StylisticClass.DamageNumber(10)); //0
-        AddRule("The opponent recieves double damage."); //1
+       
     }
-
+    public override void AddRules()
+    {
+       AddRule("At the end of the turn you recieve" +StylisticClass.DamageNumber(10)); //0
+       AddRule("The opponent recieves double damage."); //1
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

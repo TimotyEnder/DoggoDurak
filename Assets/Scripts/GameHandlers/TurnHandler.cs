@@ -139,8 +139,6 @@ public class TurnHandler : MonoBehaviour
     }
     private IEnumerator DamageRoutine() 
     {
-        GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
-        yield return new WaitForSeconds(0.5f);
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
            if(!card.IsDefended()){ 
@@ -167,6 +165,9 @@ public class TurnHandler : MonoBehaviour
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }
         }
+        yield return new WaitForSeconds(0.2f);
+        GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
+        yield return new WaitForSeconds(0.2f);
         FinishEndTurn();
     }
     public bool IsTurnEnding() 

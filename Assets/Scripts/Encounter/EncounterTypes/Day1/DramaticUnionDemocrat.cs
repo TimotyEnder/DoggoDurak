@@ -17,9 +17,12 @@ public class DramaticUnionDemocrat : Encounter
         initDeck(10,false,false,true,true);
         this.description="Hates Reds!";
         hasRules=true;
-        AddRule("Each time you play a "+StylisticClass.HighLight+"red card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+        
     }
-
+    public override void AddRules()
+    {
+       AddRule("Each time you play a "+StylisticClass.HighLight+"red card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

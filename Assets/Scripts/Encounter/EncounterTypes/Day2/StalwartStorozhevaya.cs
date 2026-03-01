@@ -19,10 +19,13 @@ public class StalwartStorozhevaya : Encounter
         AddRandomModifierToDeck(10,"Spiky");
         this.description="Incredibly strong looking guard dog. It will be hard to get past his riot shield.";
         hasRules=true;
-        AddRule("The opponent recieve "+StylisticClass.DamageNumber(5)+" less from any source."); //0
+        
         GameHandler.Instance.GetGameState()._opponentsDamageReduction = 5;
     }
-
+    public override void AddRules()
+    {
+       AddRule("The opponent recieve "+StylisticClass.DamageNumber(5)+" less from any source."); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

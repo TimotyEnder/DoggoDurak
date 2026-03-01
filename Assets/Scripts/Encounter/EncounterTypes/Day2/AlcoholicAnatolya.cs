@@ -18,10 +18,13 @@ public class AlcoholicAnatolya : Encounter
         UpgradeRandomCardsInDeck(10,1);
         this.description="Is would be disrespectful to not accept his toast...s... every turn.";
         hasRules=true;
-        AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card discarded"); //0
-        AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card drawn"); //1
+        
     }
-
+    public override void AddRules()
+    {
+       AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card discarded"); //0
+       AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card drawn"); //1
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         if (card._opponentCard)

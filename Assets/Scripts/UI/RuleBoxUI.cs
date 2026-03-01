@@ -10,6 +10,15 @@ public class RuleBoxUI : MonoBehaviour
     void Start()
     {
         _ruleTexts= new List<GameObject>();
+        UpdateRules();
+    }
+    public void UpdateRules()
+    {
+        foreach(GameObject text in _ruleTexts)
+        {
+            Destroy(text);
+        }
+        _ruleTexts.Clear();
         foreach(string rule in GameHandler.Instance.GetCurrEncounter().GetRules())
         {
             AddRulesText(rule);
@@ -23,10 +32,8 @@ public class RuleBoxUI : MonoBehaviour
     }
     public void ShakeRule(int index)
     {
-        Debug.Log("Shaking rule at index: " + index);
         if(index>=0 && index<_ruleTexts.Count)
         {
-            Debug.Log("Shaking rule: " + _ruleTexts[index].GetComponentInChildren<TextMeshProUGUI>().text);
             _ruleTexts[index].GetComponent<Animator>().SetTrigger("Shake");
         }
     }

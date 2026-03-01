@@ -20,10 +20,13 @@ public class TheBreadlineSwindler : Encounter
         AddRandomModifierToDeck(10,"Spiky");
         this.description="Quick hands, watch your cards!";
         hasRules=true;
+        
+    }
+    public override void AddRules()
+    {
         AddRule("If the opponent is made to discard a card they take "+StylisticClass.DamageNumber(10)); //0
         AddRule("And the end of each turn you discard you rightmost card");//1
     }
-
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

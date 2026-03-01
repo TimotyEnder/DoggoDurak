@@ -17,9 +17,12 @@ public class EventemperedTerrier : Encounter
         initDeck(10,true,true,true,true,true,false);
         this.description="Hates odd looking chaps!";
         hasRules=true;
-        AddRule("Each time you play an "+StylisticClass.HighLight+"odd numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
+       
     }
-
+    public override void AddRules()
+    {
+       AddRule("Each time you play an "+StylisticClass.HighLight+"odd numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

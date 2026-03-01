@@ -65,8 +65,8 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new TheBreadlineSwindler();
-        _currentEncounter.InitEncounter();
+        //_currentEncounter= new RussianRouletteRascal();
+        //_currentEncounter.InitiateEncounter();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -99,7 +99,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-             //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else
@@ -368,6 +368,14 @@ public class GameHandler : MonoBehaviour
         if(ruleHandler!=null)
         {
             ruleHandler.GetComponentInChildren<RuleBoxUI>().ShakeRule(index);
+        }
+    }
+    public void UpdateRules() 
+    {
+        GameObject ruleHandler= GameObject.Find("RulesUIBox");
+        if(ruleHandler!=null)
+        {
+            ruleHandler.GetComponentInChildren<RuleBoxUI>().UpdateRules();
         }
     }
     public void ResetEncounterGamestateAttributes() 

@@ -18,9 +18,12 @@ public class PushingPug : Encounter
         AddRandomModifierToDeck(5,"Restoring");
         this.description="A Pushy Pug.";
         hasRules=true;
+        
+    }
+    public override void AddRules()
+    {
         AddRule("Defending player receives "+StylisticClass.DamageNumber(1)+" for each unblocked card."); //0
     }
-
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

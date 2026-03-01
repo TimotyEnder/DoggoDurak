@@ -17,9 +17,12 @@ public class CrazedCommunist : Encounter
         initDeck(10,false,false,true,true);
         this.description="Only Red!";
         hasRules=true;
-        AddRule("Each time you play a "+StylisticClass.HighLight+"black card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+        
     }
-
+    public override void AddRules()
+    {
+       AddRule("Each time you play a "+StylisticClass.HighLight+"black card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

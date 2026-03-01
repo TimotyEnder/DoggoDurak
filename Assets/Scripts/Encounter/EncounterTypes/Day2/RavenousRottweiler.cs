@@ -18,9 +18,12 @@ public class RavenousRottweiler : Encounter
         AddRandomModifierToDeck(15,"Spiky");
         this.description="The hunger in his eyes is terrifying...";
         hasRules=true;
-        AddRule("The opponent heals 2hp for each instance of damage they deal."); //0
+        
     }
-
+    public override void AddRules()
+    {
+      AddRule("The opponent heals 2hp for each instance of damage they deal."); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

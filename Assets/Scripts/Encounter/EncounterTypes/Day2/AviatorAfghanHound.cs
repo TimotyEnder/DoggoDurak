@@ -18,9 +18,12 @@ public class AviatorAfghanHound : Encounter
         AddRandomModifierToDeck(20,"Bounce");
         this.description="Respected and feared army pilot.";
         hasRules=true;
+        
+    }
+    public override void AddRules()
+    {
         AddRule("Bounce effects deal " + StylisticClass.DamageNumber(4) + " more."); //0
     }
-
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
     }

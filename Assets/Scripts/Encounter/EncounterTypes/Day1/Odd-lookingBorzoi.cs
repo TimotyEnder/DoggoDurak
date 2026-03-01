@@ -16,10 +16,12 @@ public class OddlookingBorzoi : Encounter
         SetHealth();
         initDeck(10,true,true,true,true,false,true);
         this.description="Hates the even-tempered!";
-        hasRules=true;
+        hasRules=true;  
+    }
+    public override void AddRules()
+    {
         AddRule("Each time you play an "+StylisticClass.HighLight+"even numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
     }
-
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

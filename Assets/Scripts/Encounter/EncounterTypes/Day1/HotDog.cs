@@ -18,9 +18,12 @@ public class HotDog : Encounter
         AddRandomModifierToDeck(15,"Burn");
         this.description="He is on fire! No like literally...";
         hasRules=true;
-        AddRule("The opponent recieves "+StylisticClass.DamageNumber(5)+"at the end of the turn"); //0
+        
     }
-
+    public override void AddRules()
+    {
+       AddRule("The opponent recieves "+StylisticClass.DamageNumber(5)+"at the end of the turn"); //0
+    }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

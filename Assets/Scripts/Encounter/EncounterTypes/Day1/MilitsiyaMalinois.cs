@@ -20,7 +20,11 @@ public class MilitsiyaMalinois : Encounter
         this.description="Enforces the law!";
         _numberCannotBePlayed=Random.Range(6,11);
         hasRules=true;
-        AddRule("Cards with the number "+StylisticClass.HighLight+_numberCannotBePlayed+StylisticClass.HighLightClose +" are "+StylisticClass.Debuffed); //0
+        
+    }
+    public override void AddRules()
+    {
+       AddRule("Cards with the number "+StylisticClass.HighLight+_numberCannotBePlayed+StylisticClass.HighLightClose +" are "+StylisticClass.Debuffed); //0
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)

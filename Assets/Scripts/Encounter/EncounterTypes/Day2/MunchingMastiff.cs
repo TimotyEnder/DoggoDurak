@@ -24,6 +24,10 @@ public class MunchingMastiff : Encounter
         }
         this.description="Does not stop munchin'";
         hasRules=true;
+        
+    }
+    public override void AddRules()
+    {
         AddRule("The opponent restores 2hp and the end of each turn."); //0
     }
 

@@ -18,9 +18,12 @@ public class SpikedShepherded : Encounter
         AddRandomModifierToDeck(20,"Spiky");
         this.description="Spiky but brittle";
         hasRules=true;
+        
+    }
+    public override void AddRules()
+    {
         AddRule("The opponent recieves double damage"); //0
     }
-
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
         

@@ -45,7 +45,20 @@ public abstract class Encounter : ScriptableObject
     {
         GameHandler.Instance.ShakeRule(index);
     }
+    protected void UpdateRules()
+    {
+        this.rules.Clear();
+        AddRules();
+        GameHandler.Instance.UpdateRules();
+    }
+    public void InitiateEncounter()
+    {
+        InitEncounter();
+        AddRules();
+    }
     public abstract void InitEncounter();
+    public abstract void AddRules();
+
 
     public abstract void OnPlayedCard(Card card);
     public abstract void OnDefendCard(Card card, Card defendedWith);

@@ -24,6 +24,10 @@ public class FSBOperative : Encounter
         }
         this.description="An FSB operative, showing face is unsafe here.";
         hasRules=true;
+       
+    }
+    public override void AddRules()
+    {
         AddRule("Your face cards are "+StylisticClass.Debuffed); //0
     }
 

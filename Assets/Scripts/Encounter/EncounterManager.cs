@@ -14,7 +14,7 @@ public class EncounterManager
         var loadedEncounters = Resources.LoadAll<Encounter>("Encounters");
         foreach(var e in loadedEncounters) 
         {
-            e.InitEncounter();
+            e.InitiateEncounter();
             if (!e.IsBoss())
             {
                 while (e.GetDay() >= _encounters.Count)
