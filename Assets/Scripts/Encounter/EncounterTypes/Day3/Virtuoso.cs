@@ -2,17 +2,16 @@ using System.Data;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "SiberianBearHunter", menuName = "Encounters/Day3/SiberianBearHunter")]
-public class SiberianBearHunter : Encounter
+[CreateAssetMenu(fileName = "Virtuoso", menuName = "Encounters/Day3/Virtuoso")]
+public class Virtuoso : Encounter
 {
-    public int _damageCur=0;
     public override void InitEncounter()
     {
         day=1;
         boss=false;
         trumpSuit = 'R';
         icon = null;
-        encounterName = "Siberian Bear Hunter";
+        encounterName = "Virtuoso";
         goldRewardMod = 2f;
         SetHealth();
         initDeck(12,true,true,true,true);
@@ -20,15 +19,16 @@ public class SiberianBearHunter : Encounter
         {
             for (int i = 0; i < 5; i++)
             {
-                card.AddModifier("Spiky");
+                card.AddModifier("Burn");
             }
         }
-        this.description="Is he becoming sharper!?";
+        this.description="How many cards?!!";
         hasRules=true;
+        GameHandler.Instance.GetGameState()._enemyHandSize = 20; 
     }
     public override void AddRules()
     {
-       AddRule("For each "+StylisticClass.DamageNumber(5)+" the opponent deals to you, all the cards in his deck currently gain spiky 1"); //0
+       AddRule("If you defend all the cards the opponent attacks with, deal"+StylisticClass.DamageNumber(50)+" to the opponent"); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
@@ -46,20 +46,6 @@ public class SiberianBearHunter : Encounter
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
-        _damageCur+=amount;
-        int toModify = _damageCur / 5;  
-        _damageCur = _damageCur % 5;
-        if(toModify>0)
-        {
-            foreach(CardInfo card in deck)
-            {
-                for (int i = 0; i < toModify; i++)
-                {
-                    card.AddModifier("Spiky");
-                }
-            }
-        }
-        ShakeRule(0);
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
@@ -79,6 +65,13 @@ public class SiberianBearHunter : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
+        if(turnState==1)
+        {
+            if(GameHandler.Instance.GetUnblockedCards()==0)
+            {
+                GameHandler.Instance.DamageOpponent(50,false,"Virtuoso");
+            }
+        }
     }
 
     public override void SetPlayPermissions()

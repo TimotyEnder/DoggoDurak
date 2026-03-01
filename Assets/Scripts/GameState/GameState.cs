@@ -36,6 +36,7 @@ public class GameState
     public int _startingShopRerollCost;
     public float _randomBossEncounterChance;
     public bool[] _undamagable; //0 player 1 enemy
+    public int _enemyHandSize;
 
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
     public GameState()
@@ -101,6 +102,7 @@ public class GameState
         _randomBossEncounterChance = 10;
         _undamagable=new bool[]{false,false};
         _opponentsDamageReduction = 0;
+        _enemyHandSize = 6;
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {

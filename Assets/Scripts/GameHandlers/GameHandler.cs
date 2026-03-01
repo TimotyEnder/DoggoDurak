@@ -65,8 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new SiberianBearHunter();
-        _currentEncounter.InitiateEncounter();
+        _currentEncounter= new Virtuoso();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -80,6 +79,7 @@ public class GameHandler : MonoBehaviour
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
         ResetEncounterGamestateAttributes();
+        _currentEncounter.InitiateEncounter();//debug
         if(_encounterManager==null)
         {
             _encounterManager = new EncounterManager();
@@ -381,5 +381,6 @@ public class GameHandler : MonoBehaviour
     public void ResetEncounterGamestateAttributes() 
     {
         _state._opponentsDamageReduction = 0;
+        _state._enemyHandSize = 6;
     }
 }

@@ -231,7 +231,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         SetAnimatable(true);
         _animator.SetTrigger("Bling");
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
+        _cardRect.localScale = Vector3.one;
         SetAnimatable(false);
     }
     public void Hit()
@@ -245,7 +246,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         SetAnimatable(true);
         _animator.SetTrigger("Hit");
-        yield return new WaitForSeconds(0.20f);
+        yield return new WaitForSeconds(0.25f);
+        _cardRect.localScale = Vector3.one;
+        _cardRect.eulerAngles=Vector3.zero;
         SetAnimatable(false);
     }  
     public void SpawnModifierEffect(CardModifierContainer c)

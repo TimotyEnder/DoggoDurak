@@ -15,7 +15,6 @@ public class OpponentLogic : MonoBehaviour
     private List<CardInfo> _hand;
     [SerializeField]
     private List<CardInfo> _deck;
-    private int _handSize = 6;
 
     private LifeTotal _lifeTotalUI;
     private OpponentHand _handUI;
@@ -182,7 +181,8 @@ public class OpponentLogic : MonoBehaviour
     }
     public  IEnumerator DrawHandRoutine()
     {
-        int toDraw = _handSize-_hand.Count;
+        Debug.Log("Drawing handsize: "+GameHandler.Instance.GetGameState()._enemyHandSize);
+        int toDraw = GameHandler.Instance.GetGameState()._enemyHandSize - _hand.Count;
         for (int i = 0; i < toDraw; i++)
         {
             if (_deck.Count > 0)
