@@ -54,6 +54,7 @@ public abstract class Encounter : ScriptableObject
     public void InitiateEncounter()
     {
         InitEncounter();
+        this.rules.Clear();
         AddRules();
     }
     public abstract void InitEncounter();
