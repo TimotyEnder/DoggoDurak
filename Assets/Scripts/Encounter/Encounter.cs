@@ -53,6 +53,7 @@ public abstract class Encounter : ScriptableObject
     }
     public void InitiateEncounter()
     {
+        rules= new List<string>();
         InitEncounter();
         this.rules.Clear();
         AddRules();
