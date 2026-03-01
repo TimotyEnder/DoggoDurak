@@ -32,6 +32,7 @@ public class LifeTotal : MonoBehaviour
     }
     public void Damage(int damage) 
     {
+        if(damage<0){damage=0;}
         _hp -= damage;
         if(_rh.CanEffectsSpawn())
         {

@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new AviatorAfghanHound();
+        _currentEncounter= new StalwartStorozhevaya();
         _currentEncounter.InitEncounter();
         Next();
     }
@@ -197,12 +197,12 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
             {
-                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponetnDamageReduction);
                 GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
             }
             if (!fromEffect)
             {
-                DelayedOnDamageOpponentAsync(amount,fromMod).Forget();
+                DelayedOnDamageOpponentAsync(amount-_state._opponetnDamageReduction,fromMod).Forget();
             }
         }
     }
