@@ -23,7 +23,7 @@ public class MilitsiyaMalinois : Encounter
         AddRule("Cards with the number "+StylisticClass.HighLight+_numberCannotBePlayed+StylisticClass.HighLightClose +" are "+StylisticClass.Debuffed); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -65,5 +65,10 @@ public class MilitsiyaMalinois : Encounter
     {
         GameHandler.Instance.SetDebuffs(new string[]{"C"+_numberCannotBePlayed,"D"+_numberCannotBePlayed,"H"+_numberCannotBePlayed,"S"+_numberCannotBePlayed},true,true);
         ShakeRule(0);
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
     }
 }

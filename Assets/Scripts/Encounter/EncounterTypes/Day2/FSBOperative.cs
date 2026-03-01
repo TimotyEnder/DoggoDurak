@@ -27,7 +27,7 @@ public class FSBOperative : Encounter
         AddRule("Your face cards are "+StylisticClass.Debuffed); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -70,5 +70,10 @@ public class FSBOperative : Encounter
     {
         GameHandler.Instance.SetDebuffs(new string[]{"C11","C12","C13","H11","H12","H13","S11","S12","S13","D11","D12","D13"},true, false);
         ShakeRule(0);
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
     }
 }

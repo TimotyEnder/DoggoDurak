@@ -21,7 +21,7 @@ public class RavenousRottweiler : Encounter
         AddRule("The opponent heals 2hp for each instance of damage they deal."); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -62,6 +62,11 @@ public class RavenousRottweiler : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

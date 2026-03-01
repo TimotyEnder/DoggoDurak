@@ -27,7 +27,7 @@ public class MunchingMastiff : Encounter
         AddRule("The opponent restores 2hp and the end of each turn."); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -68,6 +68,11 @@ public class MunchingMastiff : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

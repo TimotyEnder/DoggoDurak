@@ -214,7 +214,7 @@ public class OpponentLogic : MonoBehaviour
         {
             int RandomIndex = Random.Range(0, _hand.Count);
             _discard.AddCard(_cardHandArea.GetCards()[RandomIndex]); //add to discard pile if a card is discarded
-            GameHandler.Instance.GetCurrEncounter().OnCardDiscarded(_hand[RandomIndex]);
+            GameHandler.Instance.GetCurrEncounter().OnHandCardDiscarded(_hand[RandomIndex]);
             _hand.RemoveAt(RandomIndex);
             _handUI.RemoveCard();
         }

@@ -54,7 +54,8 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnDamageOpponent(int amount,string fromMod = "");
     public abstract void OnTurnEnd(int turnState);
     public abstract void OnCardDrawn(CardInfo card);
-    public abstract void OnCardDiscarded(CardInfo card);
+    public abstract void OnPlayedCardDiscarded(CardInfo card);
+    public abstract void OnHandCardDiscarded(CardInfo card);
     public abstract void SetPlayPermissions();
 
     public string GetEncounterName() 

@@ -44,7 +44,7 @@ public class DefaultEncounter : Encounter
         day = 0;
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -85,6 +85,11 @@ public class DefaultEncounter : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

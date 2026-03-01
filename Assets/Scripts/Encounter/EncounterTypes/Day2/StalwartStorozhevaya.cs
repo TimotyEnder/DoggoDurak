@@ -23,7 +23,7 @@ public class StalwartStorozhevaya : Encounter
         GameHandler.Instance.GetGameState()._opponetnDamageReduction = 5;
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -62,6 +62,11 @@ public class StalwartStorozhevaya : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

@@ -20,7 +20,7 @@ public class EventemperedTerrier : Encounter
         AddRule("Each time you play an "+StylisticClass.HighLight+"odd numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -69,6 +69,11 @@ public class EventemperedTerrier : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

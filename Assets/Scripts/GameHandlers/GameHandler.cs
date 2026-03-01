@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new StalwartStorozhevaya();
+        _currentEncounter= new TheBreadlineSwindler();
         _currentEncounter.InitEncounter();
         Next();
     }
@@ -272,6 +272,7 @@ public class GameHandler : MonoBehaviour
             CardHandArea cardHScript = CardHandArea.GetComponent<CardHandArea>();
             if (cardHScript != null)
             {
+                _currentEncounter.OnHandCardDiscarded(cardHScript.GetCards()[index].GetCardInfo());
                 cardHScript.Discard(index,amount);
             }
         }

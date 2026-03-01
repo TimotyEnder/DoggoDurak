@@ -20,7 +20,7 @@ public class DramaticUnionDemocrat : Encounter
         AddRule("Each time you play a "+StylisticClass.HighLight+"red card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -69,6 +69,11 @@ public class DramaticUnionDemocrat : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

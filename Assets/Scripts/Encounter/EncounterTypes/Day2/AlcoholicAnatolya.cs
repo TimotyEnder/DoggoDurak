@@ -22,7 +22,7 @@ public class AlcoholicAnatolya : Encounter
         AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card drawn"); //1
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         if (card._opponentCard)
         {
@@ -79,5 +79,10 @@ public class AlcoholicAnatolya : Encounter
 
     public override void SetPlayPermissions()
     {
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
     }
 }

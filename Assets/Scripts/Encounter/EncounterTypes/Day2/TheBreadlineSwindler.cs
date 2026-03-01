@@ -2,23 +2,26 @@ using System.Data;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "SpikedShepherded", menuName = "Encounters/Day1/SpikedShepherded")]
-public class SpikedShepherded : Encounter
+[CreateAssetMenu(fileName = "TheBreadlineSwindler", menuName = "Encounters/Day2/TheBreadlineSwindler")]
+public class TheBreadlineSwindler : Encounter
 {
     public override void InitEncounter()
     {
-        day=0;
+        day=1;
         boss=false;
         trumpSuit = 'R';
         icon = null;
-        encounterName = "Spiked Shepherded";
-        goldRewardMod = 1f;
+        encounterName = "The Breadline Swindler";
+        goldRewardMod = 1.5f;
         SetHealth();
-        initDeck(10,true,true,true,true);
-        AddRandomModifierToDeck(20,"Spiky");
-        this.description="Spiky but brittle";
+        initDeck(12,true,true,true,true);
+        AddRandomModifierToDeck(10,"Burn");
+        AddRandomModifierToDeck(10,"Bounce");
+        AddRandomModifierToDeck(10,"Spiky");
+        this.description="Quick hands, watch your cards!";
         hasRules=true;
-        AddRule("The opponent recieves double damage"); //0
+        AddRule("If the opponent is made to discard a card they take "+StylisticClass.DamageNumber(10)); //0
+        AddRule("And the end of each turn you discard you rightmost card");//1
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)
@@ -33,23 +36,21 @@ public class SpikedShepherded : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        GameHandler.Instance.DamageOpponent(amount,true);
-        ShakeRule(0);
+        
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
-        
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-       
+        
     }
 
     public override void OnPlayedCard(Card card)
     {
-       
+        
     }
 
     public override void OnReverse(Card card)
@@ -59,7 +60,8 @@ public class SpikedShepherded : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
-        
+        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetCardsInHand()-1,1);
+        ShakeRule(1);
     }
 
     public override void SetPlayPermissions()
@@ -69,6 +71,7 @@ public class SpikedShepherded : Encounter
 
     public override void OnHandCardDiscarded(CardInfo card)
     {
-        
+        GameHandler.Instance.DamagePlayer(10);
+        ShakeRule(0);
     }
 }

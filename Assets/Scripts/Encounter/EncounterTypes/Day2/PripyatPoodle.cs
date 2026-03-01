@@ -21,7 +21,7 @@ public class PripyatPoodle : Encounter
         AddRule("The opponent recieves double damage."); //1
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -64,6 +64,11 @@ public class PripyatPoodle : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

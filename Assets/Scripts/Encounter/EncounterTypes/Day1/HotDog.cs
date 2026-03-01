@@ -21,7 +21,7 @@ public class HotDog : Encounter
         AddRule("The opponent recieves "+StylisticClass.DamageNumber(5)+"at the end of the turn"); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
         
     }
@@ -61,6 +61,11 @@ public class HotDog : Encounter
     }
 
     public override void SetPlayPermissions()
+    {
+        
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
     {
         
     }

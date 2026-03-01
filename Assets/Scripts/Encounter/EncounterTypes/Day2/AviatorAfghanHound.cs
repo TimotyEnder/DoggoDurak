@@ -21,7 +21,7 @@ public class AviatorAfghanHound : Encounter
         AddRule("Bounce effects deal " + StylisticClass.DamageNumber(4) + " more."); //0
     }
 
-    public override void OnCardDiscarded(CardInfo card)
+    public override void OnPlayedCardDiscarded(CardInfo card)
     {
     }
 
@@ -64,5 +64,10 @@ public class AviatorAfghanHound : Encounter
 
     public override void SetPlayPermissions()
     {
+    }
+
+    public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
     }
 }
