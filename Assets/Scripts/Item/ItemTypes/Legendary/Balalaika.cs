@@ -22,7 +22,7 @@ public class Balalaika : Item
 
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
         _timesDamageDone++;
         if (this._timesDamageDone >= 3) 

@@ -16,11 +16,11 @@ public class BounceCardMod : CardModifier
     {
         if (!defendee.GetCardInfo()._opponentCard)
         {
-            DelayedDamage(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number), false);
+            DelayedDamage(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number), false,"Bounce");
         }
         else 
         {
-            DelayedDamage(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number), true);
+            DelayedDamage(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number), true, "Bounce");
         }
         return true;
     }

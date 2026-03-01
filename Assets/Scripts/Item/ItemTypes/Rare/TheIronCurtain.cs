@@ -23,7 +23,7 @@ public class TheIronCurtain : Item
         
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
 
     }

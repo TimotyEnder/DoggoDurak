@@ -10,16 +10,16 @@ public abstract class CardModifier
     public abstract bool OnReverse(Card card);
     public abstract bool OnBeingDefended(Card cardDefendingThis);
 
-    public async void DelayedDamage(int amount, bool player)
+    public async void DelayedDamage(int amount, bool player, string fromMod)
     {
         await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeDamage()));
         if (player)
         {
-            GameHandler.Instance.DamagePlayer(amount);
+            GameHandler.Instance.DamagePlayer(amount, fromMod: fromMod);
         }
         else
         {
-            GameHandler.Instance.DamageOpponent(amount);
+            GameHandler.Instance.DamageOpponent(amount, fromMod: fromMod);
         }
     }
     public async void  DelayedHeal(int amount,bool player)

@@ -31,13 +31,13 @@ public class PripyatPoodle : Encounter
         
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
         GameHandler.Instance.DamageOpponent(amount,true);
         ShakeRule(1);
     }
 
-    public override void OnDamagePlayer(int amount)
+    public override void OnDamagePlayer(int amount, string fromMod)
     {
         
     }

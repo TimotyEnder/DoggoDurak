@@ -20,7 +20,7 @@ public class GrilledSteak : Item
         GameHandler.Instance.IncreaseMaxHealth(GameHandler.Instance.GetGameState()._maxhealth);
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
         
     }

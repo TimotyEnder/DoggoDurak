@@ -50,8 +50,8 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnPlayedCard(Card card);
     public abstract void OnDefendCard(Card card, Card defendedWith);
     public abstract void OnReverse(Card card);
-    public abstract void OnDamagePlayer(int amount);
-    public abstract void OnDamageOpponent(int amount);
+    public abstract void OnDamagePlayer(int amount,string fromMod = "");
+    public abstract void OnDamageOpponent(int amount,string fromMod = "");
     public abstract void OnTurnEnd(int turnState);
     public abstract void OnCardDrawn(CardInfo card);
     public abstract void OnCardDiscarded(CardInfo card);

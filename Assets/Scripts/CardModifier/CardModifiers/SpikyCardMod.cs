@@ -11,11 +11,11 @@ public class SpikyCardMod : CardModifier
     {
         if (!cardDefendingThis.GetCardInfo()._opponentCard)
         {
-            DelayedDamage(1,true);
+            DelayedDamage(1,true, "Spiky");
         }
         else
         {
-            DelayedDamage(1,false);
+            DelayedDamage(1,false, "Spiky");
         }
         return true;
     }

@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new AlcoholicAnatolya();
+        _currentEncounter= new AviatorAfghanHound();
         _currentEncounter.InitEncounter();
         Next();
     }
@@ -165,7 +165,7 @@ public class GameHandler : MonoBehaviour
         }
     }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
-    public void HealPlayer(int amount, bool fromEffect = false) //any healing effects should be handled by this
+    public void HealPlayer(int amount, bool fromEffect = false, string fromMod = "") //any healing effects should be handled by this
     {
         if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
@@ -184,7 +184,7 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public void DamageOpponent(int amount, bool fromEffect = false) //any effects damaging the enemy should go through this
+    public void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "") //any effects damaging the enemy should go through this
     {
         if(_state._undamagable[1])
         {
@@ -202,19 +202,19 @@ public class GameHandler : MonoBehaviour
             }
             if (!fromEffect)
             {
-                DelayedOnDamageOpponentAsync(amount).Forget();
+                DelayedOnDamageOpponentAsync(amount,fromMod).Forget();
             }
         }
     }
-    private async UniTaskVoid DelayedOnDamageOpponentAsync(int amount)
+    private async UniTaskVoid DelayedOnDamageOpponentAsync(int amount,string fromMod)
     {
         // Wait for next frame to ensure UI animations complete
         await UniTask.Delay(200);
         
-        _state.OnDamageOpponent(amount);
-        _currentEncounter.OnDamageOpponent(amount);
+        _state.OnDamageOpponent(amount,fromMod);
+        _currentEncounter.OnDamageOpponent(amount,fromMod);
     }
-    public void DamagePlayer(int amount,bool fromEffect = false) //any effects damaging the player should go through this
+    public void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "") //any effects damaging the player should go through this
     {
         if(_state._undamagable[0])
         {
@@ -232,15 +232,15 @@ public class GameHandler : MonoBehaviour
             }
             if (!fromEffect)
             {
-               DelayedOnDamagePlayerAsync(amount).Forget();
+               DelayedOnDamagePlayerAsync(amount,fromMod).Forget();
             }
         }
     }
-    private async UniTaskVoid DelayedOnDamagePlayerAsync(int amount)
+    private async UniTaskVoid DelayedOnDamagePlayerAsync(int amount,string fromMod)
     {
         // Wait for next frame to ensure UI animations complete
         await UniTask.NextFrame();
-        _currentEncounter.OnDamagePlayer(amount);
+        _currentEncounter.OnDamagePlayer(amount,fromMod);
     }
 
     public void Draw(int amount)

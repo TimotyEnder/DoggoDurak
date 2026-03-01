@@ -202,11 +202,11 @@ public class GameState
             item.OnHeal(amount);
         }
     }
-    public void OnDamageOpponent(int amount)
+    public void OnDamageOpponent(int amount, string fromMod = "")
     {
         foreach (Item item in _items)
         {
-            item.OnDamageOpponent(amount);
+            item.OnDamageOpponent(amount, fromMod);
         }
     }
 }

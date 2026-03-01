@@ -22,7 +22,7 @@ public class Muzzle : Item
 
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
 
     }

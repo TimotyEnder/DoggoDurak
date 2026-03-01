@@ -15,13 +15,7 @@ public class AlcoholicAnatolya : Encounter
         goldRewardMod = 1.5f;
         SetHealth();
         initDeck(12,true,true,true,true);
-        foreach(CardInfo card in deck)
-        {
-            if(card.IsOdd())
-            {
-                card.AddModifier("Parry");
-            }
-        }
+        UpgradeRandomCardsInDeck(10,1);
         this.description="Is would be disrespectful to not accept his toast...s... every turn.";
         hasRules=true;
         AddRule("Players recieve " + StylisticClass.DamageNumber(2) + " damage for each card discarded"); //0
@@ -54,12 +48,12 @@ public class AlcoholicAnatolya : Encounter
         ShakeRule(1);
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
         
     }
 
-    public override void OnDamagePlayer(int amount)
+    public override void OnDamagePlayer(int amount, string fromMod)
     {
         
     }

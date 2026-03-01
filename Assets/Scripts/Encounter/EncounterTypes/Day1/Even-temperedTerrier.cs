@@ -30,12 +30,12 @@ public class EventemperedTerrier : Encounter
         
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
         
     }
 
-    public override void OnDamagePlayer(int amount)
+    public override void OnDamagePlayer(int amount, string fromMod)
     {
         
     }

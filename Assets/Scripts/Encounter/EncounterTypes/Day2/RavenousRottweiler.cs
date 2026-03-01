@@ -31,11 +31,12 @@ public class RavenousRottweiler : Encounter
         
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
+        
     }
 
-    public override void OnDamagePlayer(int amount)
+    public override void OnDamagePlayer(int amount, string fromMod)
     {
         GameHandler.Instance.HealOpponent(2);
         ShakeRule(0);

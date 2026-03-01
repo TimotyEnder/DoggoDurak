@@ -20,7 +20,7 @@ public class BlackStar : Item
         GameHandler.Instance.GetGameState()._blackCardsSameSuit = true;
     }
 
-    public override void OnDamageOpponent(int amount)
+    public override void OnDamageOpponent(int amount, string fromMod)
     {
 
     }
