@@ -63,7 +63,7 @@ public class TheBreadlineSwindler : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
-        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetCardsInHand()-1,1);
+        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetPlayerCardsInHand()-1,1);
         ShakeRule(1);
     }
 

@@ -21,7 +21,7 @@ public class CrippleCardMod : CardModifier
     {
         if(card.GetCardInfo()._opponentCard)
         {
-            GameHandler.Instance.PlayerDiscard(Random.Range(0,GameHandler.Instance.GetCardsInHand()-1),1);
+            GameHandler.Instance.PlayerDiscard(Random.Range(0,GameHandler.Instance.GetPlayerCardsInHand()-1),1);
         }
         else
         {

@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new TheKremlinKleptocrat();
+        _currentEncounter= new ThePerestroikaPragmatist();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -278,7 +278,7 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
-    public int GetCardsInHand()
+    public int GetPlayerCardsInHand()
     {
         GameObject CardHandArea = GameObject.Find("CardHandArea");
         if (CardHandArea != null)

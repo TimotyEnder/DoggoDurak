@@ -19,7 +19,7 @@ public class EmergencyContact : Item
 
     public override void OnActivate()
     {
-        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetCardsInHand()-1);
+        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetPlayerCardsInHand()-1);
         GameHandler.Instance.Draw(1);
         GameHandler.Instance.HealPlayer(5);
     }

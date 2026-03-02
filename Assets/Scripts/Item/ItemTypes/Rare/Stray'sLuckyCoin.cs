@@ -24,7 +24,7 @@ public class StraysLuckyCoin : Item
         Debug.Log(roll);
         if(roll<failPercentage)
         {
-            GameHandler.Instance.PlayerDiscard(Random.Range(0,GameHandler.Instance.GetCardsInHand()),2);
+            GameHandler.Instance.PlayerDiscard(Random.Range(0,GameHandler.Instance.GetPlayerCardsInHand()),2);
             failPercentage+=3;
         }
         else
