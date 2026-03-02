@@ -391,4 +391,18 @@ public class GameHandler : MonoBehaviour
             opponentDeck.GetComponent<OpponentLogic>().AddToDeck(card);
         }
     }
+    public async void EnemyStealingCardParticles(int amount)
+    {
+        GameObject target= GameObject.Find("OpponentsLifeTotal");
+        GameObject deck= GameObject.Find("Deck");
+        if(deck!=null)
+        {
+            RectTransform targetRect=target.GetComponent<RectTransform>();
+            for(int i=0;i<amount;i++)
+            {
+                deck.GetComponent<Deck>().DrawCardParticle(targetRect);
+                await UniTask.Delay(200);
+            }
+        }
+    }
 }

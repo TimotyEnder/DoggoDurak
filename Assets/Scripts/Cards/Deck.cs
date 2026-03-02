@@ -89,6 +89,10 @@ public class Deck : MonoBehaviour
         CardDrawn.GetComponent<Card>().MakeCard(cardtoDraw);
         CardDrawn.GetComponent<Card>().OnDraw();
     }
+    public void DrawCardParticle(RectTransform target) //for the animation of enemy stealing cards
+    {
+        StartCoroutine(DrawParticleRoutine(target,() =>{}));
+    }
     private IEnumerator DrawParticleRoutine(RectTransform target, Action onComplete)
     {
         GameObject particle = Instantiate(cardDrawParticlePrefab, this.transform.position, Quaternion.Euler(0, 0, 0), GameObject.FindGameObjectWithTag("Canvas").transform);

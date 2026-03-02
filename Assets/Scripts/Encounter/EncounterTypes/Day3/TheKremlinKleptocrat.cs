@@ -80,14 +80,18 @@ public class TheKremlinKleptocrat : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
+        int cardsTransferred=0;
         foreach(CardInfo playerCard in GameHandler.Instance.GetGameState()._deck)
         {
-            int roll = Random.Range(0,4);
+            int roll = Random.Range(0,10);
             if(roll<1)
             {
+
+                cardsTransferred++;
                 CopyCard(playerCard);
             }
         }
+        GameHandler.Instance.EnemyStealingCardParticles(cardsTransferred);
         ShakeRule(1);
     }
 
