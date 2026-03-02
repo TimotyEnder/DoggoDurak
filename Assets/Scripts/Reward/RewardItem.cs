@@ -71,8 +71,7 @@ public class RewardItem : MonoBehaviour
             }
             if(price>0) 
             { 
-                GameHandler.Instance.GetGameState()._rubles-=price; 
-                GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+                GameHandler.Instance.UpdateMoney(-price);
             } 
             Destroy(this.gameObject);
         }

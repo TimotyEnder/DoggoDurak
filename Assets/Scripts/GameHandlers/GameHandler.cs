@@ -65,8 +65,8 @@ public class GameHandler : MonoBehaviour
         //Item debugItem2 = ScriptableObject.CreateInstance<TheSentinelsFarewell>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
-
-        _currentEncounter= new TheAdaptiveAlabai();
+        //_state._rubles=100; //debug
+        _currentEncounter= new TheTaxCollector();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -412,6 +412,15 @@ public class GameHandler : MonoBehaviour
                 deck.GetComponent<Deck>().DrawCardParticle(targetRect);
                 await UniTask.Delay(200);
             }
+        }
+    }
+    public void UpdateMoney(int amount)
+    {
+        _state._rubles+=amount;
+        GameObject rubleObj= GameObject.Find("RubleText");
+        if(rubleObj!=null)
+        {
+            rubleObj.GetComponent<RubleText>().UpdateRubleAmount();
         }
     }
 }

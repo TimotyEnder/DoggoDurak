@@ -611,8 +611,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
         if (!_isInteractable && _cost > 0 && GameHandler.Instance.GetGameState()._rubles >= _cost)
         {
-            GameHandler.Instance.GetGameState()._rubles -= _cost;
-            GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+            GameHandler.Instance.UpdateMoney(-_cost);
             GameHandler.Instance.AddCardToDeck(this.GetCardInfo());
             GetComponent<ToolTip>().SetTooltipActiveState(false);
             Destroy(this.gameObject);
@@ -625,8 +624,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
                 if(GameHandler.Instance.GetGameState()._rubles>=GameHandler.Instance.GetGameState()._discardingCardInShopCost)
                 {
-                    GameHandler.Instance.GetGameState()._rubles -= GameHandler.Instance.GetGameState()._discardingCardInShopCost;
-                    GameObject.Find("RubleText").GetComponent<RubleText>().UpdateRubleAmount();
+                    GameHandler.Instance.UpdateMoney(-GameHandler.Instance.GetGameState()._discardingCardInShopCost);
                     Debug.Log("Card Removed");
                     GameHandler.Instance.GetGameState()._deck.Remove(GetCardInfo());
                     GetComponent<ToolTip>().SetTooltipActiveState(false);
