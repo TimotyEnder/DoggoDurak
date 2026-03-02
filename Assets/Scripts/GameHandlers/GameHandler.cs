@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
 using UnityEngine;
@@ -65,7 +66,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new ThePerestroikaPragmatist();
+        _currentEncounter= new TheTroikaTerror();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -185,7 +186,7 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "") //any effects damaging the enemy should go through this
+    public async UniTaskVoid DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1) //any effects damaging the enemy should go through this
     {
         if(_state._undamagable[1])
         {
@@ -198,8 +199,12 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
             {
-                GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponentsDamageReduction);
-                GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+               for(int i=0;i<times;i++)
+                {
+                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponentsDamageReduction);
+                    GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+                    await UniTask.Delay(100);
+                }
             }
             if (!fromEffect)
             {
@@ -215,7 +220,7 @@ public class GameHandler : MonoBehaviour
         _state.OnDamageOpponent(amount,fromMod);
         _currentEncounter.OnDamageOpponent(amount,fromMod);
     }
-    public void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "") //any effects damaging the player should go through this
+    public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1) //any effects damaging the player should go through this
     {
         if(_state._undamagable[0])
         {
@@ -228,8 +233,12 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
             {
-                GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-                GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                for(int i=0;i<times; i++)
+                {
+                    GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                    GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                    await UniTask.Delay(100);
+                }
             }
             if (!fromEffect)
             {
