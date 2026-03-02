@@ -47,12 +47,11 @@ public class TheTroikaTerror : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        instance++;
-        if(instance==3)
+        int inst=instance++;
+        if(inst==3)
         {
-            ShakeRule(0);
-            GameHandler.Instance.DamageOpponent(amount,true,times:2);
             instance=0;
+            GameHandler.Instance.DamageOpponent(amount,true,times:2);
             ShakeRule(0);
         }
         UpdateRules();
@@ -60,12 +59,11 @@ public class TheTroikaTerror : Encounter
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
-        instance++;
-        if(instance==3)
+        int inst=instance++;
+        if(inst==3)
         {
-            ShakeRule(0);
-            GameHandler.Instance.DamagePlayer(amount,true,times:2);
             instance=0;
+            GameHandler.Instance.DamagePlayer(amount,true,times:2);
             ShakeRule(0);
         }
         UpdateRules();

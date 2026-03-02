@@ -24,7 +24,7 @@ public class TankerTerrier : Encounter
     }
     public override void AddRules()
     {
-       AddRule("When the opponent is above"+StylisticClass.HighLight+" 75hp they recieve"+StylisticClass.HighLightClose+StylisticClass.DamageNumber(10)+" less from all sources. Otherwise they recieve triple damage from all sources"); //0
+       AddRule("When the opponent is above"+StylisticClass.HighLight+" 75hp"+StylisticClass.HighLightClose+" they recieve"+StylisticClass.DamageNumber(10)+" less from all sources. Otherwise they recieve triple damage from all sources"); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {

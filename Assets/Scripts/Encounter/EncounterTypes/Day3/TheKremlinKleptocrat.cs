@@ -43,7 +43,7 @@ public class TheKremlinKleptocrat : Encounter
     public override void AddRules()
     {
        AddRule("Card discarded by the player are copied into the opponent's deck. Cards with the same number and suit that you own are debuffed "); //0
-       AddRule("At the end of the turn, the opponent copies 10 random cards from your deck. They are also debuffed for you."); //1
+       AddRule("At the end of the turn, the opponent copies 10 random cards from your deck. They are also "+StylisticClass.Debuffed+" for you."); //1
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {

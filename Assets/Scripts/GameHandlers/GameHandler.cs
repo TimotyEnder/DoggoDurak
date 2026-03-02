@@ -57,7 +57,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
             //c.AddModifier("Draw");
-            c.AddModifier("Cripple");
+            //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
         }
         //debug
@@ -66,7 +66,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new TheTroikaTerror();
+        _currentEncounter= new TheAdaptiveAlabai();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -186,7 +186,7 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public async UniTaskVoid DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1) //any effects damaging the enemy should go through this
+    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1) //any effects damaging the enemy should go through this
     {
         if(_state._undamagable[1])
         {
