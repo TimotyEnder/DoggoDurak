@@ -570,8 +570,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         return _defended;   
     }
-    public void MoveTowardsToDiscard()
+    public void MoveTowardsToDiscard(bool countAsPlayedDiscard=false)
     {
+        if(countAsPlayedDiscard)
+        {
+            GameHandler.Instance.GetCurrEncounter().OnPlayedCardDiscarded(this.GetCardInfo());
+        }
         _isInteractable = false; 
         Vector2 target = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetDiscardPileCardPosition();
         UnityEngine.Quaternion rotation = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetRandomRotation();  

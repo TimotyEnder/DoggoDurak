@@ -65,7 +65,7 @@ public class MilitsiyaMalinois : Encounter
     {
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         GameHandler.Instance.SetDebuffs(new string[]{"C"+_numberCannotBePlayed,"D"+_numberCannotBePlayed,"H"+_numberCannotBePlayed,"S"+_numberCannotBePlayed},true,true);
         ShakeRule(0);

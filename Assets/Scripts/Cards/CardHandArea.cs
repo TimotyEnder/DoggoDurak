@@ -219,7 +219,7 @@ public class CardHandArea : MonoBehaviour
                 {
                     Card cardToDiscard = _cards[index];
                     _discard.AddCard(cardToDiscard);
-                    GameHandler.Instance.GetCurrEncounter().OnPlayedCardDiscarded(cardToDiscard.GetCardInfo());
+                    GameHandler.Instance.GetCurrEncounter().OnHandCardDiscarded(cardToDiscard.GetCardInfo());
                     _cards.RemoveAt(index);
                     cardToDiscard.MoveTowardsToDiscard();
                     DettachCard();

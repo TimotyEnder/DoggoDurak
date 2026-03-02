@@ -71,7 +71,7 @@ public class MunchingMastiff : Encounter
         GameHandler.Instance.HealOpponent(2);
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

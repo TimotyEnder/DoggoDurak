@@ -35,6 +35,16 @@ public class CardInfo
         this._opponentCard = opp;
         this._modifierStacks = new Dictionary<string, int>();
     }
+    public CardInfo(CardInfo card, bool opponentCard)//shallow copy contructor.
+    {
+        this._suit=card._suit;
+        this._suitNumber= SuitNumber(this._suit);
+        this._number=card._number;
+        this._modifiers=new List<CardModifierContainer>(card._modifiers);
+        this._modifierStacks= new Dictionary<string, int>(card._modifierStacks);
+        this._opponentCard=opponentCard;
+        UpdateModifiers();
+    }
     public bool IsFace()
     {
         return _number<14 && _number>10;

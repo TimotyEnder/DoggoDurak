@@ -74,7 +74,7 @@ public class Virtuoso : Encounter
         }
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

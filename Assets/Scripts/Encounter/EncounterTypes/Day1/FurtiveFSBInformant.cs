@@ -68,7 +68,7 @@ public class FurtiveFSBInformant : Encounter
         
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

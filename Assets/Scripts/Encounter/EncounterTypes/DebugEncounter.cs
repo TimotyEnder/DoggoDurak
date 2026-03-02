@@ -84,7 +84,7 @@ public class DebugEncounter : Encounter
         
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

@@ -71,7 +71,7 @@ public class EventemperedTerrier : Encounter
         
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

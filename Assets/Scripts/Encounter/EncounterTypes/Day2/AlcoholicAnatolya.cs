@@ -80,7 +80,7 @@ public class AlcoholicAnatolya : Encounter
     {
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
     }
 

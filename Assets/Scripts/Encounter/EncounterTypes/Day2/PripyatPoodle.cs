@@ -66,7 +66,7 @@ public class PripyatPoodle : Encounter
         ShakeRule(0);
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

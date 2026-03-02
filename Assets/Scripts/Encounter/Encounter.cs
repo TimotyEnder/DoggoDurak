@@ -45,6 +45,12 @@ public abstract class Encounter : ScriptableObject
     {
         GameHandler.Instance.ShakeRule(index);
     }
+    protected void AddToDeck(CardInfo card)//shallow copy becoming opponent card
+    {
+        CardInfo toAdd=new CardInfo(card,true);
+        this.deck.Add(toAdd);
+        GameHandler.Instance.AddToOpponentCurrentDeck(toAdd);
+    }
     protected void UpdateRules()
     {
         this.rules.Clear();
@@ -71,7 +77,7 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnCardDrawn(CardInfo card);
     public abstract void OnPlayedCardDiscarded(CardInfo card);
     public abstract void OnHandCardDiscarded(CardInfo card);
-    public abstract void SetPlayPermissions();
+    public abstract void SetDebuffs();
 
     public string GetEncounterName() 
     {

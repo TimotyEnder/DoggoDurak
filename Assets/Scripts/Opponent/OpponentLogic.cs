@@ -60,6 +60,10 @@ public class OpponentLogic : MonoBehaviour
             _deck.Add(c);
         }
     }
+    public void AddToDeck(CardInfo card)
+    {
+        _deck.Add(card);
+    }
     public void LoadDiscard()
     {
         _deck = new List<CardInfo>();

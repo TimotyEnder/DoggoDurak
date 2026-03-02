@@ -70,7 +70,7 @@ public class OddlookingBorzoi : Encounter
         
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

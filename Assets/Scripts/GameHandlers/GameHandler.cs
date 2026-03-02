@@ -56,7 +56,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
             //c.AddModifier("Draw");
-            //c.AddModifier("Cripple");
+            c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
         }
         //debug
@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
 
-        _currentEncounter= new TankerTerrier();
+        _currentEncounter= new TheKremlinKleptocrat();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -331,7 +331,7 @@ public class GameHandler : MonoBehaviour
     }
     public void EncounterSetDebuffs()
     {
-        _currentEncounter.SetPlayPermissions();
+        _currentEncounter.SetDebuffs();
     }
     public void UIupdateDebuffs()
     {
@@ -382,5 +382,13 @@ public class GameHandler : MonoBehaviour
     {
         _state._opponentsDamageReduction = 0;
         _state._enemyHandSize = 6;
+    }
+    public void AddToOpponentCurrentDeck(CardInfo card)
+    {
+        GameObject opponentDeck= GameObject.Find("Opponent");
+        if(opponentDeck!=null)
+        {
+            opponentDeck.GetComponent<OpponentLogic>().AddToDeck(card);
+        }
     }
 }

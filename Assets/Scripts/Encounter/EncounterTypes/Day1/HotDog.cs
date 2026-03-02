@@ -63,7 +63,7 @@ public class HotDog : Encounter
         GameHandler.Instance.DamageOpponent(5,true);
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

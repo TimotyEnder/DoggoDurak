@@ -70,7 +70,7 @@ public class FSBOperative : Encounter
     {
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         GameHandler.Instance.SetDebuffs(new string[]{"C11","C12","C13","H11","H12","H13","S11","S12","S13","D11","D12","D13"},true, false);
         ShakeRule(0);

@@ -84,7 +84,7 @@ public class DefaultEncounter : Encounter
         
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

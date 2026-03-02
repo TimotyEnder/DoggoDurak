@@ -19,7 +19,14 @@ public class CrippleCardMod : CardModifier
 
     public override bool OnPlayedCard(Card card)
     {
-        GameHandler.Instance.OpponentDiscard(1);
+        if(card.GetCardInfo()._opponentCard)
+        {
+            GameHandler.Instance.PlayerDiscard(Random.Range(0,GameHandler.Instance.GetCardsInHand()-1),1);
+        }
+        else
+        {
+            GameHandler.Instance.OpponentDiscard(1);
+        }
         return true;
     }
 

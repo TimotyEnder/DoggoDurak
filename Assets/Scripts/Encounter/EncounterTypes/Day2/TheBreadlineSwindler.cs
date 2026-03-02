@@ -67,7 +67,7 @@ public class TheBreadlineSwindler : Encounter
         ShakeRule(1);
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }

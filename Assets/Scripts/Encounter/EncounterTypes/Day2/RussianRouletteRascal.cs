@@ -99,7 +99,7 @@ public class RussianRouletteRascal : Encounter
         ShakeRule(0);
     }
 
-    public override void SetPlayPermissions()
+    public override void SetDebuffs()
     {
         
     }
