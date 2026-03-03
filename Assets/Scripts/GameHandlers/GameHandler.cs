@@ -66,7 +66,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        _currentEncounter= new TheGypsyWolfhound();
+        _currentEncounter= new TheRevolvingRevolutionary();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button

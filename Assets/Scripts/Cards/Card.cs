@@ -221,6 +221,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 _notPermissible.SetActive(false);
             }
         }
+        GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
     public void Mark()
     {
