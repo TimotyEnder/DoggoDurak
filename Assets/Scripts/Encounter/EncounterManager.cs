@@ -6,11 +6,11 @@ using UnityEngine;
 public class EncounterManager
 {
     private List<List<Encounter>> _encounters;
-    private List<List<Encounter> _bossEncounters;
+    private List<List<Encounter>> _bossEncounters;
     public EncounterManager() 
     {
         _encounters= new List<List<Encounter>>();
-        _bossEncounters= new  List<List<Encounter>();
+        _bossEncounters= new  List<List<Encounter>>();
         var loadedEncounters = Resources.LoadAll<Encounter>("Encounters");
         foreach(var e in loadedEncounters) 
         {
@@ -25,7 +25,7 @@ public class EncounterManager
             }
             else 
             {
-                  while (e.GetDay() >= _encounters.Count)
+                while (e.GetDay() >= _bossEncounters.Count)
                 {
                     _bossEncounters.Add(new List<Encounter>());
                 }

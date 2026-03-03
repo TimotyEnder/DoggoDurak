@@ -66,7 +66,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        _currentEncounter= new TheTaxCollector();
+        _currentEncounter= new TheAlternatingApparatchik();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -422,5 +422,23 @@ public class GameHandler : MonoBehaviour
         {
             rubleObj.GetComponent<RubleText>().UpdateRubleAmount();
         }
+    }
+    public int PlayerOddCardsInHand()
+    {
+        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        if (cardHandArea != null)
+        {
+            cardHandArea.GetComponent<CardHandArea>().OddCards();
+        }
+        return -1;
+    }
+    public int PlayerEvenCardsInHand()
+    {
+        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        if (cardHandArea != null)
+        {
+            cardHandArea.GetComponent<CardHandArea>().EvenCards();
+        }
+        return -1;
     }
 }

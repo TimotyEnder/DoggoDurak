@@ -24,6 +24,8 @@ public class CardHandArea : MonoBehaviour
     [SerializeField]
     private List<Card> _cards;
     private Discard _discard;
+    private int _evens;
+    private int _odds;
     void Start()
     {
         _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();
@@ -92,6 +94,14 @@ public class CardHandArea : MonoBehaviour
     }
     public void AddToCards(Card card) 
     {
+        if(card.GetCardInfo().IsEven())
+        {
+            _evens++;
+        }
+        else if(card.GetCardInfo().IsOdd())
+        {
+            _odds++;
+        }
         if (_cards == null) 
         {
             _cards = new List<Card>();
@@ -100,11 +110,18 @@ public class CardHandArea : MonoBehaviour
     }
     public void AddToCards(Card card, Vector2 screenPoint) //overload for in hand card rearranging
     {
+        if(card.GetCardInfo().IsEven())
+        {
+            _evens++;
+        }
+        else if(card.GetCardInfo().IsOdd())
+        {
+            _odds++;
+        }
         if (_cards == null) 
         {
             _cards = new List<Card>();
         }
-        
         if (_cards.Count == 0)
         {
             _cards.Add(card);
@@ -128,11 +145,18 @@ public class CardHandArea : MonoBehaviour
                 return; 
             }
         }
-        
         _cards.Add(card);
     }
     public void RemoveFromCards(Card card)
     {
+        if(card.GetCardInfo().IsEven())
+        {
+            _evens--;
+        }
+        else if(card.GetCardInfo().IsOdd())
+        {
+            _odds--;
+        }
         if (_cards == null)
         {
             _cards = new List<Card>();
@@ -226,5 +250,13 @@ public class CardHandArea : MonoBehaviour
                 }
             }
         }
+    }
+    public int EvenCards()
+    {
+        return _evens;
+    }
+    public int OddCards()
+    {
+        return _odds;
     }
 }

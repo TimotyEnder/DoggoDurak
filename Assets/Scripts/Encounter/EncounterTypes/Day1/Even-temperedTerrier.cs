@@ -45,7 +45,7 @@ public class EventemperedTerrier : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsOdd())
+        if(!defendedWith.GetCardInfo()._opponentCard && defendedWith.GetCardInfo().IsOdd())
         {
             GameHandler.Instance.DamagePlayer(2,true);
             ShakeRule(0);

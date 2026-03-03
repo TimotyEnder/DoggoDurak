@@ -45,7 +45,7 @@ public class CrazedCommunist : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsBlack())
+        if(!defendedWith.GetCardInfo()._opponentCard && defendedWith.GetCardInfo().IsBlack())
         {
             GameHandler.Instance.DamagePlayer(4,true);
             ShakeRule(0);
