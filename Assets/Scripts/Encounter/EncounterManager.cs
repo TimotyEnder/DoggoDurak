@@ -6,11 +6,11 @@ using UnityEngine;
 public class EncounterManager
 {
     private List<List<Encounter>> _encounters;
-    private List<Encounter> _bossEncounters;
+    private List<List<Encounter> _bossEncounters;
     public EncounterManager() 
     {
         _encounters= new List<List<Encounter>>();
-        _bossEncounters= new List<Encounter>();
+        _bossEncounters= new  List<List<Encounter>();
         var loadedEncounters = Resources.LoadAll<Encounter>("Encounters");
         foreach(var e in loadedEncounters) 
         {
@@ -25,7 +25,11 @@ public class EncounterManager
             }
             else 
             {
-                _bossEncounters.Add(e);
+                  while (e.GetDay() >= _encounters.Count)
+                {
+                    _bossEncounters.Add(new List<Encounter>());
+                }
+                _bossEncounters[e.GetDay()].Add(e);
             }
         }
     }
@@ -37,11 +41,11 @@ public class EncounterManager
         }
         return null;
     }
-    public Encounter RandomBossEncounter() 
+    public Encounter RandomBossEncounter(int day) 
     {
-        if (_bossEncounters.Count > 0) 
+        if (day < _bossEncounters.Count && _bossEncounters[day].Count>0) 
         {
-            return _bossEncounters[Random.Range(0, _bossEncounters.Count)];
+            return _bossEncounters[day][Random.Range(0, _bossEncounters[day].Count)]; 
         }
         return null;
     }

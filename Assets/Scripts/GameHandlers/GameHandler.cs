@@ -95,7 +95,7 @@ public class GameHandler : MonoBehaviour
         }
         else if(_state._encounter==11) 
         {
-            _currentEncounter = _encounterManager.RandomBossEncounter();
+            _currentEncounter = _encounterManager.RandomBossEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else if (_state._encounter < 12)
