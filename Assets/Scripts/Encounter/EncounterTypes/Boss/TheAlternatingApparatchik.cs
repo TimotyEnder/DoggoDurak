@@ -100,11 +100,13 @@ public class TheAlternatingApparatchik : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
+        Debug.Log("Even cards:"+GameHandler.Instance.PlayerEvenCardsInHand());
+        Debug.Log("Odd cards:"+GameHandler.Instance.PlayerOddCardsInHand());
         if(evenTurn)
         {
             if(GameHandler.Instance.PlayerOddCardsInHand()>0)
             {
-                GameHandler.Instance.DamagePlayer(GameHandler.Instance.PlayerOddCardsInHand()*5);
+                GameHandler.Instance.DamagePlayer(GameHandler.Instance.PlayerOddCardsInHand()*10);
             }
             ShakeRule(0);
         }
@@ -112,7 +114,7 @@ public class TheAlternatingApparatchik : Encounter
         {
             if(GameHandler.Instance.PlayerEvenCardsInHand()>0)
             {
-                GameHandler.Instance.DamagePlayer(GameHandler.Instance.PlayerEvenCardsInHand()*5);
+                GameHandler.Instance.DamagePlayer(GameHandler.Instance.PlayerEvenCardsInHand()*10);
             }
             ShakeRule(1);
         }
@@ -124,6 +126,8 @@ public class TheAlternatingApparatchik : Encounter
         {
             evenTurn=true;
         }
+        UpdateRules();
+        ShakeRule(0);
     }
 
     public override void SetDebuffs()

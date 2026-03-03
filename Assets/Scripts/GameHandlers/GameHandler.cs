@@ -428,7 +428,7 @@ public class GameHandler : MonoBehaviour
         GameObject cardHandArea= GameObject.Find("CardHandArea");
         if (cardHandArea != null)
         {
-            cardHandArea.GetComponent<CardHandArea>().OddCards();
+            return cardHandArea.GetComponent<CardHandArea>().OddCards();
         }
         return -1;
     }
@@ -437,7 +437,7 @@ public class GameHandler : MonoBehaviour
         GameObject cardHandArea= GameObject.Find("CardHandArea");
         if (cardHandArea != null)
         {
-            cardHandArea.GetComponent<CardHandArea>().EvenCards();
+            return cardHandArea.GetComponent<CardHandArea>().EvenCards();
         }
         return -1;
     }
