@@ -37,6 +37,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     //visual modifiers
     [SerializeField]
     private GameObject _notPermissible;
+    [SerializeField]
+    private GameObject _marked;
     private GameObject _bounceOverlay;
     private GameObject _burnOverlay;
     private TextMeshProUGUI _burnText;
@@ -219,6 +221,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 _notPermissible.SetActive(false);
             }
         }
+    }
+    public void Mark()
+    {
+        _marked.SetActive(true);
+    }
+    public void Unmark()
+    {
+        _marked.SetActive(false);
     }
     public void Bling()
     {

@@ -66,7 +66,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        _currentEncounter= new TheAlternatingApparatchik();
+        _currentEncounter= new TheGypsyWolfhound();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -440,5 +440,14 @@ public class GameHandler : MonoBehaviour
             return cardHandArea.GetComponent<CardHandArea>().EvenCards();
         }
         return -1;
+    }
+    public CardInfo GetCardInHand(int index)
+    {
+        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        if (cardHandArea != null)
+        {
+            return cardHandArea.GetComponent<CardHandArea>().GetCards()[index].GetCardInfo();
+        }
+        return null;
     }
 }
