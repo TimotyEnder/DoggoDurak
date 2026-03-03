@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 231250429}
   - component: {fileID: 231250430}
   - component: {fileID: 231250431}
+  - component: {fileID: 231250432}
   m_Layer: 5
   m_Name: RulesContent
   m_TagString: Untagged
@@ -995,6 +996,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ruleText: {fileID: 4606081976230802006, guid: 421ab8ed440f5d34fab6c7135713742b, type: 3}
+--- !u!114 &231250432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231250428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c687a969946a71d382f9b8d1ff2c59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &289090422
 GameObject:
   m_ObjectHideFlags: 0
