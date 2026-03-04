@@ -62,11 +62,11 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
-        debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        //Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
+       // debugItem2.InitItem();
+        //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        _currentEncounter= new InsiderTrader();
+        _currentEncounter= new Balalaechnik();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button

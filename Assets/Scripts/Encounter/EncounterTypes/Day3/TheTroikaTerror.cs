@@ -52,21 +52,21 @@ public class TheTroikaTerror : Encounter
         {
             instance=0;
             GameHandler.Instance.DamageOpponent(amount,true,times:2);
-            ShakeRule(0);
         }
         UpdateRules();
+        ShakeRule(0);
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
         int inst=instance++;
+        UpdateRules();
         if(inst==3)
         {
             instance=0;
             GameHandler.Instance.DamagePlayer(amount,true,times:2);
             ShakeRule(0);
         }
-        UpdateRules();
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
