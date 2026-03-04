@@ -156,32 +156,19 @@ public class OpponentLogic : MonoBehaviour
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
-           if(GameHandler.Instance.IsCardnotDebuffed(card,1))
+            if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.IsCardnotDebuffed(lowerCard,1) && GameHandler.Instance.IsCardnotDebuffed(card,1))
             {
-                if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.IsCardnotDebuffed(lowerCard,1))
-                {
+            lowerCard = card;
+            }
+            else if (card._number < lowerCard._number) 
+            {
                 lowerCard = card;
-                }
-                else if (card._number < lowerCard._number) 
-                {
-                    lowerCard = card;
-                }
             }
         }
-        if(GameHandler.Instance.IsCardnotDebuffed(lowerCard,1))
-        {
-            GameObject CardToAttack = Instantiate(cardMaker);
-            CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
-            CardToAttack.GetComponent<Card>().PlayCard();
-            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+" with:"+lowerCard.CompileCondencedModifiers());
-        }
-        else
-        {
-            endTurnCaused = true;
-            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no eligible cards to play!");
-           Debug.Log("Start end turn from attack:");
-            _turnHandler.StartEndTurn();
-        }
+        GameObject CardToAttack = Instantiate(cardMaker);
+        CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
+        CardToAttack.GetComponent<Card>().PlayCard();
+        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+" with:"+lowerCard.CompileCondencedModifiers());
     }
     public  IEnumerator DrawHandRoutine()
     {
