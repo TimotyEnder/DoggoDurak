@@ -103,4 +103,9 @@ public class TheRevolvingRevolutionary : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

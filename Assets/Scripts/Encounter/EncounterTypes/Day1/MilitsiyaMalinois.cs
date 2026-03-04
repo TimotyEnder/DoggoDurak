@@ -75,4 +75,9 @@ public class MilitsiyaMalinois : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

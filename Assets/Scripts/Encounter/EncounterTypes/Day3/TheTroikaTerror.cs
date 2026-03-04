@@ -96,4 +96,9 @@ public class TheTroikaTerror : Encounter
     public override void OnHandCardDiscarded(CardInfo card)
     {
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

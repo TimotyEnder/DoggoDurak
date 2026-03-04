@@ -79,4 +79,9 @@ public class OddlookingBorzoi : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

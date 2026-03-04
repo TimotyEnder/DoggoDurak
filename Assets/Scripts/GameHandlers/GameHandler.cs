@@ -62,11 +62,11 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<TheSentinelsFarewell>();
-        //debugItem2.InitItem();
-        //_state.AddItem(debugItem2);
+        Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
+        debugItem2.InitItem();
+        _state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        _currentEncounter= new DictatingDutyOfficer();
+        _currentEncounter= new InsiderTrader();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -167,11 +167,27 @@ public class GameHandler : MonoBehaviour
         }
     }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
-    public void HealPlayer(int amount, bool fromEffect = false, string fromMod = "") //any healing effects should be handled by this
+    public async void HealPlayer(int amount, bool fromEffect = false, int times=1,string fromMod = "") //any healing effects should be handled by this
     {
         if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
-            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
+            if(!_state._healingAndDamageInverted)
+                {
+                    for(int i=0;i<times; i++)
+                    {
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
+                        await UniTask.Delay(100);
+                    }
+                }
+                else
+                {
+                    for(int i=0;i<times; i++)
+                    {
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                        GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                        await UniTask.Delay(100);
+                    }
+                }
         }
         if (!fromEffect)
         {
@@ -233,11 +249,22 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
             {
-                for(int i=0;i<times; i++)
+               if(!_state._healingAndDamageInverted || fromMod=="InsiderTrader")
                 {
-                    GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-                    GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
-                    await UniTask.Delay(100);
+                    for(int i=0;i<times; i++)
+                    {
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                        GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                        await UniTask.Delay(100);
+                    }
+                }
+                else
+                {
+                    for(int i=0;i<times; i++)
+                    {
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
+                        await UniTask.Delay(100);
+                    }
                 }
             }
             if (!fromEffect)
@@ -391,6 +418,8 @@ public class GameHandler : MonoBehaviour
     {
         _state._opponentsDamageReduction = 0;
         _state._enemyHandSize = 6;
+        _state._loseToWin=false;
+        _state._healingAndDamageInverted=false;
     }
     public void AddToOpponentCurrentDeck(CardInfo card)
     {

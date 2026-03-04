@@ -73,4 +73,9 @@ public class StalwartStorozhevaya : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

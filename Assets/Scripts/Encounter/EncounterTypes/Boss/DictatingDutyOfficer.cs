@@ -22,7 +22,7 @@ public class DictatingDutyOfficer : Encounter
         _cardsPlayed=0;
         _cardsToPlay=SelectCardsToPlay();
         _damageToDo=10;
-        this.description="Only a strong combine force of attacks will blow through his shield!";
+        this.description="Play by his rules or disappear";
         hasRules=true;
     }
     private int SelectCardsToPlay()
@@ -129,6 +129,11 @@ public class DictatingDutyOfficer : Encounter
     }
 
     public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
     }

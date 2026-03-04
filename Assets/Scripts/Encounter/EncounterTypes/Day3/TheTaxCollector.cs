@@ -76,4 +76,9 @@ public class TheTaxCollector : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

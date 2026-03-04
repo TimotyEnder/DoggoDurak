@@ -73,6 +73,7 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnReverse(Card card);
     public abstract void OnDamagePlayer(int amount,string fromMod = "");
     public abstract void OnDamageOpponent(int amount,string fromMod = "");
+    public abstract void OnHealPlayer(int amount, string fromMod="");
     public abstract void OnTurnEnd(int turnState);
     public abstract void OnCardDrawn(CardInfo card);
     public abstract void OnPlayedCardDiscarded(CardInfo card);
@@ -94,6 +95,10 @@ public abstract class Encounter : ScriptableObject
     public float GetRewardMod() 
     {
         return goldRewardMod;
+    }
+    public void SetRewardMod(float setter)
+    {
+        this.goldRewardMod=setter;
     }
     public int GetHealth() 
     { 

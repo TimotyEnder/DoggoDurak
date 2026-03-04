@@ -74,4 +74,9 @@ public class SpikedShepherded : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

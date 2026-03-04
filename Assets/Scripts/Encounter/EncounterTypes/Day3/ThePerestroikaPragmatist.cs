@@ -77,4 +77,9 @@ public class ThePerestroikaPragmatist : Encounter
           ShakeRule(1);
         }
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

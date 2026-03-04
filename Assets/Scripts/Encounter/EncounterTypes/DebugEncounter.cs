@@ -97,4 +97,9 @@ public class DebugEncounter : Encounter
     public override void AddRules()
     {
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

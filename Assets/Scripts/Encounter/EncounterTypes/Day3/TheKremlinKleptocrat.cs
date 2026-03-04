@@ -106,4 +106,9 @@ public class TheKremlinKleptocrat : Encounter
     {
         CopyCard(card);
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

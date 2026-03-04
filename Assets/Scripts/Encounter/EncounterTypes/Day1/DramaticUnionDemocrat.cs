@@ -45,7 +45,7 @@ public class DramaticUnionDemocrat : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!defendedWith.GetCardInfo()._opponentCard && defendedWith.GetCardInfo().IsRed())
+        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsRed())
         {
             GameHandler.Instance.DamagePlayer(4,true);
             ShakeRule(0);
@@ -77,6 +77,11 @@ public class DramaticUnionDemocrat : Encounter
     }
 
     public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
     }

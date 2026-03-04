@@ -77,4 +77,9 @@ public class TheBreadlineSwindler : Encounter
         GameHandler.Instance.DamagePlayer(10);
         ShakeRule(0);
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

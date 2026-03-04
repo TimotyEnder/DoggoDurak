@@ -77,4 +77,9 @@ public class FurtiveFSBInformant : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

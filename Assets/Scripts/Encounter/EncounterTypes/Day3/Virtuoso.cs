@@ -83,4 +83,9 @@ public class Virtuoso : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

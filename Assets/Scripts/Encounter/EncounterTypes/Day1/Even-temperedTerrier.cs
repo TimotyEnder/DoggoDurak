@@ -45,7 +45,7 @@ public class EventemperedTerrier : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!defendedWith.GetCardInfo()._opponentCard && defendedWith.GetCardInfo().IsOdd())
+        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsOdd())
         {
             GameHandler.Instance.DamagePlayer(2,true);
             ShakeRule(0);
@@ -77,6 +77,11 @@ public class EventemperedTerrier : Encounter
     }
 
     public override void OnHandCardDiscarded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
     }

@@ -80,4 +80,9 @@ public class FSBOperative : Encounter
     {
         
     }
+
+    public override void OnHealPlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }
