@@ -48,9 +48,9 @@ public class TheAdaptiveAlabai : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!card.GetCardInfo()._opponentCard && !numbers.Contains(defendedWith.GetCardInfo()._number))
+        if(!card.GetCardInfo()._opponentCard && !numbers.Contains(card.GetCardInfo()._number))
         {
-            numbers.Add(defendedWith.GetCardInfo()._number);
+            numbers.Add(card.GetCardInfo()._number);
         }
     }
 

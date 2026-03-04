@@ -59,14 +59,14 @@ public class TheAlternatingApparatchik : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!defendedWith.GetCardInfo()._opponentCard)
+        if(!card.GetCardInfo()._opponentCard)
         {
-            if(evenTurn && defendedWith.GetCardInfo().IsEven())
+            if(evenTurn && card.GetCardInfo().IsEven())
             {
                GameHandler.Instance.HealPlayer(5);
                ShakeRule(2); 
             }
-            else if(!evenTurn && defendedWith.GetCardInfo().IsOdd())
+            else if(!evenTurn && card.GetCardInfo().IsOdd())
             {
                 GameHandler.Instance.HealPlayer(5);
                 ShakeRule(3);

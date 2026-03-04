@@ -44,7 +44,7 @@ public class OddlookingBorzoi : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!defendedWith.GetCardInfo()._opponentCard && defendedWith.GetCardInfo().IsEven())
+        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsEven())
         {
             GameHandler.Instance.DamagePlayer(2,true);
             ShakeRule(0);
