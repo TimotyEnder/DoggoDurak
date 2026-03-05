@@ -25,7 +25,7 @@ public class Deck : MonoBehaviour
     TextMeshProUGUI _deckSizeText;
 
    
-    void Start() 
+    void Awake() 
     {
         GameObject _turnHandlerObj= GameObject.Find("TurnHandler"); 
         if(_turnHandlerObj!=null)
@@ -37,7 +37,11 @@ public class Deck : MonoBehaviour
         {
             _discard = _discardObj.GetComponent<Discard>();
         }
-        UpdateDeckSizeText();
+       
+    }
+    void Start()
+    {
+         UpdateDeckSizeText();
     }
     private void UpdateDeckSizeText()
     {
@@ -54,6 +58,7 @@ public class Deck : MonoBehaviour
         {
             _deck.Add(c);
         }
+        UpdateDeckSizeText();
     }
     public void LoadDiscard()
     {

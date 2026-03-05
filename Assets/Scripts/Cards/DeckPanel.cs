@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
@@ -59,17 +60,27 @@ public class DeckPanel : MonoBehaviour
     public void Start()
     {
         //On Click config
-        _deckButton.onClick.AddListener(()=> { if(!_deckPanel.activeSelf){ UpdateDeckContent(); }});
-        _deckExitButton.onClick.AddListener(() => _deckPanel.SetActive(false));
+        _deckButton.onClick.AddListener(()=> { if(!_deckPanel.activeSelf){ ShowDeck(); }});
+        _deckExitButton.onClick.AddListener(() => ShrinkDeckPanel());
         _clubs=new List<CardInfo>();
         _diamonds=new List<CardInfo>();
         _hearts=new List<CardInfo>();
         _spades=new List<CardInfo>();
     }
-    
-    public void UpdateDeckContent() 
+    private async void ShrinkDeckPanel()
+    {
+        _deckPanel.GetComponent<Animator>().SetTrigger("Shrink");
+        await UniTask.Delay(300);
+         _clubs=new List<CardInfo>();
+        _diamonds=new List<CardInfo>();
+        _hearts=new List<CardInfo>();
+        _spades=new List<CardInfo>();
+        _deckPanel.SetActive(false);
+    }
+    public void ShowDeck() 
     {
         _deckPanel.SetActive(true);
+        _deckPanel.GetComponent<Animator>().SetTrigger("Extend");
 
         foreach (Transform card in _clubCont.transform) 
         {
@@ -92,14 +103,9 @@ public class DeckPanel : MonoBehaviour
             PlaceInCorrectArray(cInfo);
         }
         MakeCards();
-        _clubs=new List<CardInfo>();
-        _diamonds=new List<CardInfo>();
-        _hearts=new List<CardInfo>();
-        _spades=new List<CardInfo>();
     }
     public void PlaceInCorrectArray(CardInfo c)
     {
-        GameObject cardMade=null;
         switch(c._suit)
         {
             case "C":
