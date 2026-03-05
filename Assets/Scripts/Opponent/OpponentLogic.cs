@@ -168,7 +168,7 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
         CardToAttack.GetComponent<Card>().PlayCard();
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+" with:"+lowerCard.CompileCondencedModifiers());
+        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+lowerCard.CompileCondencedModifiers());
     }
     public  IEnumerator DrawHandRoutine()
     {
