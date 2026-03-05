@@ -37,7 +37,7 @@ public static class StylisticClass
     public static string HighLightClose="</b>";
     public static string DamageNumber(int damage)
     {
-        return " <b>"+damage+"DMG"+"</b>";
+        return " <b>"+damage+"DMG"+"</b> ";
     }
     public static string Debuffed="<b>Debuffed (Cannot defend and deal zero damage)</b>";
 

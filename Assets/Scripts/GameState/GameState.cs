@@ -25,6 +25,7 @@ public class GameState
     public int _maxRewardChoices;
     public int _rareItemRewardDropRate;//  out of 100;
     public int _legendaryItemInshopDropRate;
+    public int _rareItemInshopDropRate;
     public bool _redCardsSameSuit;
     public bool _blackCardsSameSuit;
     public Dictionary<string, int> _itemStacks;
@@ -34,11 +35,11 @@ public class GameState
     public int _startingDiscardInShopCost;
     public int _shopRerollCost;
     public int _startingShopRerollCost;
-    public float _randomBossEncounterChance;
     public bool[] _undamagable; //0 player 1 enemy
     public int _enemyHandSize;
     public bool _loseToWin;//activates on Insider Investor.
     public bool _healingAndDamageInverted;
+    public int _shopCostPerCardMod;
 
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
     public GameState()
@@ -94,14 +95,15 @@ public class GameState
         _maxRewardChoices = 1;
         _rareItemRewardDropRate = 10;
         _legendaryItemInshopDropRate = 10;
-        _itemsShownInShop = 3;
+        _rareItemInshopDropRate=30;
+        _itemsShownInShop = 4;
         _maxCardModsInShop = 3;
+        _shopCostPerCardMod=5;
         _itemStacks = new Dictionary<string, int>();
         _discardingCardInShopCost = 5;
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
         _startingShopRerollCost = 5;
-        _randomBossEncounterChance = 10;
         _undamagable=new bool[]{false,false};
         _opponentsDamageReduction = 0;
         _enemyHandSize = 6;

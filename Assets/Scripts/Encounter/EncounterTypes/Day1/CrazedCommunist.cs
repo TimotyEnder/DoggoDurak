@@ -21,7 +21,7 @@ public class CrazedCommunist : Encounter
     }
     public override void AddRules()
     {
-       AddRule("Each time you play a "+StylisticClass.HighLight+"black card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+        AddRule($"Each time you play a {StylisticClass.HighLight}{CardInfo.suitToColor["S"]}black card</color>{StylisticClass.HighLightClose}you receive"+StylisticClass.DamageNumber(4)); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {

@@ -27,7 +27,7 @@ public class ShopCardGrid : MonoBehaviour
                 }
             }
             GameObject CardAdded = Instantiate(_cardPrefab, this.transform);
-            CardAdded.GetComponent<Card>().MakeCard(toAdd, false, 5 * modsAdded);
+            CardAdded.GetComponent<Card>().MakeCard(toAdd, false, GameHandler.Instance.GetGameState()._shopCostPerCardMod * modsAdded);
         }
     }
 }

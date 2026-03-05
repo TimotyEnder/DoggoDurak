@@ -61,6 +61,7 @@ public class HotDog : Encounter
     public override void OnTurnEnd(int turnState)
     {
         GameHandler.Instance.DamageOpponent(5,true);
+        ShakeRule(0);
     }
 
     public override void SetDebuffs()

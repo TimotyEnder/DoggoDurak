@@ -84,9 +84,9 @@ public class GameHandler : MonoBehaviour
         {
             _encounterManager = new EncounterManager();
         }
-        //_state._encounter = 2; //debug
         _saveManager.Value.Save(_state);
         _state._encounter++;
+        _state._encounter = 4; //debug
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
@@ -130,16 +130,28 @@ public class GameHandler : MonoBehaviour
     {
         List<Item> itemsToReturn = new List<Item>();
         int legendaryItemsInShop = 0;
+        int rareItemsInShop=0;
+        int commonItemsInShop=0;
         for (int i = 0; i < GameHandler.Instance.GetGameState()._itemsShownInShop; i++)
         {
-            int random = UnityEngine.Random.Range(1, 100);
-            if (random <= GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate)
+            int roll = UnityEngine.Random.Range(1, 100);
+            if (roll <= GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate)
             {
                 legendaryItemsInShop++;
             }
+            else if(roll >= (100-GameHandler.Instance.GetGameState()._rareItemInshopDropRate))
+            {
+                rareItemsInShop++;
+            }
+            else
+            {
+                commonItemsInShop++;
+            }
         }
         itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, legendaryItemsInShop));
-        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1,_state._itemsShownInShop - legendaryItemsInShop));
+        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1,rareItemsInShop));
+        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(0,commonItemsInShop));
+        
         return itemsToReturn;   
     }
     public void SetHealth(int health)
