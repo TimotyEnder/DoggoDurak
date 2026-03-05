@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class ShopButton:MonoBehaviour
                     GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._shopRpointCost;
                     GameObject.Find("RestHandler").GetComponent<RestHandler>().UpdateRestUI();
                     _shopPanel.SetActive(true);
+                    _shopPanel.GetComponent<Animator>().SetTrigger("Extend");
                     _shopItemContent.SetRewardGrid();
                     _shopCardGrid.SetCardGrid();
                     _discardOptButton.UpdateCostText();
@@ -40,10 +42,17 @@ public class ShopButton:MonoBehaviour
             else 
             {
                 _shopPanel.SetActive(true);
+                _shopPanel.GetComponent<Animator>().SetTrigger("Extend");
                 _discardOptButton.UpdateCostText();
             }
         });
 
-        _shopCloseButton.onClick.AddListener(() => { _shopPanel.SetActive(false);});
+        _shopCloseButton.onClick.AddListener(() => { ShrinkShopPanel();});
+    }
+    private async void ShrinkShopPanel()
+    {
+         _shopPanel.GetComponent<Animator>().SetTrigger("Shrink");
+         await UniTask.Delay(300);
+         _shopPanel.SetActive(false);
     }
 }
