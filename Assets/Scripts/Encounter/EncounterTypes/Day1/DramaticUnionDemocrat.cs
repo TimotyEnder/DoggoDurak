@@ -14,7 +14,7 @@ public class DramaticUnionDemocrat : Encounter
         encounterName = "Dramatic Union Democrat";
         goldRewardMod = 1f;
         SetHealth();
-        initDeck(10,false,false,true,true);
+        initDeck(10,true,true,false,false);
         this.description="Hates Reds!";
         hasRules=true;
         
