@@ -201,7 +201,7 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1) //any effects damaging the enemy should go through this
+    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
     {
         if(_state._undamagable[1])
         {
@@ -217,7 +217,10 @@ public class GameHandler : MonoBehaviour
                for(int i=0;i<times;i++)
                 {
                     GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponentsDamageReduction);
-                    GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+                    if(checkMatchEnd)
+                    {
+                          GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+                    }
                     await UniTask.Delay(100);
                 }
             }
@@ -235,7 +238,7 @@ public class GameHandler : MonoBehaviour
         _state.OnDamageOpponent(amount,fromMod);
         _currentEncounter.OnDamageOpponent(amount,fromMod);
     }
-    public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1) //any effects damaging the player should go through this
+    public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
     {
         if(_state._undamagable[0])
         {
@@ -253,7 +256,10 @@ public class GameHandler : MonoBehaviour
                     for(int i=0;i<times; i++)
                     {
                         GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-                        GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                       if(checkMatchEnd)
+                        {
+                             GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                        }
                         await UniTask.Delay(100);
                     }
                 }

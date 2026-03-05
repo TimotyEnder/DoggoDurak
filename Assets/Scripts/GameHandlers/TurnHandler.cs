@@ -151,24 +151,24 @@ public class TurnHandler : MonoBehaviour
                 }
                 if (_turnState > 0)
                 {
-                    GameHandler.Instance.DamagePlayer(damage);
-                    GameHandler.Instance.GetCurrEncounter().OnDamagePlayer(damage);
+                    GameHandler.Instance.DamagePlayer(damage,checkMatchEnd:false);
                 }
                 else
                 {
-                    GameHandler.Instance.DamageOpponent(damage);
-                    GameHandler.Instance.GetGameState().OnDamageOpponent(damage);
+                    GameHandler.Instance.DamageOpponent(damage, checkMatchEnd:false);
                 }
-
                 yield return new WaitForSeconds(0.8f);
                 card.SetAnimatable(false);
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }
         }
-        yield return new WaitForSeconds(0.2f);
-        GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
-        yield return new WaitForSeconds(0.2f);
-        FinishEndTurn();
+        _ruleHandler.CheckGameState();
+        if(!_ruleHandler.isGameStateFinished()){
+            yield return new WaitForSeconds(0.2f);
+            GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
+            yield return new WaitForSeconds(0.2f);
+            FinishEndTurn();
+        }
     }
     public bool IsTurnEnding() 
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RuleHandler : MonoBehaviour
 {
+    private PlayArea _playArea;
     [SerializeField]
     private string _trumpSuit;
     [SerializeField]
@@ -17,6 +18,7 @@ public class RuleHandler : MonoBehaviour
     private RewardItemGrid _rewardItemGrid;
     private bool GameStateFinished = false;
     private bool _modEffectsSpawn;
+
     void Awake()
     {
             _modEffectsSpawn=true;
@@ -26,6 +28,11 @@ public class RuleHandler : MonoBehaviour
 
         _playerHp = GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>();
         _opponentHp = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
+        _playArea= GameObject.Find("PlayArea").GetComponent<PlayArea>();
+    }
+    public bool isGameStateFinished()
+    {
+        return GameStateFinished;
     }
     public bool CanEffectsSpawn()
     {
@@ -43,7 +50,7 @@ public class RuleHandler : MonoBehaviour
     {
         return _trumpSuit;
     }
-    public void CheckGameState() 
+    public async void CheckGameState() 
     {
         if(!GameStateFinished)
         {
@@ -73,6 +80,7 @@ public class RuleHandler : MonoBehaviour
                 }
                 GameHandler.Instance.GenerateReward();
                 _endMatchScreen.SetActive(true);
+                _playArea.Wipe();
                 _endMatchScreen.GetComponent<Animator>().SetTrigger("Extend");
                 _victory.SetActive(true);
                 _rewardItemGrid.SetRewardGrid();
