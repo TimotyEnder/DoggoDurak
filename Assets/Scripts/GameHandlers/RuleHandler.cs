@@ -57,6 +57,7 @@ public class RuleHandler : MonoBehaviour
                 WipeModEffects();
                 _playerHp.reportHealth();
                 _endMatchScreen.SetActive(true);
+                _endMatchScreen.GetComponent<Animator>().SetTrigger("Extend");
                 _defeat.SetActive(true);
             }
             else if (_opponentHp.GetHealth() <= 0 || (GameHandler.Instance.GetGameState()._loseToWin && _playerHp.GetHealth() <= 0))
@@ -66,12 +67,13 @@ public class RuleHandler : MonoBehaviour
                 GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
                 //GameObject.Find("Discard").GetComponent<Discard>().WipeDiscard();  maybe replace by discard cards returning to the deck one by one?
                 _playerHp.reportHealth(); //this has to happen before reward because CurrencyCalculators rely on _health being already updated!
-                if(_opponentHp.GetHealth()<=0)
+                if(_opponentHp.GetHealth()<=0 && GameHandler.Instance.GetGameState()._loseToWin)
                 {
                     GameHandler.Instance.GetCurrEncounter().SetRewardMod(0);
                 }
                 GameHandler.Instance.GenerateReward();
                 _endMatchScreen.SetActive(true);
+                _endMatchScreen.GetComponent<Animator>().SetTrigger("Extend");
                 _victory.SetActive(true);
                 _rewardItemGrid.SetRewardGrid();
                 GameStateFinished = true;
