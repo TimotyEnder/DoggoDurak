@@ -12,6 +12,7 @@ public class ShopItemContent : MonoBehaviour
         foreach (Item rwItem in GameHandler.Instance.GetShopItems())
         {
             GameObject rwInstance = Instantiate(_rewardItemPrefab);
+            rwInstance.GetComponent<RectTransform>().localScale= Vector3.one*2f;
             rwInstance.transform.SetParent(this.transform);
             rwInstance.GetComponent<RewardItem>().AssignItem(rwItem,(rwItem.GetRarity()+1)*50);
         }
