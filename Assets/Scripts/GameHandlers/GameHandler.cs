@@ -80,7 +80,6 @@ public class GameHandler : MonoBehaviour
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
         ResetEncounterGamestateAttributes();
-        _currentEncounter.InitiateEncounter();//debug
         if(_encounterManager==null)
         {
             _encounterManager = new EncounterManager();
