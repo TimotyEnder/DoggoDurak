@@ -38,12 +38,14 @@ public class DiscardOptionPanel : MonoBehaviour
   
     private List<Card> _cardsSelected;
     private int _totalDiscardCost;
+    private Animator _disPanelAnim;
     public void Start()
     {
         //On Click config
-        _disButton.onClick.AddListener(UpdateDeckContent);
+        _disButton.onClick.AddListener(() => ShowDeckContent());
         _disExitButton.onClick.AddListener(() => DisPanelCloseHandler());
         _disConfirmButton.onClick.AddListener(()=>DisConfHandler());
+        _disPanelAnim=_disPanel.GetComponent<Animator>();
         UpdateCostText();
     }
     private async void DisConfHandler()
@@ -57,6 +59,8 @@ public class DiscardOptionPanel : MonoBehaviour
             }
             GameHandler.Instance.UpdateMoney(-_totalDiscardCost);
             await UniTask.Delay(300);
+            _totalDiscardCost=0;
+            UpdateCostText();
             UpdateDeckContent();
         }
         else
@@ -67,7 +71,7 @@ public class DiscardOptionPanel : MonoBehaviour
             _disConfText.color=oldColor;
         }
     }
-    private void DisPanelCloseHandler()
+    private async void DisPanelCloseHandler()
     {
         List<Card> cardToUnselect=new List<Card>();
         foreach(Card c in _cardsSelected)
@@ -79,11 +83,18 @@ public class DiscardOptionPanel : MonoBehaviour
         {
             UnSelectCard(c);
         }
+        _disPanelAnim.SetTrigger("Shrink");
+        await UniTask.Delay(300);
         _disPanel.SetActive(false);
+    }
+    private void ShowDeckContent()
+    {
+        _disPanel.SetActive(true);
+        _disPanelAnim.SetTrigger("Extend");
+        UpdateDeckContent();
     }
     public void UpdateDeckContent()
     {
-        _disPanel.SetActive(true);
         _clubs=new List<CardInfo>();
         _diamonds=new List<CardInfo>();
         _hearts=new List<CardInfo>();
