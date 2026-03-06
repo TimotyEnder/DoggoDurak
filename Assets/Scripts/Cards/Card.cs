@@ -632,19 +632,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             GameObject disOpt = GameObject.Find("DiscardButton");
             if (!_isInteractable && disOpt != null)
             {
-                DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
-                if(GameHandler.Instance.GetGameState()._rubles>=GameHandler.Instance.GetGameState()._discardingCardInShopCost)
-                {
-                    GameHandler.Instance.UpdateMoney(-GameHandler.Instance.GetGameState()._discardingCardInShopCost);
-                    Debug.Log("Card Removed");
-                    GameHandler.Instance.GetGameState()._deck.Remove(GetCardInfo());
-                    GetComponent<ToolTip>().SetTooltipActiveState(false);
-                    GameHandler.Instance.GetGameState()._discardingCardInShopCost++;
-                    disOptScript.UpdateCostText();
-                    disOptScript.UpdateDeckContent();
-                    Destroy(this.gameObject);
-                }
-
+                    DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
+                    if(!_marked.activeSelf)
+                    {
+                        disOptScript.SelectCard(this);
+                        Mark();
+                        Bling();
+                    }
+                    else
+                    {
+                        disOptScript.UnSelectCard(this);
+                        Unmark();
+                        Bling();
+                    }
             }
         }
     }

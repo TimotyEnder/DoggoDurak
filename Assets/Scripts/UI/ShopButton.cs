@@ -36,7 +36,6 @@ public class ShopButton:MonoBehaviour
                     _shopPanel.GetComponent<Animator>().SetTrigger("Extend");
                     _shopItemContent.SetRewardGrid();
                     _shopCardGrid.SetCardGrid();
-                    _discardOptButton.UpdateCostText();
                 }
             }
             else 

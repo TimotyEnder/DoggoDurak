@@ -65,7 +65,7 @@ public class GameHandler : MonoBehaviour
         //Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
        // debugItem2.InitItem();
         //_state.AddItem(debugItem2);
-        //_state._rubles=100; //debug
+        _state._rubles=100; //debug
         //_currentEncounter= new LaunchCodeLabrador();
         Next();
     }
