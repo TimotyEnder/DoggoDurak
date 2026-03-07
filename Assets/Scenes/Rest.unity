@@ -7505,6 +7505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shopItemContent: {fileID: 1485221226}
+  _shopCardGrid: {fileID: 1949360981}
   _costText: {fileID: 1088677983}
   _button: {fileID: 2106025261}
 --- !u!114 &2106025261

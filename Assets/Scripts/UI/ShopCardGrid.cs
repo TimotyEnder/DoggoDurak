@@ -30,4 +30,12 @@ public class ShopCardGrid : MonoBehaviour
             CardAdded.GetComponent<Card>().MakeCard(toAdd, false, GameHandler.Instance.GetGameState()._shopCostPerCardMod * modsAdded);
         }
     }
+    public void ReRoll()
+    {
+        foreach(RectTransform cards in this.transform)
+        {
+            Destroy(cards.gameObject);
+        }
+        SetCardGrid();
+    }
 }

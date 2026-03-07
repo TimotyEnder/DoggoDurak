@@ -7,6 +7,8 @@ public class ShopRerollButt : MonoBehaviour
     [SerializeField]
     private ShopItemContent _shopItemContent;
     [SerializeField]
+    private ShopCardGrid _shopCardGrid;
+    [SerializeField]
     private TextMeshProUGUI _costText;
     [SerializeField]
     private Button _button;
@@ -23,6 +25,7 @@ public class ShopRerollButt : MonoBehaviour
             GameHandler.Instance.UpdateMoney(-GameHandler.Instance.GetGameState()._shopRerollCost);
             GameHandler.Instance.GetGameState()._shopRerollCost += 5;
             _shopItemContent.ReRoll();
+            _shopCardGrid.ReRoll();
             UpdateCostText();
         }
     }

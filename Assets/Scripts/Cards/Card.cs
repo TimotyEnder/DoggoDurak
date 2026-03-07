@@ -627,7 +627,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             GameHandler.Instance.UpdateMoney(-_cost);
             GameHandler.Instance.AddCardToDeck(this.GetCardInfo());
             GetComponent<ToolTip>().SetTooltipActiveState(false);
-            Destroy(this.gameObject);
+            Bling();
+            Destroy(this.gameObject,0.3f);
         }
         else
         {
