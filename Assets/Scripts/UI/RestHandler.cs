@@ -4,14 +4,15 @@ using UnityEngine.UI;
 
 public class RestHandler : MonoBehaviour
 {
-    private Button _restButton;
     private LifeTotal _lifeTotal;
-    private TextMeshProUGUI _restPointsText;
+    [SerializeField]
+    private RectTransform _restPointContent;
+    [SerializeField]
+    private GameObject _restPointPrefab;
     private Deck _deck;
     void Awake()
     { 
         _lifeTotal= GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>();
-        _restPointsText= GameObject.Find("RestPointsText").GetComponent<TextMeshProUGUI>();
         _deck=GameObject.Find("Deck").GetComponent<Deck>();
         
     }
@@ -23,6 +24,13 @@ public class RestHandler : MonoBehaviour
     }
     public void UpdateRestUI()
     {
-        _restPointsText.text = "R:" + GameHandler.Instance.GetGameState()._restPoints.ToString();
+        foreach(RectTransform g in _restPointContent.transform)
+        {
+            Destroy(g.gameObject);
+        }
+        for(int i=0; i<GameHandler.Instance.GetGameState()._restPoints;i++)
+        {
+            GameObject restPoint= Instantiate(_restPointPrefab,_restPointContent);
+        }
     }
 }

@@ -4,11 +4,30 @@ using UnityEngine.UI;
 
 public class RestButton : MonoBehaviour
 {
-    public Button _restButton;
+    [SerializeField]
+    private  Button _restButton;
+    [SerializeField]
+    private  RectTransform _costContent;
+    [SerializeField]
+    private GameObject _restPointPrefab;
     void Start()
     {
         _restButton = this.gameObject.GetComponent<Button>();
         _restButton.onClick.AddListener(RestButtonOnClick);
+        SetRestCost();
+    }
+    private void SetRestCost()
+    {
+         foreach(RectTransform g in _costContent.transform)
+        {
+            Destroy(g.gameObject);
+        }
+        for(int i=0; i<GameHandler.Instance.GetGameState()._restRpointCost;i++)
+        {
+            GameObject restPoint= Instantiate(_restPointPrefab);
+            restPoint.GetComponent<RectTransform>().localScale= Vector3.one;
+            restPoint.transform.SetParent(_costContent);
+        }
     }
     void RestButtonOnClick()
     {

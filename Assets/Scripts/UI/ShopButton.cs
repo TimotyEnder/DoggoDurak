@@ -18,6 +18,10 @@ public class ShopButton:MonoBehaviour
     private DiscardOptionPanel _discardOptButton;
     private bool _shopPayedFor;
     private Button _shopButton;
+    [SerializeField]
+    private  RectTransform _costContent;
+    [SerializeField]
+    private GameObject _restPointPrefab;
 
     public void Start()
     {
@@ -28,6 +32,7 @@ public class ShopButton:MonoBehaviour
             if (!_shopPayedFor)
             {
                 _shopPayedFor = true;
+                RemoveCost();
                 if (GameHandler.Instance.GetGameState()._restPoints >= GameHandler.Instance.GetGameState()._shopRpointCost)
                 {
                     GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._shopRpointCost;
@@ -47,6 +52,27 @@ public class ShopButton:MonoBehaviour
         });
 
         _shopCloseButton.onClick.AddListener(() => { ShrinkShopPanel();});
+        SetRestCost();
+    }
+     private void SetRestCost()
+    {
+         foreach(RectTransform g in _costContent.transform)
+        {
+            Destroy(g.gameObject);
+        }
+        for(int i=0; i<GameHandler.Instance.GetGameState()._shopRpointCost;i++)
+        {
+            GameObject restPoint= Instantiate(_restPointPrefab);
+            restPoint.GetComponent<RectTransform>().localScale= Vector3.one;
+            restPoint.transform.SetParent(_costContent);
+        }
+    }
+    private void RemoveCost()
+    {
+        foreach(RectTransform g in _costContent.transform)
+        {
+            Destroy(g.gameObject);
+        }
     }
     private async void ShrinkShopPanel()
     {
