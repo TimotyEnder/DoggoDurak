@@ -185,6 +185,18 @@ public class CardInfo
         {13,"King"},
         {14,"Ace"},
     };
+    public static Dictionary<int, string> numberShortName = new Dictionary<int, string>
+    {
+        {6,"6"},
+        {7,"7"},
+        {8,"8"},
+        {9,"9"},
+        {10,"10"},
+        {11,"J"},
+        {12,"Q"},
+        {13,"K"},
+        {14,"A"},
+    };
     public async  void OnAquire() 
     {
         foreach(CardModifierContainer c in _modifiers) 

@@ -22,6 +22,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private Canvas _canvas;
     private RectTransform _cardImageRect;
     [SerializeField]
+    private TextMeshProUGUI _numberText;
+    [SerializeField]
+    private TextMeshProUGUI _numberText2;
+    [SerializeField]
     private bool _isInteractable;
     private int _cost;
     [SerializeField]
@@ -151,9 +155,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         this._cardInfo = card;
         card.AssignCard(this);
-        Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit + _cardInfo._number.ToString());
+        Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit);
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
+        _numberText.text=$"{CardInfo.suitToColor[_cardInfo._suit]}{CardInfo.numberShortName[_cardInfo._number]}</color>";
+        _numberText2.text=$"{CardInfo.suitToColor[_cardInfo._suit]}{CardInfo.numberShortName[_cardInfo._number]}</color>";
         _isInteractable = IsInteractable;
         _cost = Cost;
         if (_cost > 0)
