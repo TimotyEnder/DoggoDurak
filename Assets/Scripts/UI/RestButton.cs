@@ -7,7 +7,7 @@ public class RestButton : MonoBehaviour
     [SerializeField]
     private  Button _restButton;
     [SerializeField]
-    private  RectTransform _costContent;
+    private  TextMeshProUGUI _costContent;
     [SerializeField]
     private GameObject _restPointPrefab;
     void Start()
@@ -18,17 +18,9 @@ public class RestButton : MonoBehaviour
     }
     private void SetRestCost()
     {
-         foreach(RectTransform g in _costContent.transform)
-        {
-            Destroy(g.gameObject);
-        }
-        for(int i=0; i<GameHandler.Instance.GetGameState()._restRpointCost;i++)
-        {
-            GameObject restPoint= Instantiate(_restPointPrefab);
-            restPoint.GetComponent<RectTransform>().localScale= Vector3.one;
-            restPoint.transform.SetParent(_costContent);
-        }
+         _costContent.text=$"{StylisticClass.RestPoint}{GameHandler.Instance.GetGameState()._shopRpointCost}";
     }
+
     void RestButtonOnClick()
     {
         if (GameHandler.Instance.GetGameState()._restPoints >= GameHandler.Instance.GetGameState()._restRpointCost)

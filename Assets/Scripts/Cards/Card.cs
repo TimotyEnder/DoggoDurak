@@ -26,6 +26,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private int _cost;
     [SerializeField]
     private TextMeshProUGUI _costText;
+    [SerializeField]
+    private GameObject _costObject;
     private GameObject _playArea;
     private RectTransform _playAreaRect;
     private PlayArea _playAreaScript;
@@ -156,8 +158,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cost = Cost;
         if (_cost > 0)
         {
-            _costText.gameObject.SetActive(true);
-            _costText.text = _cost.ToString();
+            _costObject.SetActive(true);
+            _costText.text = _cost.ToString()+_costText.text[_costText.text.Length-1];
         }
         UpdateModifiers();
         CheckPlayPermission();

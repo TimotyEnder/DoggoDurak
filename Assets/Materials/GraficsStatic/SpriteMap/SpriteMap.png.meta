@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 5a47bbcfb4f61ab46a366e5fb8bf6938
+guid: c8fbb6313ea21b842badcec6ecad0304
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5696234589234851955
-    second: RestIcon_0
+      213: -9209479668324958208
+    second: SpriteMap_0
+  - first:
+      213: -661355702085498197
+    second: SpriteMap_1
+  - first:
+      213: 7515698825314227898
+    second: SpriteMap_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +54,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -152,14 +158,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RestIcon_0
+      name: Damage
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 369
-        height: 263
-      alignment: 0
+        x: 95
+        y: 906
+        width: 88
+        height: 88
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -167,8 +173,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 370f2a0dd271d0f40800000000000000
-      internalID: 5696234589234851955
+      spriteID: baac3033e7462d6f0800000000000000
+      internalID: -661355702085498197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Healing
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 914
+        width: 72
+        height: 72
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6dca103402d4860800000000000000
+      internalID: 7515698825314227898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RestPoint
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 914
+        width: 81
+        height: 79
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522b22e14ac8cfe42adbbf14bc9e3744
+      internalID: -9209479668324958208
       vertices: []
       indices: 
       edges: []
@@ -177,7 +227,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0e34dbbeeb6db76419a5496619656238
     internalID: 0
     vertices: []
     indices: 
@@ -186,7 +236,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Damage: -661355702085498197
+      Healing: 7515698825314227898
+      RestPoint: -9209479668324958208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

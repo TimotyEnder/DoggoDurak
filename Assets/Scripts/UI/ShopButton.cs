@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ public class ShopButton:MonoBehaviour
     private bool _shopPayedFor;
     private Button _shopButton;
     [SerializeField]
-    private  RectTransform _costContent;
+    private  TextMeshProUGUI _costContent;
     [SerializeField]
     private GameObject _restPointPrefab;
 
@@ -54,26 +55,14 @@ public class ShopButton:MonoBehaviour
         _shopCloseButton.onClick.AddListener(() => { ShrinkShopPanel();});
         SetRestCost();
     }
-     private void SetRestCost()
-    {
-         foreach(RectTransform g in _costContent.transform)
-        {
-            Destroy(g.gameObject);
-        }
-        for(int i=0; i<GameHandler.Instance.GetGameState()._shopRpointCost;i++)
-        {
-            GameObject restPoint= Instantiate(_restPointPrefab);
-            restPoint.GetComponent<RectTransform>().localScale= Vector3.one;
-            restPoint.transform.SetParent(_costContent);
-        }
-    }
-    private void RemoveCost()
-    {
-        foreach(RectTransform g in _costContent.transform)
-        {
-            Destroy(g.gameObject);
-        }
-    }
+private void SetRestCost()
+{
+        _costContent.text=$"{StylisticClass.RestPoint}{GameHandler.Instance.GetGameState()._shopRpointCost}";
+}
+private void RemoveCost()
+{
+    _costContent.text="";
+}
     private async void ShrinkShopPanel()
     {
          _shopPanel.GetComponent<Animator>().SetTrigger("Shrink");

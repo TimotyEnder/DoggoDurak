@@ -37,12 +37,17 @@ public static class StylisticClass
     public static string HighLightClose="</b>";
     public static string DamageNumber(int damage)
     {
-        return " <b>"+damage+"DMG"+"</b> ";
+        return " <b>"+damage+" "+DamageIcon+"</b> ";
     }
     public static string Debuffed="<b>Debuffed (Cannot defend and deal zero damage)</b>";
 
     //active items
     public static Color ActiveItemUseInvalid= new Color(0.678f, 0.012f, 0.098f);
+
+    //icons
+    public static string DamageIcon="<sprite name=Damage>";
+    public static string HealingIcon="<sprite name=Healing>";
+    public static string RestPoint="<sprite name=RestPoint>";
 
 
 

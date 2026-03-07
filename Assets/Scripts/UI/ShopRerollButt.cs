@@ -28,7 +28,7 @@ public class ShopRerollButt : MonoBehaviour
     }
     private void UpdateCostText()
     {
-        _costText.text =  GameHandler.Instance.GetGameState()._shopRerollCost.ToString();
+        _costText.text =  GameHandler.Instance.GetGameState()._shopRerollCost.ToString()+_costText.text[_costText.text.Length-1];
     }
 
 }

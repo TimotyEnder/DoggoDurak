@@ -6,7 +6,7 @@ public class RestHandler : MonoBehaviour
 {
     private LifeTotal _lifeTotal;
     [SerializeField]
-    private RectTransform _restPointContent;
+    private TextMeshProUGUI _restPointContent;
     [SerializeField]
     private GameObject _restPointPrefab;
     private Deck _deck;
@@ -24,13 +24,6 @@ public class RestHandler : MonoBehaviour
     }
     public void UpdateRestUI()
     {
-        foreach(RectTransform g in _restPointContent.transform)
-        {
-            Destroy(g.gameObject);
-        }
-        for(int i=0; i<GameHandler.Instance.GetGameState()._restPoints;i++)
-        {
-            GameObject restPoint= Instantiate(_restPointPrefab,_restPointContent);
-        }
+        _restPointContent.text=$"{StylisticClass.RestPoint}{GameHandler.Instance.GetGameState()._restPoints}";
     }
 }
