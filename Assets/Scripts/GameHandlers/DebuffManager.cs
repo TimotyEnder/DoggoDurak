@@ -25,6 +25,7 @@ public class DebuffManager
                 }
             }
         }
+        if(card._number==0){return true;}
         if (_playPermissionsCard[card._number].ContainsKey(card._suit))
         {
             return _playPermissionsCard[card._number][card._suit][turnState];

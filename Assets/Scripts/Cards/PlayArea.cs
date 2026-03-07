@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -188,6 +189,10 @@ public class PlayArea : MonoBehaviour
         else if (defendingCard._suit == _ruleHandler.GetTrumpSuit()) 
         {
             return true;    
+        }
+        else if(defendingCard._suit=="L")
+        {
+            return true;
         }
         else
         {

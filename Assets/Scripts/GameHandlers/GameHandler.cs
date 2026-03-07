@@ -86,7 +86,7 @@ public class GameHandler : MonoBehaviour
         }
         _saveManager.Value.Save(_state);
         _state._encounter++;
-        _state._encounter = 4; //debug
+        //_state._encounter = 4; //debug
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {

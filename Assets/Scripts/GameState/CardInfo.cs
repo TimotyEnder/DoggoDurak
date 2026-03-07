@@ -85,6 +85,8 @@ public class CardInfo
                 break;
             case "C":
                 return 3;
+            case "L":
+                return 4;
                 break;
             default:
                 return -1;
@@ -164,17 +166,20 @@ public class CardInfo
         {"C"," of Clubs"},
         {"D"," of Diamonds"},
         {"H"," of Hearts"},
-        {"S"," of Spades"}
+        {"S"," of Spades"},
+        {"L", "Laika Card"}
     };
     public static Dictionary<string, string> suitToColor = new Dictionary<string, string>
     {
         {"C","<color=white>"},
         {"D","<color=red>"},
         {"H","<color=red>"},
-        {"S","<color=white>"}
+        {"S","<color=white>"},
+        {"L","<rainb>"}
     };
     public static Dictionary<int, string> numberFullName = new Dictionary<int, string>
     {
+        {0,""},
         {6,"Six"},
         {7,"Seven"},
         {8,"Eight"},
@@ -187,6 +192,7 @@ public class CardInfo
     };
     public static Dictionary<int, string> numberShortName = new Dictionary<int, string>
     {
+        {0,"0"},
         {6,"6"},
         {7,"7"},
         {8,"8"},
