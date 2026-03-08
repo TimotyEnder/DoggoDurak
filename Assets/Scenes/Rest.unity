@@ -3975,6 +3975,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043015556}
   m_CullTransparentMesh: 1
+--- !u!1 &1063288899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 796969522274453720, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
+  m_PrefabInstance: {fileID: 399872904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1083519071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7656,6 +7661,10 @@ PrefabInstance:
       propertyPath: _drawText
       value: 
       objectReference: {fileID: 34383726}
+    - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
+      propertyPath: _miscCont
+      value: 
+      objectReference: {fileID: 1063288899}
     - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
       propertyPath: _clubsText
       value: 

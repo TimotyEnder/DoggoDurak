@@ -10,7 +10,7 @@ public class TheRedTape : Item
         this.isActive=true;
         this.itemId = "TheRedTape";
         this.persistent=true;
-        this.toolTipDesc = StylisticClass.ActivateString+CardInfo.suitToColor["H"]+" Hearts cannot be played this turn.";
+        this.toolTipDesc = StylisticClass.ActivateString+CardInfo.suitToColorToolText["H"]+" Hearts cannot be played this turn.";
     }
 
     public override void OnActivate()

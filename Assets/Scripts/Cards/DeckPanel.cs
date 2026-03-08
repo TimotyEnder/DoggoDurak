@@ -24,6 +24,8 @@ public class DeckPanel : MonoBehaviour
     [SerializeField]
     private GameObject _spadeCont;
     [SerializeField]
+    private GameObject _miscCont;
+    [SerializeField]
     private GameObject _cardPrefab;
     //suit tests deck panel
     [SerializeField]
@@ -57,24 +59,27 @@ public class DeckPanel : MonoBehaviour
     private List<CardInfo> _diamonds;
     private List<CardInfo> _hearts;
     private  List<CardInfo> _spades;   
+    private List<CardInfo> _misc;
     public void Start()
     {
         //On Click config
         _deckButton.onClick.AddListener(()=> { if(!_deckPanel.activeSelf){ ShowDeck(); }});
         _deckExitButton.onClick.AddListener(() => ShrinkDeckPanel());
+        ClearLists();
+    }
+    private  void ClearLists()
+    {
         _clubs=new List<CardInfo>();
         _diamonds=new List<CardInfo>();
         _hearts=new List<CardInfo>();
         _spades=new List<CardInfo>();
+        _misc= new List<CardInfo>();
     }
     private async void ShrinkDeckPanel()
     {
         _deckPanel.GetComponent<Animator>().SetTrigger("Shrink");
         await UniTask.Delay(300);
-         _clubs=new List<CardInfo>();
-        _diamonds=new List<CardInfo>();
-        _hearts=new List<CardInfo>();
-        _spades=new List<CardInfo>();
+        ClearLists();
         _deckPanel.SetActive(false);
     }
     public void ShowDeck() 
@@ -119,6 +124,9 @@ public class DeckPanel : MonoBehaviour
                 break;
             case "S":
                 _spades.Add(c);
+                break;
+            case "L":
+                _misc.Add(c);
                 break;
         }
     }
@@ -175,6 +183,23 @@ public class DeckPanel : MonoBehaviour
             {
                 cardMade.GetComponent<Card>().GreyIn();
             }
+        }
+        if(_misc.Count>0)
+        {
+            _miscCont.SetActive(true);
+            foreach(CardInfo c in _misc)
+            {
+                GameObject cardMade = Instantiate(_cardPrefab, _miscCont.transform);
+                cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+                if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
+                {
+                    cardMade.GetComponent<Card>().GreyIn();
+                }
+            }
+        }
+        else
+        {
+            _miscCont.SetActive(false);
         }
         ComplileStatsText();
     }

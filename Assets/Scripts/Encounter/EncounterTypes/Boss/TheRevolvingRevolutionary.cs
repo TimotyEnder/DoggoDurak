@@ -35,7 +35,7 @@ public class TheRevolvingRevolutionary : Encounter
         string toRet="";
         foreach(string suit in _suitsPlayedLastTurn)
         {
-            toRet+=$"{CardInfo.suitToColor[suit]}{CardInfo.suitFullName[suit].Substring(3)}</color>\n";
+            toRet+=$"{CardInfo.suitToColorToolText[suit]}{CardInfo.suitFullName[suit].Substring(3)}</color>\n";
         }
         return toRet;
     }

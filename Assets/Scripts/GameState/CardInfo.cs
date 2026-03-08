@@ -169,12 +169,20 @@ public class CardInfo
         {"S"," of Spades"},
         {"L", "Laika Card"}
     };
-    public static Dictionary<string, string> suitToColor = new Dictionary<string, string>
+    public static Dictionary<string, string> suitToColorToolText = new Dictionary<string, string>
     {
         {"C","<color=white>"},
         {"D","<color=red>"},
         {"H","<color=red>"},
         {"S","<color=white>"},
+        {"L","<rainb>"}
+    };
+    public static Dictionary<string, string> suitToColorNumber = new Dictionary<string, string>
+    {
+        {"C","<color=black>"},
+        {"D","<color=red>"},
+        {"H","<color=red>"},
+        {"S","<color=black>"},
         {"L","<rainb>"}
     };
     public static Dictionary<int, string> numberFullName = new Dictionary<int, string>
@@ -322,7 +330,7 @@ public class CardInfo
     }
     public string CompileCardName()
     {
-        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColor[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align></color></size>";
+        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align></color></size>";
     }
     public string CompileCondencedModifiers()
     {

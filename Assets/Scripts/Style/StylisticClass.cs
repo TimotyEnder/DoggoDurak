@@ -25,7 +25,7 @@ public static class StylisticClass
     public static string BounceColor = "<color=#FFA500FF>";    
     public static string BurnColor = "<color=#FFFF00FF>";      
     public static string CrippleColor = "<color=#c300ff>";  
-    public static string DrawColor = "<color=#E00000>";    
+    public static string DrawColor = "<color=#ff0000>";    
     public static string ParryColor = "<color=#FFFAFA>";     
     public static string RestoringColor = "<color=#01bb1e>"; 
     public static string SpikyColor = "<color=#999999>";     

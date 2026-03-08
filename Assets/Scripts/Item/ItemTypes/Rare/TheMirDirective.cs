@@ -10,7 +10,7 @@ public class TheMirDirective : Item
         this.isActive=true;
         this.itemId = "TheMirDirective";
         this.persistent=true;
-        this.toolTipDesc = StylisticClass.ActivateString+CardInfo.suitToColor["D"]+" Diamonds</color> cannot be played this turn.";
+        this.toolTipDesc = StylisticClass.ActivateString+CardInfo.suitToColorToolText["D"]+" Diamonds</color> cannot be played this turn.";
     }
 
     public override void OnActivate()
