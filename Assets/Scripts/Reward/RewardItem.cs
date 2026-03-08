@@ -12,6 +12,8 @@ public class RewardItem : MonoBehaviour
     private RewardItemGrid _rewgrid;
     [SerializeField]
     private TextMeshProUGUI _priceText;
+    [SerializeField]
+    private GameObject _costImage;
     private int price = 0;
 
     private void Start()
@@ -35,7 +37,8 @@ public class RewardItem : MonoBehaviour
         {
             this.price = itemPrice;
             _priceText.gameObject.SetActive(true);
-            _priceText.text = itemPrice.ToString();   
+            _costImage.SetActive(true);
+            _priceText.text = itemPrice.ToString()+_priceText.text[_priceText.text.Length-1];   
         }
         _toolTip = GetComponent<ToolTip>();
         this._item = item;

@@ -103,6 +103,10 @@ public class DeckPanel : MonoBehaviour
         {
             Destroy(card.gameObject);
         }
+         foreach (Transform card in _miscCont.transform) 
+        {
+            Destroy(card.gameObject);
+        }
         foreach (CardInfo cInfo in GameHandler.Instance.GetGameState()._deck)
         {
             PlaceInCorrectArray(cInfo);
@@ -125,7 +129,7 @@ public class DeckPanel : MonoBehaviour
             case "S":
                 _spades.Add(c);
                 break;
-            case "L":
+            default:
                 _misc.Add(c);
                 break;
         }

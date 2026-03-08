@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -28,12 +29,15 @@ public class DiscardOptionPanel : MonoBehaviour
     [SerializeField]
     private GameObject _spadeCont;
     [SerializeField]
+    private GameObject _miscCont;
+    [SerializeField]
     private GameObject _cardPrefab;
 
     private List<CardInfo> _clubs;
     private List<CardInfo> _diamonds;
     private List<CardInfo> _hearts;
     private  List<CardInfo> _spades;  
+    private  List<CardInfo>  _misc;
 
   
     private List<Card> _cardsSelected;
@@ -100,6 +104,7 @@ public class DiscardOptionPanel : MonoBehaviour
         _hearts=new List<CardInfo>();
         _spades=new List<CardInfo>();
         _cardsSelected= new List<Card>();
+        _misc= new List<CardInfo>();
         foreach (Transform card in _clubCont.transform) 
         {
             Destroy(card.gameObject);
@@ -113,6 +118,10 @@ public class DiscardOptionPanel : MonoBehaviour
             Destroy(card.gameObject);
         }
         foreach (Transform card in _spadeCont.transform) 
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (Transform card in _miscCont.transform) 
         {
             Destroy(card.gameObject);
         }
@@ -142,6 +151,19 @@ public class DiscardOptionPanel : MonoBehaviour
             GameObject cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
             cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
         }
+         if(_misc.Count>0)
+        {
+            _miscCont.SetActive(true);
+            foreach(CardInfo c in _misc)
+            {
+                GameObject cardMade = Instantiate(_cardPrefab, _miscCont.transform);
+                cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
+            }
+        }
+        else
+        {
+            _miscCont.SetActive(false);
+        }
     }
      public void PlaceInCorrectArray(CardInfo c)
     {
@@ -158,6 +180,9 @@ public class DiscardOptionPanel : MonoBehaviour
                 break;
             case "S":
                 _spades.Add(c);
+                break;
+            default:
+                _misc.Add(c);
                 break;
         }
     }
