@@ -53,7 +53,7 @@ public class GameState
                     for (int j = 6; j < 15; j++)
                     {
                         _deck.Add(new CardInfo("C", j));
-                        //_deck.Add(new CardInfo("L", 0)); //debug
+                        //_deck.Add(new CardInfo("C", 6)); //debug
 
                     }
                     break;

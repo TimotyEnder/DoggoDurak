@@ -71,10 +71,10 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     private IEnumerator TrumpAppear()
     {
         RectTransform myRect = GetComponent<RectTransform>();
-        myRect.anchoredPosition = new Vector2(-962,0);
-        GameObject trumpTxt= Instantiate(_trumpTextPrefab, this.transform.parent);
-        trumpTxt.GetComponent<TrumpSuitText>().SetText(GetTrumpText());
-         trumpTxt.GetComponent<TrumpSuitText>().Init(null, this.gameObject.GetComponentInParent<Canvas>());
+        myRect.anchoredPosition = new Vector2(-962,-123);
+        //GameObject trumpTxt= Instantiate(_trumpTextPrefab, this.transform.parent);
+        //trumpTxt.GetComponent<TrumpSuitText>().SetText(GetTrumpText());
+        //trumpTxt.GetComponent<TrumpSuitText>().Init(null, this.gameObject.GetComponentInParent<Canvas>());
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(MoveToPosition(_revealPos, 0.5f,5f));
         this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());

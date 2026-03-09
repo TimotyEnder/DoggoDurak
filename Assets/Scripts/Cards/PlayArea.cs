@@ -139,7 +139,7 @@ public class PlayArea : MonoBehaviour
     }
     bool CanReverseWithAnotherCard()
     {
-        if (_turnHandler.GetTurnState() == 1)
+        if (_turnHandler.GetTurnState() == 0)
         {
             return UnblockedCardsAmount() <= _playerHand.GetCardsInHand();
         }

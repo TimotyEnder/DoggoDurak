@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -62,11 +63,12 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
-        // debugItem2.InitItem();
+        //Item debugItem2 = ScriptableObject.CreateInstance<PrivatizedCheckVoucher>();
+        //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
-        _state._rubles=100; //debug
-        //_currentEncounter= new LaunchCodeLabrador();
+        //_state._rubles=100; //debug
+        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter.InitiateEncounter();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -86,8 +88,8 @@ public class GameHandler : MonoBehaviour
         }
         _saveManager.Value.Save(_state);
         _state._encounter++;
-        //_state._encounter = 11; //debug
-        //_state._encounter = 4; //debug
+        //_state._encounter = 11; //debug insta boss
+        //_state._encounter = 4; //debug insta shop
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
