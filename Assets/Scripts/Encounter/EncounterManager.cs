@@ -48,9 +48,9 @@ public class EncounterManager
     {
         if (day < _bossEncounters.Count && _bossEncounters[day].Count>0) 
         {
-            int roll= Random.Range(0, _encounters[day].Count);
-            Encounter chosen = _encounters[day][roll];
-            _encounters[day].Remove(chosen);
+            int roll= Random.Range(0, _bossEncounters[day].Count);
+            Encounter chosen = _bossEncounters[day][roll];
+            _bossEncounters[day].Remove(chosen);
             return chosen;
         }
         return null;

@@ -287,16 +287,19 @@ public class CardInfo
             }
         }
     }
-    public void AddModifier(string ModType) 
+    public void AddModifier(string ModType, int times=1) 
     {
-        if (modifierMaxCopies[ModType]==-1 || !_modifierStacks.ContainsKey(ModType) || _modifierStacks[ModType] < modifierMaxCopies[ModType]) 
+        for(int i=0;i<times;i++)
         {
-            _modifiers.Add(new CardModifierContainer(ModType));
-            if (!_modifierStacks.ContainsKey(ModType))
+            if (modifierMaxCopies[ModType]==-1 || !_modifierStacks.ContainsKey(ModType) || _modifierStacks[ModType] < modifierMaxCopies[ModType]) 
             {
-                _modifierStacks[ModType] = 0;
+                _modifiers.Add(new CardModifierContainer(ModType));
+                if (!_modifierStacks.ContainsKey(ModType))
+                {
+                    _modifierStacks[ModType] = 0;
+                }
+                _modifierStacks[ModType] += 1;
             }
-            _modifierStacks[ModType] += 1;
         }
     }
     public void UpdateModifiers() 

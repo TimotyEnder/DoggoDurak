@@ -22,7 +22,7 @@ public class TheGypsyWolfhound : Encounter
         SetHealth();
         initDeck(14,true,true,true,true);
         nominatedCards=new HashSet<CardInfo>();
-        this.description="The does not know what he believes in  himself.";
+        this.description="His foresight is only as deep as your pockets.";
         hasRules=true;
     }
     public override void AddRules()
