@@ -52,7 +52,7 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            c.AddModifier("Burn",50);
+            //c.AddModifier("Burn",50);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
         //debug
 
         //Item debugItem2 = ScriptableObject.CreateInstance<EmergencyContact>();
-       // debugItem2.InitItem();
+        // debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         _state._rubles=100; //debug
         //_currentEncounter= new LaunchCodeLabrador();
@@ -86,7 +86,8 @@ public class GameHandler : MonoBehaviour
         }
         _saveManager.Value.Save(_state);
         _state._encounter++;
-        _state._encounter = 11; //debug
+        //_state._encounter = 11; //debug
+        //_state._encounter = 4; //debug
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {

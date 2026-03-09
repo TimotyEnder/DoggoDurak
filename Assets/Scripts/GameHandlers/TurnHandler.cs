@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class TurnHandler : MonoBehaviour
 {
     [SerializeField]
     private int _turnState = 0; //0 your turn to attack, _turnState>0 enemy (_turnState) is attacking
-
+    private int _turn=0;
     private Deck _playerDeck;
     private TurnStateToggle _turnStateToggle;
     private bool _toggled;//player Attacking
@@ -18,7 +19,9 @@ public class TurnHandler : MonoBehaviour
     private LifeTotal _opponentHp;
     private CardHandArea _playerHand;
     private bool _turnEndStarted=false;
-    void Start()
+    private Animator _turnIndicatorAnim;
+    private TextMeshProUGUI _turnIndicatorText;
+    void Awake()
     {
         //initialising
         _playerDeck = GameObject.Find("Deck").GetComponent<Deck>();
@@ -30,6 +33,17 @@ public class TurnHandler : MonoBehaviour
         _playerHp= GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>(); 
         _opponentHp = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
         _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
+        _turnIndicatorAnim= GameObject.Find("TurnIndicator").GetComponent<Animator>();
+        _turnIndicatorText= GameObject.Find("TurnIndicator").GetComponentInChildren<TextMeshProUGUI>();
+    }
+    private void TurnIndicatorLaunch()
+    {
+        _turn++;
+        _turnIndicatorText.text=$"Turn {_turn}";
+        _turnIndicatorAnim.SetTrigger("Cycle");
+    }
+    void Start()
+    {
         //Init Setup
         InitSetup();
     }
@@ -51,6 +65,7 @@ public class TurnHandler : MonoBehaviour
     }
     void Turn() 
     {
+        TurnIndicatorLaunch();
         _ruleHandler.CheckGameState();
         GameHandler.Instance.EncounterSetDebuffs();
         _opponent.resetEndTurnFlag();
