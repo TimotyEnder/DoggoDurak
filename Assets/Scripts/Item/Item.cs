@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Windows;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
+[Serializable]
 public abstract class Item : ScriptableObject
 {
     [SerializeField]

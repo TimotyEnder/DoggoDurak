@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<LaikasNumber>();
-        debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasCall>();
+        //debugItem2.InitItem();
+        //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
@@ -354,7 +354,7 @@ public class GameHandler : MonoBehaviour
     public void SortDeck()
     {
         _state._deck.Sort((a, b) => a._suitNumber == b._suitNumber ? 
-            b._number.CompareTo(a._number) : 
+            a._number.CompareTo(b._number) : 
             a._suitNumber.CompareTo(b._suitNumber));
     }
     public void AddCardToDeck(CardInfo card)

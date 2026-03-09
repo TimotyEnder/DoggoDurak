@@ -1,5 +1,6 @@
 using System.Diagnostics;
-
+using UnityEngine;
+[CreateAssetMenu(fileName = "LaikasNumber", menuName = "Items/Rare/LaikasNumber")]
 class LaikasNumber : Item
 {
     private int _turnsPlayed=0;
