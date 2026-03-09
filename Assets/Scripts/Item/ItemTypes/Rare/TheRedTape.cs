@@ -57,4 +57,9 @@ public class TheRedTape : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

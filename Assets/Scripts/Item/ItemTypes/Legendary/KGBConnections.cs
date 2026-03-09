@@ -60,4 +60,9 @@ public class KGBConnections : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

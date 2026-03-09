@@ -56,4 +56,9 @@ public class Muzzle : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

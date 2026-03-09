@@ -60,4 +60,9 @@ public class TsarsCrown:Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

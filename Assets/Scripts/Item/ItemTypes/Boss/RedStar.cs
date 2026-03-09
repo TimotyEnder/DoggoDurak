@@ -54,4 +54,9 @@ public class RedStar : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

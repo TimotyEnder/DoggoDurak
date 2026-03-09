@@ -57,4 +57,9 @@ public class TheSentinelsFarewell : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

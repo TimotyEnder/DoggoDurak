@@ -74,4 +74,9 @@ public class StraysLuckyCoin : Item
     {
         
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

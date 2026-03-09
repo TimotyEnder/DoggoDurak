@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<ChewToy>();
-        //debugItem2.InitItem();
-        //_state.AddItem(debugItem2);
+        Item debugItem2 = ScriptableObject.CreateInstance<LaikasNumber>();
+        debugItem2.InitItem();
+        _state.AddItem(debugItem2);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
@@ -361,6 +361,11 @@ public class GameHandler : MonoBehaviour
     {
         _state._deck.Add(card);
         SortDeck();
+        GameObject opponentDeck= GameObject.Find("Deck");
+        if(opponentDeck!=null)
+        {
+            opponentDeck.GetComponent<Deck>().AddCard(card);
+        }
     }
     public void AddCurrencyCalculator(CurrencyCalculator cc) 
     {

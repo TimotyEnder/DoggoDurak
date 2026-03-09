@@ -60,4 +60,9 @@ public class SiberianBearHuntingSuit : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

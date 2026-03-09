@@ -54,4 +54,9 @@ public class TheBreadlineBargain : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

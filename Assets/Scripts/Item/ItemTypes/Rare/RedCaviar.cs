@@ -60,4 +60,9 @@ public class RedCaviar : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

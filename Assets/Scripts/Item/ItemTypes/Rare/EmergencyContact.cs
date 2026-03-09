@@ -63,4 +63,9 @@ public class EmergencyContact : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

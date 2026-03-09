@@ -181,6 +181,7 @@ public class TurnHandler : MonoBehaviour
         if(!_ruleHandler.isGameStateFinished()){
             yield return new WaitForSeconds(0.2f);
             GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
+            GameHandler.Instance.GetGameState().OnTurnEnd(_turnState);
             yield return new WaitForSeconds(0.2f);
             FinishEndTurn();
         }

@@ -7,7 +7,7 @@ class ChewToy : Item
          this.rarity = 1;
         this.boss = false;
         this.itemId = "ChewToy";
-        this.toolTipDesc = $"At the end of each encounter heal 5%hp";
+        this.toolTipDesc = $"At the end of each encounter heal {StylisticClass.HighLight}5%{StylisticClass.HighLightClose} hp";
     }
 
     public override void OnActivate()
@@ -51,6 +51,11 @@ class ChewToy : Item
     }
 
     public override void OnReverse(Card card)
+    {
+        
+    }
+
+    public override void OnTurnEnd(int turnState)
     {
         
     }

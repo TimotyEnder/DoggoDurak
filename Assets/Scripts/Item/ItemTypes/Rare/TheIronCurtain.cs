@@ -57,4 +57,9 @@ public class TheIronCurtain : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

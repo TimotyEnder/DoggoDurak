@@ -51,4 +51,9 @@ public class DefaultItem : Item
     {
         
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

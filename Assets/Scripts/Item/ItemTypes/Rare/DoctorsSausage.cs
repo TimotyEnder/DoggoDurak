@@ -60,4 +60,9 @@ public class DoctorsSausage : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

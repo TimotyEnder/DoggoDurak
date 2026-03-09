@@ -54,4 +54,9 @@ public class FluffyUshanka : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

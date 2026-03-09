@@ -54,4 +54,9 @@ public class TheOligarchsPreviledge : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

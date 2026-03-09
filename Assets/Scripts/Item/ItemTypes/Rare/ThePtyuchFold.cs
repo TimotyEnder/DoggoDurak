@@ -56,4 +56,9 @@ public class ThePtyuchFold : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

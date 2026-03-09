@@ -54,4 +54,9 @@ public class BlackStar : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

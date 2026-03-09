@@ -64,4 +64,9 @@ public class BlackCaviar : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

@@ -57,4 +57,9 @@ public class SausagesWithHren : Item
     {
 
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

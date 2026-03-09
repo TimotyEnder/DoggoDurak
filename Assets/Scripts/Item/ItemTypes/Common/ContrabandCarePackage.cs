@@ -68,4 +68,9 @@ public class ContrabandCarePackage : Item
     public override void OnReverse(Card card)
     {
     }
+
+    public override void OnTurnEnd(int turnState)
+    {
+        
+    }
 }

@@ -60,6 +60,10 @@ public class Deck : MonoBehaviour
         }
         UpdateDeckSizeText();
     }
+    public void AddCard(CardInfo card)
+    {
+        _deck.Add(card);
+    }
     public void LoadDiscard()
     {
         _deck = new List<CardInfo>();
