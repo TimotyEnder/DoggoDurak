@@ -6,13 +6,17 @@ public class ShopItemContent : MonoBehaviour
 {
     [SerializeField]
     private GameObject _rewardItemPrefab;
-    private int _remainingChoices;
+    private Canvas _canvas;
+    void Awake()
+    {
+        _canvas= GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
+    }
     public void SetRewardGrid()
     {
         foreach (Item rwItem in GameHandler.Instance.GetShopItems())
         {
             GameObject rwInstance = Instantiate(_rewardItemPrefab);
-            rwInstance.GetComponent<RectTransform>().localScale= Vector3.one*2f;
+            rwInstance.GetComponent<RectTransform>().localScale= Vector3.one*2f*_canvas.scaleFactor;
             rwInstance.transform.SetParent(this.transform);
             rwInstance.GetComponent<RewardItem>().AssignItem(rwItem,(rwItem.GetRarity()+1)*50);
         }

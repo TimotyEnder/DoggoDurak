@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
-  _myRectScale: 2
+  _myRectScale: 1
   displayWaitSeconds: 0.05
   canvas: {fileID: 0}
 --- !u!1 &7533121254872429403
