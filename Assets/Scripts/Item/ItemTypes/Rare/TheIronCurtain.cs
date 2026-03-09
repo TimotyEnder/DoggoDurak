@@ -33,6 +33,11 @@ public class TheIronCurtain : Item
 
     }
 
+    public override void OnEndEncounter()
+    {
+        
+    }
+
     public override void OnHeal(int amount)
     {
 

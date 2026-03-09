@@ -69,6 +69,7 @@ public class RuleHandler : MonoBehaviour
             }
             else if (_opponentHp.GetHealth() <= 0 || (GameHandler.Instance.GetGameState()._loseToWin && _playerHp.GetHealth() <= 0))
             {
+                GameHandler.Instance.GetGameState().OnEndEncounter();
                 _modEffectsSpawn=false;
                 WipeModEffects();
                 GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();

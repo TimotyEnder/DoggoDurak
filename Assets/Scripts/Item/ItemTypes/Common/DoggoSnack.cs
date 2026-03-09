@@ -29,6 +29,11 @@ public class DoggoSnack : Item
     {
     }
 
+    public override void OnEndEncounter()
+    {
+        
+    }
+
     public override void OnHeal(int amount)
     {
 

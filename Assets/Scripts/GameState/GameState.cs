@@ -224,4 +224,11 @@ public class GameState
             item.OnDamageOpponent(amount, fromMod);
         }
     }
+    public void OnEndEncounter()
+    {
+         foreach (Item item in _items)
+        {
+            item.OnEndEncounter();
+        }
+    }
 }

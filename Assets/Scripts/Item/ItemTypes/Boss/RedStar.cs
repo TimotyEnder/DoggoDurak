@@ -30,6 +30,11 @@ public class RedStar : Item
 
     }
 
+    public override void OnEndEncounter()
+    {
+        
+    }
+
     public override void OnHeal(int amount)
     {
 

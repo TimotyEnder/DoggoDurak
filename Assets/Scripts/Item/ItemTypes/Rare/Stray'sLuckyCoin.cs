@@ -69,4 +69,9 @@ public class StraysLuckyCoin : Item
     {
 
     }
+
+    public override void OnEndEncounter()
+    {
+        
+    }
 }

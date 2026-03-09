@@ -32,6 +32,11 @@ public class Muzzle : Item
 
     }
 
+    public override void OnEndEncounter()
+    {
+        
+    }
+
     public override void OnHeal(int amount)
     {
 
