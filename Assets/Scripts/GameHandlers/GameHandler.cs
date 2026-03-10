@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<PrimeLaikaDirective>();
-        debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        //Item debugItem2 = ScriptableObject.CreateInstance<PrimeLaikaDirective>();
+        //debugItem2.InitItem();
+        //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();

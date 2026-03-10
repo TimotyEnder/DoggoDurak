@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class ShopCardGrid : MonoBehaviour
 
     public void SetCardGrid()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 6; i++)
         {
             int modsForCard = Random.Range(1, GameHandler.Instance.GetGameState()._maxCardModsInShop);
             CardInfo toAdd = new CardInfo(CardInfo.RandomSuit(), Random.Range(6, 14));
@@ -25,6 +26,12 @@ public class ShopCardGrid : MonoBehaviour
                     toAdd.AddModifier(ModTypeToAdd);
                     modsAdded++;
                 }
+            }
+            int roll= Random.Range(0,100);
+            if(roll<GameHandler.Instance.GetGameState()._laikaCardInShopChance)
+            {
+                toAdd.MakeLaika();
+                modsAdded++;//aditional cost becuase it is a Laika Card.
             }
             GameObject CardAdded = Instantiate(_cardPrefab, this.transform);
             CardAdded.GetComponent<Card>().MakeCard(toAdd, false, GameHandler.Instance.GetGameState()._shopCostPerCardMod * modsAdded);

@@ -190,7 +190,7 @@ public class PlayArea : MonoBehaviour
         {
             return true;    
         }
-        else if(defendingCard._suit=="L" || defendedCard._suit=="L")
+        else if(defendingCard.IsLaika() || defendedCard.IsLaika())
         {
             return true;
         }

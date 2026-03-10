@@ -40,6 +40,7 @@ public class GameState
     public bool _loseToWin;//activates on Insider Investor.
     public bool _healingAndDamageInverted;
     public int _shopCostPerCardMod;
+    public int _laikaCardInShopChance;
 
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
     public GameState()
@@ -113,6 +114,7 @@ public class GameState
         _enemyHandSize = 6;
         _loseToWin=false;
         _healingAndDamageInverted=false;
+        _laikaCardInShopChance=10;
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {

@@ -65,7 +65,20 @@ public class CardInfo
     {
         return _number<11 && (_number%2)!=0;
     }
-
+    public bool IsLaika()
+    {
+        return _suit=="L";
+    }
+    public bool MakeLaika()
+    {
+        if(_suit!="L")
+        {
+            _suit="L";
+            _number=0;
+            return true;
+        }
+        return false;
+    }
     public void AssignCard(Card card) 
     {
         _card = card;
@@ -184,6 +197,14 @@ public class CardInfo
         {"H","<color=red>"},
         {"S","<color=black>"},
         {"L","<rainb>"}
+    };
+        public static Dictionary<string, string> suitToStyleClose = new Dictionary<string, string>
+    {
+        {"C","</color>"},
+        {"D","</color>"},
+        {"H","</color>"},
+        {"S","</color>"},
+        {"L","</rainb>"}
     };
     public static Dictionary<int, string> numberFullName = new Dictionary<int, string>
     {
@@ -318,6 +339,10 @@ public class CardInfo
     {
         string returnString = "";
         returnString += CompileCardName()+"\n";
+        if(IsLaika())
+        {
+            returnString+=$"<size={SettingsState.ToolTipFontSizeText}>{suitToColorToolText["L"]}{StylisticClass.Laika.Substring(0,13)}{suitToStyleClose["L"]}{StylisticClass.Laika.Substring(13)}</size>\n";
+        }
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
             if(modifierMaxCopies[entry.Key]==1)
@@ -333,7 +358,7 @@ public class CardInfo
     }
     public string CompileCardName()
     {
-        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align></color></size>";
+        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align>"+suitToStyleClose[_suit]+"</size>";
     }
     public string CompileCondencedModifiers()
     {

@@ -18,7 +18,7 @@ public class RestButton : MonoBehaviour
     }
     private void SetRestCost()
     {
-         _costContent.text=$"{StylisticClass.RestPoint}{GameHandler.Instance.GetGameState()._shopRpointCost}";
+         _costContent.text=$"{StylisticClass.RestPoint}{GameHandler.Instance.GetGameState()._restRpointCost}";
     }
 
     void RestButtonOnClick()

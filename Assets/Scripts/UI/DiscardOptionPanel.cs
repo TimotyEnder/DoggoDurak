@@ -66,6 +66,8 @@ public class DiscardOptionPanel : MonoBehaviour
             _totalDiscardCost=0;
             UpdateCostText();
             UpdateDeckContent();
+            await UniTask.Delay(200);
+            DisPanelCloseHandler();
         }
         else
         {

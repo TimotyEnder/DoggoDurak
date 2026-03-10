@@ -21,8 +21,7 @@ class PrimeLaikaDirective : Item
         {
             if(c._number==7 || c._number==11)
             {
-                c._number=0;
-                c._suit="L";
+                c.MakeLaika();
                 c.AddModifier("Burn",5);
             }
         }

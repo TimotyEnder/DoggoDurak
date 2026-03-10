@@ -19,8 +19,7 @@ class LaikasCall : Item
     public override void OnAquire()
     {
         CardInfo randomCard= GameHandler.Instance.GetGameState()._deck[Random.Range(0,GameHandler.Instance.GetGameState()._deck.Count)];
-        randomCard._number=0;
-        randomCard._suit="L";
+        randomCard.MakeLaika();
     }
 
     public override void OnDamageOpponent(int amount, string fromMod = "")
