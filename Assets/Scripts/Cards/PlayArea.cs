@@ -244,7 +244,7 @@ public class PlayArea : MonoBehaviour
 
         foreach (Card card in cardsToMove)
         {
-            card.MoveTowardsToDiscard(true); //this makes on played card discard trigger
+            card.MoveTowardsDiscard(true); //this makes on played card discard trigger
         }
     }
     public void RealignDefendingCards()

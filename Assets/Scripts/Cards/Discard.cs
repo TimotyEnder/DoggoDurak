@@ -24,9 +24,6 @@ public class Discard : MonoBehaviour
     {
         _opponentCards = new List<Card>();
         _playerCards = new List<Card>();
-        //On Click config
-        _discardButton.onClick.AddListener(UpdateDiscardContent);
-        _discardExitButton.onClick.AddListener(() => _discardPanel.SetActive(false));
     }
     public void AddCard(Card card) 
     {

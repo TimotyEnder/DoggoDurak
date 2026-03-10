@@ -245,7 +245,7 @@ public class CardHandArea : MonoBehaviour
                     _discard.AddCard(cardToDiscard);
                     GameHandler.Instance.GetCurrEncounter().OnHandCardDiscarded(cardToDiscard.GetCardInfo());
                     _cards.RemoveAt(index);
-                    cardToDiscard.MoveTowardsToDiscard();
+                    cardToDiscard.MoveTowardsDiscard();
                     DettachCard();
                 }
             }
