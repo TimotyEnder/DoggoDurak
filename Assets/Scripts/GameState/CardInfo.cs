@@ -206,32 +206,48 @@ public class CardInfo
         {"S","</color>"},
         {"L","</rainb>"}
     };
-    public static Dictionary<int, string> numberFullName = new Dictionary<int, string>
+    public static string GetNumberFullName(int number)
     {
-        {0,""},
-        {6,"Six"},
-        {7,"Seven"},
-        {8,"Eight"},
-        {9,"Nine"},
-        {10,"Ten"},
-        {11,"Jack"},
-        {12,"Queen"},
-        {13,"King"},
-        {14,"Ace"},
-    };
-    public static Dictionary<int, string> numberShortName = new Dictionary<int, string>
+        switch (number)
+        {
+            case 6:
+                return "Six";
+            case 7:
+                return "Seven";
+            case 8:
+                return "Eight";
+            case 9:
+                return "Nine";
+            case 10:
+                return "Ten";
+            case 11:
+                return "Jack";
+            case 12:
+                return "Queen";
+            case 13:
+                return "King";
+            case 14:
+                return "Ace";
+            default:
+                return "";
+        }
+    }
+public static string GetNumberShortName(int number)
+{
+    switch (number)
     {
-        {0,"0"},
-        {6,"6"},
-        {7,"7"},
-        {8,"8"},
-        {9,"9"},
-        {10,"10"},
-        {11,"J"},
-        {12,"Q"},
-        {13,"K"},
-        {14,"A"},
-    };
+        case 11:
+            return "J";
+        case 12:
+            return "Q";
+        case 13:
+            return "K";
+        case 14:
+            return "A";
+        default:
+            return number.ToString();
+    }
+}
     public async  void OnAquire() 
     {
         foreach(CardModifierContainer c in _modifiers) 
@@ -358,7 +374,7 @@ public class CardInfo
     }
     public string CompileCardName()
     {
-        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ numberFullName[_number] + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align>"+suitToStyleClose[_suit]+"</size>";
+        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ GetNumberFullName(_number) + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align>"+suitToStyleClose[_suit]+"</size>";
     }
     public string CompileCondencedModifiers()
     {
@@ -382,6 +398,6 @@ public class CardInfo
     }
     public override string ToString() // for debug purposes
     {
-        return numberFullName[_number] + suitFullName[_suit];
+        return GetNumberFullName(_number) + suitFullName[_suit];
     }
 }

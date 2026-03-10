@@ -20,6 +20,11 @@ public class RedStar : Item
         GameHandler.Instance.GetGameState()._redCardsSameSuit = true;
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
 

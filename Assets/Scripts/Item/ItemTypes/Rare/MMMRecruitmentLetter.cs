@@ -19,6 +19,11 @@ public class MMMRecruitmentLetter : Item
         GameHandler.Instance.AddCurrencyCalculator(new CardHoarderCC());
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
     }

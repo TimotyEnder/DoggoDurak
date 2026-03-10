@@ -22,6 +22,11 @@ class LaikasNumber : Item
         
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod = "")
     {
         

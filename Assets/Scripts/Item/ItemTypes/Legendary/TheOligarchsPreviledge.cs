@@ -20,6 +20,11 @@ public class TheOligarchsPreviledge : Item
         GameHandler.Instance.GetGameState()._handSize += 2;
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
         

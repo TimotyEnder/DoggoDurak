@@ -49,7 +49,7 @@ public class TheGypsyWolfhound : Encounter
         string toRet="";
         foreach(CardInfo card in nominatedCards)
         {
-            toRet+=$"{CardInfo.suitToColorToolText[card._suit]}{CardInfo.numberFullName[card._number]} {CardInfo.suitFullName[card._suit]}</color>\n";
+            toRet+=$"{CardInfo.suitToColorToolText[card._suit]}{CardInfo.GetNumberFullName(card._number)} {CardInfo.suitFullName[card._suit]}</color>\n";
         }
         return toRet;
     }

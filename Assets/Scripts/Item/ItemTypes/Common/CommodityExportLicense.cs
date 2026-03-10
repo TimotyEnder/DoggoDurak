@@ -19,6 +19,11 @@ public class CommodityExportLicense : Item
         GameHandler.Instance.GetGameState()._maxCardModsInShop++;
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
     }

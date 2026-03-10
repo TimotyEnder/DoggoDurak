@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<RavenousRottweilerFang>();
-        debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasFavor>();
+        //debugItem2.InitItem();
+        //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
@@ -366,6 +366,7 @@ public class GameHandler : MonoBehaviour
         {
             opponentDeck.GetComponent<Deck>().AddCard(card);
         }
+        _state.OnCardAdded(card);
     }
     public void AddCurrencyCalculator(CurrencyCalculator cc) 
     {

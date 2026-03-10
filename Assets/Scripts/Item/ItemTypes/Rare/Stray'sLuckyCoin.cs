@@ -79,4 +79,9 @@ public class StraysLuckyCoin : Item
     {
         
     }
+
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
 }

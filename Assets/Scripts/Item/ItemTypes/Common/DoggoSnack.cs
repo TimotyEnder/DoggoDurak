@@ -20,6 +20,11 @@ public class DoggoSnack : Item
         GameHandler.Instance.IncreaseMaxHealth(10);
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
    

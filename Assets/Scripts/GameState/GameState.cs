@@ -235,9 +235,16 @@ public class GameState
     }
     public void OnTurnEnd(int turnState)
     {
-         foreach (Item item in _items)
+        foreach (Item item in _items)
         {
             item.OnTurnEnd(turnState);
+        }
+    }
+    public void OnCardAdded(CardInfo card)
+    {
+        foreach (Item item in _items)
+        {
+            item.OnCardAdded(card);
         }
     }
 }

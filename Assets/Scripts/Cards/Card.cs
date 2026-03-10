@@ -158,8 +158,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit);
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
-        _numberText.text=$"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.numberShortName[_cardInfo._number]}</color>";
-        _numberText2.text=$"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.numberShortName[_cardInfo._number]}</color>";
+        _numberText.text=$"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
+        _numberText2.text=$"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
         _isInteractable = IsInteractable;
         _cost = Cost;
         if (_cost > 0)

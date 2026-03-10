@@ -20,6 +20,11 @@ public class TheBreadlineBargain : Item
         GameHandler.Instance.GetGameState()._handSize += 1;
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
         

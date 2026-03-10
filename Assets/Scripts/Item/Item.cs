@@ -35,6 +35,7 @@ public abstract class Item : ScriptableObject
     public abstract void OnActivate();
     public abstract void OnEndEncounter();
     public abstract void OnTurnEnd(int turnState);
+    public abstract void OnCardAdded(CardInfo card);
 
     public bool Activate() 
     {

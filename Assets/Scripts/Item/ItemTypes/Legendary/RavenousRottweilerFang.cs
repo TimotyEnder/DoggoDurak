@@ -20,6 +20,11 @@ class RavenousRottweilerFang : Item
         
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod = "")
     {
         if(amount>1)

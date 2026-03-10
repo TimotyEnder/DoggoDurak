@@ -56,4 +56,9 @@ public class DefaultItem : Item
     {
         
     }
+
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
 }

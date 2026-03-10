@@ -25,7 +25,6 @@ public class DebuffManager
                 }
             }
         }
-        if(card._number==0){return true;}
         if (_playPermissionsCard[card._number].ContainsKey(card._suit))
         {
             return _playPermissionsCard[card._number][card._suit][turnState];
@@ -35,13 +34,14 @@ public class DebuffManager
     public void ResetPermissions() 
     {
         _playPermissionsCard = new Dictionary<int, Dictionary<string, bool[]>>();
-        for(int i=6; i<15; i++)
+        for(int i=0; i<15; i++)
         {
             _playPermissionsCard[i] = new Dictionary<string, bool[]>();
             _playPermissionsCard[i]["C"] = new bool[2]{true, true};
             _playPermissionsCard[i]["D"] = new bool[2]{true, true};
             _playPermissionsCard[i]["H"] = new bool[2]{true, true};
             _playPermissionsCard[i]["S"] = new bool[2]{true, true};
+            _playPermissionsCard[i]["L"] = new bool[2]{true, true};
         }
         _playPermissionsModifier = new Dictionary<string, bool[]>();
         foreach (string modifier in CardInfo.modifierStringToType.Keys)
@@ -139,14 +139,13 @@ public class DebuffManager
                         }
                     }
                     break;
-                    
-                case 'S':
-                    // Spades
+                case 'L':
+                    // All Laikas
                     if(perm.Length > 1)
                     {
                         try
                         {
-                            _playPermissionsCard[int.Parse(perm.Substring(1))]["S"] = new bool[2] { !forPlayer, !forEnemy };
+                            _playPermissionsCard[int.Parse(perm.Substring(1))]["L"] = new bool[2] { !forPlayer, !forEnemy };
                         }
                         catch (Exception)
                         {
@@ -159,9 +158,9 @@ public class DebuffManager
                         for(int i = 6; i < 15; i++)
                         {
                             if (_playPermissionsCard.ContainsKey(i) && 
-                                _playPermissionsCard[i].ContainsKey("S"))
+                                _playPermissionsCard[i].ContainsKey("L"))
                             {
-                                _playPermissionsCard[i]["S"] = new bool[2] { !forPlayer, !forEnemy };
+                                _playPermissionsCard[i]["L"] = new bool[2] { !forPlayer, !forEnemy };
                             }
                         }
                     }

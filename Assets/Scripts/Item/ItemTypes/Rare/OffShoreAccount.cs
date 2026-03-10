@@ -19,6 +19,11 @@ public class OffShoreAccount : Item
         GameHandler.Instance.AddCurrencyCalculator(new ScalerCC());
     }
 
+    public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
     public override void OnDamageOpponent(int amount, string fromMod)
     {
         
