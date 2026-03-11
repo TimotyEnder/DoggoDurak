@@ -406,11 +406,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             Debug.Log("Able to attack");
             PlayCard();
             _opponent.resetDoublePass();
-            if(_cardHandAreaScript.GetCardsInHand()==0)
-            {
-                _passButton.SetJiggle(false);
-                StartCoroutine(_opponent.EnemyPlay());
-            }
             _passButton.SetJiggle(true);
         }
         //Defending, not your turn
@@ -419,11 +414,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             Debug.Log("Able to defend");
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
             _opponent.resetDoublePass();
-            if(_cardHandAreaScript.GetCardsInHand()==0)
-            {
-                _passButton.SetJiggle(false);
-                StartCoroutine(_opponent.EnemyPlay());
-            }
             _passButton.SetJiggle(true);
         }
         //reverse
