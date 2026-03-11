@@ -7,6 +7,7 @@ public class GrilledSteak : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "GrilledSteak";
+        this.itemName="GrilledSteak";
         this.toolTipDesc = "Doubles max health";
     }
 

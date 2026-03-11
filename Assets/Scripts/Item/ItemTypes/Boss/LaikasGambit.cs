@@ -6,7 +6,8 @@ class LaikasGambit : Item
     {
         this.rarity = 3;
         this.boss = true;
-        this.itemId = "Laika's Gambit";
+        this.itemId = "LaikasGambit";
+        this.itemName="Laika's Gambit";
         this.toolTipDesc = $"All {StylisticClass.HighLight} you face cards{StylisticClass.HighLightClose} are now {StylisticClass.Laika}";
     }
 

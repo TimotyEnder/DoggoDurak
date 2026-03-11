@@ -8,7 +8,8 @@ class LaikasNumber : Item
     {
         this.rarity = 1;
         this.boss = false;
-        this.itemId = "Laika's Number";
+        this.itemId = "LaikasNumber";
+        this.itemName="Laika's Number";
         this.toolTipDesc = $"On the {StylisticClass.HighLight}5th turn{StylisticClass.HighLightClose} of an encounter, {StylisticClass.HighLight}add a Laika Card{StylisticClass.HighLightClose} to your deck";
     }
 

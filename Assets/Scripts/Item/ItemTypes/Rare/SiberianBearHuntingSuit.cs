@@ -7,6 +7,7 @@ public class SiberianBearHuntingSuit : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "SiberianBearHuntingSuit";
+        this.itemName="SiberianBearHuntingSuit";
         this.toolTipDesc = "Odd numbered cards gain "+StylisticClass.SpikyColor+StylisticClass.SpikyString+" 1 "+CardInfo.modifierToDescription["Spiky"]+"</color>";
     }
 

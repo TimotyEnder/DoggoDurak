@@ -15,6 +15,7 @@ public abstract class Item : ScriptableObject
     [SerializeField]
     protected bool boss;
     protected string itemId;//serialized already in the item container
+    protected string itemName;
     protected Sprite Icon;
     protected bool isActive;
     protected bool persistent=false;// if true the effect of the item is something that affects the entire turn. important for animations.
@@ -77,14 +78,18 @@ public abstract class Item : ScriptableObject
     {
         return itemId;
     }
+    public string GetName()
+    {
+        return itemName;
+    }
     public string GetItemToolTip() 
     {
-        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+GetSpacedItemId()+"</align></size>\n" +
+        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+GetSpacedItemName()+"</align></size>\n" +
                $"<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+toolTipDesc+"</align></size>";
     }
-    private string GetSpacedItemId() 
+    private string GetSpacedItemName() 
     {
-        return Regex.Replace(this.itemId,
+        return Regex.Replace(this.itemName,
            "([a-z])([A-Z])|([A-Z])([A-Z][a-z])",
            "$1$3 $2$4");
     }

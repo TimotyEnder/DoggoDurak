@@ -8,6 +8,7 @@ public class Balalaika : Item
         this.rarity = 2;
         this.boss = false;
         this.itemId = "Balalaika";
+        this.itemName="Balalaika";
         this._timesDamageDone = 0;
         this.toolTipDesc = "Every third intance of damage you deal is tripled";
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stray'sLuckyCoin", menuName = "Items/Active-Rare/Stray'sLuckyCoin")]
+[CreateAssetMenu(fileName = "StraysLuckyCoin", menuName = "Items/Active-Rare/StraysLuckyCoin")]
 public class StraysLuckyCoin : Item
 {
     private int failPercentage=50;
@@ -9,7 +9,8 @@ public class StraysLuckyCoin : Item
          this.rarity = 1;
         this.boss = false;
         this.isActive=true;
-        this.itemId = "Stray'sLuckyCoin";
+        this.itemId = "StraysLuckyCoin";
+        this.itemName="Stray's Lucky Coin";
         this.persistent=false;
         UpdateToolTip();
     }

@@ -9,6 +9,7 @@ public class Muzzle : Item
         this.isActive=true;
         this.persistent=true;
         this.itemId = "Muzzle";
+        this.itemName="Muzzle";
         this.toolTipDesc =StylisticClass.ActivateString+"opponent cannot play face cards this turn.";
     }
 

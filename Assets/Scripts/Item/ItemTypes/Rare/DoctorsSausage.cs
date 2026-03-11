@@ -7,6 +7,7 @@ public class DoctorsSausage : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "DoctorsSausage";
+        this.itemName="DoctorsSausage";
         this.toolTipDesc = "+1 for each card in your deck";
     }
 

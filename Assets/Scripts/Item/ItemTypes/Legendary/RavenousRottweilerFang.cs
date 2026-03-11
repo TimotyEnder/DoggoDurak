@@ -7,6 +7,7 @@ class RavenousRottweilerFang : Item
         this.rarity = 2;
         this.boss = false;
         this.itemId = "RavenousRottweilerFang";
+        this.itemName="RavenousRottweilerFang";
         this.toolTipDesc = $"When you deal >{StylisticClass.DamageNumber(1)} at once, heal {StylisticClass.HighLight} 1hp{StylisticClass.HighLightClose}";
     }
 

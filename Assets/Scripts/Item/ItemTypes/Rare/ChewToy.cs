@@ -7,6 +7,7 @@ class ChewToy : Item
          this.rarity = 1;
         this.boss = false;
         this.itemId = "ChewToy";
+        this.itemName="ChewToy";
         this.toolTipDesc = $"At the end of each encounter heal {StylisticClass.HighLight}5%{StylisticClass.HighLightClose} hp";
     }
 

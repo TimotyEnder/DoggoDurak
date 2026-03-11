@@ -7,6 +7,7 @@ public class BabushkasSlipper : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "BabushkasSlipper";
+        this.itemName="Babushka's Slipper";
         this.toolTipDesc = "Even numbered cards gain "+StylisticClass.ParryColor+StylisticClass.ParryString+CardInfo.modifierToDescription["Parry"]+"</color>";
     }
 

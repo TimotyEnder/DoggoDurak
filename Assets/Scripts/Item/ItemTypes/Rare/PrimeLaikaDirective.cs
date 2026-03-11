@@ -7,6 +7,7 @@ class PrimeLaikaDirective : Item
          this.rarity = 1;
         this.boss = false;
         this.itemId = "PrimeLaikaDirective";
+        this.itemName="PrimeLaikaDirective";
         this.toolTipDesc = $"All {StylisticClass.HighLight}7s and Jacks{StylisticClass.HighLightClose} become {StylisticClass.Laika} and gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5 {CardInfo.modifierToDescription["Burn"]} </color>";
     }
 

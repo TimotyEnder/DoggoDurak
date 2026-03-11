@@ -7,6 +7,7 @@ public class MolotovKibble : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "MolotovKibble";
+        this.itemName="MolotovKibble";
         this.toolTipDesc = "If you played a card with at least one "+StylisticClass.BurnColor+StylisticClass.BurnString+"</color> modifier there is a 25% chance another card in your draw pile gains "+StylisticClass.BurnColor+StylisticClass.BurnString+" 1"+CardInfo.modifierToDescription["Burn"]+"</color>";
     }
 

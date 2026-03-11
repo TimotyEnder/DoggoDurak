@@ -7,6 +7,7 @@ public class TsarsCrown:Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "TsarsCrown";
+        this.itemName="TsarsCrown";
         this.toolTipDesc = "+1 value to all face cards";
     }
 

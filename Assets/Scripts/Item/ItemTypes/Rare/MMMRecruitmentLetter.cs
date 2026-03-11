@@ -7,6 +7,7 @@ public class MMMRecruitmentLetter : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "MMM RecruitmentLetter";
+        this.itemName="MMM RecruitmentLetter";
         this.toolTipDesc = "For each encounter get a bonus ruble reward for each additional card in your deck";
     }
 

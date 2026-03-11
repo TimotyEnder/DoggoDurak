@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "TheSentinel'sFarewell", menuName = "Items/Active-Legendary/TheSentinel'sFarewell")]
+[CreateAssetMenu(fileName = "TheSentinelsFarewell", menuName = "Items/Active-Legendary/TheSentinelsFarewell")]
 public class TheSentinelsFarewell : Item
 {
     public override void InitItem()
@@ -8,7 +8,8 @@ public class TheSentinelsFarewell : Item
         this.boss = false;
         this.isActive=true;
         this.persistent=true;
-        this.itemId = "TheSentinel'sFarewell";
+        this.itemId = "TheSentinelsFarewell";
+        this.itemName="TheSentinel'sFarewell";
         this.toolTipDesc =StylisticClass.ActivateString+" set your hp to 1, it cannot be lowered this turn.";
     }
 

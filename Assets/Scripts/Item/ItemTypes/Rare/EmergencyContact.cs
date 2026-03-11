@@ -9,6 +9,7 @@ public class EmergencyContact : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "EmergencyContact";
+        this.itemName="EmergencyContact";
         this.toolTipDesc = StylisticClass.ActivateString+" Discard right-most card, draw 1 card and heal 5 hp.";
     }
 

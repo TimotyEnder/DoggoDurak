@@ -6,7 +6,8 @@ class LaikasFavor : Item
     {
         this.rarity = 2;
         this.boss = false;
-        this.itemId = "Laika's Favor";
+        this.itemId = "LaikasFavor";
+        this.itemName="Laika's Favor";
         this.toolTipDesc = $"{StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} have number {StylisticClass.HighLight}1{StylisticClass.HighLightClose}";
     }
 
