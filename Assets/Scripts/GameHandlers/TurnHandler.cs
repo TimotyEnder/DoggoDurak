@@ -23,6 +23,7 @@ public class TurnHandler : MonoBehaviour
     private bool _turnEndStarted=false;
     private Animator _turnIndicatorAnim;
     private TextMeshProUGUI _turnIndicatorText;
+    private  int OldTurnState=0;
     void Awake()
     {
         //initialising
@@ -47,9 +48,9 @@ public class TurnHandler : MonoBehaviour
     void Start()
     {
         //Init Setup
-        InitSetup();
+        _ = InitSetup();
     }
-    private void InitSetup()
+    private async Task InitSetup()
     {
         _turnStateToggle.Toggle();
         _toggled = true;
@@ -59,7 +60,7 @@ public class TurnHandler : MonoBehaviour
         _playerDeck.LoadDeck();
         _playerHp.SetHealth(GameHandler.Instance.GetGameState()._health);
         _opponentHp.SetHealth(GameHandler.Instance.GetCurrEncounter().GetHealth());
-        _ = Turn();
+        await  Turn();
     }
     void Update()
     {
@@ -73,16 +74,7 @@ public class TurnHandler : MonoBehaviour
         _opponent.resetEndTurnFlag();
         await _playerDeck.DrawHand();
         await _opponent.DrawHand();
-        //Change Turn State
-        if (_turnState == 0)
-        {
-            _turnState = 1;
-        }
-        else
-        {
-            _turnState = 0;
-        }
-        if (_turnState == 0)
+        if (OldTurnState == 0)
         {
             if (!_toggled)
             {
@@ -99,16 +91,18 @@ public class TurnHandler : MonoBehaviour
             }
             _opponent.Attack();
         }
+        _turnState=OldTurnState;
     }
-    public void StartEndTurn() 
+    public async Task StartEndTurn() 
     {
         Debug.Log("Start End Turn! Checking if turn end conditions are met! Cards in play: "+_playArea.GetCardsInPlay()+" Has more plays?:"+_playerHand.HasMorePlays());
         if ((_playArea.GetCardsInPlay()>0 || !_playerHand.HasMorePlays()) &&!_turnEndStarted) 
         {
             _turnEndStarted=true;
+            OldTurnState=_turnState;
             StartCoroutine(_opponent.CheckForPlaysRoutine(true));//this is to prevent a turn end inside a turn end.
             //Damage Co-Routine
-            _ = DamageRoutine();
+            await  DamageRoutine();
 
         }
     }
@@ -121,7 +115,16 @@ public class TurnHandler : MonoBehaviour
         await _playArea.Wipe();
         if(!_ruleHandler.isGameStateFinished())
         {
-            _ = Turn();
+            //Change Turn State
+            if (OldTurnState == 0)
+            {
+                OldTurnState = 1;
+            }
+            else
+            {
+                OldTurnState = 0;
+            }
+            await  Turn();
         }
     }
     public int GetTurnState() 
@@ -186,7 +189,7 @@ public class TurnHandler : MonoBehaviour
             GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
             GameHandler.Instance.GetGameState().OnTurnEnd(_turnState);
             await UniTask.Delay(200);
-            _ = FinishEndTurn();
+            await FinishEndTurn();
         }
     }
     public bool IsTurnEnding() 

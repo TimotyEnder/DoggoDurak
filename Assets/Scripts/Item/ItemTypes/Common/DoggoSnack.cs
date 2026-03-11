@@ -7,6 +7,7 @@ public class DoggoSnack : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "DoggoSnack";
+        this.itemName="DoggoSnack";
         this.toolTipDesc = "Increases max health by 10";
     }
 

@@ -7,6 +7,7 @@ public class BabushkasBorsh : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "BabushkasBorsh";
+        this.itemName="BabushkasBorsh";
         this.toolTipDesc = "3 random cards gain "+StylisticClass.RestoringColor+StylisticClass.RestoringString+CardInfo.modifierToDescription["Restoring"]+"</color>";
     }
 

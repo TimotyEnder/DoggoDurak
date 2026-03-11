@@ -98,14 +98,17 @@ public class Discard : MonoBehaviour
     }
     private async Task ReturnCardToDeckVisual(Card c,RectTransform target)
     {
-        Destroy(c.gameObject);
-        GameObject particle = Instantiate(_cardParticlePrefab, this.transform.position, Quaternion.Euler(0, 0, 0), GameObject.FindGameObjectWithTag("Canvas").transform);
-        CardDrawParticle particleScript = particle.GetComponent<CardDrawParticle>();
-        particleScript.SetTarget(target);
-        particleScript.SetSpeedAndAccel(2000,10000f);
-        while (particle != null)
+       if(c!=null)
         {
-            await UniTask.NextFrame();
+            Destroy(c.gameObject);
+            GameObject particle = Instantiate(_cardParticlePrefab, this.transform.position, Quaternion.Euler(0, 0, 0), GameObject.FindGameObjectWithTag("Canvas").transform);
+            CardDrawParticle particleScript = particle.GetComponent<CardDrawParticle>();
+            particleScript.SetTarget(target);
+            particleScript.SetSpeedAndAccel(2000,10000f);
+            while (particle != null)
+            {
+                await UniTask.NextFrame();
+            }
         }
     }
     public void UpdateDiscardContent() 
