@@ -67,8 +67,8 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        _currentEncounter= new DebugEncounter();
-        _currentEncounter.InitiateEncounter();
+        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter.InitiateEncounter();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -102,7 +102,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else

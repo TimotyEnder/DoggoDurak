@@ -63,7 +63,7 @@ public class DeckPanel : MonoBehaviour
     public void Start()
     {
         //On Click config
-        _deckButton.onClick.AddListener(()=> { if(!_deckPanel.activeSelf){ ShowDeck(); }});
+        _deckButton.onClick.AddListener(()=> { if(!_deckPanel.activeSelf){ ShowDeck(); } else {ShrinkDeckPanel();}});
         _deckExitButton.onClick.AddListener(() => ShrinkDeckPanel());
         ClearLists();
     }
