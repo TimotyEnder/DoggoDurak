@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RuleHandler : MonoBehaviour
@@ -50,7 +51,7 @@ public class RuleHandler : MonoBehaviour
     {
         return _trumpSuit;
     }
-    public async void CheckGameState() 
+    public async Task CheckGameState() 
     {
         if(!GameStateFinished)
         {
@@ -72,7 +73,8 @@ public class RuleHandler : MonoBehaviour
                 GameHandler.Instance.GetGameState().OnEndEncounter();
                 _modEffectsSpawn=false;
                 WipeModEffects();
-                GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
+                await _playArea.Wipe();
+                await GameObject.Find("Deck").GetComponent<Deck>().LoadDiscard();
                 //GameObject.Find("Discard").GetComponent<Discard>().WipeDiscard();  maybe replace by discard cards returning to the deck one by one?
                 _playerHp.reportHealth(); //this has to happen before reward because CurrencyCalculators rely on _health being already updated!
                 if(_opponentHp.GetHealth()<=0 && GameHandler.Instance.GetGameState()._loseToWin)
@@ -81,7 +83,6 @@ public class RuleHandler : MonoBehaviour
                 }
                 GameHandler.Instance.GenerateReward();
                 _endMatchScreen.SetActive(true);
-                _playArea.Wipe();
                 _endMatchScreen.GetComponent<Animator>().SetTrigger("Extend");
                 _victory.SetActive(true);
                 _rewardItemGrid.SetRewardGrid();

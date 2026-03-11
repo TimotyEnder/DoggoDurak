@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasFavor>();
+        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasGambit>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
@@ -198,7 +198,7 @@ public class GameHandler : MonoBehaviour
                     for(int i=0;i<times; i++)
                     {
                         GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-                        GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                        await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
                         await UniTask.Delay(100);
                     }
                 }
@@ -234,7 +234,7 @@ public class GameHandler : MonoBehaviour
                     GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponentsDamageReduction);
                     if(checkMatchEnd)
                     {
-                          GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+                          await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
                     }
                     await UniTask.Delay(100);
                 }
@@ -273,7 +273,7 @@ public class GameHandler : MonoBehaviour
                         GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
                        if(checkMatchEnd)
                         {
-                             GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                             await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
                         }
                         await UniTask.Delay(100);
                     }

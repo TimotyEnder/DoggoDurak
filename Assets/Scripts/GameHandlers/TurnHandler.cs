@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -58,16 +59,16 @@ public class TurnHandler : MonoBehaviour
         _playerDeck.LoadDeck();
         _playerHp.SetHealth(GameHandler.Instance.GetGameState()._health);
         _opponentHp.SetHealth(GameHandler.Instance.GetCurrEncounter().GetHealth());
-        Turn();
+        _ = Turn();
     }
     void Update()
     {
         
     }
-    void Turn() 
+    async Task Turn() 
     {
         TurnIndicatorLaunch();
-        _ruleHandler.CheckGameState();
+        await _ruleHandler.CheckGameState();
         GameHandler.Instance.EncounterSetDebuffs();
         _opponent.resetEndTurnFlag();
         _playerDeck.DrawHand();
@@ -99,7 +100,7 @@ public class TurnHandler : MonoBehaviour
             _turnEndStarted=true;
             StartCoroutine(_opponent.CheckForPlaysRoutine(true));//this is to prevent a turn end inside a turn end.
             //Damage Co-Routine
-            StartCoroutine(DamageRoutine());
+            _ = DamageRoutine();
 
         }
     }
@@ -120,7 +121,10 @@ public class TurnHandler : MonoBehaviour
         {
             _turnState = 0;
         }
-        Turn();
+        if(!_ruleHandler.isGameStateFinished())
+        {
+            _ = Turn();
+        }
     }
     public int GetTurnState() 
     {
@@ -153,7 +157,7 @@ public class TurnHandler : MonoBehaviour
             }
         }
     }
-    private IEnumerator DamageRoutine() 
+    private async Task DamageRoutine() 
     {
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
@@ -173,18 +177,18 @@ public class TurnHandler : MonoBehaviour
                 {
                     GameHandler.Instance.DamageOpponent(damage, checkMatchEnd:false);
                 }
-                yield return new WaitForSeconds(0.8f);
+                await UniTask.Delay(800);
                 card.SetAnimatable(false);
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }
         }
-        _ruleHandler.CheckGameState();
+        await _ruleHandler.CheckGameState();
         if(!_ruleHandler.isGameStateFinished()){
-            yield return new WaitForSeconds(0.2f);
+            await UniTask.Delay(200);
             GameHandler.Instance.GetCurrEncounter().OnTurnEnd(_turnState);
             GameHandler.Instance.GetGameState().OnTurnEnd(_turnState);
-            yield return new WaitForSeconds(0.2f);
-            FinishEndTurn();
+            await UniTask.Delay(200);
+            _ = FinishEndTurn();
         }
     }
     public bool IsTurnEnding() 

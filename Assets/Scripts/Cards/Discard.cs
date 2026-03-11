@@ -63,10 +63,11 @@ public class Discard : MonoBehaviour
             returnList= new List<Card>();
         }
         List<Task> tasks= new List<Task>();
+        int calcDelay= 1000/_playerCards.Count;
         foreach(Card c in _opponentCards)
         {
             tasks.Add(ReturnCardToDeckVisual(c,_returnCardsHereOpponent));
-            await UniTask.Delay(100);
+            await UniTask.Delay(calcDelay);
         }
         await Task.WhenAll(tasks);
         _opponentCards=new List<Card>();
@@ -85,10 +86,11 @@ public class Discard : MonoBehaviour
             returnList= new List<Card>();
         }
         List<Task> tasks= new List<Task>();
+        int calcDelay= 1000/_playerCards.Count;
         foreach(Card c in _playerCards)
         {
             tasks.Add(ReturnCardToDeckVisual(c,_returnCardsHerePlayer));
-            await UniTask.Delay(100);
+            await UniTask.Delay(calcDelay);
         }
         await Task.WhenAll(tasks);
         _playerCards=new List<Card>();

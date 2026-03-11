@@ -4,7 +4,7 @@ class LaikasFavor : Item
 {
     public override void InitItem()
     {
-         this.rarity = 2;
+        this.rarity = 2;
         this.boss = false;
         this.itemId = "Laika's Favor";
         this.toolTipDesc = $"{StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} have number {StylisticClass.HighLight}1{StylisticClass.HighLightClose}";

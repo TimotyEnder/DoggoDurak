@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class StylisticClass
 {
-    public static Color BossItem = new Color(0.345098f, 0, 0.022939f);
+    public static Color BossItem = new Color(1, 0.173f, 0.227f);
     public static Color CommonItem = new Color(0.003921569f, 0.2941177f, 0);
     public static Color RareItem = new Color(0, 0.165f, 0.58f);
     public static Color LegendaryItem = new Color(0.345098f, 0.2784314f, 0);
