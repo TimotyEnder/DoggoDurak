@@ -13,25 +13,25 @@ public class DebugEncounter : Encounter
                 case 0:
                     for (int j = 11; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("C", 6, true));
+                        //deck.Add(new CardInfo("C", 6, true));
                     }
                     break;
                 case 1:
                     for (int j = 11; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("S", 6, true));
+                        //deck.Add(new CardInfo("S", 6, true));
                     }
                     break;
                 case 2:
                     for (int j = 11; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("D", 6, true));
+                        //deck.Add(new CardInfo("D", 6, true));
                     }
                     break;
                 case 3:
                     for (int j = 11; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("H", 6, true));
+                        deck.Add(new CardInfo("L", 6, true));
                     }
                     break;
             }

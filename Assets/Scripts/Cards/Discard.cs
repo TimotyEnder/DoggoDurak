@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +22,12 @@ public class Discard : MonoBehaviour
     private GameObject _opponentDiscardContent;
     [SerializeField]
     private GameObject _cardPrefab;
+    [SerializeField]
+    private GameObject _cardParticlePrefab;
+    [SerializeField]
+    private RectTransform _returnCardsHerePlayer;
+    [SerializeField]
+    private RectTransform _returnCardsHereOpponent;
     public void Start()
     {
         _opponentCards = new List<Card>();
@@ -43,18 +51,28 @@ public class Discard : MonoBehaviour
             Destroy(c.gameObject);
         }
     }   
-    public List<Card> GetOpponentDiscard() 
+    public async  Task<List<Card>> GetOpponentDiscard() 
     {
-        // Create a new list with the same elements (shallow copy)
-        List<Card> returnList = new List<Card>(_opponentCards);
-
-        // Clear the original list
-        _opponentCards.Clear();
-
-
+        List<Card> returnList;
+        if(_opponentCards!=null)
+        { 
+             returnList= new List<Card>(_opponentCards);
+        }
+        else
+        {
+            returnList= new List<Card>();
+        }
+        List<Task> tasks= new List<Task>();
+        foreach(Card c in _opponentCards)
+        {
+            tasks.Add(ReturnCardToDeckVisual(c,_returnCardsHereOpponent));
+            await UniTask.Delay(100);
+        }
+        await Task.WhenAll(tasks);
+        _opponentCards=new List<Card>();
         return returnList;
     }
-    public List<Card> GetPlayerDiscard()
+    public async  Task<List<Card>> GetPlayerDiscard()
     {
         // Create a new list with the same elements (shallow copy)
         List<Card> returnList;
@@ -66,7 +84,27 @@ public class Discard : MonoBehaviour
         {
             returnList= new List<Card>();
         }
+        List<Task> tasks= new List<Task>();
+        foreach(Card c in _playerCards)
+        {
+            tasks.Add(ReturnCardToDeckVisual(c,_returnCardsHerePlayer));
+            await UniTask.Delay(100);
+        }
+        await Task.WhenAll(tasks);
+        _playerCards=new List<Card>();
         return returnList;
+    }
+    private async Task ReturnCardToDeckVisual(Card c,RectTransform target)
+    {
+        Destroy(c.gameObject);
+        GameObject particle = Instantiate(_cardParticlePrefab, this.transform.position, Quaternion.Euler(0, 0, 0), GameObject.FindGameObjectWithTag("Canvas").transform);
+        CardDrawParticle particleScript = particle.GetComponent<CardDrawParticle>();
+        particleScript.SetTarget(target);
+        particleScript.SetSpeedAndAccel(2000,10000f);
+        while (particle != null)
+        {
+            await UniTask.NextFrame();
+        }
     }
     public void UpdateDiscardContent() 
     {

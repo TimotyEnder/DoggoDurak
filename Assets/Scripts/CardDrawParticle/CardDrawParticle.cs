@@ -22,6 +22,11 @@ public class CardDrawParticle : MonoBehaviour
         _initPos = _myRect.anchoredPosition;
         _prevPos = _initPos;
     }
+    public void SetSpeedAndAccel(float speed, float accel)
+    {
+        this._currentSpeed=speed;
+        this._acceleration=accel;
+    }
 
     void Update()
     {

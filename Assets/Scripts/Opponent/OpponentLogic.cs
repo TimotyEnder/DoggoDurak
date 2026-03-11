@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using NUnit.Framework;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -64,10 +62,10 @@ public class OpponentLogic : MonoBehaviour
     {
         _deck.Add(card);
     }
-    public void LoadDiscard()
+    public async Task LoadDiscard()
     {
         _deck = new List<CardInfo>();
-        foreach(Card c in _discard.GetOpponentDiscard())
+        foreach(Card c in await _discard.GetOpponentDiscard())
         {
             _deck.Add(c.GetCardInfo());
         }
@@ -170,7 +168,7 @@ public class OpponentLogic : MonoBehaviour
         CardToAttack.GetComponent<Card>().PlayCard();
         AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+lowerCard.CompileCondencedModifiers());
     }
-    public  IEnumerator DrawHandRoutine()
+    public  async void DrawHand()
     {
         Debug.Log("Drawing handsize: "+GameHandler.Instance.GetGameState()._enemyHandSize);
         int toDraw = GameHandler.Instance.GetGameState()._enemyHandSize - _hand.Count;
@@ -178,26 +176,35 @@ public class OpponentLogic : MonoBehaviour
         {
             if (_deck.Count > 0)
             {
-                Draw();
-                _handUI.AddCard();
+                if(Draw())
+                {
+                   _handUI.AddCard();
+                }
             }
             else 
             {
-                LoadDiscard();
-                Draw();
-                _handUI.AddCard();
+                await LoadDiscard();
+                if(Draw())
+                {
+                   _handUI.AddCard();
+                }
             }
-            yield return new WaitForSeconds(0.1f);
+            await UniTask.Delay(100);
         }
     }
-    void Draw()
+    bool Draw()
     {
         //CardInfo handling
         int cardDrawIndex = Random.Range(0, _deck.Count);
-        CardInfo cardtoDraw = _deck[cardDrawIndex];
-        _deck.Remove(cardtoDraw);
-        _hand.Add(cardtoDraw);
-        GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
+        if(_deck.Count>0)
+        {
+            CardInfo cardtoDraw = _deck[cardDrawIndex];
+            _deck.Remove(cardtoDraw);
+            _hand.Add(cardtoDraw);
+            GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
+            return true;
+        }
+        return false;
     }
     public void Discard() 
     {

@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
@@ -580,7 +581,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         return _defended;   
     }
-    public void MoveTowardsDiscard(bool countAsPlayedDiscard=false)
+    public async Task MoveTowardsDiscard(bool countAsPlayedDiscard=false)
     {
         if(countAsPlayedDiscard)
         {
@@ -591,11 +592,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         UnityEngine.Quaternion rotation = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetRandomRotation();  
         GetComponent<ToolTip>().SetTooltipActiveState(false);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>()); 
-        StartCoroutine(MoveTowardsCoroutine(target, rotation));
+        await MoveTowardsCoroutine(target, rotation);
     }
-    private IEnumerator MoveTowardsCoroutine(Vector2 target, UnityEngine.Quaternion? rotation=null)
+    private async Task MoveTowardsCoroutine(Vector2 target, UnityEngine.Quaternion? rotation=null,bool dieAfterReaching=false)
     {
-        float speed = 2000f;
+        float speed = 2500f;
         while (Vector2.Distance(_cardRect.anchoredPosition, target) > 0.01f)
         {
             float distance = Vector2.Distance(_cardRect.anchoredPosition, target);
@@ -608,12 +609,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             }
             
             _cardRect.anchoredPosition = Vector2.MoveTowards(_cardRect.anchoredPosition, target, step);
-            yield return null;
+            await UniTask.NextFrame();
         }
         _cardRect.SetAsFirstSibling();
         if (rotation != null)
         {
             _cardRect.rotation = (UnityEngine.Quaternion)rotation;
+        }
+        if(dieAfterReaching)
+        {
+            Destroy(this.gameObject);
         }
     }
     public void OnPointerClick(PointerEventData eventData) //this is to handle buyable cards

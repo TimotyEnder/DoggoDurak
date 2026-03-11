@@ -1,13 +1,11 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 using System;
-using UnityEngine.UI;
+using System.Threading.Tasks;
 using TMPro;
+using Cysharp.Threading.Tasks;
 
 
 public class Deck : MonoBehaviour
@@ -64,10 +62,10 @@ public class Deck : MonoBehaviour
     {
         _deck.Add(card);
     }
-    public void LoadDiscard()
+    public async Task LoadDiscard()
     {
         _deck = new List<CardInfo>();
-        foreach(Card c in _discard.GetPlayerDiscard())
+        foreach(Card c in await _discard.GetPlayerDiscard())
         {
             _deck.Add(c.GetCardInfo());
         }
@@ -76,19 +74,22 @@ public class Deck : MonoBehaviour
     {
         // CardInfo handling
         int cardDrawIndex = UnityEngine.Random.Range(0, _deck.Count);
-        CardInfo cardtoDraw = _deck[cardDrawIndex];
-        GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
-        _deck.Remove(cardtoDraw);
-        
-        UpdateDeckSizeText();  
-
-        // Card draw particle with callback
-        RectTransform target = GameObject.Find("DrawToHere").GetComponent<RectTransform>();
-        StartCoroutine(DrawParticleRoutine(target, () => 
+        if(_deck.Count>0)
         {
-            // This callback runs after the coroutine completes
-            OnDrawParticleComplete(cardtoDraw);
-        }));
+            CardInfo cardtoDraw = _deck[cardDrawIndex];
+            GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
+            _deck.Remove(cardtoDraw);
+            
+            UpdateDeckSizeText();  
+
+            // Card draw particle with callback
+            RectTransform target = GameObject.Find("DrawToHere").GetComponent<RectTransform>();
+            StartCoroutine(DrawParticleRoutine(target, () => 
+            {
+                // This callback runs after the coroutine completes
+                OnDrawParticleComplete(cardtoDraw);
+            }));
+        }
     }
 
     private void OnDrawParticleComplete(CardInfo cardtoDraw)
@@ -113,7 +114,7 @@ public class Deck : MonoBehaviour
         }
         onComplete?.Invoke();
     }
-    public IEnumerator DrawHandRoutine() 
+    public async void DrawHand()
     {
         CardHandArea cardHand= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         int  toDraw= GameHandler.Instance.GetGameState()._handSize - cardHand.GetCardsInHand(); 
@@ -125,10 +126,10 @@ public class Deck : MonoBehaviour
             }
             else 
             {
-                LoadDiscard();
+                await LoadDiscard();
                 Draw();
             }
-            yield return new WaitForSeconds(0.1f);
+            await UniTask.Delay(100);
         }
     }
 }

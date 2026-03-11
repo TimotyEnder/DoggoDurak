@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using TMPro;
-using Unity.VisualScripting;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayArea : MonoBehaviour
 {
@@ -218,7 +216,7 @@ public class PlayArea : MonoBehaviour
         }
         return false;
     }
-    public void Wipe() 
+    public async Task Wipe() 
     {
         foreach (Card card in _cardsDefendedWith) 
         {
@@ -241,11 +239,12 @@ public class PlayArea : MonoBehaviour
         {
             cardsToMove.Add(child.gameObject.GetComponent<Card>());
         }
-
+        var moveTasks = new List<Task>();
         foreach (Card card in cardsToMove)
         {
-            card.MoveTowardsDiscard(true); //this makes on played card discard trigger
+            moveTasks.Add(card.MoveTowardsDiscard(true)); //this makes on played card discard trigger
         }
+        await Task.WhenAll(moveTasks);
     }
     public void RealignDefendingCards()
     {

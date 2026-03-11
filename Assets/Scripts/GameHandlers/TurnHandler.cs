@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -69,8 +70,8 @@ public class TurnHandler : MonoBehaviour
         _ruleHandler.CheckGameState();
         GameHandler.Instance.EncounterSetDebuffs();
         _opponent.resetEndTurnFlag();
-        StartCoroutine(_playerDeck.DrawHandRoutine());
-        StartCoroutine(_opponent.DrawHandRoutine());
+        _playerDeck.DrawHand();
+        _opponent.DrawHand();
         if (_turnState == 0)
         {
             if (!_toggled)
@@ -102,11 +103,11 @@ public class TurnHandler : MonoBehaviour
 
         }
     }
-    public void FinishEndTurn() 
+    public async Task FinishEndTurn() 
     {
         //Wipe Cards
         _turnEndStarted=false;
-        _playArea.Wipe();
+        await _playArea.Wipe();
         GameHandler.Instance.ResetDebuffs();
 
         GameHandler.Instance.ResetPersistentItems();
