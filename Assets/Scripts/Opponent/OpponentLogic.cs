@@ -208,7 +208,7 @@ public class OpponentLogic : MonoBehaviour
         CardToAttack.GetComponent<Card>().PlayCard();
         AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+lowerCard.CompileCondencedModifiers());
     }
-    public  async void DrawHand()
+    public  async Task DrawHand()
     {
         Debug.Log("Drawing handsize: "+GameHandler.Instance.GetGameState()._enemyHandSize);
         int toDraw = GameHandler.Instance.GetGameState()._enemyHandSize - _hand.Count;
