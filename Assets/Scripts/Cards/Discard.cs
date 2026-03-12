@@ -63,7 +63,7 @@ public class Discard : MonoBehaviour
             returnList= new List<Card>();
         }
         List<Task> tasks= new List<Task>();
-        int calcDelay= 1000/_playerCards.Count;
+        int calcDelay= 1000/_opponentCards.Count;
         foreach(Card c in _opponentCards)
         {
             tasks.Add(ReturnCardToDeckVisual(c,_returnCardsHereOpponent));

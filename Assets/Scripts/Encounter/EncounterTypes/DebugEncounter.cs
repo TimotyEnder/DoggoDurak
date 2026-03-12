@@ -13,7 +13,7 @@ public class DebugEncounter : Encounter
                 case 0:
                     for (int j = 11; j < 15; j++)
                     {
-                        //deck.Add(new CardInfo("C", 6, true));
+                        deck.Add(new CardInfo("C", 6, true));
                     }
                     break;
                 case 1:
@@ -31,7 +31,7 @@ public class DebugEncounter : Encounter
                 case 3:
                     for (int j = 11; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("L", 6, true));
+                        //deck.Add(new CardInfo("L", 6, true));
                     }
                     break;
             }
@@ -42,6 +42,10 @@ public class DebugEncounter : Encounter
         icon = null;
         boss = false;
         day = 0;
+        foreach(CardInfo c in deck)
+        {
+        c.AddModifier("Spiky");
+        }
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)
