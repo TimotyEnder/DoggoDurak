@@ -181,7 +181,7 @@ public class CardHandArea : MonoBehaviour
     {
         foreach(Card card in this._cards)
         {
-            card.CheckPlayPermission();
+            card.CheckDebuffVisual();
         }
     }
     public bool HasMorePlays() 

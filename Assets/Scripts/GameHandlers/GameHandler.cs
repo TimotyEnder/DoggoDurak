@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasContact>();
-        //debugItem2.InitItem();
-        //_state.AddItem(debugItem2);
+        Item debugItem2 = ScriptableObject.CreateInstance<PrisonerTransfer>();
+        debugItem2.InitItem();
+        _state.AddItem(debugItem2);
         //_state._rubles=100; //debug
         //_currentEncounter= new SpikedShepherded();
         //_currentEncounter.InitiateEncounter();

@@ -26,7 +26,7 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
     }
     public void SelectColor()
     {
-         switch (_item.GetRarity())
+        switch (_item.GetRarity())
         {
             case 0:
                 _bgColor.color = StylisticClass.CommonItem;
@@ -40,6 +40,10 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
             case 3:
                 _bgColor.color = StylisticClass.BossItem;
                 break;
+        }
+        if(_item.hasBeenActivated())
+        {
+            _bgColor.color=Color.gray;
         }
     }
     public void OnPointerClick(PointerEventData eventData)

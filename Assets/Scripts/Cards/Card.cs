@@ -170,7 +170,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _costText.text = _cost.ToString()+_costText.text[_costText.text.Length-1];
         }
         UpdateModifiers();
-        CheckPlayPermission();
+        CheckDebuffVisual();
         _cardRect.localScale = Vector3.one;
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
@@ -205,7 +205,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _grey=false;
         _cardImage.GetComponent<Image>().color = Color.white;
     }
-    public void CheckPlayPermission()
+    public void CheckDebuffVisual()
     {
        if(_cardInfo._opponentCard)
         {
