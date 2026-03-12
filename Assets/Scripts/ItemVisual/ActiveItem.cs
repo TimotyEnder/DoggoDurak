@@ -43,7 +43,7 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
         }
         if(_item.hasBeenActivated())
         {
-            _bgColor.color=Color.gray;
+            _bgColor.color=new Color(_bgColor.color.r,_bgColor.color.g,_bgColor.color.b,0.5f);
         }
     }
     public void OnPointerClick(PointerEventData eventData)
