@@ -71,94 +71,25 @@ public class OpponentLogic : MonoBehaviour
         }
     }
     //check once for available plays
-    private void AttackWithCard(CardInfo cardInHand)
-    {
-        _hand.Remove(cardInHand);
-        _handUI.RemoveCard();
-        GameObject CardToAttack = Instantiate(cardMaker);
-        CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
-        CardToAttack.GetComponent<Card>().PlayCard();
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
-        _noResponse=false;
-    }
-    private void ReverseWithCard(CardInfo cardInHand)
-    {
-        _hand.Remove(cardInHand);
-        _handUI.RemoveCard();
-        GameObject CardToReverse = Instantiate(cardMaker);
-        CardToReverse.GetComponent<Card>().MakeCard(cardInHand);
-        CardToReverse.GetComponent<Card>().PlayCard();
-        CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
-        GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
-        _justReverse=true;
-        _turnHandler.Reverse();
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
-        _noResponse=false;
-    }
-    private void DefendWithCard(Card defended, CardInfo chosenToDefend)
-    {
-        
-        _hand.Remove(chosenToDefend);
-        _handUI.RemoveCard();
-        GameObject CardToDefend = Instantiate(cardMaker);
-        CardToDefend.GetComponent<Card>().MakeCard(chosenToDefend);
-        CardToDefend.GetComponent<Card>().DefendCard(defended);
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ defended.GetCardInfo().CompileCardName() +defended.GetCardInfo().CompileCardName()+ " with: "+chosenToDefend.CompileCardName()+chosenToDefend.CompileCondencedModifiers());
-        _noResponse=false;
-    }
-    private CardInfo ChooseBestAtkCard(List<CardInfo> opt)
-    {
-        opt.Sort((a, b) => a._number.CompareTo(b._number));
-        CardInfo choice=opt[0];
-        foreach (CardInfo c in opt)
-        {
-            if(c._modifierStacks.ContainsKey("Spiky")||c._modifierStacks.ContainsKey("Burn")||(choice._suit==_ruleHandler.GetTrumpSuit() && c._suit!=_ruleHandler.GetTrumpSuit()))
-            {
-                return c;
-            }
-        }
-        return choice;
-    }
-    private CardInfo ChooseBestDefCard(List<CardInfo> opt)
-    {
-        opt.Sort((a, b) => a._number.CompareTo(b._number));
-        CardInfo choice=opt[0];
-        foreach (CardInfo c in opt)
-        {
-            if(c._modifierStacks.ContainsKey("Restoring")||c._modifierStacks.ContainsKey("Bounce")||(choice._suit==_ruleHandler.GetTrumpSuit() && c._suit!=_ruleHandler.GetTrumpSuit()))
-            {
-                return c;
-            }
-        }
-        return choice;
-    }
-    private CardInfo ChooseBestRevCard(List<CardInfo> opt)
-    {
-        opt.Sort((a, b) => a._number.CompareTo(b._number));
-        CardInfo choice=opt[0];
-        foreach (CardInfo c in opt)
-        {
-            if(c._modifierStacks.ContainsKey("Parry")||(choice._suit==_ruleHandler.GetTrumpSuit() && c._suit!=_ruleHandler.GetTrumpSuit()))
-            {
-                return c;
-            }
-        }
-        return choice;
-    }
     bool CheckPlay() 
     {
         //if Enemy attacking check for available attacks
         if (_turnHandler.GetTurnState() > 0)
         {
-            List<CardInfo> atkOpt=new List<CardInfo>();
             foreach (CardInfo cardInHand in _hand)
             {
                 if (_playArea.CanAttackWithCard(cardInHand))
                 {
-                    atkOpt.Add(cardInHand);
+                    _hand.Remove(cardInHand);
+                    _handUI.RemoveCard();
+                    GameObject CardToAttack = Instantiate(cardMaker);
+                    CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
+                    CardToAttack.GetComponent<Card>().PlayCard();
+                    AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
+                    _noResponse=false;
+                    return true;
                 }
             }
-            if(atkOpt.Count>0) {AttackWithCard(ChooseBestAtkCard(atkOpt));}
             return false;
         }
         else
@@ -167,30 +98,48 @@ public class OpponentLogic : MonoBehaviour
             {
                 if (!card.IsDefended())
                 {
-                    List<CardInfo> defOpt=new List<CardInfo>();
-                    List<CardInfo> revOpt= new List<CardInfo>();
+                    CardInfo smallestCardThatDefends = null;
                     foreach (CardInfo cardInHand in _hand)
                     {   
                         Debug.Log("Can play card to defend? "+GameHandler.Instance.IsCardnotDebuffed(cardInHand,1) + " Can card defend? "+ _playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()));
                         //reverse if possible
                         if (_playArea.CanReverseWithCard(cardInHand))
                         {
-                            revOpt.Add(cardInHand);
+                            _hand.Remove(cardInHand);
+                            _handUI.RemoveCard();
+                            GameObject CardToReverse = Instantiate(cardMaker);
+                            CardToReverse.GetComponent<Card>().MakeCard(cardInHand);
+                            CardToReverse.GetComponent<Card>().PlayCard();
+                            CardToReverse.GetComponent<Card>().GetCardInfo().OnReverse(CardToReverse.GetComponent<Card>());
+                            GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
+                            _justReverse=true;
+                            _turnHandler.Reverse();
+                            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
+                            _noResponse=false;
+                            return true;
                         }
                         //Defending if cannot reverse
                         else if (_playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()) && GameHandler.Instance.IsCardnotDebuffed(cardInHand,1))
                         {
-                            defOpt.Add(cardInHand);
+                            if (smallestCardThatDefends == null)
+                            {
+                                smallestCardThatDefends = cardInHand;
+                            }
+                            else if (smallestCardThatDefends._number > cardInHand._number)
+                            {
+                                smallestCardThatDefends = cardInHand;
+                            }
                         }
                     }
-                    if(revOpt.Count>0)
+                    if (smallestCardThatDefends != null)
                     {
-                        ReverseWithCard(ChooseBestRevCard(revOpt));
-                        return true;
-                    }
-                    else if (defOpt.Count>0)
-                    {
-                        DefendWithCard(card,ChooseBestDefCard(defOpt));
+                        _hand.Remove(smallestCardThatDefends);
+                        _handUI.RemoveCard();
+                        GameObject CardToDefend = Instantiate(cardMaker);
+                        CardToDefend.GetComponent<Card>().MakeCard(smallestCardThatDefends);
+                        CardToDefend.GetComponent<Card>().DefendCard(card);
+                        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ card.GetCardInfo().CompileCardName() +card.GetCardInfo().CompileCardName()+ " with: "+smallestCardThatDefends.CompileCardName()+smallestCardThatDefends.CompileCondencedModifiers());
+                        _noResponse=false;
                         return true;
                     }
                     return false;
@@ -202,7 +151,18 @@ public class OpponentLogic : MonoBehaviour
     public void Attack() 
     {
         WipeResponseText();
-        CardInfo lowerCard = ChooseBestAtkCard(_hand);
+        CardInfo lowerCard = _hand[0];
+        foreach(CardInfo card in _hand) 
+        {
+            if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.IsCardnotDebuffed(lowerCard,1) && GameHandler.Instance.IsCardnotDebuffed(card,1))
+            {
+            lowerCard = card;
+            }
+            else if (card._number < lowerCard._number) 
+            {
+                lowerCard = card;
+            }
+        }
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
         CardToAttack.GetComponent<Card>().PlayCard();
