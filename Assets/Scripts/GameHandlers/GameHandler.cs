@@ -63,9 +63,12 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<OligarchsPrestige>();
+        Item debugItem2 = ScriptableObject.CreateInstance<OligarchsPrerogative>();
         debugItem2.InitItem();
         _state.AddItem(debugItem2);
+        Item debugItem = ScriptableObject.CreateInstance<TheIronCurtain>();
+        debugItem.InitItem();
+        _state.AddItem(debugItem);
         //_state._rubles=100; //debug
         //_currentEncounter= new SpikedShepherded();
         //_currentEncounter.InitiateEncounter();

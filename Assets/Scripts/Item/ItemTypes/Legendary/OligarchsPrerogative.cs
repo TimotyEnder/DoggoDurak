@@ -1,15 +1,16 @@
+using System.Diagnostics;
 using UnityEngine;
-[CreateAssetMenu(fileName = "PrisonerTransfer", menuName = "Items/Active-Rare/PrisonerTransfer")]
-class PrisonerTransfer : Item
+[CreateAssetMenu(fileName = "OligarchsPrerogative", menuName = "Items/Active-Legendary/OligarchsPrerogative")]
+class OligarchsPrerogative : Item
 {
     public override void InitItem()
     {
-        this.rarity = 1;
+        this.rarity = 2;
         this.boss = false;
         this.isActive=true;
-        this.itemId = "PrisonerTransfer";
-        this.itemName="Prisoner Transfer";
-        this.toolTipDesc = $"{StylisticClass.ActivateString} Until the end of the turn, {StylisticClass.HighLight}debuffed cards{StylisticClass.HighLightClose} are no longer {StylisticClass.HighLight}debuffed{StylisticClass.HighLightClose}, and cards that are not {StylisticClass.HighLight}debuffed{StylisticClass.HighLightClose} become {StylisticClass.Debuffed}"; 
+        this.itemId = "OligarchsPrerogative";
+        this.itemName="Oligarch's Prerogative";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}All{StylisticClass.HighLightClose} cards in your hand lose {StylisticClass.Debuffed} until the end of the turn";
     }
 
     public override void OnActivate()
@@ -17,14 +18,7 @@ class PrisonerTransfer : Item
         for(int i=0;i<GameHandler.Instance.GetPlayerCardsInHand();i++)
         {
             CardInfo card= GameHandler.Instance.GetCardInHand(i);
-            if(GameHandler.Instance.IsCardnotDebuffed(card,0))
-            {
-                GameHandler.Instance.SetDebuffs(new string[]{$"{card._suit}{card._number}"},true,GameHandler.Instance.IsCardnotDebuffed(card,1));
-            }
-            else
-            {
-                GameHandler.Instance.SetDebuffs(new string[]{$"{card._suit}{card._number}"},false,GameHandler.Instance.IsCardnotDebuffed(card,1));
-            }
+            GameHandler.Instance.SetDebuffs(new string[]{$"{card._suit}{card._number}"},false,GameHandler.Instance.IsCardnotDebuffed(card,1));
             card._card.CheckDebuffVisual();
             card._card.Bling();
         }
