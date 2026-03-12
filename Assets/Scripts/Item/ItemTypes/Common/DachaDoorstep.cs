@@ -9,6 +9,7 @@ public class DachaDoorstep : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "DachaDoorstep";
+        this.itemName="DachaDoorstep";
         this.toolTipDesc = "3 random cards gain "+StylisticClass.BounceColor+StylisticClass.BounceString+CardInfo.modifierToDescription["Bounce"]+"</color>";
     }
 

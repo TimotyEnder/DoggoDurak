@@ -9,7 +9,7 @@ public class TheRedTape : Item
         this.boss = false;
         this.isActive=true;
         this.itemId = "TheRedTape";
-        this.itemName="TsarsCrown";
+        this.itemName="TheRedTape";
         this.persistent=true;
         this.toolTipDesc = StylisticClass.ActivateString+CardInfo.suitToColorToolText["H"]+" Hearts cannot be played this turn.";
     }

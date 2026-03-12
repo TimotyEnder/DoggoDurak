@@ -139,8 +139,34 @@ public class DebuffManager
                         }
                     }
                     break;
+                case 'S':
+                    // A spade
+                    if(perm.Length > 1)
+                    {
+                        try
+                        {
+                            _playPermissionsCard[int.Parse(perm.Substring(1))]["S"] = new bool[2] { !forPlayer, !forEnemy };
+                        }
+                        catch (Exception)
+                        {
+                            //just do nothing
+                        }
+                    }
+                    //all Spades
+                    else
+                    {
+                        for(int i = 6; i < 15; i++)
+                        {
+                            if (_playPermissionsCard.ContainsKey(i) && 
+                                _playPermissionsCard[i].ContainsKey("S"))
+                            {
+                                _playPermissionsCard[i]["S"] = new bool[2] { !forPlayer, !forEnemy };
+                            }
+                        }
+                    }
+                    break;
                 case 'L':
-                    // All Laikas
+                    // A laika
                     if(perm.Length > 1)
                     {
                         try
@@ -152,7 +178,7 @@ public class DebuffManager
                             //just do nothing
                         }
                     }
-                    //all Spades
+                    //all Laikas
                     else
                     {
                         for(int i = 6; i < 15; i++)

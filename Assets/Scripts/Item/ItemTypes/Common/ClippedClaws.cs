@@ -7,6 +7,7 @@ public class ClippedClaws : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "ClippedClaws";
+        this.itemName="ClippedClaws";
         this.toolTipDesc = "5 random cards gain "+StylisticClass.SpikyColor+StylisticClass.SpikyString+" 1"+CardInfo.modifierToDescription["Spiky"]+"</color>";
     }
 
