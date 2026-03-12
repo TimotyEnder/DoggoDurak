@@ -47,26 +47,11 @@ public class TheTroikaTerror : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        int inst=instance++;
-        if(inst==3)
-        {
-            instance=0;
-            GameHandler.Instance.DamageOpponent(amount,true,times:2);
-        }
-        UpdateRules();
-        ShakeRule(0);
+        
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
-        int inst=instance++;
-        UpdateRules();
-        if(inst==3)
-        {
-            instance=0;
-            GameHandler.Instance.DamagePlayer(amount,true,times:2);
-            ShakeRule(0);
-        }
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
@@ -100,5 +85,35 @@ public class TheTroikaTerror : Encounter
     public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
+    }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        int inst=instance++;
+        int toReturn=0;
+        if(inst==3)
+        {
+            instance=0;
+            toReturn= amount*3;
+        }
+        toReturn=amount;
+        UpdateRules();
+        ShakeRule(0);
+        return toReturn;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        int inst=instance++;
+        int toReturn=0;
+        if(inst==3)
+        {
+            instance=0;
+            toReturn= amount*3;
+        }
+        toReturn=amount;
+        UpdateRules();
+        ShakeRule(0);
+        return toReturn;
     }
 }

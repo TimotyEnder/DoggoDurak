@@ -61,7 +61,6 @@ public class RiotShieldVanguard : Encounter
                 _blownThrough=true;
                 UpdateRules();
                 GameHandler.Instance.GetGameState()._opponentsDamageReduction=0;
-                GameHandler.Instance.DamageOpponent(amount,true,times:2);
                 ShakeRule(0);
             }
             else
@@ -69,10 +68,6 @@ public class RiotShieldVanguard : Encounter
                 UpdateRules();
                 ShakeRule(1);
             }
-        }
-        else
-        {
-            GameHandler.Instance.DamageOpponent(amount,true,times:2);
         }
     }
 
@@ -118,5 +113,22 @@ public class RiotShieldVanguard : Encounter
     public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
+    }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        return amount;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        if(_blownThrough)
+        {
+            return amount*3;
+        }
+        else
+        {
+            return amount;
+        }
     }
 }

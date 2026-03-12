@@ -113,4 +113,14 @@ public class RussianRouletteRascal : Encounter
     {
         
     }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        return amount;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        return amount;
+    }
 }

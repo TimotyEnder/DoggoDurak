@@ -36,8 +36,6 @@ public class PripyatPoodle : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        GameHandler.Instance.DamageOpponent(amount,true);
-        ShakeRule(1);
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
@@ -79,5 +77,16 @@ public class PripyatPoodle : Encounter
     public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
+    }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        return amount;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        ShakeRule(1);
+        return amount*2;
     }
 }

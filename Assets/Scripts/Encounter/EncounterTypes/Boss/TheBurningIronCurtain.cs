@@ -130,4 +130,14 @@ public class TheBurningIronCurtain : Encounter
     {
         GameHandler.Instance.SetDebuffs(new string[]{"C","D","H","S"},true,true);
     }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        return amount;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        return amount;
+    }
 }

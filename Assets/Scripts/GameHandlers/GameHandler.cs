@@ -67,7 +67,7 @@ public class GameHandler : MonoBehaviour
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
-        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter= new SpikedShepherded();
         //_currentEncounter.InitiateEncounter();
         Next();
     }
@@ -218,6 +218,7 @@ public class GameHandler : MonoBehaviour
     }
     public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
     {
+        int damageCalc=_currentEncounter.AddToDamageOpponent(amount);
         if(_state._undamagable[1])
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
@@ -231,7 +232,7 @@ public class GameHandler : MonoBehaviour
             {
                for(int i=0;i<times;i++)
                 {
-                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(amount-_state._opponentsDamageReduction);
+                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-_state._opponentsDamageReduction);
                     if(checkMatchEnd)
                     {
                           await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
@@ -241,7 +242,7 @@ public class GameHandler : MonoBehaviour
             }
             if (!fromEffect)
             {
-                DelayedOnDamageOpponentAsync(amount-_state._opponentsDamageReduction,fromMod).Forget();
+                DelayedOnDamageOpponentAsync(damageCalc-_state._opponentsDamageReduction,fromMod).Forget();
             }
         }
     }
@@ -255,6 +256,7 @@ public class GameHandler : MonoBehaviour
     }
     public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
     {
+        int damageCalc=_currentEncounter.AddToDamagePlayer(amount);
         if(_state._undamagable[0])
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
@@ -266,11 +268,12 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
             {
+               
                if(!_state._healingAndDamageInverted || fromMod=="InsiderTrader")
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc);
                        if(checkMatchEnd)
                         {
                              await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
@@ -282,14 +285,14 @@ public class GameHandler : MonoBehaviour
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc);
                         await UniTask.Delay(100);
                     }
                 }
             }
             if (!fromEffect)
             {
-               DelayedOnDamagePlayerAsync(amount,fromMod).Forget();
+               DelayedOnDamagePlayerAsync(damageCalc,fromMod).Forget();
             }
         }
     }

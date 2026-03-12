@@ -99,4 +99,24 @@ public class Balalaechnik : Encounter
     {
         
     }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        int inst=_damageInstance++;
+        int toReturn=0;
+        if(inst==3)
+        {
+            _damageInstance=0;
+            toReturn= amount*3;
+        }
+        toReturn=amount;
+        UpdateRules();
+        ShakeRule(0);
+        return toReturn;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        return amount;
+    }
 }

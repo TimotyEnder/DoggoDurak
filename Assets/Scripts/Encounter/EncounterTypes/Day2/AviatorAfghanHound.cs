@@ -39,11 +39,6 @@ public class AviatorAfghanHound : Encounter
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
-        if (fromMod == "Bounce")
-        {
-            GameHandler.Instance.DamagePlayer(4,true);
-            ShakeRule(0);
-        }
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
@@ -77,5 +72,25 @@ public class AviatorAfghanHound : Encounter
     public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
+    }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        if (fromMod == "Bounce")
+        {
+            ShakeRule(0);
+            return amount+4;
+        }
+        return amount;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {
+        if (fromMod == "Bounce")
+        {
+            ShakeRule(0);
+            return amount+4;
+        }
+        return amount;
     }
 }

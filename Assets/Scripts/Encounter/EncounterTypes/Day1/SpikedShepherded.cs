@@ -36,8 +36,7 @@ public class SpikedShepherded : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        GameHandler.Instance.DamageOpponent(amount,true);
-        ShakeRule(0);
+        
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
@@ -78,5 +77,16 @@ public class SpikedShepherded : Encounter
     public override void OnHealPlayer(int amount, string fromMod = "")
     {
         
+    }
+
+    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    {
+        return amount;
+    }
+
+    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    {    
+        ShakeRule(0);
+        return amount*2;
     }
 }
