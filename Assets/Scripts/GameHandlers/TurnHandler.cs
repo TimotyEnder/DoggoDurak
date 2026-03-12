@@ -71,17 +71,8 @@ public class TurnHandler : MonoBehaviour
         await _ruleHandler.CheckGameState();
         GameHandler.Instance.EncounterSetDebuffs();
         _opponent.resetEndTurnFlag();
-        await _playerDeck.DrawHand();
-        await _opponent.DrawHand();
-        //Change Turn State
-        if (_turnState == 0)
-        {
-            _turnState = 1;
-        }
-        else
-        {
-            _turnState = 0;
-        }
+        _playerDeck.DrawHand();
+        _opponent.DrawHand();
         if (_turnState == 0)
         {
             if (!_toggled)
@@ -99,6 +90,7 @@ public class TurnHandler : MonoBehaviour
             }
             _opponent.Attack();
         }
+
     }
     public void StartEndTurn() 
     {
@@ -116,9 +108,19 @@ public class TurnHandler : MonoBehaviour
     {
         //Wipe Cards
         _turnEndStarted=false;
-        GameHandler.Instance.ResetDebuffs();
-        GameHandler.Instance.ResetPersistentItems();
         await _playArea.Wipe();
+        GameHandler.Instance.ResetDebuffs();
+
+        GameHandler.Instance.ResetPersistentItems();
+        //Change Turn State
+        if (_turnState == 0)
+        {
+            _turnState = 1;
+        }
+        else
+        {
+            _turnState = 0;
+        }
         if(!_ruleHandler.isGameStateFinished())
         {
             _ = Turn();

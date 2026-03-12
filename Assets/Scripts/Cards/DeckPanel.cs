@@ -218,24 +218,24 @@ public class DeckPanel : MonoBehaviour
 
         //modifiers 
         _bounceText.text=CardInfo.modifierColors["Bounce"]+StylisticClass.BounceString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=>card._modifierStacks.ContainsKey("Bounce") && card._modifierStacks["Bounce"]>0).Count+"</color>"+"\n";
-        _bounceText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Bounce"]+CardInfo.modifierToDescription["Bounce"]+"</color></size>");
+        _bounceText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Bounce"]+CardInfo.modifierToDescription["Bounce"]+"</color>");
 
         _burnText.text=CardInfo.modifierColors["Burn"]+StylisticClass.BurnString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Burn") && card._modifierStacks["Burn"]>0).Count+"</color>"+"\n";
-        _burnText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Burn"]+CardInfo.modifierToDescription["Burn"]+"</color></size>");
+        _burnText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Burn"]+CardInfo.modifierToDescription["Burn"]+"</color>");
 
         _crippleText.text=CardInfo.modifierColors["Cripple"]+StylisticClass.CrippleString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Cripple") && card._modifierStacks["Cripple"]>0).Count+"</color>"+"\n";
-        _crippleText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Cripple"]+CardInfo.modifierToDescription["Cripple"]+"</color></size>");
+        _crippleText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Cripple"]+CardInfo.modifierToDescription["Cripple"]+"</color>");
 
         _drawText.text=CardInfo.modifierColors["Draw"]+StylisticClass.DrawString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Draw") && card._modifierStacks["Draw"]>0).Count+"</color>"+"\n";
-        _drawText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Draw"]+CardInfo.modifierToDescription["Draw"]+"</color></size>");
+        _drawText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Draw"]+CardInfo.modifierToDescription["Draw"]+"</color>");
 
         _parryText.text=CardInfo.modifierColors["Parry"]+StylisticClass.ParryString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Parry") && card._modifierStacks["Parry"]>0).Count+"</color>"+"\n";
-        _parryText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Parry"]+CardInfo.modifierToDescription["Parry"]+"</color></size>");
+        _parryText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Parry"]+CardInfo.modifierToDescription["Parry"]+"</color>");
 
         _restoringText.text=CardInfo.modifierColors["Restoring"]+StylisticClass.RestoringString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Restoring") && card._modifierStacks["Restoring"]>0).Count+"</color>"+"\n";
-        _restoringText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Restoring"]+CardInfo.modifierToDescription["Restoring"]+"</color></size>");
+        _restoringText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Restoring"]+CardInfo.modifierToDescription["Restoring"]+"</color>");
 
         _spikyText.text=CardInfo.modifierColors["Spiky"]+StylisticClass.SpikyString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Spiky") && card._modifierStacks["Spiky"]>0).Count+"</color>"+"\n";
-        _spikyText.gameObject.GetComponent<ToolTip>().SetToolTipText("<size="+SettingsState.ToolTipFontSizeText+">"+CardInfo.modifierColors["Spiky"]+CardInfo.modifierToDescription["Spiky"]+"</color></size>");
+        _spikyText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Spiky"]+CardInfo.modifierToDescription["Spiky"]+"</color>");
     }
 }

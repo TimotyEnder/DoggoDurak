@@ -114,7 +114,7 @@ public class Deck : MonoBehaviour
         }
         onComplete?.Invoke();
     }
-    public async Task DrawHand()
+    public async void DrawHand()
     {
         CardHandArea cardHand= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         int  toDraw= GameHandler.Instance.GetGameState()._handSize - cardHand.GetCardsInHand(); 
