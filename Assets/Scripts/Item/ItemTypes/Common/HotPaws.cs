@@ -7,7 +7,6 @@ public class HotPaws : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "HotPaws";
-        this.itemName="HotPaws";
         this.toolTipDesc = "5 random cards gain "+StylisticClass.BurnColor+StylisticClass.BurnString+" 1"+CardInfo.modifierToDescription["Burn"]+"</color>";
     }
 

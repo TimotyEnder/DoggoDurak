@@ -7,7 +7,6 @@ public class PrivatizedCheckVoucher : Item
                 this.rarity = 0;
         this.boss = false;
         this.itemId = "PrivatizedCheckVoucher";
-        this.itemName="PrivatizedCheckVoucher";
         this.toolTipDesc = "One more item option will appear in the shop.";
     }
 

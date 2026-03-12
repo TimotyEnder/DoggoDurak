@@ -7,7 +7,6 @@ public class CommodityExportLicense : Item
         this.rarity = 0;
         this.boss = false;
         this.itemId = "CommodityExportLicense";
-        this.itemName="CommodityExportLicense";
         this.toolTipDesc = "More modifiers will appear on cards in shops";
     }
 

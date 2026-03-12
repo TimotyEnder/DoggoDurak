@@ -7,8 +7,7 @@ class LaikasCall : Item
     {
         this.rarity = 0;
         this.boss = false;
-        this.itemId = "LaikasCall";
-        this.itemName="Laika's Call";
+        this.itemId = "Laika's Call";
         this.toolTipDesc = $"{StylisticClass.HighLight}1{StylisticClass.HighLightClose} random card  becomes a {StylisticClass.Laika}";
     }
 

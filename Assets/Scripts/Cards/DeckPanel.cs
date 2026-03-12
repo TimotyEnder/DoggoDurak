@@ -155,9 +155,7 @@ public class DeckPanel : MonoBehaviour
         foreach(CardInfo c in _clubs)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _clubCont.transform);
-            Card cardMadeC=cardMade.GetComponent<Card>();
-            cardMadeC.MakeCard(c, false); //make an undraggable card
-            cardMadeC.CheckDebuffVisual();
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
             if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
@@ -166,9 +164,7 @@ public class DeckPanel : MonoBehaviour
         foreach(CardInfo c in _diamonds)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _diamondCont.transform);
-            Card cardMadeC=cardMade.GetComponent<Card>();
-            cardMadeC.MakeCard(c, false); //make an undraggable card
-            cardMadeC.CheckDebuffVisual();
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
             if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
@@ -177,9 +173,7 @@ public class DeckPanel : MonoBehaviour
         foreach(CardInfo c in _hearts)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _heartCont.transform);
-            Card cardMadeC=cardMade.GetComponent<Card>();
-            cardMadeC.MakeCard(c, false); //make an undraggable card
-            cardMadeC.CheckDebuffVisual();
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
             if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
@@ -188,9 +182,7 @@ public class DeckPanel : MonoBehaviour
         foreach(CardInfo c in _spades)
         {
             GameObject cardMade = Instantiate(_cardPrefab, _spadeCont.transform);
-            Card cardMadeC=cardMade.GetComponent<Card>();
-            cardMadeC.MakeCard(c, false); //make an undraggable card
-            cardMadeC.CheckDebuffVisual();
+            cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
             if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
             {
                 cardMade.GetComponent<Card>().GreyIn();
@@ -202,9 +194,7 @@ public class DeckPanel : MonoBehaviour
             foreach(CardInfo c in _misc)
             {
                 GameObject cardMade = Instantiate(_cardPrefab, _miscCont.transform);
-                Card cardMadeC=cardMade.GetComponent<Card>();
-                cardMadeC.MakeCard(c, false); //make an undraggable card
-                cardMadeC.CheckDebuffVisual();
+                cardMade.GetComponent<Card>().MakeCard(c, false); //make an undraggable card
                 if(!_deck.Contains(c) && handArea!=null && !handArea.GetCards().Exists(card => card.GetCardInfo() == c))
                 {
                     cardMade.GetComponent<Card>().GreyIn();

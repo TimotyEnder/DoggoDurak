@@ -7,8 +7,7 @@ public class DefaultItem : Item
         rarity = 0;
         boss = false;
         itemId = "DefaultItem";
-        this.itemName="What?";
-        this.toolTipDesc = "Hello Modders! Have your fun! Sorry shit might be a bit confusing but i am sure you will figure it out:)";
+        this.toolTipDesc = "Hello Modders! Have your fun! Sorry shit might be a bit confusing but i am sur you will figure it out:)";
     }
     public override void OnLoad()
     {
