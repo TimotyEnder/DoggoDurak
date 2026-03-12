@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasGambit>();
+        //Item debugItem2 = ScriptableObject.CreateInstance<LaikasContact>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
         //_state._rubles=100; //debug
