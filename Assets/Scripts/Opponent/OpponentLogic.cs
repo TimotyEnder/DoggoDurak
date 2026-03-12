@@ -226,21 +226,21 @@ public class OpponentLogic : MonoBehaviour
             _handUI.RemoveCard();
         }
     }
-    public IEnumerator EnemyPlay() 
+    public async Task EnemyPlay() 
     {
         _enemyPlaying = true;
         _cardHandArea.GreyInAllCards();
         WipeResponseText();
-        yield return new WaitForEndOfFrame();
-        StartCoroutine(CheckForPlaysRoutine());
+        await UniTask.NextFrame();
+        await CheckForPlaysRoutine();
     }
     
-    public IEnumerator CheckForPlaysRoutine( bool fromTurnEnd=false)
+    public async Task CheckForPlaysRoutine( bool fromTurnEnd=false)
     { 
-        yield return new WaitForSecondsRealtime(0.5f);  
+        await UniTask.Delay(500);
         while (CheckPlay()) 
         {
-            yield return new WaitForSeconds(0.5f);
+            await UniTask.Delay(500);
         }
         if(_noResponse && !_noResponseWritten)
         {
@@ -253,7 +253,7 @@ public class OpponentLogic : MonoBehaviour
         if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()] || (_turnHandler.GetTurnState()==1 && _playArea.UnblockedCardsAmount()==_playArea.GetCardsInPlay() && !_justReverse)) && !fromTurnEnd) 
         {
             endTurnCaused = true;
-            _turnHandler.StartEndTurn();
+            _=_turnHandler.StartEndTurn();
         }
         else
         {

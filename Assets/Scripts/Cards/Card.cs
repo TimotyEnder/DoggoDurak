@@ -430,7 +430,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             }
             GameHandler.Instance.GetCurrEncounter().OnReverse(this);
             _turnHandler.Reverse();
-            StartCoroutine(_opponent.EnemyPlay());
+            _=_opponent.EnemyPlay();
         }
         else
         {

@@ -23,6 +23,7 @@ public class TurnHandler : MonoBehaviour
     private bool _turnEndStarted=false;
     private Animator _turnIndicatorAnim;
     private TextMeshProUGUI _turnIndicatorText;
+    private CardHandArea _cardHandArea;
     void Awake()
     {
         //initialising
@@ -37,6 +38,7 @@ public class TurnHandler : MonoBehaviour
         _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         _turnIndicatorAnim= GameObject.Find("TurnIndicator").GetComponent<Animator>();
         _turnIndicatorText= GameObject.Find("TurnIndicator").GetComponentInChildren<TextMeshProUGUI>();
+        _cardHandArea= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
     }
     private void TurnIndicatorLaunch()
     {
@@ -92,13 +94,13 @@ public class TurnHandler : MonoBehaviour
         }
 
     }
-    public void StartEndTurn() 
+    public async Task StartEndTurn() 
     {
         Debug.Log("Start End Turn! Checking if turn end conditions are met! Cards in play: "+_playArea.GetCardsInPlay()+" Has more plays?:"+_playerHand.HasMorePlays());
         if ((_playArea.GetCardsInPlay()>0 || !_playerHand.HasMorePlays()) &&!_turnEndStarted) 
         {
             _turnEndStarted=true;
-            StartCoroutine(_opponent.CheckForPlaysRoutine(true));//this is to prevent a turn end inside a turn end.
+            await   _opponent.CheckForPlaysRoutine(true);//this is to prevent a turn end inside a turn end.
             //Damage Co-Routine
             _ = DamageRoutine();
 
@@ -159,6 +161,7 @@ public class TurnHandler : MonoBehaviour
     }
     private async Task DamageRoutine() 
     {
+        _cardHandArea.GreyInAllCards();
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
            if(!card.IsDefended()){ 
@@ -182,6 +185,7 @@ public class TurnHandler : MonoBehaviour
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }
         }
+        _cardHandArea.GreyOutAllCards();
         await _ruleHandler.CheckGameState();
         if(!_ruleHandler.isGameStateFinished()){
             await UniTask.Delay(200);

@@ -19,7 +19,7 @@ public class PassButton : MonoBehaviour
     void OnEndTurnClick() 
     {
         SetJiggle(false);
-        StartCoroutine(_opp.EnemyPlay());
+        _=_opp.EnemyPlay();
     }
     public void SetJiggle(bool state)
     {
