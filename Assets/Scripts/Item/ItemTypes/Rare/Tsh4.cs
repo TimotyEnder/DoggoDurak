@@ -28,7 +28,7 @@ class Tsh4 : Item
         
     }
 
-    public override void OnDamageOpponent(int amount, string fromMod = "")
+public override void OnDamageOpponent(int amount, string fromMod = "")
     {
         
     }
@@ -40,7 +40,7 @@ class Tsh4 : Item
 
     public override void OnEncounterStart()
     {
-        GameHandler.Instance.GetGameState()._playedDamageReduction=5;
+        GameHandler.Instance.GetGameState()._playedDamageReduction+=5;
         turns=0;
     }
 
@@ -74,7 +74,7 @@ class Tsh4 : Item
         turns++;
         if(turns>=3)
         {
-            GameHandler.Instance.GetGameState()._playedDamageReduction=0;
+            GameHandler.Instance.GetGameState()._playedDamageReduction-=5;
         }
     }
 }
