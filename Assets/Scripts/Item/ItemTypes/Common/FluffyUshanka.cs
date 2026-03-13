@@ -48,7 +48,7 @@ public class FluffyUshanka : Item
 
     public override void OnHeal(int amount)
     {
-        GameHandler.Instance.HealPlayer(5);
+        GameHandler.Instance.HealPlayer(5,true);
     }
 
     public override void OnLoad()

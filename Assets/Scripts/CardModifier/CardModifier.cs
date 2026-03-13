@@ -27,11 +27,11 @@ public abstract class CardModifier
         await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeDamage()));
         if (player)
         {
-            GameHandler.Instance.HealPlayer(amount,fromEffect:true);
+            GameHandler.Instance.HealPlayer(amount,fromEffect:false);
         }
         else
         {
-            GameHandler.Instance.HealOpponent(amount,fromEffect:true);
+            GameHandler.Instance.HealOpponent(amount,fromEffect:false);
         }
     }
 }

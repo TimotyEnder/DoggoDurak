@@ -54,7 +54,7 @@ public class GameHandler : MonoBehaviour
         foreach (CardInfo c in _state._deck)
         {
             //c.AddModifier("Burn",1);
-            //c.AddModifier("Restoring");
+            c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
             //c.AddModifier("Draw");
@@ -63,12 +63,12 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<SneakySleeve>();
+        Item debugItem2 = ScriptableObject.CreateInstance<FluffyUshanka>();
         debugItem2.InitItem();
         _state.AddItem(debugItem2);
-        Item debugItem = ScriptableObject.CreateInstance<TheIronCurtain>();
-        debugItem.InitItem();
-        _state.AddItem(debugItem);
+        //Item debugItem = ScriptableObject.CreateInstance<TheIronCurtain>();
+        //debugItem.InitItem();
+        //_state.AddItem(debugItem);
         //_state._rubles=100; //debug
         //_currentEncounter= new SpikedShepherded();
         //_currentEncounter.InitiateEncounter();
@@ -209,8 +209,15 @@ public class GameHandler : MonoBehaviour
         }
         if (!fromEffect)
         {
-            _state.OnHeal(amount);
+            DelayedPlayerOnHealAsync(amount).Forget();
         }
+    }
+    private async UniTaskVoid DelayedPlayerOnHealAsync(int amount,string fromMod="")
+    {
+        // Wait for next frame to ensure UI animations complete
+        await UniTask.Delay(200);
+        
+         _state.OnHeal(amount);
     }
     public void HealOpponent(int amount,bool fromEffect=false) //any healing effects should be handled by this
     {
