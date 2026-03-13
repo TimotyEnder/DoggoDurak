@@ -33,6 +33,11 @@ public class CommodityExportLicense : Item
     {
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

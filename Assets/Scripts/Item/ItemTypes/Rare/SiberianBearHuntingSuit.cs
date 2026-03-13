@@ -42,6 +42,11 @@ public class SiberianBearHuntingSuit : Item
 
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

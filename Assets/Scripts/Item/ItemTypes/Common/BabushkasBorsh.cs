@@ -53,6 +53,11 @@ public class BabushkasBorsh : Item
     {
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

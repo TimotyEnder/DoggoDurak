@@ -33,6 +33,11 @@ public class MMMRecruitmentLetter : Item
     {
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

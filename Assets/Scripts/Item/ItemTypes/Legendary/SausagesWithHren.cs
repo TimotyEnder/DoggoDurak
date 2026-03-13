@@ -39,6 +39,11 @@ public class SausagesWithHren : Item
 
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

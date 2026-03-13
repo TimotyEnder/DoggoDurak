@@ -36,6 +36,11 @@ class ChewToy : Item
         
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         GameHandler.Instance.HealPlayer((int)(GameHandler.Instance.GetGameState()._maxhealth*0.05f));

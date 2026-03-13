@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<VodkaBottle>();
+        Item debugItem2 = ScriptableObject.CreateInstance<SneakySleeve>();
         debugItem2.InitItem();
         _state.AddItem(debugItem2);
         Item debugItem = ScriptableObject.CreateInstance<TheIronCurtain>();
@@ -115,6 +115,7 @@ public class GameHandler : MonoBehaviour
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
+        _state.OnEncounterStart();
     }
     public GameState GetGameState()
     {

@@ -228,9 +228,16 @@ public class GameState
     }
     public void OnEndEncounter()
     {
-         foreach (Item item in _items)
+        foreach (Item item in _items)
         {
             item.OnEndEncounter();
+        }
+    }
+    public void OnEncounterStart()
+    {
+        foreach (Item item in _items)
+        {
+            item.OnEncounterStart();
         }
     }
     public void OnTurnEnd(int turnState)

@@ -1,5 +1,4 @@
 using UnityEngine;
-
 [CreateAssetMenu(fileName = "StraysLuckyCoin", menuName = "Items/Active-Rare/StraysLuckyCoin")]
 public class StraysLuckyCoin : Item
 {
@@ -82,6 +81,11 @@ public class StraysLuckyCoin : Item
     }
 
     public override void OnCardAdded(CardInfo card)
+    {
+        
+    }
+
+    public override void OnEncounterStart()
     {
         
     }

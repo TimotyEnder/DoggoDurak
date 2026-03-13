@@ -62,4 +62,9 @@ public class DefaultItem : Item
     {
         
     }
+
+    public override void OnEncounterStart()
+    {
+        
+    }
 }

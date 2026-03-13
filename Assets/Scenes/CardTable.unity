@@ -8413,7 +8413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df384028a0c902439922debad557577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHandSpacing: 150
+  _maxHandSpacing: 60
   _cardsInHand: 0
   _angleDelta: 8
   _idealAngleDelta: 8

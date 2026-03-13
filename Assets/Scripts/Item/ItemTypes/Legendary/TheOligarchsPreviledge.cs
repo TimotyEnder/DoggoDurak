@@ -36,6 +36,11 @@ public class TheOligarchsPreviledge : Item
 
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

@@ -35,6 +35,11 @@ public class DoggoSnack : Item
     {
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

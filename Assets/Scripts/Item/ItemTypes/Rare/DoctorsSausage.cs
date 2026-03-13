@@ -42,6 +42,11 @@ public class DoctorsSausage : Item
 
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         

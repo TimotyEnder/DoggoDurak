@@ -41,6 +41,11 @@ class LaikasContact : Item
         
     }
 
+    public override void OnEncounterStart()
+    {
+        
+    }
+
     public override void OnEndEncounter()
     {
         
