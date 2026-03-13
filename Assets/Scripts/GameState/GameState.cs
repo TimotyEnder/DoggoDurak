@@ -43,6 +43,7 @@ public class GameState
     public int _laikaCardInShopChance;
 
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
+    public int _playedDamageReduction;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -111,6 +112,7 @@ public class GameState
         _startingShopRerollCost = 5;
         _undamagable=new bool[]{false,false};
         _opponentsDamageReduction = 0;
+        _playedDamageReduction=0;
         _enemyHandSize = 6;
         _loseToWin=false;
         _healingAndDamageInverted=false;
