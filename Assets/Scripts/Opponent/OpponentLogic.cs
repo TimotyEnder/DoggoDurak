@@ -251,19 +251,16 @@ public class OpponentLogic : MonoBehaviour
     }
     public bool Draw()
     {
-        lock (_drawLock)
+        if (_deck.Count > 0)
         {
-            if (_deck.Count > 0)
-            {
-                int cardDrawIndex = Random.Range(0, _deck.Count);
-                CardInfo cardtoDraw = _deck[cardDrawIndex];
-                _deck.RemoveAt(cardDrawIndex); 
-                _hand.Add(cardtoDraw);
-                GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
-                return true;
-            }
-            return false;
+            int cardDrawIndex = Random.Range(0, _deck.Count);
+            CardInfo cardtoDraw = _deck[cardDrawIndex];
+            _deck.RemoveAt(cardDrawIndex); 
+            _hand.Add(cardtoDraw);
+            GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
+            return true;
         }
+        return false;
     }
     public async UniTask OpponentDraw()
     {
