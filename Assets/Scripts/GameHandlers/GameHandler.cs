@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<Tsh4>();
+        Item debugItem2 = ScriptableObject.CreateInstance<ForeignImportPermit>();
         debugItem2.InitItem();
         _state.AddItem(debugItem2);
         //Item debugItem = ScriptableObject.CreateInstance<TheIronCurtain>();
