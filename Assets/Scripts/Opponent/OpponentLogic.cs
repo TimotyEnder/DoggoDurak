@@ -31,6 +31,7 @@ public class OpponentLogic : MonoBehaviour
     private bool  _noResponseWritten=false;
 
     private bool _justReverse=false; //flag to check if the enemy just reversed, so it lets you defend even tho you have not defended yet.
+    private readonly object _drawLock= new object();
     private void Start()
     {
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
@@ -248,26 +249,39 @@ public class OpponentLogic : MonoBehaviour
             await UniTask.Delay(100);
         }
     }
-    bool Draw()
+    public bool Draw()
     {
-        //CardInfo handling
-        int cardDrawIndex = Random.Range(0, _deck.Count);
-        if(_deck.Count>0)
+        lock (_drawLock)
         {
-            CardInfo cardtoDraw = _deck[cardDrawIndex];
-            _deck.Remove(cardtoDraw);
-            _hand.Add(cardtoDraw);
-            GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
-            return true;
+            if (_deck.Count > 0)
+            {
+                int cardDrawIndex = Random.Range(0, _deck.Count);
+                CardInfo cardtoDraw = _deck[cardDrawIndex];
+                _deck.RemoveAt(cardDrawIndex); 
+                _hand.Add(cardtoDraw);
+                GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
+                return true;
+            }
+            return false;
         }
-        return false;
     }
     public async UniTask OpponentDraw()
     {
         await UniTask.NextFrame();
-        if(Draw())
+        if (_deck.Count > 0)
         {
+            if(Draw())
+            {
             _handUI.AddCard();
+            }
+        }
+        else 
+        {
+            await LoadDiscard();
+            if(Draw())
+            {
+            _handUI.AddCard();
+            }
         }
     }
     public void Discard() 
