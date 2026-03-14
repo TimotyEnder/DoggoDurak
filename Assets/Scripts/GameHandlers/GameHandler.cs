@@ -63,12 +63,12 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<ForeignImportPermit>();
+        Item debugItem2 = ScriptableObject.CreateInstance<SunfrowerSeedsBag>();
         debugItem2.InitItem();
         _state.AddItem(debugItem2);
-        //Item debugItem = ScriptableObject.CreateInstance<TheIronCurtain>();
-        //debugItem.InitItem();
-        //_state.AddItem(debugItem);
+        //Item debugItem3 = ScriptableObject.CreateInstance<FluffyUshanka>();
+        //debugItem3.InitItem();
+        //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new SpikedShepherded();
         //_currentEncounter.InitiateEncounter();
