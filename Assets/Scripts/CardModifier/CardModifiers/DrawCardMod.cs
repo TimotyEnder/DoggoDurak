@@ -14,12 +14,27 @@ public class DrawCardMod : CardModifier
 
     public override bool OnDefendCard(Card defendee, Card defended)
     {
-        return false;
+         if(defendee.GetCardInfo()._opponentCard)
+        {
+            GameHandler.Instance.OpponentDraw(1);
+        }
+        else
+        {
+            GameHandler.Instance.Draw(1);
+        }
+        return true;
     }
 
     public override bool OnPlayedCard(Card card)
     {
-        GameHandler.Instance.Draw(1);
+        if(card.GetCardInfo()._opponentCard)
+        {
+            GameHandler.Instance.OpponentDraw(1);
+        }
+        else
+        {
+            GameHandler.Instance.Draw(1);
+        }
         return true;
     }
 

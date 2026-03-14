@@ -57,21 +57,21 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
-            //c.AddModifier("Draw");
+            c.AddModifier("Draw");
             //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<SunfrowerSeedsBag>();
-        debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        //Item debugItem2 = ScriptableObject.CreateInstance<SunfrowerSeedsBag>();
+        //debugItem2.InitItem();
+        //_state.AddItem(debugItem2);
         //Item debugItem3 = ScriptableObject.CreateInstance<FluffyUshanka>();
         //debugItem3.InitItem();
         //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
-        //_currentEncounter= new SpikedShepherded();
-        //_currentEncounter.InitiateEncounter();
+        _currentEncounter= new DebugEncounter();
+        _currentEncounter.InitiateEncounter();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -105,7 +105,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else
@@ -316,11 +316,25 @@ public class GameHandler : MonoBehaviour
 
     public void Draw(int amount)
     {
-        if (GameObject.Find("Deck").GetComponent<Deck>() != null)
+        GameObject Deck= GameObject.Find("Deck");
+        if(Deck!=null)
         {
+            Deck deckSc=Deck.GetComponent<Deck>();
             for (int i = 0; i < amount; i++)
             {
-                GameObject.Find("Deck").GetComponent<Deck>().Draw();
+               deckSc.Draw();
+            }
+        }
+    }
+    public void OpponentDraw(int amount)
+    {
+        GameObject Opp= GameObject.Find("Opponent");
+        if(Opp!=null)
+        {
+            OpponentLogic oppSc=Opp.GetComponent<OpponentLogic>();
+            for (int i = 0; i < amount; i++)
+            {
+               oppSc.OpponentDraw().Forget();
             }
         }
     }

@@ -218,6 +218,7 @@ public class OpponentLogic : MonoBehaviour
                 lowerCard = card;
             }
         }
+        _handUI.RemoveCard();
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
         CardToAttack.GetComponent<Card>().PlayCard();
@@ -260,6 +261,14 @@ public class OpponentLogic : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public async UniTask OpponentDraw()
+    {
+        await UniTask.NextFrame();
+        if(Draw())
+        {
+            _handUI.AddCard();
+        }
     }
     public void Discard() 
     {

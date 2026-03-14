@@ -11,7 +11,7 @@ public class DebugEncounter : Encounter
             switch (i)
             {
                 case 0:
-                    for (int j = 11; j < 15; j++)
+                    for (int j = 0; j < 15; j++)
                     {
                         deck.Add(new CardInfo("C", 6, true));
                     }
@@ -29,7 +29,7 @@ public class DebugEncounter : Encounter
                     }
                     break;
                 case 3:
-                    for (int j = 11; j < 15; j++)
+                    for (int j = 0; j < 15; j++)
                     {
                         //deck.Add(new CardInfo("L", 6, true));
                     }
@@ -44,7 +44,7 @@ public class DebugEncounter : Encounter
         day = 0;
         foreach(CardInfo c in deck)
         {
-        c.AddModifier("Spiky");
+        c.AddModifier("Draw");
         }
     }
 
