@@ -267,17 +267,23 @@ public class OpponentLogic : MonoBehaviour
         await UniTask.NextFrame();
         if (_deck.Count > 0)
         {
-            if(Draw())
+            lock(_drawLock)
             {
-            _handUI.AddCard();
+                if(Draw())
+                {
+                    _handUI.AddCard();
+                }
             }
         }
         else 
         {
             await LoadDiscard();
-            if(Draw())
+            lock(_drawLock)
             {
-            _handUI.AddCard();
+                if(Draw())
+                {
+                    _handUI.AddCard();
+                }
             }
         }
     }
