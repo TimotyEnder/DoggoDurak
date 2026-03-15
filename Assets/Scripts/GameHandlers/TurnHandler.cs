@@ -162,7 +162,19 @@ public class TurnHandler : MonoBehaviour
     private async Task DamageRoutine() 
     {
         _cardHandArea.GreyInAllCards();
-        int scaledDelayTime=3000/GameHandler.Instance.GetUnblockedCards();
+        int scaledDelayTime;
+        if(GameHandler.Instance.GetUnblockedCards()>0 && (GameHandler.Instance.GetUnblockedCards()*800)>3000)
+        {
+            scaledDelayTime=3000/GameHandler.Instance.GetUnblockedCards();
+        }
+        else if(GameHandler.Instance.GetUnblockedCards()>0)
+        {
+            scaledDelayTime=800;
+        }
+        else
+        {
+            scaledDelayTime=100;
+        }
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
            if(!card.IsDefended()){ 

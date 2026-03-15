@@ -57,7 +57,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
-            //c.AddModifier("Draw");
+            c.AddModifier("Draw");
             //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
         }
