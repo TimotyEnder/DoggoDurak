@@ -57,15 +57,15 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
-            c.AddModifier("Draw");
+            //c.AddModifier("Draw");
             //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
         }
         //debug
 
-        //Item debugItem2 = ScriptableObject.CreateInstance<SunfrowerSeedsBag>();
-        //debugItem2.InitItem();
-        //_state.AddItem(debugItem2);
+        Item debugItem2 = ScriptableObject.CreateInstance<STsh81>();
+        debugItem2.InitItem();
+        _state.AddItem(debugItem2);
         //Item debugItem3 = ScriptableObject.CreateInstance<FluffyUshanka>();
         //debugItem3.InitItem();
         //_state.AddItem(debugItem3);
