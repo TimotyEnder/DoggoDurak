@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,8 +33,14 @@ public class OpponentLogic : MonoBehaviour
 
     private bool _justReverse=false; //flag to check if the enemy just reversed, so it lets you defend even tho you have not defended yet.
     private readonly object _drawLock= new object();
-    private void Start()
+
+     //drawing Queue
+    private Queue<Action> _drawQueue;
+    private bool _isDrawing;
+    void Awake()
     {
+        _drawQueue=new Queue<Action>();
+        _isDrawing=false;
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
         _handUI = GameObject.Find("OpponentHand").GetComponent<OpponentHand>();
         _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
@@ -41,6 +48,9 @@ public class OpponentLogic : MonoBehaviour
         _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
         _discard = GameObject.Find("Discard").GetComponent<Discard>();
         _cardHandArea = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
+    }
+    private void Start()
+    {
         LoadDeck();
     }
     public int GetCardsInHand()
@@ -225,73 +235,73 @@ public class OpponentLogic : MonoBehaviour
         CardToAttack.GetComponent<Card>().PlayCard();
         AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+lowerCard.CompileCondencedModifiers());
     }
-    public  async void DrawHand()
+    public  void DrawHand()
     {
         Debug.Log("Drawing handsize: "+GameHandler.Instance.GetGameState()._enemyHandSize);
         int toDraw = GameHandler.Instance.GetGameState()._enemyHandSize - _hand.Count;
         for (int i = 0; i < toDraw; i++)
         {
-            if (_deck.Count > 0)
-            {
-                if(Draw())
-                {
-                   _handUI.AddCard();
-                }
-            }
-            else 
-            {
-                await LoadDiscard();
-                if(Draw())
-                {
-                   _handUI.AddCard();
-                }
-            }
-            await UniTask.Delay(100);
+           DrawCard();
         }
     }
-    public bool Draw()
+    public void DrawCard()
     {
-        if (_deck.Count > 0)
+        lock(_drawQueue)
         {
-            int cardDrawIndex = Random.Range(0, _deck.Count);
-            CardInfo cardtoDraw = _deck[cardDrawIndex];
-            _deck.RemoveAt(cardDrawIndex); 
-            _hand.Add(cardtoDraw);
-            GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
-            return true;
+            _drawQueue.Enqueue(DrawJob);
         }
-        return false;
+        if(!_isDrawing)
+        {
+            DrawQueueProcess().Forget();
+        }
     }
-    public async UniTask OpponentDraw()
+    private void Draw()
     {
-        await UniTask.NextFrame();
+        int cardDrawIndex = UnityEngine.Random.Range(0, _deck.Count);
+        CardInfo cardtoDraw = _deck[cardDrawIndex];
+        _deck.RemoveAt(cardDrawIndex); 
+        _hand.Add(cardtoDraw);
+        GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
+        _handUI.AddCard();
+    }
+    private async void DrawJob()
+    {
+        if(_deck.Count<=0)
+        {
+             await LoadDiscard();
+        }
         if (_deck.Count > 0)
         {
-            lock(_drawLock)
-            {
-                if(Draw())
-                {
-                    _handUI.AddCard();
-                }
-            }
+            Draw();
         }
-        else 
+    }
+    public async UniTask DrawQueueProcess()
+    {
+        _isDrawing=true;
+        while(true)
         {
-            await LoadDiscard();
-            lock(_drawLock)
+            Action draw=null;
+            lock(_drawQueue)
             {
-                if(Draw())
+                if(_drawQueue.Count>0)
                 {
-                    _handUI.AddCard();
+                    draw= _drawQueue.Dequeue();
+                }
+                else
+                {
+                    _isDrawing=false;
+                    break;
                 }
             }
+            draw?.Invoke();
+            await UniTask.NextFrame();
         }
     }
     public void Discard() 
     {
         if (_hand.Count>0) 
         {
-            int RandomIndex = Random.Range(0, _hand.Count);
+            int RandomIndex = UnityEngine.Random.Range(0, _hand.Count);
             _discard.AddCard(_cardHandArea.GetCards()[RandomIndex]); //add to discard pile if a card is discarded
             GameHandler.Instance.GetCurrEncounter().OnHandCardDiscarded(_hand[RandomIndex]);
             _hand.RemoveAt(RandomIndex);

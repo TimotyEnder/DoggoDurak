@@ -11,27 +11,32 @@ public class DebugEncounter : Encounter
             switch (i)
             {
                 case 0:
-                    for (int j = 0; j < 15; j++)
+                    for (int j = 6; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("C", 6, true));
+                        //_deck.Add(new CardInfo("C", j,true));
+                        deck.Add(new CardInfo("L", 0,true)); //debug
+
                     }
                     break;
                 case 1:
-                    for (int j = 11; j < 15; j++)
+                    for (int j = 6; j < 15; j++)
                     {
-                        //deck.Add(new CardInfo("S", 6, true));
+                        //_deck.Add(new CardInfo("S", j,true));
+                        deck.Add(new CardInfo("L", 0,true)); //debug
                     }
                     break;
                 case 2:
-                    for (int j = 11; j < 15; j++)
+                    for (int j = 6; j < 15; j++)
                     {
-                        //deck.Add(new CardInfo("D", 6, true));
+                        //_deck.Add(new CardInfo("D", j,true));
+                        deck.Add(new CardInfo("L", 0,true));  //debug
                     }
                     break;
                 case 3:
-                    for (int j = 0; j < 15; j++)
+                    for (int j = 6; j < 15; j++)
                     {
-                        //deck.Add(new CardInfo("L", 6, true));
+                        //_deck.Add(new CardInfo("H", j,true));
+                        deck.Add(new CardInfo("L", 0,true));  //debug
                     }
                     break;
             }

@@ -322,7 +322,7 @@ public class GameHandler : MonoBehaviour
             Deck deckSc=Deck.GetComponent<Deck>();
             for (int i = 0; i < amount; i++)
             {
-               deckSc.Draw();
+               deckSc.DrawCard();
             }
         }
     }
@@ -334,7 +334,7 @@ public class GameHandler : MonoBehaviour
             OpponentLogic oppSc=Opp.GetComponent<OpponentLogic>();
             for (int i = 0; i < amount; i++)
             {
-               oppSc.OpponentDraw().Forget();
+               oppSc.DrawCard();
             }
         }
     }

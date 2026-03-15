@@ -22,9 +22,14 @@ public class Deck : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI _deckSizeText;
 
+    //drawing Queue
+    private Queue<Action> _drawQueue;
+    private bool _isDrawing;
    
     void Awake() 
     {
+        _drawQueue= new Queue<Action>();
+        _isDrawing=false;
         GameObject _turnHandlerObj= GameObject.Find("TurnHandler"); 
         if(_turnHandlerObj!=null)
         {
@@ -70,7 +75,7 @@ public class Deck : MonoBehaviour
             _deck.Add(c.GetCardInfo());
         }
     }
-    public void Draw() 
+    private void Draw() 
     {
         // CardInfo handling
         int cardDrawIndex = UnityEngine.Random.Range(0, _deck.Count);
@@ -114,21 +119,56 @@ public class Deck : MonoBehaviour
         }
         onComplete?.Invoke();
     }
-    public async void DrawHand()
+    public  void DrawHand()
     {
         CardHandArea cardHand= GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         int  toDraw= GameHandler.Instance.GetGameState()._handSize - cardHand.GetCardsInHand(); 
         for (int i = 0; i <toDraw; i++) 
         {
-            if (_deck.Count > 0)
+            DrawCard();
+        }
+    }
+    private async void DrawJob()
+    {
+        if(_deck.Count<=0)
+        {
+             await LoadDiscard();
+        }
+        if (_deck.Count > 0)
+        {
+            Draw();
+        }
+    }
+    public void DrawCard()
+    {
+        lock(_drawQueue)
+        {
+           _drawQueue.Enqueue(DrawJob);
+        }
+        if(!_isDrawing)
+        {
+            DrawQueueProcess().Forget();
+        }
+    }
+    public async UniTask DrawQueueProcess()
+    {
+        _isDrawing=true;
+        while(true)
+        {
+            Action draw=null;
+            lock(_drawQueue)
             {
-                Draw();
+                if(_drawQueue.Count>0)
+                {
+                    draw= _drawQueue.Dequeue();
+                }
+                else
+                {
+                    _isDrawing=false;
+                    break;
+                }
             }
-            else 
-            {
-                await LoadDiscard();
-                Draw();
-            }
+            draw?.Invoke();
             await UniTask.Delay(100);
         }
     }

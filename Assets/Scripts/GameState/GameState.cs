@@ -54,30 +54,30 @@ public class GameState
                 case 0:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("C", j));
-                        //_deck.Add(new CardInfo("C", 6)); //debug
+                        //_deck.Add(new CardInfo("C", j));
+                        _deck.Add(new CardInfo("L", 0)); //debug
 
                     }
                     break;
                 case 1:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("S", j));
-                        //_deck.Add(new CardInfo("L", 0)); //debug
+                        //_deck.Add(new CardInfo("S", j));
+                        _deck.Add(new CardInfo("L", 0)); //debug
                     }
                     break;
                 case 2:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("D", j));
-                        //_deck.Add(new CardInfo("L", 0));  //debug
+                        //_deck.Add(new CardInfo("D", j));
+                        _deck.Add(new CardInfo("L", 0));  //debug
                     }
                     break;
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
-                        _deck.Add(new CardInfo("H", j));
-                        //_deck.Add(new CardInfo("L", 0));  //debug
+                        //_deck.Add(new CardInfo("H", j));
+                        _deck.Add(new CardInfo("L", 0));  //debug
                     }
                     break;
             }

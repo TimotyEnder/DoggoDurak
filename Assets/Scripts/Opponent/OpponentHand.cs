@@ -27,22 +27,28 @@ public class OpponentHand : MonoBehaviour
     }
     public void AddCard()
     {
-        GameObject card = Instantiate(_opCard, this.transform);
-        _cards.Add(card); // Add to list
-        _cardsInHand++;
-        RealignCardsInHand();
+        lock(_cards)
+        {
+             GameObject card = Instantiate(_opCard, this.transform);
+            _cards.Add(card); // Add to list
+            _cardsInHand++;
+            RealignCardsInHand();
+        }
     }
 
     public void RemoveCard()
     {
-        if (_cards.Count == 0) return; // No cards left
-        GameObject cardToRemove = _cards[0];
-        _cards.RemoveAt(0);
-        cardToRemove.transform.SetParent(null);
-        if (cardToRemove != null)
+        lock(_cards)
+        {
+            if (_cards.Count == 0) return; // No cards left
+            GameObject cardToRemove = _cards[0];
+            _cards.RemoveAt(0);
+            cardToRemove.transform.SetParent(null);
+            if (cardToRemove != null)
             Destroy(cardToRemove); // Safe destroy
 
-        _cardsInHand--;
+            _cardsInHand--;
+        }
         StartCoroutine(DelayedRealign()); // Wait for destruction
     }
     public void RealignCardsInHand()
