@@ -44,6 +44,7 @@ public class GameState
 
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
     public int _playedDamageReduction;
+    public bool _reversePossible;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -117,6 +118,7 @@ public class GameState
         _loseToWin=false;
         _healingAndDamageInverted=false;
         _laikaCardInShopChance=10;
+        _reversePossible=true;
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {

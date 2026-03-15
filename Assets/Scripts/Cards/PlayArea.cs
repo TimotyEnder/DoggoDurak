@@ -199,7 +199,7 @@ public class PlayArea : MonoBehaviour
     }
     public bool CanReverseWithCard(CardInfo card) 
     {
-        if (_cardsDefendedWith.Count > 0)
+        if (_cardsDefendedWith.Count > 0 || !GameHandler.Instance.GetGameState()._reversePossible)
         {
             return false;
         }

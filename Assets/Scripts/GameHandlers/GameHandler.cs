@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
         }
         //debug
 
-        Item debugItem2 = ScriptableObject.CreateInstance<STsh81>();
-        debugItem2.InitItem();
-        _state.AddItem(debugItem2);
+        //Item debugItem2 = ScriptableObject.CreateInstance<OligarchsProtection>();
+        //debugItem2.InitItem();
+        //_state.AddItem(debugItem2);
         //Item debugItem3 = ScriptableObject.CreateInstance<FluffyUshanka>();
         //debugItem3.InitItem();
         //_state.AddItem(debugItem3);
