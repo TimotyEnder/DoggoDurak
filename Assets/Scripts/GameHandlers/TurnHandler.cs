@@ -162,6 +162,7 @@ public class TurnHandler : MonoBehaviour
     private async Task DamageRoutine() 
     {
         _cardHandArea.GreyInAllCards();
+        int scaledDelayTime=3000/GameHandler.Instance.GetUnblockedCards();
         foreach (Card card in _playArea.GetCardsPlayed()) 
         {
            if(!card.IsDefended()){ 
@@ -180,7 +181,7 @@ public class TurnHandler : MonoBehaviour
                 {
                     GameHandler.Instance.DamageOpponent(damage, checkMatchEnd:false);
                 }
-                await UniTask.Delay(800);
+                await UniTask.Delay(scaledDelayTime);
                 card.SetAnimatable(false);
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
            }

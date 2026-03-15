@@ -57,7 +57,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
-            c.AddModifier("Draw");
+            //c.AddModifier("Draw");
             //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
         }
@@ -70,8 +70,8 @@ public class GameHandler : MonoBehaviour
         //debugItem3.InitItem();
         //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
-        _currentEncounter= new DebugEncounter();
-        _currentEncounter.InitiateEncounter();
+        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter.InitiateEncounter();
         Next();
     }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
@@ -105,7 +105,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else
