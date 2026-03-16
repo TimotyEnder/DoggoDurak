@@ -134,10 +134,7 @@ public class Deck : MonoBehaviour
         {
              await LoadDiscard();
         }
-        if (_deck.Count > 0)
-        {
-            Draw();
-        }
+        Draw();
     }
     public void DrawCard()
     {
