@@ -354,6 +354,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                     break;
                 case "Burn":
                     _burnOverlay.SetActive(true);
+                    var burnemission= _burnOverlay.GetComponent<ParticleSystem>().emission;
+                    burnemission.rateOverTime=10+(_cardInfo._modifierStacks["Burn"]*5);
                     break;
                 case "Parry":
                     _parryOverlay.SetActive(true);
@@ -365,6 +367,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                     break;
                 case "Cripple":
                     _crippleOverlay.SetActive(true);
+                    var crippleemission= _crippleOverlay.GetComponent<ParticleSystem>().emission;
+                    crippleemission.rateOverTime=15+(_cardInfo._modifierStacks["Cripple"]*10);
                     break;
                 case "Spiky":
                     _spikyOverlay.SetActive(true);

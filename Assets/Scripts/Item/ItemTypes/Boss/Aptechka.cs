@@ -62,6 +62,7 @@ class Aptechka : Item
         if(!card.GetCardInfo()._opponentCard && card.GetCardInfo()._modifierStacks.ContainsKey("Restoring"))
         {
             GameHandler.Instance.HealPlayer(card.GetCardInfo()._number/4);
+            card.SpawnModifierEffect(new CardModifierContainer("Restoring"));
         }
     }
 
