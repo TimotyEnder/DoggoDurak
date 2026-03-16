@@ -18,7 +18,7 @@ public class ShopItemContent : MonoBehaviour
             GameObject rwInstance = Instantiate(_rewardItemPrefab);
             rwInstance.GetComponent<RectTransform>().localScale= Vector3.one*1.7f*_canvas.scaleFactor;
             rwInstance.transform.SetParent(this.transform);
-            rwInstance.GetComponent<RewardItem>().AssignItem(rwItem,(rwItem.GetRarity()+1)*50);
+            rwInstance.GetComponent<RewardItem>().AssignItem(rwItem,(rwItem.GetRarity()+1)*25);
         }
     }
     public void RemoveAllGrid()
