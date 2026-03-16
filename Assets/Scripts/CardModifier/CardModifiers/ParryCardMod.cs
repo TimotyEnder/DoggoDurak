@@ -31,7 +31,7 @@ public class ParryCardMod : CardModifier
     {
         if (!card.GetCardInfo()._opponentCard)
         {
-            DelayedDamage(card.GetCardInfo()._number, true, "Parry");
+            DelayedDamage(card.GetCardInfo()._number, false, "Parry");
         }
         else 
         {
