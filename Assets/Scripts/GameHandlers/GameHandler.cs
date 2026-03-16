@@ -66,9 +66,9 @@ public class GameHandler : MonoBehaviour
         //Item debugItem2 = ScriptableObject.CreateInstance<OligarchsProtection>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
-        Item debugItem3 = ScriptableObject.CreateInstance<UZB76>();
+        Item debugItem3 = ScriptableObject.CreateInstance<Aptechka>();
         debugItem3.InitItem();
-        _state.AddItem(debugItem3);
+        //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
