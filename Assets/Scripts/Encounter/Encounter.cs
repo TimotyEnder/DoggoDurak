@@ -1,8 +1,10 @@
+using Cysharp.Threading.Tasks;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -90,9 +92,10 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnHandCardDiscarded(CardInfo card);
     public abstract void SetDebuffs();
 
-    public void OnTurnEndHandler(int turnState)
+    public async Task OnTurnEndHandler(int turnState)
     {
         PoisonCounterHandler();
+        await UniTask.Delay(200);
         OnTurnEnd(turnState);
     }
     protected void PoisonCounterHandler()

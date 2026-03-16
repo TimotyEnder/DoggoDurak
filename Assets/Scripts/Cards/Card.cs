@@ -379,7 +379,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 case "Poison":
                     _poisonOverlay.SetActive(true);
                     var poisonEmission= _poisonOverlay.GetComponent<ParticleSystem>().emission;
-                    poisonEmission.rateOverTime=5+(_cardInfo._modifierStacks["Poison"]*5);
+                    poisonEmission.rateOverTime=2+(_cardInfo._modifierStacks["Poison"]*2);
                     break;
             }
         }

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 [Serializable]
 public class CardInfo
 {
@@ -329,6 +330,21 @@ public static string GetNumberShortName(int number)
             }
         }
     }
+    public async Task OnDamage(int amount,Card card) 
+    {
+        foreach (CardModifierContainer c in _modifiers)
+        {
+            if (modifierStringToType.GetValueOrDefault(c.ModType).OnCardDamage(amount,card)) 
+            {
+                if (_card != null)
+                {
+                    _card.Bling();
+                    //_card.SpawnModifierEffect(c);
+                }
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
+            }
+        }
+    }
     public void AddModifier(string ModType, int times=1) 
     {
         for(int i=0;i<times;i++)
@@ -344,6 +360,7 @@ public static string GetNumberShortName(int number)
             }
         }
     }
+    
     public void UpdateModifiers() 
     {
         _modifierStacks= new Dictionary<string, int>();
