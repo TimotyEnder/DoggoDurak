@@ -57,6 +57,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _restoringOverlay;
     private TextMeshProUGUI _restoringText;
     private GameObject _spikyOverlay;
+    private GameObject _poisonOverlay;
     private Animator _animator;
     private int _animationsCurrent=0;
     private bool _tryToHighlightCard=true; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
@@ -330,6 +331,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _drawText = transform.Find("CardImage/DrawText").gameObject.GetComponent<TextMeshProUGUI>();
         _parryOverlay = transform.Find("CardImage/ParryMod").gameObject;
         _spikyOverlay = transform.Find("CardImage/SpikyMod").gameObject;
+        _poisonOverlay = transform.Find("CardImage/PoisonMod").gameObject;
 
         _restoringOverlay.SetActive(false);
         _bounceOverlay.SetActive(false);
@@ -339,6 +341,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _crippleOverlay.SetActive(false);
         _spikyOverlay.SetActive(false);
         _drawText.gameObject.SetActive(false);
+        _poisonOverlay.SetActive(false);
 
         _cardInfo.UpdateModifiers();
 
@@ -372,6 +375,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                     break;
                 case "Spiky":
                     _spikyOverlay.SetActive(true);
+                    break;
+                case "Poison":
+                    _poisonOverlay.SetActive(true);
+                    var poisonEmission= _poisonOverlay.GetComponent<ParticleSystem>().emission;
+                    poisonEmission.rateOverTime=5+(_cardInfo._modifierStacks["Poison"]*5);
                     break;
             }
         }

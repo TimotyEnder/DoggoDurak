@@ -133,6 +133,7 @@ public class CardInfo
         {"Draw", new DrawCardMod()},
         {"Cripple", new CrippleCardMod()},
         {"Spiky", new SpikyCardMod()},
+        {"Poison", new PoisonCardMod()}
     };
     public static Dictionary<string, int> modifierMaxCopies = new Dictionary<string, int>  //-1 equals infinite copies
     {
@@ -143,6 +144,7 @@ public class CardInfo
         {"Draw", -1},
         {"Cripple", -1},
         {"Spiky", -1},
+        {"Poison",-1}
     };
     public static Dictionary<string, string> modifierColors = new Dictionary<string, string> 
     {
@@ -153,6 +155,7 @@ public class CardInfo
         {"Draw", StylisticClass.DrawColor},
         {"Cripple", StylisticClass.CrippleColor},
         {"Spiky", StylisticClass.SpikyColor},
+        {"Poison",StylisticClass.PoisonColor}
     };
     private static Dictionary<string, string> modifierToStyleString = new Dictionary<string, string> 
     {
@@ -163,6 +166,7 @@ public class CardInfo
         {"Draw", StylisticClass.DrawString},
         {"Cripple", StylisticClass.CrippleString},
         {"Spiky", StylisticClass.SpikyString},
+        {"Poison",StylisticClass.PoisonString}
     };
     public  static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
     {
@@ -173,6 +177,7 @@ public class CardInfo
         {"Draw", " (When attacking draws 1 card for each draw modifier on the card.) "},
         {"Cripple", " (When attacking makes opponent discard 1 card for each cripple modifier on the card.) "},
         {"Spiky", " (When this card is defended deal "+StylisticClass.DamageNumber(1)+" for each spiky modifier of the card to the defending player.) "},
+        {"Poison",$"(On Damage apply poison stack to the opponent. At the end of the turn they recieve {StylisticClass.DamageNumber(1)} per poison stack.)"}
     };
     public static Dictionary<string, string> suitFullName = new Dictionary<string, string>
     {

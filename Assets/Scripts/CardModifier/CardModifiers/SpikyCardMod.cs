@@ -20,6 +20,11 @@ public class SpikyCardMod : CardModifier
         return true;
     }
 
+    public override bool OnCardDamage(int amount, Card card)
+    {
+        return false;
+    }
+
     public override bool OnDefendCard(Card defendee, Card defended)
     {
         return false;

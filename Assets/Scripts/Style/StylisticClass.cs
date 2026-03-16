@@ -20,6 +20,7 @@ public static class StylisticClass
     public static String ParryString="<rainb>PARRY</rainb>";
     public static String RestoringString="<incr f=2>RESTORING</incr>";
     public static String SpikyString= "<swing>SPIKY</swing>";
+    public static String PoisonString="<wiggle>POISON</wiggle>";
     
     //modifier colors
     public static string BounceColor = "<color=#FFA500FF>";    
@@ -28,7 +29,8 @@ public static class StylisticClass
     public static string DrawColor = "<color=#ff0000>";    
     public static string ParryColor = "<color=#FFFAFA>";     
     public static string RestoringColor = "<color=#01bb1e>"; 
-    public static string SpikyColor = "<color=#999999>";     
+    public static string SpikyColor = "<color=#999999>";  
+    public static string PoisonColor="<color=#CAFF00>";   
 
 
     // common text elements

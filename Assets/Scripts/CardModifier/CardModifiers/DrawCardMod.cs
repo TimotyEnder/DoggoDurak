@@ -12,6 +12,11 @@ public class DrawCardMod : CardModifier
         return false;
     }
 
+    public override bool OnCardDamage(int amount, Card card)
+    {
+        return false;
+    }
+
     public override bool OnDefendCard(Card defendee, Card defended)
     {
          if(defendee.GetCardInfo()._opponentCard)

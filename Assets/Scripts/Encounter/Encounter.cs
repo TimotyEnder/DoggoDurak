@@ -20,6 +20,7 @@ public abstract class Encounter : ScriptableObject
     [SerializeField] protected bool boss;
     [SerializeField] protected string encounterName;
     protected string description;
+    protected int _poisonCounters;
 
     protected bool hasRules= false;
     protected List<string> rules;
@@ -62,9 +63,14 @@ public abstract class Encounter : ScriptableObject
     public void InitiateEncounter()
     {
         rules= new List<string>();
+        this._poisonCounters=0;
         InitEncounter();
         this.rules.Clear();
         AddRules();
+    }
+    public void AddPoisonCounter(int amount)
+    {
+        this._poisonCounters++;
     }
     public abstract void InitEncounter();
     public abstract void AddRules();
@@ -83,6 +89,19 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnPlayedCardDiscarded(CardInfo card);
     public abstract void OnHandCardDiscarded(CardInfo card);
     public abstract void SetDebuffs();
+
+    public void OnTurnEndHandler(int turnState)
+    {
+        PoisonCounterHandler();
+        OnTurnEnd(turnState);
+    }
+    protected void PoisonCounterHandler()
+    {
+        if(this._poisonCounters>0)
+        {
+            GameHandler.Instance.DamageOpponent(this._poisonCounters,true);
+        }
+    }
 
     public string GetEncounterName() 
     {

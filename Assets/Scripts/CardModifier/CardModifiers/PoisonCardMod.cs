@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class BurnCardMod : CardModifier
+class PoisonCardMod : CardModifier
 {
     public override bool OnAquire()
     {
@@ -14,7 +12,15 @@ public class BurnCardMod : CardModifier
 
     public override bool OnCardDamage(int amount, Card card)
     {
-        return false;
+        if(card.GetCardInfo()._opponentCard)
+        {
+            //add player poison counter handling
+        }
+        else
+        {
+            GameHandler.Instance.GetCurrEncounter().AddPoisonCounter(1);
+        }
+        return true;
     }
 
     public override bool OnDefendCard(Card defendee, Card defended)
@@ -24,15 +30,7 @@ public class BurnCardMod : CardModifier
 
     public override bool OnPlayedCard(Card card)
     {
-        if (!card.GetCardInfo()._opponentCard)
-        {
-            DelayedDamage(1, false, "Burn"); //treat x = 1 for all X effects and just add more to a cards effect list.
-        }
-        else 
-        {
-            DelayedDamage(1, true, "Burn"); //treat x = 1 for all X effects and just add more to a cards effect list.
-        }
-        return true;
+        return false;
     }
 
     public override bool OnReverse(Card card)
