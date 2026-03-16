@@ -60,7 +60,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Draw");
             //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
-            c.AddModifier("Poison");
+            //c.AddModifier("Poison");
         }
         //debug
 
