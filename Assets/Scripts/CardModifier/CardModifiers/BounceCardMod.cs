@@ -12,7 +12,7 @@ public class BounceCardMod : CardModifier
         return false;
     }
 
-    public override bool OnCardDamage(int amount, Card card)
+    public override bool OnCardDamage(int amount, Card card, int turnState)
     {
         return false;
     }
@@ -21,7 +21,7 @@ public class BounceCardMod : CardModifier
     {
         if (!defendee.GetCardInfo()._opponentCard)
         {
-            DelayedDamage(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number), false,"Bounce");
+            DelayedDamage(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number), true,"Bounce");
         }
         else 
         {

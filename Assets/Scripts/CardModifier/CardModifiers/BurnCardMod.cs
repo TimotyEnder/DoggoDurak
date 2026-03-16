@@ -12,7 +12,7 @@ public class BurnCardMod : CardModifier
         return false;
     }
 
-    public override bool OnCardDamage(int amount, Card card)
+    public override bool OnCardDamage(int amount, Card card, int turnState)
     {
         return false;
     }
@@ -26,7 +26,7 @@ public class BurnCardMod : CardModifier
     {
         if (!card.GetCardInfo()._opponentCard)
         {
-            DelayedDamage(1, false, "Burn"); //treat x = 1 for all X effects and just add more to a cards effect list.
+            DelayedDamage(1, true, "Burn"); //treat x = 1 for all X effects and just add more to a cards effect list.
         }
         else 
         {

@@ -230,7 +230,15 @@ public class GameHandler : MonoBehaviour
     }
     public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
     {
-        int damageCalc=_currentEncounter.AddToDamageOpponent(amount);
+        int damageCalc;
+        if(!fromEffect)
+        {
+            damageCalc=_currentEncounter.AddToDamageOpponent(amount);
+        }
+        else
+        {
+            damageCalc=amount;
+        }
         if(_state._undamagable[1])
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
@@ -244,7 +252,7 @@ public class GameHandler : MonoBehaviour
             {
                for(int i=0;i<times;i++)
                 {
-                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-_state._opponentsDamageReduction);
+                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-_state._opponentsDamageReduction,fromMod);
                     if(checkMatchEnd)
                     {
                           await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
@@ -266,6 +274,14 @@ public class GameHandler : MonoBehaviour
         _state.OnDamageOpponent(amount,fromMod);
         _currentEncounter.OnDamageOpponent(amount,fromMod);
     }
+    public void PoisonOpponent(int amount)
+    {
+        _currentEncounter.AddPoisonCounter(amount);
+        if(GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+        {
+            GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdatePoisonCounters(true);
+        }
+    }
     public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
     {
         int damageCalc=_currentEncounter.AddToDamagePlayer(amount);
@@ -285,7 +301,7 @@ public class GameHandler : MonoBehaviour
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-GameHandler.Instance.GetGameState()._playedDamageReduction);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-GameHandler.Instance.GetGameState()._playedDamageReduction,fromMod);
                        if(checkMatchEnd)
                         {
                              await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
@@ -314,7 +330,21 @@ public class GameHandler : MonoBehaviour
         await UniTask.NextFrame();
         _currentEncounter.OnDamagePlayer(amount,fromMod);
     }
-
+    public void PoisonPlayer(int amount)
+    {
+        _state._playerPoisonCounters+=amount;
+        if(GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+        {
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdatePoisonCounters(false);
+        }
+    }
+    public void PlayerPoisonHandler()
+    {
+        if(_state._playerPoisonCounters>0)
+        {
+            DamagePlayer(_state._playerPoisonCounters,true,fromMod:"Poison");
+        }
+    }
     public void Draw(int amount)
     {
         GameObject Deck= GameObject.Find("Deck");

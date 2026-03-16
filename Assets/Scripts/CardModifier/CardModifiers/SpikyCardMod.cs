@@ -15,12 +15,12 @@ public class SpikyCardMod : CardModifier
         }
         else
         {
-            DelayedDamage(1,false, "Spiky");
+            DelayedDamage(1,true, "Spiky");
         }
         return true;
     }
 
-    public override bool OnCardDamage(int amount, Card card)
+    public override bool OnCardDamage(int amount, Card card, int turnState)
     {
         return false;
     }

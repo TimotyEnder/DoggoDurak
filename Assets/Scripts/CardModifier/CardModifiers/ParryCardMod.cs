@@ -12,7 +12,7 @@ public class ParryCardMod : CardModifier
         return false;
     }
 
-    public override bool OnCardDamage(int amount, Card card)
+    public override bool OnCardDamage(int amount, Card card, int turnState)
     {
         return false;
     }
@@ -31,7 +31,7 @@ public class ParryCardMod : CardModifier
     {
         if (!card.GetCardInfo()._opponentCard)
         {
-            DelayedDamage(card.GetCardInfo()._number, false, "Parry");
+            DelayedDamage(card.GetCardInfo()._number, true, "Parry");
         }
         else 
         {

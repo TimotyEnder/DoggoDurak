@@ -10,6 +10,8 @@ public class LifeTotal : MonoBehaviour
     private TextMeshProUGUI _hpText;
     public GameObject damageTextPrefab;
     public GameObject healTextPrefab;
+    [SerializeField]
+    private TextMeshProUGUI _poisonCounter;
 
     private RuleHandler _rh;
     void Awake()
@@ -30,15 +32,38 @@ public class LifeTotal : MonoBehaviour
         _hp = val;
         UpdateHealthUI();
     }
-    public void Damage(int damage) 
+    public void UpdatePoisonCounters(bool opponent)
     {
+        if(!_poisonCounter.gameObject.activeSelf)
+        {
+            _poisonCounter.gameObject.SetActive(true);
+        }
+        if(opponent)
+        {
+            _poisonCounter.text=GameHandler.Instance.GetCurrEncounter().GetPoisonCounters().ToString();
+        }
+        else
+        {
+            _poisonCounter.text=GameHandler.Instance.GetGameState()._playerPoisonCounters.ToString();
+        }
+    }
+    public void Damage(int damage,string fromMod=null) 
+    {
+        
         if(damage<0){damage=0;}
         _hp -= damage;
         if(_rh.CanEffectsSpawn())
         {
             TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
             StartCoroutine(DestroyText(damageText));
-            damageText.text = damage.ToString();
+            if(fromMod!=null)
+            {
+                damageText.text = $"{CardInfo.modifierColors[fromMod]}{damage}</color>";
+            }
+            else
+            {
+                damageText.text = damage.ToString();
+            }
             damageText.fontSize = _hpText.fontSize;
         }
         UpdateHealthUI();

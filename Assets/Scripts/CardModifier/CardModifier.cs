@@ -9,7 +9,7 @@ public abstract class CardModifier
     public abstract bool OnPlayedCard(Card card);
     public abstract bool OnReverse(Card card);
     public abstract bool OnBeingDefended(Card cardDefendingThis);
-    public abstract bool OnCardDamage(int amount, Card card);
+    public abstract bool OnCardDamage(int amount, Card card, int turnState);
 
     public async void DelayedDamage(int amount, bool player, string fromMod)
     {

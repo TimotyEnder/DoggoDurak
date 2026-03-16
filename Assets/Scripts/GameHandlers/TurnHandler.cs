@@ -196,7 +196,7 @@ public class TurnHandler : MonoBehaviour
                 await UniTask.Delay(scaledDelayTime);
                 card.SetAnimatable(false);
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
-                await card.GetCardInfo().OnDamage(damage,card);
+                await card.GetCardInfo().OnDamage(damage,card,_turnState);
            }
         }
         _cardHandArea.GreyOutAllCards();
@@ -204,6 +204,7 @@ public class TurnHandler : MonoBehaviour
         if(!_ruleHandler.isGameStateFinished()){
             await UniTask.Delay(200);
             await GameHandler.Instance.GetCurrEncounter().OnTurnEndHandler(_turnState);
+            GameHandler.Instance.PlayerPoisonHandler();
             GameHandler.Instance.GetGameState().OnTurnEnd(_turnState);
             await UniTask.Delay(200);
             _ = FinishEndTurn();

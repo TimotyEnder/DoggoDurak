@@ -12,7 +12,7 @@ public class RestoringCardMod : CardModifier
         return false;
     }
 
-    public override bool OnCardDamage(int amount, Card card)
+    public override bool OnCardDamage(int amount, Card card, int turnState)
     {
         return false;
     }

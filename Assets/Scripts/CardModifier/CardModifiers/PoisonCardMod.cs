@@ -10,15 +10,15 @@ class PoisonCardMod : CardModifier
         return false;
     }
 
-    public override bool OnCardDamage(int amount, Card card)
+    public override bool OnCardDamage(int amount, Card card, int turnState)
     {
-        if(card.GetCardInfo()._opponentCard)
+        if(turnState==1)
         {
-            //add player poison counter handling
+            GameHandler.Instance.PoisonPlayer(1);
         }
         else
         {
-            GameHandler.Instance.GetCurrEncounter().AddPoisonCounter(1);
+            GameHandler.Instance.PoisonOpponent(1);
         }
         return true;
     }

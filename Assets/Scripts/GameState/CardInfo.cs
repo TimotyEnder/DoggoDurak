@@ -330,11 +330,11 @@ public static string GetNumberShortName(int number)
             }
         }
     }
-    public async Task OnDamage(int amount,Card card) 
+    public async Task OnDamage(int amount,Card card, int turnState) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
-            if (modifierStringToType.GetValueOrDefault(c.ModType).OnCardDamage(amount,card)) 
+            if (modifierStringToType.GetValueOrDefault(c.ModType).OnCardDamage(amount,card,turnState)) 
             {
                 if (_card != null)
                 {

@@ -45,6 +45,7 @@ public class GameState
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
     public int _playedDamageReduction;
     public bool _reversePossible;
+    public int _playerPoisonCounters;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
