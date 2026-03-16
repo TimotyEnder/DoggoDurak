@@ -8,7 +8,7 @@ class ContrabandChocolateBar : Item
         this.boss = false;
         this.itemId = "ContrabandChocolateBar";
         this.itemName="ContrabandChocolateBar";
-        this.toolTipDesc = "5 random cards gain "+StylisticClass.PoisonColor+StylisticClass.PoisonString+" 1"+CardInfo.modifierToDescription["Poison"]+"</color>";
+        this.toolTipDesc = "3 random cards gain "+StylisticClass.PoisonColor+StylisticClass.PoisonString+" 1"+CardInfo.modifierToDescription["Poison"]+"</color>";
     }
 
     public override void OnActivate()
@@ -20,7 +20,7 @@ class ContrabandChocolateBar : Item
     {
         int cardsModded = 0;
         int it = 0;
-        int amountToMod = 5;
+        int amountToMod = 3;
         string modifier = "Poison";
         while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amountToMod)
         {
