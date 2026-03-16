@@ -66,9 +66,9 @@ public class GameHandler : MonoBehaviour
         //Item debugItem2 = ScriptableObject.CreateInstance<OligarchsProtection>();
         //debugItem2.InitItem();
         //_state.AddItem(debugItem2);
-        //Item debugItem3 = ScriptableObject.CreateInstance<FluffyUshanka>();
-        //debugItem3.InitItem();
-        //_state.AddItem(debugItem3);
+        Item debugItem3 = ScriptableObject.CreateInstance<UZB76>();
+        debugItem3.InitItem();
+        _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
@@ -389,10 +389,10 @@ public class GameHandler : MonoBehaviour
     {
         _state._deck.Add(card);
         SortDeck();
-        GameObject opponentDeck= GameObject.Find("Deck");
-        if(opponentDeck!=null)
+        GameObject playerDeck= GameObject.Find("Deck");
+        if(playerDeck!=null)
         {
-            opponentDeck.GetComponent<Deck>().AddCard(card);
+            playerDeck.GetComponent<Deck>().AddCard(card);
         }
         _state.OnCardAdded(card);
     }

@@ -35,7 +35,7 @@ public class CardInfo
         this._opponentCard = opp;
         this._modifierStacks = new Dictionary<string, int>();
     }
-    public CardInfo(CardInfo card, bool opponentCard)//shallow copy contructor.
+    public CardInfo(CardInfo card, bool opponentCard=false)//shallow copy contructor.
     {
         this._suit=card._suit;
         this._suitNumber= SuitNumber(this._suit);
