@@ -82,6 +82,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject parryTextPrefab;
     [SerializeField]
     private GameObject drawTextPrefab;
+    [SerializeField]
+    private GameObject poisonTextPrefab;
     private PassButton _passButton;
     void Start()
     {
@@ -307,6 +309,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 case "Spiky":
                     Debug.Log("Spiky");
                     instancedText = Instantiate(spikyTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    break; 
+                case "Poison":
+                    Debug.Log("Poison");
+                    instancedText = Instantiate(poisonTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
                     break; 
             }
         }

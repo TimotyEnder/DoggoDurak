@@ -339,7 +339,7 @@ public static string GetNumberShortName(int number)
                 if (_card != null)
                 {
                     _card.Bling();
-                    //_card.SpawnModifierEffect(c);
+                    _card.SpawnModifierEffect(c);
                 }
                 await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }

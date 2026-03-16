@@ -72,7 +72,7 @@ public abstract class Encounter : ScriptableObject
     }
     public void AddPoisonCounter(int amount)
     {
-        this._poisonCounters++;
+        this._poisonCounters+=amount;
     }
     public int GetPoisonCounters()
     {
@@ -107,6 +107,7 @@ public abstract class Encounter : ScriptableObject
         if(this._poisonCounters>0)
         {
             GameHandler.Instance.DamageOpponent(this._poisonCounters,true,"Poison");
+            GameHandler.Instance.PoisonOpponent(-1);
         }
     }
 

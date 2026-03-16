@@ -56,7 +56,7 @@ public class LifeTotal : MonoBehaviour
         {
             TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
             StartCoroutine(DestroyText(damageText));
-            if(fromMod!=null)
+            if(fromMod!="")
             {
                 damageText.text = $"{CardInfo.modifierColors[fromMod]}{damage}</color>";
             }

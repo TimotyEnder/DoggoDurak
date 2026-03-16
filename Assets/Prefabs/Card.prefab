@@ -26226,6 +26226,7 @@ MonoBehaviour:
   cripplingTextPrefab: {fileID: 3117037092606373501, guid: aab88024b5bcc5943a3d75bc7dba6a3e, type: 3}
   parryTextPrefab: {fileID: 8990485995031706129, guid: 016005817db6b59468b8c29115e46998, type: 3}
   drawTextPrefab: {fileID: 5337278189223182718, guid: 9dd824b06bf039e4e8d1e582af91ab8f, type: 3}
+  poisonTextPrefab: {fileID: 2919352896825218704, guid: 32b2ef50b74b30b678fae837499dc953, type: 3}
 --- !u!95 &9176361097048513517
 Animator:
   serializedVersion: 7

@@ -343,6 +343,7 @@ public class GameHandler : MonoBehaviour
         if(_state._playerPoisonCounters>0)
         {
             DamagePlayer(_state._playerPoisonCounters,true,fromMod:"Poison");
+            PoisonPlayer(-1);
         }
     }
     public void Draw(int amount)
@@ -505,6 +506,7 @@ public class GameHandler : MonoBehaviour
         _state._enemyHandSize = 6;
         _state._loseToWin=false;
         _state._healingAndDamageInverted=false;
+        _state._playerPoisonCounters=0;
     }
     public void AddToOpponentCurrentDeck(CardInfo card)
     {
