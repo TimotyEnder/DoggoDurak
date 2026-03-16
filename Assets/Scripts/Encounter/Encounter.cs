@@ -107,7 +107,10 @@ public abstract class Encounter : ScriptableObject
         if(this._poisonCounters>0)
         {
             GameHandler.Instance.DamageOpponent(this._poisonCounters,true,"Poison");
-            GameHandler.Instance.PoisonOpponent(-1);
+            if(GameHandler.Instance.GetGameState()._poisonCountDown)
+            {
+                GameHandler.Instance.PoisonOpponent(-1);
+            }
         }
     }
 

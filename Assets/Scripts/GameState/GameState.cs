@@ -46,6 +46,7 @@ public class GameState
     public int _playedDamageReduction;
     public bool _reversePossible;
     public int _playerPoisonCounters;
+    public bool _poisonCountDown;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -120,6 +121,7 @@ public class GameState
         _healingAndDamageInverted=false;
         _laikaCardInShopChance=10;
         _reversePossible=true;
+        _poisonCountDown=true;
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {
