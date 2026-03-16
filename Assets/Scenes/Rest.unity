@@ -877,6 +877,17 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
+--- !u!114 &67001974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4644241256409412879, guid: 0e7da57424230cf48bba0d98f19f16f3, type: 3}
+  m_PrefabInstance: {fileID: 399872904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &121005684
 GameObject:
   m_ObjectHideFlags: 0
@@ -7856,6 +7867,10 @@ PrefabInstance:
       propertyPath: _heartsText
       value: 
       objectReference: {fileID: 34383731}
+    - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
+      propertyPath: _poisonText
+      value: 
+      objectReference: {fileID: 67001974}
     - target: {fileID: 8174636042219354403, guid: f2623c5743040342ba30927a305cf20e, type: 3}
       propertyPath: _spadesText
       value: 

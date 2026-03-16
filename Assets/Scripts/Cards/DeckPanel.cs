@@ -53,7 +53,8 @@ public class DeckPanel : MonoBehaviour
     private TextMeshProUGUI _restoringText;
     [SerializeField]
     private TextMeshProUGUI _spikyText;
-
+    [SerializeField]
+    private TextMeshProUGUI _poisonText;
 
     private List<CardInfo> _clubs;
     private List<CardInfo> _diamonds;
@@ -237,5 +238,8 @@ public class DeckPanel : MonoBehaviour
 
         _spikyText.text=CardInfo.modifierColors["Spiky"]+StylisticClass.SpikyString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Spiky") && card._modifierStacks["Spiky"]>0).Count+"</color>"+"\n";
         _spikyText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Spiky"]+CardInfo.modifierToDescription["Spiky"]+"</color>");
+
+        _poisonText.text=CardInfo.modifierColors["Poison"]+StylisticClass.PoisonString+": "+GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Poison") && card._modifierStacks["Poison"]>0).Count+"</color>"+"\n";
+        _poisonText.gameObject.GetComponent<ToolTip>().SetToolTipText(CardInfo.modifierColors["Poison"]+CardInfo.modifierToDescription["Poison"]+"</color>");
     }
 }
