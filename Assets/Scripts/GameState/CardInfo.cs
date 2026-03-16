@@ -173,7 +173,7 @@ public class CardInfo
     {
         {"Restoring", " (Defend with this card to gain health equal to the difference of values between the defending and defended cards.) "},
         {"Bounce", " (When defending, this card does  damage  equal  to the difference of values between the defending and defended cards.) "},
-        {"Burn", " (When attacking deal "+StylisticClass.DamageNumber(1)+" for each burn modifier on the card.) "},
+        {"Burn", " (When attacking/defending deal "+StylisticClass.DamageNumber(1)+" for each burn modifier on the card.) "},
         {"Parry", "(Reverse with this card to deal that cards value as damage.) "},
         {"Draw", " (When attacking draws 1 card for each draw modifier on the card.) "},
         {"Cripple", " (When attacking makes opponent discard 1 card for each cripple modifier on the card.) "},
