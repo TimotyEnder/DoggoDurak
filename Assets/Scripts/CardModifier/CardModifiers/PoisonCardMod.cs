@@ -14,11 +14,11 @@ class PoisonCardMod : CardModifier
     {
         if(turnState==1)
         {
-            GameHandler.Instance.PoisonPlayer(1);
+            GameHandler.Instance.PoisonPlayer(card.GetCardInfo()._number/3);
         }
         else
         {
-            GameHandler.Instance.PoisonOpponent(1);
+            GameHandler.Instance.PoisonOpponent(card.GetCardInfo()._number/3);
         }
         return true;
     }

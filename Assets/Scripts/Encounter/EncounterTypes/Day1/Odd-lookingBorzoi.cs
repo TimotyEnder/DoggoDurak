@@ -20,7 +20,7 @@ public class OddlookingBorzoi : Encounter
     }
     public override void AddRules()
     {
-        AddRule("Each time you play an "+StylisticClass.HighLight+"even numbered card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
+        AddRule("Each time you play an "+StylisticClass.HighLight+" even numbered card "+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(2)); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
