@@ -8,7 +8,7 @@ public class DoctorsSausage : Item
         this.boss = false;
         this.itemId = "DoctorsSausage";
         this.itemName="DoctorsSausage";
-        this.toolTipDesc = "+1 for each card in your deck";
+        this.toolTipDesc = "+1 for each numbered card in your deck";
     }
 
     public override void OnActivate()
@@ -20,7 +20,7 @@ public class DoctorsSausage : Item
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
         {
-            if (c._number < 14) 
+            if(!c.IsFace())
             {
                 c._number++;
             }

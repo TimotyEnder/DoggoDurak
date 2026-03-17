@@ -8,7 +8,7 @@ public class TsarsCrown:Item
         this.boss = false;
         this.itemId = "TsarsCrown";
         this.itemName="TsarsCrown";
-        this.toolTipDesc = "+1 value to all face cards";
+        this.toolTipDesc = "+2 value to all face cards";
     }
 
     public override void OnActivate()
@@ -20,9 +20,9 @@ public class TsarsCrown:Item
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
         {
-            if (c._number > 10 && c._number < 14) 
+            if (c.IsFace()) 
             {
-                c._number++;
+                c._number+=2;
             }
         }
     }
