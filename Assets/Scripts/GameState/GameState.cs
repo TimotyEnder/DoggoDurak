@@ -235,6 +235,13 @@ public class GameState
             item.OnDamageOpponent(amount, fromMod);
         }
     }
+    public void OnDamagePlayer(int amount, string fromMod = "")
+    {
+        foreach (Item item in _items)
+        {
+            item.OnDamagePlayer(amount, fromMod);
+        }
+    }
     public void OnEndEncounter()
     {
         foreach (Item item in _items)

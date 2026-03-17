@@ -67,4 +67,9 @@ public class DefaultItem : Item
     {
         
     }
+
+    public override void OnDamagePlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }

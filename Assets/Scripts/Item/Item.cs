@@ -33,6 +33,7 @@ public abstract class Item : ScriptableObject
     public abstract void OnReverse(Card card);
     public abstract void OnHeal(int amount);
     public abstract void OnDamageOpponent(int amount, string fromMod = "");
+    public abstract void OnDamagePlayer(int amount, string fromMod="");
     public abstract void OnActivate();
     public abstract void OnEndEncounter();
     public abstract void OnTurnEnd(int turnState);

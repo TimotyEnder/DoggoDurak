@@ -34,6 +34,11 @@ class SneakySleeve : Item
         
     }
 
+    public override void OnDamagePlayer(int amount, string fromMod = "")
+    {
+        
+    }
+
     public override void OnDefendCard(Card defendee, Card defended)
     {
         

@@ -89,4 +89,9 @@ public class StraysLuckyCoin : Item
     {
         
     }
+
+    public override void OnDamagePlayer(int amount, string fromMod = "")
+    {
+        
+    }
 }
