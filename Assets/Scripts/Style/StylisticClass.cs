@@ -30,7 +30,7 @@ public static class StylisticClass
     public static string ParryColor = "<color=#FFFAFA>";     
     public static string RestoringColor = "<color=#01bb1e>"; 
     public static string SpikyColor = "<color=#999999>";  
-    public static string PoisonColor="<color=#CAFF00>";   
+    public static string PoisonColor="<color=#95BA3E>";   
 
 
     // common text elements
