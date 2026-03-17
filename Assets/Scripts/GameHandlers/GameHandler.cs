@@ -53,7 +53,7 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            c.AddModifier("Burn",1);
+            //c.AddModifier("Burn",1);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
@@ -69,7 +69,7 @@ public class GameHandler : MonoBehaviour
         //_state.AddItem(debugItem2);
         Item debugItem3 = ScriptableObject.CreateInstance<HotChocolate>();
         debugItem3.InitItem();
-        _state.AddItem(debugItem3);
+        //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();

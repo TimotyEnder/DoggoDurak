@@ -44,6 +44,13 @@ public class TurnHandler : MonoBehaviour
     {
         _turn++;
         _turnIndicatorText.text=$"Turn {_turn}";
+        _turnIndicatorAnim.speed=1f;
+        _turnIndicatorAnim.SetTrigger("Cycle");
+    }
+    private void TurnIndicatorReverse()
+    {
+        _turnIndicatorText.text=$"Reversed!";
+        _turnIndicatorAnim.speed=1.5f;
         _turnIndicatorAnim.SetTrigger("Cycle");
     }
     void Start()
@@ -134,6 +141,7 @@ public class TurnHandler : MonoBehaviour
     }
     public void Reverse() 
     {
+        TurnIndicatorReverse();
         if (_turnState == 0)
         {
             _turnState = 1;
