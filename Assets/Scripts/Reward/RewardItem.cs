@@ -1,8 +1,10 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RewardItem : MonoBehaviour
+public class RewardItem : MonoBehaviour,IPointerEnterHandler
 {
     private Item _item;
     private Sprite _itemIcon;
@@ -15,9 +17,11 @@ public class RewardItem : MonoBehaviour
     [SerializeField]
     private GameObject _costImage;
     private int price = 0;
+    private Animator _thisAnim;
 
     private void Start()
     {
+        _thisAnim=GetComponent<Animator>();
         _button = transform.Find("Button").GetComponent<Button>();
         _button.onClick.AddListener(OnClickActiveItem);
         GameObject rewObj = GameObject.Find("RewardItemGrid");
@@ -62,11 +66,16 @@ public class RewardItem : MonoBehaviour
         _toolTip.SetToolTipText(item.GetItemToolTip());
         //_toolTip.infoRight="<size="+SettingsState.ToolTipFontSizeText+">"+Item.rarityIntToWord[item.GetRarity()]+" Item"+"</size>";
     }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _thisAnim.SetTrigger("Hover");
+    }
     private void OnClickActiveItem()
     {
         if (price==0 || price>0 && GameHandler.Instance.GetGameState()._rubles>=price) 
         {
             GameHandler.Instance.GetGameState().AddItem(this._item);
+            _thisAnim.SetTrigger("Pick");
             GetComponent<ToolTip>().SetTooltipActiveState(false);
             if (price==0 && _rewgrid != null) 
             {
@@ -76,7 +85,7 @@ public class RewardItem : MonoBehaviour
             { 
                 GameHandler.Instance.UpdateMoney(-price);
             } 
-            Destroy(this.gameObject);
+            Destroy(this.gameObject,0.5f);
         }
     }
 }
