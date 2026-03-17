@@ -1,22 +1,22 @@
+using System.Diagnostics;
 using UnityEngine;
-[CreateAssetMenu(fileName = "InvestmentFund", menuName = "Items/Active-Rare/InvestmentFund")]
-class InvestmentFund : Item
+[CreateAssetMenu(fileName = "BurrowerOfTheBone", menuName = "Items/Active-Rare/BurrowerOfTheBone")]
+class BurrowerOfTheBone : Item
 {
     public override void InitItem()
     {
         this.rarity = 1;
         this.boss = false;
-        this.itemId = "InvestmentFund";
-        this.itemName="InvestmentFund";
         this.isActive=true;
-        this.persistent=false;
-        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}discard{StylisticClass.HighLightClose} the {StylisticClass.HighLight}right-most{StylisticClass.HighLightClose} card and {StylisticClass.HighLight}gain rubles equal to its number{StylisticClass.HighLightClose}.";
+        this.itemId = "BurrowerOfTheBone";
+        this.itemName="BurrowerOfTheBone";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}Discard{StylisticClass.HighLightClose} your hand and {StylisticClass.HighLight}draw{StylisticClass.HighLightClose} a new hand.";
     }
 
     public override void OnActivate()
     {
-        GameHandler.Instance.UpdateMoney(GameHandler.Instance.GetCardInHand(GameHandler.Instance.GetPlayerCardsInHand()-1)._number);
-        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetPlayerCardsInHand()-1);
+        GameHandler.Instance.PlayerDiscard(0,GameHandler.Instance.GetPlayerCardsInHand());
+        GameHandler.Instance.Draw(GameHandler.Instance.GetGameState()._handSize);
     }
 
     public override void OnAquire()

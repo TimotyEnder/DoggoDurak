@@ -1,22 +1,21 @@
+using System.Diagnostics;
 using UnityEngine;
-[CreateAssetMenu(fileName = "InvestmentFund", menuName = "Items/Active-Rare/InvestmentFund")]
-class InvestmentFund : Item
+[CreateAssetMenu(fileName = "EmergencyContact", menuName = "Items/Active-Rare/ChocolateBonBon")]
+class ChocolateBonBon : Item
 {
     public override void InitItem()
     {
         this.rarity = 1;
         this.boss = false;
-        this.itemId = "InvestmentFund";
-        this.itemName="InvestmentFund";
         this.isActive=true;
-        this.persistent=false;
-        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}discard{StylisticClass.HighLightClose} the {StylisticClass.HighLight}right-most{StylisticClass.HighLightClose} card and {StylisticClass.HighLight}gain rubles equal to its number{StylisticClass.HighLightClose}.";
+        this.itemId = "ChocolateBonBon";
+        this.itemName="ChocolateBonBon";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} The opponent gains {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters for each card with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck.";
     }
 
     public override void OnActivate()
     {
-        GameHandler.Instance.UpdateMoney(GameHandler.Instance.GetCardInHand(GameHandler.Instance.GetPlayerCardsInHand()-1)._number);
-        GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetPlayerCardsInHand()-1);
+        GameHandler.Instance.PoisonOpponent(GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Poison") && card._modifierStacks["Poison"]>0).Count);
     }
 
     public override void OnAquire()
