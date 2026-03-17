@@ -29,6 +29,10 @@ class AlyonkaBar : Item
 
     public override void OnCardAdded(CardInfo card)
     {
+         if(card.IsFace())
+        {
+            card.AddModifier("Poison");
+        }
     }
 
     public override void OnDamageOpponent(int amount, string fromMod = "")

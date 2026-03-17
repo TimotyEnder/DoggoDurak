@@ -21,11 +21,11 @@ public class RestoringCardMod : CardModifier
     {
         if (!defendee.GetCardInfo()._opponentCard)
         {
-            DelayedHeal(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number),true);
+            DelayedHeal(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number),true,"Restoring");
         }
         else 
         {
-            DelayedHeal(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number),false);
+            DelayedHeal(Mathf.Abs(defendee.GetCardInfo()._number - defended.GetCardInfo()._number),false,"Restoring");
         }
         return true;
     }

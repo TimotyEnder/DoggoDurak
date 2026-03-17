@@ -76,6 +76,7 @@ public class CardInfo
         {
             _suit="L";
             _number=0;
+            GameHandler.Instance.GetGameState().OnCardAdded(this);
             return true;
         }
         return false;

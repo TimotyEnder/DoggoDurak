@@ -48,6 +48,7 @@ public class GameState
     public int _playerPoisonCounters;
     public bool _poisonCountDown;
     public bool _burnPoison;
+    public Dictionary<string,int> _modifierAddedEffect;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -124,6 +125,21 @@ public class GameState
         _reversePossible=true;
         _poisonCountDown=true;
         _burnPoison=false;
+        InitModDamageDic();
+    }
+    private void InitModDamageDic()
+    {
+        _modifierAddedEffect = new Dictionary<string, int>  //-1 equals infinite copies
+        {
+            {"Restoring", 0},
+            {"Bounce", 0},
+            {"Burn", 0},
+            {"Parry", 0},
+            {"Draw", 0},
+            {"Cripple", 0},
+            {"Spiky", 0},
+            {"Poison",0}
+        };
     }
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {

@@ -8,7 +8,7 @@ class HeartyBeet : Item
         this.boss = false;
         this.itemId = "HeartyBeet";
         this.itemName="HeartyBeet";
-        this.toolTipDesc = "+1 to 15 random cards.";
+        this.toolTipDesc = "+1 to 7 random cards.";
     }
 
     public override void OnActivate()
@@ -18,7 +18,7 @@ class HeartyBeet : Item
 
     public override void OnAquire()
     {
-        UpgradeRandomCards(15,1);
+        UpgradeRandomCards(7,1);
     }
 
     public override void OnCardAdded(CardInfo card)

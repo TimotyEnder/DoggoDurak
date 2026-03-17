@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "RedCaviar", menuName = "Items/Rare/RedCaviar")]
 public class RedCaviar : Item
@@ -8,7 +9,7 @@ public class RedCaviar : Item
         this.boss = false;
         this.itemId = "RedCaviar";
         this.itemName="RedCaviar";
-        this.toolTipDesc = "+1 value to all red cards";
+        this.toolTipDesc = $"20 random {StylisticClass.HighLight}red cards{StylisticClass.HighLightClose} gain {StylisticClass.HighLight}+1{StylisticClass.HighLightClose} ";
     }
 
     public override void OnActivate()
@@ -18,13 +19,15 @@ public class RedCaviar : Item
 
     public override void OnAquire()
     {
+        List<CardInfo> redCards= new List<CardInfo>();
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
-            if (c._number < 14 && (c._suit=="D"|| c._suit == "H"))
+            if (c._suit=="D"|| c._suit == "H")
             {
-                c._number++;
+               redCards.Add(c);
             }
         }
+        UpgradeRandomCards(20,1,redCards);
     }
 
     public override void OnCardAdded(CardInfo card)

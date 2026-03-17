@@ -20,10 +20,10 @@ public abstract class CardModifier
         }
         else
         {
-            GameHandler.Instance.DamageOpponent(amount, fromMod: fromMod);
+            GameHandler.Instance.DamageOpponent(amount+GameHandler.Instance.GetGameState()._modifierAddedEffect[fromMod], fromMod: fromMod);
         }
     }
-    public async void  DelayedHeal(int amount,bool player)
+    public async void  DelayedHeal(int amount,bool player,string fromMod)
     {
         await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeDamage()));
         if (player)
@@ -32,7 +32,7 @@ public abstract class CardModifier
         }
         else
         {
-            GameHandler.Instance.HealOpponent(amount,fromEffect:false);
+            GameHandler.Instance.HealOpponent(amount+GameHandler.Instance.GetGameState()._modifierAddedEffect[fromMod],fromEffect:false);
         }
     }
 }

@@ -114,13 +114,17 @@ public abstract class Item : ScriptableObject
         {2,"Legendary"},
         {3,"Boss"},
     };
-    protected void AddModToRandomCards(int amountToMod,string modifier)
+    protected void AddModToRandomCards(int amountToMod,string modifier,List<CardInfo> list=null)
     {
         int cardsModded = 0;
         int it = 0;
-        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amountToMod)
+        if(list==null)
         {
-            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[UnityEngine.Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            list=  GameHandler.Instance.GetGameState()._deck;
+        }
+        while (it < list.Count && cardsModded < amountToMod)
+        {
+            CardInfo cardToMod = list[UnityEngine.Random.Range(0, list.Count - 1)];
             if (!cardToMod._modifierStacks.ContainsKey(modifier))
             {
                 cardToMod.AddModifier(modifier);
@@ -130,17 +134,21 @@ public abstract class Item : ScriptableObject
         }
         for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
         {
-            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[UnityEngine.Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            CardInfo cardToMod = list[UnityEngine.Random.Range(0, list.Count - 1)];
             cardToMod.AddModifier(modifier);
         }
     }
-    public void UpgradeRandomCards(int amount, int mod)
+    public void UpgradeRandomCards(int amount, int mod,List<CardInfo> list=null)
     {
         int cardsModded = 0;
         int it = 0;
-        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amount)
+        if(list==null)
         {
-            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[UnityEngine.Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            list=  GameHandler.Instance.GetGameState()._deck;
+        }
+        while (it < list.Count && cardsModded < amount)
+        {
+            CardInfo cardToMod = list[UnityEngine.Random.Range(0, list.Count - 1)];
             cardToMod._number+=mod;
             it++;
         }

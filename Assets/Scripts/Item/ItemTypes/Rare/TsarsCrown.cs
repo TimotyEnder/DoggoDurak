@@ -8,7 +8,7 @@ public class TsarsCrown:Item
         this.boss = false;
         this.itemId = "TsarsCrown";
         this.itemName="TsarsCrown";
-        this.toolTipDesc = "+2 value to all face cards";
+        this.toolTipDesc = $"All {StylisticClass.HighLight}face{StylisticClass.HighLightClose} cards are {StylisticClass.HighLight}Kings{StylisticClass.HighLightClose}";
     }
 
     public override void OnActivate()
@@ -22,14 +22,17 @@ public class TsarsCrown:Item
         {
             if (c.IsFace()) 
             {
-                c._number+=2;
+                c._number=13;
             }
         }
     }
 
     public override void OnCardAdded(CardInfo card)
     {
-        
+        if (card.IsFace()) 
+        {
+            card._number=13;
+        }
     }
 
     public override void OnDamageOpponent(int amount, string fromMod)

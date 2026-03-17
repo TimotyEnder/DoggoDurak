@@ -20,17 +20,21 @@ class PrimeLaikaDirective : Item
     {
         foreach(CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
-            if(c._number==7 || c._number==11)
+            if(c.IsLaika())
             {
-                c.MakeLaika();
                 c.AddModifier("Burn",5);
+                c.AddModifier("Bounce");
             }
         }
     }
 
     public override void OnCardAdded(CardInfo card)
     {
-        
+        if(card.IsLaika())
+        {
+            card.AddModifier("Burn",5);
+            card.AddModifier("Bounce");
+        }
     }
 
     public override void OnDamageOpponent(int amount, string fromMod = "")

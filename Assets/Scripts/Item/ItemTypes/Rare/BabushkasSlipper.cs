@@ -8,7 +8,7 @@ public class BabushkasSlipper : Item
         this.boss = false;
         this.itemId = "BabushkasSlipper";
         this.itemName="Babushka's Slipper";
-        this.toolTipDesc = "Even numbered cards gain "+StylisticClass.ParryColor+StylisticClass.ParryString+CardInfo.modifierToDescription["Parry"]+"</color>";
+        this.toolTipDesc = $"{StylisticClass.ParryColor}{StylisticClass.ParryString}</color> effects +{StylisticClass.DamageNumber(1)}";
     }
 
     public override void OnActivate()
@@ -18,13 +18,7 @@ public class BabushkasSlipper : Item
 
     public override void OnAquire()
     {
-        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
-        {
-            if (c.IsEven() && !c._modifierStacks.ContainsKey("Parry")) 
-            {
-                c.AddModifier("Parry");
-            }
-        }
+        GameHandler.Instance.GetGameState()._modifierAddedEffect["Parry"]++;
     }
 
     public override void OnCardAdded(CardInfo card)

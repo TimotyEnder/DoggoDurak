@@ -8,7 +8,7 @@ public class KGBConnections : Item
         this.boss = false;
         this.itemId = "KGBConnections";
         this.itemName="KGBConnections";
-        this.toolTipDesc = "All face crads gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+" 1 (Makes opponent discard 1 card for each cripple modifier on the card)</color>";
+        this.toolTipDesc = $"All {StylisticClass.HighLight}face cards{StylisticClass.HighLightClose} gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+CardInfo.modifierToDescription["Cripple"]+"</color>";
     }
 
     public override void OnActivate()
@@ -20,7 +20,7 @@ public class KGBConnections : Item
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
         {
-            if (c._number > 10) 
+            if (c.IsFace()) 
             {
                 c.AddModifier("Cripple");
             }
@@ -29,7 +29,10 @@ public class KGBConnections : Item
 
     public override void OnCardAdded(CardInfo card)
     {
-        
+        if (card.IsFace()) 
+        {
+            card.AddModifier("Cripple");
+        }
     }
 
     public override void OnDamageOpponent(int amount, string fromMod)

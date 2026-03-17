@@ -56,14 +56,14 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Burn",1);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
-            //c.AddModifier("Parry");
+            c.AddModifier("Parry");
             //c.AddModifier("Draw");
             //c.AddModifier("Cripple");
             //c.AddModifier("Spiky");
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<Laikad>();
+        Item debugItem3 = ScriptableObject.CreateInstance<LaikasCall>();
         debugItem3.InitItem();
         //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug

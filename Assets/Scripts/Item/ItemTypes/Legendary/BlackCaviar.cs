@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "BlackCaviar", menuName = "Items/Legendary/BlackCaviar")]
 public class BlackCaviar : Item
@@ -18,17 +19,15 @@ public class BlackCaviar : Item
 
     public override void OnAquire()
     {
-        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
+        List<CardInfo> blackCards= new List<CardInfo>();
+        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
-            if (c._number < 13 && (c._suit == "S" || c._suit == "C"))
+            if (c._suit=="S"|| c._suit == "C")
             {
-                c._number += 2;
-            }
-            else if (c._number < 14 && (c._suit == "S" || c._suit == "C"))
-            {
-                c._number++;
+               blackCards.Add(c);
             }
         }
+        UpgradeRandomCards(20,2,blackCards);
     }
 
     public override void OnCardAdded(CardInfo card)

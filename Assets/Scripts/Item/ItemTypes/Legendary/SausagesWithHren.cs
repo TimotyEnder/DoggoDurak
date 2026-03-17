@@ -8,7 +8,7 @@ public class SausagesWithHren : Item
         this.boss = false;
         this.itemId = "SausagesWithHren";
         this.itemName="SausagesWithHren";
-        this.toolTipDesc = "All cards in your deck gain "+StylisticClass.BounceColor+StylisticClass.BounceString+"(When defending, this card deals damage equal to the difference of values between the defending and defended cards)</color>";
+        this.toolTipDesc = $"All {StylisticClass.HighLight}red{StylisticClass.HighLightClose} cards in your deck gain "+StylisticClass.BounceColor+StylisticClass.BounceString+CardInfo.modifierToDescription["Bounce"]+"</color>";
     }
 
     public override void OnActivate()
@@ -20,13 +20,19 @@ public class SausagesWithHren : Item
     {
         foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck) 
         {
-            c.AddModifier("Bounce");
+            if(c.IsRed())
+            {
+                c.AddModifier("Bounce");
+            }
         }
     }
 
     public override void OnCardAdded(CardInfo card)
     {
-        
+        if(card.IsRed())
+        {
+            card.AddModifier("Bounce");
+        }
     }
 
     public override void OnDamageOpponent(int amount, string fromMod)
