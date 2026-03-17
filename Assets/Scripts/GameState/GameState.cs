@@ -34,6 +34,8 @@ public class GameState
     public int _discardingCardInShopCost;
     public int _startingDiscardInShopCost;
     public int _shopRerollCost;
+    public int _freeShopRerolls;
+    public int _maxFreeShopRerolls;
     public int _startingShopRerollCost;
     public bool[] _undamagable; //0 player 1 enemy
     public int _enemyHandSize;
@@ -114,6 +116,8 @@ public class GameState
         _discardingCardInShopCost = 5;
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
+        _freeShopRerolls=0;
+        _maxFreeShopRerolls=0;
         _startingShopRerollCost = 5;
         _undamagable=new bool[]{false,false};
         _opponentsDamageReduction = 0;

@@ -20,10 +20,17 @@ public class ShopRerollButt : MonoBehaviour
     }
     private void OnRerollButtonClick()
     {
-        if (GameHandler.Instance.GetGameState()._shopRerollCost <= GameHandler.Instance.GetGameState()._rubles)
+        if (GameHandler.Instance.GetGameState()._shopRerollCost <= GameHandler.Instance.GetGameState()._rubles  || GameHandler.Instance.GetGameState()._freeShopRerolls>0)
         {
-            GameHandler.Instance.UpdateMoney(-GameHandler.Instance.GetGameState()._shopRerollCost);
-            GameHandler.Instance.GetGameState()._shopRerollCost += 5;
+            if(GameHandler.Instance.GetGameState()._freeShopRerolls<=0)
+            {
+                GameHandler.Instance.UpdateMoney(-GameHandler.Instance.GetGameState()._shopRerollCost);
+                GameHandler.Instance.GetGameState()._shopRerollCost += 5;
+            }
+            else
+            {
+                GameHandler.Instance.GetGameState()._freeShopRerolls--;
+            }
             _shopItemContent.ReRoll();
             _shopCardGrid.ReRoll();
             UpdateCostText();
@@ -31,7 +38,14 @@ public class ShopRerollButt : MonoBehaviour
     }
     private void UpdateCostText()
     {
-        _costText.text =  GameHandler.Instance.GetGameState()._shopRerollCost.ToString()+_costText.text[_costText.text.Length-1];
+        if(GameHandler.Instance.GetGameState()._freeShopRerolls<=0)
+        {
+            _costText.text =  GameHandler.Instance.GetGameState()._shopRerollCost.ToString()+_costText.text[_costText.text.Length-1];
+        }
+        else
+        {
+            _costText.text=GameHandler.Instance.GetGameState()._freeShopRerolls.ToString()+"x0"+_costText.text[_costText.text.Length-1].ToString();
+        }
     }
 
 }
