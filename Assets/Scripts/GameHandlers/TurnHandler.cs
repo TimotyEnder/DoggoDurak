@@ -204,8 +204,9 @@ public class TurnHandler : MonoBehaviour
         if(!_ruleHandler.isGameStateFinished()){
             await UniTask.Delay(200);
             await GameHandler.Instance.GetCurrEncounter().OnTurnEndHandler(_turnState);
-            GameHandler.Instance.PlayerPoisonHandler();
             GameHandler.Instance.GetGameState().OnTurnEnd(_turnState);
+            await UniTask.Delay(100);
+            GameHandler.Instance.PlayerPoisonHandler();
             await UniTask.Delay(200);
             _ = FinishEndTurn();
         }

@@ -507,6 +507,7 @@ public class GameHandler : MonoBehaviour
         _state._loseToWin=false;
         _state._healingAndDamageInverted=false;
         _state._playerPoisonCounters=0;
+        ResetDebuffs();
     }
     public void AddToOpponentCurrentDeck(CardInfo card)
     {
