@@ -1,26 +1,24 @@
-using NUnit.Framework;
-using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "DachaDoorstep", menuName = "Items/Common/DachaDoorstep")]
-public class DachaDoorstep : Item
+[CreateAssetMenu(fileName = "HeartyBeet", menuName = "Items/Common/HeartyBeet")]
+class HeartyBeet : Item
 {
     public override void InitItem()
     {
         this.rarity = 0;
         this.boss = false;
-        this.itemId = "DachaDoorstep";
-        this.itemName="DachaDoorstep";
-        this.toolTipDesc = "5 random cards gain "+StylisticClass.BounceColor+StylisticClass.BounceString+CardInfo.modifierToDescription["Bounce"]+"</color>";
+        this.itemId = "HeartyBeet";
+        this.itemName="HeartyBeet";
+        this.toolTipDesc = "+1 to 15 random cards.";
     }
 
     public override void OnActivate()
     {
-
+        
     }
 
     public override void OnAquire()
     {
-        AddModToRandomCards(5,"Bounce");
+        UpgradeRandomCards(15,1);
     }
 
     public override void OnCardAdded(CardInfo card)
@@ -28,13 +26,14 @@ public class DachaDoorstep : Item
         
     }
 
-    public override void OnDamageOpponent(int amount, string fromMod)
+    public override void OnDamageOpponent(int amount, string fromMod = "")
     {
         
     }
 
     public override void OnDefendCard(Card defendee, Card defended)
     {
+        
     }
 
     public override void OnEncounterStart()
@@ -49,19 +48,22 @@ public class DachaDoorstep : Item
 
     public override void OnHeal(int amount)
     {
-
+        
     }
 
     public override void OnLoad()
     {
+        
     }
 
     public override void OnPlayedCard(Card card)
     {
+        
     }
 
     public override void OnReverse(Card card)
     {
+        
     }
 
     public override void OnTurnEnd(int turnState)

@@ -113,4 +113,35 @@ public abstract class Item : ScriptableObject
         {2,"Legendary"},
         {3,"Boss"},
     };
+    protected void AddModToRandomCards(int amountToMod,string modifier)
+    {
+        int cardsModded = 0;
+        int it = 0;
+        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amountToMod)
+        {
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[UnityEngine.Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            if (!cardToMod._modifierStacks.ContainsKey(modifier))
+            {
+                cardToMod.AddModifier(modifier);
+                cardsModded++;
+            }
+            it++;
+        }
+        for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
+        {
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[UnityEngine.Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            cardToMod.AddModifier(modifier);
+        }
+    }
+    public void UpgradeRandomCards(int amount, int mod)
+    {
+        int cardsModded = 0;
+        int it = 0;
+        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amount)
+        {
+            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[UnityEngine.Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
+            cardToMod._number+=mod;
+            it++;
+        }
+    }
 }

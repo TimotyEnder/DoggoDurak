@@ -18,25 +18,7 @@ public class ClippedClaws : Item
 
     public override void OnAquire()
     {
-        int cardsModded = 0;
-        int it = 0;
-        int amountToMod = 5;
-        string modifier = "Spiky";
-        while (it < GameHandler.Instance.GetGameState()._deck.Count && cardsModded < amountToMod)
-        {
-            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
-            if (!cardToMod._modifierStacks.ContainsKey(modifier))
-            {
-                cardToMod.AddModifier(modifier);
-                cardsModded++;
-            }
-            it++;
-        }
-        for (int j = 0; j < amountToMod - cardsModded; j++) //try top add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
-        {
-            CardInfo cardToMod = GameHandler.Instance.GetGameState()._deck[Random.Range(0, GameHandler.Instance.GetGameState()._deck.Count - 1)];
-            cardToMod.AddModifier(modifier);
-        }
+        AddModToRandomCards(5,"Spiky");
     }
 
     public override void OnCardAdded(CardInfo card)
