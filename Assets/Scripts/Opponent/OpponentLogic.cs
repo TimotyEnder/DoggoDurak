@@ -328,6 +328,7 @@ public class OpponentLogic : MonoBehaviour
     
     public async Task CheckForPlaysRoutine( bool fromTurnEnd=false)
     { 
+        bool NotDefended= GameHandler.Instance.GetUnblockedCards()>0; 
         await UniTask.Delay(500);
         while (CheckPlay()) 
         {
@@ -341,7 +342,7 @@ public class OpponentLogic : MonoBehaviour
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         Debug.Log("Enemy Turn Routine! Has more plays?:"+cha.HasMorePlays() +" Double Pass?:"+_doublePass[_turnHandler.GetTurnState()]);
 
-        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()] || (_turnHandler.GetTurnState()==1 && _playArea.UnblockedCardsAmount()==_playArea.GetCardsInPlay() && !_justReverse)) && !fromTurnEnd) 
+        if (!endTurnCaused && cha != null && (!cha.HasMorePlays() || _doublePass[_turnHandler.GetTurnState()] || (_turnHandler.GetTurnState()==1 && _playArea.UnblockedCardsAmount()==_playArea.GetCardsInPlay() && !_justReverse)|| (_turnHandler.GetTurnState()==1 && NotDefended && !_justReverse)) && !fromTurnEnd) 
         {
             endTurnCaused = true;
             _=_turnHandler.StartEndTurn();
