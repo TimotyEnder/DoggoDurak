@@ -1,24 +1,27 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "STsh81", menuName = "Items/Legendary/STsh81")]
-class STsh81 : Item
+[CreateAssetMenu(fileName = "TrenchShovel", menuName = "Items/Consumable/TrenchShovel")]
+class TrenchShovel : Item
 {
     public override void InitItem()
     {
-        this.rarity = 2;
-        this.boss = false;
-        this.itemId = "STsh81";
-        this.itemName="STsh-81 Sfera";
-        this.toolTipDesc = $"You recieve {StylisticClass.DamageNumber(3)} less from all sources.";
+        rarity = 0;
+        boss = false;
+        isActive=true;
+        persistent=true;
+        consumable=true;
+        itemId = "TrenchShovel";
+        this.itemName="TrenchShovel";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Recieve {StylisticClass.DamageNumber(10)} less from all sources {StylisticClass.HighLight}this turn{StylisticClass.HighLightClose}.";
     }
 
     public override void OnActivate()
     {
-        
+        GameHandler.Instance.GetGameState()._playerDamageReduction+=10;
     }
 
     public override void OnAquire()
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction+=3;
+        
     }
 
     public override void OnCardAdded(CardInfo card)
@@ -73,6 +76,6 @@ class STsh81 : Item
 
     public override void OnTurnEnd(int turnState)
     {
-        
+        GameHandler.Instance.GetGameState()._playerDamageReduction-=10;
     }
 }

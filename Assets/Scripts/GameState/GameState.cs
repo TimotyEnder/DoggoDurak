@@ -45,7 +45,7 @@ public class GameState
     public int _laikaCardInShopChance;
 
     public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
-    public int _playedDamageReduction;
+    public int _playerDamageReduction;
     public bool _reversePossible;
     public int _playerPoisonCounters;
     public bool _poisonCountDown;
@@ -121,7 +121,7 @@ public class GameState
         _startingShopRerollCost = 5;
         _undamagable=new bool[]{false,false};
         _opponentsDamageReduction = 0;
-        _playedDamageReduction=0;
+        _playerDamageReduction=0;
         _enemyHandSize = 6;
         _loseToWin=false;
         _healingAndDamageInverted=false;
@@ -152,7 +152,15 @@ public class GameState
             item.ResetActivation();
         }
     }
-    private void addItemStack(Item item) 
+    public void DeleteConsumableItems()
+    {
+        List<Item> itemIt= new List<Item>(_items);
+        foreach (Item item in itemIt)
+        {
+            item.DeleteConsumable();
+        }
+    }
+    private void addItemOrStack(Item item) 
     {
         if (_itemStacks.ContainsKey(item.name))
         {
@@ -183,7 +191,7 @@ public class GameState
             JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeItem);
             item.InitItem();
             _items.Add(item);
-            addItemStack(item);
+            addItemOrStack(item);
         }
         OnLoad();
     }
@@ -191,7 +199,29 @@ public class GameState
     {
         item.OnAquire();
         _items.Add(item);
-        addItemStack(item);
+        addItemOrStack(item);
+        GameObject itemInventory = GameObject.Find("ItemInventory");
+        GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
+        if (activeItemInventory != null) 
+        {
+            ActiveItemInventoryGrid aIscript = activeItemInventory.GetComponent<ActiveItemInventoryGrid>();
+            if (aIscript != null)
+            {
+                aIscript.UpdateItemGrid();
+            }
+        }
+        if (itemInventory != null)
+        {
+            ItemInventoryGrid Iscript = itemInventory.GetComponent<ItemInventoryGrid>();
+            if (Iscript != null) 
+            {
+                Iscript.UpdateItemGrid();
+            }
+        }
+    }
+    public void RemoveItem(Item item)
+    {
+        _items.Remove(item);
         GameObject itemInventory = GameObject.Find("ItemInventory");
         GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
         if (activeItemInventory != null) 

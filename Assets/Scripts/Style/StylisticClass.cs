@@ -35,6 +35,7 @@ public static class StylisticClass
 
     // common text elements
     public static string ActivateString="<color=red>ACTIVATE:</color>";
+    public static string ConsumeString="<color=green>CONSUME:</color>";
     public static string HighLight="<b>";
     public static string HighLightClose="</b>";
     public static string DamageNumber(int damage)

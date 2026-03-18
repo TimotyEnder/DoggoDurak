@@ -19,6 +19,7 @@ public abstract class Item : ScriptableObject
     protected Sprite Icon;
     protected bool isActive;
     protected bool persistent=false;// if true the effect of the item is something that affects the entire turn. important for animations.
+    protected bool consumable=false;
     protected bool _hasBeenActivated=false;
     protected string toolTipDesc;
 
@@ -64,6 +65,13 @@ public abstract class Item : ScriptableObject
             _hasBeenActivated = false;
         }
     }
+    public void DeleteConsumable()
+    {
+        if(consumable && _hasBeenActivated)
+        {
+            GameHandler.Instance.GetGameState().RemoveItem(this);
+        }
+    }
     public void LoadIcon(string icon) 
     {
         this.Icon= Resources.Load<Sprite>("ItemIcons/"+icon);
@@ -107,6 +115,10 @@ public abstract class Item : ScriptableObject
     {
         return persistent;
     }   
+    public bool IsConsumable()
+    {
+        return consumable;
+    }
     public  static Dictionary<int, string> rarityIntToWord = new Dictionary<int, string>
     {
         {0,"Common"},

@@ -63,9 +63,9 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<BurningClaws>();
+        Item debugItem3 = ScriptableObject.CreateInstance<TrenchShovel>();
         debugItem3.InitItem();
-        //_state.AddItem(debugItem3);
+        _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
@@ -297,7 +297,7 @@ public class GameHandler : MonoBehaviour
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-GameHandler.Instance.GetGameState()._playedDamageReduction,fromMod);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-GameHandler.Instance.GetGameState()._playerDamageReduction,fromMod);
                        if(checkMatchEnd)
                         {
                              await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
@@ -309,7 +309,7 @@ public class GameHandler : MonoBehaviour
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc-GameHandler.Instance.GetGameState()._playedDamageReduction);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc-GameHandler.Instance.GetGameState()._playerDamageReduction);
                         await UniTask.Delay(100);
                     }
                 }

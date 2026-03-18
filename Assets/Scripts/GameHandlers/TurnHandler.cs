@@ -122,6 +122,7 @@ public class TurnHandler : MonoBehaviour
 
         GameHandler.Instance.ResetPersistentItems();
         GameHandler.Instance.ClearTemporaryModifiers();
+        GameHandler.Instance.GetGameState().DeleteConsumableItems();
         //Change Turn State
         if (_turnState == 0)
         {

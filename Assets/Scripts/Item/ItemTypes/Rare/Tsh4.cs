@@ -45,7 +45,7 @@ public override void OnDamageOpponent(int amount, string fromMod = "")
 
     public override void OnEncounterStart()
     {
-        GameHandler.Instance.GetGameState()._playedDamageReduction+=5;
+        GameHandler.Instance.GetGameState()._playerDamageReduction+=5;
         turns=0;
     }
 
@@ -79,7 +79,7 @@ public override void OnDamageOpponent(int amount, string fromMod = "")
         turns++;
         if(turns>=3)
         {
-            GameHandler.Instance.GetGameState()._playedDamageReduction-=5;
+            GameHandler.Instance.GetGameState()._playerDamageReduction-=5;
         }
     }
 }
