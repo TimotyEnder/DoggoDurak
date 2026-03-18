@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<TrenchShovel>();
+        Item debugItem3 = ScriptableObject.CreateInstance<BagOfTreats>();
         debugItem3.InitItem();
         _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
