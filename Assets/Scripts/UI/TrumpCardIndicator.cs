@@ -20,8 +20,8 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _revealPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 55f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
-        _hoverPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 100f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
+        _revealPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x-80f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
+        _hoverPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 200f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
     }
 
     // Update is called once per frame
@@ -77,13 +77,12 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
         //trumpTxt.GetComponent<TrumpSuitText>().Init(null, this.gameObject.GetComponentInParent<Canvas>());
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(MoveToPosition(_revealPos, 0.5f,5f));
-        this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
-        this.GetComponent<ToolTip>().SetTooltipActiveState(true);
         _appeared=true;
     }
 
-    public IEnumerator MoveToPosition(Vector2 targetPosition, float duration, float targetRotationZ = 0f)
+    public IEnumerator MoveToPosition(Vector2 targetPosition, float duration, float targetRotationZ = 0f,bool toolTip=false)
     {
+        this.GetComponent<ToolTip>().SetTooltipActiveState(false);
         RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
 
         Vector2 startPos = rectTransform.anchoredPosition;
@@ -105,11 +104,17 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
 
         rectTransform.anchoredPosition = targetPosition;
         rectTransform.rotation = endRot;
+        this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
+        this.GetComponent<ToolTip>().SetTooltipActiveState(true);
+        if(toolTip)
+        {
+            _=this.GetComponent<ToolTip>().ShowToolTip();
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
       if(_appeared){ this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one * 1.3f;
-        StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10));}
+        StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10,true));}
     }
     public void OnPointerExit(PointerEventData eventData)
     {

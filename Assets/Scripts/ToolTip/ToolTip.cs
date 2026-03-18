@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -26,6 +27,10 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private CanvasScaler _canvasScaler;
     private float _canvasScaleFactor = 1f;
     public async void OnPointerEnter(PointerEventData eventData)
+    {
+        await ShowToolTip();
+    }
+    public async Task ShowToolTip()
     {
         if (_enabled && _currentTooltip == null)
         {
@@ -74,7 +79,6 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
         }
     }
-
     private void PositionTooltip()
     {
         if (_currentTooltip == null) return;
