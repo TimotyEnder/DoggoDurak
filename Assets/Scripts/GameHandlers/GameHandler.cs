@@ -54,7 +54,7 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            //c.AddModifier("Burn",1);
+            c.AddModifier("Burn",1);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
@@ -64,9 +64,9 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<HeartyPotato>();
+        Item debugItem3 = ScriptableObject.CreateInstance<ScorchedEarthPolicy>();
         debugItem3.InitItem();
-        _state.AddItem(debugItem3);
+        //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
