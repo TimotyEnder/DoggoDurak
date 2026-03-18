@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<BearTrap>();
+        Item debugItem3 = ScriptableObject.CreateInstance<HeartyPotato>();
         debugItem3.InitItem();
         _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
