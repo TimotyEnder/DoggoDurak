@@ -343,7 +343,7 @@ public static string GetNumberShortName(int number)
             }
         }
     }
-    public async Task OnDamage(int amount,Card card, int turnState) 
+    public  void OnDamage(int amount,Card card, int turnState) 
     {
         foreach (CardModifierContainer c in _modifiers)
         {
@@ -351,10 +351,9 @@ public static string GetNumberShortName(int number)
             {
                 if (_card != null)
                 {
-                    _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
+                //await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
             }
         }
     }

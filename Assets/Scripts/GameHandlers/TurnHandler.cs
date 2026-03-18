@@ -201,10 +201,10 @@ public class TurnHandler : MonoBehaviour
                 {
                     GameHandler.Instance.DamageOpponent(damage, checkMatchEnd:false);
                 }
+                card.GetCardInfo().OnDamage(damage,card,_turnState);
                 await UniTask.Delay(scaledDelayTime);
                 card.SetAnimatable(false);
                 card.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
-                await card.GetCardInfo().OnDamage(damage,card,_turnState);
            }
         }
         _cardHandArea.GreyOutAllCards();

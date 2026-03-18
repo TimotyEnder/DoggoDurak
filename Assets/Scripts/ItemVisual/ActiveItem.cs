@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
@@ -52,8 +53,9 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
     }
     private IEnumerator OnPress()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
         _anim.SetTrigger("Click");
-        if(!_item.Activate())
+        if((currentScene.name == "Rest") || !_item.Activate())
         {
             _bgColor.color=StylisticClass.ActiveItemUseInvalid;
         }
