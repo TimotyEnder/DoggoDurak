@@ -387,11 +387,24 @@ public static string GetNumberShortName(int number)
     }
     public void ClearTemporaryModifiers()
     {
+        List<CardModifierContainer> toRemove= new List<CardModifierContainer>();
         foreach(CardModifierContainer c in _modifiers)
         {
             if(!c.Permanent)
             {
-                _modifiers.Remove(c);
+               toRemove.Add(c);
+            }
+        }
+        foreach(CardModifierContainer c in toRemove)
+        {
+            _modifiers.Remove(c);
+            if (_modifierStacks.ContainsKey(c.ModType))
+            {
+                _modifierStacks[c.ModType]--;
+                if(_modifierStacks[c.ModType]<0)
+                {
+                    _modifierStacks.Remove(c.ModType);
+                }
             }
         }
     }

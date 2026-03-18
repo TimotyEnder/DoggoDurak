@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,7 +64,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<BagOfTreats>();
+        Item debugItem3 = ScriptableObject.CreateInstance<BearTrap>();
         debugItem3.InitItem();
         _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
@@ -569,6 +570,11 @@ public class GameHandler : MonoBehaviour
         foreach(CardInfo c in _state._deck)
         {
             c.ClearTemporaryModifiers();
+            if(c._card!=null)
+            {
+                c._card.MakeCard(c);
+                c._card.Bling();
+            }
         }
     }
 }

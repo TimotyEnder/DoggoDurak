@@ -11,16 +11,9 @@ public class ButtonSpaceHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Make the button visually change when you press space
-            ExecuteEvents.Execute(passButton.gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
             
             //invoke its onClick from here
             passButton.onClick.Invoke();
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            // Return to normal state
-            ExecuteEvents.Execute(passButton.gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
         }
     }
 }
