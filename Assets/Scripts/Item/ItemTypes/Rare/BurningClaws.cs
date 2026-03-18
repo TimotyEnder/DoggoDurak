@@ -1,14 +1,14 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "SiberianBearHuntingSuit", menuName = "Items/Rare/SiberianBearHuntingSuit")]
-public class SiberianBearHuntingSuit : Item
+[CreateAssetMenu(fileName = "BurningClaws", menuName = "Items/Rare/BurningClaws")]
+public class BurningClaws : Item
 {
     public override void InitItem()
     {
         this.rarity = 1;
         this.boss = false;
-        this.itemId = "SiberianBearHuntingSuit";
-        this.itemName="SiberianBearHuntingSuit";
-        this.toolTipDesc = $"{StylisticClass.SpikyColor}{StylisticClass.SpikyString}</color> effects +{StylisticClass.DamageNumber(1)}";
+        this.itemId = "BurningClaws";
+        this.itemName="BurningClaws";
+        this.toolTipDesc = $"{StylisticClass.BurnColor}{StylisticClass.BurnString}</color> effects +{StylisticClass.DamageNumber(1)}";
     }
 
     public override void OnActivate()
@@ -18,7 +18,7 @@ public class SiberianBearHuntingSuit : Item
 
     public override void OnAquire()
     {
-        GameHandler.Instance.GetGameState()._modifierAddedEffect["Spiky"]++;
+        GameHandler.Instance.GetGameState()._modifierAddedEffect["Burn"]++;
     }
 
     public override void OnCardAdded(CardInfo card)
