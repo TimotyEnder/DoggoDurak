@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using UnityEngine;
 [CreateAssetMenu(fileName = "EmergencyContact", menuName = "Items/Active-Rare/ChocolateBonBon")]
@@ -10,12 +11,15 @@ class ChocolateBonBon : Item
         this.isActive=true;
         this.itemId = "ChocolateBonBon";
         this.itemName="ChocolateBonBon";
-        this.toolTipDesc = $"{StylisticClass.ActivateString} The opponent gains {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters for each card with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck.";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} The opponent gains {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters for each card with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck. You discard cards equal to the amount of cards with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck.";
     }
 
     public override void OnActivate()
     {
-        GameHandler.Instance.PoisonOpponent(GameHandler.Instance.GetGameState()._deck.FindAll(card=> card._modifierStacks.ContainsKey("Poison") && card._modifierStacks["Poison"]>0).Count);
+        int poisonAmount = GameHandler.Instance.GetGameState()._deck.FindAll(card => card._modifierStacks.ContainsKey("Poison") && card._modifierStacks["Poison"] > 0).Count;
+        GameHandler.Instance.PoisonOpponent(poisonAmount);
+        GameHandler.Instance.PlayerDiscard(0,Math.Min(poisonAmount,GameHandler.Instance.GetPlayerCardsInHand()));
+
     }
 
     public override void OnAquire()
