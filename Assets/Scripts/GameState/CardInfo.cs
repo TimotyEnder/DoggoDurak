@@ -357,13 +357,13 @@ public static string GetNumberShortName(int number)
             }
         }
     }
-    public void AddModifier(string ModType, int times=1) 
+    public void AddModifier(string ModType, int times=1, bool Permanent=true) 
     {
         for(int i=0;i<times;i++)
         {
             if (modifierMaxCopies[ModType]==-1 || !_modifierStacks.ContainsKey(ModType) || _modifierStacks[ModType] < modifierMaxCopies[ModType]) 
             {
-                _modifiers.Add(new CardModifierContainer(ModType));
+                _modifiers.Add(new CardModifierContainer(ModType,Permanent));
                 if (!_modifierStacks.ContainsKey(ModType))
                 {
                     _modifierStacks[ModType] = 0;
@@ -383,6 +383,16 @@ public static string GetNumberShortName(int number)
                 _modifierStacks[c.ModType] = 0;
             }
             _modifierStacks[c.ModType] += 1;
+        }
+    }
+    public void ClearTemporaryModifiers()
+    {
+        foreach(CardModifierContainer c in _modifiers)
+        {
+            if(!c.Permanent)
+            {
+                _modifiers.Remove(c);
+            }
         }
     }
     public string CompileTooltipDescription() 

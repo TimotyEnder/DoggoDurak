@@ -564,4 +564,11 @@ public class GameHandler : MonoBehaviour
         }
         return null;
     }
+    public void ClearTemporaryModifiers()
+    {
+        foreach(CardInfo c in _state._deck)
+        {
+            c.ClearTemporaryModifiers();
+        }
+    }
 }
