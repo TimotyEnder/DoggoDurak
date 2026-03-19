@@ -107,7 +107,7 @@ public class TheGypsyWolfhound : Encounter
         {
             if(card != null && card._card != null) 
             {
-                GameHandler.Instance.DamagePlayer(card._number, fromMod: "The Gypsy Wolfhound Rule");
+                GameHandler.Instance.DamagePlayer(card._number,true, fromMod: "");
                 
                 if(card._card != null)
                 {
@@ -130,9 +130,14 @@ public class TheGypsyWolfhound : Encounter
         }
         nominatedCards.Clear();
         
-        UpdateRules();
+        await WaitTillCardsDrawnToUpdate();
         ShakeRule(0);
-    }  
+    } 
+    private async Task WaitTillCardsDrawnToUpdate()
+    {
+        await UniTask.WaitUntil(()=>GameHandler.Instance.GetPlayerCardsInHand()>=GameHandler.Instance.GetGameState()._handSize);
+        UpdateRules();
+    }
     public override void SetDebuffs()
     {
         

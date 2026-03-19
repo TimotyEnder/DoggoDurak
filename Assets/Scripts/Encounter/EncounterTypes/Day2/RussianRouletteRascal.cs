@@ -90,11 +90,11 @@ public class RussianRouletteRascal : Encounter
         int roll = Random.Range(0, 100);
         if(roll<crestProbability)
         {
-            GameHandler.Instance.DamageOpponent(35,fromMod:"RussianRouletteRascal");
+            GameHandler.Instance.DamageOpponent(35,fromMod:"");
         }
         else
         {
-            GameHandler.Instance.DamagePlayer(35,fromMod:"RussianRouletteRascal");
+            GameHandler.Instance.DamagePlayer(35,fromMod:"");
         }
         ShakeRule(0);
     }

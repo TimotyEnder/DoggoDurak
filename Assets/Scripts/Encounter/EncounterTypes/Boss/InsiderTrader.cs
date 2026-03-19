@@ -66,7 +66,7 @@ public class InsiderTrader : Encounter
 
     public override void OnTurnEnd(int turnState)
     {
-       GameHandler.Instance.DamagePlayer(10,fromMod:"InsiderTrader");
+       GameHandler.Instance.DamagePlayer(10,fromMod:"");
        ShakeRule(3);
     }
 
