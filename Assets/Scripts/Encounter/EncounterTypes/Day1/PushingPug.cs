@@ -62,13 +62,16 @@ public class PushingPug : Encounter
     public override void OnTurnEnd(int turnState)
     {
         int unblockedCards= GameHandler.Instance.GetUnblockedCards();
-        if(turnState==0)
+        if(unblockedCards>0)
         {
-            GameHandler.Instance.DamageOpponent(unblockedCards,true);
-        }
-        else
-        {
-            GameHandler.Instance.DamagePlayer(unblockedCards,true);
+            if(turnState==0)
+            {
+                GameHandler.Instance.DamageOpponent(unblockedCards,true);
+            }
+            else
+            {
+                GameHandler.Instance.DamagePlayer(unblockedCards,true);
+            }
         }
         ShakeRule(0);
     }
