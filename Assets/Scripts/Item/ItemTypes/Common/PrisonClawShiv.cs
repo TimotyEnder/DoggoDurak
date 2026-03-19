@@ -1,14 +1,14 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "DoggoSnack", menuName = "Items/Common/ClippedClaws")]
-public class ClippedClaws : Item
+[CreateAssetMenu(fileName = "PrisonClawShiv", menuName = "Items/Common/PrisonClawShiv")]
+public class PrisonClawShiv : Item
 {
     public override void InitItem()
     {
         this.rarity = 0;
         this.boss = false;
-        this.itemId = "ClippedClaws";
-        this.itemName="ClippedClaws";
-        this.toolTipDesc = "7 random cards gain "+StylisticClass.SpikyColor+StylisticClass.SpikyString+" 1"+CardInfo.modifierToDescription["Spiky"]+"</color>";
+        this.itemId = "PrisonClawShiv";
+        this.itemName="PrisonClawShiv";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.ParryColor+StylisticClass.ParryString+" 1"+CardInfo.modifierToDescription["Parry"]+"</color>";
     }
 
     public override void OnActivate()
@@ -18,7 +18,7 @@ public class ClippedClaws : Item
 
     public override void OnAquire()
     {
-        AddModToRandomCards(7,"Spiky");
+        AddModToRandomCards(5,"Parry");
     }
 
     public override void OnCardAdded(CardInfo card)
@@ -52,6 +52,7 @@ public class ClippedClaws : Item
 
     public override void OnHeal(int amount)
     {
+
     }
 
     public override void OnLoad()

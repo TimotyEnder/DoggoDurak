@@ -18,7 +18,7 @@ public class ContrabandCarePackage : Item
 
     public override void OnAquire()
     {
-        AddModToRandomCards(2,"Draw");
+        AddModToRandomCards(5,"Draw");
     }
 
     public override void OnCardAdded(CardInfo card)

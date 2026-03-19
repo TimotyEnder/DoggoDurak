@@ -8,7 +8,7 @@ public class BabushkasBorsh : Item
         this.boss = false;
         this.itemId = "BabushkasBorsh";
         this.itemName = "BabushkasBorsh";
-        this.toolTipDesc = "3 random cards gain "+StylisticClass.RestoringColor+StylisticClass.RestoringString+CardInfo.modifierToDescription["Restoring"]+"</color>";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.RestoringColor+StylisticClass.RestoringString+CardInfo.modifierToDescription["Restoring"]+"</color>";
     }
 
     public override void OnActivate()
@@ -18,7 +18,7 @@ public class BabushkasBorsh : Item
 
     public override void OnAquire()
     {
-        AddModToRandomCards(3,"Restoring");
+        AddModToRandomCards(5,"Restoring");
     }
 
     public override void OnCardAdded(CardInfo card)
