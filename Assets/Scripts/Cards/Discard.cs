@@ -115,7 +115,10 @@ public class Discard : MonoBehaviour
     }
     private async Task ReturnCardToDeckVisual(Card c,RectTransform target)
     {
-        Destroy(c.gameObject);
+        if(c!=null && c.gameObject!=null)
+        {
+            Destroy(c.gameObject);
+        }
         GameObject particle = Instantiate(_cardParticlePrefab, this.transform.position, Quaternion.Euler(0, 0, 0), GameObject.FindGameObjectWithTag("Canvas").transform);
         CardDrawParticle particleScript = particle.GetComponent<CardDrawParticle>();
         particleScript.SetTarget(target);

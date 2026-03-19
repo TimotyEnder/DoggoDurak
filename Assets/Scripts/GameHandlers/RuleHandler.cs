@@ -63,6 +63,7 @@ public class RuleHandler : MonoBehaviour
             }
             if (_playerHp.GetHealth() <= 0 && !GameHandler.Instance.GetGameState()._loseToWin)
             {
+                GameStateFinished = true;
                 _modEffectsSpawn=false; 
                 WipeModEffects();
                 _playerHp.reportHealth();
@@ -72,6 +73,7 @@ public class RuleHandler : MonoBehaviour
             }
             else if (_opponentHp.GetHealth() <= 0 || (GameHandler.Instance.GetGameState()._loseToWin && _playerHp.GetHealth() <= 0))
             {
+                GameStateFinished = true;
                 GameHandler.Instance.GetGameState().OnEndEncounter();
                 _modEffectsSpawn=false;
                 WipeModEffects();
@@ -89,7 +91,6 @@ public class RuleHandler : MonoBehaviour
                 _victory.SetActive(true);
                 _rewardItemGrid.SetRewardGrid();
                 _consumablesGrid.SetRewardGrid();
-                GameStateFinished = true;
             }
         }
     }
