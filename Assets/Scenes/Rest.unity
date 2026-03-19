@@ -3366,6 +3366,7 @@ GameObject:
   - component: {fileID: 636500721}
   - component: {fileID: 636500723}
   - component: {fileID: 636500722}
+  - component: {fileID: 636500724}
   m_Layer: 5
   m_Name: GadalkaPanel
   m_TagString: Untagged
@@ -3434,6 +3435,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636500720}
   m_CullTransparentMesh: 1
+--- !u!95 &636500724
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636500720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe9d9ffe6493b0c4ba2bfc0be016ce2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &667283437
 GameObject:
   m_ObjectHideFlags: 0
@@ -8133,6 +8156,7 @@ GameObject:
   - component: {fileID: 1837226032}
   - component: {fileID: 1837226031}
   - component: {fileID: 1837226030}
+  - component: {fileID: 1837226033}
   m_Layer: 5
   m_Name: GadalkaButton
   m_TagString: Untagged
@@ -8243,6 +8267,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837226028}
   m_CullTransparentMesh: 1
+--- !u!114 &1837226033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837226028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb6be763b5fa5749bdce7c31d0c5838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gadalkaPanel: {fileID: 636500720}
+  _gCloseButton: {fileID: 258379093}
+  _costContent: {fileID: 1115723297}
 --- !u!1 &1885863645
 GameObject:
   m_ObjectHideFlags: 0

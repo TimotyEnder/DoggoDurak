@@ -20,6 +20,7 @@ public class GameState
     public int _maxrestPoints;
     public int _restRpointCost;
     public int _shopRpointCost;
+    public int _gadalkaRpointCost;
     public int _handSize;
     public int _maxRewardSelection;
     public int _maxRewardChoices;
@@ -36,7 +37,7 @@ public class GameState
     public int _startingDiscardInShopCost;
     public int _shopRerollCost;
     public bool _shopUnlocked;
-
+    public bool _gadalkaUnlocked;
     public int _freeShopRerolls;
     public int _maxFreeShopRerolls;
     public int _startingShopRerollCost;
@@ -104,6 +105,7 @@ public class GameState
         _maxrestPoints = 3;
         _restRpointCost = 1;//cost to use rest action in the rest tab
         _shopRpointCost = 2;//cost to use shop action in the rest tab
+        _gadalkaRpointCost=3;//cost to use gadalka in the rest tab
         _handSize = 6;
         _items = new List<Item>();
         _serializableItems = new List<ItemContainer>();
@@ -123,6 +125,7 @@ public class GameState
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
         _shopUnlocked=false;
+        _gadalkaUnlocked=false;
         _freeShopRerolls=0;
         _maxFreeShopRerolls=0;
         _startingShopRerollCost = 5;

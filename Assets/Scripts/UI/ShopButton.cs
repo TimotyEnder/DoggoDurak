@@ -34,11 +34,11 @@ public class ShopButton:MonoBehaviour
         {
             if (!_shopPayedFor)
             {
-                _shopPayedFor = true;
-                GameHandler.Instance.GetGameState()._shopUnlocked=true;
-                RemoveCost();
                 if (GameHandler.Instance.GetGameState()._restPoints >= GameHandler.Instance.GetGameState()._shopRpointCost)
                 {
+                    _shopPayedFor = true;
+                    GameHandler.Instance.GetGameState()._shopUnlocked=true;
+                    RemoveCost();
                     GameHandler.Instance.GetGameState()._restPoints -= GameHandler.Instance.GetGameState()._shopRpointCost;
                     GameObject.Find("RestHandler").GetComponent<RestHandler>().UpdateRestUI();
                     _shopPanel.SetActive(true);
