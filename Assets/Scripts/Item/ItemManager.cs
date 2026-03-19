@@ -6,22 +6,28 @@ public class ItemManager
 {
     private List<List<Item>> _items;
     private List<Item> _bossItems;
+    private List<Item> _consumables;
     public ItemManager()
     {
         _items = new List<List<Item>>();
         _bossItems = new List<Item>();
+        _consumables = new List<Item>();
         var loadedItems = Resources.LoadAll<Item>("Items");
         foreach (var i in loadedItems)
         {
             Item runtimeItem = Object.Instantiate(i); // Create a safe copy
             runtimeItem.InitItem();
-            if (!runtimeItem.IsBoss())
+            if (!runtimeItem.IsBoss() && !runtimeItem.IsConsumable())
             {
                 while (runtimeItem.GetRarity() >= _items.Count)
                 {
                     _items.Add(new List<Item>());
                 }
                 _items[runtimeItem.GetRarity()].Add(runtimeItem);
+            }
+            else if(runtimeItem.IsConsumable())
+            {
+                _consumables.Add(runtimeItem);
             }
             else
             {
@@ -59,6 +65,43 @@ public class ItemManager
             {
                 Debug.Log("Removed at:"+i);
                 _items[rarity].Remove(i);// no other item rarity apart from common stacks so you should remove it from drop table 
+            }
+        }
+        return itemsDropped;
+    }
+    public List<Item> RandomBossItems(int amount)
+    {
+        List<Item> itemsDropped = new List<Item>();
+        List<Item> toRem= new List<Item>();
+        if(_bossItems.Count>0)
+        {
+            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _bossItems.Count - 1, amount);
+            foreach (int i in randomInts)
+            {
+                Item itemReturned = Object.Instantiate(_bossItems[i]);
+                itemReturned.InitItem();
+                toRem.Add(_bossItems[i]);
+                itemsDropped.Add(itemReturned);
+            }
+        }
+        foreach(Item i in toRem)
+        {
+            Debug.Log("Removed at:"+i);
+            _bossItems.Remove(i);
+        }
+        return itemsDropped;
+    }
+    public List<Item> RandomConsumable(int amount)
+    {
+        List<Item> itemsDropped = new List<Item>();
+        if(_consumables.Count>0)
+        {
+            int[] randomInts = RandomPlus.GenerateUniqueRandomNumbers(0, _consumables.Count - 1, amount);
+            foreach (int i in randomInts)
+            {
+                Item itemReturned = Object.Instantiate(_consumables[i]);
+                itemReturned.InitItem();
+                itemsDropped.Add(itemReturned);
             }
         }
         return itemsDropped;

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class RewardManager
 {
@@ -32,9 +33,23 @@ public class RewardManager
     public Reward GenerateBossReward()
     {
         List<Item> itemsDropped = new List<Item>();
-        itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(3,3));
+        itemsDropped.AddRange(_itemManager.RandomBossItems(3));
         Reward toReturn = new Reward(itemsDropped, _currencyManager.GetCurrency());
         return toReturn;
+    }
+    public List<Item> RollConsumableChance()
+    {
+        int roll= Random.Range(0,100);
+        List<Item> toAdd = new List<Item>();
+        if(roll<GameHandler.Instance.GetGameState()._consumableDropRate/2)
+        {
+            toAdd.AddRange(_itemManager.RandomConsumable(2));
+        }
+        else if(roll<GameHandler.Instance.GetGameState()._consumableDropRate)
+        {
+            toAdd.AddRange(_itemManager.RandomConsumable(1));
+        }
+        return toAdd;
     }
     public List<Item> ShopReward(int rarity, int amount)
     {

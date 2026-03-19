@@ -17,6 +17,8 @@ public class RuleHandler : MonoBehaviour
     private LifeTotal _opponentHp;
     [SerializeField]
     private RewardItemGrid _rewardItemGrid;
+    [SerializeField]
+    private ConsumablesGrid _consumablesGrid;
     private bool GameStateFinished = false;
     private bool _modEffectsSpawn;
 
@@ -86,6 +88,7 @@ public class RuleHandler : MonoBehaviour
                 _endMatchScreen.GetComponent<Animator>().SetTrigger("Extend");
                 _victory.SetActive(true);
                 _rewardItemGrid.SetRewardGrid();
+                _consumablesGrid.SetRewardGrid();
                 GameStateFinished = true;
             }
         }

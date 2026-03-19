@@ -6,6 +6,7 @@ using UnityEngine;
 public class Reward
 {
     public List<Item> items;
+    public List<Item> consumables;
     public int rubleReward;
 
     public Reward(List<Item> items, int goldReward)

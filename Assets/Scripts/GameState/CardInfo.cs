@@ -284,6 +284,7 @@ public static string GetNumberShortName(int number)
     }
     public async void OnDefendCard(Card defendee, Card defended) 
     {
+        int times=0;
         foreach (CardModifierContainer c in _modifiers)
         {
             if (modifierStringToType.GetValueOrDefault(c.ModType).OnDefendCard(defendee, defended)) 
@@ -293,12 +294,14 @@ public static string GetNumberShortName(int number)
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim(times)));
+                times++;
             }
         }
     }
     public async void OnPlayedCard(Card card)
     {
+        int times=0;
         var modifiersCopy = new List<CardModifierContainer>(_modifiers);
         foreach (CardModifierContainer c in modifiersCopy)
         {
@@ -309,12 +312,14 @@ public static string GetNumberShortName(int number)
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim(times)));
+                times++;
             }
         }
     }
     public async void OnReverse(Card card) 
     {
+        int times=0;
         foreach (CardModifierContainer c in _modifiers)
         {
             if (modifierStringToType.GetValueOrDefault(c.ModType).OnReverse(card)) 
@@ -324,12 +329,14 @@ public static string GetNumberShortName(int number)
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim(times)));
+                times++;
             }
         }
     }
     public async void OnBeingDefended(Card cardDefendingThis)
     {
+        int times=0;
         foreach (CardModifierContainer c in _modifiers)
         {
             if (modifierStringToType.GetValueOrDefault(c.ModType).OnBeingDefended(cardDefendingThis)) 
@@ -339,7 +346,8 @@ public static string GetNumberShortName(int number)
                     _card.Bling();
                     _card.SpawnModifierEffect(c);
                 }
-                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim()));
+                await UniTask.Delay(System.TimeSpan.FromSeconds(DelayHandler.GiveDelayTimeAnim(times)));
+                times++;
             }
         }
     }

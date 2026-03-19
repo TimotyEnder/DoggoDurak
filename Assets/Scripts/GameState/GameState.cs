@@ -24,6 +24,7 @@ public class GameState
     public int _maxRewardSelection;
     public int _maxRewardChoices;
     public int _rareItemRewardDropRate;//  out of 100;
+    public int _consumableDropRate;
     public int _legendaryItemInshopDropRate;
     public int _rareItemInshopDropRate;
     public bool _redCardsSameSuit;
@@ -107,6 +108,7 @@ public class GameState
         _maxRewardSelection = 3;
         _maxRewardChoices = 1;
         _rareItemRewardDropRate = 10;
+        _consumableDropRate=20;
         _legendaryItemInshopDropRate = 10;
         _rareItemInshopDropRate=30;
         _itemsShownInShop = 4;

@@ -22,7 +22,7 @@ public class RewardItemGrid:MonoBehaviour
     {
         foreach (Transform rwItemTransform in this.transform) 
         {
-            Destroy(rwItemTransform.gameObject);
+            Destroy(rwItemTransform.gameObject,0.5f);
         }
     }
     public void ChoiceHappened() 
@@ -33,6 +33,10 @@ public class RewardItemGrid:MonoBehaviour
         {
             RemoveAllGrid();
         }
+    }
+    public int GetRemainingChoices()
+    {
+        return _remainingChoices;
     }
     public void UpdateChooceText() 
     {

@@ -54,13 +54,13 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            c.AddModifier("Burn",1);
+            //c.AddModifier("Burn",100);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
             //c.AddModifier("Draw");
             //c.AddModifier("Cripple");
-            //c.AddModifier("Spiky");
+            c.AddModifier("Spiky",100);
             //c.AddModifier("Poison");
         }
         //debug
@@ -129,7 +129,15 @@ public class GameHandler : MonoBehaviour
     }
     public void GenerateReward()
     {
-        _currentReward = _rewardManager.Value.GenerateReward();
+        if(_state._encounter==11)
+        {
+            _currentReward = _rewardManager.Value.GenerateBossReward();
+        }
+        else
+        {
+            _currentReward = _rewardManager.Value.GenerateReward();
+        }
+        _currentReward.consumables = _rewardManager.Value.RollConsumableChance();
     }
     public List<Item> GetShopItems() 
     {
