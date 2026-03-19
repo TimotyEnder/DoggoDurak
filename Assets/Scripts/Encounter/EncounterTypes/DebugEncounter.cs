@@ -14,7 +14,7 @@ public class DebugEncounter : Encounter
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("C", j,true));
-                        deck.Add(new CardInfo("L", 0,true)); //debug
+                        deck.Add(new CardInfo("S", 6,true)); //debug
 
                     }
                     break;
@@ -22,21 +22,21 @@ public class DebugEncounter : Encounter
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("S", j,true));
-                        deck.Add(new CardInfo("L", 0,true)); //debug
+                        deck.Add(new CardInfo("S", 6,true)); //debug
                     }
                     break;
                 case 2:
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("D", j,true));
-                        deck.Add(new CardInfo("L", 0,true));  //debug
+                        deck.Add(new CardInfo("S", 6,true));  //debug
                     }
                     break;
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("H", j,true));
-                        deck.Add(new CardInfo("L", 0,true));  //debug
+                        deck.Add(new CardInfo("S", 6,true));  //debug
                     }
                     break;
             }

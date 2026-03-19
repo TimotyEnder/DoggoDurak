@@ -22,7 +22,7 @@ public class RewardItemGrid:MonoBehaviour
     {
         foreach (Transform rwItemTransform in this.transform) 
         {
-            Destroy(rwItemTransform.gameObject,0.5f);
+            Destroy(rwItemTransform.gameObject,0.3f);
         }
     }
     public void ChoiceHappened() 

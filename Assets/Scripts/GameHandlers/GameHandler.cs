@@ -55,7 +55,7 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
-            c.AddModifier("Burn",10);
+            //c.AddModifier("Burn",10);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
@@ -65,12 +65,12 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<ScorchedEarthPolicy>();
-        debugItem3.InitItem();
+        //Item debugItem3 = ScriptableObject.CreateInstance<ScorchedEarthPolicy>();
+        //debugItem3.InitItem();
         //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
-        _currentEncounter= new TheGypsyWolfhound();
-        _currentEncounter.InitiateEncounter();
+        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter.InitiateEncounter();
         Next();
     }
     public void SaveState()
@@ -108,7 +108,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else
@@ -591,8 +591,8 @@ public class GameHandler : MonoBehaviour
     {
         foreach(CardInfo c in _state._deck)
         {
-            c.ClearTemporaryModifiers();
-            if(c._card!=null)
+            
+            if(c.ClearTemporaryModifiers()&&c._card!=null)
             {
                 c._card.MakeCard(c);
                 c._card.Bling();

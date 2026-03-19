@@ -393,14 +393,16 @@ public static string GetNumberShortName(int number)
             _modifierStacks[c.ModType] += 1;
         }
     }
-    public void ClearTemporaryModifiers()
+    public bool ClearTemporaryModifiers()
     {
+        bool tempModFound=false;
         List<CardModifierContainer> toRemove= new List<CardModifierContainer>();
         foreach(CardModifierContainer c in _modifiers)
         {
             if(!c.Permanent)
             {
                toRemove.Add(c);
+               tempModFound=true;
             }
         }
         foreach(CardModifierContainer c in toRemove)
@@ -415,6 +417,7 @@ public static string GetNumberShortName(int number)
                 }
             }
         }
+        return tempModFound;
     }
     public string CompileTooltipDescription() 
     {
