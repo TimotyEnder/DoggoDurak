@@ -11,30 +11,50 @@ public class ShopCardGrid : MonoBehaviour
 
     public void SetCardGrid()
     {
-        for (int i = 0; i < 6; i++)
+        foreach(RectTransform c in this.transform)
         {
-            int modsForCard = Random.Range(1, GameHandler.Instance.GetGameState()._maxCardModsInShop);
-            CardInfo toAdd = new CardInfo(CardInfo.RandomSuit(), Random.Range(6, 14));
-            int modsAdded = 0;
-            while (modsAdded < modsForCard)
+            Destroy(c.gameObject);
+        }
+        if(GameHandler.Instance.GetGameState()._shopCards.Count<=0)
+        {
+            for (int i = 0; i < 6; i++)
             {
-                string ModTypeToAdd = CardInfo.modifierMaxCopies.Keys.ToArrayPooled()[Random.Range(0, CardInfo.modifierMaxCopies.Count)];
-                int ModTypeMaxStacks = 0;
-                CardInfo.modifierMaxCopies.TryGetValue(ModTypeToAdd, out ModTypeMaxStacks);
-                if ((ModTypeMaxStacks == 1 && !toAdd._modifierStacks.ContainsKey(ModTypeToAdd)) || (ModTypeMaxStacks > 1))
+                int modsForCard = Random.Range(1, GameHandler.Instance.GetGameState()._maxCardModsInShop);
+                CardInfo toAdd = new CardInfo(CardInfo.RandomSuit(), Random.Range(6, 14));
+                int modsAdded = 0;
+                while (modsAdded < modsForCard)
                 {
-                    toAdd.AddModifier(ModTypeToAdd);
-                    modsAdded++;
+                    string ModTypeToAdd = CardInfo.modifierMaxCopies.Keys.ToArrayPooled()[Random.Range(0, CardInfo.modifierMaxCopies.Count)];
+                    int ModTypeMaxStacks = 0;
+                    CardInfo.modifierMaxCopies.TryGetValue(ModTypeToAdd, out ModTypeMaxStacks);
+                    if ((ModTypeMaxStacks == 1 && !toAdd._modifierStacks.ContainsKey(ModTypeToAdd)) || (ModTypeMaxStacks > 1))
+                    {
+                        toAdd.AddModifier(ModTypeToAdd);
+                        modsAdded++;
+                    }
                 }
+                int roll= Random.Range(0,100);
+                if(roll<GameHandler.Instance.GetGameState()._laikaCardInShopChance)
+                {
+                    toAdd.MakeLaika();
+                    modsAdded++;//aditional cost becuase it is a Laika Card.
+                }
+                GameHandler.Instance.GetGameState()._shopCards.Add(toAdd);
+                GameObject CardAdded = Instantiate(_cardPrefab, this.transform);
+                CardAdded.GetComponent<Card>().MakeCard(toAdd, false, GameHandler.Instance.GetGameState()._shopCostPerCardMod * modsAdded);
             }
-            int roll= Random.Range(0,100);
-            if(roll<GameHandler.Instance.GetGameState()._laikaCardInShopChance)
+            GameHandler.Instance.SaveState();
+        }
+        else
+        {
+            List<CardInfo> cardsToMake= GameHandler.Instance.GetGameState()._shopCards;
+            foreach (CardInfo c in cardsToMake)
             {
-                toAdd.MakeLaika();
-                modsAdded++;//aditional cost becuase it is a Laika Card.
+                
+                GameObject CardAdded = Instantiate(_cardPrefab, this.transform);
+                c.UpdateModifiers();
+                CardAdded.GetComponent<Card>().MakeCard(c, false, GameHandler.Instance.GetGameState()._shopCostPerCardMod * c._modifierStacks.Keys.Count);
             }
-            GameObject CardAdded = Instantiate(_cardPrefab, this.transform);
-            CardAdded.GetComponent<Card>().MakeCard(toAdd, false, GameHandler.Instance.GetGameState()._shopCostPerCardMod * modsAdded);
         }
     }
     public void ReRoll()

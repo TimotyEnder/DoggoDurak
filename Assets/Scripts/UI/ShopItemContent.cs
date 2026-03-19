@@ -13,6 +13,10 @@ public class ShopItemContent : MonoBehaviour
     }
     public void SetRewardGrid()
     {
+        foreach(RectTransform c in this.transform)
+        {
+            Destroy(c.gameObject);
+        }
         foreach (Item rwItem in GameHandler.Instance.GetShopItems())
         {
             GameObject rwInstance = Instantiate(_rewardItemPrefab);

@@ -62,6 +62,7 @@ public class DiscardOptionPanel : MonoBehaviour
                 c.Bling();
             }
             GameHandler.Instance.UpdateMoney(-_totalDiscardCost);
+            GameHandler.Instance.SaveState();
             await UniTask.Delay(300);
             _totalDiscardCost=0;
             UpdateCostText();

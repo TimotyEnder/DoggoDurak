@@ -5,7 +5,7 @@ public class SaveManager
 {
     public void Save(GameState gameState) 
     {
-        gameState.SaveItems();
+        gameState._serializableItems=gameState.SaveItems(gameState._items);
         string JSONGameState = JsonUtility.ToJson(gameState,true);
         string path = Path.Combine(Application.persistentDataPath, "SaveGame.json");
         File.WriteAllText(path, JSONGameState);
@@ -18,7 +18,7 @@ public class SaveManager
             string path = Path.Combine(Application.persistentDataPath, "SaveGame.json");
             string JSONloaded=File.ReadAllText(path);
             GameState gameState = JsonUtility.FromJson<GameState>(JSONloaded);
-            gameState.LoadItems();
+            gameState._items=gameState.LoadItems(gameState._serializableItems);
             return gameState;
         }
         else {  return null; }

@@ -13,7 +13,7 @@ class HeartyPotato : Item
         consumable=true;
         itemId = "HeartyPotato";
         this.itemName="HeartyPotato";
-        this.toolTipDesc = $"";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of turn all card in your hand gain +1";
         cardsUpgraded= new List<CardInfo>();
     }
 

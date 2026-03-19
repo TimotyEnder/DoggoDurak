@@ -27,12 +27,15 @@ public class ShopButton:MonoBehaviour
     public void Start()
     {
         _shopButton = GetComponent<Button>();
-        _shopPayedFor = false;
+        _shopPayedFor = GameHandler.Instance.GetGameState()._shopUnlocked;
+        SetRestCost();
+        if(_shopPayedFor){RemoveCost();}
         _shopButton.onClick.AddListener(() => 
         {
             if (!_shopPayedFor)
             {
                 _shopPayedFor = true;
+                GameHandler.Instance.GetGameState()._shopUnlocked=true;
                 RemoveCost();
                 if (GameHandler.Instance.GetGameState()._restPoints >= GameHandler.Instance.GetGameState()._shopRpointCost)
                 {
@@ -48,12 +51,14 @@ public class ShopButton:MonoBehaviour
             {
                 _shopPanel.SetActive(true);
                 _shopPanel.GetComponent<Animator>().SetTrigger("Extend");
+                _shopItemContent.SetRewardGrid();
+                _shopCardGrid.SetCardGrid();
                 _discardOptButton.UpdateCostText();
             }
+            GameHandler.Instance.SaveState();
         });
 
         _shopCloseButton.onClick.AddListener(() => { ShrinkShopPanel();});
-        SetRestCost();
     }
 private void SetRestCost()
 {
@@ -63,10 +68,10 @@ private void RemoveCost()
 {
     _costContent.text="";
 }
-    private async void ShrinkShopPanel()
-    {
-         _shopPanel.GetComponent<Animator>().SetTrigger("Shrink");
-         await UniTask.Delay(300);
-         _shopPanel.SetActive(false);
-    }
+private async void ShrinkShopPanel()
+{
+        _shopPanel.GetComponent<Animator>().SetTrigger("Shrink");
+        await UniTask.Delay(300);
+        _shopPanel.SetActive(false);
+}
 }

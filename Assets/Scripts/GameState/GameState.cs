@@ -9,7 +9,7 @@ public class GameState
     [NonSerialized]
     public List<Item> _items;
     [SerializeField]
-    private List<ItemContainer> _serializableItems;
+    public List<ItemContainer> _serializableItems;
     public int _rubles;
     public int _health;
     public int _lastHealth;
@@ -35,6 +35,8 @@ public class GameState
     public int _discardingCardInShopCost;
     public int _startingDiscardInShopCost;
     public int _shopRerollCost;
+    public bool _shopUnlocked;
+
     public int _freeShopRerolls;
     public int _maxFreeShopRerolls;
     public int _startingShopRerollCost;
@@ -52,6 +54,8 @@ public class GameState
     public bool _poisonCountDown;
     public bool _burnPoison;
     public Dictionary<string,int> _modifierAddedEffect;
+    public List<ItemContainer> _shopItems;
+    public List<CardInfo> _shopCards;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -118,6 +122,7 @@ public class GameState
         _discardingCardInShopCost = 5;
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
+        _shopUnlocked=false;
         _freeShopRerolls=0;
         _maxFreeShopRerolls=0;
         _startingShopRerollCost = 5;
@@ -132,6 +137,8 @@ public class GameState
         _poisonCountDown=true;
         _burnPoison=false;
         InitModDamageDic();
+        _shopItems= new List<ItemContainer>();
+        _shopCards = new List<CardInfo>();
     }
     private void InitModDamageDic()
     {
@@ -173,18 +180,19 @@ public class GameState
             _itemStacks.Add(item.name, 1);
         }
     }
-    public void SaveItems() 
+    public List<ItemContainer> SaveItems(List<Item> items) 
     {
-        _serializableItems.Clear();
-        foreach (Item item in _items)
+        List<ItemContainer> toRet= new List<ItemContainer>();
+        foreach (Item item in items)
         {
-            _serializableItems.Add(new ItemContainer(item.GetId(), JsonUtility.ToJson(item)));
+            toRet.Add(new ItemContainer(item.GetId(), JsonUtility.ToJson(item)));
         }
+        return toRet;
     }
-    public void LoadItems() 
+    public List<Item> LoadItems(List<ItemContainer> sItems) 
     {
-        _items.Clear();
-        foreach (ItemContainer iCont in _serializableItems)
+        List<Item> toRet= new List<Item>();
+        foreach (ItemContainer iCont in sItems)
         {
             // Get the base ScriptableObject (pre-loaded in Resources/Items/)
             Item item = Resources.Load<Item>($"Items/{iCont.ItemID}");
@@ -192,16 +200,18 @@ public class GameState
             // Create a runtime instance and apply saved data
             JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeItem);
             item.InitItem();
-            _items.Add(item);
+            toRet.Add(item);
             addItemOrStack(item);
         }
         OnLoad();
+        return toRet;
     }
     public void AddItem(Item item) //assumes item has been initialized with InitItem()
     {
         item.OnAquire();
         _items.Add(item);
         addItemOrStack(item);
+        GameHandler.Instance.SaveState();
         GameObject itemInventory = GameObject.Find("ItemInventory");
         GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
         if (activeItemInventory != null) 

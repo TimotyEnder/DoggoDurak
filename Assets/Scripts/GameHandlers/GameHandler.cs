@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class GameHandler : MonoBehaviour
 {
     private static GameHandler _instance;
+    [SerializeField]
     private GameState _state;
     private Lazy<SaveManager> _saveManager = new Lazy<SaveManager>(); //elegant fix to start init issue
     private Lazy<RewardManager> _rewardManager = new Lazy<RewardManager>();
@@ -72,15 +73,19 @@ public class GameHandler : MonoBehaviour
         //_currentEncounter.InitiateEncounter();
         Next();
     }
+    public void SaveState()
+    {
+        _saveManager.Value.Save(_state);
+    }
     public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
     {
         if (HasSave())
         {
             _state = _saveManager.Value.Load();
-            Next();
+            Next(true); //this doesnt increment encounter so you stay on the same one.
         }
     }
-    public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
+    public void Next(bool FromContinue=false) // will be called after an encounter or rest is finished and will handle what should happen next
     {
         ResetEncounterGamestateAttributes();
         if(_encounterManager==null)
@@ -88,9 +93,9 @@ public class GameHandler : MonoBehaviour
             _encounterManager = new EncounterManager();
         }
         _saveManager.Value.Save(_state);
-        _state._encounter++;
+        if(!FromContinue){_state._encounter++;}
         //_state._encounter = 11; //debug insta boss
-        //_state._encounter = 4; //debug insta shop
+        _state._encounter = 4; //debug insta shop
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
@@ -142,29 +147,37 @@ public class GameHandler : MonoBehaviour
     public List<Item> GetShopItems() 
     {
         List<Item> itemsToReturn = new List<Item>();
-        int legendaryItemsInShop = 0;
-        int rareItemsInShop=0;
-        int commonItemsInShop=0;
-        for (int i = 0; i < GameHandler.Instance.GetGameState()._itemsShownInShop; i++)
+        if(_state._shopItems.Count<=0)
         {
-            int roll = UnityEngine.Random.Range(1, 100);
-            if (roll <= GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate)
+            int legendaryItemsInShop = 0;
+            int rareItemsInShop=0;
+            int commonItemsInShop=0;
+            for (int i = 0; i < GameHandler.Instance.GetGameState()._itemsShownInShop; i++)
             {
-                legendaryItemsInShop++;
+                int roll = UnityEngine.Random.Range(1, 100);
+                if (roll <= GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate)
+                {
+                    legendaryItemsInShop++;
+                }
+                else if(roll >= (100-GameHandler.Instance.GetGameState()._rareItemInshopDropRate))
+                {
+                    rareItemsInShop++;
+                }
+                else
+                {
+                    commonItemsInShop++;
+                }
             }
-            else if(roll >= (100-GameHandler.Instance.GetGameState()._rareItemInshopDropRate))
-            {
-                rareItemsInShop++;
-            }
-            else
-            {
-                commonItemsInShop++;
-            }
+            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, legendaryItemsInShop));
+            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1,rareItemsInShop));
+            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(0,commonItemsInShop));
+            _state._shopItems=_state.SaveItems(itemsToReturn);
+            SaveState();
         }
-        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, legendaryItemsInShop));
-        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1,rareItemsInShop));
-        itemsToReturn.AddRange(_rewardManager.Value.ShopReward(0,commonItemsInShop));
-        
+        else
+        {
+            itemsToReturn= _state.LoadItems(_state._shopItems);
+        }
         return itemsToReturn;   
     }
     public void SetHealth(int health)
@@ -426,6 +439,7 @@ public class GameHandler : MonoBehaviour
     public void AddCardToDeck(CardInfo card)
     {
         _state._deck.Add(card);
+        SaveState();
         SortDeck();
         GameObject playerDeck= GameObject.Find("Deck");
         if(playerDeck!=null)

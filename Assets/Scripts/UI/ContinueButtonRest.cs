@@ -20,6 +20,8 @@ public class ContinueButtonRest: MonoBehaviour
         GameHandler.Instance.GetGameState()._discardingCardInShopCost = GameHandler.Instance.GetGameState()._startingDiscardInShopCost;
         GameHandler.Instance.GetGameState()._shopRerollCost = GameHandler.Instance.GetGameState()._startingShopRerollCost;
         GameHandler.Instance.GetGameState()._freeShopRerolls = GameHandler.Instance.GetGameState()._maxFreeShopRerolls;
+        GameHandler.Instance.GetGameState()._shopUnlocked=false;
+        GameHandler.Instance.GetGameState()._shopItems= new System.Collections.Generic.List<ItemContainer>();
         _playerLifeTotal.reportHealth();
         _shopContent.RemoveAllGrid();
         GameHandler.Instance.Next();
