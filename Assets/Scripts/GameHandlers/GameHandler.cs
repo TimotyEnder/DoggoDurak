@@ -16,6 +16,7 @@ public class GameHandler : MonoBehaviour
     private Lazy<SaveManager> _saveManager = new Lazy<SaveManager>(); //elegant fix to start init issue
     private Lazy<RewardManager> _rewardManager = new Lazy<RewardManager>();
     private EncounterManager _encounterManager;
+    private GadalkaEffectManager _gadalkaEffectManager;
     private Encounter _currentEncounter;
     [SerializeField]
     private Reward _currentReward;
@@ -52,6 +53,7 @@ public class GameHandler : MonoBehaviour
         _state = new GameState();
         _saveManager.Value.Save(_state);
         _encounterManager = new EncounterManager();
+        _gadalkaEffectManager =  new GadalkaEffectManager();
         //debug
         foreach (CardInfo c in _state._deck)
         {

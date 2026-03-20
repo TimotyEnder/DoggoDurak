@@ -58,6 +58,10 @@ public abstract class GadalkaEffectInfo:ScriptableObject
         {
             CardInfo cardToMod = list[UnityEngine.Random.Range(0, list.Count - 1)];
             cardToMod._number+=mod;
+            if(cardToMod._number<0)
+            {
+                cardToMod._number=0;
+            }
             it++;
         }
     }
