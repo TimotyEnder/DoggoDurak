@@ -59,7 +59,7 @@ private void RemoveCost()
 {
     _costContent.text="";
 }
-private async void ShrinkShopPanel()
+public async void ShrinkShopPanel()
 {
         _gadalkaPanel.GetComponent<Animator>().SetTrigger("Shrink");
         await UniTask.Delay(500);

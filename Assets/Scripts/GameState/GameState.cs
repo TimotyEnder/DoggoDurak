@@ -230,7 +230,7 @@ public class GameState
         foreach (GadalkaEffectContainer iCont in sItems)
         {
             // Get the base ScriptableObject (pre-loaded in Resources/Items/)
-            GadalkaEffectInfo effect = Resources.Load<GadalkaEffectInfo>($"GadalkaEffects/{iCont.ItemID}");
+            GadalkaEffectInfo effect = Resources.Load<GadalkaEffectInfo>($"GadalkaEffects/{iCont.EffectID}");
             GadalkaEffectInfo runtimeEffect = ScriptableObject.CreateInstance(effect.GetType()) as GadalkaEffectInfo;
             // Create a runtime instance and apply saved data
             JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeEffect);

@@ -3,12 +3,12 @@ using UnityEngine;
 [Serializable]
 public class GadalkaEffectContainer
 {
-    public string ItemID;
+    public string EffectID;
     public string SerializedData;
 
     public GadalkaEffectContainer(string effectID, string serializedData)
     {
-        ItemID = effectID;
+        EffectID = effectID;
         SerializedData = serializedData;
     }
 }

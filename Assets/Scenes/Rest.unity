@@ -3645,6 +3645,7 @@ MonoBehaviour:
   _pointsText: {fileID: 1321608715}
   _gadalkaEffectPrefab: {fileID: 9006426085118547144, guid: d58957a7be5f08c438e2f3a804399855, type: 3}
   _confirmButton: {fileID: 199799312}
+  _gButton: {fileID: 1837226033}
 --- !u!1 &667283437
 GameObject:
   m_ObjectHideFlags: 0

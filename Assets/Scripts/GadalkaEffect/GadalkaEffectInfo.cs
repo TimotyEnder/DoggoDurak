@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 [CreateAssetMenu(fileName = "GadalkaEffect", menuName = "Scriptable Objects/GadalkaEffect")]
 [Serializable]
@@ -9,6 +10,7 @@ public abstract class GadalkaEffectInfo:ScriptableObject
     protected bool blessing;
     protected int cost;
     protected string effectId;
+    protected GadalkaEffect gEffect;
     public abstract void InitEffect();
     public abstract void ExecuteEffect();
     public string GetId()
@@ -26,6 +28,14 @@ public abstract class GadalkaEffectInfo:ScriptableObject
     public int GetCost()
     {
         return this.cost;
+    }
+    public void AssignGEffect(GadalkaEffect gEffect)
+    {
+        this.gEffect= gEffect;
+    }
+    public GadalkaEffect GetGEffect()
+    {
+        return this.gEffect;
     }
     protected void AddModToRandomCards(int amountToMod,string modifier,List<CardInfo> list=null)
     {

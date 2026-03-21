@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-class GadalkaEffect:MonoBehaviour, IPointerClickHandler,IPointerEnterHandler
+public class GadalkaEffect:MonoBehaviour, IPointerClickHandler,IPointerEnterHandler
 {
     private GadalkaEffectInfo _gInfo;
     [SerializeField]
@@ -15,6 +15,7 @@ class GadalkaEffect:MonoBehaviour, IPointerClickHandler,IPointerEnterHandler
     private GameObject _selectedGfx;
     private bool Selected;
     private Animator _thisAnim;
+    private GadalkaPanel _panelParent;
 
 
     void Awake()
@@ -22,9 +23,11 @@ class GadalkaEffect:MonoBehaviour, IPointerClickHandler,IPointerEnterHandler
         _thisAnim=GetComponent<Animator>();
     }
 
-    public void MakeGEffect(GadalkaEffectInfo gInfo)
+    public void MakeGEffect(GadalkaEffectInfo gInfo,GadalkaPanel _gParent)
     {
         this._gInfo=gInfo;
+        this._panelParent=_gParent;
+        gInfo.AssignGEffect(this);
         UpdateDescText();
         UpdateCostTxt();
     }
@@ -50,6 +53,14 @@ class GadalkaEffect:MonoBehaviour, IPointerClickHandler,IPointerEnterHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         _thisAnim.SetTrigger("Click");
+        if(Selected)
+        {
+            _panelParent.UnSelectEffect(this._gInfo);
+        }
+        else
+        {
+            _panelParent.SelectEffect(this._gInfo);
+        }
         Selected=Selected?false:true;
         _selectedGfx.SetActive(Selected?true:false);
     }
