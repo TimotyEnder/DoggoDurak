@@ -11,7 +11,7 @@ class GshopCostIncreaseEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=true;
+        this.blessing=false;
         this.cost=1;
         this.descriptionText=$"Shop costs 1 more {StylisticClass.RestPoint}";
     }

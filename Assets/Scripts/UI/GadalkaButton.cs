@@ -16,6 +16,7 @@ public class GadalkaButton:MonoBehaviour
     [SerializeField]
     private  TextMeshProUGUI _costContent;
     [SerializeField]
+    private GadalkaPanel _gadalkaPanelSc;
 
     public void Start()
     {
@@ -44,6 +45,7 @@ public class GadalkaButton:MonoBehaviour
                 _gadalkaPanel.SetActive(true);
                 _gadalkaPanel.GetComponent<Animator>().SetTrigger("Extend");
             }
+            _gadalkaPanelSc.SetGadalkaEffects();
             GameHandler.Instance.SaveState();
         });
 

@@ -601,4 +601,12 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
+    public List<GadalkaEffectInfo> CompileBlessings()
+    {
+        return _gadalkaEffectManager.BlessingCompile(_state._gadalkaEffectsMax);
+    }
+    public List<GadalkaEffectInfo> CompileCurses()
+    {
+        return _gadalkaEffectManager.CursesCompile(_state._gadalkaEffectsMax);
+    }
 }

@@ -57,6 +57,7 @@ public class GameState
     public Dictionary<string,int> _modifierAddedEffect;
     public List<ItemContainer> _shopItems;
     public List<CardInfo> _shopCards;
+    public int _gadalkaEffectsMax;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -142,6 +143,7 @@ public class GameState
         InitModDamageDic();
         _shopItems= new List<ItemContainer>();
         _shopCards = new List<CardInfo>();
+        _gadalkaEffectsMax=5;
     }
     private void InitModDamageDic()
     {

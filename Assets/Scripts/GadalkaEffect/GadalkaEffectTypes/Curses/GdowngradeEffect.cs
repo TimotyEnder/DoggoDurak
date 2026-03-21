@@ -12,7 +12,7 @@ class GdowngradeEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=true;
+        this.blessing=false;
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=roll;
         SelectedAmount= 10 * roll;

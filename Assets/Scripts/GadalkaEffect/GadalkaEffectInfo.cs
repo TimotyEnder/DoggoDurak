@@ -12,11 +12,11 @@ public abstract class GadalkaEffectInfo:ScriptableObject
     public abstract void ExecuteEffect();
     public string GetDescription()
     {
-        return descriptionText;
+        return this.descriptionText;
     }
     public bool IsBlessing()
     {
-        return blessing;
+        return this.blessing;
     }
     public int GetCost()
     {

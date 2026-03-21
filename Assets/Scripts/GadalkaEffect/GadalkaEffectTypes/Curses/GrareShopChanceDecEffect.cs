@@ -12,7 +12,7 @@ class GrareShopChanceDecEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=true;
+        this.blessing=false;
         int roll = UnityEngine.Random.Range(1,3);
         selectedChance=roll*5+5;
         this.cost=roll;
