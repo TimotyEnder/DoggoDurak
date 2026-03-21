@@ -9,17 +9,17 @@ class GrareItemEncounterDecEffect : GadalkaEffectInfo
     int selectedChance;
     public override void ExecuteEffect()
     {
-       GameHandler.Instance.GetGameState()._rareItemRewardDropRate=(GameHandler.Instance.GetGameState()._rareItemRewardDropRate-selectedChance==0)?0:GameHandler.Instance.GetGameState()._rareItemRewardDropRate-selectedChance;
+       GameHandler.Instance.GetGameState()._rareItemRewardDropRate -= (int)(GameHandler.Instance.GetGameState()._rareItemRewardDropRate * (selectedChance / 100.0));
     }
 
     public override void InitEffect()
     {
         this.blessing=false;
         int roll = UnityEngine.Random.Range(1,3);
-        selectedChance=roll*5;
+        selectedChance=roll*10+10;
         this.cost=roll;
-        this.effectId="GrareItemEncounterDecEffect";
-        this.descriptionText=$"Chance for rare items in encounter rewards -{selectedChance}% Total chance becomes {((GameHandler.Instance.GetGameState()._rareItemRewardDropRate-selectedChance==0)?0:GameHandler.Instance.GetGameState()._rareItemRewardDropRate-selectedChance)}%";
+        this.effectId="GconsumableChanceDecEffect";
+        this.descriptionText=$"Chance for consumable items in encounter rewards -{selectedChance}% Total chance becomes {GameHandler.Instance.GetGameState()._rareItemRewardDropRate - (int)(GameHandler.Instance.GetGameState()._legendaryItemInshopDropRate * (selectedChance / 100.0))}%";
         
     }
 }
