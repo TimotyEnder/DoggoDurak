@@ -603,10 +603,30 @@ public class GameHandler : MonoBehaviour
     }
     public List<GadalkaEffectInfo> CompileBlessings()
     {
-        return _gadalkaEffectManager.BlessingCompile(_state._gadalkaEffectsMax);
+        if(GameHandler.Instance.GetGameState()._gadalkaBlessings.Count>0)
+        {
+            return _state.LoadGEffects(_state._gadalkaBlessings);
+        }
+        else
+        {
+            List<GadalkaEffectInfo> toRet=_gadalkaEffectManager.BlessingCompile(_state._gadalkaEffectsMax);
+            _state._gadalkaBlessings=_state.SaveGEffects(toRet);  
+            SaveState();
+            return toRet;  
+        }
     }
     public List<GadalkaEffectInfo> CompileCurses()
     {
-        return _gadalkaEffectManager.CursesCompile(_state._gadalkaEffectsMax);
+        if(GameHandler.Instance.GetGameState()._gadalkaCurses.Count>0)
+        {
+            return _state.LoadGEffects(_state._gadalkaCurses);
+        }
+        else
+        {
+            List<GadalkaEffectInfo> toRet=_gadalkaEffectManager.CursesCompile(_state._gadalkaEffectsMax);
+            _state._gadalkaCurses=_state.SaveGEffects(toRet);  
+            SaveState();
+            return toRet;  
+        }
     }
 }

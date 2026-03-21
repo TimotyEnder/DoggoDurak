@@ -16,6 +16,7 @@ class GrestoringEffect : GadalkaEffectInfo
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=-roll;
         SelectedAmount= 5 * roll;
+        this.effectId="GrestoringEffect";
         this.descriptionText=$"{SelectedAmount} random cards gain {StylisticClass.RestoringColor}{StylisticClass.RestoringString}{CardInfo.modifierToDescription["Restoring"]}</color>";
     }
 }

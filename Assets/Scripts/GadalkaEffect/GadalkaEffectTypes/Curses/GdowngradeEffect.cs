@@ -16,6 +16,7 @@ class GdowngradeEffect : GadalkaEffectInfo
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=roll;
         SelectedAmount= 10 * roll;
+        this.effectId="GdowngradeEffect";
         this.descriptionText=$"{SelectedAmount} random cards gain {StylisticClass.HighLight}-1{StylisticClass.HighLightClose}";
     }
 }

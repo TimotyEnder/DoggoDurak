@@ -16,6 +16,7 @@ class GspikyEffect : GadalkaEffectInfo
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=-roll;
         SelectedAmount= 7 * roll;
+        this.effectId="GspikyEffect";
         this.descriptionText=$"{SelectedAmount} random cards gain {StylisticClass.SpikyColor}{StylisticClass.SpikyString}{CardInfo.modifierToDescription["Spiky"]}</color>";
     }
 }

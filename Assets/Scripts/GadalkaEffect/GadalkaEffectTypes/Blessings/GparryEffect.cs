@@ -16,6 +16,7 @@ class GparryEffect : GadalkaEffectInfo
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=-roll;
         SelectedAmount= 5 * roll;
+        this.effectId="GparryEffect";
         this.descriptionText=$"{SelectedAmount} random cards gain {StylisticClass.ParryColor}{StylisticClass.ParryString}{CardInfo.modifierToDescription["Parry"]}</color>";
     }
 }

@@ -13,6 +13,7 @@ class GencounterRewardChoiceDecEffect : GadalkaEffectInfo
     {
         this.blessing=false;
         this.cost=2;
+        this.effectId="GencounterRewardChoiceDecEffect";
         this.descriptionText=$"Encounter rewards will have {StylisticClass.HighLight}1{StylisticClass.HighLightClose} fewer choice to choose from";
     }
 }

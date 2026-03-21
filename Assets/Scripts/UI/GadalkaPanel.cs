@@ -21,6 +21,14 @@ class GadalkaPanel:MonoBehaviour
     }
     public void SetGadalkaEffects()
     {
+        foreach(RectTransform e in _blessingsPanel.transform)
+        {
+            Destroy(e.gameObject);
+        }
+         foreach(RectTransform e in _cursesPanel.transform)
+        {
+            Destroy(e.gameObject);
+        }
         foreach(GadalkaEffectInfo gInfo in GameHandler.Instance.CompileBlessings())
         {
             GameObject gEffect= Instantiate(_gadalkaEffectPrefab,_blessingsPanel.transform);

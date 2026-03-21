@@ -8,8 +8,13 @@ public abstract class GadalkaEffectInfo:ScriptableObject
     protected string descriptionText;
     protected bool blessing;
     protected int cost;
+    protected string effectId;
     public abstract void InitEffect();
     public abstract void ExecuteEffect();
+    public string GetId()
+    {
+        return this.effectId;
+    }
     public string GetDescription()
     {
         return this.descriptionText;

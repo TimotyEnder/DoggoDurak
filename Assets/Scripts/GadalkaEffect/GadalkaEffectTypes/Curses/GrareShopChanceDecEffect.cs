@@ -16,6 +16,7 @@ class GrareShopChanceDecEffect : GadalkaEffectInfo
         int roll = UnityEngine.Random.Range(1,3);
         selectedChance=roll*5+5;
         this.cost=roll;
+        this.effectId="GrareShopChanceDecEffect";
         this.descriptionText=$"Chance for rare items in encounter rewards -{selectedChance}% Total chance becomes {((GameHandler.Instance.GetGameState()._rareItemInshopDropRate-selectedChance==0)?0:GameHandler.Instance.GetGameState()._rareItemInshopDropRate-selectedChance)}%";
         
     }

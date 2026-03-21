@@ -58,6 +58,8 @@ public class GameState
     public List<ItemContainer> _shopItems;
     public List<CardInfo> _shopCards;
     public int _gadalkaEffectsMax;
+    public List<GadalkaEffectContainer> _gadalkaBlessings;
+    public List<GadalkaEffectContainer> _gadalkaCurses;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -144,6 +146,8 @@ public class GameState
         _shopItems= new List<ItemContainer>();
         _shopCards = new List<CardInfo>();
         _gadalkaEffectsMax=5;
+        _gadalkaBlessings=new List<GadalkaEffectContainer>();
+        _gadalkaCurses=new List<GadalkaEffectContainer>();
     }
     private void InitModDamageDic()
     {
@@ -209,6 +213,30 @@ public class GameState
             addItemOrStack(item);
         }
         OnLoad();
+        return toRet;
+    }
+    public List<GadalkaEffectContainer> SaveGEffects(List<GadalkaEffectInfo> effects) 
+    {
+        List<GadalkaEffectContainer> toRet= new List<GadalkaEffectContainer>();
+        foreach (GadalkaEffectInfo eff in effects)
+        {
+            toRet.Add(new GadalkaEffectContainer(eff.GetId(), JsonUtility.ToJson(eff)));
+        }
+        return toRet;
+    }
+    public List<GadalkaEffectInfo> LoadGEffects(List<GadalkaEffectContainer> sItems) 
+    {
+        List<GadalkaEffectInfo> toRet= new List<GadalkaEffectInfo>();
+        foreach (GadalkaEffectContainer iCont in sItems)
+        {
+            // Get the base ScriptableObject (pre-loaded in Resources/Items/)
+            GadalkaEffectInfo effect = Resources.Load<GadalkaEffectInfo>($"GadalkaEffects/{iCont.ItemID}");
+            GadalkaEffectInfo runtimeEffect = ScriptableObject.CreateInstance(effect.GetType()) as GadalkaEffectInfo;
+            // Create a runtime instance and apply saved data
+            JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeEffect);
+            effect.InitEffect();
+            toRet.Add(effect);
+        }
         return toRet;
     }
     public void AddItem(Item item) //assumes item has been initialized with InitItem()

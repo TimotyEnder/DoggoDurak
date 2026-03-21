@@ -16,6 +16,7 @@ class GconsumableChanceDecEffect : GadalkaEffectInfo
         int roll = UnityEngine.Random.Range(1,3);
         selectedChance=roll*7;
         this.cost=roll;
+        this.effectId="GconsumableChanceDecEffect";
         this.descriptionText=$"Chance for consumable items in encounter rewards -{selectedChance}% Total chance becomes {((GameHandler.Instance.GetGameState()._consumableDropRate-selectedChance==0)?0:GameHandler.Instance.GetGameState()._consumableDropRate-selectedChance)}%";
         
     }

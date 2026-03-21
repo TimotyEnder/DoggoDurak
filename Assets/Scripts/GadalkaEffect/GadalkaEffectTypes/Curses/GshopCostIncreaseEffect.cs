@@ -13,6 +13,7 @@ class GshopCostIncreaseEffect : GadalkaEffectInfo
     {
         this.blessing=false;
         this.cost=1;
+        this.effectId="GshopCostIncreaseEffect";
         this.descriptionText=$"Shop costs 1 more {StylisticClass.RestPoint}";
     }
 }

@@ -16,6 +16,7 @@ class GburnEffect : GadalkaEffectInfo
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=-roll;
         SelectedAmount= 7 * roll;
+        this.effectId="GburnEffect";
         this.descriptionText=$"{SelectedAmount} random cards gain {StylisticClass.BurnColor}{StylisticClass.BurnString}{CardInfo.modifierToDescription["Burn"]}</color>";
     }
 }

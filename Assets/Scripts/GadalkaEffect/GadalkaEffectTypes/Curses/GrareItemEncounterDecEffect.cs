@@ -18,6 +18,7 @@ class GrareItemEncounterDecEffect : GadalkaEffectInfo
         int roll = UnityEngine.Random.Range(1,3);
         selectedChance=roll*5;
         this.cost=roll;
+        this.effectId="GrareItemEncounterDecEffect";
         this.descriptionText=$"Chance for rare items in encounter rewards -{selectedChance}% Total chance becomes {((GameHandler.Instance.GetGameState()._rareItemRewardDropRate-selectedChance==0)?0:GameHandler.Instance.GetGameState()._rareItemRewardDropRate-selectedChance)}%";
         
     }
