@@ -15,7 +15,7 @@ class GpoisonEffect : GadalkaEffectInfo
         this.blessing=true;
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=-roll;
-        SelectedAmount= 5 * roll;
+        SelectedAmount= -5 * roll;
         this.effectId="GpoisonEffect";
         this.descriptionText=$"{SelectedAmount} random cards gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}{CardInfo.modifierToDescription["Poison"]}</color>";
     }
