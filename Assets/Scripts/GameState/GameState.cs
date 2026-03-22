@@ -62,6 +62,7 @@ public class GameState
     public List<GadalkaEffectContainer> _gadalkaBlessings;
     public List<GadalkaEffectContainer> _gadalkaCurses;
     public int _opponentCardUpgradeDefault;
+    public List<int> _itemsCostPerRarity;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -110,7 +111,7 @@ public class GameState
         _maxrestPoints = 3;
         _restRpointCost = 1;//cost to use rest action in the rest tab
         _shopRpointCost = 2;//cost to use shop action in the rest tab
-        _gadalkaRpointCost=3;//cost to use gadalka in the rest tab
+        _gadalkaRpointCost=2;//cost to use gadalka in the rest tab
         _handSize = 6;
         _items = new List<Item>();
         _serializableItems = new List<ItemContainer>();
@@ -152,6 +153,7 @@ public class GameState
         _gadalkaBlessings=new List<GadalkaEffectContainer>();
         _gadalkaCurses=new List<GadalkaEffectContainer>();
         _opponentCardUpgradeDefault=0;
+        _itemsCostPerRarity=new List<int>{10,40,60};
     }
     private void InitModDamageDic()
     {
