@@ -35,11 +35,11 @@ public class OpponentLogic : MonoBehaviour
     private readonly object _drawLock= new object();
 
      //drawing Queue
-    private Queue<Action> _drawQueue;
+    private Queue<Func<UniTask>> _drawQueue;
     private bool _isDrawing;
     void Awake()
     {
-        _drawQueue=new Queue<Action>();
+        _drawQueue=new Queue<Func<UniTask>>();
         _isDrawing=false;
         _lifeTotalUI = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
         _handUI = GameObject.Find("OpponentHand").GetComponent<OpponentHand>();
@@ -264,7 +264,7 @@ public class OpponentLogic : MonoBehaviour
         GameHandler.Instance.GetCurrEncounter().OnCardDrawn(cardtoDraw);
         _handUI.AddCard();
     }
-    private async void DrawJob()
+    private async UniTask DrawJob()
     {
         if(_deck.Count<=0)
         {
@@ -280,7 +280,7 @@ public class OpponentLogic : MonoBehaviour
         _isDrawing=true;
         while(true)
         {
-            Action draw=null;
+            Func<UniTask> draw=null;
             lock(_drawQueue)
             {
                 if(_drawQueue.Count>0)
@@ -293,7 +293,8 @@ public class OpponentLogic : MonoBehaviour
                     break;
                 }
             }
-            draw?.Invoke();
+            if (draw != null)
+                await draw();  
             await UniTask.NextFrame();
         }
     }

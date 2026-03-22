@@ -23,12 +23,12 @@ public class Deck : MonoBehaviour
     TextMeshProUGUI _deckSizeText;
 
     //drawing Queue
-    private Queue<Action> _drawQueue;
+    private Queue<Func<UniTask>> _drawQueue;
     private bool _isDrawing;
    
     void Awake() 
     {
-        _drawQueue= new Queue<Action>();
+        _drawQueue= new Queue<Func<UniTask>>();
         _isDrawing=false;
         GameObject _turnHandlerObj= GameObject.Find("TurnHandler"); 
         if(_turnHandlerObj!=null)
@@ -128,7 +128,7 @@ public class Deck : MonoBehaviour
             DrawCard();
         }
     }
-    private async void DrawJob()
+    private async UniTask DrawJob()
     {
         if(_deck.Count<=0)
         {
@@ -152,7 +152,7 @@ public class Deck : MonoBehaviour
         _isDrawing=true;
         while(true)
         {
-            Action draw=null;
+            Func<UniTask> draw=null;
             lock(_drawQueue)
             {
                 if(_drawQueue.Count>0)
@@ -165,7 +165,8 @@ public class Deck : MonoBehaviour
                     break;
                 }
             }
-            draw?.Invoke();
+            if (draw != null)
+                await draw();  
             await UniTask.Delay(100);
         }
     }
