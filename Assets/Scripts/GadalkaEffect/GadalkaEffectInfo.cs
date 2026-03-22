@@ -48,7 +48,11 @@ public abstract class GadalkaEffectInfo:ScriptableObject
         while (it < list.Count && cardsModded < amountToMod)
         {
             CardInfo cardToMod = list[UnityEngine.Random.Range(0, list.Count - 1)];
-            if (!cardToMod._modifierStacks.ContainsKey(modifier))
+            if(modifier=="Laika" && !cardToMod.IsLaika())
+            {
+                cardToMod.MakeLaika();
+            }
+            else if (!cardToMod._modifierStacks.ContainsKey(modifier))
             {
                 cardToMod.AddModifier(modifier);
                 cardsModded++;
@@ -58,7 +62,14 @@ public abstract class GadalkaEffectInfo:ScriptableObject
         for (int j = 0; j < amountToMod - cardsModded; j++) //try to add modifiers even if one instance of them is on every card. Sigleton modifiers handled internally by addModifier()
         {
             CardInfo cardToMod = list[UnityEngine.Random.Range(0, list.Count - 1)];
-            cardToMod.AddModifier(modifier);
+            if(modifier=="Laika")
+            {
+                cardToMod.MakeLaika();
+            }
+            else
+            {
+                cardToMod.AddModifier(modifier);
+            }
         }
     }
     public void UpgradeRandomCards(int amount, int mod,List<CardInfo> list=null)
