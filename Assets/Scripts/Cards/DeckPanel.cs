@@ -78,16 +78,9 @@ public class DeckPanel : MonoBehaviour
     }
     private async void ShrinkDeckPanel()
     {
+
         _deckPanel.GetComponent<Animator>().SetTrigger("Shrink");
         await UniTask.Delay(300);
-        ClearLists();
-        _deckPanel.SetActive(false);
-    }
-    public void ShowDeck() 
-    {
-        _deckPanel.SetActive(true);
-        _deckPanel.GetComponent<Animator>().SetTrigger("Extend");
-
         foreach (Transform card in _clubCont.transform) 
         {
             Destroy(card.gameObject);
@@ -108,6 +101,13 @@ public class DeckPanel : MonoBehaviour
         {
             Destroy(card.gameObject);
         }
+        ClearLists();
+        _deckPanel.SetActive(false);
+    }
+    public void ShowDeck() 
+    {
+        _deckPanel.SetActive(true);
+        _deckPanel.GetComponent<Animator>().SetTrigger("Extend");
         foreach (CardInfo cInfo in GameHandler.Instance.GetGameState()._deck)
         {
             PlaceInCorrectArray(cInfo);

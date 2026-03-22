@@ -8,7 +8,7 @@ class ContrabandChocolateBar : Item
         this.boss = false;
         this.itemId = "ContrabandChocolateBar";
         this.itemName="ContrabandChocolateBar";
-        this.toolTipDesc = "5 random cards gain "+StylisticClass.PoisonColor+StylisticClass.PoisonString+" 1"+CardInfo.modifierToDescription["Poison"]+"</color>";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.PoisonColor+StylisticClass.PoisonString+CardInfo.modifierToDescription["Poison"]+"</color>";
     }
 
     public override void OnActivate()

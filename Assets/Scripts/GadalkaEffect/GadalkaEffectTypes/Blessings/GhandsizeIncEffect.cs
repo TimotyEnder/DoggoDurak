@@ -12,7 +12,7 @@ class GhandsizeIncEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=false;
+        this.blessing=true;
         int roll=UnityEngine.Random.Range(1,4);
         this.cost=-roll;
         SelectedAmount= roll;
