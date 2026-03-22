@@ -14,7 +14,7 @@ class GhandsizeIncEffect : GadalkaEffectInfo
     {
         this.blessing=false;
         int roll=UnityEngine.Random.Range(1,4);
-        this.cost=roll;
+        this.cost=-roll;
         SelectedAmount= roll;
         this.effectId="GhandsizeIncEffect";
         this.descriptionText=$"Hand size +{SelectedAmount}";

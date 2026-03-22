@@ -12,7 +12,7 @@ class GoppDmgRec : GadalkaEffectInfo
     public override void InitEffect()
     {
         this.blessing=false;
-        this.cost=-3;
+        this.cost=3;
         this.effectId="GoppDmgRec";
         this.descriptionText=$"All Opponents  recieve {StylisticClass.DamageNumber(1)} less from all sources.";
     }

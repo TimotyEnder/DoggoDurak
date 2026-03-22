@@ -12,9 +12,9 @@ class GmaxHealthIncEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=false;
+        this.blessing=true;
         int roll=UnityEngine.Random.Range(1,4);
-        this.cost=roll;
+        this.cost=-roll;
         SelectedAmount= 20 * roll;
         this.effectId="GmaxHealthIncEffect";
         this.descriptionText=$"Max health +{SelectedAmount}";

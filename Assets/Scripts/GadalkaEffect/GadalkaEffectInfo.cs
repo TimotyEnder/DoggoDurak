@@ -52,7 +52,7 @@ public abstract class GadalkaEffectInfo:ScriptableObject
             {
                 cardToMod.MakeLaika();
             }
-            else if (!cardToMod._modifierStacks.ContainsKey(modifier))
+            else if (modifier!="Laika" && !cardToMod._modifierStacks.ContainsKey(modifier))
             {
                 cardToMod.AddModifier(modifier);
                 cardsModded++;
@@ -66,7 +66,7 @@ public abstract class GadalkaEffectInfo:ScriptableObject
             {
                 cardToMod.MakeLaika();
             }
-            else
+            else if(modifier!="Laika")
             {
                 cardToMod.AddModifier(modifier);
             }

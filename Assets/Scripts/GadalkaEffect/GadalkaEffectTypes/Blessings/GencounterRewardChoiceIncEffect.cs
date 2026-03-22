@@ -11,7 +11,7 @@ class GencounterRewardChoiceIncEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=false;
+        this.blessing=true;
         this.cost=-2;
         this.effectId="GencounterRewardChoiceIncEffect";
         this.descriptionText=$"Encounter rewards will have {StylisticClass.HighLight}1{StylisticClass.HighLightClose} more choice to choose from";

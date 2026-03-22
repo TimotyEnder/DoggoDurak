@@ -11,7 +11,7 @@ class GdmgRecEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=false;
+        this.blessing=true;
         this.cost=-3;
         this.effectId="GdmgRecEffect";
         this.descriptionText=$"Recieve {StylisticClass.DamageNumber(2)} less from all sources.";
