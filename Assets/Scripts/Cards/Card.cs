@@ -246,7 +246,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void Bling()
     {
-        if (_animator != null)
+        if (_animator != null && this.gameObject.activeSelf)
         {
             StartCoroutine(BlingRoutine());
         }
