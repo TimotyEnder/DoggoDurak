@@ -25,7 +25,7 @@ public class RiotShieldVanguard : Encounter
         _damageReduction=6;
         _damageDone=0;
         this.description="Only a strong combine force of attacks will blow through his shield!";
-        GameHandler.Instance.GetGameState()._opponentsDamageReduction=_damageReduction;
+        GameHandler.Instance.GetGameState()._opponentsDamageReduction+=_damageReduction;
         hasRules=true;
     }
     public override void AddRules()
@@ -60,7 +60,7 @@ public class RiotShieldVanguard : Encounter
             {
                 _blownThrough=true;
                 UpdateRules();
-                GameHandler.Instance.GetGameState()._opponentsDamageReduction=0;
+                GameHandler.Instance.GetGameState()._opponentsDamageReduction-=_damageReduction;
                 ShakeRule(0);
             }
             else
@@ -94,7 +94,7 @@ public class RiotShieldVanguard : Encounter
     {
        if(_blownThrough){ _damageToBlownThrough--;}
        _blownThrough=false;
-        GameHandler.Instance.GetGameState()._opponentsDamageReduction=_damageDone;
+        GameHandler.Instance.GetGameState()._opponentsDamageReduction=_damageReduction;
        _damageDone=0;
        UpdateRules();
        ShakeRule(0);

@@ -221,7 +221,7 @@ public abstract class Encounter : ScriptableObject
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
-                               deck.Add(new CardInfo("C", j, true));
+                               deck.Add(new CardInfo("C", j+GameHandler.Instance.GetGameState()._opponentCardUpgradeDefault, true));
                             }
                         }
                     }
@@ -233,7 +233,7 @@ public abstract class Encounter : ScriptableObject
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
-                                deck.Add(new CardInfo("S", j, true));
+                                deck.Add(new CardInfo("S", j+GameHandler.Instance.GetGameState()._opponentCardUpgradeDefault, true));
                             }
                         }
                     }
@@ -245,7 +245,7 @@ public abstract class Encounter : ScriptableObject
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
-                                deck.Add(new CardInfo("D", j, true));
+                                deck.Add(new CardInfo("D", j+GameHandler.Instance.GetGameState()._opponentCardUpgradeDefault, true));
                             }
                         }
                     }
@@ -257,7 +257,7 @@ public abstract class Encounter : ScriptableObject
                         {
                             if(j>10||OnlyEven && (j%2==0) ||OnlyOdd &&(j%2!=0) || (!OnlyEven && !OnlyOdd))
                             {
-                                deck.Add(new CardInfo("H", j, true));
+                                deck.Add(new CardInfo("H", j+GameHandler.Instance.GetGameState()._opponentCardUpgradeDefault, true));
                             }
                         }
                     }

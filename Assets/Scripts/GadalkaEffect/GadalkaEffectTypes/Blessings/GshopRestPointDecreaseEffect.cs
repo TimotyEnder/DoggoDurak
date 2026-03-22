@@ -11,7 +11,7 @@ class GshopRestPointDecreaseEffect : GadalkaEffectInfo
 
     public override void InitEffect()
     {
-        this.blessing=false;
+        this.blessing=true;
         this.cost=-1;
         this.effectId="GshopRestPointDecreaseEffect";
         this.descriptionText=$"Shop costs 1 less {StylisticClass.RestPoint}";

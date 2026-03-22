@@ -524,7 +524,7 @@ public class GameHandler : MonoBehaviour
     }
     public void ResetEncounterGamestateAttributes() 
     {
-        _state._opponentsDamageReduction = 0;
+        _state._opponentsDamageReduction = _state._defaultOpponentDamageReduction;
         _state._enemyHandSize = 6;
         _state._loseToWin=false;
         _state._healingAndDamageInverted=false;

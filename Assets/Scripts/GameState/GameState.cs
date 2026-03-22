@@ -48,7 +48,8 @@ public class GameState
     public int _shopCostPerCardMod;
     public int _laikaCardInShopChance;
 
-    public int _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
+    public int  _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
+    public int _defaultOpponentDamageReduction;
     public int _playerDamageReduction;
     public bool _reversePossible;
     public int _playerPoisonCounters;
@@ -60,6 +61,7 @@ public class GameState
     public int _gadalkaEffectsMax;
     public List<GadalkaEffectContainer> _gadalkaBlessings;
     public List<GadalkaEffectContainer> _gadalkaCurses;
+    public int _opponentCardUpgradeDefault;
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -134,6 +136,7 @@ public class GameState
         _startingShopRerollCost = 5;
         _undamagable=new bool[]{false,false};
         _opponentsDamageReduction = 0;
+        _defaultOpponentDamageReduction=0;
         _playerDamageReduction=0;
         _enemyHandSize = 6;
         _loseToWin=false;
@@ -148,6 +151,7 @@ public class GameState
         _gadalkaEffectsMax=5;
         _gadalkaBlessings=new List<GadalkaEffectContainer>();
         _gadalkaCurses=new List<GadalkaEffectContainer>();
+        _opponentCardUpgradeDefault=0;
     }
     private void InitModDamageDic()
     {
