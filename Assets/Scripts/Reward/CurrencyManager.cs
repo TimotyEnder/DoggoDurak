@@ -7,7 +7,7 @@ public class CurrencyManager
     public CurrencyManager() 
     {
         _currCurrencyCalculator = new List<CurrencyCalculator>();
-        _currCurrencyCalculator.Add(new DefaultCC());
+        //_currCurrencyCalculator.Add(new LifeGainCC());
     }
     public void AddCurrencyCalculator(CurrencyCalculator cc) 
     {

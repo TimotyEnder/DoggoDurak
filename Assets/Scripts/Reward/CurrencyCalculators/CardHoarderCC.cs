@@ -11,6 +11,6 @@ public class CardHoarderCC : CurrencyCalculator
 
     public override string GetExplanationText()
     {
-        return "A Check from the MMM: (Cards in Deck:" + GameHandler.Instance.GetGameState()._deck.Count.ToString() + ") = ";
+        return "From your hoarding habits: (Cards in Deck:" + GameHandler.Instance.GetGameState()._deck.Count.ToString() + ") = ";
     }
 }

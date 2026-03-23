@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
-public class DefaultCC : CurrencyCalculator
+public class LifeGainCC : CurrencyCalculator
 {
     public override int CalculateCurrency()
     {

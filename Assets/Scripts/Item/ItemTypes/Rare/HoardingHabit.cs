@@ -1,14 +1,14 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "MMMRecruitmentLetter", menuName = "Items/Rare/MMMRecruitmentLetter")]
-public class MMMRecruitmentLetter : Item
+[CreateAssetMenu(fileName = "HoardingHabit", menuName = "Items/Rare/HoardingHabit")]
+public class HoardingHabit : Item
 {
     public override void InitItem()
     {
         this.rarity = 1;
         this.boss = false;
-        this.itemId = "MMM RecruitmentLetter";
-        this.itemName="MMM RecruitmentLetter";
-        this.toolTipDesc = "For each encounter get a bonus ruble reward for each additional card in your deck";
+        this.itemId = "HoardingHabit";
+        this.itemName="HoardingHabit";
+        this.toolTipDesc = "For each encounter get a  ruble reward for each additional card in your deck";
     }
 
     public override void OnActivate()
