@@ -51,6 +51,7 @@ public abstract class GadalkaEffectInfo:ScriptableObject
             if(modifier=="Laika" && !cardToMod.IsLaika())
             {
                 cardToMod.MakeLaika();
+                cardsModded++;
             }
             else if (modifier!="Laika" && !cardToMod._modifierStacks.ContainsKey(modifier))
             {
