@@ -186,13 +186,13 @@ public class GameState
     }
     private void addItemOrStack(Item item) 
     {
-        if (_itemStacks.ContainsKey(item.name))
+        if (_itemStacks.ContainsKey(item.GetId()))
         {
-            _itemStacks[item.name]++;
+            _itemStacks[item.GetId()]++;
         }
         else 
         {
-            _itemStacks.Add(item.name, 1);
+            _itemStacks.Add(item.GetId(), 1);
         }
     }
     public List<ItemContainer> SaveItems(List<Item> items) 

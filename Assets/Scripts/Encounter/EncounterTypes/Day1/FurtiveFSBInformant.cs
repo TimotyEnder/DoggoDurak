@@ -22,7 +22,7 @@ public class FurtiveFSBInformant : Encounter
     }
     public override void AddRules()
     {
-      AddRule("Each time you play a "+StylisticClass.HighLight+"face card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
+      AddRule("Each time you attack with  a "+StylisticClass.HighLight+"face card"+StylisticClass.HighLightClose+"you receive"+StylisticClass.DamageNumber(4)); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {

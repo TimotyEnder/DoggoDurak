@@ -17,7 +17,9 @@ public class GameHandler : MonoBehaviour
     private Lazy<RewardManager> _rewardManager = new Lazy<RewardManager>();
     private EncounterManager _encounterManager;
     private GadalkaEffectManager _gadalkaEffectManager;
+    private CharacterManager _characterManager;
     private Encounter _currentEncounter;
+    private Character _currentCharacter;
     [SerializeField]
     private Reward _currentReward;
     private  DebuffManager  _debuffManager;
@@ -42,6 +44,7 @@ public class GameHandler : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
+        _characterManager= new CharacterManager();
         _debuffManager = new DebuffManager();
         //character manager
     }
@@ -49,9 +52,15 @@ public class GameHandler : MonoBehaviour
     {
         return _saveManager.Value.Load() != null;
     }
-    public void NewGame()
+    public void NewGame(string characerChoice="")
     {
+        
         _state = new GameState();
+        _currentCharacter= _characterManager.SelectChar("MedicalMalinois");
+        foreach(Item i in _currentCharacter.LoadItems())
+        {
+            _state.AddItem(i);
+        }
         _saveManager.Value.Save(_state);
         _encounterManager = new EncounterManager();
         _gadalkaEffectManager =  new GadalkaEffectManager();

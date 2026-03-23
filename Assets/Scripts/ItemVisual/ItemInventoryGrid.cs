@@ -22,17 +22,17 @@ public class ItemInventoryGrid:MonoBehaviour
         foreach (Item i in GameHandler.Instance.GetGameState()._items)
         {
 
-            if (!i.IsActive() && !itemsUpdated.Contains(i.name))
+            if (!i.IsActive() && !itemsUpdated.Contains(i.GetId()))
             {
                 GameObject IIintance = Instantiate(inventoryItemPrefab, this.transform);
                 InventoryItem IIscript = IIintance.GetComponent<InventoryItem>();
                 IIscript.AssignItem(i);
-                int stacks= GameHandler.Instance.GetGameState()._itemStacks[i.name];
+                int stacks= GameHandler.Instance.GetGameState()._itemStacks[i.GetId()];
                 if (stacks > 1) 
                 {
                     IIscript.SetStackNum(stacks);
                 }
-                itemsUpdated.Add(i.name);    
+                itemsUpdated.Add(i.GetId());    
             }
         }
     }

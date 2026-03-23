@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GadalkaEffectManager
+class GadalkaEffectManager
 {
     private List<GadalkaEffectInfo> _curses;
     private List<GadalkaEffectInfo> _blessings;
@@ -10,8 +10,8 @@ public class GadalkaEffectManager
     {
         _curses = new List<GadalkaEffectInfo>();
         _blessings= new List<GadalkaEffectInfo>();
-        var loadedItems = Resources.LoadAll<GadalkaEffectInfo>("GadalkaEffects");
-        foreach (var i in loadedItems)
+        var loadedEffects = Resources.LoadAll<GadalkaEffectInfo>("GadalkaEffects");
+        foreach (var i in loadedEffects)
         {
             GadalkaEffectInfo runtimeEffect = Object.Instantiate(i); // Create a safe copy
             runtimeEffect.InitEffect();
