@@ -13,7 +13,7 @@ class GcostPerCardModDecEffect : GadalkaEffectInfo
     {
         this.blessing=true;
         this.cost=-1;
-        this.effectId="GcostPerCardModIncEffect";
+        this.effectId="GcostPerCardModDecEffect";
         this.descriptionText=$"Cards in the shop cost {StylisticClass.HighLight}2 rubles less{StylisticClass.HighLightClose} per modifier.";
     }
 }
