@@ -5,12 +5,12 @@ public class CardHoarderCC : CurrencyCalculator
     public override int CalculateCurrency()
     {
         int cardsInDeck = GameHandler.Instance.GetGameState()._deck.Count;
-        int calculation =  Mathf.CeilToInt((cardsInDeck-36)*0.5f);
+        int calculation =  5+Mathf.CeilToInt((cardsInDeck-36)*1f);
         return calculation;
     }
 
     public override string GetExplanationText()
     {
-        return "From your hoarding habits: (Cards in Deck:" + GameHandler.Instance.GetGameState()._deck.Count.ToString() + ") = ";
+        return "From your hoarding habits: (Addicional cards:" + (GameHandler.Instance.GetGameState()._deck.Count-36).ToString()+ ") = ";
     }
 }
