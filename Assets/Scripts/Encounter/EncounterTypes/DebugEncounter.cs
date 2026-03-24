@@ -49,7 +49,8 @@ public class DebugEncounter : Encounter
         day = 0;
         foreach(CardInfo c in deck)
         {
-        c.AddModifier("Draw");
+            c.MakeLaika();
+            c.AddModifier("Draw");
         }
         this.encounterName="DEBUG";
     }
@@ -96,7 +97,7 @@ public class DebugEncounter : Encounter
 
     public override void SetDebuffs()
     {
-        GameHandler.Instance.SetDebuffs(new string[]{"C6","D6","H6","S6"},true,true);
+        //GameHandler.Instance.SetDebuffs(new string[]{"C6","D6","H6","S6"},true,true);
     }
 
     public override void OnHandCardDiscarded(CardInfo card)

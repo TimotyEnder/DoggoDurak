@@ -67,6 +67,7 @@ public class GameHandler : MonoBehaviour
         //debug
         foreach (CardInfo c in _state._deck)
         {
+            //c.MakeLaika();
             //c.AddModifier("Burn",10);
             //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
@@ -77,12 +78,12 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
-        debugItem3.InitItem();
-        _state.AddItem(debugItem3);
+        //Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        //debugItem3.InitItem();
+        //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
-        _currentEncounter= new DebugEncounter();
-        _currentEncounter.InitiateEncounter();
+        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter.InitiateEncounter();
         Next();
     }
     public void SaveState()
@@ -120,7 +121,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else
