@@ -38,7 +38,6 @@ public class TheAdaptiveAlabai : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        GameHandler.Instance.DamageOpponent(amount,true);
         ShakeRule(1);
     }
 
@@ -99,6 +98,6 @@ public class TheAdaptiveAlabai : Encounter
 
     public override int AddToDamageOpponent(int amount, string fromMod = "")
     {
-        return amount;
+        return amount*2;
     }
 }

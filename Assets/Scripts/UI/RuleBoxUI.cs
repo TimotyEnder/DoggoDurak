@@ -19,9 +19,12 @@ public class RuleBoxUI : MonoBehaviour
             Destroy(text);
         }
         _ruleTexts.Clear();
-        foreach(string rule in GameHandler.Instance.GetCurrEncounter().GetRules())
+        if(GameHandler.Instance.GetCurrEncounter().GetRules()!=null)
         {
-            AddRulesText(rule);
+            foreach(string rule in GameHandler.Instance.GetCurrEncounter().GetRules())
+            {
+                AddRulesText(rule);
+            }
         }
     }
     public void AddRulesText(string text) 

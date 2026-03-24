@@ -191,7 +191,7 @@ public class TurnHandler : MonoBehaviour
                 card.SetAnimatable(true);
                 card.Hit();
                 int damage=0;
-                if(GameHandler.Instance.IsCardnotDebuffed(card.GetCardInfo(), card.GetCardInfo()._opponentCard ? 1 : 0))
+                if(!card.IsDebuffed())
                 {
                     damage = card.GetCardInfo()._number;
                 }

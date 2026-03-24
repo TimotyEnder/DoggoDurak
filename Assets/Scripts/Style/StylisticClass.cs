@@ -42,7 +42,7 @@ public static class StylisticClass
     {
         return " <b>"+damage+" "+DamageIcon+"</b> ";
     }
-    public static string Debuffed="<b>Debuffed (Cannot defend and deal zero damage)</b>";
+    public static string Debuffed="<b>Debuffed (Is defended by everything and deals zero damage)</b>";
     public static string Laika="<b>Laika Card (Defends/Is defended by anything but number is 0)</b>";
 
     //active items

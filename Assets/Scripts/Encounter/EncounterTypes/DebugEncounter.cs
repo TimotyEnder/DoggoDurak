@@ -51,6 +51,7 @@ public class DebugEncounter : Encounter
         {
         c.AddModifier("Draw");
         }
+        this.encounterName="DEBUG";
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)
@@ -95,7 +96,7 @@ public class DebugEncounter : Encounter
 
     public override void SetDebuffs()
     {
-        
+        GameHandler.Instance.SetDebuffs(new string[]{"C6","D6","H6","S6"},true,true);
     }
 
     public override void OnHandCardDiscarded(CardInfo card)

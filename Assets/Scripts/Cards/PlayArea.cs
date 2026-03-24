@@ -184,6 +184,10 @@ public class PlayArea : MonoBehaviour
         {
             return defendingCard._number > defendedCard._number;
         }
+        else if(defendedCard._card.IsDebuffed())
+        {
+            return  true;
+        }
         else if (defendingCard._suit == _ruleHandler.GetTrumpSuit()) 
         {
             return true;    

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 [CreateAssetMenu(fileName = "VodkaBottle", menuName = "Items/Active-Rare/VodkaBottle")]
@@ -15,10 +16,11 @@ class VodkaBottle : Item
 
     public override void OnActivate()
     {
+        List<string> toDebuff= new List<string>();
         for(int i =0;i<GameHandler.Instance.GetPlayerCardsInHand();i++)
         {
             CardInfo card= GameHandler.Instance.GetCardInHand(i);
-            GameHandler.Instance.SetDebuffs(new string[]{$"{card._suit}{card._number}"},true,GameHandler.Instance.IsCardnotDebuffed(card,1));
+            card._card.SetDebuffed(true);
         }
         GameHandler.Instance.HealPlayer(20);
     }

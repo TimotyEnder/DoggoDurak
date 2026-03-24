@@ -11,7 +11,7 @@ public class DebuffManager
     //number-> suit-> 0=player 1=enemy-> boolean representing if card can be played 
     public  Dictionary<string, Dictionary<int, bool[]>> _playPermissionsCard;
     public Dictionary<string, bool[]> _playPermissionsModifier;
-    public bool[] AllEven;
+    public bool[] AllEvenDebuffed;
     public bool[] AllOdd;
     public DebuffManager()
     {
@@ -30,10 +30,10 @@ public class DebuffManager
             }
         }
         if(!_playPermissionsCard.ContainsKey(card._suit)){return false;}
-        else if(!AllEven[target] || !AllOdd[target]){return false;}
+        else if(AllEvenDebuffed[target] && card.IsEven() || AllOdd[target] && card.IsOdd()){return false;}
         else
         {
-            return !_playPermissionsCard[card._suit].ContainsKey(card._number) || _playPermissionsCard[card._suit][card._number][target];
+            return !_playPermissionsCard[card._suit].ContainsKey(card._number) || !_playPermissionsCard[card._suit][card._number][target];
         }
     }
     public void ResetPermissions() 
@@ -51,8 +51,8 @@ public class DebuffManager
             { "H", new Dictionary<int, bool[]>() },
             { "L", new Dictionary<int, bool[]>() }
         };
-        AllEven=new bool[2]{true, true};
-        AllOdd=new bool[2]{true, true};
+        AllEvenDebuffed=new bool[2]{false, false};
+        AllOdd=new bool[2]{false, false};
     }
     //how to use:
     // [One Character For Suit]{Number} = disables cards with that specific suit and number
@@ -62,12 +62,13 @@ public class DebuffManager
     {
         if(AllEven!=null)
         {
-            this.AllEven=AllEven;
+            this.AllEvenDebuffed=AllEven;
         }
         if(AllOdd!=null)
         {
             this.AllOdd = AllOdd;
         }
+        if(perms==null){return;}
         foreach(string perm in perms)
         {
             switch(perm[0])
@@ -82,6 +83,10 @@ public class DebuffManager
                             if (_playPermissionsCard["C"].ContainsKey(num))
                             {
                                 _playPermissionsCard["C"][num]= new bool[2]{forPlayer,forEnemy};
+                            }
+                            else
+                            {
+                                _playPermissionsCard["C"].Add(num, new bool[2]{forPlayer,forEnemy});
                             }
                         }
                     }
@@ -103,6 +108,10 @@ public class DebuffManager
                             {
                                 _playPermissionsCard["D"][num]= new bool[2]{forPlayer,forEnemy};
                             }
+                            else
+                            {
+                                _playPermissionsCard["D"].Add(num, new bool[2]{forPlayer,forEnemy});
+                            }
                         }
                     }
                     //All Diamonds
@@ -123,6 +132,10 @@ public class DebuffManager
                             {
                                 _playPermissionsCard["H"][num]= new bool[2]{forPlayer,forEnemy};
                             }
+                            else
+                            {
+                                _playPermissionsCard["H"].Add(num, new bool[2]{forPlayer,forEnemy});
+                            }
                         }
                     }
                     //All Hearts
@@ -142,6 +155,10 @@ public class DebuffManager
                             {
                                 _playPermissionsCard["S"][num]= new bool[2]{forPlayer,forEnemy};
                             }
+                            else
+                            {
+                                _playPermissionsCard["S"].Add(num, new bool[2]{forPlayer,forEnemy});
+                            }
                         }
                     }
                     //all Spades
@@ -160,6 +177,10 @@ public class DebuffManager
                                 if (_playPermissionsCard["L"].ContainsKey(num))
                                 {
                                     _playPermissionsCard["L"][num]= new bool[2]{forPlayer,forEnemy};
+                                }
+                                else
+                                {
+                                    _playPermissionsCard["L"].Add(num, new bool[2]{forPlayer,forEnemy});
                                 }
                             }
                         }

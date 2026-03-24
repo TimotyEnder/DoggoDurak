@@ -442,7 +442,7 @@ public static string GetNumberShortName(int number)
     }
     public string CompileCardName()
     {
-        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ GetNumberFullName(_number) + suitFullName[_suit]  +" ("+(GameHandler.Instance.IsCardnotDebuffed(this,_opponentCard?1:0)?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align>"+suitToStyleClose[_suit]+"</size>";
+        return "<size="+SettingsState.ToolTipFontSizeTitle+">"+suitToColorToolText[_suit]+"<align=center>"+ GetNumberFullName(_number) + suitFullName[_suit]  +" ("+(!_card.IsDebuffed()?StylisticClass.DamageNumber(_number):StylisticClass.DamageNumber(0))+" )</align>"+suitToStyleClose[_suit]+"</size>";
     }
     public string CompileCondencedModifiers()
     {

@@ -85,12 +85,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     [SerializeField]
     private GameObject poisonTextPrefab;
     private PassButton _passButton;
+
+    //debuff management
+    private bool _Debuffed;
     void Start()
     {
     }
     void Awake()
     {
         //card hand area
+        _Debuffed=false;
         _cardHandArea = GameObject.Find("CardHandArea");
         if (_cardHandArea != null)
         {
@@ -173,7 +177,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _costText.text = _cost.ToString()+_costText.text[_costText.text.Length-1];
         }
         UpdateModifiers();
-        CheckDebuffVisual();
+        CheckIsDebuffed();
         _cardRect.localScale = Vector3.one;
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
@@ -208,31 +212,33 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _grey=false;
         _cardImage.GetComponent<Image>().color = Color.white;
     }
+    public bool IsDebuffed()
+    {
+        return _Debuffed;
+    }
+    public void SetDebuffed(bool state)
+    {
+        this._Debuffed=state;
+        CheckDebuffVisual();
+    }
+    public void CheckIsDebuffed()
+    {
+        if(!GameHandler.Instance.IsCardnotDebuffed(_cardInfo,_cardInfo._opponentCard?1:0))
+        {
+            this._Debuffed=true;
+            CheckDebuffVisual();
+        }
+    }
     public void CheckDebuffVisual()
     {
-       if(_cardInfo._opponentCard)
+        if(this._Debuffed)
         {
-            if(!GameHandler.Instance.IsCardnotDebuffed(this.GetCardInfo(),1))
-            {
-                _notPermissible.SetActive(true);
-                Bling();
-            }
-            else
-            {
-                _notPermissible.SetActive(false);
-            }
+            _notPermissible.SetActive(true);
+            Bling();
         }
         else
         {
-            if(!GameHandler.Instance.IsCardnotDebuffed(this.GetCardInfo(),0))
-            {
-                _notPermissible.SetActive(true);
-                Bling();
-            }
-            else
-            {
-                _notPermissible.SetActive(false);
-            }
+            _notPermissible.SetActive(false);
         }
         GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
@@ -428,7 +434,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _passButton.SetJiggle(true);
         }
         //Defending, not your turn
-        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend) && GameHandler.Instance.IsCardnotDebuffed(this.GetCardInfo(),0))
+        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend))
         {
             Debug.Log("Able to defend");
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());

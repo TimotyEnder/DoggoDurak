@@ -17,16 +17,14 @@ class PrisonerTransfer : Item
         for(int i=0;i<GameHandler.Instance.GetPlayerCardsInHand();i++)
         {
             CardInfo card= GameHandler.Instance.GetCardInHand(i);
-            if(GameHandler.Instance.IsCardnotDebuffed(card,0))
+            if(card._card.IsDebuffed())
             {
-                GameHandler.Instance.SetDebuffs(new string[]{$"{card._suit}{card._number}"},true,GameHandler.Instance.IsCardnotDebuffed(card,1));
+                card._card.SetDebuffed(false);
             }
             else
             {
-                GameHandler.Instance.SetDebuffs(new string[]{$"{card._suit}{card._number}"},false,GameHandler.Instance.IsCardnotDebuffed(card,1));
+                card._card.SetDebuffed(false);
             }
-            card._card.CheckDebuffVisual();
-            card._card.Bling();
         }
     }
 

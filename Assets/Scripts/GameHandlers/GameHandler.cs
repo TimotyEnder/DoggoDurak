@@ -77,12 +77,12 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        //Item debugItem3 = ScriptableObject.CreateInstance<ScorchedEarthPolicy>();
-        //debugItem3.InitItem();
-        //_state.AddItem(debugItem3);
+        Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        debugItem3.InitItem();
+        _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
-        //_currentEncounter= new DebugEncounter();
-        //_currentEncounter.InitiateEncounter();
+        _currentEncounter= new DebugEncounter();
+        _currentEncounter.InitiateEncounter();
         Next();
     }
     public void SaveState()
@@ -120,7 +120,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
             SceneManager.LoadScene(1);
         }
         else
@@ -478,9 +478,9 @@ public class GameHandler : MonoBehaviour
          _debuffManager.ResetPermissions();
          UIupdateDebuffs();
     }  
-    public void SetDebuffs(string[]perms, bool forPlayer,bool forEnemy)
+    public void SetDebuffs(string[]perms, bool forPlayer,bool forEnemy,bool[] AllEven=null,bool[] AllOdd=null)
     {
-        _debuffManager.SetPermissions(perms,forPlayer,forEnemy);
+        _debuffManager.SetPermissions(perms,forPlayer,forEnemy,AllEven,AllOdd);
         UIupdateDebuffs();
     }
     public void EncounterSetDebuffs()
