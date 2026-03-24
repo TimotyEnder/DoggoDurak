@@ -20,8 +20,8 @@ class CharacterManager
     {
         return _chars[charId];
     }
-    public List<Character> GetCharacterInfo()
+    public LoopList<Character> GetCharacterInfo()
     {
-        return _chars.Values.ToList();
+        return new LoopList<Character>(_chars.Values.ToList());
     }
 }
