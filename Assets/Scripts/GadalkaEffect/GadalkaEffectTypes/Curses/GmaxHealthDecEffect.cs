@@ -7,11 +7,7 @@ class GmaxHealthDecEffect : GadalkaEffectInfo
     private int SelectedAmount;
     public override void ExecuteEffect()
     {
-        GameHandler.Instance.GetGameState()._maxhealth-=SelectedAmount;
-        if(GameHandler.Instance.GetGameState()._health>GameHandler.Instance.GetGameState()._maxhealth)
-        {
-            GameHandler.Instance.SetHealth(GameHandler.Instance.GetGameState()._maxhealth);
-        }
+        GameHandler.Instance.SetMaxHealth(-SelectedAmount);
     }
 
     public override void InitEffect()

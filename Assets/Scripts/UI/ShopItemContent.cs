@@ -42,6 +42,7 @@ public class ShopItemContent : MonoBehaviour
     public void ReRoll()
     {
         RemoveAllGrid();
+        GameHandler.Instance.GetGameState()._shopItems= new List<ItemContainer>();
         SetRewardGrid();
     }
 }

@@ -21,7 +21,7 @@ public class DramaticUnionDemocrat : Encounter
     }
     public override void AddRules()
     {
-       AddRule($"Each time you play a {StylisticClass.HighLight}{CardInfo.suitToColorToolText["D"]}red card</color>{StylisticClass.HighLightClose}you receive"+StylisticClass.DamageNumber(4)); //0
+       AddRule($"Each time you attack with a {StylisticClass.HighLight}{CardInfo.suitToColorToolText["D"]}red card</color>{StylisticClass.HighLightClose}you receive"+StylisticClass.DamageNumber(4)); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
@@ -45,11 +45,6 @@ public class DramaticUnionDemocrat : Encounter
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        if(!card.GetCardInfo()._opponentCard && card.GetCardInfo().IsRed())
-        {
-            GameHandler.Instance.DamagePlayer(4,true);
-            ShakeRule(0);
-        }
     }
 
     public override void OnPlayedCard(Card card)

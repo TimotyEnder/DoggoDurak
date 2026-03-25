@@ -63,6 +63,7 @@ public class ShopCardGrid : MonoBehaviour
         {
             Destroy(cards.gameObject);
         }
+        GameHandler.Instance.GetGameState()._shopCards= new List<CardInfo>();
         SetCardGrid();
     }
 }

@@ -18,7 +18,7 @@ public class DoggoSnack : Item
 
     public override void OnAquire()
     {
-        GameHandler.Instance.IncreaseMaxHealth(10);
+        GameHandler.Instance.SetMaxHealth(10);
     }
 
     public override void OnCardAdded(CardInfo card)

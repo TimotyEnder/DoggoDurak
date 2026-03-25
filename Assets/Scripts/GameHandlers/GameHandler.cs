@@ -56,6 +56,7 @@ public class GameHandler : MonoBehaviour
         
         _state = new GameState();
         _currentCharacter= _characterManager.GetCharacterInfo().here();
+        _state._rubles=_currentCharacter.GetStartRub();
         foreach(Item i in _currentCharacter.LoadItems())
         {
             _state.AddItem(i);
@@ -206,13 +207,17 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdateHealthUI();
         }
     }
-    public void IncreaseMaxHealth(int amount)
+    public void SetMaxHealth(int amount)
     {
         _state._maxhealth+=amount;
         GameObject maxHpText=GameObject.Find("MaxPlayerHealthText");
         if(maxHpText!=null)
         {
             maxHpText.GetComponent<MaxPlayerHealthText>().Increase(amount);
+        }
+        if(GameHandler.Instance.GetGameState()._health>GameHandler.Instance.GetGameState()._maxhealth)
+        {
+            GameHandler.Instance.SetHealth(GameHandler.Instance.GetGameState()._maxhealth);
         }
     }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!

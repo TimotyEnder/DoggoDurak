@@ -7,7 +7,7 @@ class GmaxHealthIncEffect : GadalkaEffectInfo
     private int SelectedAmount;
     public override void ExecuteEffect()
     {
-        GameHandler.Instance.GetGameState()._maxhealth+=SelectedAmount;
+        GameHandler.Instance.SetMaxHealth(SelectedAmount);
     }
 
     public override void InitEffect()
