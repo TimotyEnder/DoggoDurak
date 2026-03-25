@@ -46,7 +46,6 @@ public class GameHandler : MonoBehaviour
         DontDestroyOnLoad(this);
         _characterManager= new CharacterManager();
         _debuffManager = new DebuffManager();
-        //character manager
     }
     public bool HasSave()
     {
@@ -56,7 +55,7 @@ public class GameHandler : MonoBehaviour
     {
         
         _state = new GameState();
-        _currentCharacter= _characterManager.SelectChar("MedicalMalinois");
+        _currentCharacter= _characterManager.GetCharacterInfo().here();
         foreach(Item i in _currentCharacter.LoadItems())
         {
             _state.AddItem(i);
@@ -639,5 +638,9 @@ public class GameHandler : MonoBehaviour
             SaveState();
             return toRet;  
         }
+    }
+    public LoopList<Character> GetCharacterInfo()
+    {
+        return _characterManager.GetCharacterInfo();
     }
 }

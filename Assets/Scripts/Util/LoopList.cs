@@ -1,7 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
-public class LoopList<T>
+public  class LoopList<T>:IEnumerable
 {
     private List<T> _revolvingStorage;
     private int _currentIndex;
@@ -13,8 +14,16 @@ public class LoopList<T>
     public LoopList(List<T> list,int importCurrentIndex=0)
     {
         //from list constructor
-        _revolvingStorage=new List<T>();
+        _revolvingStorage=new List<T>(list);
         _currentIndex=importCurrentIndex;
+    }
+    public IEnumerator<T> GetEnumerator()
+    {
+        return _revolvingStorage.GetEnumerator();
+    }
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
     public void Add(T thing)
     {

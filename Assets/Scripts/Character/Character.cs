@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract class Character:ScriptableObject
+public abstract class Character:ScriptableObject
 {
     protected int startingRubles;
     protected string characterId;
@@ -11,6 +11,10 @@ abstract class Character:ScriptableObject
     public string GetID()
     {
         return this.characterId;
+    }
+    public int GetStartRub()
+    {
+        return this.startingRubles;
     }
     public string GetName()
     {

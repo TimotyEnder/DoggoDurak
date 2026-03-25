@@ -8,7 +8,7 @@ class MedicalMalinois : Character
     {
         this.startingRubles=20;
         this.characterId="MedicalMalinois";
-        this.characterName="MedicalMalinois";
+        this.characterName="Malinois";
     }
 
     public override List<Item> LoadItems()

@@ -8,12 +8,12 @@ class InvestmentBankerBorzoi : Character
     {
         this.startingRubles=15;
         this.characterId="InvestmentBankerBorzoi";
-        this.characterName="InvestmentBankerBorzoi";
+        this.characterName="Investment Banker Borzoi";
     }
 
     public override List<Item> LoadItems()
     {
-        List<Item> toRet=new List<Item>{new DachaDoorstep(), new InvestmentFund()};
+        List<Item> toRet=new List<Item>{new DachaDoorstep(), new InvestorProfile()};
         foreach(Item i in toRet)
         {
             i.InitItem();
