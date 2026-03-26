@@ -22,7 +22,6 @@ public class PlayArea : MonoBehaviour
     private CardHandArea _playerHand;
     private OpponentLogic _opponentHand;
     private Discard _discard;
-    private ResponseText _responseText;
     void Start()
     {
         _cardsDefendedWith = new List<Card>();  
@@ -40,7 +39,6 @@ public class PlayArea : MonoBehaviour
         _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
         _opponentHand= GameObject.Find("Opponent").GetComponent<OpponentLogic>(); 
         _discard= GameObject.Find("Discard").GetComponent<Discard>();
-        _responseText=GameObject.Find("ResponseText").GetComponent<ResponseText>();
     }
     void Update()
     {

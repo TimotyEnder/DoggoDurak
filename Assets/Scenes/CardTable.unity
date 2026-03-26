@@ -8557,7 +8557,7 @@ GameObject:
   - component: {fileID: 908364353}
   - component: {fileID: 908364352}
   m_Layer: 5
-  m_Name: ResponseText
+  m_Name: OpponentResponseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10979,7 +10979,7 @@ MonoBehaviour:
   _deck: []
   _cardParticlePrefab: {fileID: 4363370197148885183, guid: 2dd013d048bd0464d8ccc08bdf173b14, type: 3}
   _canvas: {fileID: 32215550}
-  _responseText: {fileID: 0}
+  _responseText: {fileID: 908364353}
 --- !u!4 &1311001220
 Transform:
   m_ObjectHideFlags: 0

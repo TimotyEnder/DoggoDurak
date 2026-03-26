@@ -88,7 +88,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
     //debuff management
     private bool _Debuffed;
-    //Response Error Text
     void Start()
     {
     }
