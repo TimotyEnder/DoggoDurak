@@ -30,9 +30,9 @@ public class OpponentLogic : MonoBehaviour
     private bool[] _doublePass={false,false}; //if you pass once the enemy gets to put more cards down and then if you press pass again you will not defend.
     private Discard _discard;
     [SerializeField]
-    private TextMeshProUGUI _responseText;
+    private ResponseText _responseText;
+    private bool _noResponseWritten=false;
     private bool _noResponse=true; //if the enemy has no response to the players attack, this is set to true and the response text is set to "No Response" at the end of the player's turn. This is reset at the start of the enemy's turn.
-    private bool  _noResponseWritten=false;
 
     private bool _justReverse=false; //flag to check if the enemy just reversed, so it lets you defend even tho you have not defended yet.
 
@@ -90,7 +90,6 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
         CardToAttack.GetComponent<Card>().PlayCard();
-        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
         _noResponse=false;
     }
     private void ReverseWithCard(CardInfo cardInHand)
@@ -104,7 +103,6 @@ public class OpponentLogic : MonoBehaviour
         GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
         _justReverse=true;
         _turnHandler.Reverse();
-        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
         _noResponse=false;
     }
     private void DefendWithCard(Card defended, CardInfo chosenToDefend)
@@ -115,7 +113,6 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToDefend = Instantiate(cardMaker);
         CardToDefend.GetComponent<Card>().MakeCard(chosenToDefend);
         CardToDefend.GetComponent<Card>().DefendCard(defended);
-        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ defended.GetCardInfo().CompileCardName() +defended.GetCardInfo().CompileCardName()+ " with: "+chosenToDefend.CompileCardName()+chosenToDefend.CompileCondencedModifiers());
         _noResponse=false;
     }
     private async void CardVisualDraw(CardInfo target)
@@ -234,7 +231,7 @@ public class OpponentLogic : MonoBehaviour
     }
     public void Attack() 
     {
-        WipeResponseText();
+        _responseText.WipeResponseText();
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
@@ -341,7 +338,7 @@ public class OpponentLogic : MonoBehaviour
     {
         _enemyPlaying = true;
         _cardHandArea.GreyInAllCards();
-        WipeResponseText();
+        _responseText.WipeResponseText();
         await UniTask.NextFrame();
         await CheckForPlaysRoutine();
     }
@@ -356,7 +353,7 @@ public class OpponentLogic : MonoBehaviour
         }
         if(_noResponse && !_noResponseWritten)
         {
-            AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no response!");
+            _responseText.AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " has no response!");
             _noResponseWritten = true;
         }
         CardHandArea cha = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
@@ -384,13 +381,4 @@ public class OpponentLogic : MonoBehaviour
     {
         endTurnCaused = false;
     }
-    private void WipeResponseText() 
-    {
-        _responseText.text = "";
-        _noResponseWritten=false; 
-    } 
-    private void AddToResponseText(string textToAdd) 
-    {
-        _responseText.text += "<wave  a=0.1>" + textToAdd + "</wave>\n";
-    }  
 }
