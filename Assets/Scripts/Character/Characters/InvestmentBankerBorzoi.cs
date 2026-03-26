@@ -13,7 +13,7 @@ class InvestmentBankerBorzoi : Character
 
     public override List<Item> LoadItems()
     {
-        List<Item> toRet=new List<Item>{new DachaDoorstep(), new InvestorProfile()};
+        List<Item> toRet=new List<Item>{ScriptableObject.CreateInstance<DachaDoorstep>(), ScriptableObject.CreateInstance<InvestorProfile>()};
         foreach(Item i in toRet)
         {
             i.InitItem();

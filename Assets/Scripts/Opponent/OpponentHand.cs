@@ -45,7 +45,9 @@ public class OpponentHand : MonoBehaviour
             _cards.RemoveAt(0);
             cardToRemove.transform.SetParent(null);
             if (cardToRemove != null)
-            Destroy(cardToRemove); // Safe destroy
+            {
+                Destroy(cardToRemove); // Safe destroy
+            }
 
             _cardsInHand--;
         }

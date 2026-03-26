@@ -187,7 +187,7 @@ public class CardInfo
         {"D"," of Diamonds"},
         {"H"," of Hearts"},
         {"S"," of Spades"},
-        {"L", "Laika Card"}
+        {"L", " Laika Card"}
     };
     public static Dictionary<string, string> suitToColorToolText = new Dictionary<string, string>
     {

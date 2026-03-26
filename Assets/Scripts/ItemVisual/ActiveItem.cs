@@ -53,16 +53,18 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
     }
     private IEnumerator OnPress()
     {
+        bool FailedToActivate=false;
         Scene currentScene = SceneManager.GetActiveScene();
         _anim.SetTrigger("Click");
         if((currentScene.name == "Rest") || !_item.Activate())
         {
             _bgColor.color=StylisticClass.ActiveItemUseInvalid;
+            FailedToActivate=true;
         }
         _toolTip.SetToolTipText(_item.GetItemToolTip()); //basically for Stay's coin
         yield return new WaitForSeconds(0.2f);
         SelectColor();
-        if(_item.IsPersistent())
+        if(_item.IsPersistent()&&!FailedToActivate)
         {
             _anim.SetBool("Active",true);
         }

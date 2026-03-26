@@ -13,7 +13,7 @@ class MedicalMalinois : Character
 
     public override List<Item> LoadItems()
     {
-        List<Item> toRet=new List<Item>{new BabushkasBorsh(), new NaZdorovie()};
+        List<Item> toRet=new List<Item>{ScriptableObject.CreateInstance<BabushkasBorsh>(), ScriptableObject.CreateInstance<NaZdorovie>()};
         foreach(Item i in toRet)
         {
             i.InitItem();

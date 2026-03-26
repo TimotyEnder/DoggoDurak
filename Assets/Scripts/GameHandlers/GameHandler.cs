@@ -78,9 +78,9 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        //Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
-        //debugItem3.InitItem();
-        //_state.AddItem(debugItem3);
+        Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        debugItem3.InitItem();
+        _state.AddItem(debugItem3);
         //_state._rubles=100; //debug
         //_currentEncounter= new DebugEncounter();
         //_currentEncounter.InitiateEncounter();
@@ -108,7 +108,7 @@ public class GameHandler : MonoBehaviour
         _saveManager.Value.Save(_state);
         if(!FromContinue){_state._encounter++;}
         //_state._encounter = 11; //debug insta boss
-        //_state._encounter = 4; //debug insta shop
+        _state._encounter = 4; //debug insta shop
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {

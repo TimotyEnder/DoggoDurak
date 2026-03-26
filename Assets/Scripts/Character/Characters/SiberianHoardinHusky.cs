@@ -13,7 +13,7 @@ class SiberianHoardinHusky : Character
 
     public override List<Item> LoadItems()
     {
-        List<Item> toRet=new List<Item>{new ClippedClaws(), new HoardingHabit()};
+        List<Item> toRet=new List<Item>{ScriptableObject.CreateInstance<ClippedClaws>(), ScriptableObject.CreateInstance<HoardingHabit>()};
         foreach(Item i in toRet)
         {
             i.InitItem();

@@ -90,7 +90,7 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(cardInHand);
         CardToAttack.GetComponent<Card>().PlayCard();
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
+        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
         _noResponse=false;
     }
     private void ReverseWithCard(CardInfo cardInHand)
@@ -104,7 +104,7 @@ public class OpponentLogic : MonoBehaviour
         GameHandler.Instance.GetGameState().OnReverse(CardToReverse.GetComponent<Card>());
         _justReverse=true;
         _turnHandler.Reverse();
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
+        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " reverses with: "+cardInHand.CompileCardName()+cardInHand.CompileCondencedModifiers());
         _noResponse=false;
     }
     private void DefendWithCard(Card defended, CardInfo chosenToDefend)
@@ -115,7 +115,7 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToDefend = Instantiate(cardMaker);
         CardToDefend.GetComponent<Card>().MakeCard(chosenToDefend);
         CardToDefend.GetComponent<Card>().DefendCard(defended);
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ defended.GetCardInfo().CompileCardName() +defended.GetCardInfo().CompileCardName()+ " with: "+chosenToDefend.CompileCardName()+chosenToDefend.CompileCondencedModifiers());
+        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ defended.GetCardInfo().CompileCardName() +defended.GetCardInfo().CompileCardName()+ " with: "+chosenToDefend.CompileCardName()+chosenToDefend.CompileCondencedModifiers());
         _noResponse=false;
     }
     private async void CardVisualDraw(CardInfo target)
@@ -251,7 +251,8 @@ public class OpponentLogic : MonoBehaviour
         GameObject CardToAttack = Instantiate(cardMaker);
         CardToAttack.GetComponent<Card>().MakeCard(lowerCard);
         CardToAttack.GetComponent<Card>().PlayCard();
-        AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+lowerCard.CompileCondencedModifiers());
+        CardVisualDraw(lowerCard);
+        //AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " attacks with: "+lowerCard.CompileCardName()+lowerCard.CompileCondencedModifiers());
     }
     public  void DrawHand()
     {
