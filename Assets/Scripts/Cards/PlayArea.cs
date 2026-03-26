@@ -238,7 +238,7 @@ public class PlayArea : MonoBehaviour
                 {
                     if(ShowErrorResponses)
                     {
-                        _responseText.AddToResponseText($"{cardPlayed.GetCardInfo().CompileCardName()} does not have the same number as {card.CompileCardName()}");
+                        _responseText.AddToResponseText($"Cannot attack with {cardPlayed.GetCardInfo().CompileCardName()}");
                     }
                     return false;
                 }
