@@ -20,7 +20,10 @@ public class OpponentLogic : MonoBehaviour
     private TurnHandler _turnHandler;
     private PlayArea _playArea;
     private RuleHandler _ruleHandler;
-
+    [SerializeField]
+    private GameObject _cardParticlePrefab;
+    [SerializeField]
+    private GameObject _canvas;
     private bool endTurnCaused = false;//flag to stop end turn infinite loop 
     private bool _enemyPlaying = false;
     private CardHandArea _cardHandArea;
@@ -32,7 +35,6 @@ public class OpponentLogic : MonoBehaviour
     private bool  _noResponseWritten=false;
 
     private bool _justReverse=false; //flag to check if the enemy just reversed, so it lets you defend even tho you have not defended yet.
-    private readonly object _drawLock= new object();
 
      //drawing Queue
     private Queue<Func<UniTask>> _drawQueue;
@@ -116,6 +118,16 @@ public class OpponentLogic : MonoBehaviour
         AddToResponseText(GameHandler.Instance.GetCurrEncounter().GetEncounterName() + " defends: "+ defended.GetCardInfo().CompileCardName() +defended.GetCardInfo().CompileCardName()+ " with: "+chosenToDefend.CompileCardName()+chosenToDefend.CompileCondencedModifiers());
         _noResponse=false;
     }
+    private async void CardVisualDraw(CardInfo target)
+    {
+        target._card.gameObject.SetActive(false);
+        GameObject drawParticle=Instantiate(_cardParticlePrefab,_handUI.gameObject.transform.position,Quaternion.identity,_canvas.transform);
+        CardDrawParticle cScript= drawParticle.GetComponent<CardDrawParticle>();
+        cScript.SetSpeedAndAccel(10,10);
+        cScript.SetTarget(target._card.gameObject.GetComponent<RectTransform>());
+        await UniTask.WaitWhile(()=>drawParticle!=null);
+        target._card.gameObject.SetActive(true);
+    }
     private CardInfo ChooseBestAtkCard(List<CardInfo> opt)
     {
         opt.Sort((a, b) => a._number.CompareTo(b._number));
@@ -171,7 +183,9 @@ public class OpponentLogic : MonoBehaviour
             }
             if(atkOpt.Count>0)
             {
-                AttackWithCard(ChooseBestAtkCard(atkOpt));
+                CardInfo cardChosen=ChooseBestAtkCard(atkOpt);
+                AttackWithCard(cardChosen);
+                CardVisualDraw(cardChosen);
                 return true;
             }
             return false;
@@ -200,12 +214,16 @@ public class OpponentLogic : MonoBehaviour
                     }
                     if(revOpt.Count>0)
                     {
-                        ReverseWithCard(ChooseBestRevCard(revOpt));
+                        CardInfo cardChosen=ChooseBestRevCard(revOpt);
+                        ReverseWithCard(cardChosen);
+                        CardVisualDraw(cardChosen);
                         return true;
                     }
                     else if(defOpt.Count>0)
                     {
-                        DefendWithCard(card,ChooseBestDefCard(defOpt));
+                        CardInfo cardChosen=ChooseBestDefCard(defOpt);
+                        DefendWithCard(card,cardChosen);
+                        CardVisualDraw(cardChosen);
                         return true;
                     }
                     return false;
