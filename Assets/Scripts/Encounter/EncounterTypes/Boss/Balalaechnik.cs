@@ -100,7 +100,7 @@ public class Balalaechnik : Encounter
         
     }
 
-    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod = "")
     {
         int inst=_damageInstance++;
         int toReturn=0;
@@ -115,7 +115,7 @@ public class Balalaechnik : Encounter
         return toReturn;
     }
 
-    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "")
     {
         return amount;
     }

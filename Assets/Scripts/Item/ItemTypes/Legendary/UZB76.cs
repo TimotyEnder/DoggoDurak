@@ -3,6 +3,17 @@ using UnityEngine;
 class UZB76 : Item
 {
     private bool _copied;
+
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 2;

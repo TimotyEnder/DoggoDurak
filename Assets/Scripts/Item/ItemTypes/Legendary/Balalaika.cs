@@ -3,6 +3,23 @@ using UnityEngine;
 public class Balalaika : Item
 {
     private int _timesDamageDone;
+
+    public override int AddToDamageOpponent(int amount)
+    {
+        _timesDamageDone++;
+        if (this._timesDamageDone >= 3) 
+        {
+            return amount*2;
+            //every third attack triple damage
+        }
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 2;
@@ -30,12 +47,6 @@ public class Balalaika : Item
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        _timesDamageDone++;
-        if (this._timesDamageDone >= 3) 
-        {
-            GameHandler.Instance.DamageOpponent(amount * 2,true);
-            //every third attack triple damage
-        }
     }
 
     public override void OnDamagePlayer(int amount, string fromMod = "")

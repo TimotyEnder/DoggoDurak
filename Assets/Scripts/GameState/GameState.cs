@@ -371,4 +371,22 @@ public class GameState
             item.OnCardAdded(card);
         }
     }
+    public int AddToDamagePlayer(int amount) 
+    {
+        int total=0;
+        foreach (Item item in _items)
+        {
+            total+=item.AddToDamagePlayer(amount);
+        }
+        return total;
+    }
+    public int AddToDamageOpponent(int amount) 
+    {
+        int total=0;
+        foreach (Item item in _items)
+        {
+            total+=item.AddToDamageOpponent(amount);
+        }
+        return total;
+    }
 }

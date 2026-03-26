@@ -2,13 +2,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Aptechka", menuName = "Items/Boss/Aptechka")]
 class Aptechka : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 3;
         this.boss = true;
         this.itemId = "Aptechka";
         this.itemName="State-of-the-art Aptechka";
-        this.toolTipDesc = $"{StylisticClass.RestoringString} cards heal for {StylisticClass.HighLight}1/4{StylisticClass.HighLightClose} of their number value when {StylisticClass.HighLight}played{StylisticClass.HighLightClose}";
+        this.toolTipDesc = $"{StylisticClass.RestoringColor}{StylisticClass.RestoringString}</color> cards heal for {StylisticClass.HighLight}1/4{StylisticClass.HighLightClose} of their number value when {StylisticClass.HighLight}played{StylisticClass.HighLightClose}";
 
     }
 

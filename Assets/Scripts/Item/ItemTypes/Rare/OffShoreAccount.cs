@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "OffShoreAccount", menuName = "Items/Rare/OffShoreAccount")]
 public class OffShoreAccount : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 1;

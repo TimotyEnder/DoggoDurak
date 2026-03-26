@@ -3,6 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RedCaviar", menuName = "Items/Rare/RedCaviar")]
 public class RedCaviar : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 1;

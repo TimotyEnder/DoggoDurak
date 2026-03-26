@@ -4,6 +4,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VodkaBottle", menuName = "Items/Active-Rare/VodkaBottle")]
 class VodkaBottle : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 1;

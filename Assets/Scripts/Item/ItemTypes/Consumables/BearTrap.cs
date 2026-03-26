@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BearTrap", menuName = "Items/Consumable/BearTrap")]
 class BearTrap : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         rarity = 0;

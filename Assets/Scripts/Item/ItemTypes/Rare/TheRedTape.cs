@@ -3,7 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TheRedTape", menuName = "Items/Active-Rare/TheRedTape")]
 public class TheRedTape : Item
 {
-     public override void InitItem()
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
+    public override void InitItem()
     {
          this.rarity = 1;
         this.boss = false;

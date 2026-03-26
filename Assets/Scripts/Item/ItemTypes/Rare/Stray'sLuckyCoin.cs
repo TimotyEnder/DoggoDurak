@@ -94,4 +94,14 @@ public class StraysLuckyCoin : Item
     {
         
     }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
 }

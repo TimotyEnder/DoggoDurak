@@ -86,9 +86,9 @@ public abstract class Encounter : ScriptableObject
     public abstract void OnDefendCard(Card card, Card defendedWith);
     public abstract void OnReverse(Card card);
     public abstract void OnDamagePlayer(int amount,string fromMod = "");
-    public abstract int AddToDamagePlayer(int amount, string fromMod="");
+    public abstract int ModifyDamagePlayer(int amount, string fromMod="");
     public abstract void OnDamageOpponent(int amount,string fromMod = ""); //does not apply to damage effects
-    public abstract int AddToDamageOpponent(int amout, string fromMod= ""); //only applies to damage effects.
+    public abstract int ModifyDamageOpponent(int amout, string fromMod= ""); //only applies to damage effects.
     public abstract void OnHealPlayer(int amount, string fromMod="");
     public abstract void OnTurnEnd(int turnState);
     public abstract void OnCardDrawn(CardInfo card);

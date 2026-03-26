@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FluffyUshanka", menuName = "Items/Common/FluffyUshanka")]
 public class FluffyUshanka : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 0;

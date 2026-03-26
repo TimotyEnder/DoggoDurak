@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CounterOffensive", menuName = "Items/Consumable/CounterOffensive")]
 class CounterOffensive : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         rarity = 0;

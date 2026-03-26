@@ -14,12 +14,12 @@ public class LaunchCodeLabrador : Encounter
         AddRule($"Every time you delay the opponent's attack, the damage required to do so increases");
     }
 
-    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "")
     {
         return amount;
     }
 
-    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod = "")
     {
         return amount;
     }

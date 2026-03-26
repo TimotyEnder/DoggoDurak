@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GasCanister", menuName = "Items/Consumable/GasCanister")]
 class GasCanister : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         rarity = 0;

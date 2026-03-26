@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HeartyBeet", menuName = "Items/Common/HeartyBeet")]
 class HeartyBeet : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 0;

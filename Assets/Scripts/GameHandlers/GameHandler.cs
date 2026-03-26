@@ -268,7 +268,7 @@ public class GameHandler : MonoBehaviour
         int damageCalc;
         if(!fromEffect)
         {
-            damageCalc=_currentEncounter.AddToDamageOpponent(amount);
+            damageCalc=_currentEncounter.ModifyDamageOpponent(amount) + _state.AddToDamageOpponent(amount);
         }
         else
         {
@@ -319,7 +319,7 @@ public class GameHandler : MonoBehaviour
     }
     public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
     {
-        int damageCalc=_currentEncounter.AddToDamagePlayer(amount);
+        int damageCalc=_currentEncounter.ModifyDamagePlayer(amount)+ _state.AddToDamagePlayer(amount);
         if(_state._undamagable[0])
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)

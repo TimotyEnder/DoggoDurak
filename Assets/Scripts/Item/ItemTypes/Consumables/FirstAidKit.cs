@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FirstAidKit", menuName = "Items/Consumable/FirstAidKit")]
 class FirstAidKit : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         rarity = 0;

@@ -87,7 +87,7 @@ public class TheTroikaTerror : Encounter
         
     }
 
-    public override int AddToDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod = "")
     {
         int inst=instance++;
         int toReturn=0;
@@ -102,7 +102,7 @@ public class TheTroikaTerror : Encounter
         return toReturn;
     }
 
-    public override int AddToDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "")
     {
         int inst=instance++;
         int toReturn=0;

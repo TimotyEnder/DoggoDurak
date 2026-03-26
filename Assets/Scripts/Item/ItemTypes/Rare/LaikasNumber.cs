@@ -4,6 +4,17 @@ using UnityEngine;
 class LaikasNumber : Item
 {
     private int _turnsPlayed=0;
+
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 1;

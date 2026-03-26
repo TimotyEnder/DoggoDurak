@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TheOligarchsPreviledge", menuName = "Items/Legendary/TheOligarchsPreviledge")]
 public class TheOligarchsPreviledge : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 2;

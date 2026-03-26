@@ -2,6 +2,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Muzzle", menuName = "Items/Active-Legendary/Muzzle")]
 public class Muzzle : Item
 {
+    public override int AddToDamageOpponent(int amount)
+    {
+        return 0;
+    }
+
+    public override int AddToDamagePlayer(int amount)
+    {
+        return 0;
+    }
+
     public override void InitItem()
     {
         this.rarity = 2;
