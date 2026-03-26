@@ -99,7 +99,7 @@ public abstract class Encounter : ScriptableObject
     public async Task OnTurnEndHandler(int turnState)
     {
         PoisonCounterHandler();
-        await UniTask.Delay(200);
+        await UniTask.Delay(100);
         OnTurnEnd(turnState);
     }
     protected void PoisonCounterHandler()

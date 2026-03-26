@@ -212,12 +212,12 @@ public class TurnHandler : MonoBehaviour
         _cardHandArea.GreyOutAllCards();
         await _ruleHandler.CheckGameState();
         if(!_ruleHandler.isGameStateFinished()){
-            await UniTask.Delay(200);
+            await UniTask.Delay(100);
             await GameHandler.Instance.GetCurrEncounter().OnTurnEndHandler(_turnState);
             GameHandler.Instance.GetGameState().OnTurnEnd(_turnState);
             await UniTask.Delay(100);
             GameHandler.Instance.PlayerPoisonHandler();
-            await UniTask.Delay(200);
+            await UniTask.Delay(100);
             _ = FinishEndTurn();
         }
     }
