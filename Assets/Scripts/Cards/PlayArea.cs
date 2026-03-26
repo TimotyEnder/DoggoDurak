@@ -184,17 +184,20 @@ public class PlayArea : MonoBehaviour
     }
     public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard,bool ShowErrorResponses=false) 
     {
-        if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._blackCardsSameSuit && defendedCard._suitNumber > 1 && defendingCard._suitNumber > 1) 
+        if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._blackCardsSameSuit && defendedCard._suitNumber > 1 && defendingCard._suitNumber > 1)
         {
-            return defendingCard._number > defendedCard._number;
+            if(defendingCard._number > defendedCard._number){return true;}
+            else{_responseText.AddToResponseText($"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"); return false;}
         }
         if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._redCardsSameSuit && defendedCard._suitNumber < 2 && defendingCard._suitNumber < 2)
         {
-            return defendingCard._number > defendedCard._number;
+            if(defendingCard._number > defendedCard._number){return true;}
+            else{_responseText.AddToResponseText($"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"); return false;}
         }
         if (defendedCard._suit == defendingCard._suit)
         {
-            return defendingCard._number > defendedCard._number;
+            if(defendingCard._number > defendedCard._number){return true;}
+            else{_responseText.AddToResponseText($"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"); return false;}
         }
         else if(defendedCard._card.IsDebuffed())
         {

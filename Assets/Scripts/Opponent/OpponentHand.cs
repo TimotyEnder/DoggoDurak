@@ -53,26 +53,30 @@ public class OpponentHand : MonoBehaviour
         }
         StartCoroutine(DelayedRealign()); // Wait for destruction
     }
+    
     public void RealignCardsInHand()
     {
-        foreach (RectTransform i in this.transform)
+        lock(_cards)
         {
-            i.anchoredPosition = Vector3.zero;
-            i.eulerAngles = Vector3.zero;
-        }
-        float midpoint = (_cardsInHand - 1) / 2f;
-        _angleDelta = GetCardSpacing();
-        int index = 0;
-        Vector3 center = this.gameObject.GetComponent<RectTransform>().anchoredPosition;
-        foreach (RectTransform i in this.transform)
-        {
-            float angle = _angleDelta * (midpoint - index);
-            i.transform.eulerAngles = new Vector3(0, 0, angle);
-            angle *= -Mathf.Deg2Rad;
-            float x = Mathf.Sin(angle) * radius;
-            float y = Mathf.Cos(angle) * radius;
-            i.anchoredPosition = new Vector3(center.x + x, center.y + y, 0);
-            index++;
+            foreach (RectTransform i in this.transform)
+            {
+                i.anchoredPosition = Vector3.zero;
+                i.eulerAngles = Vector3.zero;
+            }
+            float midpoint = (_cardsInHand - 1) / 2f;
+            _angleDelta = GetCardSpacing();
+            int index = 0;
+            Vector3 center = this.gameObject.GetComponent<RectTransform>().anchoredPosition;
+            foreach (RectTransform i in this.transform)
+            {
+                float angle = _angleDelta * (midpoint - index);
+                i.transform.eulerAngles = new Vector3(0, 0, angle);
+                angle *= -Mathf.Deg2Rad;
+                float x = Mathf.Sin(angle) * radius;
+                float y = Mathf.Cos(angle) * radius;
+                i.anchoredPosition = new Vector3(center.x + x, center.y + y, 0);
+                index++;
+            }
         }
     }
     float GetCardSpacing()
