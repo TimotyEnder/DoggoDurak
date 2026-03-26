@@ -72,7 +72,7 @@ public class RewardItem : MonoBehaviour,IPointerEnterHandler
     }
     private void OnClickActiveItem()
     {
-        if (price==0 || price>0 && GameHandler.Instance.GetGameState()._rubles>=price &&(_rewgrid==null || _rewgrid.GetRemainingChoices()>0)) 
+        if ((price==0 || price>0 && GameHandler.Instance.GetGameState()._rubles>=price) &&(_rewgrid==null || _rewgrid.GetRemainingChoices()>0)) 
         {
             GameHandler.Instance.GetGameState().AddItem(this._item);
             _thisAnim.SetTrigger("Pick");

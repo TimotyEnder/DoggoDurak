@@ -149,7 +149,7 @@ public class PlayArea : MonoBehaviour
             // UnblockedCardsAmount() < _opponentHand.GetCardsInHand();
         }
     }
-    public bool CanAttackWithCard(CardInfo card) 
+    public bool CanAttackWithCard(CardInfo card, bool ShowErrorResponses=false) 
     {
         if (this.transform.Find("PlayedCards").childCount == 0) { return true; }
         else if(CanAtackWithAnotherCard()) 
@@ -168,11 +168,21 @@ public class PlayArea : MonoBehaviour
                     return true;
                 }
             }
-            return false;
+            if(ShowErrorResponses)
+            {
+                _responseText.AddToResponseText($"Cannot Attack with this card because it does not share its number with any other card!");
+            }
+        }
+        else
+        {
+            if(ShowErrorResponses)
+            {
+                _responseText.AddToResponseText($"Cannot Attack with any more cards!");
+            }
         }
         return false;
     }
-    public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard) 
+    public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard,bool ShowErrorResponses=false) 
     {
         if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._blackCardsSameSuit && defendedCard._suitNumber > 1 && defendingCard._suitNumber > 1) 
         {
@@ -200,13 +210,21 @@ public class PlayArea : MonoBehaviour
         }
         else
         {
+            if(ShowErrorResponses)
+            {
+                _responseText.AddToResponseText($"{defendingCard.CompileCardName()} cannot defend {defendedCard.CompileCardName()}!");
+            }
             return false;
         }
     }
-    public bool CanReverseWithCard(CardInfo card) 
+    public bool CanReverseWithCard(CardInfo card, bool ShowErrorResponses=false) 
     {
         if (_cardsDefendedWith.Count > 0 || !GameHandler.Instance.GetGameState()._reversePossible)
         {
+            if(ShowErrorResponses)
+            {
+                _responseText.AddToResponseText($"Cannot reverse when there are already cards defended!");
+            }
             return false;
         }
         else if(CanReverseWithAnotherCard())
@@ -215,10 +233,18 @@ public class PlayArea : MonoBehaviour
             {
                 if (card._number != cardPlayed.GetCardInfo()._number) 
                 {
+                    if(ShowErrorResponses)
+                    {
+                        _responseText.AddToResponseText($"{cardPlayed.GetCardInfo().CompileCardName()} does not have the same number as {card.CompileCardName()}");
+                    }
                     return false;
                 }
             }
             return true;
+        }
+        if(ShowErrorResponses)
+        {
+            _responseText.AddToResponseText("Cannot reverse with another card!");
         }
         return false;
     }

@@ -197,7 +197,6 @@ public class OpponentLogic : MonoBehaviour
                     List<CardInfo> revOpt= new List<CardInfo>();
                     foreach (CardInfo cardInHand in _hand)
                     {   
-                        Debug.Log("Can play card to defend? "+GameHandler.Instance.IsCardnotDebuffed(cardInHand,1) + " Can card defend? "+ _playArea.CardCanDefendCard(cardInHand, card.GetCardInfo()));
                         //reverse if possible
                         if (_playArea.CanReverseWithCard(cardInHand))
                         {
@@ -231,13 +230,12 @@ public class OpponentLogic : MonoBehaviour
     }
     public void Attack() 
     {
-        _responseText.WipeResponseText();
         CardInfo lowerCard = _hand[0];
         foreach(CardInfo card in _hand) 
         {
             if (lowerCard._suit == _ruleHandler.GetTrumpSuit() && card._suit != _ruleHandler.GetTrumpSuit() || !GameHandler.Instance.IsCardnotDebuffed(lowerCard,1) && GameHandler.Instance.IsCardnotDebuffed(card,1))
             {
-            lowerCard = card;
+                lowerCard = card;
             }
             else if (card._number < lowerCard._number) 
             {
