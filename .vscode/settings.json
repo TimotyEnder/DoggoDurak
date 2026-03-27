@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "DoggoDurak.sln"
+    "dotnet.defaultSolution": "DoggoDurak.slnx"
 }
