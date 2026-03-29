@@ -263,7 +263,7 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
+    public int OpponentDamageCalculation(int amount, bool fromEffect=false)
     {
         int damageCalc;
         if(!fromEffect)
@@ -274,6 +274,11 @@ public class GameHandler : MonoBehaviour
         {
             damageCalc=amount;
         }
+        return damageCalc;
+    }
+    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
+    {
+        int damageCalc=OpponentDamageCalculation(amount,fromEffect);
         if(_state._undamagable[1])
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
@@ -317,10 +322,17 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdatePoisonCounters(true);
         }
     }
-    public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
+    public int CalculateDamagePlayer(int amount, bool fromEffect=false)
     {
         int damageCalc=_currentEncounter.ModifyDamagePlayer(amount)+ _state.AddToDamagePlayer(amount);
-        if(_state._undamagable[0])
+       
+        return damageCalc;
+    }
+    public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
+    {
+        int damageCalc=CalculateDamagePlayer(amount,fromEffect);
+        
+         if(_state._undamagable[0])
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
             {
