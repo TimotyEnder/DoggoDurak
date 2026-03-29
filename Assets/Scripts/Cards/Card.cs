@@ -84,6 +84,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject drawTextPrefab;
     [SerializeField]
     private GameObject poisonTextPrefab;
+    [SerializeField]
+    private GameObject _upArrow;
+    [SerializeField]
+    private TextMeshProUGUI _upArrowText;
+    [SerializeField]
+    private GameObject _downArrow;
+    [SerializeField]
+    private TextMeshProUGUI _downArrowText;
     private PassButton _passButton;
     //Draggins handled
     private bool _dragging;
@@ -184,6 +192,41 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         CheckIsDebuffed();
         _cardRect.localScale = Vector3.one;
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
+    }
+    public void UpdateCardArrows()
+    {
+        _upArrow.SetActive(false);
+        _downArrow.SetActive(false);
+        if(_turnHandler.GetTurnState()==0)
+        {
+            _upArrow.SetActive(true);
+            if(GameHandler.Instance.GetGameState()._opponentsDamageReduction > 0)
+            {
+                _upArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.DamageNumber(GameHandler.Instance.GetGameState()._opponentsDamageReduction)}</color>";
+            }
+            else
+            {
+                _upArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(_cardInfo._number,OnlyVisual:true))}</color>";
+            }
+        }
+            
+        else
+        {
+            _downArrow.SetActive(true);
+            if(GameHandler.Instance.GetGameState()._playerDamageReduction > 0)
+            {
+                _downArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.DamageNumber(GameHandler.Instance.GetGameState()._playerDamageReduction)}</color>";
+            }
+            else
+            {
+                _downArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(_cardInfo._number,OnlyVisual:true))}</color>";
+            }
+        }
+    }
+    public void RemoveCardArrows()
+    {
+        _upArrow.SetActive(false);
+        _downArrow.SetActive(false);
     }
     public void SetAnimatable(bool state)
     {
@@ -501,6 +544,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         Debug.Log(GameHandler.Instance.GetGameState());
         GameHandler.Instance.GetCurrEncounter().OnDefendCard(this, card);
+        this.RemoveCardArrows();
+        card.RemoveCardArrows();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

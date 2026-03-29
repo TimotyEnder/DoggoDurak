@@ -78,11 +78,11 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
-        debugItem3.InitItem();
-        _state.AddItem(debugItem3);
+        //Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        //debugItem3.InitItem();
+        //_state.AddItem(debugItem3);
         //_state._rubles=100; //debug
-        //_currentEncounter= new DebugEncounter();
+        //_currentEncounter= new SpikedShepherded();
         //_currentEncounter.InitiateEncounter();
         Next();
     }

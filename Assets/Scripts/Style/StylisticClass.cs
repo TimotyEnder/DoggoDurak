@@ -38,6 +38,7 @@ public static class StylisticClass
     public static string ConsumeString="<color=green>CONSUME:</color>";
     public static string HighLight="<b>";
     public static string HighLightClose="</b>";
+    public static string SecondaryColor="<color=red>";
     public static string DamageNumber(int damage)
     {
         return " <b>"+damage+" "+DamageIcon+"</b> ";

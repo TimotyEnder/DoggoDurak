@@ -168,6 +168,7 @@ public class TurnHandler : MonoBehaviour
                 _toggled = false;
             }
         }
+        _playArea.ReverseArrowsOnPlayedCards();
     }
     private async Task DamageRoutine() 
     {
