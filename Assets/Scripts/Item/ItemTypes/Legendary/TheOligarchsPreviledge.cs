@@ -2,12 +2,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TheOligarchsPreviledge", menuName = "Items/Legendary/TheOligarchsPreviledge")]
 public class TheOligarchsPreviledge : Item
 {
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

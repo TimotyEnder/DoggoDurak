@@ -263,12 +263,12 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public int OpponentDamageCalculation(int amount, bool fromEffect=false)
+    public int OpponentDamageCalculation(int amount, bool fromEffect=false, bool OnlyVisual=false)
     {
         int damageCalc;
         if(!fromEffect)
         {
-            damageCalc=_currentEncounter.ModifyDamageOpponent(amount) + _state.AddToDamageOpponent(amount);
+            damageCalc=_currentEncounter.ModifyDamageOpponent(amount,OnlyVisual:OnlyVisual) + _state.AddToDamageOpponent(amount,OnlyVisual);
         }
         else
         {
@@ -322,15 +322,15 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdatePoisonCounters(true);
         }
     }
-    public int CalculateDamagePlayer(int amount, bool fromEffect=false)
+    public int PlayerDamageCalculation(int amount, bool fromEffect=false, bool OnlyVisual=false)
     {
-        int damageCalc=_currentEncounter.ModifyDamagePlayer(amount)+ _state.AddToDamagePlayer(amount);
+        int damageCalc=_currentEncounter.ModifyDamagePlayer(amount,OnlyVisual:OnlyVisual)+ _state.AddToDamagePlayer(amount,OnlyVisual);
        
         return damageCalc;
     }
     public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
     {
-        int damageCalc=CalculateDamagePlayer(amount,fromEffect);
+        int damageCalc=PlayerDamageCalculation(amount,fromEffect);
         
          if(_state._undamagable[0])
         {

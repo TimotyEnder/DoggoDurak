@@ -2,12 +2,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LaikasContact", menuName = "Items/Active-Rare/LaikasContact")]
 class LaikasContact : Item
 {
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

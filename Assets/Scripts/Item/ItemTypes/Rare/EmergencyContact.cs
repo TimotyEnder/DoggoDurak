@@ -13,12 +13,12 @@ public class EmergencyContact : Item
         this.toolTipDesc = StylisticClass.ActivateString+" Discard right-most card, draw 1 card and heal 5 hp.";
     }
 
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

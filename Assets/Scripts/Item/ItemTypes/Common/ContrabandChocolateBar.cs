@@ -2,12 +2,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ContrabandChocolateBar", menuName = "Items/Common/ContrabandChocolateBar")]
 class ContrabandChocolateBar : Item
 {
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

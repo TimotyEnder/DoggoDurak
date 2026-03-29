@@ -38,15 +38,6 @@ public class TankerTerrier : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        if(this.health<75)
-        {
-            if(GameHandler.Instance.GetGameState()._opponentsDamageReduction>0)
-            {
-                GameHandler.Instance.GetGameState()._opponentsDamageReduction-=10;
-            }
-            GameHandler.Instance.DamageOpponent(amount*2,true,"TankerTerrier");
-        }
-        ShakeRule(0);
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
@@ -87,13 +78,23 @@ public class TankerTerrier : Encounter
         
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
     {
         return amount;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
     {
+        if(this.health<75)
+        {
+            if(GameHandler.Instance.GetGameState()._opponentsDamageReduction>0 && !OnlyVisual)
+            {
+                GameHandler.Instance.GetGameState()._opponentsDamageReduction-=10;
+            }
+            ShakeRule(0);
+            return amount*2;
+        }
+        ShakeRule(0);
         return amount;
     }
 }

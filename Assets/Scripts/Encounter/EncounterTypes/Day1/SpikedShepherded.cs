@@ -79,12 +79,12 @@ public class SpikedShepherded : Encounter
         
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
     {
         return amount;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
     {    
         ShakeRule(0);
         return amount*2;

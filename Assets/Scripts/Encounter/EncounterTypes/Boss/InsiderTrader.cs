@@ -85,12 +85,12 @@ public class InsiderTrader : Encounter
         ShakeRule(2);
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
     {
         return amount;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
     {
         return amount;
     }

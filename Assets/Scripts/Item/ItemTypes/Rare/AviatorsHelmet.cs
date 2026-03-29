@@ -2,12 +2,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AviatorsHelmet", menuName = "Items/Rare/AviatorsHelmet")]
 public class AviatorsHelmet : Item
 {
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

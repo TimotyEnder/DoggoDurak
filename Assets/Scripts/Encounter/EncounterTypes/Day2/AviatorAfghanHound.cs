@@ -74,7 +74,7 @@ public class AviatorAfghanHound : Encounter
         
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
     {
         if (fromMod == "Bounce")
         {
@@ -84,7 +84,7 @@ public class AviatorAfghanHound : Encounter
         return amount;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
     {
         if (fromMod == "Bounce")
         {

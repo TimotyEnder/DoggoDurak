@@ -87,7 +87,7 @@ public class TheTroikaTerror : Encounter
         
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
     {
         int inst=instance++;
         int toReturn=0;
@@ -97,12 +97,19 @@ public class TheTroikaTerror : Encounter
             toReturn= amount*3;
         }
         toReturn=amount;
-        UpdateRules();
-        ShakeRule(0);
+        if(!OnlyVisual)
+        {
+            UpdateRules();
+            ShakeRule(0);
+        }
+        else
+        {
+            instance--;
+        }
         return toReturn;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
     {
         int inst=instance++;
         int toReturn=0;
@@ -112,8 +119,15 @@ public class TheTroikaTerror : Encounter
             toReturn= amount*3;
         }
         toReturn=amount;
-        UpdateRules();
-        ShakeRule(0);
+        if(!OnlyVisual)
+        {
+            UpdateRules();
+            ShakeRule(0);
+        }
+        else
+        {
+            instance--;
+        }
         return toReturn;
     }
 }

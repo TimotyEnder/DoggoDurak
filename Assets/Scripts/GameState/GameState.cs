@@ -371,7 +371,7 @@ public class GameState
             item.OnCardAdded(card);
         }
     }
-    public int AddToDamagePlayer(int amount) 
+    public int AddToDamagePlayer(int amount, bool OnlyVisual=false) 
     {
         int total=0;
         foreach (Item item in _items)
@@ -380,7 +380,7 @@ public class GameState
         }
         return total;
     }
-    public int AddToDamageOpponent(int amount) 
+    public int AddToDamageOpponent(int amount, bool OnlyVisual=false) 
     {
         int total=0;
         foreach (Item item in _items)

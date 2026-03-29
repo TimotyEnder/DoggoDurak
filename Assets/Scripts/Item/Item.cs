@@ -40,8 +40,8 @@ public abstract class Item : ScriptableObject
     public abstract void OnTurnEnd(int turnState);
     public abstract void OnCardAdded(CardInfo card);
     public abstract void OnEncounterStart();
-    public abstract int AddToDamagePlayer(int amount);
-    public abstract int AddToDamageOpponent(int amount);
+    public abstract int AddToDamagePlayer(int amount, bool OnlyVisual=false);
+    public abstract  int AddToDamageOpponent(int amount, bool OnlyVisual=false);
 
     public bool Activate() 
     {

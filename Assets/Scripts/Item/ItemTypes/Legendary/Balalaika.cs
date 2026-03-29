@@ -4,18 +4,20 @@ public class Balalaika : Item
 {
     private int _timesDamageDone;
 
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         _timesDamageDone++;
         if (this._timesDamageDone >= 3) 
         {
+            if(OnlyVisual){_timesDamageDone--;}
             return amount*2;
             //every third attack triple damage
         }
+        if(OnlyVisual){_timesDamageDone--;}
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

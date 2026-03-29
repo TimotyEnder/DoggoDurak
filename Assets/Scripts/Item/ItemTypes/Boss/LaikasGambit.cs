@@ -2,12 +2,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LaikasGambit", menuName = "Items/Boss/LaikasGambit")]
 class LaikasGambit : Item
 {
-    public override int AddToDamageOpponent(int amount)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
     {
         return 0;
     }

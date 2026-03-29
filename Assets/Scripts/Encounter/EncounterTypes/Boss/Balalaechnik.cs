@@ -100,22 +100,24 @@ public class Balalaechnik : Encounter
         
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod = "")
+    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
     {
         int inst=_damageInstance++;
         int toReturn=0;
         if(inst==3)
         {
             _damageInstance=0;
+            if(OnlyVisual){_damageInstance--;}
             toReturn= amount*3;
         }
         toReturn=amount;
         UpdateRules();
         ShakeRule(0);
+        if(OnlyVisual){_damageInstance--;}
         return toReturn;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "")
+    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
     {
         return amount;
     }
