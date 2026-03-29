@@ -115,7 +115,7 @@ public class OpponentLogic : MonoBehaviour
         CardToDefend.GetComponent<Card>().DefendCard(defended);
         _noResponse=false;
     }
-    private async void CardVisualDraw(CardInfo target)
+    private async Task CardVisualDraw(CardInfo target)
     {
         target._card.gameObject.SetActive(false);
         GameObject drawParticle=Instantiate(_cardParticlePrefab,_handUI.gameObject.transform.position,Quaternion.identity,_canvas.transform);
@@ -165,7 +165,7 @@ public class OpponentLogic : MonoBehaviour
         return choice;
     }
     //check once for available plays
-    bool CheckPlay() 
+    async Task<bool> CheckPlay() 
     {
         //if Enemy attacking check for available attacks
         if (_turnHandler.GetTurnState() > 0)
@@ -182,7 +182,7 @@ public class OpponentLogic : MonoBehaviour
             {
                 CardInfo cardChosen=ChooseBestAtkCard(atkOpt);
                 AttackWithCard(cardChosen);
-                CardVisualDraw(cardChosen);
+                await CardVisualDraw(cardChosen);
                 return true;
             }
             return false;
@@ -212,14 +212,14 @@ public class OpponentLogic : MonoBehaviour
                     {
                         CardInfo cardChosen=ChooseBestRevCard(revOpt);
                         ReverseWithCard(cardChosen);
-                        CardVisualDraw(cardChosen);
+                        await CardVisualDraw(cardChosen);
                         return true;
                     }
                     else if(defOpt.Count>0)
                     {
                         CardInfo cardChosen=ChooseBestDefCard(defOpt);
                         DefendWithCard(card,cardChosen);
-                        CardVisualDraw(cardChosen);
+                        await CardVisualDraw(cardChosen);
                         return true;
                     }
                     return false;
@@ -345,7 +345,7 @@ public class OpponentLogic : MonoBehaviour
     { 
         bool NotDefended= GameHandler.Instance.GetUnblockedCards()>0; 
         await UniTask.Delay(500);
-        while (CheckPlay()) 
+        while (await CheckPlay()) 
         {
             await UniTask.Delay(500);
         }
