@@ -19,6 +19,13 @@ public class PassButton : MonoBehaviour
     void OnEndTurnClick() 
     {
         SetJiggle(false);
+        foreach(GameObject c in GameObject.FindGameObjectsWithTag("Card"))
+        {
+            if(c.GetComponent<Card>().IsBeingDragged())
+            {
+                return;
+            }
+        }
         _=_opp.EnemyPlay();
     }
     public void SetJiggle(bool state)

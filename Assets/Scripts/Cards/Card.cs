@@ -85,6 +85,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     [SerializeField]
     private GameObject poisonTextPrefab;
     private PassButton _passButton;
+    //Draggins handled
+    private bool _dragging;
 
     //debuff management
     private bool _Debuffed;
@@ -96,6 +98,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         //card hand area
         _Debuffed=false;
+        _dragging=false;
         _cardHandArea = GameObject.Find("CardHandArea");
         if (_cardHandArea != null)
         {
@@ -216,6 +219,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public bool IsDebuffed()
     {
         return _Debuffed;
+    }
+    public bool IsBeingDragged()
+    {
+        return this._dragging;
     }
     public void SetDebuffed(bool state)
     {
@@ -562,6 +569,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_played || _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; } //return early in this method fails the drag.
         GetComponent<ToolTip>().SetTooltipActiveState(false);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
+        _dragging=true;
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -577,10 +585,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardHandAreaScript.DettachCard();
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
+            _dragging=false;
             OnPlay(eventData.position);
         }
         else
         {
+            _dragging=false;
             OnDraw(eventData.position);
         }
     }
