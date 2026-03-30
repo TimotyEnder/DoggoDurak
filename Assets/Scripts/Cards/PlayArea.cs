@@ -49,12 +49,10 @@ public class PlayArea : MonoBehaviour
     public void AddtoPlayedCards(Card card) 
     {
         _cardsPlayed.Insert(0, card);
-        card.UpdateCardArrows();
     }
     public void AddtoDefendedWithCards(Card card) 
     {
         _cardsDefendedWith.Add(card);
-        card.UpdateCardArrows();
     }
     public List<Card> GetDefendedWith() 
     {
@@ -77,6 +75,11 @@ public class PlayArea : MonoBehaviour
         {
             i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(initPosition.x - (_playAreaOffSet * it), 0);
             it++;
+            if(!i.IsDefended())
+            {
+                i.UpdateCardArrows();
+            }
+            
         }
         RealignDefendingCards();
     }
@@ -300,13 +303,12 @@ public class PlayArea : MonoBehaviour
     }
     public void ReverseArrowsOnPlayedCards()
     {
-        foreach (Card card in _cardsDefendedWith)
-        {
-            card.UpdateCardArrows();
-        }
         foreach (Card card in _cardsPlayed)
         {
-            card.UpdateCardArrows();
+           if(!card.IsDefended())
+            {
+                card.UpdateCardArrows();
+            }
         }
     }
 }

@@ -89,9 +89,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     [SerializeField]
     private TextMeshProUGUI _upArrowText;
     [SerializeField]
+    private RectTransform _upArrowPos;
+    [SerializeField]
     private GameObject _downArrow;
     [SerializeField]
     private TextMeshProUGUI _downArrowText;
+    [SerializeField]
+    private RectTransform _downArrowPos;
     private PassButton _passButton;
     //Draggins handled
     private bool _dragging;
@@ -197,29 +201,38 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         _upArrow.SetActive(false);
         _downArrow.SetActive(false);
+        _upArrow.transform.SetParent(this.transform);
+        _downArrow.transform.SetParent(this.transform);
+        
         if(_turnHandler.GetTurnState()==0)
         {
             _upArrow.SetActive(true);
+            _upArrow.GetComponent<RectTransform>().anchoredPosition=_upArrowPos.anchoredPosition;
+            _upArrow.transform.SetParent(_canvas.transform);
+            _upArrow.transform.SetAsFirstSibling();
             if(GameHandler.Instance.GetGameState()._opponentsDamageReduction > 0)
             {
-                _upArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.DamageNumber(GameHandler.Instance.GetGameState()._opponentsDamageReduction)}</color>";
+                _upArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.DamageNumber(GameHandler.Instance.GetGameState()._opponentsDamageReduction)}</color>";
             }
             else
             {
-                _upArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(_cardInfo._number,OnlyVisual:true))}</color>";
+                _upArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(_cardInfo._number,OnlyVisual:true))}</color>";
             }
         }
             
         else
         {
             _downArrow.SetActive(true);
+            _downArrow.GetComponent<RectTransform>().anchoredPosition=_downArrowPos.anchoredPosition;
+            _downArrow.transform.SetParent(_canvas.transform);
+            _downArrow.transform.SetAsFirstSibling();
             if(GameHandler.Instance.GetGameState()._playerDamageReduction > 0)
             {
-                _downArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.DamageNumber(GameHandler.Instance.GetGameState()._playerDamageReduction)}</color>";
+                _downArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.DamageNumber(GameHandler.Instance.GetGameState()._playerDamageReduction)}</color>";
             }
             else
             {
-                _downArrowText.text=$"{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(_cardInfo._number,OnlyVisual:true))}</color>";
+                _downArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(_cardInfo._number,OnlyVisual:true))}</color>";
             }
         }
     }
@@ -519,6 +532,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.localScale = Vector3.one;
         _playAreaScript.AddtoPlayedCards(this);
         _playAreaScript.AttachCard();
+        UpdateCardArrows();
         _played = true;
         _cardInfo.OnPlayedCard(this);
         if (!_cardInfo._opponentCard)
@@ -533,7 +547,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.SetAsFirstSibling();
         _cardImageRect.localScale = Vector3.one;
         _cardRect.localScale = Vector3.one;
-        _cardRect.anchoredPosition = card.GetDefendPosition();//hehe
+        _cardRect.anchoredPosition = card.GetDefendPosition();
+        UpdateCardArrows();
         card.Defend(this);
         _playAreaScript.AddtoDefendedWithCards(this);
         _played = true;
