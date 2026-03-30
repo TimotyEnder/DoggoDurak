@@ -51,6 +51,16 @@ public class GameHandler : MonoBehaviour
     {
         return _saveManager.Value.Load() != null;
     }
+    public void  BackToMainMenu()
+    {
+        SaveState();
+        SceneManager.LoadScene(0);
+    }
+    public void BackToDesktop()
+    {
+        SaveState();
+        Application.Quit();
+    }
     public void NewGame(string characerChoice="")
     {
         
