@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -19,7 +20,8 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField]
     private Button _desktopButton;
-
+    [SerializeField]
+    private Animator _thisAnim;
     void Awake()
     {
         _resumeButton.onClick.AddListener(resumeOnClick);
@@ -35,12 +37,16 @@ public class PauseMenu : MonoBehaviour
             else{ShowPauseMenu();}
         }
     }
-    void ShowPauseMenu()
+    async void ShowPauseMenu()
     {
         _pauseMenu.SetActive(true);
+        _thisAnim.SetTrigger("Extend");
+        await UniTask.Delay(200);
     }
-    void HidePauseMenu()
+    async void HidePauseMenu()
     {
+        _thisAnim.SetTrigger("Shrink");
+        await UniTask.Delay(250);
         _pauseMenu.SetActive(false);
     }
     void resumeOnClick()
