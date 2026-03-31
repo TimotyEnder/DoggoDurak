@@ -66,6 +66,7 @@ public class OpponentLogic : MonoBehaviour
     public void LoadDeck()
     {
         _deck = new List<CardInfo>();
+        _hand = new List<CardInfo>(); 
         foreach (CardInfo c in GameHandler.Instance.GetCurrEncounter().GetDeck())
         {
             _deck.Add(c);

@@ -111,7 +111,7 @@ public class GameHandler : MonoBehaviour
     public void Next(bool FromContinue=false) // will be called after an encounter or rest is finished and will handle what should happen next
     {
         ResetEncounterGamestateAttributes();
-        if(_encounterManager==null)
+        if(_encounterManager==null || FromContinue)
         {
             _encounterManager = new EncounterManager();
         }
@@ -124,14 +124,21 @@ public class GameHandler : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
+        else if(_state._currentEncounterName!="")
+        {
+           _currentEncounter=_encounterManager.EncounterByName(_state._currentEncounterName);
+           SceneManager.LoadScene(1);
+        }
         else if(_state._encounter==11) 
         {
             _currentEncounter = _encounterManager.RandomBossEncounter(_state._day);
+            _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
         else if (_state._encounter < 12)
         {
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
         else
@@ -139,6 +146,7 @@ public class GameHandler : MonoBehaviour
             _state._day++;
             _state._encounter = 1;
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
         _state.OnEncounterStart();

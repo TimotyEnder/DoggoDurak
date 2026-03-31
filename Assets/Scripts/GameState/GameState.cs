@@ -10,6 +10,7 @@ public class GameState
     public List<Item> _items;
     [SerializeField]
     public List<ItemContainer> _serializableItems;
+    public String _currentEncounterName;
     public int _rubles;
     public int _health;
     public int _lastHealth;
@@ -154,6 +155,7 @@ public class GameState
         _gadalkaCurses=new List<GadalkaEffectContainer>();
         _opponentCardUpgradeDefault=0;
         _itemsCostPerRarity=new List<int>{10,40,60};
+        _currentEncounterName="";
     }
     private void InitModDamageDic()
     {

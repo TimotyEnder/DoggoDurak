@@ -55,4 +55,24 @@ public class EncounterManager
         }
         return null;
     }
+    public Encounter EncounterByName(string id)
+    {
+        // Search all normal encounters
+        var allEncounters = _encounters.SelectMany(dayList => dayList);
+        
+        // Also include boss encounters
+        allEncounters = allEncounters.Concat(_bossEncounters.SelectMany(dayList => dayList));
+        Encounter toRet=allEncounters.LastOrDefault(encounter => encounter.GetEncounterName() == id);
+
+        toRet.InitiateEncounter();
+        if(toRet.IsBoss())
+        {
+            _bossEncounters[toRet.GetDay()].Remove(toRet);
+        }
+        else
+        {
+            _encounters[toRet.GetDay()].Remove(toRet);
+        }
+        return toRet;
+    }
 }

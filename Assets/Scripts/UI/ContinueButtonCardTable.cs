@@ -15,6 +15,7 @@ public class ContinueButtonCardTable : MonoBehaviour
         if (GameHandler.Instance.GetGameState()._health>0)
         {
             GameHandler.Instance.GetGameState()._rubles += GameHandler.Instance.GetCurrReward().rubleReward;
+            GameHandler.Instance.GetGameState()._currentEncounterName="";
             GameHandler.Instance.Next();
         }
         else 
