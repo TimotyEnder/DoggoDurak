@@ -87,12 +87,13 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Spiky",100);
             //c.AddModifier("Poison");
         }
-        //debug
-        //Item debugItem3 = ScriptableObject.CreateInstance<TheIronCurtain>();
-        //debugItem3.InitItem();
-        //_state.AddItem(debugItem3);
+        //debug   
+        // Item debugItem5 = ScriptableObject.CreateInstance<TheIronCurtain>();
+        //Item debugItem4 = ScriptableObject.CreateInstance<TheRedTape>();
+        //debugItem4.InitItem();
+        //_state.AddItem(debugItem4);
         //_state._rubles=100; //debug
-        //_currentEncounter= new SpikedShepherded();
+        //_currentEncounter= new TheAlternatingApparatchik();s
         //_currentEncounter.InitiateEncounter();
         Next();
     }
@@ -137,7 +138,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
             _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
