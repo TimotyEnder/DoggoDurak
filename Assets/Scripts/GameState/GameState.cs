@@ -43,7 +43,15 @@ public class GameState
     public int _maxFreeShopRerolls;
     public int _startingShopRerollCost;
     public bool[] _undamagable; //0 player 1 enemy
-    public int _enemyHandSize;
+    private int __enemyHandSize;
+    public int _enemyHandSize 
+    {
+        get => __enemyHandSize;
+        set 
+        {
+            __enemyHandSize = value;  // <-- PUT YOUR BREAKPOINT HERE
+        }
+    }
     public bool _loseToWin;//activates on Insider Investor.
     public bool _healingAndDamageInverted;
     public int _shopCostPerCardMod;

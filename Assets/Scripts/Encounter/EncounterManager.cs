@@ -14,7 +14,6 @@ public class EncounterManager
         var loadedEncounters = Resources.LoadAll<Encounter>("Encounters");
         foreach(var e in loadedEncounters) 
         {
-            e.InitiateEncounter();
             if (!e.IsBoss())
             {
                 while (e.GetDay() >= _encounters.Count)
@@ -40,6 +39,7 @@ public class EncounterManager
             int roll= Random.Range(0, _encounters[day].Count);
             Encounter chosen = _encounters[day][roll];
             _encounters[day].Remove(chosen);
+            chosen.InitiateEncounter();
             return chosen;
         }
         return null;
@@ -51,6 +51,7 @@ public class EncounterManager
             int roll= Random.Range(0, _bossEncounters[day].Count);
             Encounter chosen = _bossEncounters[day][roll];
             _bossEncounters[day].Remove(chosen);
+            chosen.InitiateEncounter();
             return chosen;
         }
         return null;
