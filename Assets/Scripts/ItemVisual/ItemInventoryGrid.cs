@@ -27,8 +27,8 @@ public class ItemInventoryGrid:MonoBehaviour
                 GameObject IIintance = Instantiate(inventoryItemPrefab, this.transform);
                 InventoryItem IIscript = IIintance.GetComponent<InventoryItem>();
                 IIscript.AssignItem(i);
-                int stacks= GameHandler.Instance.GetGameState()._itemStacks[i.GetId()];
-                if (stacks > 1) 
+                List<Item> stacks= GameHandler.Instance.GetGameState()._itemStacks[i.GetId()];
+                if (stacks.Count > 1) 
                 {
                     IIscript.SetStackNum(stacks);
                 }

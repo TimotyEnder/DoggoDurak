@@ -32,7 +32,7 @@ public class GameState
     public int _rareItemInshopDropRate;
     public bool _redCardsSameSuit;
     public bool _blackCardsSameSuit;
-    public Dictionary<string, int> _itemStacks;
+    public Dictionary<string, List<Item>> _itemStacks;
     public int _itemsShownInShop;
     public int _maxCardModsInShop;
     public int _discardingCardInShopCost;
@@ -136,7 +136,7 @@ public class GameState
         _itemsShownInShop = 4;
         _maxCardModsInShop = 3;
         _shopCostPerCardMod=5;
-        _itemStacks = new Dictionary<string, int>();
+        _itemStacks = new Dictionary<string, List<Item>>();
         _discardingCardInShopCost = 5;
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
@@ -199,11 +199,11 @@ public class GameState
     {
         if (_itemStacks.ContainsKey(item.GetId()))
         {
-            _itemStacks[item.GetId()]++;
+            _itemStacks[item.GetId()].Add(item);
         }
         else 
         {
-            _itemStacks.Add(item.GetId(), 1);
+            _itemStacks.Add(item.GetId(), new List<Item>(){item});
         }
     }
     public List<ItemContainer> SaveItems(List<Item> items) 
@@ -309,77 +309,77 @@ public class GameState
     {
         foreach (Item item in _items)
         {
-            item.OnLoad();
+            if(item.OnLoad()){item.GetInventoryItem().Bling();}
         }
     }
     public void OnDefendCard(Card defendee, Card defended) 
     {
         foreach (Item item in _items)
         {
-            item.OnDefendCard(defendee, defended);
+            if(item.OnDefendCard(defendee, defended)){item.GetInventoryItem().Bling();}
         }
     }
     public void OnPlayedCard(Card card) 
     {
         foreach (Item item in _items)
         {
-            item.OnPlayedCard(card);
+            if(item.OnPlayedCard(card)){item.GetInventoryItem().Bling();}
         }
     }
     public  void OnReverse(Card card) 
     {
         foreach (Item item in _items)
         {
-            item.OnReverse(card);
+            if(item.OnReverse(card)){item.GetInventoryItem().Bling();}
         }
     }
     public void OnHeal(int amount) 
     {
         foreach (Item item in _items)
         {
-            item.OnHeal(amount);
+            if(item.OnHeal(amount)){item.GetInventoryItem().Bling();}
         }
     }
     public void OnDamageOpponent(int amount, string fromMod = "")
     {
         foreach (Item item in _items)
         {
-            item.OnDamageOpponent(amount, fromMod);
+            if(item.OnDamageOpponent(amount,fromMod)){item.GetInventoryItem().Bling();}
         }
     }
     public void OnDamagePlayer(int amount, string fromMod="")
     {
         foreach (Item item in _items)
         {
-            item.OnDamagePlayer(amount, fromMod);
+            if(item.OnDamagePlayer(amount,fromMod)){item.GetInventoryItem().Bling();}
         }
     }
     public void OnEndEncounter()
     {
         foreach (Item item in _items)
         {
-            item.OnEndEncounter();
+            if(item.OnEndEncounter()){item.GetInventoryItem().Bling();}
         }
     }
     public void OnEncounterStart()
     {
         foreach (Item item in _items)
         {
-            item.OnEncounterStart();
+            if(item.OnEncounterStart()){item.GetInventoryItem().Bling();}
         }
     }
     public void OnTurnEnd(int turnState)
     {
         foreach (Item item in _items)
         {
-            item.OnTurnEnd(turnState);
+            if(item.OnTurnEnd(turnState)){item.GetInventoryItem().Bling();}
         }
     }
     public void OnCardAdded(CardInfo card)
     {
         foreach (Item item in _items)
         {
-            item.OnCardAdded(card);
+            if(item.OnCardAdded(card)){item.GetInventoryItem().Bling();}
         }
     }
     public int AddToDamagePlayer(int amount, bool OnlyVisual=false) 
@@ -387,7 +387,9 @@ public class GameState
         int total=0;
         foreach (Item item in _items)
         {
-            total+=item.AddToDamagePlayer(amount);
+            int fromItem=item.AddToDamagePlayer(amount);
+            if(fromItem>0){item.GetInventoryItem().Bling();}
+            total+=fromItem;
         }
         return total;
     }
@@ -396,7 +398,9 @@ public class GameState
         int total=0;
         foreach (Item item in _items)
         {
-            total+=item.AddToDamageOpponent(amount);
+             int fromItem=item.AddToDamageOpponent(amount);
+            if(fromItem>0){item.GetInventoryItem().Bling();}
+            total+=fromItem;
         }
         return total;
     }
