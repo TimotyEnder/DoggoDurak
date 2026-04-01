@@ -16,6 +16,7 @@ public class EncounterManager
         {
             if (!e.IsBoss())
             {
+                e.InitiateEncounter();
                 while (e.GetDay() >= _encounters.Count)
                 {
                     _encounters.Add(new List<Encounter>());
@@ -24,6 +25,7 @@ public class EncounterManager
             }
             else 
             {
+                e.InitiateEncounter();
                 while (e.GetDay() >= _bossEncounters.Count)
                 {
                     _bossEncounters.Add(new List<Encounter>());

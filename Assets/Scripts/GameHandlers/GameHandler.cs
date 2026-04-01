@@ -63,15 +63,16 @@ public class GameHandler : MonoBehaviour
     }
     public void NewGame(string characerChoice="")
     {
-        
+        int freshSeed = System.Environment.TickCount;
+        UnityEngine.Random.InitState(freshSeed);
         _state = new GameState();
+        _state._currentEncounterRandomState = UnityEngine.Random.state;
         _currentCharacter= _characterManager.GetCharacterInfo().here();
         _state._rubles=_currentCharacter.GetStartRub();
         foreach(Item i in _currentCharacter.LoadItems())
         {
             _state.AddItem(i);
         }
-        _saveManager.Value.Save(_state);
         _encounterManager = new EncounterManager();
         _gadalkaEffectManager =  new GadalkaEffectManager();
         //debug
@@ -95,40 +96,55 @@ public class GameHandler : MonoBehaviour
         //_state._rubles=100; //debug
         //_currentEncounter= new TheAlternatingApparatchik();s
         //_currentEncounter.InitiateEncounter();
+        SaveState();
         Next();
     }
     public void SaveState()
     {
         _saveManager.Value.Save(_state);
     }
-    public void Continue() //enters only if hasSave returns true but if somehow trying to acess without pressing the button
+    public void Continue()
     {
         if (HasSave())
         {
             _state = _saveManager.Value.Load();
-            Next(true); //this doesnt increment encounter so you stay on the same one.
-        }
+
+            // Recreate managers
+            _encounterManager = new EncounterManager();
+            _gadalkaEffectManager = new GadalkaEffectManager();
+            ResetEncounterGamestateAttributes();
+            // Recreate the encounter
+            if (!string.IsNullOrEmpty(_state._currentEncounterName))
+            {
+                _currentEncounter = _encounterManager.EncounterByName(_state._currentEncounterName);
+            }
+            // Load the appropriate scene
+            if (_state._encounter % 4 == 0 && _state._encounter > 0)
+            {
+                SceneManager.LoadScene(2);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+            UnityEngine.Random.state=_state._currentEncounterRandomState;
+            _state.OnEncounterStart();
+        } 
     }
-    public void Next(bool FromContinue=false) // will be called after an encounter or rest is finished and will handle what should happen next
+    public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
         ResetEncounterGamestateAttributes();
-        if(_encounterManager==null || FromContinue)
-        {
-            _encounterManager = new EncounterManager();
-        }
-        _saveManager.Value.Save(_state);
-        if(!FromContinue){_state._encounter++;}
+        SaveState();
+        //Random seed stuff
+        _state._encounter++;
+
         //_state._encounter = 11; //debug insta boss
         //_state._encounter = 4; //debug insta shop
+
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
         {
             SceneManager.LoadScene(2);
-        }
-        else if(_state._currentEncounterName!="")
-        {
-           _currentEncounter=_encounterManager.EncounterByName(_state._currentEncounterName);
-           SceneManager.LoadScene(1);
         }
         else if(_state._encounter==11) 
         {
@@ -138,7 +154,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
@@ -150,6 +166,7 @@ public class GameHandler : MonoBehaviour
             _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
+        _state._currentEncounterRandomState = UnityEngine.Random.state;
         _state.OnEncounterStart();
     }
     public GameState GetGameState()

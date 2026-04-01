@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class GameState
 {
+    public UnityEngine.Random.State _currentEncounterRandomState;//Responsible for all randomness in the game, used on load.
     public List<CardInfo> _deck;
     [NonSerialized]
     public List<Item> _items;
