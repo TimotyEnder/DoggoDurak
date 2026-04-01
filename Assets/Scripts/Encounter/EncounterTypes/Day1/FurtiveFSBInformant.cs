@@ -36,7 +36,6 @@ public class FurtiveFSBInformant : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
@@ -60,12 +59,10 @@ public class FurtiveFSBInformant : Encounter
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public override void OnTurnEnd(int turnState)
     {
-        
     }
 
     public override void SetDebuffs()

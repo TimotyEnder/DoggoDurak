@@ -61,9 +61,8 @@ public class LaunchCodeLabrador : Encounter
         }
     }
 
-    public override void OnDamagePlayer(int amount, string fromMod = "")
+    public override void OnDamagePlayer(int amount, string fromMod="")
     {
-        
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
@@ -83,7 +82,6 @@ public class LaunchCodeLabrador : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)
@@ -93,7 +91,6 @@ public class LaunchCodeLabrador : Encounter
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public override void OnTurnEnd(int turnState)

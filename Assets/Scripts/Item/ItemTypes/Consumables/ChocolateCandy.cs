@@ -24,7 +24,7 @@ class ChocolateCandy : Item
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString} {CardInfo.modifierToDescription["Poison"]}</color>";
     }
 
-    public override void OnActivate()
+    public override bool OnActivate()
     {
         for(int i = 0; i<GameHandler.Instance.GetPlayerCardsInHand();i++)
         {
@@ -33,65 +33,66 @@ class ChocolateCandy : Item
             c._card.MakeCard(c);
             c._card.Bling();
         }
+        return true;
     }
 
-    public override void OnAquire()
+    public override bool OnAquire()
     {
-        
+            return false;
     }
 
-    public override void OnCardAdded(CardInfo card)
+    public override bool OnCardAdded(CardInfo card)
     {
-        
+         return false;
     }
 
-    public override void OnDamageOpponent(int amount, string fromMod = "")
+    public override bool OnDamageOpponent(int amount, string fromMod = "")
     {
-        
+         return false;
     }
 
-    public override void OnDamagePlayer(int amount, string fromMod = "")
+    public override bool OnDamagePlayer(int amount, string fromMod="")
     {
-        
+         return false;
     }
 
-    public override void OnDefendCard(Card defendee, Card defended)
+    public override bool OnDefendCard(Card defendee, Card defended)
     {
-        
+          return false;
     }
 
-    public override void OnEncounterStart()
+    public override bool OnEncounterStart()
     {
-        
+         return false;
     }
 
-    public override void OnEndEncounter()
+    public override bool OnEndEncounter()
     {
-        
+         return false;
     }
 
-    public override void OnHeal(int amount)
+    public override bool OnHeal(int amount)
     {
-        
+         return false;
     }
 
-    public override void OnLoad()
+    public override bool OnLoad()
     {
-        
+         return false;
     }
 
-    public override void OnPlayedCard(Card card)
+    public override bool OnPlayedCard(Card card)
     {
-        
+         return false;
     }
 
-    public override void OnReverse(Card card)
+    public override bool OnReverse(Card card)
     {
-        
+         return false;
     }
 
-    public override void OnTurnEnd(int turnState)
+    public override bool OnTurnEnd(int turnState)
     {
-        
+         return false;
     }
 }

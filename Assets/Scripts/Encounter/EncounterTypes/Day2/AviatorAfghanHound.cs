@@ -34,7 +34,6 @@ public class AviatorAfghanHound : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
@@ -48,12 +47,10 @@ public class AviatorAfghanHound : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        
     }
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public override void OnTurnEnd(int turnState)

@@ -26,20 +26,20 @@ public abstract class Item : ScriptableObject
     public abstract void InitItem();
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
     // and life total does it in it's OnLoad()
-    public abstract void OnLoad(); 
+    public abstract bool OnLoad(); 
     //when picked up
-    public abstract void OnAquire();
-    public abstract void OnDefendCard(Card defendee, Card defended);
-    public abstract void OnPlayedCard(Card card);
-    public abstract void OnReverse(Card card);
-    public abstract void OnHeal(int amount);
-    public abstract void OnDamageOpponent(int amount, string fromMod = "");
-    public abstract void OnDamagePlayer(int amount, string fromMod="");
-    public abstract void OnActivate();
-    public abstract void OnEndEncounter();
-    public abstract void OnTurnEnd(int turnState);
-    public abstract void OnCardAdded(CardInfo card);
-    public abstract void OnEncounterStart();
+    public abstract bool OnAquire();
+    public abstract bool OnDefendCard(Card defendee, Card defended);
+    public abstract bool OnPlayedCard(Card card);
+    public abstract bool OnReverse(Card card);
+    public abstract bool OnHeal(int amount);
+    public abstract bool OnDamageOpponent(int amount, string fromMod = "");
+    public abstract bool OnDamagePlayer(int amount, string fromMod="");
+    public abstract bool OnActivate();
+    public abstract bool OnEndEncounter();
+    public abstract bool OnTurnEnd(int turnState);
+    public abstract bool OnCardAdded(CardInfo card);
+    public abstract bool OnEncounterStart();
     public abstract int AddToDamagePlayer(int amount, bool OnlyVisual=false);
     public abstract  int AddToDamageOpponent(int amount, bool OnlyVisual=false);
 

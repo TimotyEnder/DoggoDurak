@@ -45,10 +45,9 @@ public class Balalaechnik : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod = "")
     {
-        
     }
 
-    public override void OnDamagePlayer(int amount, string fromMod = "")
+    public override void OnDamagePlayer(int amount, string fromMod="")
     {
         int inst=_damageInstance++;
         if(inst==3)
@@ -77,7 +76,6 @@ public class Balalaechnik : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)
@@ -87,12 +85,10 @@ public class Balalaechnik : Encounter
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public override void OnTurnEnd(int turnState)
     {
-        
     }
 
     public override void SetDebuffs()

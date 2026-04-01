@@ -267,7 +267,7 @@ public static string GetNumberShortName(int number)
             return number.ToString();
     }
 }
-    public async  void OnAquire() 
+    public async  void  OnAquire() 
     {
         foreach(CardModifierContainer c in _modifiers) 
         {

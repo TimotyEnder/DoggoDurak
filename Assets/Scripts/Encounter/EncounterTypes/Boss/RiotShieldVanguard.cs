@@ -87,7 +87,6 @@ public class RiotShieldVanguard : Encounter
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public override void OnTurnEnd(int turnState)

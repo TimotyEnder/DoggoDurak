@@ -46,12 +46,10 @@ public class ThePerestroikaPragmatist : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        
     }
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public async override void OnTurnEnd(int turnState)

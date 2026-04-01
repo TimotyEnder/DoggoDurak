@@ -47,7 +47,6 @@ public class TheTroikaTerror : Encounter
 
     public override void OnDamageOpponent(int amount, string fromMod)
     {
-        
     }
 
     public override void OnDamagePlayer(int amount, string fromMod)
@@ -61,12 +60,10 @@ public class TheTroikaTerror : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        
     }
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public async override void OnTurnEnd(int turnState)

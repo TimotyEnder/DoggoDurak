@@ -21,12 +21,12 @@ class LaikasFavor : Item
         this.toolTipDesc = $"{StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} have number {StylisticClass.HighLight}1{StylisticClass.HighLightClose}";
     }
 
-    public override void OnActivate()
+    public override bool OnActivate()
     {
-        
+         return false;
     }
 
-    public override void OnAquire()
+    public override bool OnAquire()
     {
         foreach(CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
@@ -35,63 +35,65 @@ class LaikasFavor : Item
                 c._number=1;
             }
         }
+        return true;
     }
 
-    public override void OnCardAdded(CardInfo card)
+    public override bool OnCardAdded(CardInfo card)
     {
         if(card.IsLaika())
         {
             card._number=1;
         }
+        return true;
     }
 
-    public override void OnDamageOpponent(int amount, string fromMod = "")
+    public override bool OnDamageOpponent(int amount, string fromMod = "")
     {
-        
+         return false;
     }
 
-    public override void OnDamagePlayer(int amount, string fromMod = "")
+    public override bool OnDamagePlayer(int amount, string fromMod="")
     {
-        
+         return false;
     }
 
-    public override void OnDefendCard(Card defendee, Card defended)
+    public override bool OnDefendCard(Card defendee, Card defended)
     {
-        
+          return false;
     }
 
-    public override void OnEncounterStart()
+    public override bool OnEncounterStart()
     {
-        
+         return false;
     }
 
-    public override void OnEndEncounter()
+    public override bool OnEndEncounter()
     {
-        
+         return false;
     }
 
-    public override void OnHeal(int amount)
+    public override bool OnHeal(int amount)
     {
-        
+         return false;
     }
 
-    public override void OnLoad()
+    public override bool OnLoad()
     {
-        
+         return false;
     }
 
-    public override void OnPlayedCard(Card card)
+    public override bool OnPlayedCard(Card card)
     {
-        
+         return false;
     }
 
-    public override void OnReverse(Card card)
+    public override bool OnReverse(Card card)
     {
-        
+         return false;
     }
 
-    public override void OnTurnEnd(int turnState)
+    public override bool OnTurnEnd(int turnState)
     {
-        
+         return false;
     }
 }

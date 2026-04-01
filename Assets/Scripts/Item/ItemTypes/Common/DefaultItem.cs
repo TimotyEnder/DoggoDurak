@@ -10,67 +10,70 @@ public class DefaultItem : Item
         this.itemName="?";
         this.toolTipDesc = "Hello Modders! Have your fun! Sorry shit might be a bit confusing but i am sur you will figure it out:)";
     }
-    public override void OnLoad()
+    public override bool OnLoad()
     {
-
+           return false;
     }
 
-    public override void OnAquire()
+    public override bool OnAquire()
     {
         Debug.Log("Default Item On Aquire");
+        return true;
     }
 
-    public override void OnDefendCard(Card defendee, Card defended)
+    public override bool OnDefendCard(Card defendee, Card defended)
     {
+         return false;
     }
 
-    public override void OnPlayedCard(Card card)
+    public override bool OnPlayedCard(Card card)
     {
+         return false;
     }
 
-    public override void OnReverse(Card card)
+    public override bool OnReverse(Card card)
     {
-
+          return false;
     }
 
-    public override void OnHeal(int amount)
+    public override bool OnHeal(int amount)
     {
-
+         return false;
     }
 
-    public override void OnDamageOpponent(int amount, string fromMod)
+    public override bool OnDamageOpponent(int amount, string fromMod)
     {
-
+          return false;
     }
 
-    public override void OnActivate()
+    public override bool OnActivate()
     {
-
+          return false;
     }
 
-    public override void OnEndEncounter()
+    public override bool OnEndEncounter()
     {
-        
+         return false;
     }
 
-    public override void OnTurnEnd(int turnState)
+    public override bool OnTurnEnd(int turnState)
     {
-        
+         return false;
     }
 
-    public override void OnCardAdded(CardInfo card)
+    public override bool OnCardAdded(CardInfo card)
     {
-        
+         return false;
     }
 
-    public override void OnEncounterStart()
+    public override bool OnEncounterStart()
     {
-        
+         return false;
     }
 
-    public override void OnDamagePlayer(int amount, string fromMod = "")
+    public override bool OnDamagePlayer(int amount, string fromMod="")
     {
-        
+         return false;
     }
 
     public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)

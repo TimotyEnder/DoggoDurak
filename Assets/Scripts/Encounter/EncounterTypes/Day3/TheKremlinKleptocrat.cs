@@ -70,12 +70,10 @@ public class TheKremlinKleptocrat : Encounter
 
     public override void OnPlayedCard(Card card)
     {
-        
     }
 
     public override void OnReverse(Card card)
     {
-        
     }
 
     public override void OnTurnEnd(int turnState)

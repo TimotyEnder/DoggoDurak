@@ -24,71 +24,71 @@ class ChocolateBonBon : Item
         this.toolTipDesc = $"{StylisticClass.ActivateString} The opponent gains {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters for each card with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck. You discard cards equal to the amount of cards with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck.";
     }
 
-    public override void OnActivate()
+    public override bool OnActivate()
     {
         int poisonAmount = GameHandler.Instance.GetGameState()._deck.FindAll(card => card._modifierStacks.ContainsKey("Poison") && card._modifierStacks["Poison"] > 0).Count;
         GameHandler.Instance.PoisonOpponent(poisonAmount);
         GameHandler.Instance.PlayerDiscard(0,Math.Min(poisonAmount,GameHandler.Instance.GetPlayerCardsInHand()));
-
+        return true;
     }
 
-    public override void OnAquire()
+    public override bool OnAquire()
     {
-        
+            return false;
     }
 
-    public override void OnCardAdded(CardInfo card)
+    public override bool OnCardAdded(CardInfo card)
     {
-        
+         return false;
     }
 
-    public override void OnDamageOpponent(int amount, string fromMod = "")
+    public override bool OnDamageOpponent(int amount, string fromMod = "")
     {
-        
+         return false;
     }
 
-    public override void OnDamagePlayer(int amount, string fromMod = "")
+    public override bool OnDamagePlayer(int amount, string fromMod="")
     {
-        
+         return false;
     }
 
-    public override void OnDefendCard(Card defendee, Card defended)
+    public override bool OnDefendCard(Card defendee, Card defended)
     {
-        
+          return false;
     }
 
-    public override void OnEncounterStart()
+    public override bool OnEncounterStart()
     {
-        
+         return false;
     }
 
-    public override void OnEndEncounter()
+    public override bool OnEndEncounter()
     {
-        
+         return false;
     }
 
-    public override void OnHeal(int amount)
+    public override bool OnHeal(int amount)
     {
-        
+         return false;
     }
 
-    public override void OnLoad()
+    public override bool OnLoad()
     {
-        
+         return false;
     }
 
-    public override void OnPlayedCard(Card card)
+    public override bool OnPlayedCard(Card card)
     {
-        
+         return false;
     }
 
-    public override void OnReverse(Card card)
+    public override bool OnReverse(Card card)
     {
-        
+         return false;
     }
 
-    public override void OnTurnEnd(int turnState)
+    public override bool OnTurnEnd(int turnState)
     {
-        
+         return false;
     }
 }
