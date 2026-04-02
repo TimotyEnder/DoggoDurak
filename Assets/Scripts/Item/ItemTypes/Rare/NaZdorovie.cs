@@ -18,7 +18,7 @@ class NaZdorovie : Item
         this.boss = false;
         this.itemId = "NaZdorovie";
         this.itemName="Na zdorovie!";
-        this.toolTipDesc = $"For each encounter, gain rubles based on {StylisticClass.HighLight}health lost/gained{StylisticClass.HighLightClose}";
+        this.toolTipDesc = $"For each encounter, gain {StylisticClass.RubleSign} based on {StylisticClass.HighLight}health lost/gained{StylisticClass.HighLightClose}";
     }
 
     public override bool OnActivate()

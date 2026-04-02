@@ -40,11 +40,11 @@ public class ShopRerollButt : MonoBehaviour
     {
         if(GameHandler.Instance.GetGameState()._freeShopRerolls<=0)
         {
-            _costText.text =  GameHandler.Instance.GetGameState()._shopRerollCost.ToString()+_costText.text[_costText.text.Length-1];
+            _costText.text =  GameHandler.Instance.GetGameState()._shopRerollCost.ToString()+StylisticClass.RubleSign;
         }
         else
         {
-            _costText.text=GameHandler.Instance.GetGameState()._freeShopRerolls.ToString()+"x0"+_costText.text[_costText.text.Length-1].ToString();
+            _costText.text=GameHandler.Instance.GetGameState()._freeShopRerolls.ToString()+"x0"+StylisticClass.RubleSign;
         }
     }
 

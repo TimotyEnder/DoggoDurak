@@ -18,7 +18,7 @@ class InvestorProfile : Item
         this.boss = false;
         this.itemId = "InvestorProfile";
         this.itemName="InvestorProfile";
-        this.toolTipDesc = $"For each encounter, gain rubles based on total rubles.";
+        this.toolTipDesc = $"For each encounter, gain {StylisticClass.RubleSign} based on total {StylisticClass.RubleSign}.";
     }
 
     public override bool OnActivate()

@@ -18,7 +18,7 @@ public class OffShoreAccount : Item
         this.boss = false;
         this.itemId = "OffshoreAccount";
         this.itemName="OffshoreAccount";
-        this.toolTipDesc = "You now gain an amount of rubles that increases with the amount of encounters played";
+        this.toolTipDesc = $"You now gain an amount of {StylisticClass.RubleSign} that increases with the amount of encounters played";
     }
 
     public override bool OnActivate()

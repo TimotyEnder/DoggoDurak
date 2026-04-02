@@ -21,7 +21,7 @@ public class TheTaxCollector : Encounter
     }
     public override void AddRules()
     {
-        AddRule("For each "+StylisticClass.DamageNumber(5)+" you get dealt. you loose a ruble");//0
+        AddRule($"For each {StylisticClass.DamageNumber(5)} you get dealt. you loose a {StylisticClass.RubleSign}");//0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {

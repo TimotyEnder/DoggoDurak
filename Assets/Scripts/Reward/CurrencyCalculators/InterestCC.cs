@@ -7,6 +7,6 @@ class InterestCC : CurrencyCalculator
 
     public override string GetExplanationText()
     {
-        return $"Investment dividends: (5 x 20% of {GameHandler.Instance.GetGameState()._rubles}) = ";
+        return $"Investment dividends: (5 x 20% of {GameHandler.Instance.GetGameState()._rubles}{StylisticClass.RubleSign}) = ";
     }
 }

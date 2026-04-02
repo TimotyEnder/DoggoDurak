@@ -8372,15 +8372,15 @@ RectTransform:
   - {fileID: 548958519}
   - {fileID: 486667740}
   - {fileID: 121005685}
+  - {fileID: 544030630}
+  - {fileID: 841525862}
+  - {fileID: 983426946}
   - {fileID: 1083519072}
   - {fileID: 1593585911}
   - {fileID: 399872905}
   - {fileID: 618693686}
   - {fileID: 636500721}
   - {fileID: 1652197230}
-  - {fileID: 544030630}
-  - {fileID: 841525862}
-  - {fileID: 983426946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

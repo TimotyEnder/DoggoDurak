@@ -53,6 +53,9 @@ public static class StylisticClass
     public static string DamageIcon="<sprite name=Damage>";
     public static string HealingIcon="<sprite name=Healing>";
     public static string RestPoint="<sprite name=RestPoint>";
+    public static string RubleSign="<sprite name=Ruble>";
+    public static string Shield="<sprite name=Shield>";
+
 
 
 

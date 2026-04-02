@@ -190,7 +190,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         if (_cost > 0)
         {
             _costObject.SetActive(true);
-            _costText.text = _cost.ToString()+_costText.text[_costText.text.Length-1];
+            _costText.text = _cost.ToString()+StylisticClass.RubleSign;
         }
         UpdateModifiers();
         CheckIsDebuffed();

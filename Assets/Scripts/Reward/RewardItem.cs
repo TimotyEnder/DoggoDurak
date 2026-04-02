@@ -42,7 +42,7 @@ public class RewardItem : MonoBehaviour,IPointerEnterHandler
             this.price = itemPrice;
             _priceText.gameObject.SetActive(true);
             _costImage.SetActive(true);
-            _priceText.text = itemPrice.ToString()+_priceText.text[_priceText.text.Length-1];   
+            _priceText.text = itemPrice.ToString()+StylisticClass.RubleSign;   
         }
         _toolTip = GetComponent<ToolTip>();
         this._item = item;

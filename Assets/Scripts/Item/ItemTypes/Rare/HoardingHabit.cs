@@ -18,7 +18,7 @@ public class HoardingHabit : Item
         this.boss = false;
         this.itemId = "HoardingHabit";
         this.itemName="HoardingHabit";
-        this.toolTipDesc = "For each encounter get a  ruble reward for each additional card in your deck";
+        this.toolTipDesc = $"For each encounter get a  {StylisticClass.RubleSign} reward for each additional card in your deck";
     }
 
     public override bool OnActivate()

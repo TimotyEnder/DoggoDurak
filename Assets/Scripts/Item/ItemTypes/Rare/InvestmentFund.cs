@@ -20,7 +20,7 @@ class InvestmentFund : Item
         this.itemName="InvestmentFund";
         this.isActive=true;
         this.persistent=false;
-        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}discard{StylisticClass.HighLightClose} the {StylisticClass.HighLight}right-most{StylisticClass.HighLightClose} card and {StylisticClass.HighLight}gain rubles equal to its number{StylisticClass.HighLightClose}.";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}discard{StylisticClass.HighLightClose} the {StylisticClass.HighLight}right-most{StylisticClass.HighLightClose} card and {StylisticClass.HighLight}gain {StylisticClass.RubleSign} equal to its number{StylisticClass.HighLightClose}.";
     }
 
     public override bool OnActivate()
