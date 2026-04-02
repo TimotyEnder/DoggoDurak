@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
+public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,BlingableVisualItem
 {
     private Item _item;
     [SerializeField]
@@ -19,6 +19,7 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
 
     public void AssignItem(Item item)
     {
+        item.AssignInventoryItem(this);
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
         SelectColor();
@@ -76,6 +77,10 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler
     }   
     public void OnPointerEnter(PointerEventData eventData)
     {
-         _anim.SetTrigger("Hover");
+        _anim.SetTrigger("Hover");
+    }
+    public void Bling()
+    {
+        _anim.SetTrigger("Click");
     }
 }

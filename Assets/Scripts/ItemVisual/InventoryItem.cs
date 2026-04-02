@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IPointerEnterHandler
+public class InventoryItem : MonoBehaviour, IPointerEnterHandler,BlingableVisualItem
 {
     private Item _item;
     private Sprite _itemIcon;
@@ -54,7 +54,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler
         _stackText.gameObject.SetActive(true);
         _stackText.text = stacks.Count.ToString();
     }
-    public void Bling()
+    public  void Bling()
     {
         _thisAnim.SetTrigger("Bling");
     }

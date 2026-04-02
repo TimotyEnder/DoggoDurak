@@ -309,77 +309,77 @@ public class GameState
     {
         foreach (Item item in _items)
         {
-            if(item.OnLoad()){item.GetInventoryItem().Bling();}
+            if(item.OnLoad()){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnDefendCard(Card defendee, Card defended) 
     {
         foreach (Item item in _items)
         {
-            if(item.OnDefendCard(defendee, defended)){item.GetInventoryItem().Bling();}
+            if(item.OnDefendCard(defendee, defended)){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnPlayedCard(Card card) 
     {
         foreach (Item item in _items)
         {
-            if(item.OnPlayedCard(card)){item.GetInventoryItem().Bling();}
+            if(item.OnPlayedCard(card)){item.GetInventoryItem()?.Bling();}
         }
     }
     public  void OnReverse(Card card) 
     {
         foreach (Item item in _items)
         {
-            if(item.OnReverse(card)){item.GetInventoryItem().Bling();}
+            if(item.OnReverse(card)){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnHeal(int amount) 
     {
         foreach (Item item in _items)
         {
-            if(item.OnHeal(amount)){item.GetInventoryItem().Bling();}
+            if(item.OnHeal(amount)){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnDamageOpponent(int amount, string fromMod = "")
     {
         foreach (Item item in _items)
         {
-            if(item.OnDamageOpponent(amount,fromMod)){item.GetInventoryItem().Bling();}
+            if(item.OnDamageOpponent(amount,fromMod)){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnDamagePlayer(int amount, string fromMod="")
     {
         foreach (Item item in _items)
         {
-            if(item.OnDamagePlayer(amount,fromMod)){item.GetInventoryItem().Bling();}
+            if(item.OnDamagePlayer(amount,fromMod)){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnEndEncounter()
     {
         foreach (Item item in _items)
         {
-            if(item.OnEndEncounter()){item.GetInventoryItem().Bling();}
+            if(item.OnEndEncounter()){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnEncounterStart()
     {
         foreach (Item item in _items)
         {
-            if(item.OnEncounterStart()){item.GetInventoryItem().Bling();}
+            if(item.OnEncounterStart()){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnTurnEnd(int turnState)
     {
         foreach (Item item in _items)
         {
-            if(item.OnTurnEnd(turnState)){item.GetInventoryItem().Bling();}
+            if(item.OnTurnEnd(turnState)){item.GetInventoryItem()?.Bling();}
         }
     }
     public void OnCardAdded(CardInfo card)
     {
         foreach (Item item in _items)
         {
-            if(item.OnCardAdded(card)){item.GetInventoryItem().Bling();}
+            if(item.OnCardAdded(card)){item.GetInventoryItem()?.Bling();}
         }
     }
     public int AddToDamagePlayer(int amount, bool OnlyVisual=false) 

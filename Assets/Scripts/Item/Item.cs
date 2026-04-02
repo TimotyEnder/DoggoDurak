@@ -22,7 +22,7 @@ public abstract class Item : ScriptableObject
     protected bool consumable=false;
     protected bool _hasBeenActivated=false;
     protected string toolTipDesc;
-    protected InventoryItem _invItem;// this is to be able to make the imventory items bling when triggered. Active items are handler with onActivate and that is a different system.
+    protected BlingableVisualItem _invItem;// this is to be able to make the imventory items bling when triggered. Active items are handler with onActivate and that is a different system.
 
     public abstract void InitItem();
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
@@ -43,11 +43,11 @@ public abstract class Item : ScriptableObject
     public abstract bool OnEncounterStart();
     public abstract int AddToDamagePlayer(int amount, bool OnlyVisual=false);
     public abstract  int AddToDamageOpponent(int amount, bool OnlyVisual=false);
-    public void AssignInventoryItem(InventoryItem i)
+    public void AssignInventoryItem(BlingableVisualItem i)
     {
         this._invItem=i;
     }
-    public InventoryItem GetInventoryItem(){return this._invItem;}
+    public BlingableVisualItem GetInventoryItem(){return this._invItem;}
     public bool Activate() 
     {
         if (isActive && !_hasBeenActivated)
