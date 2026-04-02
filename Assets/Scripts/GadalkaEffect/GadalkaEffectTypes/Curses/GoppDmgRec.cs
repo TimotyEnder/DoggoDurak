@@ -6,7 +6,7 @@ class GoppDmgRec : GadalkaEffectInfo
 {
     public override void ExecuteEffect()
     {
-        GameHandler.Instance.GetGameState()._defaultOpponentDamageReduction+=1;
+        GameHandler.Instance.GetGameState()._defaultOpponentsShield+=1;
     }
 
     public override void InitEffect()
@@ -14,6 +14,6 @@ class GoppDmgRec : GadalkaEffectInfo
         this.blessing=false;
         this.cost=3;
         this.effectId="GoppDmgRec";
-        this.descriptionText=$"All Opponents  recieve {StylisticClass.DamageNumber(1)} less from all sources.";
+        this.descriptionText=$"All Opponents  recieve {StylisticClass.ShieldNumber(4)}";
     }
 }

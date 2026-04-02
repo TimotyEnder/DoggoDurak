@@ -19,8 +19,8 @@ class Tsh4 : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "Tsh4";
-        this.itemName="Tsh=4";
-        this.toolTipDesc = $"For the first 3 turns, recieve {StylisticClass.DamageNumber(5)} less from all sources.";
+        this.itemName="Tsh-4";
+        this.toolTipDesc = $"For the first 3 turns, recieve {StylisticClass.ShieldNumber(5)}";
         turns=0;
     }
 
@@ -56,7 +56,7 @@ class Tsh4 : Item
 
     public override bool OnEncounterStart()
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction+=5;
+        GameHandler.Instance.GetGameState()._playerShield+=5;
         turns=0;
         return true;
     }
@@ -91,7 +91,7 @@ class Tsh4 : Item
         turns++;
         if(turns>=3)
         {
-            GameHandler.Instance.GetGameState()._playerDamageReduction-=5;
+            GameHandler.Instance.GetGameState()._playerShield-=5;
         }
         return true;
     }

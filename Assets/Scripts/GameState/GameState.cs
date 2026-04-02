@@ -58,9 +58,9 @@ public class GameState
     public int _shopCostPerCardMod;
     public int _laikaCardInShopChance;
 
-    public int  _opponentsDamageReduction; //used for stalwart storozhevaya and can be used for other things in the future.
-    public int _defaultOpponentDamageReduction;
-    public int _playerDamageReduction;
+    public int  _opponentsShield; //used for stalwart storozhevaya and can be used for other things in the future.
+    public int _defaultOpponentsShield;
+    public int _playerShield;
     public bool _reversePossible;
     public int _playerPoisonCounters;
     public bool _poisonCountDown;
@@ -146,9 +146,9 @@ public class GameState
         _maxFreeShopRerolls=0;
         _startingShopRerollCost = 5;
         _undamagable=new bool[]{false,false};
-        _opponentsDamageReduction = 0;
-        _defaultOpponentDamageReduction=0;
-        _playerDamageReduction=0;
+        _opponentsShield = 0;
+        _defaultOpponentsShield=0;
+        _playerShield=0;
         _enemyHandSize = 6;
         _loseToWin=false;
         _healingAndDamageInverted=false;

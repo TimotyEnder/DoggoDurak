@@ -21,12 +21,12 @@ class TrenchShovel : Item
         consumable=true;
         itemId = "TrenchShovel";
         this.itemName="TrenchShovel";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Recieve {StylisticClass.DamageNumber(10)} less from all sources {StylisticClass.HighLight}this turn{StylisticClass.HighLightClose}.";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Recieve {StylisticClass.ShieldNumber(10)} {StylisticClass.HighLight}this turn{StylisticClass.HighLightClose}.";
     }
 
     public override bool OnActivate()
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction+=10;
+        GameHandler.Instance.GetGameState()._playerShield+=10;
         return true;
     }
 
@@ -87,7 +87,7 @@ class TrenchShovel : Item
 
     public override bool OnTurnEnd(int turnState)
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction-=10;
+        GameHandler.Instance.GetGameState()._playerShield-=10;
         return true;
     }
 }

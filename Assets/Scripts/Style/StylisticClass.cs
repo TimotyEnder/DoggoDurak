@@ -43,8 +43,13 @@ public static class StylisticClass
     {
         return " <b>"+damage+" "+DamageIcon+"</b> ";
     }
-    public static string Debuffed="<b>Debuffed (Is defended by everything and deals zero damage)</b>";
-    public static string Laika="<b>Laika Card (Defends/Is defended by anything but number is 0)</b>";
+    public static string ShieldNumber(int amount)
+    {
+        return $" <b>{ShieldIcon}{amount}</b> ";
+    }
+    public static string Debuffed="<b>Debuffed(Is defended by everything and deals zero damage)</b>";
+    public static string Laika="<b>Laika Card(Defends/Is defended by anything but it's number is 0)/b>";
+    public static string Shield = $"<b>{ShieldIcon}Shield(reduce all {DamageIcon} less or equal to {ShieldIcon} to 1 {DamageNumber(1)})</b>";
 
     //active items
     public static Color ActiveItemUseInvalid= new Color(0.678f, 0.012f, 0.098f);
@@ -54,7 +59,7 @@ public static class StylisticClass
     public static string HealingIcon="<sprite name=Healing>";
     public static string RestPoint="<sprite name=RestPoint>";
     public static string RubleSign="<sprite name=Ruble>";
-    public static string Shield="<sprite name=Shield>";
+    public static string ShieldIcon="<sprite name=Shield>";
 
 
 

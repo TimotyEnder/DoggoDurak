@@ -18,7 +18,7 @@ class STsh81 : Item
         this.boss = false;
         this.itemId = "STsh81";
         this.itemName="STsh-81 Sfera";
-        this.toolTipDesc = $"You recieve {StylisticClass.DamageNumber(3)} less from all sources.";
+        this.toolTipDesc = $"You recieve {StylisticClass.ShieldNumber(3)}";
     }
 
     public override bool OnActivate()
@@ -28,7 +28,7 @@ class STsh81 : Item
 
     public override bool OnAquire()
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction+=3;
+        GameHandler.Instance.GetGameState()._playerShield+=3;
         return true;
     }
 

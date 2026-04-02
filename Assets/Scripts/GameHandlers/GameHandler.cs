@@ -80,7 +80,7 @@ public class GameHandler : MonoBehaviour
         {
             //c.MakeLaika();
             //c.AddModifier("Burn",10);
-            c.AddModifier("Restoring");
+            //c.AddModifier("Restoring");
             //c.AddModifier("Bounce");
             //c.AddModifier("Parry");
             //c.AddModifier("Draw");
@@ -89,12 +89,12 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug   
-        Item debugItem4 = ScriptableObject.CreateInstance<FluffyUshanka>();
+        Item debugItem4 = ScriptableObject.CreateInstance<Tsh4>();
         debugItem4.InitItem();
         _state.AddItem(debugItem4);
-        Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
-        debugItem5.InitItem();
-        _state.AddItem(debugItem5);
+        //Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
+        //debugItem5.InitItem();
+        //_state.AddItem(debugItem5);
         //_state._rubles=100; //debug
         //_currentEncounter= new TheAlternatingApparatchik();s
         //_currentEncounter.InitiateEncounter();
@@ -141,7 +141,7 @@ public class GameHandler : MonoBehaviour
         _state._encounter++;
 
         //_state._encounter = 11; //debug insta boss
-        _state._encounter = 4; //debug insta shop
+        //_state._encounter = 4; //debug insta shop
 
         _state.ResetActiveItems();
         if (_state._encounter % 4 == 0 && _state._encounter > 0) //every three encounters you have a rest
@@ -314,6 +314,10 @@ public class GameHandler : MonoBehaviour
         }
         return damageCalc;
     }
+    private int DamageReduced(int damageCalc,int shield)
+    {
+        return damageCalc-shield<=0?1:damageCalc-shield;
+    }
     public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
     {
         int damageCalc=OpponentDamageCalculation(amount,fromEffect);
@@ -330,7 +334,7 @@ public class GameHandler : MonoBehaviour
             {
                for(int i=0;i<times;i++)
                 {
-                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-_state._opponentsDamageReduction,fromMod);
+                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(DamageReduced(damageCalc,_state._opponentsShield),fromMod);
                     if(checkMatchEnd)
                     {
                           await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
@@ -340,7 +344,7 @@ public class GameHandler : MonoBehaviour
             }
             if (!fromEffect)
             {
-                DelayedOnDamageOpponentAsync(damageCalc-_state._opponentsDamageReduction,fromMod).Forget();
+                DelayedOnDamageOpponentAsync(damageCalc-_state._opponentsShield,fromMod).Forget();
             }
         }
     }
@@ -386,7 +390,7 @@ public class GameHandler : MonoBehaviour
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(damageCalc-GameHandler.Instance.GetGameState()._playerDamageReduction,fromMod);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(DamageReduced(damageCalc,_state._playerShield),fromMod);
                        if(checkMatchEnd)
                         {
                              await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
@@ -398,7 +402,7 @@ public class GameHandler : MonoBehaviour
                 {
                     for(int i=0;i<times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc-GameHandler.Instance.GetGameState()._playerDamageReduction);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc-GameHandler.Instance.GetGameState()._playerShield);
                         await UniTask.Delay(100);
                     }
                 }
@@ -589,7 +593,7 @@ public class GameHandler : MonoBehaviour
     }
     public void ResetEncounterGamestateAttributes() 
     {
-        _state._opponentsDamageReduction = _state._defaultOpponentDamageReduction;
+        _state._opponentsShield = _state._defaultOpponentsShield;
         _state._enemyHandSize = 6;
         _state._loseToWin=false;
         _state._healingAndDamageInverted=false;

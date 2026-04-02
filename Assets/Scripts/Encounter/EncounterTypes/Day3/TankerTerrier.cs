@@ -20,11 +20,11 @@ public class TankerTerrier : Encounter
         AddRandomModifierToDeck(60,"Spiky");
         this.description="The armor seems hard. But brittle!";
         hasRules=true;
-        GameHandler.Instance.GetGameState()._opponentsDamageReduction+=10;
+        GameHandler.Instance.GetGameState()._opponentsShield+=10;
     }
     public override void AddRules()
     {
-       AddRule("When the opponent is above"+StylisticClass.HighLight+" 75hp"+StylisticClass.HighLightClose+" they recieve"+StylisticClass.DamageNumber(10)+" less from all sources. Otherwise they recieve triple damage from all sources"); //0
+       AddRule("When the opponent is above"+StylisticClass.HighLight+" 75hp"+StylisticClass.HighLightClose+" he  has"+StylisticClass.ShieldNumber(10)+". Otherwise they recieve triple damage from all sources"); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
@@ -85,9 +85,9 @@ public class TankerTerrier : Encounter
     {
         if(this.health<75)
         {
-            if(GameHandler.Instance.GetGameState()._opponentsDamageReduction>0 && !OnlyVisual)
+            if(GameHandler.Instance.GetGameState()._opponentsShield>0 && !OnlyVisual)
             {
-                GameHandler.Instance.GetGameState()._opponentsDamageReduction-=10;
+                GameHandler.Instance.GetGameState()._opponentsShield-=10;
             }
             ShakeRule(0);
             return amount*2;

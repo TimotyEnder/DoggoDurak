@@ -7,7 +7,7 @@ class GdamageAmpPlayerEffect : GadalkaEffectInfo
     private int SelectedAmount;
     public override void ExecuteEffect()
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction-=SelectedAmount;
+        GameHandler.Instance.GetGameState()._playerShield-=SelectedAmount;
     }
 
     public override void InitEffect()

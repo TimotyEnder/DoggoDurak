@@ -6,7 +6,7 @@ class GdmgRecEffect : GadalkaEffectInfo
 {
     public override void ExecuteEffect()
     {
-        GameHandler.Instance.GetGameState()._playerDamageReduction+=2;
+        GameHandler.Instance.GetGameState()._playerShield+=2;
     }
 
     public override void InitEffect()
@@ -14,6 +14,6 @@ class GdmgRecEffect : GadalkaEffectInfo
         this.blessing=true;
         this.cost=-3;
         this.effectId="GdmgRecEffect";
-        this.descriptionText=$"Recieve {StylisticClass.DamageNumber(2)} less from all sources.";
+        this.descriptionText=$"Recieve {StylisticClass.ShieldNumber(3)}";
     }
 }
