@@ -26,7 +26,7 @@ class TrenchShovel : Item
 
     public override bool OnActivate()
     {
-        GameHandler.Instance.GetGameState()._playerShield+=10;
+        GameHandler.Instance.SetPlayerShield(GameHandler.Instance.GetGameState()._playerShield+10);
         return true;
     }
 
@@ -87,7 +87,7 @@ class TrenchShovel : Item
 
     public override bool OnTurnEnd(int turnState)
     {
-        GameHandler.Instance.GetGameState()._playerShield-=10;
+        GameHandler.Instance.SetPlayerShield(GameHandler.Instance.GetGameState()._playerShield-10);
         return true;
     }
 }

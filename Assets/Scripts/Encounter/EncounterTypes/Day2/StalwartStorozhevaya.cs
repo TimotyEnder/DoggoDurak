@@ -20,7 +20,7 @@ public class StalwartStorozhevaya : Encounter
         this.description="Incredibly strong looking guard dog. It will be hard to get past his riot shield.";
         hasRules=true;
         
-        GameHandler.Instance.GetGameState()._opponentsShield += 5;
+        GameHandler.Instance.SetOpponentShield(GameHandler.Instance.GetGameState()._opponentsShield + 5);
     }
     public override void AddRules()
     {

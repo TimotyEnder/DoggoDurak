@@ -56,7 +56,7 @@ class Tsh4 : Item
 
     public override bool OnEncounterStart()
     {
-        GameHandler.Instance.GetGameState()._playerShield+=5;
+        GameHandler.Instance.SetPlayerShield(GameHandler.Instance.GetGameState()._playerShield+5);
         turns=0;
         return true;
     }
@@ -91,7 +91,7 @@ class Tsh4 : Item
         turns++;
         if(turns>=3)
         {
-            GameHandler.Instance.GetGameState()._playerShield-=5;
+            GameHandler.Instance.SetPlayerShield(GameHandler.Instance.GetGameState()._playerShield-5);
             return true;
         }
         return false;

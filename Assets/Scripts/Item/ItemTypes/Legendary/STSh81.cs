@@ -28,7 +28,7 @@ class STsh81 : Item
 
     public override bool OnAquire()
     {
-        GameHandler.Instance.GetGameState()._playerShield+=3;
+        GameHandler.Instance.SetPlayerShield(GameHandler.Instance.GetGameState()._playerShield+3);
         return true;
     }
 

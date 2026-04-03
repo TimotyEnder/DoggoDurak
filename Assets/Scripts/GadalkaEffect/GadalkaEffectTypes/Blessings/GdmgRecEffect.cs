@@ -6,7 +6,7 @@ class GdmgRecEffect : GadalkaEffectInfo
 {
     public override void ExecuteEffect()
     {
-        GameHandler.Instance.GetGameState()._playerShield+=2;
+        GameHandler.Instance.SetPlayerShield(GameHandler.Instance.GetGameState()._playerShield+2);
     }
 
     public override void InitEffect()

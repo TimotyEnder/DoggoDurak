@@ -245,8 +245,10 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdateHealthUI();
         }
     }
-    public void UpdatePlayerShield()
+    public void SetPlayerShield(int amount)
     {
+        _state._playerShield=amount;
+
         if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdateShieldCounters(false);
@@ -308,8 +310,9 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
-    public void UpdateOpponentShield()
+    public void SetOpponentShield(int amount)
     {
+        _state._opponentsShield=amount;
         if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdateShieldCounters(true);
@@ -607,7 +610,7 @@ public class GameHandler : MonoBehaviour
     }
     public void ResetEncounterGamestateAttributes() 
     {
-        _state._opponentsShield = _state._defaultOpponentsShield;
+        SetOpponentShield(_state._defaultOpponentsShield);
         _state._enemyHandSize = 6;
         _state._loseToWin=false;
         _state._healingAndDamageInverted=false;

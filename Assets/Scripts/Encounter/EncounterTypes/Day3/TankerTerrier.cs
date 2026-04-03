@@ -20,7 +20,7 @@ public class TankerTerrier : Encounter
         AddRandomModifierToDeck(60,"Spiky");
         this.description="The armor seems hard. But brittle!";
         hasRules=true;
-        GameHandler.Instance.GetGameState()._opponentsShield+=10;
+        GameHandler.Instance.SetOpponentShield(GameHandler.Instance.GetGameState()._opponentsShield+10);
     }
     public override void AddRules()
     {
@@ -87,7 +87,7 @@ public class TankerTerrier : Encounter
         {
             if(GameHandler.Instance.GetGameState()._opponentsShield>0 && !OnlyVisual)
             {
-                GameHandler.Instance.GetGameState()._opponentsShield-=10;
+                GameHandler.Instance.SetOpponentShield(GameHandler.Instance.GetGameState()._opponentsShield-10);
             }
             ShakeRule(0);
             return amount*2;
