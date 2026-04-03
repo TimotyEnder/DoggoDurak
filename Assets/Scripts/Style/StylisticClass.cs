@@ -48,7 +48,7 @@ public static class StylisticClass
         return $" <b>{ShieldIcon}{amount}</b> ";
     }
     public static string Debuffed="<b>Debuffed(Is defended by everything and deals zero damage)</b>";
-    public static string Laika="<b>Laika Card(Defends/Is defended by anything but it's number is 0)/b>";
+    public static string Laika="<b>Laika Card(Defends/Is defended by anything but it's number is 0)</b>";
     public static string Shield = $"<b>{ShieldIcon}Shield(reduce all {DamageIcon} less or equal to {ShieldIcon} to 1 {DamageNumber(1)})</b>";
 
     //active items
