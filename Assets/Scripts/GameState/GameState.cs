@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -57,10 +58,29 @@ public class GameState
     public bool _healingAndDamageInverted;
     public int _shopCostPerCardMod;
     public int _laikaCardInShopChance;
-
-    public int  _opponentsShield; //used for stalwart storozhevaya and can be used for other things in the future.
+    [Serialize]
+    private int  __opponentsShield; //used for stalwart storozhevaya and can be used for other things in the future.
+    public int _opponentsShield 
+    {
+        get => __opponentsShield;
+        set 
+        {
+            __opponentsShield = value;
+            GameHandler.Instance.UpdateOpponentShield();// Call your function here
+        }
+    }
     public int _defaultOpponentsShield;
-    public int _playerShield;
+    [Serialize]
+    private int __playerShield;
+    public int _playerShield 
+    {
+        get => __playerShield;
+        set 
+        {
+            __playerShield = value;
+            GameHandler.Instance.UpdatePlayerShield();// Call your function here
+        }
+    }
     public bool _reversePossible;
     public int _playerPoisonCounters;
     public bool _poisonCountDown;

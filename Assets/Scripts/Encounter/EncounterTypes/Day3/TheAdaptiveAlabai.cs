@@ -8,7 +8,7 @@ public class TheAdaptiveAlabai : Encounter
     HashSet<int> numbers;
     public override void InitEncounter()
     {
-        day=1;
+        day=2;
         boss=false;
         trumpSuit = 'R';
         icon = null;

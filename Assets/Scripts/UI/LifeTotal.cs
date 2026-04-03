@@ -12,6 +12,10 @@ public class LifeTotal : MonoBehaviour
     public GameObject healTextPrefab;
     [SerializeField]
     private TextMeshProUGUI _poisonCounter;
+    [SerializeField]
+    private TextMeshProUGUI _shieldCounter;
+    [SerializeField]
+    private TextMeshProUGUI _shieldCounterText;
 
     private RuleHandler _rh;
     void Awake()
@@ -21,6 +25,9 @@ public class LifeTotal : MonoBehaviour
         {
             _rh = rhObj.GetComponent<RuleHandler>();
         }
+    }
+    void Start()
+    {
     }
     public void UpdateHealthUI() 
     {
@@ -45,6 +52,27 @@ public class LifeTotal : MonoBehaviour
         else
         {
             _poisonCounter.text=GameHandler.Instance.GetGameState()._playerPoisonCounters.ToString();
+        }
+    }
+    public void UpdateShieldCounters(bool opponent)
+    {
+        _shieldCounter.gameObject.SetActive(true);
+        _shieldCounter.text=StylisticClass.ShieldIcon;
+        if(opponent)
+        {
+            _shieldCounterText.text=GameHandler.Instance.GetGameState()._opponentsShield.ToString();
+            if(GameHandler.Instance.GetGameState()._opponentsShield<=0)
+            {
+                _shieldCounter.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            _shieldCounterText.text=GameHandler.Instance.GetGameState()._playerShield.ToString();
+            if(GameHandler.Instance.GetGameState()._playerShield<=0)
+            {
+                _shieldCounter.gameObject.SetActive(false);
+            }
         }
     }
     public void Damage(int damage,string fromMod=null) 

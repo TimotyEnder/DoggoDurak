@@ -29,7 +29,7 @@ public class GameHandler : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = FindFirstObjectByType<GameHandler>();
+                _instance = FindAnyObjectByType<GameHandler>();
                 if (_instance == null)
                 {
                     GameObject singleton = new GameObject(typeof(GameHandler).Name);
@@ -245,6 +245,13 @@ public class GameHandler : MonoBehaviour
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdateHealthUI();
         }
     }
+    public void UpdatePlayerShield()
+    {
+        if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+        {
+            GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdateShieldCounters(false);
+        }
+    }
     public void SetMaxHealth(int amount)
     {
         _state._maxhealth+=amount;
@@ -301,6 +308,13 @@ public class GameHandler : MonoBehaviour
         }
         //fromEffect should be here just as a placehoolder if we ever add OnHealOpponent()
     }
+    public void UpdateOpponentShield()
+    {
+        if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+        {
+            GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdateShieldCounters(true);
+        }
+    }
     public int OpponentDamageCalculation(int amount, bool fromEffect=false, bool OnlyVisual=false)
     {
         int damageCalc;
@@ -316,7 +330,7 @@ public class GameHandler : MonoBehaviour
     }
     private int DamageReduced(int damageCalc,int shield)
     {
-        return damageCalc-shield<=0?1:damageCalc-shield;
+        return damageCalc-shield<=0 && damageCalc>0?1:damageCalc-shield;
     }
     public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
     {

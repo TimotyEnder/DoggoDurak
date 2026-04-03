@@ -7,7 +7,7 @@ public class TheTroikaTerror : Encounter
     int instance=0;
     public override void InitEncounter()
     {
-        day=1;
+        day=2;
         boss=false;
         trumpSuit = 'R';
         icon = null;

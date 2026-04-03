@@ -8,7 +8,7 @@ public class SiberianBearHunter : Encounter
     public int _damageCur=0;
     public override void InitEncounter()
     {
-        day=1;
+        day=2;
         boss=false;
         trumpSuit = 'R';
         icon = null;

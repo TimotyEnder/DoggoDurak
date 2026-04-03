@@ -92,7 +92,8 @@ class Tsh4 : Item
         if(turns>=3)
         {
             GameHandler.Instance.GetGameState()._playerShield-=5;
+            return true;
         }
-        return true;
+        return false;
     }
 }

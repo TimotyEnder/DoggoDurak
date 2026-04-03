@@ -68,6 +68,8 @@ public class TurnHandler : MonoBehaviour
         _playerDeck.LoadDeck();
         _playerHp.SetHealth(GameHandler.Instance.GetGameState()._health);
         _opponentHp.SetHealth(GameHandler.Instance.GetCurrEncounter().GetHealth());
+        _playerHp.UpdateShieldCounters(false);
+        _opponentHp.UpdateShieldCounters(true);
         _ = Turn();
     }
     void Update()
