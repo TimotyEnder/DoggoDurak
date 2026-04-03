@@ -22,7 +22,7 @@ public class PushingPug : Encounter
     }
     public override void AddRules()
     {
-        AddRule("Defending player receives "+StylisticClass.DamageNumber(1)+" for each unblocked card."); //0
+        AddRule("Defending player receives "+StylisticClass.DamageNumber(2)+" for each unblocked card."); //0
     }
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
@@ -63,11 +63,11 @@ public class PushingPug : Encounter
         {
             if(turnState==0)
             {
-                GameHandler.Instance.DamageOpponent(unblockedCards,true);
+                GameHandler.Instance.DamageOpponent(unblockedCards*2,true);
             }
             else
             {
-                GameHandler.Instance.DamagePlayer(unblockedCards,true);
+                GameHandler.Instance.DamagePlayer(unblockedCards*2,true);
             }
         }
         ShakeRule(0);

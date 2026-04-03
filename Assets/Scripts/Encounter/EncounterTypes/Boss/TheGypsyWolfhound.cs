@@ -28,7 +28,7 @@ public class TheGypsyWolfhound : Encounter
     public override void AddRules()
     {
        AddRule("The the start of the turn, the opponent nominates 3 cards in your hand:\n"+nominateCards()); //0
-       AddRule("If you end the turn with any of those cards in your hand, they will deal their damage to you."); //1
+       AddRule("If you end the turn with any of those cards in your hand, they will deal half their damage to you."); //1
     }
     public  string nominateCards()
     {
@@ -106,7 +106,7 @@ public class TheGypsyWolfhound : Encounter
         {
             if(card != null && card._card != null) 
             {
-                GameHandler.Instance.DamagePlayer(card._number,true, fromMod: "");
+                GameHandler.Instance.DamagePlayer(card._number/2,true, fromMod: "");
                 
                 if(card._card != null)
                 {

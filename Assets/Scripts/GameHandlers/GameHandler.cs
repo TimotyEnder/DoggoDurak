@@ -63,6 +63,7 @@ public class GameHandler : MonoBehaviour
     }
     public void NewGame(string characerChoice="")
     {
+        _rewardManager= new Lazy<RewardManager>();
         int freshSeed = System.Environment.TickCount;
         UnityEngine.Random.InitState(freshSeed);
         _state = new GameState();
@@ -89,9 +90,9 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug   
-        Item debugItem4 = ScriptableObject.CreateInstance<Tsh4>();
-        debugItem4.InitItem();
-        _state.AddItem(debugItem4);
+        //Item debugItem4 = ScriptableObject.CreateInstance<Tsh4>();
+        //debugItem4.InitItem();
+        //_state.AddItem(debugItem4);
         //Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
         //debugItem5.InitItem();
         //_state.AddItem(debugItem5);
@@ -110,8 +111,8 @@ public class GameHandler : MonoBehaviour
         if (HasSave())
         {
             _state = _saveManager.Value.Load();
-
             // Recreate managers
+            _rewardManager= new Lazy<RewardManager>();
             _encounterManager = new EncounterManager();
             _gadalkaEffectManager = new GadalkaEffectManager();
             ResetEncounterGamestateAttributes();
@@ -137,7 +138,6 @@ public class GameHandler : MonoBehaviour
     {
         ResetEncounterGamestateAttributes();
         SaveState();
-        //Random seed stuff
         _state._encounter++;
 
         //_state._encounter = 11; //debug insta boss

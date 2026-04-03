@@ -205,6 +205,6 @@ public class DiscardOptionPanel : MonoBehaviour
     }
     public void UpdateCostText()
     {
-        _disConfText.text=$"({_totalDiscardCost}{_disConfText.text.Substring(_disConfText.text.Count()-2)}";
+        _disConfText.text=$"({_totalDiscardCost}{StylisticClass.RubleSign}";
     }
 }

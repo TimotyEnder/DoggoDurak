@@ -6002,6 +6002,8 @@ GameObject:
   - component: {fileID: 240343009}
   - component: {fileID: 240343011}
   - component: {fileID: 240343010}
+  - component: {fileID: 240343012}
+  - component: {fileID: 240343013}
   m_Layer: 5
   m_Name: PoisonCounterTextPlayer
   m_TagString: Untagged
@@ -6129,6 +6131,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240343008}
   m_CullTransparentMesh: 1
+--- !u!114 &240343012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240343008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb398dcc55e6819e7877316a4df53f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoisonCounterToolTipSetter
+  opponent: 0
+--- !u!114 &240343013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240343008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 32215553}
 --- !u!1 &289090422
 GameObject:
   m_ObjectHideFlags: 0
@@ -6215,6 +6246,8 @@ GameObject:
   - component: {fileID: 290516503}
   - component: {fileID: 290516505}
   - component: {fileID: 290516504}
+  - component: {fileID: 290516506}
+  - component: {fileID: 290516507}
   m_Layer: 5
   m_Name: ShieldCounterPlayer
   m_TagString: Untagged
@@ -6342,6 +6375,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290516502}
   m_CullTransparentMesh: 1
+--- !u!114 &290516506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290516502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881e5e9aaca80983fabc0e0d28c231a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShieldCounterTooltipSetter
+--- !u!114 &290516507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290516502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 32215553}
 --- !u!1 &333214907
 GameObject:
   m_ObjectHideFlags: 0
@@ -6838,6 +6899,8 @@ GameObject:
   - component: {fileID: 428023844}
   - component: {fileID: 428023846}
   - component: {fileID: 428023845}
+  - component: {fileID: 428023847}
+  - component: {fileID: 428023848}
   m_Layer: 5
   m_Name: PoisonCounterTextOpponent
   m_TagString: Untagged
@@ -6965,6 +7028,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428023843}
   m_CullTransparentMesh: 1
+--- !u!114 &428023847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428023843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 32215553}
+--- !u!114 &428023848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428023843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb398dcc55e6819e7877316a4df53f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoisonCounterToolTipSetter
+  opponent: 1
 --- !u!1 &456984141
 GameObject:
   m_ObjectHideFlags: 0
@@ -8173,6 +8265,8 @@ GameObject:
   - component: {fileID: 726813695}
   - component: {fileID: 726813697}
   - component: {fileID: 726813696}
+  - component: {fileID: 726813698}
+  - component: {fileID: 726813699}
   m_Layer: 5
   m_Name: ShieldCounterOpponent
   m_TagString: Untagged
@@ -8300,6 +8394,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726813694}
   m_CullTransparentMesh: 1
+--- !u!114 &726813698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726813694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881e5e9aaca80983fabc0e0d28c231a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShieldCounterTooltipSetter
+--- !u!114 &726813699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726813694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 32215553}
 --- !u!1 &740171875
 GameObject:
   m_ObjectHideFlags: 0

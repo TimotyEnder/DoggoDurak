@@ -41,15 +41,15 @@ public static class StylisticClass
     public static string SecondaryColor="<color=red>";
     public static string DamageNumber(int damage)
     {
-        return " <b>"+damage+" "+DamageIcon+"</b> ";
+        return $" <b>{damage}{DamageIcon}</b> ";
     }
     public static string ShieldNumber(int amount)
     {
         return $" <b>{ShieldIcon}{amount}</b> ";
     }
-    public static string Debuffed="<b>Debuffed(Is defended by everything and deals zero damage)</b>";
-    public static string Laika="<b>Laika Card(Defends/Is defended by anything but it's number is 0)</b>";
-    public static string Shield = $"<b>{ShieldIcon}Shield(reduce all {DamageIcon} less or equal to {ShieldIcon} to 1 {DamageNumber(1)})</b>";
+    public static string Debuffed="<b>Debuffed (Is defended by everything and deals zero damage)</b>";
+    public static string Laika="<b>Laika Card (Defends/Is defended by anything but it's number is 0)</b>";
+    public static string Shield = $"<b>Reduces damage by a flat amount to no less than 1<sprite name=Damage></b>";
 
     //active items
     public static Color ActiveItemUseInvalid= new Color(0.678f, 0.012f, 0.098f);

@@ -41,37 +41,43 @@ public class LifeTotal : MonoBehaviour
     }
     public void UpdatePoisonCounters(bool opponent)
     {
-        if(!_poisonCounter.gameObject.activeSelf)
+        if(_poisonCounter!=null)
         {
-            _poisonCounter.gameObject.SetActive(true);
-        }
-        if(opponent)
-        {
-            _poisonCounter.text=GameHandler.Instance.GetCurrEncounter().GetPoisonCounters().ToString();
-        }
-        else
-        {
-            _poisonCounter.text=GameHandler.Instance.GetGameState()._playerPoisonCounters.ToString();
+            if(!_poisonCounter.gameObject.activeSelf)
+            {
+                _poisonCounter.gameObject.SetActive(true);
+            }
+            if(opponent)
+            {
+                _poisonCounter.text=GameHandler.Instance.GetCurrEncounter().GetPoisonCounters().ToString();
+            }
+            else
+            {
+                _poisonCounter.text=GameHandler.Instance.GetGameState()._playerPoisonCounters.ToString();
+            }
         }
     }
     public void UpdateShieldCounters(bool opponent)
     {
-        _shieldCounter.gameObject.SetActive(true);
-        _shieldCounter.text=StylisticClass.ShieldIcon;
-        if(opponent)
+        if(_shieldCounter!=null)
         {
-            _shieldCounterText.text=GameHandler.Instance.GetGameState()._opponentsShield.ToString();
-            if(GameHandler.Instance.GetGameState()._opponentsShield<=0)
+            _shieldCounter.gameObject.SetActive(true);
+            _shieldCounter.text=StylisticClass.ShieldIcon;
+            if(opponent)
             {
-                _shieldCounter.gameObject.SetActive(false);
+                _shieldCounterText.text=GameHandler.Instance.GetGameState()._opponentsShield.ToString();
+                if(GameHandler.Instance.GetGameState()._opponentsShield<=0)
+                {
+                    _shieldCounter.gameObject.SetActive(false);
+                }
             }
-        }
-        else
-        {
-            _shieldCounterText.text=GameHandler.Instance.GetGameState()._playerShield.ToString();
-            if(GameHandler.Instance.GetGameState()._playerShield<=0)
+            else
             {
-                _shieldCounter.gameObject.SetActive(false);
+                _shieldCounterText.text=GameHandler.Instance.GetGameState()._playerShield.ToString();
+                if(GameHandler.Instance.GetGameState()._playerShield<=0)
+                {
+                    _shieldCounter.gameObject.SetActive(false);
+                }
             }
         }
     }
