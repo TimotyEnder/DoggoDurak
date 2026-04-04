@@ -19,7 +19,7 @@ class Aptechka : Item
         this.itemId = "Aptechka";
         this.itemName="State-of-the-art Aptechka";
         this.toolTipDesc = $"{StylisticClass.RestoringColor}{StylisticClass.RestoringString}</color> cards heal for {StylisticClass.HighLight}1/4{StylisticClass.HighLightClose} of their number value when {StylisticClass.HighLight}played{StylisticClass.HighLightClose}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Restoring"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Restoring"]);
     }
 
     public override bool OnActivate()

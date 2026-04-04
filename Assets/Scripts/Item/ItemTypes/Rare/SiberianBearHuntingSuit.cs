@@ -19,7 +19,7 @@ public class SiberianBearHuntingSuit : Item
         this.itemId = "SiberianBearHuntingSuit";
         this.itemName="SiberianBearHuntingSuit";
         this.toolTipDesc = $"{StylisticClass.SpikyColor}{StylisticClass.SpikyString}</color> effects +{StylisticClass.DamageNumber(1)}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Spiky"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Spiky"]);
     }
 
     public override bool OnActivate()

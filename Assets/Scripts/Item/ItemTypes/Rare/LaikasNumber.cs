@@ -22,7 +22,7 @@ class LaikasNumber : Item
         this.itemId = "LaikasNumber";
         this.itemName="Laika's Number";
         this.toolTipDesc = $"On the {StylisticClass.HighLight}5th turn{StylisticClass.HighLightClose} of an encounter, {StylisticClass.HighLight}add a Laika Card{StylisticClass.HighLightClose} to your deck";
-        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Laika"]);
     }
 
     public override bool OnActivate()

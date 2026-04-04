@@ -22,7 +22,7 @@ class FirstAidKit : Item
         itemId = "FirstAidKit";
         this.itemName="FirstAidKit";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.RestoringColor}{StylisticClass.RestoringString}</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Restoring"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Restoring"]);
     }
 
     public override bool OnActivate()

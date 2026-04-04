@@ -21,7 +21,7 @@ class ScorchedEarthPolicy : Item
         this.itemId = "ScorchedEarthPolicy";
         this.itemName="ScorchedEarthPolicy";
         this.toolTipDesc = $"At the end of the turn, the oppnent recieves {StylisticClass.DamageNumber(1)} per {StylisticClass.DamageNumber(2)} dealt by {StylisticClass.BurnColor}{StylisticClass.BurnString}</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

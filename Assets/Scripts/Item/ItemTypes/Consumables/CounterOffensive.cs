@@ -22,7 +22,7 @@ class CounterOffensive : Item
         itemId = "CounterOffensive";
         this.itemName="CounterOffensive";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.ParryColor}{StylisticClass.ParryString}</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Parry"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Parry"]);
     }
 
     public override bool OnActivate()

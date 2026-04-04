@@ -22,7 +22,7 @@ class ChocolateBonBon : Item
         this.itemId = "ChocolateBonBon";
         this.itemName="ChocolateBonBon";
         this.toolTipDesc = $"{StylisticClass.ActivateString} The opponent gains {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters for each card with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck. You discard cards equal to the amount of cards with {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> in your deck.";
-        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

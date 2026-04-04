@@ -19,7 +19,7 @@ public class ClippedClaws : Item
         this.itemId = "ClippedClaws";
         this.itemName="ClippedClaws";
         this.toolTipDesc = "7 random cards gain "+StylisticClass.SpikyColor+StylisticClass.SpikyString+" 1"+"</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Spiky"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Spiky"]);
     }
 
     public override bool OnActivate()

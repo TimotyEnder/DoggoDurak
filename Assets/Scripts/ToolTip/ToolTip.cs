@@ -280,4 +280,18 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
         }
     }
+     public static Dictionary<string,string> SubtoolTips= new Dictionary<string, string>()
+    {
+       {$"Spiky",$"{StylisticClass.SpikyColor}{StylisticClass.SpikyString}\n<align=left>{CardInfo.modifierToDescription["Spiky"]}</color>/align>"},
+       {$"Burn",$"{StylisticClass.BurnColor}{StylisticClass.BurnString}\n<align=left>{CardInfo.modifierToDescription["Burn"]}</color></align>"},
+       {$"Restoring",$"{StylisticClass.RestoringColor}{StylisticClass.RestoringString}\n<align=left>{CardInfo.modifierToDescription["Restoring"]}</color></align>"},
+       {$"Bounce",$"{StylisticClass.BounceColor}{StylisticClass.BounceString}\n<align=left>{CardInfo.modifierToDescription["Bounce"]}</color></align>"},
+       {$"Parry",$"{StylisticClass.ParryColor}{StylisticClass.ParryString}\n<align=left>{CardInfo.modifierToDescription["Parry"]}</color></align>"},
+       {$"Poison",$"{StylisticClass.PoisonColor}{StylisticClass.PoisonString}\n<align=left>{CardInfo.modifierToDescription["Poison"]}</color></align>"},
+       {$"Cripple",$"{StylisticClass.CrippleColor}{StylisticClass.CrippleString}\n<align=left>{CardInfo.modifierToDescription["Cripple"]}</color></align>"},
+       {$"Draw",$"{StylisticClass.DrawColor}{StylisticClass.DrawString}\n<align=left>{CardInfo.modifierToDescription["Draw"]}</color></align>"},
+       {$"Laika",$"{StylisticClass.LaikaDesc.Split(new char[]{'('})[0]}\n<align=left>({StylisticClass.LaikaDesc.Split(new char[]{'('})[1]}</align>"},
+       {$"Debuffed",$"{StylisticClass.DebuffedDesc.Split(new char[]{'('})[0]}\n<align=left>({StylisticClass.DebuffedDesc.Split(new char[]{'('})[1]}</align>"},
+       {$"Shield",$"{StylisticClass.ShieldDesc.Split(new char[]{'('})[0]}\n<align=left>({StylisticClass.ShieldDesc.Split(new char[]{'('})[1]}</align>"},
+    };
 }

@@ -19,7 +19,7 @@ public class ContrabandCarePackage : Item
         this.itemId = "ContrabandCarePackage";
         this.itemName="ContrabandCarePackage";
         this.toolTipDesc = "5 random cards gain "+StylisticClass.DrawColor+StylisticClass.DrawString+" 1</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Draw"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Draw"]);
     }
 
     public override bool OnActivate()

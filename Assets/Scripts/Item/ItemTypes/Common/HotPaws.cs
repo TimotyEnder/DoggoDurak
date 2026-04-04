@@ -19,7 +19,7 @@ public class HotPaws : Item
         this.itemId = "HotPaws";
         this.itemName="HotPaws";
         this.toolTipDesc = "7 random cards gain "+StylisticClass.BurnColor+StylisticClass.BurnString+" 1</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

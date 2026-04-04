@@ -22,7 +22,7 @@ class GasCanister : Item
         itemId = "GasCanister";
         this.itemName="GasCanister";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5 </color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

@@ -19,7 +19,7 @@ class STsh81 : Item
         this.itemId = "STsh81";
         this.itemName="STsh-81 Sfera";
         this.toolTipDesc = $"You recieve {StylisticClass.ShieldNumber(3)}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Shield"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Shield"]);
     }
 
     public override bool OnActivate()

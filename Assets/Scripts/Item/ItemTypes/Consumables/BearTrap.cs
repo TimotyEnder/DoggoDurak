@@ -22,7 +22,7 @@ class BearTrap : Item
         itemId = "BearTrap";
         this.itemName="BearTrap";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.SpikyColor}{StylisticClass.SpikyString} 5 </color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Spiky"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Spiky"]);
     }
 
     public override bool OnActivate()

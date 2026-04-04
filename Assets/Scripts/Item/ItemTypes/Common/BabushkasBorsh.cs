@@ -19,7 +19,7 @@ public class BabushkasBorsh : Item
         this.itemId = "BabushkasBorsh";
         this.itemName = "BabushkasBorsh";
         this.toolTipDesc = "5 random cards gain "+StylisticClass.RestoringColor+StylisticClass.RestoringString+"</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Restoring"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Restoring"]);
     }
 
     public override bool OnActivate()

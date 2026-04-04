@@ -19,8 +19,8 @@ class PrimeLaikaDirective : Item
         this.itemId = "PrimeLaikaDirective";
         this.itemName="PrimeLaikaDirective";
         this.toolTipDesc = $"All {StylisticClass.HighLight}7s and Jacks{StylisticClass.HighLightClose} become {StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} and gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
-        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Laika"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

@@ -19,7 +19,7 @@ class AlyonkaBar : Item
         this.itemId = "AlyonkaBar";
         this.itemName="AlyonkaBar";
         this.toolTipDesc = $"{StylisticClass.HighLight}Face cards gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

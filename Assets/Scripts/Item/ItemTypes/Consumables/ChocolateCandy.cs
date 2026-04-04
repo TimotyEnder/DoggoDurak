@@ -22,7 +22,7 @@ class ChocolateCandy : Item
         itemId = "ChocolateCandy";
         this.itemName="ChocolateCandy";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

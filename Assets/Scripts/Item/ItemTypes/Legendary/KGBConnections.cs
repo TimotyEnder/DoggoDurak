@@ -19,7 +19,7 @@ public class KGBConnections : Item
         this.itemId = "KGBConnections";
         this.itemName="KGBConnections";
         this.toolTipDesc = $"All {StylisticClass.HighLight}face cards{StylisticClass.HighLightClose} gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+"</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Cripple"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Cripple"]);
     }
 
     public override bool OnActivate()

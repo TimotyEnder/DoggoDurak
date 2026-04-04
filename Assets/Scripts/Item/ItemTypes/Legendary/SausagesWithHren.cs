@@ -19,7 +19,7 @@ public class SausagesWithHren : Item
         this.itemId = "SausagesWithHren";
         this.itemName="SausagesWithHren";
         this.toolTipDesc = $"All {StylisticClass.HighLight}red{StylisticClass.HighLightClose} cards in your deck gain "+StylisticClass.BounceColor+StylisticClass.BounceString+"</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Bounce"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Bounce"]);
     }
 
     public override bool OnActivate()

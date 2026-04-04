@@ -19,7 +19,7 @@ public class AviatorsHelmet : Item
         this.itemId = "AviatorsHelmet";
         this.itemName="Aviator's Helmet";
         this.toolTipDesc = $"{StylisticClass.BounceColor}{StylisticClass.BounceString}</color> effects +{StylisticClass.DamageNumber(1)}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Bounce"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Bounce"]);
     }
 
     public override bool OnActivate()

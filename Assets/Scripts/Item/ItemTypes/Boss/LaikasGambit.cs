@@ -19,7 +19,7 @@ class LaikasGambit : Item
         this.itemId = "LaikasGambit";
         this.itemName="Laika's Gambit";
         this.toolTipDesc = $"All {StylisticClass.HighLight} you face cards{StylisticClass.HighLightClose} are now {StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Laika"]);
     }
 
     public override bool OnActivate()

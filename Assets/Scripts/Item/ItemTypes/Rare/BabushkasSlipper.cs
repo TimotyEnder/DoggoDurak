@@ -19,7 +19,7 @@ public class BabushkasSlipper : Item
         this.itemId = "BabushkasSlipper";
         this.itemName="Babushka's Slipper";
         this.toolTipDesc = $"{StylisticClass.ParryColor}{StylisticClass.ParryString}</color> effects +{StylisticClass.DamageNumber(1)}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Parry"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Parry"]);
     }
 
     public override bool OnActivate()

@@ -20,7 +20,7 @@ class LaikasCall : Item
         this.itemId = "LaikasCall";
         this.itemName="Laika's Call";
         this.toolTipDesc = $"{StylisticClass.HighLight}1{StylisticClass.HighLightClose} random card  becomes a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Laika"]);
     }
 
     public override bool OnActivate()

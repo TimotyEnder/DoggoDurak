@@ -9,7 +9,7 @@ class Laikad : Item
         this.itemId = "Laikad";
         this.itemName="Laika'd!";
         this.toolTipDesc = $"Each time you play a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose} the highest card in your deck becomes a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose}";
-        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Laika"]);
     }
     private void LaikaHandler(Card card)
     {

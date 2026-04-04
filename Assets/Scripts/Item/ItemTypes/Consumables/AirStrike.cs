@@ -22,7 +22,7 @@ class AirStrike : Item
         itemId = "AirStrike";
         this.itemName="AirStrike";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.BounceColor}{StylisticClass.BounceString}</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Bounce"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Bounce"]);
     }
 
     public override bool OnActivate()

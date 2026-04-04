@@ -19,7 +19,7 @@ class ContrabandChocolateBar : Item
         this.itemId = "ContrabandChocolateBar";
         this.itemName="ContrabandChocolateBar";
         this.toolTipDesc = "5 random cards gain "+StylisticClass.PoisonColor+StylisticClass.PoisonString+"</color>";
-        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
+        AddSubtoolTip(ToolTip.SubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()
