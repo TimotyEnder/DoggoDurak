@@ -93,7 +93,7 @@ public class TheRevolvingRevolutionary : Encounter
     }
     public override void SetDebuffs()
     {
-        GameHandler.Instance.SetDebuffs(_suitsPlayedLastTurn.ToArray(),true,false);
+        GameHandler.Instance.SetDebuffs(_suitsPlayedLastTurn.ToArray(),forPlayer:true,forEnemy:false);
         _suitsPlayedLastTurn.Clear();
         UpdateRules();
         ShakeRule(1);

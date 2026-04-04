@@ -18,7 +18,7 @@ class AContactInTheTrades : Item
         this.boss = false;
         this.itemId = "AContactInTheTrades";
         this.itemName="AContactInTheTrades";
-        this.toolTipDesc = $"+1 shop reroll in the shop tab.";
+        this.toolTipDesc = $"{StylisticClass.HighLight}+1 free shop reroll{StylisticClass.HighLightClose} in the shop tab.";
     }
 
     public override bool OnActivate()

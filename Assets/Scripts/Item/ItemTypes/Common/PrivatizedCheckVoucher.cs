@@ -18,7 +18,7 @@ public class PrivatizedCheckVoucher : Item
         this.boss = false;
         this.itemId = "PrivatizedCheckVoucher";
         this.itemName="PrivatizedCheckVoucher";
-        this.toolTipDesc = "One more item option will appear in the shop.";
+        this.toolTipDesc = $"{StylisticClass.HighLight}+1 item option{StylisticClass.HighLightClose} will appear in the shop.";
     }
 
     public override bool OnActivate()

@@ -427,6 +427,10 @@ public static string GetNumberShortName(int number)
         {
             returnString+=$"<size={SettingsState.ToolTipFontSizeText}>{suitToColorToolText["L"]}{StylisticClass.LaikaDesc.Substring(0,13)}{suitToStyleClose["L"]}{StylisticClass.LaikaDesc.Substring(13)}</size>\n";
         }
+        if(_card.IsDebuffed())
+        {
+            returnString+=$"<size={SettingsState.ToolTipFontSizeText}>{StylisticClass.DebuffedDesc}</size>\n";
+        }
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
             if(modifierMaxCopies[entry.Key]==1)

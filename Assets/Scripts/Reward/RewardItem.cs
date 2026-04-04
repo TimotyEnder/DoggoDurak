@@ -64,7 +64,11 @@ public class RewardItem : MonoBehaviour,IPointerEnterHandler
                 break;
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());
-        //_toolTip.infoRight="<size="+SettingsState.ToolTipFontSizeText+">"+Item.rarityIntToWord[item.GetRarity()]+" Item"+"</size>";
+        _toolTip.SetToolTipText(item.GetItemToolTip());
+        foreach(SubToolTip st in item.GetSubToolTips())
+        {
+            _toolTip.AddSubToolTip(st);
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

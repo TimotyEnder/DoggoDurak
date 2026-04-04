@@ -52,7 +52,7 @@ public class NewGameButton : MonoBehaviour
     {
         Character chosen=GameHandler.Instance.GetCharacterInfo().here();
         _characterNameText.text= chosen.GetName();
-        _startingRubles.text=chosen.GetStartRub().ToString()+_startingRubles.text[_startingRubles.text.Length-1];
+        _startingRubles.text=chosen.GetStartRub().ToString()+StylisticClass.RubleSign;
         foreach(RectTransform item in _itemContent.transform)
         {
             Destroy(item.gameObject);
