@@ -21,7 +21,8 @@ class BearTrap : Item
         consumable=true;
         itemId = "BearTrap";
         this.itemName="BearTrap";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.SpikyColor}{StylisticClass.SpikyString} 5 {CardInfo.modifierToDescription["Spiky"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.SpikyColor}{StylisticClass.SpikyString} 5 </color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Spiky"]);
     }
 
     public override bool OnActivate()

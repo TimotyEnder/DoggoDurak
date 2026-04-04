@@ -28,7 +28,7 @@ public class FSBOperative : Encounter
     }
     public override void AddRules()
     {
-        AddRule("Your face cards are "+StylisticClass.Debuffed); //0
+        AddRule("Your face cards are "+StylisticClass.DebuffedDesc); //0
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)

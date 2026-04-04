@@ -19,6 +19,7 @@ class LaikasFavor : Item
         this.itemId = "LaikasFavor";
         this.itemName="Laika's Favor";
         this.toolTipDesc = $"{StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} have number {StylisticClass.HighLight}1{StylisticClass.HighLightClose}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
     }
 
     public override bool OnActivate()

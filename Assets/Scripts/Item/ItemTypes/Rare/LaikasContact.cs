@@ -19,7 +19,8 @@ class LaikasContact : Item
         this.isActive=true;
         this.itemId = "LaikasContact";
         this.itemName="Laika's Contact";
-        this.toolTipDesc = $"{StylisticClass.ActivateString} The righ=most card in your hand becomes a {StylisticClass.Laika}. you heaal {StylisticClass.HighLight}5 hp{StylisticClass.HighLightClose}";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} The righ=most card in your hand becomes a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose}. you heaal {StylisticClass.HighLight}5 hp{StylisticClass.HighLightClose}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
     }
 
     public override bool OnActivate()

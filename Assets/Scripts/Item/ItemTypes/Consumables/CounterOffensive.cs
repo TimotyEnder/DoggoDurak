@@ -21,7 +21,8 @@ class CounterOffensive : Item
         consumable=true;
         itemId = "CounterOffensive";
         this.itemName="CounterOffensive";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.ParryColor}{StylisticClass.ParryString} {CardInfo.modifierToDescription["Parry"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.ParryColor}{StylisticClass.ParryString}</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Parry"]);
     }
 
     public override bool OnActivate()

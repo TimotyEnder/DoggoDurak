@@ -21,6 +21,7 @@ class Tsh4 : Item
         this.itemId = "Tsh4";
         this.itemName="Tsh-4";
         this.toolTipDesc = $"For the first 3 turns, recieve {StylisticClass.ShieldNumber(5)}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Shield"]);
         turns=0;
     }
 

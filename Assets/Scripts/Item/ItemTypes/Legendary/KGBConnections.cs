@@ -18,7 +18,8 @@ public class KGBConnections : Item
         this.boss = false;
         this.itemId = "KGBConnections";
         this.itemName="KGBConnections";
-        this.toolTipDesc = $"All {StylisticClass.HighLight}face cards{StylisticClass.HighLightClose} gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+CardInfo.modifierToDescription["Cripple"]+"</color>";
+        this.toolTipDesc = $"All {StylisticClass.HighLight}face cards{StylisticClass.HighLightClose} gain "+StylisticClass.CrippleColor+StylisticClass.CrippleString+"</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Cripple"]);
     }
 
     public override bool OnActivate()

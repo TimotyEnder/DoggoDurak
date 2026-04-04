@@ -21,7 +21,8 @@ class AirStrike : Item
         consumable=true;
         itemId = "AirStrike";
         this.itemName="AirStrike";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.BounceColor}{StylisticClass.BounceString} {CardInfo.modifierToDescription["Bounce"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.BounceColor}{StylisticClass.BounceString}</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Bounce"]);
     }
 
     public override bool OnActivate()

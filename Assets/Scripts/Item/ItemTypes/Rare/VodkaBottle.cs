@@ -21,7 +21,7 @@ class VodkaBottle : Item
         this.isActive=true;
         this.itemId = "VodkaBottle";
         this.itemName="Vodka Bottle";
-        this.toolTipDesc = $"{StylisticClass.ActivateString} This turn all the cards in your hand are {StylisticClass.Debuffed}. You heal {StylisticClass.HighLight}20 hp{StylisticClass.HighLightClose}.";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} This turn all the cards in your hand are {StylisticClass.DebuffedDesc}. You heal {StylisticClass.HighLight}20 hp{StylisticClass.HighLightClose}.";
     }
 
     public override bool OnActivate()

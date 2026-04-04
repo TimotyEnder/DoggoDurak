@@ -18,7 +18,7 @@ public class DoctorsSausage : Item
         this.boss = false;
         this.itemId = "DoctorsSausage";
         this.itemName="DoctorsSausage";
-        this.toolTipDesc = "+1 for each numbered card in your deck";
+        this.toolTipDesc = $"Each numbered card in your deck gains {StylisticClass.HighLight}+1{StylisticClass.HighLightClose}";
     }
 
     public override bool OnActivate()
@@ -40,7 +40,12 @@ public class DoctorsSausage : Item
 
     public override bool OnCardAdded(CardInfo card)
     {
-         return false;
+          if(!card.IsFace())
+          {
+               card._number++;
+               return true;
+          }
+          return false;
     }
 
     public override bool OnDamageOpponent(int amount, string fromMod)

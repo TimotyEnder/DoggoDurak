@@ -25,6 +25,10 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,
         SelectColor();
         this._itemIcon = item.GetIcon();
         _toolTip.SetToolTipText(item.GetItemToolTip());
+        foreach(SubToolTip st in item.GetSubToolTips())
+        {
+            _toolTip.AddSubToolTip(st);
+        }
     }
     public void SelectColor()
     {

@@ -27,7 +27,7 @@ public class TheRevolvingRevolutionary : Encounter
     }
     public override void AddRules()
     {
-       AddRule($"Suits {StylisticClass.Debuffed} next turn:"+CompileSuitsPlayed()); //0
+       AddRule($"Suits {StylisticClass.DebuffedDesc} next turn:"+CompileSuitsPlayed()); //0
        AddRule("Suits Played last turn are debuffed"); //1
     }
     public string CompileSuitsPlayed()

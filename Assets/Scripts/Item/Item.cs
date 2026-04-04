@@ -22,6 +22,7 @@ public abstract class Item : ScriptableObject
     protected bool consumable=false;
     protected bool _hasBeenActivated=false;
     protected string toolTipDesc;
+    protected List<string> subTooltips= new List<string>();
     protected BlingableVisualItem _invItem;// this is to be able to make the imventory items bling when triggered. Active items are handler with onActivate and that is a different system.
 
     public abstract void InitItem();
@@ -99,10 +100,23 @@ public abstract class Item : ScriptableObject
     {
         return itemName;
     }
+    public void AddSubtoolTip(string subTtext)
+    {
+        this.subTooltips.Add(subTtext);
+    }
     public string GetItemToolTip() 
     {
-        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+GetSpacedItemName()+"</align></size>\n" +
+        return $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+GetSpacedItemName()+"</align></size>\n<align=left>" +
                $"<size="+SettingsState.ToolTipFontSizeText+"><align=left>"+toolTipDesc+"</align></size>";
+    }
+    public List<SubToolTip> GetSubToolTips()
+    {
+        List<SubToolTip> toRet= new List<SubToolTip>();
+        foreach(string sTstr in this.subTooltips)
+        {
+            toRet.Add(new SubToolTip($"<size={SettingsState.ToolTipFontSizeText}><align=center>{sTstr}</size></align>"));
+        }
+        return toRet;
     }
     private string GetSpacedItemName() 
     {
@@ -172,4 +186,18 @@ public abstract class Item : ScriptableObject
             it++;
         }
     }
+    public static Dictionary<string,string> ItemSubtoolTips= new Dictionary<string, string>()
+    {
+       {$"Spiky",$"{StylisticClass.SpikyColor}{StylisticClass.SpikyString}\n<align=left>{CardInfo.modifierToDescription["Spiky"]}</color>/align>"},
+       {$"Burn",$"{StylisticClass.BurnColor}{StylisticClass.BurnString}\n<align=left>{CardInfo.modifierToDescription["Burn"]}</color></align>"},
+       {$"Restoring",$"{StylisticClass.RestoringColor}{StylisticClass.RestoringString}\n<align=left>{CardInfo.modifierToDescription["Restoring"]}</color></align>"},
+       {$"Bounce",$"{StylisticClass.BounceColor}{StylisticClass.BounceString}\n<align=left>{CardInfo.modifierToDescription["Bounce"]}</color></align>"},
+       {$"Parry",$"{StylisticClass.ParryColor}{StylisticClass.ParryString}\n<align=left>{CardInfo.modifierToDescription["Parry"]}</color></align>"},
+       {$"Poison",$"{StylisticClass.PoisonColor}{StylisticClass.PoisonString}\n<align=left>{CardInfo.modifierToDescription["Poison"]}</color></align>"},
+       {$"Cripple",$"{StylisticClass.CrippleColor}{StylisticClass.CrippleString}\n<align=left>{CardInfo.modifierToDescription["Cripple"]}</color></align>"},
+       {$"Draw",$"{StylisticClass.DrawColor}{StylisticClass.DrawString}\n<align=left>{CardInfo.modifierToDescription["Draw"]}</color></align>"},
+       {$"Laika",$"{StylisticClass.LaikaDesc.Split(new char[]{'('})[0]}\n<align=left>({StylisticClass.LaikaDesc.Split(new char[]{'('})[1]}</align>"},
+       {$"Debuffed",$"{StylisticClass.DebuffedDesc.Split(new char[]{'('})[0]}\n<align=left>({StylisticClass.DebuffedDesc.Split(new char[]{'('})[1]}</align>"},
+       {$"Shield",$"{StylisticClass.ShieldDesc.Split(new char[]{'('})[0]}\n<align=left>({StylisticClass.ShieldDesc.Split(new char[]{'('})[1]}</align>"},
+    };
 }

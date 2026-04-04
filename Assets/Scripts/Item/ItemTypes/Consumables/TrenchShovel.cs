@@ -22,6 +22,7 @@ class TrenchShovel : Item
         itemId = "TrenchShovel";
         this.itemName="TrenchShovel";
         this.toolTipDesc = $"{StylisticClass.ConsumeString} Recieve {StylisticClass.ShieldNumber(10)} {StylisticClass.HighLight}this turn{StylisticClass.HighLightClose}.";
+        AddSubtoolTip(Item.ItemSubtoolTips["Shield"]);
     }
 
     public override bool OnActivate()

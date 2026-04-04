@@ -47,9 +47,9 @@ public static class StylisticClass
     {
         return $" <b>{ShieldIcon}{amount}</b> ";
     }
-    public static string Debuffed="<b>Debuffed (Is defended by everything and deals zero damage)</b>";
-    public static string Laika="<b>Laika Card (Defends/Is defended by anything but it's number is 0)</b>";
-    public static string Shield = $"<b>Reduces damage by a flat amount to no less than 1<sprite name=Damage></b>";
+    public static string DebuffedDesc="<b>Debuffed (Is defended by everything and deals zero damage)</b>";
+    public static string LaikaDesc="<b>Laika Card (Defends/Is defended by anything but it's number is 0)</b>";
+    public static string ShieldDesc = $"<b><sprite name=Shield>Shield (reduces damage by a flat amount to no less than 1<sprite name=Damage>)</b>";
 
     //active items
     public static Color ActiveItemUseInvalid= new Color(0.678f, 0.012f, 0.098f);

@@ -21,7 +21,8 @@ class ChocolateCandy : Item
         consumable=true;
         itemId = "ChocolateCandy";
         this.itemName="ChocolateCandy";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString} {CardInfo.modifierToDescription["Poison"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

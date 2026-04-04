@@ -21,7 +21,8 @@ class FirstAidKit : Item
         consumable=true;
         itemId = "FirstAidKit";
         this.itemName="FirstAidKit";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.RestoringColor}{StylisticClass.RestoringString} {CardInfo.modifierToDescription["Restoring"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.RestoringColor}{StylisticClass.RestoringString}</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Restoring"]);
     }
 
     public override bool OnActivate()

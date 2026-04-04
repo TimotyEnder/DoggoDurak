@@ -18,7 +18,8 @@ public class MolotovKibble : Item
         this.boss = false;
         this.itemId = "MolotovKibble";
         this.itemName="MolotovKibble";
-        this.toolTipDesc = "If you played a card with at least one "+StylisticClass.BurnColor+StylisticClass.BurnString+"</color> modifier there is a 25% chance another card in your draw pile gains "+StylisticClass.BurnColor+StylisticClass.BurnString+" 1"+CardInfo.modifierToDescription["Burn"]+"</color>";
+        this.toolTipDesc = "If you played a card with at least one "+StylisticClass.BurnColor+StylisticClass.BurnString+"</color> modifier there is a 25% chance another card in your draw pile gains "+StylisticClass.BurnColor+StylisticClass.BurnString+" 1"+"</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

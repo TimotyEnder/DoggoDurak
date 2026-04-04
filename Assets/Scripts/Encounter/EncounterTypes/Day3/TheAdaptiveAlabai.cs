@@ -23,7 +23,7 @@ public class TheAdaptiveAlabai : Encounter
     }
     public override void AddRules()
     {
-        AddRule("Cards that have the "+StylisticClass.HighLight+"same number"+StylisticClass.HighLightClose+" as any of the cards you  played this game  are "+StylisticClass.Debuffed+".");//0
+        AddRule("Cards that have the "+StylisticClass.HighLight+"same number"+StylisticClass.HighLightClose+" as any of the cards you  played this game  are "+StylisticClass.DebuffedDesc+".");//0
         AddRule("Opponent recieves double damage");//1
     }
 

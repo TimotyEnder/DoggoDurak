@@ -18,7 +18,9 @@ class HotChocolate : Item
         this.boss = false;
         this.itemId = "HotChocolate";
         this.itemName="HotChocolate";
-        this.toolTipDesc = $"Your {StylisticClass.BurnColor}{StylisticClass.BurnString}</color> modifiers also apply {StylisticClass.HighLight}poison counters{StylisticClass.HighLightClose}.";
+        this.toolTipDesc = $"Your {StylisticClass.BurnColor}{StylisticClass.BurnString}</color> modifiers also apply {StylisticClass.HighLight}{StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters{StylisticClass.HighLightClose}.";
+        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
+        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

@@ -18,7 +18,8 @@ class AlyonkaBar : Item
         this.boss = false;
         this.itemId = "AlyonkaBar";
         this.itemName="AlyonkaBar";
-        this.toolTipDesc = $"{StylisticClass.HighLight}Face cards gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}{CardInfo.modifierToDescription["Poison"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.HighLight}Face cards gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

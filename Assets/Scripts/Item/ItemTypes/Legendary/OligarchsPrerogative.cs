@@ -20,7 +20,7 @@ class OligarchsPrerogative : Item
         this.isActive=true;
         this.itemId = "OligarchsPrerogative";
         this.itemName="Oligarch's Prerogative";
-        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}All{StylisticClass.HighLightClose} cards in your hand lose {StylisticClass.Debuffed} until the end of the turn";
+        this.toolTipDesc = $"{StylisticClass.ActivateString} {StylisticClass.HighLight}All{StylisticClass.HighLightClose} cards in your hand lose {StylisticClass.DebuffedDesc} until the end of the turn";
     }
 
     public override bool OnActivate()

@@ -20,7 +20,8 @@ public class DachaDoorstep : Item
         this.boss = false;
         this.itemId = "DachaDoorstep";
         this.itemName="DachaDoorstep";
-        this.toolTipDesc = "5 random cards gain "+StylisticClass.BounceColor+StylisticClass.BounceString+CardInfo.modifierToDescription["Bounce"]+"</color>";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.BounceColor+StylisticClass.BounceString+"</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Bounce"]);
     }
 
     public override bool OnActivate()

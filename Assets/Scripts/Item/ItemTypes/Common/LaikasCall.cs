@@ -19,7 +19,8 @@ class LaikasCall : Item
         this.boss = false;
         this.itemId = "LaikasCall";
         this.itemName="Laika's Call";
-        this.toolTipDesc = $"{StylisticClass.HighLight}1{StylisticClass.HighLightClose} random card  becomes a {StylisticClass.Laika}";
+        this.toolTipDesc = $"{StylisticClass.HighLight}1{StylisticClass.HighLightClose} random card  becomes a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
     }
 
     public override bool OnActivate()

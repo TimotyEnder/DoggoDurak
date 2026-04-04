@@ -21,7 +21,8 @@ class GasCanister : Item
         consumable=true;
         itemId = "GasCanister";
         this.itemName="GasCanister";
-        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5 {CardInfo.modifierToDescription["Burn"]}</color>";
+        this.toolTipDesc = $"{StylisticClass.ConsumeString} Until the end of the turn, all cards in your hand gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5 </color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

@@ -8,7 +8,7 @@ public class TheBurningIronCurtain : Encounter
 {
     public override void AddRules()
     {
-        AddRule($"{StylisticClass.HighLight}ALL{StylisticClass.HighLightClose} suits are {StylisticClass.Debuffed}");//0
+        AddRule($"{StylisticClass.HighLight}ALL{StylisticClass.HighLightClose} suits are {StylisticClass.DebuffedDesc}");//0
     }
 
     public override void InitEncounter()

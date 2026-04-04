@@ -19,6 +19,7 @@ public class BurningClaws : Item
         this.itemId = "BurningClaws";
         this.itemName="BurningClaws";
         this.toolTipDesc = $"{StylisticClass.BurnColor}{StylisticClass.BurnString}</color> effects +{StylisticClass.DamageNumber(1)}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()

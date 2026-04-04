@@ -18,7 +18,8 @@ class ChewyChocolate : Item
         this.boss = false;
         this.itemId = "ChewyChocolate";
         this.itemName="ChewyChocolate";
-        this.toolTipDesc = $"{StylisticClass.HighLight}Your poison counters{StylisticClass.HighLightClose} no longer {StylisticClass.HighLight}decrease{StylisticClass.HighLightClose} at the end of turn.";
+        this.toolTipDesc = $"{StylisticClass.HighLight}Your {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> counters{StylisticClass.HighLightClose} no longer {StylisticClass.HighLight}decrease{StylisticClass.HighLightClose} at the end of turn.";
+        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

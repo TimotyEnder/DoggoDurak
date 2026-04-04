@@ -44,6 +44,10 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler,BlingableVisual
                 break;
         }
         _toolTip.SetToolTipText(item.GetItemToolTip());
+        foreach(SubToolTip st in item.GetSubToolTips())
+        {
+            _toolTip.AddSubToolTip(st);
+        }
     }
     public void SetStackNum(List<Item> stacks) 
     {

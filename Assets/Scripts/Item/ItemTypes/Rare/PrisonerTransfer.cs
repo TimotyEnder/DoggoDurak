@@ -19,7 +19,7 @@ class PrisonerTransfer : Item
         this.isActive=true;
         this.itemId = "PrisonerTransfer";
         this.itemName="Prisoner Transfer";
-        this.toolTipDesc = $"{StylisticClass.ActivateString} Until the end of the turn, {StylisticClass.HighLight}debuffed cards{StylisticClass.HighLightClose} are no longer {StylisticClass.HighLight}debuffed{StylisticClass.HighLightClose}, and cards that are not {StylisticClass.HighLight}debuffed{StylisticClass.HighLightClose} become {StylisticClass.Debuffed}"; 
+        this.toolTipDesc = $"{StylisticClass.ActivateString} Until the end of the turn, {StylisticClass.HighLight}debuffed cards{StylisticClass.HighLightClose} are no longer {StylisticClass.HighLight}debuffed{StylisticClass.HighLightClose}, and cards that are not {StylisticClass.HighLight}debuffed{StylisticClass.HighLightClose} become {StylisticClass.DebuffedDesc}"; 
     }
 
     public override bool OnActivate()

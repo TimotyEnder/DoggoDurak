@@ -19,6 +19,7 @@ public class ContrabandChocolateMold : Item
         this.itemId = "ContrabandChocolateMold";
         this.itemName="ContrabandChocolateMold";
         this.toolTipDesc = $"{StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color> effects +{StylisticClass.DamageNumber(1)}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()

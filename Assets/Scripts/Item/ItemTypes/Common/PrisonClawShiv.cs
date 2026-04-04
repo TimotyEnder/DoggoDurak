@@ -18,7 +18,8 @@ public class PrisonClawShiv : Item
         this.boss = false;
         this.itemId = "PrisonClawShiv";
         this.itemName="PrisonClawShiv";
-        this.toolTipDesc = "5 random cards gain "+StylisticClass.ParryColor+StylisticClass.ParryString+" 1"+CardInfo.modifierToDescription["Parry"]+"</color>";
+        this.toolTipDesc = "5 random cards gain "+StylisticClass.ParryColor+StylisticClass.ParryString+" 1</color>";
+        AddSubtoolTip(Item.ItemSubtoolTips["Parry"]);
     }
 
     public override bool OnActivate()

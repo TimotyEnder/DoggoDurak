@@ -8,7 +8,8 @@ class Laikad : Item
         this.boss = false;
         this.itemId = "Laikad";
         this.itemName="Laika'd!";
-        this.toolTipDesc = $"Each time you play a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose} the highest card in your deck becomes a {StylisticClass.Laika}";
+        this.toolTipDesc = $"Each time you play a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose} the highest card in your deck becomes a {StylisticClass.HighLight}Laika Card{StylisticClass.HighLightClose}";
+        AddSubtoolTip(Item.ItemSubtoolTips["Laika"]);
     }
     private void LaikaHandler(Card card)
     {

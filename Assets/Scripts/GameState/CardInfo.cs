@@ -172,14 +172,14 @@ public class CardInfo
     };
     public  static Dictionary<string, string> modifierToDescription = new Dictionary<string, string>
     {
-        {"Restoring", " (Defend with this card to gain health equal to the difference of values between the defending and defended cards.) "},
-        {"Bounce", " (When defending, this card does  damage  equal  to the difference of values between the defending and defended cards.) "},
-        {"Burn", " (When attacking/defending deal "+StylisticClass.DamageNumber(1)+" for each burn modifier on the card.) "},
-        {"Parry", "(Reverse with this card to deal that cards value as damage.) "},
-        {"Draw", " (When attacking draws 1 card for each draw modifier on the card.) "},
-        {"Cripple", " (When attacking makes opponent discard 1 card for each cripple modifier on the card.) "},
-        {"Spiky", " (When this card is defended deal "+StylisticClass.DamageNumber(1)+" for each spiky modifier of the card to the defending player.) "},
-        {"Poison",$"(On Damage apply third the cards value as poison stacks. At the end of the turn they recieve {StylisticClass.DamageNumber(1)} per poison stack.)"}
+        {"Restoring", " Defend with this card to gain health equal to the difference of values between the defending and defended cards."},
+        {"Bounce", " When defending, this card does  damage  equal  to the difference of values between the defending and defended cards."},
+        {"Burn", " When attacking/defending deal "+StylisticClass.DamageNumber(1)+" for each burn modifier on the card."},
+        {"Parry", "Reverse with this card to deal that cards value as damage."},
+        {"Draw", " When attacking draws 1 card for each draw modifier on the card."},
+        {"Cripple", " When attacking makes opponent discard 1 card for each cripple modifier on the card."},
+        {"Spiky", $" When this card is defended deal {StylisticClass.DamageNumber(1)} for each spiky modifier of the card to the defending player."},
+        {"Poison",$"On Damage apply third the cards value as poison stacks. At the end of the turn they recieve {StylisticClass.DamageNumber(1)} per poison stack."}
     };
     public static Dictionary<string, string> suitFullName = new Dictionary<string, string>
     {
@@ -425,7 +425,7 @@ public static string GetNumberShortName(int number)
         returnString += CompileCardName()+"\n";
         if(IsLaika())
         {
-            returnString+=$"<size={SettingsState.ToolTipFontSizeText}>{suitToColorToolText["L"]}{StylisticClass.Laika.Substring(0,13)}{suitToStyleClose["L"]}{StylisticClass.Laika.Substring(13)}</size>\n";
+            returnString+=$"<size={SettingsState.ToolTipFontSizeText}>{suitToColorToolText["L"]}{StylisticClass.LaikaDesc.Substring(0,13)}{suitToStyleClose["L"]}{StylisticClass.LaikaDesc.Substring(13)}</size>\n";
         }
         foreach (KeyValuePair<string, int> entry in _modifierStacks) 
         {
