@@ -5,6 +5,7 @@ using TMPro;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 
 public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -24,12 +25,21 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Canvas canvas;
     private bool _enabled = true;
     private bool _shouldExist=true;
-
+    [SerializeField]
+    private List<SubToolTip> _subToolTips;
     private CanvasScaler _canvasScaler;
     private float _canvasScaleFactor = 1f;
+    void Awake()
+    {
+        _subToolTips= new List<SubToolTip>(){};
+    }
     public async void OnPointerEnter(PointerEventData eventData)
     {
         await ShowToolTip();
+    }
+    public void AddSubToolTip(SubToolTip sT)
+    {
+        _subToolTips.Add(sT);
     }
     public async Task ShowToolTip()
     {
@@ -71,7 +81,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     ttScript.ScaleImageToText();
                 }
-                    // Force layout rebuild to get proper sizes
+                // Force layout rebuild to get proper sizes
                 Canvas.ForceUpdateCanvases();
                 LayoutRebuilder.ForceRebuildLayoutImmediate(_currentTooltip.GetComponent<RectTransform>());
                 
@@ -99,66 +109,108 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Vector3 myCenter = myRect.position;
             float scaledPaddingX = ttPaddingX * _canvasScaleFactor;
             float scaledPaddingY = ttPaddingY * _canvasScaleFactor;
-            
+            //            UpGrid
+            //  LeftGrid  tooltip  RightGrid
+            //            DownGrid
             // Define positions relative to the tooltip's pivot (usually center)
-            Vector3[] preferredPositions = new Vector3[]
+            (Vector3 tooltipPosition, string subTooltipPosition)[] preferredPositions = new (Vector3, string)[]
             {
                 // Above - center aligned horizontally
-                new Vector3(
-                    myCenter.x,
-                    myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x,
+                        myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
+                        0
+                    ),
+                    "UpGrid"
                 ),
                 // Below - center aligned horizontally
-                new Vector3(
-                    myCenter.x,
-                    myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x,
+                        myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
+                        0
+                    ),
+                    "DownGrid"
                 ),
                 // Right - center aligned vertically
-                new Vector3(
-                    myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
-                    myCenter.y,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
+                        myCenter.y,
+                        0
+                    ),
+                    "RightGrid"
                 ),
                 // Left - center aligned vertically
-                new Vector3(
-                    myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
-                    myCenter.y,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
+                        myCenter.y,
+                        0
+                    ),
+                    "LeftGrid"
                 ),
                 // Top Left - center aligned vertically
-                new Vector3(
-                    myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
-                    myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
+                        myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
+                        0
+                    ),
+                    "LeftGrid"
                 ),
                 // Top Right - center aligned vertically
-                new Vector3(
-                    myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
-                    myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
+                        myCenter.y + (myHeight/_myRectScale) + (ttHeight/2) + scaledPaddingY,
+                        0
+                    ),
+                    "RightGrid"
                 ),
                 // Bottom Left - center aligned vertically
-                new Vector3(
-                    myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
-                    myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x - (myWidth/_myRectScale) - (ttWidth/2) - scaledPaddingX,
+                        myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
+                        0
+                    ),
+                    "LeftGrid"
                 ),
                 // Bottom Right - center aligned vertically
-                new Vector3(
-                    myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
-                    myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
-                    0
+                (
+                    new Vector3(
+                        myCenter.x + (myWidth/_myRectScale) + (ttWidth/2) + scaledPaddingX,
+                        myCenter.y - (myHeight/_myRectScale) - (ttHeight/2) - scaledPaddingY,
+                        0
+                    ),
+                    "RightGrid"
                 )
             };
 
             // Try each position until we find one that fits
             foreach (var pos in preferredPositions)
             {
-                ttRect.position = pos;
+                ttRect.position = pos.tooltipPosition;
                 if (IsFullyWithinScreenBounds(ttRect))
                 {
+                    GameObject _gridToInsert = _currentTooltip.transform.Find($"ToolTipBackground/{pos.subTooltipPosition}").gameObject;
+                    foreach(SubToolTip sT in _subToolTips)
+                    {
+                        GameObject toolTipInstance=Instantiate(_tooltipPrefab, _gridToInsert.transform);
+                        TextMeshProUGUI ttText = toolTipInstance.GetComponentInChildren<TextMeshProUGUI>();
+                        ttText.richText = true; // Enable rich text
+                        ttText.fontMaterial.EnableKeyword("OUTLINE_ON");
+                        ttText.outlineWidth = 0.2f; // Base outline width
+                        ttText.outlineColor = Color.black; // Base outline color
+                        ttText.text = sT.GetToolTipString();
+                        ToolTipScaler ttScript = toolTipInstance.GetComponentInChildren<ToolTipScaler>();
+                        if (ttScript != null)
+                        {
+                            ttScript.ScaleImageToText();
+                        }
+                    }
                     break;
                 }
             }
