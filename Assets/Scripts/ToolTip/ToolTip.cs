@@ -282,7 +282,7 @@ public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
      public static Dictionary<string,string> SubtoolTips= new Dictionary<string, string>()
     {
-       {$"Spiky",$"{StylisticClass.SpikyColor}{StylisticClass.SpikyString}\n<align=left>{CardInfo.modifierToDescription["Spiky"]}</color>/align>"},
+       {$"Spiky",$"{StylisticClass.SpikyColor}{StylisticClass.SpikyString}\n<align=left>{CardInfo.modifierToDescription["Spiky"]}</color></align>"},
        {$"Burn",$"{StylisticClass.BurnColor}{StylisticClass.BurnString}\n<align=left>{CardInfo.modifierToDescription["Burn"]}</color></align>"},
        {$"Restoring",$"{StylisticClass.RestoringColor}{StylisticClass.RestoringString}\n<align=left>{CardInfo.modifierToDescription["Restoring"]}</color></align>"},
        {$"Bounce",$"{StylisticClass.BounceColor}{StylisticClass.BounceString}\n<align=left>{CardInfo.modifierToDescription["Bounce"]}</color></align>"},

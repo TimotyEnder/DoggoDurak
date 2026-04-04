@@ -160,13 +160,19 @@ public class GameHandler : MonoBehaviour
             _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
-        else
+        else if(_state._day<3)
         {
             _state._day++;
             _state._encounter = 1;
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             _state._currentEncounterName=_currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+            _saveManager.Value.DeleteSaveFileOnCompletion();
+            return; //game complete
         }
         _state._currentEncounterRandomState = UnityEngine.Random.state;
         _state.OnEncounterStart();

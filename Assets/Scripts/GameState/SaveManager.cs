@@ -23,4 +23,9 @@ public class SaveManager
         }
         else {  return null; }
     }
+    public void DeleteSaveFileOnCompletion()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "SaveGame.json");
+        File.Delete(path);
+    }
 }
