@@ -16,6 +16,6 @@ class GupgradeOpponentEffect : GadalkaEffectInfo
         this.cost=3;
         SelectedAmount= 1;
         this.effectId="GupgradeOpponentEffect";
-        this.descriptionText=$"All opponents cards gain {StylisticClass.HighLight}+1{StylisticClass.HighLightClose}";
+        this.descriptionText=$"All opponent's cards gain {StylisticClass.HighLight}+1{StylisticClass.HighLightClose}";
     }
 }

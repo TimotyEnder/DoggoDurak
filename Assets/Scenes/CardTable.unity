@@ -9060,8 +9060,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 191.28}
-  m_SizeDelta: {x: 959.44, y: 191.885}
+  m_AnchoredPosition: {x: 411.49, y: 216.51}
+  m_SizeDelta: {x: 579.35, y: 191.885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &908364354
 CanvasRenderer:
@@ -20119,8 +20119,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.297, y: 497.58}
-  m_SizeDelta: {x: 226.07, y: 87.63}
+  m_AnchoredPosition: {x: 0, y: 275.8}
+  m_SizeDelta: {x: 226.07, y: 50.4346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078651407
 MonoBehaviour:
@@ -20151,8 +20151,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190299
-  m_fontColor: {r: 0.8584906, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -20169,7 +20169,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.55
+  m_fontSize: 24.35
   m_fontSizeBase: 20.78
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20182,7 +20182,7 @@ MonoBehaviour:
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -57.1
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

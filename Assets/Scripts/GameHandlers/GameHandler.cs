@@ -90,9 +90,9 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug   
-        //Item debugItem4 = ScriptableObject.CreateInstance<PrimeLaikaDirective>();
-        //debugItem4.InitItem();
-        //_state.AddItem(debugItem4);
+        Item debugItem4 = ScriptableObject.CreateInstance<ContrabandChocolateBar>();
+        debugItem4.InitItem();
+        _state.AddItem(debugItem4);
         //Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
         //debugItem5.InitItem();
         //_state.AddItem(debugItem5);
