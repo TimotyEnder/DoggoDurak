@@ -1219,6 +1219,8 @@ MonoBehaviour:
   _pauseMenu: {fileID: 8411587639514452952}
   _resumeButton: {fileID: 8205780755023354766}
   _settingsButton: {fileID: 9102085990289913488}
+  _settingsPanel: {fileID: 0}
+  _settingsPanelAnim: {fileID: 0}
   _mainMenuButton: {fileID: 4967313165041536984}
   _desktopButton: {fileID: 7107838292535565473}
   _thisAnim: {fileID: 8786768254985496736}

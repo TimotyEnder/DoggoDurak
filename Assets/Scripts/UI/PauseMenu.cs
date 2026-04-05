@@ -14,6 +14,10 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField]
     private Button _settingsButton;
+    [SerializeField]
+    private GameObject _settingsPanel;
+    [SerializeField]
+    private Animator _settingsPanelAnim;
 
     [SerializeField]
     private Button _mainMenuButton;
@@ -55,7 +59,11 @@ public class PauseMenu : MonoBehaviour
     }
     void settingsOnClick()
     {
-        throw new Exception("Add later");
+         // Force animator to initialize properly
+        _settingsPanelAnim.Rebind();
+        _settingsPanelAnim.Update(0);
+        _settingsPanel.SetActive(true);
+        _settingsPanelAnim.SetTrigger("Extend");
     }
     void mainMenuOnClick()
     {
