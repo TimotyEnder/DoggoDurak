@@ -118,7 +118,7 @@ public abstract class Item : ScriptableObject
         }
         return toRet;
     }
-    private string GetSpacedItemName() 
+    public string GetSpacedItemName() 
     {
         return Regex.Replace(this.itemName,
            "([a-z])([A-Z])|([A-Z])([A-Z][a-z])",

@@ -16,6 +16,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler,BlingableVisual
     private TextMeshProUGUI _stackText;
     [SerializeField]
     private Animator _thisAnim;
+    [SerializeField]
+    private TextMeshProUGUI _itemNameText;
     
     void Update()
     {
@@ -24,6 +26,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler,BlingableVisual
     public void AssignItem(Item item) 
     {
         item.AssignInventoryItem(this);
+        _itemNameText.text=item.GetSpacedItemName();
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
         this._itemIcon = item.GetIcon();

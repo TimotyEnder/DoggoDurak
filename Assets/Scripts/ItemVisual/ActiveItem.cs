@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -14,12 +15,15 @@ public class ActiveItem:MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,
     private Image _bgColor;
     [SerializeField]
     private Animator _anim;
+    [SerializeField]
+    private TextMeshProUGUI _itemName;
 
 
 
     public void AssignItem(Item item)
     {
         item.AssignInventoryItem(this);
+        _itemName.text=item.GetSpacedItemName();
         _toolTip = GetComponent<ToolTip>();
         this._item = item;
         SelectColor();
