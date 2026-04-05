@@ -15,6 +15,7 @@ public class RestButton : MonoBehaviour
         _restButton = this.gameObject.GetComponent<Button>();
         _restButton.onClick.AddListener(RestButtonOnClick);
         SetRestCost();
+        this.gameObject.GetComponent<ToolTip>().SetToolTipText($"<size={SettingsState.ToolTipFontSizeText}><align=center>For {GameHandler.Instance.GetGameState()._restRpointCost}{StylisticClass.RestPoint}, restore {StylisticClass.HighLight}50% hp</align></size>");
     }
     private void SetRestCost()
     {

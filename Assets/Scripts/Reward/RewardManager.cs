@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class RewardManager
 {

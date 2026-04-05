@@ -22,6 +22,7 @@ public class GadalkaButton:MonoBehaviour
     {
         _gadalkaButton = GetComponent<Button>();
         _gadalkaPayedFor = GameHandler.Instance.GetGameState()._gadalkaUnlocked;
+        this.gameObject.GetComponent<ToolTip>().SetToolTipText($"<size={SettingsState.ToolTipFontSizeText}><align=center>For {GameHandler.Instance.GetGameState()._shopRpointCost}{StylisticClass.RestPoint}, {StylisticClass.HighLight}tempt your fate{StylisticClass.HighLightClose} with this shaman!</align></size>");
         SetRestCost();
         if(_gadalkaPayedFor){RemoveCost();}
         _gadalkaButton.onClick.AddListener(() => 

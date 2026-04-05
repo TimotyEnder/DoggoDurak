@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 49564281}
   - component: {fileID: 49564280}
   - component: {fileID: 49564283}
+  - component: {fileID: 49564284}
   m_Layer: 5
   m_Name: ShopButton
   m_TagString: Untagged
@@ -800,6 +801,22 @@ MonoBehaviour:
   _discardOptButton: {fileID: 1479914866}
   _costContent: {fileID: 166283253}
   _restPointPrefab: {fileID: 7409959727989068393, guid: e195d4a50059531419b013e916e53501, type: 3}
+--- !u!114 &49564284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49564278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 0}
 --- !u!1 &50776955
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2434,7 @@ GameObject:
   - component: {fileID: 364293746}
   - component: {fileID: 364293745}
   - component: {fileID: 364293748}
+  - component: {fileID: 364293749}
   m_Layer: 5
   m_Name: RestButton
   m_TagString: Untagged
@@ -2542,6 +2560,22 @@ MonoBehaviour:
   _restButton: {fileID: 364293745}
   _costContent: {fileID: 723754850}
   _restPointPrefab: {fileID: 7409959727989068393, guid: e195d4a50059531419b013e916e53501, type: 3}
+--- !u!114 &364293749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364293743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 0}
 --- !u!1 &380043264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,6 +2956,8 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 9184229622983044126, guid: a585a073ff18ed440bbf97e52f21295b, type: 3}
   healTextPrefab: {fileID: 7556633476567445011, guid: 95f1995f1091dfc48a1eae38d136ae27, type: 3}
   _poisonCounter: {fileID: 0}
+  _shieldCounter: {fileID: 0}
+  _shieldCounterText: {fileID: 0}
 --- !u!114 &486667742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8769,6 +8805,7 @@ GameObject:
   - component: {fileID: 1837226031}
   - component: {fileID: 1837226030}
   - component: {fileID: 1837226033}
+  - component: {fileID: 1837226034}
   m_Layer: 5
   m_Name: GadalkaButton
   m_TagString: Untagged
@@ -8895,6 +8932,22 @@ MonoBehaviour:
   _gCloseButton: {fileID: 258379093}
   _costContent: {fileID: 1115723297}
   _gadalkaPanelSc: {fileID: 636500725}
+--- !u!114 &1837226034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837226028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 0}
 --- !u!1 &1885863645
 GameObject:
   m_ObjectHideFlags: 0
@@ -9195,6 +9248,7 @@ GameObject:
   - component: {fileID: 1944952500}
   - component: {fileID: 1944952502}
   - component: {fileID: 1944952501}
+  - component: {fileID: 1944952503}
   m_Layer: 5
   m_Name: RestPointsContent
   m_TagString: Untagged
@@ -9321,6 +9375,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944952499}
   m_CullTransparentMesh: 1
+--- !u!114 &1944952503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944952499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4e45c021708c84d8943fb27b33ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTip
+  _tooltipPrefab: {fileID: 8401400483152319293, guid: feba8373029ab714c874ebf2ef54acf8, type: 3}
+  _myRectScale: 2
+  displayWaitSeconds: 0.05
+  canvas: {fileID: 0}
 --- !u!1 &1949360979
 GameObject:
   m_ObjectHideFlags: 0

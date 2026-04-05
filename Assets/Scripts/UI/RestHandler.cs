@@ -25,5 +25,6 @@ public class RestHandler : MonoBehaviour
     public void UpdateRestUI()
     {
         _restPointContent.text=$"{StylisticClass.RestPoint}{GameHandler.Instance.GetGameState()._restPoints}";
+        _restPointContent.gameObject.GetComponent<ToolTip>().SetToolTipText($"<size={SettingsState.ToolTipFontSizeText}><align=center>Rest Points ({StylisticClass.RestPoint}) used for actions that you can perform while resting.</align></size>");
     }
 }

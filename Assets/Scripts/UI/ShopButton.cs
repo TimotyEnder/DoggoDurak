@@ -29,6 +29,7 @@ public class ShopButton:MonoBehaviour
         _shopButton = GetComponent<Button>();
         _shopPayedFor = GameHandler.Instance.GetGameState()._shopUnlocked;
         SetRestCost();
+        this.gameObject.GetComponent<ToolTip>().SetToolTipText($"<size={SettingsState.ToolTipFontSizeText}><align=center>For {GameHandler.Instance.GetGameState()._shopRpointCost}{StylisticClass.RestPoint}, {StylisticClass.HighLight}purchase powerful trinkets{StylisticClass.HighLightClose} to become a better Durak player!</align></size>");
         if(_shopPayedFor){RemoveCost();}
         _shopButton.onClick.AddListener(() => 
         {
