@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using TMPro;
@@ -27,6 +28,12 @@ public class NewGameButton : MonoBehaviour
     private GameObject _characterSelectPanel;
     [SerializeField]
     private Animator _characterPanelAnim;
+    [SerializeField]
+    private GameObject _selectDotsContent;
+    [SerializeField]
+    private GameObject _selectDotPrefab;
+    private Color _ogDotsColor;
+    private Color _selectedDotsColor= Color.white;
 
     void Start()
     {
@@ -37,6 +44,11 @@ public class NewGameButton : MonoBehaviour
         _panelCloseButton.onClick.AddListener(CloseButtonOnClick);
         _leftButton.onClick.AddListener(LeftOnClick);
         _rightButton.onClick.AddListener(RightOnClick);
+        for(int i=0; i<GameHandler.Instance.GetCharacterInfo().Size();i++)
+        {
+            Instantiate(_selectDotPrefab,_selectDotsContent.transform);
+        }
+        _ogDotsColor=_selectDotsContent.transform.GetChild(0).GetComponent<Image>().color;
     }
     void StartGameOnClick()
     {
@@ -50,6 +62,7 @@ public class NewGameButton : MonoBehaviour
     }
     private void UpdateCharacterInfo()
     {
+        _selectDotsContent.transform.GetChild(GameHandler.Instance.GetCharacterInfo().hereIndex()).GetComponent<Image>().color= _selectedDotsColor;
         Character chosen=GameHandler.Instance.GetCharacterInfo().here();
         _characterNameText.text= chosen.GetName();
         _startingRubles.text=chosen.GetStartRub().ToString()+StylisticClass.RubleSign;
@@ -75,12 +88,29 @@ public class NewGameButton : MonoBehaviour
         await UniTask.Delay(150);
         GameHandler.Instance.GetCharacterInfo().leftRet();
         UpdateCharacterInfo();
+        _selectDotsContent.transform.GetChild(GameHandler.Instance.GetCharacterInfo().hereIndex()).GetComponent<Image>().color= _selectedDotsColor;
+        for(int i=0; i<GameHandler.Instance.GetCharacterInfo().Size();i++)
+        {
+            if(i!=GameHandler.Instance.GetCharacterInfo().hereIndex())
+            {
+                _selectDotsContent.transform.GetChild(i).GetComponent<Image>().color = _ogDotsColor;
+            }
+        }
     }
     private async void RightOnClick()
     {
+        
         _characterPanelAnim.SetTrigger("Right");
         await UniTask.Delay(150);
         GameHandler.Instance.GetCharacterInfo().rightRet();
         UpdateCharacterInfo();
+        _selectDotsContent.transform.GetChild(GameHandler.Instance.GetCharacterInfo().hereIndex()).GetComponent<Image>().color= _selectedDotsColor;
+        for(int i=0; i<GameHandler.Instance.GetCharacterInfo().Size();i++)
+        {
+            if(i!=GameHandler.Instance.GetCharacterInfo().hereIndex())
+            {
+                _selectDotsContent.transform.GetChild(i).GetComponent<Image>().color = _ogDotsColor;
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProgressBarIndicator : MonoBehaviour
 {
-    private float[] _indicatorPositions={56,120,167,167,255,320,370,370,456,519,568,568};
+    private float[] _indicatorPositions={56,120,167,199,255,320,370,400,456,519,568,568};
     private bool[] _restTimeTextSpawn={false,false,false,true,false,false,false,true,false,false,false,true};
     [SerializeField]
     private RectTransform _myRect;

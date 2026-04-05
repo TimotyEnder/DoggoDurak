@@ -25,6 +25,10 @@ public  class LoopList<T>:IEnumerable
     {
         return GetEnumerator();
     }
+    public int Size()
+    {
+        return _revolvingStorage.Count;
+    }
     public void Add(T thing)
     {
         _revolvingStorage.Add(thing);
@@ -41,6 +45,10 @@ public  class LoopList<T>:IEnumerable
     {
         if(_revolvingStorage.Count<=0){throw new InvalidOperationException("Loop list empty, cannot return any value.");}
         return _revolvingStorage[_currentIndex];
+    }
+    public int hereIndex()
+    {
+        return this._currentIndex;
     }
     private void MoveIndex(int pos)
     {

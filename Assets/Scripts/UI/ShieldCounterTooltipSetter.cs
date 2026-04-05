@@ -10,6 +10,6 @@ class ShieldCounterTooltipSetter:MonoBehaviour
     void Start()
     {
         _thisToolTip.SetTooltipActiveState(true);
-        _thisToolTip.SetToolTipText($"{StylisticClass.ShieldDesc}");
+        _thisToolTip.SetToolTipText($"<align=center><size={SettingsState.ToolTipFontSizeText}>{StylisticClass.ShieldDesc}</align></size>");
     }
 }
