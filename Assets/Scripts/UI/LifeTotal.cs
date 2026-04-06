@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class LifeTotal : MonoBehaviour
@@ -20,8 +19,8 @@ public class LifeTotal : MonoBehaviour
     private RuleHandler _rh;
     void Awake()
     {
-        GameObject rhObj= GameObject.Find("RuleHandler");
-        if(rhObj!=null)
+        GameObject rhObj = GameObject.Find("RuleHandler");
+        if (rhObj != null)
         {
             _rh = rhObj.GetComponent<RuleHandler>();
         }
@@ -29,68 +28,68 @@ public class LifeTotal : MonoBehaviour
     void Start()
     {
     }
-    public void UpdateHealthUI() 
+    public void UpdateHealthUI()
     {
         _hpText = this.gameObject.GetComponent<TextMeshProUGUI>();
         _hpText.text = _hp.ToString();
     }
-    public void SetHealth(int val) 
+    public void SetHealth(int val)
     {
         _hp = val;
         UpdateHealthUI();
     }
     public void UpdatePoisonCounters(bool opponent)
     {
-        if(_poisonCounter!=null)
+        if (_poisonCounter != null)
         {
-            if(!_poisonCounter.gameObject.activeSelf)
+            if (!_poisonCounter.gameObject.activeSelf)
             {
                 _poisonCounter.gameObject.SetActive(true);
             }
-            if(opponent)
+            if (opponent)
             {
-                _poisonCounter.text=GameHandler.Instance.GetCurrEncounter().GetPoisonCounters().ToString();
+                _poisonCounter.text = GameHandler.Instance.GetCurrEncounter().GetPoisonCounters().ToString();
             }
             else
             {
-                _poisonCounter.text=GameHandler.Instance.GetGameState()._playerPoisonCounters.ToString();
+                _poisonCounter.text = GameHandler.Instance.GetGameState()._playerPoisonCounters.ToString();
             }
         }
     }
     public void UpdateShieldCounters(bool opponent)
     {
-        if(_shieldCounter!=null)
+        if (_shieldCounter != null)
         {
             _shieldCounter.gameObject.SetActive(true);
-            _shieldCounter.text=StylisticClass.ShieldIcon;
-            if(opponent)
+            _shieldCounter.text = StylisticClass.ShieldIcon;
+            if (opponent)
             {
-                _shieldCounterText.text=GameHandler.Instance.GetGameState()._opponentsShield.ToString();
-                if(GameHandler.Instance.GetGameState()._opponentsShield<=0)
+                _shieldCounterText.text = GameHandler.Instance.GetGameState()._opponentsShield.ToString();
+                if (GameHandler.Instance.GetGameState()._opponentsShield <= 0)
                 {
                     _shieldCounter.gameObject.SetActive(false);
                 }
             }
             else
             {
-                _shieldCounterText.text=GameHandler.Instance.GetGameState()._playerShield.ToString();
-                if(GameHandler.Instance.GetGameState()._playerShield<=0)
+                _shieldCounterText.text = GameHandler.Instance.GetGameState()._playerShield.ToString();
+                if (GameHandler.Instance.GetGameState()._playerShield <= 0)
                 {
                     _shieldCounter.gameObject.SetActive(false);
                 }
             }
         }
     }
-    public void Damage(int damage,string fromMod=null) 
+    public void Damage(int damage, string fromMod = null)
     {
-        
-        if(damage<0){damage=0;}
+
+        if (damage < 0) { damage = 0; }
         _hp -= damage;
-        if(_rh.CanEffectsSpawn())
+        if (_rh.CanEffectsSpawn())
         {
             TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
             StartCoroutine(DestroyText(damageText));
-            if(fromMod!="")
+            if (fromMod != "")
             {
                 damageText.text = $"{CardInfo.modifierColors[fromMod]}{damage}</color>";
             }
@@ -109,7 +108,7 @@ public class LifeTotal : MonoBehaviour
         StartCoroutine(DestroyText(healText));
         healText.text = amount.ToString();
         healText.fontSize = _hpText.fontSize;
-        if (_hp > GameHandler.Instance.GetGameState()._maxhealth) 
+        if (_hp > GameHandler.Instance.GetGameState()._maxhealth)
         {
             _hp = GameHandler.Instance.GetGameState()._maxhealth;
         }
@@ -117,15 +116,15 @@ public class LifeTotal : MonoBehaviour
     }
     public void ShowNoDamage() //for effects that prevent damage.
     {
-        if(_rh.CanEffectsSpawn())
+        if (_rh.CanEffectsSpawn())
         {
             TextMeshProUGUI damageText = Instantiate(damageTextPrefab, this.transform.position, this.transform.rotation, this.transform.parent).GetComponent<TextMeshProUGUI>();
             StartCoroutine(DestroyText(damageText));
             damageText.text = "Cannot Be Damaged!";
-            damageText.fontSize = _hpText.fontSize*0.4f;
+            damageText.fontSize = _hpText.fontSize * 0.4f;
         }
     }
-    public int GetHealth() 
+    public int GetHealth()
     {
         return _hp;
     }

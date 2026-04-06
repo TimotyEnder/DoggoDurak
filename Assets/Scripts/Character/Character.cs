@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character:ScriptableObject
+public abstract class Character : ScriptableObject
 {
     protected int startingRubles;
     protected string characterId;

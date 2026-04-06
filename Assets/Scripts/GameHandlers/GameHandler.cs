@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +18,7 @@ public class GameHandler : MonoBehaviour
     private Character _currentCharacter;
     [SerializeField]
     private Reward _currentReward;
-    private  DebuffManager  _debuffManager;
+    private DebuffManager _debuffManager;
     public static GameHandler Instance
     {
         get
@@ -44,14 +40,14 @@ public class GameHandler : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        _characterManager= new CharacterManager();
+        _characterManager = new CharacterManager();
         _debuffManager = new DebuffManager();
     }
     public bool HasSave()
     {
         return _saveManager.Value.Load() != null;
     }
-    public void  BackToMainMenu()
+    public void BackToMainMenu()
     {
         SaveState();
         SceneManager.LoadScene(0);
@@ -61,21 +57,21 @@ public class GameHandler : MonoBehaviour
         SaveState();
         Application.Quit();
     }
-    public void NewGame(string characerChoice="")
+    public void NewGame(string characerChoice = "")
     {
-        _rewardManager= new Lazy<RewardManager>();
+        _rewardManager = new Lazy<RewardManager>();
         int freshSeed = System.Environment.TickCount;
         UnityEngine.Random.InitState(freshSeed);
         _state = new GameState();
         _state._currentEncounterRandomState = UnityEngine.Random.state;
-        _currentCharacter= _characterManager.GetCharacterInfo().here();
-        _state._rubles=_currentCharacter.GetStartRub();
-        foreach(Item i in _currentCharacter.LoadItems())
+        _currentCharacter = _characterManager.GetCharacterInfo().here();
+        _state._rubles = _currentCharacter.GetStartRub();
+        foreach (Item i in _currentCharacter.LoadItems())
         {
             _state.AddItem(i);
         }
         _encounterManager = new EncounterManager();
-        _gadalkaEffectManager =  new GadalkaEffectManager();
+        _gadalkaEffectManager = new GadalkaEffectManager();
         //debug
         foreach (CardInfo c in _state._deck)
         {
@@ -90,7 +86,7 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug   
-        //Item debugItem4 = ScriptableObject.CreateInstance<Tsh4>();
+        //Item debugItem4 = ScriptableObject.CreateInstance<SadismOfSurplus>();
         //debugItem4.InitItem();
         //_state.AddItem(debugItem4);
         //Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
@@ -112,7 +108,7 @@ public class GameHandler : MonoBehaviour
         {
             _state = _saveManager.Value.Load();
             // Recreate managers
-            _rewardManager= new Lazy<RewardManager>();
+            _rewardManager = new Lazy<RewardManager>();
             _encounterManager = new EncounterManager();
             _gadalkaEffectManager = new GadalkaEffectManager();
             ResetEncounterGamestateAttributes();
@@ -130,9 +126,9 @@ public class GameHandler : MonoBehaviour
             {
                 SceneManager.LoadScene(1);
             }
-            UnityEngine.Random.state=_state._currentEncounterRandomState;
+            UnityEngine.Random.state = _state._currentEncounterRandomState;
             _state.OnEncounterStart();
-        } 
+        }
     }
     public void Next() // will be called after an encounter or rest is finished and will handle what should happen next
     {
@@ -148,24 +144,24 @@ public class GameHandler : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
-        else if(_state._encounter==11) 
+        else if (_state._encounter == 11)
         {
             _currentEncounter = _encounterManager.RandomBossEncounter(_state._day);
-            _state._currentEncounterName=_currentEncounter.GetEncounterName();
+            _state._currentEncounterName = _currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
         else if (_state._encounter < 12)
         {
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
-            _state._currentEncounterName=_currentEncounter.GetEncounterName();
+            _state._currentEncounterName = _currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
-        else if(_state._day<3)
+        else if (_state._day < 3)
         {
             _state._day++;
             _state._encounter = 1;
             _currentEncounter = _encounterManager.RandomEncounter(_state._day);
-            _state._currentEncounterName=_currentEncounter.GetEncounterName();
+            _state._currentEncounterName = _currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
         else
@@ -185,13 +181,21 @@ public class GameHandler : MonoBehaviour
     {
         return _currentEncounter;
     }
+    public int? GetOpponentCurrentHealth()
+    {
+        if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+        {
+            return GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().GetHealth();
+        }
+        return null;
+    }
     public Reward GetCurrReward()
     {
         return _currentReward;
     }
     public void GenerateReward()
     {
-        if(_state._encounter==11)
+        if (_state._encounter == 11)
         {
             _currentReward = _rewardManager.Value.GenerateBossReward();
         }
@@ -201,14 +205,14 @@ public class GameHandler : MonoBehaviour
         }
         _currentReward.consumables = _rewardManager.Value.RollConsumableChance();
     }
-    public List<Item> GetShopItems() 
+    public List<Item> GetShopItems()
     {
         List<Item> itemsToReturn = new List<Item>();
-        if(_state._shopItems.Count<=0)
+        if (_state._shopItems.Count <= 0)
         {
             int legendaryItemsInShop = 0;
-            int rareItemsInShop=0;
-            int commonItemsInShop=0;
+            int rareItemsInShop = 0;
+            int commonItemsInShop = 0;
             for (int i = 0; i < GameHandler.Instance.GetGameState()._itemsShownInShop; i++)
             {
                 int roll = UnityEngine.Random.Range(1, 100);
@@ -216,7 +220,7 @@ public class GameHandler : MonoBehaviour
                 {
                     legendaryItemsInShop++;
                 }
-                else if(roll >= (100-GameHandler.Instance.GetGameState()._rareItemInshopDropRate))
+                else if (roll >= (100 - GameHandler.Instance.GetGameState()._rareItemInshopDropRate))
                 {
                     rareItemsInShop++;
                 }
@@ -226,16 +230,16 @@ public class GameHandler : MonoBehaviour
                 }
             }
             itemsToReturn.AddRange(_rewardManager.Value.ShopReward(2, legendaryItemsInShop));
-            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1,rareItemsInShop));
-            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(0,commonItemsInShop));
-            _state._shopItems=_state.SaveItems(itemsToReturn);
+            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(1, rareItemsInShop));
+            itemsToReturn.AddRange(_rewardManager.Value.ShopReward(0, commonItemsInShop));
+            _state._shopItems = _state.SaveItems(itemsToReturn);
             SaveState();
         }
         else
         {
-            itemsToReturn= _state.LoadItems(_state._shopItems);
+            itemsToReturn = _state.LoadItems(_state._shopItems);
         }
-        return itemsToReturn;   
+        return itemsToReturn;
     }
     public void SetHealth(int health)
     {
@@ -253,7 +257,7 @@ public class GameHandler : MonoBehaviour
     }
     public void SetPlayerShield(int amount)
     {
-        _state._playerShield=amount;
+        _state._playerShield = amount;
 
         if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
@@ -262,53 +266,53 @@ public class GameHandler : MonoBehaviour
     }
     public void SetMaxHealth(int amount)
     {
-        _state._maxhealth+=amount;
-        GameObject maxHpText=GameObject.Find("MaxPlayerHealthText");
-        if(maxHpText!=null)
+        _state._maxhealth += amount;
+        GameObject maxHpText = GameObject.Find("MaxPlayerHealthText");
+        if (maxHpText != null)
         {
             maxHpText.GetComponent<MaxPlayerHealthText>().Increase(amount);
         }
-        if(GameHandler.Instance.GetGameState()._health>GameHandler.Instance.GetGameState()._maxhealth)
+        if (GameHandler.Instance.GetGameState()._health > GameHandler.Instance.GetGameState()._maxhealth)
         {
             GameHandler.Instance.SetHealth(GameHandler.Instance.GetGameState()._maxhealth);
         }
     }
     //Heal From effect should be true for heals comes from item/card effects to not create an infinite chain of healing!
-    public async void HealPlayer(int amount, bool fromEffect = false, int times=1,string fromMod = "") //any healing effects should be handled by this
+    public async void HealPlayer(int amount, bool fromEffect = false, int times = 1, string fromMod = "") //any healing effects should be handled by this
     {
         if (GameObject.Find("PlayerLifeTotal") != null && GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
-            if(!_state._healingAndDamageInverted)
+            if (!_state._healingAndDamageInverted)
+            {
+                for (int i = 0; i < times; i++)
                 {
-                    for(int i=0;i<times; i++)
-                    {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
-                        await UniTask.Delay(100);
-                    }
+                    GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(amount);
+                    await UniTask.Delay(100);
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < times; i++)
                 {
-                    for(int i=0;i<times; i++)
-                    {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
-                        await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
-                        await UniTask.Delay(100);
-                    }
+                    GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(amount);
+                    await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                    await UniTask.Delay(100);
                 }
+            }
         }
         if (!fromEffect)
         {
             DelayedPlayerOnHealAsync(amount).Forget();
         }
     }
-    private async UniTaskVoid DelayedPlayerOnHealAsync(int amount,string fromMod="")
+    private async UniTaskVoid DelayedPlayerOnHealAsync(int amount, string fromMod = "")
     {
         // Wait for next frame to ensure UI animations complete
         await UniTask.Delay(200);
-        
-         _state.OnHeal(amount);
+
+        _state.OnHeal(amount);
     }
-    public void HealOpponent(int amount,bool fromEffect=false) //any healing effects should be handled by this
+    public void HealOpponent(int amount, bool fromEffect = false) //any healing effects should be handled by this
     {
         if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
@@ -318,33 +322,33 @@ public class GameHandler : MonoBehaviour
     }
     public void SetOpponentShield(int amount)
     {
-        _state._opponentsShield=amount;
+        _state._opponentsShield = amount;
         if (GameObject.Find("OpponentsLifeTotal") != null && GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdateShieldCounters(true);
         }
     }
-    public int OpponentDamageCalculation(int amount, bool fromEffect=false, bool OnlyVisual=false)
+    public int OpponentDamageCalculation(int amount, bool fromEffect = false, bool OnlyVisual = false)
     {
         int damageCalc;
-        if(!fromEffect)
+        if (!fromEffect)
         {
-            damageCalc=_currentEncounter.ModifyDamageOpponent(amount,OnlyVisual:OnlyVisual) + _state.AddToDamageOpponent(amount,OnlyVisual);
+            damageCalc = _currentEncounter.ModifyDamageOpponent(amount, OnlyVisual: OnlyVisual) + _state.AddToDamageOpponent(amount, OnlyVisual);
         }
         else
         {
-            damageCalc=amount;
+            damageCalc = amount;
         }
         return damageCalc;
     }
-    private int DamageReduced(int damageCalc,int shield)
+    private int DamageReduced(int damageCalc, int shield)
     {
-        return damageCalc-shield<=0 && damageCalc>0?1:damageCalc-shield;
+        return damageCalc - shield <= 0 && damageCalc > 0 ? 1 : damageCalc - shield;
     }
-    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times=1,bool checkMatchEnd=true) //any effects damaging the enemy should go through this
+    public async void DamageOpponent(int amount, bool fromEffect = false, string fromMod = "", int times = 1, bool checkMatchEnd = true) //any effects damaging the enemy should go through this
     {
-        int damageCalc=OpponentDamageCalculation(amount,fromEffect);
-        if(_state._undamagable[1])
+        int damageCalc = OpponentDamageCalculation(amount, fromEffect);
+        if (_state._undamagable[1])
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
             {
@@ -355,49 +359,49 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
             {
-               for(int i=0;i<times;i++)
+                for (int i = 0; i < times; i++)
                 {
-                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(DamageReduced(damageCalc,_state._opponentsShield),fromMod);
-                    if(checkMatchEnd)
+                    GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().Damage(DamageReduced(damageCalc, _state._opponentsShield), fromMod);
+                    if (checkMatchEnd)
                     {
-                          await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
+                        await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState();//opponent might be dead mid-turn
                     }
                     await UniTask.Delay(100);
                 }
             }
             if (!fromEffect)
             {
-                DelayedOnDamageOpponentAsync(damageCalc-_state._opponentsShield,fromMod).Forget();
+                DelayedOnDamageOpponentAsync(damageCalc - _state._opponentsShield, fromMod).Forget();
             }
         }
     }
-    private async UniTaskVoid DelayedOnDamageOpponentAsync(int amount,string fromMod)
+    private async UniTaskVoid DelayedOnDamageOpponentAsync(int amount, string fromMod)
     {
         // Wait for next frame to ensure UI animations complete
         await UniTask.Delay(200);
-        
-        _state.OnDamageOpponent(amount,fromMod);
-        _currentEncounter.OnDamageOpponent(amount,fromMod);
+
+        _state.OnDamageOpponent(amount, fromMod);
+        _currentEncounter.OnDamageOpponent(amount, fromMod);
     }
     public void PoisonOpponent(int amount)
     {
         _currentEncounter.AddPoisonCounter(amount);
-        if(GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
+        if (GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>().UpdatePoisonCounters(true);
         }
     }
-    public int PlayerDamageCalculation(int amount, bool fromEffect=false, bool OnlyVisual=false)
+    public int PlayerDamageCalculation(int amount, bool fromEffect = false, bool OnlyVisual = false)
     {
-        int damageCalc=_currentEncounter.ModifyDamagePlayer(amount,OnlyVisual:OnlyVisual)+ _state.AddToDamagePlayer(amount,OnlyVisual);
-       
+        int damageCalc = _currentEncounter.ModifyDamagePlayer(amount, OnlyVisual: OnlyVisual) + _state.AddToDamagePlayer(amount, OnlyVisual);
+
         return damageCalc;
     }
-    public async void DamagePlayer(int amount,bool fromEffect = false, string fromMod = "", int times =1, bool checkMatchEnd=true) //any effects damaging the player should go through this
+    public async void DamagePlayer(int amount, bool fromEffect = false, string fromMod = "", int times = 1, bool checkMatchEnd = true) //any effects damaging the player should go through this
     {
-        int damageCalc=PlayerDamageCalculation(amount,fromEffect);
-        
-         if(_state._undamagable[0])
+        int damageCalc = PlayerDamageCalculation(amount, fromEffect);
+
+        if (_state._undamagable[0])
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
             {
@@ -408,78 +412,78 @@ public class GameHandler : MonoBehaviour
         {
             if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
             {
-               
-               if(!_state._healingAndDamageInverted || fromMod=="InsiderTrader")
+
+                if (!_state._healingAndDamageInverted || fromMod == "InsiderTrader")
                 {
-                    for(int i=0;i<times; i++)
+                    for (int i = 0; i < times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(DamageReduced(damageCalc,_state._playerShield),fromMod);
-                       if(checkMatchEnd)
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Damage(DamageReduced(damageCalc, _state._playerShield), fromMod);
+                        if (checkMatchEnd)
                         {
-                             await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
+                            await GameObject.Find("RuleHandler").GetComponent<RuleHandler>().CheckGameState(); //player might be dead mid-turn
                         }
                         await UniTask.Delay(100);
                     }
                 }
                 else
                 {
-                    for(int i=0;i<times; i++)
+                    for (int i = 0; i < times; i++)
                     {
-                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc-GameHandler.Instance.GetGameState()._playerShield);
+                        GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().Heal(damageCalc - GameHandler.Instance.GetGameState()._playerShield);
                         await UniTask.Delay(100);
                     }
                 }
             }
             if (!fromEffect)
             {
-               _state.OnDamagePlayer(amount,fromMod);
-               DelayedOnDamagePlayerAsync(damageCalc,fromMod).Forget();
+                _state.OnDamagePlayer(amount, fromMod);
+                DelayedOnDamagePlayerAsync(damageCalc, fromMod).Forget();
             }
         }
     }
-    private async UniTaskVoid DelayedOnDamagePlayerAsync(int amount,string fromMod)
+    private async UniTaskVoid DelayedOnDamagePlayerAsync(int amount, string fromMod)
     {
         // Wait for next frame to ensure UI animations complete
         await UniTask.NextFrame();
-        _currentEncounter.OnDamagePlayer(amount,fromMod);
+        _currentEncounter.OnDamagePlayer(amount, fromMod);
     }
     public void PoisonPlayer(int amount)
     {
-        _state._playerPoisonCounters+=amount;
-        if(GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
+        _state._playerPoisonCounters += amount;
+        if (GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>() != null)
         {
             GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>().UpdatePoisonCounters(false);
         }
     }
     public void PlayerPoisonHandler()
     {
-        if(_state._playerPoisonCounters>0)
+        if (_state._playerPoisonCounters > 0)
         {
-            DamagePlayer(_state._playerPoisonCounters,true,fromMod:"Poison");
+            DamagePlayer(_state._playerPoisonCounters, true, fromMod: "Poison");
             PoisonPlayer(-1);
         }
     }
     public void Draw(int amount)
     {
-        GameObject Deck= GameObject.Find("Deck");
-        if(Deck!=null)
+        GameObject Deck = GameObject.Find("Deck");
+        if (Deck != null)
         {
-            Deck deckSc=Deck.GetComponent<Deck>();
+            Deck deckSc = Deck.GetComponent<Deck>();
             for (int i = 0; i < amount; i++)
             {
-               deckSc.DrawCard();
+                deckSc.DrawCard();
             }
         }
     }
     public void OpponentDraw(int amount)
     {
-        GameObject Opp= GameObject.Find("Opponent");
-        if(Opp!=null)
+        GameObject Opp = GameObject.Find("Opponent");
+        if (Opp != null)
         {
-            OpponentLogic oppSc=Opp.GetComponent<OpponentLogic>();
+            OpponentLogic oppSc = Opp.GetComponent<OpponentLogic>();
             for (int i = 0; i < amount; i++)
             {
-               oppSc.DrawCard();
+                oppSc.DrawCard();
             }
         }
     }
@@ -493,17 +497,17 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
-    public void PlayerDiscard(int index, int amount=1)
+    public void PlayerDiscard(int index, int amount = 1)
     {
-        Debug.Log("Discarding card at index: " + index+" amount: "+amount);
-        GameObject CardHandArea= GameObject.Find("CardHandArea");
+        Debug.Log("Discarding card at index: " + index + " amount: " + amount);
+        GameObject CardHandArea = GameObject.Find("CardHandArea");
         if (CardHandArea != null)
         {
             CardHandArea cardHScript = CardHandArea.GetComponent<CardHandArea>();
             if (cardHScript != null)
             {
                 _currentEncounter.OnHandCardDiscarded(cardHScript.GetCards()[index].GetCardInfo());
-                cardHScript.Discard(index,amount);
+                cardHScript.Discard(index, amount);
             }
         }
     }
@@ -526,8 +530,8 @@ public class GameHandler : MonoBehaviour
     }
     public void SortDeck()
     {
-        _state._deck.Sort((a, b) => a._suitNumber == b._suitNumber ? 
-            a._number.CompareTo(b._number) : 
+        _state._deck.Sort((a, b) => a._suitNumber == b._suitNumber ?
+            a._number.CompareTo(b._number) :
             a._suitNumber.CompareTo(b._suitNumber));
     }
     public void AddCardToDeck(CardInfo card)
@@ -535,34 +539,34 @@ public class GameHandler : MonoBehaviour
         _state._deck.Add(card);
         SaveState();
         SortDeck();
-        GameObject playerDeck= GameObject.Find("Deck");
-        if(playerDeck!=null)
+        GameObject playerDeck = GameObject.Find("Deck");
+        if (playerDeck != null)
         {
             playerDeck.GetComponent<Deck>().AddCard(card);
         }
         _state.OnCardAdded(card);
     }
-    public void AddCurrencyCalculator(CurrencyCalculator cc) 
+    public void AddCurrencyCalculator(CurrencyCalculator cc)
     {
         _rewardManager.Value.AddCurrencyCalculator(cc);
     }
-    public string GetCurrencyExplanationText() 
+    public string GetCurrencyExplanationText()
     {
         return _rewardManager.Value.GetCurrencyExplanationText();
     }
     //0 player 1 opponent.
-    public bool IsCardnotDebuffed(CardInfo card, int target) 
+    public bool IsCardnotDebuffed(CardInfo card, int target)
     {
         return _debuffManager.CanPlayCard(card, target);
-    } 
-    public void  ResetDebuffs() 
+    }
+    public void ResetDebuffs()
     {
-         _debuffManager.ResetPermissions();
-         UIupdateDebuffs();
-    }  
-    public void SetDebuffs(string[]perms, bool forPlayer,bool forEnemy,bool[] AllEven=null,bool[] AllOdd=null)
+        _debuffManager.ResetPermissions();
+        UIupdateDebuffs();
+    }
+    public void SetDebuffs(string[] perms, bool forPlayer, bool forEnemy, bool[] AllEven = null, bool[] AllOdd = null)
     {
-        _debuffManager.SetPermissions(perms,forPlayer,forEnemy,AllEven,AllOdd);
+        _debuffManager.SetPermissions(perms, forPlayer, forEnemy, AllEven, AllOdd);
         UIupdateDebuffs();
     }
     public void EncounterSetDebuffs()
@@ -571,7 +575,7 @@ public class GameHandler : MonoBehaviour
     }
     public void UIupdateDebuffs()
     {
-        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        GameObject cardHandArea = GameObject.Find("CardHandArea");
         if (cardHandArea != null)
         {
             cardHandArea.GetComponent<CardHandArea>().CheckPlayPermissionHand();
@@ -583,12 +587,12 @@ public class GameHandler : MonoBehaviour
         {
             item.gameObject.GetComponent<ActiveItem>().ResetAnim();
         }
-        _state._undamagable=new bool[]{false,false};
+        _state._undamagable = new bool[] { false, false };
     }
     public int GetUnblockedCards()
     {
-        GameObject playArea= GameObject.Find("PlayArea");
-        if(playArea!=null)
+        GameObject playArea = GameObject.Find("PlayArea");
+        if (playArea != null)
         {
             return playArea.GetComponent<PlayArea>().UnblockedCardsAmount();
         }
@@ -597,48 +601,48 @@ public class GameHandler : MonoBehaviour
             return -1;
         }
     }
-    public void ShakeRule(int index) 
+    public void ShakeRule(int index)
     {
-        GameObject ruleHandler= GameObject.Find("RulesUIBox");
+        GameObject ruleHandler = GameObject.Find("RulesUIBox");
         Debug.Log("Shaking rule at index: " + index);
-        if(ruleHandler!=null)
+        if (ruleHandler != null)
         {
             ruleHandler.GetComponentInChildren<RuleBoxUI>().ShakeRule(index);
         }
     }
-    public void UpdateRules() 
+    public void UpdateRules()
     {
-        GameObject ruleHandler= GameObject.Find("RulesUIBox");
-        if(ruleHandler!=null)
+        GameObject ruleHandler = GameObject.Find("RulesUIBox");
+        if (ruleHandler != null)
         {
             ruleHandler.GetComponentInChildren<RuleBoxUI>().UpdateRules();
         }
     }
-    public void ResetEncounterGamestateAttributes() 
+    public void ResetEncounterGamestateAttributes()
     {
         SetOpponentShield(_state._defaultOpponentsShield);
         _state._enemyHandSize = 6;
-        _state._loseToWin=false;
-        _state._healingAndDamageInverted=false;
-        _state._playerPoisonCounters=0;
+        _state._loseToWin = false;
+        _state._healingAndDamageInverted = false;
+        _state._playerPoisonCounters = 0;
         ResetDebuffs();
     }
     public void AddToOpponentCurrentDeck(CardInfo card)
     {
-        GameObject opponentDeck= GameObject.Find("Opponent");
-        if(opponentDeck!=null)
+        GameObject opponentDeck = GameObject.Find("Opponent");
+        if (opponentDeck != null)
         {
             opponentDeck.GetComponent<OpponentLogic>().AddToDeck(card);
         }
     }
     public async void EnemyStealingCardParticles(int amount)
     {
-        GameObject target= GameObject.Find("OpponentsLifeTotal");
-        GameObject deck= GameObject.Find("Deck");
-        if(deck!=null)
+        GameObject target = GameObject.Find("OpponentsLifeTotal");
+        GameObject deck = GameObject.Find("Deck");
+        if (deck != null)
         {
-            RectTransform targetRect=target.GetComponent<RectTransform>();
-            for(int i=0;i<amount;i++)
+            RectTransform targetRect = target.GetComponent<RectTransform>();
+            for (int i = 0; i < amount; i++)
             {
                 deck.GetComponent<Deck>().DrawCardParticle(targetRect);
                 await UniTask.Delay(200);
@@ -647,16 +651,16 @@ public class GameHandler : MonoBehaviour
     }
     public void UpdateMoney(int amount)
     {
-        _state._rubles+=amount;
-        GameObject rubleObj= GameObject.Find("RubleText");
-        if(rubleObj!=null)
+        _state._rubles += amount;
+        GameObject rubleObj = GameObject.Find("RubleText");
+        if (rubleObj != null)
         {
             rubleObj.GetComponent<RubleText>().UpdateRubleAmount();
         }
     }
     public int PlayerOddCardsInHand()
     {
-        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        GameObject cardHandArea = GameObject.Find("CardHandArea");
         if (cardHandArea != null)
         {
             return cardHandArea.GetComponent<CardHandArea>().OddCards();
@@ -665,7 +669,7 @@ public class GameHandler : MonoBehaviour
     }
     public int PlayerEvenCardsInHand()
     {
-        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        GameObject cardHandArea = GameObject.Find("CardHandArea");
         if (cardHandArea != null)
         {
             return cardHandArea.GetComponent<CardHandArea>().EvenCards();
@@ -674,7 +678,7 @@ public class GameHandler : MonoBehaviour
     }
     public CardInfo GetCardInHand(int index)
     {
-        GameObject cardHandArea= GameObject.Find("CardHandArea");
+        GameObject cardHandArea = GameObject.Find("CardHandArea");
         if (cardHandArea != null)
         {
             return cardHandArea.GetComponent<CardHandArea>().GetCards()[index].GetCardInfo();
@@ -683,10 +687,10 @@ public class GameHandler : MonoBehaviour
     }
     public void ClearTemporaryModifiers()
     {
-        foreach(CardInfo c in _state._deck)
+        foreach (CardInfo c in _state._deck)
         {
-            
-            if(c.ClearTemporaryModifiers()&&c._card!=null)
+
+            if (c.ClearTemporaryModifiers() && c._card != null)
             {
                 c._card.MakeCard(c);
                 c._card.Bling();
@@ -695,30 +699,30 @@ public class GameHandler : MonoBehaviour
     }
     public List<GadalkaEffectInfo> CompileBlessings()
     {
-        if(GameHandler.Instance.GetGameState()._gadalkaBlessings.Count>0)
+        if (GameHandler.Instance.GetGameState()._gadalkaBlessings.Count > 0)
         {
             return _state.LoadGEffects(_state._gadalkaBlessings);
         }
         else
         {
-            List<GadalkaEffectInfo> toRet=_gadalkaEffectManager.BlessingCompile(_state._gadalkaEffectsMax);
-            _state._gadalkaBlessings=_state.SaveGEffects(toRet);  
+            List<GadalkaEffectInfo> toRet = _gadalkaEffectManager.BlessingCompile(_state._gadalkaEffectsMax);
+            _state._gadalkaBlessings = _state.SaveGEffects(toRet);
             SaveState();
-            return toRet;  
+            return toRet;
         }
     }
     public List<GadalkaEffectInfo> CompileCurses()
     {
-        if(GameHandler.Instance.GetGameState()._gadalkaCurses.Count>0)
+        if (GameHandler.Instance.GetGameState()._gadalkaCurses.Count > 0)
         {
             return _state.LoadGEffects(_state._gadalkaCurses);
         }
         else
         {
-            List<GadalkaEffectInfo> toRet=_gadalkaEffectManager.CursesCompile(_state._gadalkaEffectsMax);
-            _state._gadalkaCurses=_state.SaveGEffects(toRet);  
+            List<GadalkaEffectInfo> toRet = _gadalkaEffectManager.CursesCompile(_state._gadalkaEffectsMax);
+            _state._gadalkaCurses = _state.SaveGEffects(toRet);
             SaveState();
-            return toRet;  
+            return toRet;
         }
     }
     public LoopList<Character> GetCharacterInfo()
