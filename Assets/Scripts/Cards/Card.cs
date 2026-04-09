@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerClickHandler
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 
 {
     private CardInfo _cardInfo;
@@ -20,6 +19,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private RectTransform _cardHandAreaRect;
     private CardHandArea _cardHandAreaScript;
     private int _oldSiblingIndex;
+    private int _oldHandOrder;
     private GameObject _cardImage;
     private Canvas _canvas;
     private RectTransform _cardImageRect;
@@ -59,14 +59,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _spikyOverlay;
     private GameObject _poisonOverlay;
     private Animator _animator;
-    private int _animationsCurrent=0;
-    private bool _tryToHighlightCard=true; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
+    private int _animationsCurrent = 0;
+    private bool _tryToHighlightCard = true; //this will be true to try to retrigger the on pointer logics until on pointer exit happens
     private RuleHandler _rh;
     private CanvasScaler _cScaler;
-    private bool _grey=false; //make greyed out card undraggable.
-    private bool _playedSelectAnim=false;
+    private bool _grey = false; //make greyed out card undraggable.
+    private bool _playedSelectAnim = false;
     public Vector3 _oldEuAngle;
-    
+
     //text prefabs for card modifier effects
     [SerializeField]
     private GameObject burnTextPrefab;
@@ -109,8 +109,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     void Awake()
     {
         //card hand area
-        _Debuffed=false;
-        _dragging=false;
+        _Debuffed = false;
+        _dragging = false;
+        _oldHandOrder = -1;
         _cardHandArea = GameObject.Find("CardHandArea");
         if (_cardHandArea != null)
         {
@@ -162,35 +163,39 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             _opponent = opponentObj.GetComponent<OpponentLogic>();
         }
-        _animator=this.gameObject.GetComponent<Animator>();
+        _animator = this.gameObject.GetComponent<Animator>();
         _animator.applyRootMotion = false;
 
-        GameObject rhObj= GameObject.Find("RuleHandler");
-        if(rhObj!=null)
+        GameObject rhObj = GameObject.Find("RuleHandler");
+        if (rhObj != null)
         {
-            _rh=rhObj.GetComponent<RuleHandler>();
+            _rh = rhObj.GetComponent<RuleHandler>();
         }
-        GameObject passBtnObj= GameObject.Find("PassButton");
-        if(passBtnObj!=null)
+        GameObject passBtnObj = GameObject.Find("PassButton");
+        if (passBtnObj != null)
         {
-            _passButton= passBtnObj.GetComponent<PassButton>();
+            _passButton = passBtnObj.GetComponent<PassButton>();
         }
     }
-    public void MakeCard(CardInfo card, bool IsInteractable=true, int Cost=0)
+    public int getOldHandOrder()
+    {
+        return this._oldHandOrder;
+    }
+    public void MakeCard(CardInfo card, bool IsInteractable = true, int Cost = 0)
     {
         this._cardInfo = card;
         card.AssignCard(this);
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit);
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
-        _numberText.text=$"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
-        _numberText2.text=$"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
+        _numberText.text = $"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
+        _numberText2.text = $"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
         _isInteractable = IsInteractable;
         _cost = Cost;
         if (_cost > 0)
         {
             _costObject.SetActive(true);
-            _costText.text = _cost.ToString()+StylisticClass.RubleSign;
+            _costText.text = _cost.ToString() + StylisticClass.RubleSign;
         }
         UpdateModifiers();
         CheckIsDebuffed();
@@ -203,36 +208,36 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _downArrow.SetActive(false);
         _upArrow.transform.SetParent(this.transform);
         _downArrow.transform.SetParent(this.transform);
-        
-        if(_turnHandler.GetTurnState()==0)
+
+        if (_turnHandler.GetTurnState() == 0)
         {
             _upArrow.SetActive(true);
-            _upArrow.GetComponent<RectTransform>().anchoredPosition=_upArrowPos.anchoredPosition;
+            _upArrow.GetComponent<RectTransform>().anchoredPosition = _upArrowPos.anchoredPosition;
             _upArrow.transform.SetParent(_canvas.transform);
             _upArrow.transform.SetAsFirstSibling();
-            if(GameHandler.Instance.GetGameState()._opponentsShield > 0)
+            if (GameHandler.Instance.GetGameState()._opponentsShield > 0)
             {
-                _upArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed?0:_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._opponentsShield)}</color>";
+                _upArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._opponentsShield)}</color>";
             }
             else
             {
-                _upArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed?0:_cardInfo._number,OnlyVisual:true))}</color>";
+                _upArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}</color>";
             }
         }
-            
+
         else
         {
             _downArrow.SetActive(true);
-            _downArrow.GetComponent<RectTransform>().anchoredPosition=_downArrowPos.anchoredPosition;
+            _downArrow.GetComponent<RectTransform>().anchoredPosition = _downArrowPos.anchoredPosition;
             _downArrow.transform.SetParent(_canvas.transform);
             _downArrow.transform.SetAsFirstSibling();
-            if(GameHandler.Instance.GetGameState()._playerShield > 0)
+            if (GameHandler.Instance.GetGameState()._playerShield > 0)
             {
-                _downArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed?0:_cardInfo._number,OnlyVisual:true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._playerShield)}</color>";
+                _downArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._playerShield)}</color>";
             }
             else
             {
-                _downArrowText.text=$"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed?0:_cardInfo._number,OnlyVisual:true))}</color>";
+                _downArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}</color>";
             }
         }
     }
@@ -243,17 +248,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void SetAnimatable(bool state)
     {
-        if(_animator.enabled==false)
+        if (_animator.enabled == false)
         {
-            _animator.enabled=true; 
+            _animator.enabled = true;
         }
-        if(!state)
+        if (!state)
         {
             _animationsCurrent--;
-            if(_animationsCurrent==0)
+            if (_animationsCurrent == 0)
             {
                 _animator.applyRootMotion = false;
-                _animator.enabled=false;
+                _animator.enabled = false;
             }
         }
         else
@@ -264,12 +269,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void GreyIn()
     {
-        _grey=true;
+        _grey = true;
         _cardImage.GetComponent<Image>().color = Color.grey;
     }
     public void GreyOut()
     {
-        _grey=false;
+        _grey = false;
         _cardImage.GetComponent<Image>().color = Color.white;
     }
     public bool IsDebuffed()
@@ -282,20 +287,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     }
     public void SetDebuffed(bool state)
     {
-        this._Debuffed=state;
+        this._Debuffed = state;
         CheckDebuffVisual();
     }
     public void CheckIsDebuffed()
     {
-        if(!GameHandler.Instance.IsCardnotDebuffed(_cardInfo,_cardInfo._opponentCard?1:0))
+        if (!GameHandler.Instance.IsCardnotDebuffed(_cardInfo, _cardInfo._opponentCard ? 1 : 0))
         {
-            this._Debuffed=true;
+            this._Debuffed = true;
             CheckDebuffVisual();
         }
     }
     public void CheckDebuffVisual()
     {
-        if(this._Debuffed)
+        if (this._Debuffed)
         {
             _notPermissible.SetActive(true);
             Bling();
@@ -335,21 +340,22 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             StartCoroutine(HitRoutine());
         }
-    } 
+    }
     private IEnumerator HitRoutine()
     {
         SetAnimatable(true);
         _animator.SetTrigger("Hit");
         yield return new WaitForSeconds(0.25f);
         _cardRect.localScale = Vector3.one;
-        _cardRect.eulerAngles=Vector3.zero;
+        _cardRect.eulerAngles = Vector3.zero;
         SetAnimatable(false);
-    }  
+    }
     public void SpawnModifierEffect(CardModifierContainer c)
     {
         GameObject instancedText = null;
-        
-        if(_rh.CanEffectsSpawn()){
+
+        if (_rh.CanEffectsSpawn())
+        {
             switch (c.ModType)
             {
                 case "Restoring":
@@ -379,24 +385,24 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 case "Spiky":
                     Debug.Log("Spiky");
                     instancedText = Instantiate(spikyTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                    break; 
+                    break;
                 case "Poison":
                     Debug.Log("Poison");
                     instancedText = Instantiate(poisonTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
-                    break; 
+                    break;
             }
         }
         if (instancedText != null)
         {
-            instancedText.GetComponent<ModifierText>().Init(this.GetCardInfo(),_canvas);
+            instancedText.GetComponent<ModifierText>().Init(this.GetCardInfo(), _canvas);
         }
 
     }
-    public float GetAnimSpeed() 
+    public float GetAnimSpeed()
     {
         return _animator.speed;
     }
-    public void UpdateModifiers() 
+    public void UpdateModifiers()
     {
         //cardModifiers
         _restoringOverlay = transform.Find("CardImage/RestoringMod").gameObject;
@@ -421,9 +427,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
         _cardInfo.UpdateModifiers();
 
-        foreach (KeyValuePair<string,int> c in _cardInfo._modifierStacks) 
+        foreach (KeyValuePair<string, int> c in _cardInfo._modifierStacks)
         {
-            switch(c.Key) 
+            switch (c.Key)
             {
                 case "Restoring":
                     _restoringOverlay.SetActive(true);
@@ -433,8 +439,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                     break;
                 case "Burn":
                     _burnOverlay.SetActive(true);
-                    var burnemission= _burnOverlay.GetComponent<ParticleSystem>().emission;
-                    burnemission.rateOverTime=10+(_cardInfo._modifierStacks["Burn"]*5);
+                    var burnemission = _burnOverlay.GetComponent<ParticleSystem>().emission;
+                    burnemission.rateOverTime = 10 + (_cardInfo._modifierStacks["Burn"] * 5);
                     break;
                 case "Parry":
                     _parryOverlay.SetActive(true);
@@ -446,51 +452,67 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                     break;
                 case "Cripple":
                     _crippleOverlay.SetActive(true);
-                    var crippleemission= _crippleOverlay.GetComponent<ParticleSystem>().emission;
-                    crippleemission.rateOverTime=15+(_cardInfo._modifierStacks["Cripple"]*10);
+                    var crippleemission = _crippleOverlay.GetComponent<ParticleSystem>().emission;
+                    crippleemission.rateOverTime = 15 + (_cardInfo._modifierStacks["Cripple"] * 10);
                     break;
                 case "Spiky":
                     _spikyOverlay.SetActive(true);
                     break;
                 case "Poison":
                     _poisonOverlay.SetActive(true);
-                    var poisonEmission= _poisonOverlay.GetComponent<ParticleSystem>().emission;
-                    poisonEmission.rateOverTime=2+(_cardInfo._modifierStacks["Poison"]*2);
+                    var poisonEmission = _poisonOverlay.GetComponent<ParticleSystem>().emission;
+                    poisonEmission.rateOverTime = 2 + (_cardInfo._modifierStacks["Poison"] * 2);
                     break;
             }
         }
     }
     public void OnDraw()
     {
+        UnityEngine.Debug.Log("OnDraw() is executing!");
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
         _cardRect.localScale = Vector3.one;
-        _cardRect.SetSiblingIndex(0);
+        if (_oldHandOrder != -1)
+        {
+            _cardRect.SetSiblingIndex(_oldHandOrder);
+        }
+        else
+        {
+            _cardRect.SetSiblingIndex(0);
+        }
         _cardHandAreaScript.AttachCard();
         _cardHandAreaScript.AddToCards(this);
         _cardHandAreaScript.RealignCardsInHand();
     }
-     public void OnDraw(Vector2 screenPoint)
+    public void OnDraw(Vector2 screenPoint, bool OnFailedPlay = false)
     {
+        UnityEngine.Debug.Log("OnDraw() is executing!");
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
         _cardRect.localScale = Vector3.one;
-        _cardRect.SetSiblingIndex(0);
+        if (_oldHandOrder != -1)
+        {
+            _cardRect.SetSiblingIndex(_oldHandOrder);
+        }
+        else
+        {
+            _cardRect.SetSiblingIndex(0);
+        }
         _cardHandAreaScript.AttachCard();
-        _cardHandAreaScript.AddToCards(this,screenPoint);
+        _cardHandAreaScript.AddToCards(this, screenPoint, OnFailedPlay);
         _cardHandAreaScript.RealignCardsInHand();
     }
     public void OnPlay(Vector2 screenPoint)
     {
-        Debug.Log("On play turn state: "+_turnHandler.GetTurnState());
+        Debug.Log("On play turn state: " + _turnHandler.GetTurnState());
         int cardDefendingIndex = _playAreaScript.GetCardDefending(screenPoint);
         CardInfo cardToDefend = null;
-        if (cardDefendingIndex!=-1) 
+        if (cardDefendingIndex != -1)
         {
-            cardToDefend= _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetCardInfo();
+            cardToDefend = _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetCardInfo();
         }
         //playing cards  as it is your turn
-        if (cardDefendingIndex==-1 && _turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo(),true))
+        if (cardDefendingIndex == -1 && _turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo(), true))
         {
             Debug.Log("Able to attack");
             PlayCard();
@@ -498,7 +520,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _passButton.SetJiggle(true);
         }
         //Defending, not your turn
-        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend,true))
+        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend, true))
         {
             Debug.Log("Able to defend");
             DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
@@ -506,7 +528,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _passButton.SetJiggle(true);
         }
         //reverse
-        else if (cardDefendingIndex==-1 && _playAreaScript.CanReverseWithCard(this._cardInfo,true) && _turnHandler.GetTurnState() != 0) 
+        else if (cardDefendingIndex == -1 && _playAreaScript.CanReverseWithCard(this._cardInfo, true) && _turnHandler.GetTurnState() != 0)
         {
             Debug.Log("Able to reverse");
             PlayCard();
@@ -518,14 +540,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             }
             GameHandler.Instance.GetCurrEncounter().OnReverse(this);
             _turnHandler.Reverse();
-            _=_opponent.EnemyPlay();
+            _ = _opponent.EnemyPlay();
         }
         else
         {
-            OnDraw();
+            OnDraw(screenPoint, true);
         }
     }
-    public void PlayCard() 
+    public void PlayCard()
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
         _cardImageRect.localScale = Vector3.one;
@@ -541,7 +563,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         GameHandler.Instance.GetCurrEncounter().OnPlayedCard(this);
     }
-    public void DefendCard(Card card) 
+    public void DefendCard(Card card)
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
         _cardRect.SetAsFirstSibling();
@@ -565,7 +587,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void OnPointerEnter(PointerEventData eventData)
     {
         _tryToHighlightCard = true;
-        _oldEuAngle=_cardRect.eulerAngles;
+        _oldEuAngle = _cardRect.eulerAngles;
         StartCoroutine(CheckTopPointerUntilExit(eventData));
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -573,9 +595,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _tryToHighlightCard = false;
         StopCoroutine(CheckTopPointerUntilExit(eventData)); // Stop the checking coroutine
         SetAnimatable(false);
-        _playedSelectAnim=false;
-        _cardRect.eulerAngles=Vector3.zero;
-        if(_cardHandAreaScript!=null)
+        _playedSelectAnim = false;
+        _cardRect.eulerAngles = Vector3.zero;
+        if (_cardHandAreaScript != null)
         {
             _cardHandAreaScript.RealignCardsInHand();
         }
@@ -591,20 +613,21 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             if (IsTopPointer(ped))
             {
-                if(_isInteractable){
+                if (_isInteractable)
+                {
                     _oldSiblingIndex = _cardRect.GetSiblingIndex();
                     _cardRect.SetAsLastSibling();
                 }
                 _cardImageRect.localScale = Vector3.one * 1.3f;
-                if(!_playedSelectAnim)
+                if (!_playedSelectAnim)
                 {
-                    _playedSelectAnim=true;
+                    _playedSelectAnim = true;
                     SetAnimatable(true);
                     _animator.SetTrigger("Select");
                     yield return new WaitForSeconds(0.05f);
                 }
             }
-            
+
             // Wait for next frame before checking again
             yield return null;
         }
@@ -613,7 +636,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(ped, results);
-        
+
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.GetComponent<Card>() != null)
@@ -621,88 +644,89 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 return result.gameObject == this.gameObject;
             }
         }
-        
+
         return false;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_played || _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; } //return early in this method fails the drag.
+        if (_played || _grey || !_isInteractable || _turnHandler.IsTurnEnding()) { return; } //return early in this method fails the drag.
         GetComponent<ToolTip>().SetTooltipActiveState(false);
+        _oldHandOrder = _cardHandAreaScript.GetIndexOfCard(this);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
-        _dragging=true;
+        _dragging = true;
     }
     public void OnDrag(PointerEventData eventData)
     {
-         if (_played || _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; }
+        if (_played || _grey || !_isInteractable || _turnHandler.IsTurnEnding()) { return; }
         _cardRect.eulerAngles = Vector3.zero;
         _cardRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        if (_played && !_opponent.IsEnemyPlaying()|| _grey ||!_isInteractable || _turnHandler.IsTurnEnding()) { return; }
+        if (_played && !_opponent.IsEnemyPlaying() || _grey || !_isInteractable || _turnHandler.IsTurnEnding()) { return; }
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
-            _dragging=false;
+            _dragging = false;
             OnPlay(eventData.position);
         }
         else
         {
-            _dragging=false;
+            _dragging = false;
             OnDraw(eventData.position);
         }
     }
     public Vector2 GetDefendPosition()
     {
-        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y - (this.GetComponent<RectTransform>().rect.height*0.5f));
+        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y - (this.GetComponent<RectTransform>().rect.height * 0.5f));
     }
     public CardInfo GetCardInfo()
     {
         return this._cardInfo;
     }
-    public void Defend(Card defendedWith) 
+    public void Defend(Card defendedWith)
     {
-        _defended = true;  
+        _defended = true;
         _cardDefending = defendedWith;
         _cardInfo.OnBeingDefended(defendedWith);
     }
-    public Card GetCardDefending() 
+    public Card GetCardDefending()
     {
         return _cardDefending;
     }
-    public bool IsDefended() 
+    public bool IsDefended()
     {
-        return _defended;   
+        return _defended;
     }
-    public async Task MoveTowardsDiscard(bool countAsPlayedDiscard=false)
+    public async Task MoveTowardsDiscard(bool countAsPlayedDiscard = false)
     {
-        if(countAsPlayedDiscard)
+        if (countAsPlayedDiscard)
         {
             GameHandler.Instance.GetCurrEncounter().OnPlayedCardDiscarded(this.GetCardInfo());
         }
-        _isInteractable = false; 
+        _isInteractable = false;
         Vector2 target = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetDiscardPileCardPosition();
-        UnityEngine.Quaternion rotation = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetRandomRotation();  
+        UnityEngine.Quaternion rotation = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetRandomRotation();
         GetComponent<ToolTip>().SetTooltipActiveState(false);
-        _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>()); 
+        _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         await MoveTowardsCoroutine(target, rotation);
     }
-    private async Task MoveTowardsCoroutine(Vector2 target, UnityEngine.Quaternion? rotation=null,bool dieAfterReaching=false)
+    private async Task MoveTowardsCoroutine(Vector2 target, UnityEngine.Quaternion? rotation = null, bool dieAfterReaching = false)
     {
         float speed = 2500f;
         while (Vector2.Distance(_cardRect.anchoredPosition, target) > 0.01f)
         {
             float distance = Vector2.Distance(_cardRect.anchoredPosition, target);
             float step = speed * Time.deltaTime;
-            
+
             // Prevent overshoot by limiting step to remaining distance
             if (step > distance)
             {
                 step = distance;
             }
-            
+
             _cardRect.anchoredPosition = Vector2.MoveTowards(_cardRect.anchoredPosition, target, step);
             await UniTask.NextFrame();
         }
@@ -711,7 +735,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             _cardRect.rotation = (UnityEngine.Quaternion)rotation;
         }
-        if(dieAfterReaching)
+        if (dieAfterReaching)
         {
             Destroy(this.gameObject);
         }
@@ -725,26 +749,26 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             GameHandler.Instance.AddCardToDeck(this.GetCardInfo());
             GetComponent<ToolTip>().SetTooltipActiveState(false);
             Bling();
-            Destroy(this.gameObject,0.3f);
+            Destroy(this.gameObject, 0.3f);
         }
         else
         {
             GameObject disOpt = GameObject.Find("DiscardButton");
             if (!_isInteractable && disOpt != null)
             {
-                    DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
-                    if(!_marked.activeSelf)
-                    {
-                        disOptScript.SelectCard(this);
-                        Mark();
-                        Bling();
-                    }
-                    else
-                    {
-                        disOptScript.UnSelectCard(this);
-                        Unmark();
-                        Bling();
-                    }
+                DiscardOptionPanel disOptScript = disOpt.GetComponent<DiscardOptionPanel>();
+                if (!_marked.activeSelf)
+                {
+                    disOptScript.SelectCard(this);
+                    Mark();
+                    Bling();
+                }
+                else
+                {
+                    disOptScript.UnSelectCard(this);
+                    Unmark();
+                    Bling();
+                }
             }
         }
     }

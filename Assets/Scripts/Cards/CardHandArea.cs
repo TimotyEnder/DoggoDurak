@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 public class CardHandArea : MonoBehaviour
 {
@@ -28,9 +24,9 @@ public class CardHandArea : MonoBehaviour
     private int _odds;
     void Start()
     {
-        _canvasRect= GameObject.Find("UI").GetComponent<RectTransform>();
+        _canvasRect = GameObject.Find("UI").GetComponent<RectTransform>();
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
-        _oldCanvasWidth= _canvasRect.rect.width;
+        _oldCanvasWidth = _canvasRect.rect.width;
         _discard = GameObject.Find("Discard").GetComponent<Discard>();
     }
 
@@ -45,28 +41,28 @@ public class CardHandArea : MonoBehaviour
             i.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
             i.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
         }
-        float midpoint =(_cardsInHand-1)/2f;
+        float midpoint = (_cardsInHand - 1) / 2f;
         _angleDelta = GetCardSpacing();
         int index = 0;
         Vector3 center = this.gameObject.GetComponent<RectTransform>().anchoredPosition;
         foreach (Card i in _cards)
         {
             float angle = _angleDelta * (midpoint - index);
-            i.GetComponent<RectTransform>().eulerAngles= new Vector3(0, 0, angle);
+            i.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, angle);
             angle *= -Mathf.Deg2Rad;
             float x = Mathf.Sin(angle) * radius;
             float y = Mathf.Cos(angle) * radius;
-            i.GetComponent<RectTransform>().anchoredPosition= new Vector3(center.x + x, center.y + y, 0); 
+            i.GetComponent<RectTransform>().anchoredPosition = new Vector3(center.x + x, center.y + y, 0);
             index++;
         }
     }
-    public List<Card> GetCards() 
+    public List<Card> GetCards()
     {
         return this._cards;
-    }   
+    }
     public void OrderByRank()
     {
-        _cards.Sort((a, b) => (a.GetCardInfo()._number == b.GetCardInfo()._number) ? a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber):a.GetCardInfo()._number.CompareTo(b.GetCardInfo()._number));
+        _cards.Sort((a, b) => (a.GetCardInfo()._number == b.GetCardInfo()._number) ? a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber) : a.GetCardInfo()._number.CompareTo(b.GetCardInfo()._number));
         RealignCardsInHand();
     }
     public void OrderBySuit()
@@ -74,11 +70,11 @@ public class CardHandArea : MonoBehaviour
         _cards.Sort((a, b) => a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber));
         RealignCardsInHand();
     }
-    public void  AttachCard() 
+    public void AttachCard()
     {
         this._cardsInHand++;
     }
-    public void DettachCard() 
+    public void DettachCard()
     {
         this._cardsInHand--;
         RealignCardsInHand();
@@ -88,37 +84,41 @@ public class CardHandArea : MonoBehaviour
         float neededWidth = (this._cardsInHand - 1) * this._idealAngleDelta;
         return (neededWidth <= this._maxHandSpacing) ? this._idealAngleDelta : (this._maxHandSpacing / (this._cardsInHand - 1));
     }
-    public int GetCardsInHand() 
+    public int GetCardsInHand()
     {
         return this._cardsInHand;
     }
-    public void AddToCards(Card card) 
+    public int GetIndexOfCard(Card card)
     {
-        if(card.GetCardInfo().IsEven())
+        return _cards.IndexOf(card);
+    }
+    public void AddToCards(Card card)
+    {
+        if (card.GetCardInfo().IsEven())
         {
             _evens++;
         }
-        else if(card.GetCardInfo().IsOdd())
+        else if (card.GetCardInfo().IsOdd())
         {
             _odds++;
         }
-        if (_cards == null) 
+        if (_cards == null)
         {
             _cards = new List<Card>();
         }
         _cards.Add(card);
     }
-    public void AddToCards(Card card, Vector2 screenPoint) //overload for in hand card rearranging
+    public void AddToCards(Card card, Vector2 screenPoint, bool OnFailedPlay = false) //overload for in hand card rearranging
     {
-        if(card.GetCardInfo().IsEven())
+        if (card.GetCardInfo().IsEven())
         {
             _evens++;
         }
-        else if(card.GetCardInfo().IsOdd())
+        else if (card.GetCardInfo().IsOdd())
         {
             _odds++;
         }
-        if (_cards == null) 
+        if (_cards == null)
         {
             _cards = new List<Card>();
         }
@@ -127,33 +127,42 @@ public class CardHandArea : MonoBehaviour
             _cards.Add(card);
             return;
         }
-        
-        if (screenPoint.x < _cards[0].GetComponent<RectTransform>().position.x)
+
+        if (!OnFailedPlay)
         {
-            _cards.Insert(0, card);
-            return;
-        }
-        
-        for(int i = 0; i < _cards.Count - 1; i++)
-        {
-            float currentCardX = _cards[i].GetComponent<RectTransform>().position.x;
-            float nextCardX = _cards[i + 1].GetComponent<RectTransform>().position.x;
-            
-            if (screenPoint.x > currentCardX && screenPoint.x < nextCardX)
+            if (screenPoint.x < _cards[0].GetComponent<RectTransform>().position.x)
             {
-                _cards.Insert(i + 1, card);
-                return; 
+                _cards.Insert(0, card);
+                return;
             }
+
+            for (int i = 0; i < _cards.Count - 1; i++)
+            {
+                float currentCardX = _cards[i].GetComponent<RectTransform>().position.x;
+                float nextCardX = _cards[i + 1].GetComponent<RectTransform>().position.x;
+
+                if (screenPoint.x > currentCardX && screenPoint.x < nextCardX)
+                {
+                    _cards.Insert(i + 1, card);
+                    return;
+                }
+            }
+
+        }
+        else
+        {
+            _cards.Insert(card.getOldHandOrder(), card);
+            return;
         }
         _cards.Add(card);
     }
     public void RemoveFromCards(Card card)
     {
-        if(card.GetCardInfo().IsEven())
+        if (card.GetCardInfo().IsEven())
         {
             _evens--;
         }
-        else if(card.GetCardInfo().IsOdd())
+        else if (card.GetCardInfo().IsOdd())
         {
             _odds--;
         }
@@ -161,11 +170,11 @@ public class CardHandArea : MonoBehaviour
         {
             _cards = new List<Card>();
         }
-        _cards.Remove(card); 
+        _cards.Remove(card);
     }
-    public void GreyOutAllCards() 
+    public void GreyOutAllCards()
     {
-        foreach (GameObject card in GameObject.FindGameObjectsWithTag("Card")) 
+        foreach (GameObject card in GameObject.FindGameObjectsWithTag("Card"))
         {
             card.GetComponent<Card>().GreyOut();
         }
@@ -179,21 +188,21 @@ public class CardHandArea : MonoBehaviour
     }
     public void CheckPlayPermissionHand()
     {
-        foreach(Card card in this._cards)
+        foreach (Card card in this._cards)
         {
             card.CheckIsDebuffed();
         }
     }
-    public bool HasMorePlays() 
+    public bool HasMorePlays()
     {
-        PlayArea pa= GameObject.Find("PlayArea").GetComponent<PlayArea>();
-        TurnHandler th= GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
+        PlayArea pa = GameObject.Find("PlayArea").GetComponent<PlayArea>();
+        TurnHandler th = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         Debug.Log("HasMorePPlays Called");
         if (pa != null)
         {
             foreach (Card card in this._cards)
             {
-                Debug.Log("Concidering Card: "+ card.GetCardInfo()._suit+ card.GetCardInfo()._number);
+                Debug.Log("Concidering Card: " + card.GetCardInfo()._suit + card.GetCardInfo()._number);
                 Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
                 Debug.Log("Can Attack With Card: " + pa.CanAttackWithCard(card.GetCardInfo()));
                 Debug.Log("Turn State: " + th.GetTurnState());
@@ -221,7 +230,7 @@ public class CardHandArea : MonoBehaviour
                     {
                         if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()) && !pcard.IsDefended())
                         {
-                            Debug.Log("Current Card "+card.GetCardInfo()+"Can Defend: "+pcard.GetCardInfo());
+                            Debug.Log("Current Card " + card.GetCardInfo() + "Can Defend: " + pcard.GetCardInfo());
                             return true;
                         }
                     }
@@ -230,19 +239,19 @@ public class CardHandArea : MonoBehaviour
         }
         return false;
     }
-    public void Discard(int index, int amount=1)
+    public void Discard(int index, int amount = 1)
     {
-        if(index<_cards.Count)
+        if (index < _cards.Count)
         {
-            for(int i=0; i<amount; i++)
+            for (int i = 0; i < amount; i++)
             {
-                if(index< _cards.Count && index>=0)
+                if (index < _cards.Count && index >= 0)
                 {
                     Card cardToDiscard = _cards[index];
                     _discard.AddCard(cardToDiscard);
                     GameHandler.Instance.GetCurrEncounter().OnHandCardDiscarded(cardToDiscard.GetCardInfo());
                     _cards.RemoveAt(index);
-                    cardToDiscard.MoveTowardsDiscard();
+                    _ = cardToDiscard.MoveTowardsDiscard();
                     DettachCard();
                 }
             }
