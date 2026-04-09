@@ -14,7 +14,7 @@ public class DebugEncounter : Encounter
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("C", j,true));
-                        deck.Add(new CardInfo("S", 6,true)); //debug
+                        deck.Add(new CardInfo("S", 6, true)); //debug
 
                     }
                     break;
@@ -22,21 +22,21 @@ public class DebugEncounter : Encounter
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("S", j,true));
-                        deck.Add(new CardInfo("S", 6,true)); //debug
+                        deck.Add(new CardInfo("S", 6, true)); //debug
                     }
                     break;
                 case 2:
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("D", j,true));
-                        deck.Add(new CardInfo("S", 6,true));  //debug
+                        deck.Add(new CardInfo("S", 6, true));  //debug
                     }
                     break;
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
                         //_deck.Add(new CardInfo("H", j,true));
-                        deck.Add(new CardInfo("S", 6,true));  //debug
+                        deck.Add(new CardInfo("S", 6, true));  //debug
                     }
                     break;
             }
@@ -47,22 +47,22 @@ public class DebugEncounter : Encounter
         icon = null;
         boss = false;
         day = 0;
-        foreach(CardInfo c in deck)
+        foreach (CardInfo c in deck)
         {
-            c.MakeLaika();
+            //c.MakeLaika();
             c.AddModifier("Draw");
         }
-        this.encounterName="DEBUG";
+        this.encounterName = "DEBUG";
     }
 
     public override void OnPlayedCardDiscarded(CardInfo card)
     {
-        
+
     }
 
     public override void OnCardDrawn(CardInfo card)
     {
-        
+
     }
 
     public override void OnDamageOpponent(int amount, string fromMod)
@@ -71,12 +71,12 @@ public class DebugEncounter : Encounter
 
     public override void OnDamagePlayer(int amount, string fromMod)
     {
-        
+
     }
 
     public override void OnDefendCard(Card card, Card defendedWith)
     {
-        
+
     }
 
     public override void OnPlayedCard(Card card)
@@ -93,12 +93,12 @@ public class DebugEncounter : Encounter
 
     public override void SetDebuffs()
     {
-        //GameHandler.Instance.SetDebuffs(new string[]{"C6","D6","H6","S6"},true,true);
+        GameHandler.Instance.SetDebuffs(new string[] { "C", "D", "H", "S" }, false, true);
     }
 
     public override void OnHandCardDiscarded(CardInfo card)
     {
-        
+
     }
 
     public override void AddRules()
@@ -107,10 +107,10 @@ public class DebugEncounter : Encounter
 
     public override void OnHealPlayer(int amount, string fromMod = "")
     {
-        
+
     }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
+    public override int ModifyDamagePlayer(int amount, string fromMod = "", bool OnlyVisual = false)
     {
         return amount;
     }
