@@ -7,20 +7,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerExitHandler
+public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Vector2 _revealPos;
     private Vector2 _hoverPos;
-    private List<string> _trumps=new List<string>();
-    private List<string> _trumpColors=new List<string>(){"White","Red","White","Red"};
+    private List<string> _trumps = new List<string>();
+    private List<string> _trumpColors = new List<string>() { "White", "Red", "White", "Red" };
     private int _trumpSelected;
-    private bool _appeared=false;
+    private bool _appeared = false;
     [SerializeField]
     GameObject _trumpTextPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _revealPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x-80f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
+        _revealPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 80f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
         _hoverPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 200f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
     }
 
@@ -29,7 +29,7 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     {
 
     }
-    void InitTrumps() 
+    void InitTrumps()
     {
         _trumps.Add("Clubs");
         _trumps.Add("Diamonds");
@@ -41,7 +41,7 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
         InitTrumps();
         this.GetComponent<ToolTip>().SetTooltipActiveState(false);
         _trumpSelected = -1;
-        switch (GameHandler.Instance.GetCurrEncounter().GetTrumpSuit()) 
+        switch (GameHandler.Instance.GetCurrEncounter().GetTrumpSuit())
         {
             case 'C':
                 _trumpSelected = 0;
@@ -56,10 +56,19 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
                 _trumpSelected = 3;
                 break;
             default:
-                 _trumpSelected = Random.Range(0, _trumps.Count);
+                _trumpSelected = Random.Range(0, _trumps.Count);
                 break;
         }
         string trumpStringSelected = _trumps[_trumpSelected];
+        Sprite cardSprite = Resources.Load<Sprite>("Grafics/Trumps/" + trumpStringSelected);
+        this.gameObject.GetComponent<Image>().sprite = cardSprite;
+        return trumpStringSelected.Substring(0, 1);
+    }
+    public string SelectTrump(int selection)
+    {
+        InitTrumps();
+
+        string trumpStringSelected = _trumps[selection];
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Trumps/" + trumpStringSelected);
         this.gameObject.GetComponent<Image>().sprite = cardSprite;
         return trumpStringSelected.Substring(0, 1);
@@ -71,16 +80,16 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
     private IEnumerator TrumpAppear()
     {
         RectTransform myRect = GetComponent<RectTransform>();
-        myRect.anchoredPosition = new Vector2(-962,-123);
+        myRect.anchoredPosition = new Vector2(-962, -123);
         //GameObject trumpTxt= Instantiate(_trumpTextPrefab, this.transform.parent);
         //trumpTxt.GetComponent<TrumpSuitText>().SetText(GetTrumpText());
         //trumpTxt.GetComponent<TrumpSuitText>().Init(null, this.gameObject.GetComponentInParent<Canvas>());
         yield return new WaitForSeconds(0.5f);
-        StartCoroutine(MoveToPosition(_revealPos, 0.5f,5f));
-        _appeared=true;
+        StartCoroutine(MoveToPosition(_revealPos, 0.5f, 5f));
+        _appeared = true;
     }
 
-    public IEnumerator MoveToPosition(Vector2 targetPosition, float duration, float targetRotationZ = 0f,bool toolTip=false)
+    public IEnumerator MoveToPosition(Vector2 targetPosition, float duration, float targetRotationZ = 0f, bool toolTip = false)
     {
         this.GetComponent<ToolTip>().SetTooltipActiveState(false);
         RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
@@ -106,27 +115,33 @@ public class TrumpCardIndicator : MonoBehaviour ,IPointerEnterHandler, IPointerE
         rectTransform.rotation = endRot;
         this.GetComponent<ToolTip>().SetToolTipText(GetToolTip());
         this.GetComponent<ToolTip>().SetTooltipActiveState(true);
-        if(toolTip)
+        if (toolTip)
         {
-            _=this.GetComponent<ToolTip>().ShowToolTip();
+            _ = this.GetComponent<ToolTip>().ShowToolTip();
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-      if(_appeared){ this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one * 1.3f;
-        StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10,true));}
+        if (_appeared)
+        {
+            this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one * 1.3f;
+            StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10, true));
+        }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-       if(_appeared){this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
-        StartCoroutine(MoveToPosition(_revealPos, 0.2f, 5));}
+        if (_appeared)
+        {
+            this.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
+            StartCoroutine(MoveToPosition(_revealPos, 0.2f, 5));
+        }
     }
     public string GetToolTip()
     {
-        return  $"<size="+SettingsState.ToolTipFontSizeTitle+"><align=center>"+"The trump suit is "+"<color="+_trumpColors[_trumpSelected]+">"+_trumps[_trumpSelected]+ "!</color></align></size>";
+        return $"<size=" + SettingsState.ToolTipFontSizeTitle + "><align=center>" + "The trump suit is " + "<color=" + _trumpColors[_trumpSelected] + ">" + _trumps[_trumpSelected] + "!</color></align></size>";
     }
     public string GetTrumpText()
     {
-        return  $"<align=center>"+"The trump suit is "+"<color="+_trumpColors[_trumpSelected]+">"+_trumps[_trumpSelected]+ "!</color></align></size>";
+        return $"<align=center>" + "The trump suit is " + "<color=" + _trumpColors[_trumpSelected] + ">" + _trumps[_trumpSelected] + "!</color></align></size>";
     }
 }

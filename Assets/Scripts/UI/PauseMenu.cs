@@ -26,6 +26,7 @@ public class PauseMenu : MonoBehaviour
     private Button _desktopButton;
     [SerializeField]
     private Animator _thisAnim;
+    public bool dontSaveFromHere = false;
     void Awake()
     {
         _resumeButton.onClick.AddListener(resumeOnClick);
@@ -35,10 +36,10 @@ public class PauseMenu : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(_pauseMenu.activeSelf){HidePauseMenu();}
-            else{ShowPauseMenu();}
+            if (_pauseMenu.activeSelf) { HidePauseMenu(); }
+            else { ShowPauseMenu(); }
         }
     }
     async void ShowPauseMenu()
@@ -59,7 +60,7 @@ public class PauseMenu : MonoBehaviour
     }
     void settingsOnClick()
     {
-         // Force animator to initialize properly
+        // Force animator to initialize properly
         _settingsPanelAnim.Rebind();
         _settingsPanelAnim.Update(0);
         _settingsPanel.SetActive(true);
@@ -67,10 +68,10 @@ public class PauseMenu : MonoBehaviour
     }
     void mainMenuOnClick()
     {
-        GameHandler.Instance.BackToMainMenu();
+        GameHandler.Instance.BackToMainMenu(dontSaveFromHere);
     }
     void quitOnClick()
     {
-        GameHandler.Instance.BackToDesktop();
+        GameHandler.Instance.BackToDesktop(dontSaveFromHere);
     }
 }

@@ -47,14 +47,20 @@ public class GameHandler : MonoBehaviour
     {
         return _saveManager.Value.Load() != null;
     }
-    public void BackToMainMenu()
+    public void BackToMainMenu(bool dontSave = false)
     {
-        SaveState();
+        if (!dontSave)
+        {
+            SaveState();
+        }
         SceneManager.LoadScene(0);
     }
-    public void BackToDesktop()
+    public void BackToDesktop(bool dontSave = false)
     {
-        SaveState();
+        if (!dontSave)
+        {
+            SaveState();
+        }
         Application.Quit();
     }
     public void NewGame(string characerChoice = "")
