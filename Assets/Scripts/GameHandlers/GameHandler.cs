@@ -99,8 +99,8 @@ public class GameHandler : MonoBehaviour
         //debugItem5.InitItem();
         //_state.AddItem(debugItem5);
         //_state._rubles=100; //debug
-        _currentEncounter = new DebugEncounter();
-        _currentEncounter.InitiateEncounter();
+        //_currentEncounter = new DebugEncounter();
+        //_currentEncounter.InitiateEncounter();
         SaveState();
         Next();
     }
@@ -158,7 +158,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
             _state._currentEncounterName = _currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
