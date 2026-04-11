@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,20 +15,26 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
     private List<string> _trumpColors = new List<string>() { "White", "Red", "White", "Red" };
     private int _trumpSelected;
     private bool _appeared = false;
+
     [SerializeField]
     GameObject _trumpTextPrefab;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _revealPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 80f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
-        _hoverPos = new Vector2(this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 200f, this.gameObject.GetComponent<RectTransform>().anchoredPosition.y);
+        _revealPos = new Vector2(
+            this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 80f,
+            this.gameObject.GetComponent<RectTransform>().anchoredPosition.y
+        );
+        _hoverPos = new Vector2(
+            this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 200f,
+            this.gameObject.GetComponent<RectTransform>().anchoredPosition.y
+        );
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() { }
 
-    }
     void InitTrumps()
     {
         _trumps.Add("Clubs");
@@ -36,6 +42,7 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
         _trumps.Add("Spades");
         _trumps.Add("Hearts");
     }
+
     public string SelectTrump()
     {
         InitTrumps();
@@ -64,6 +71,7 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
         this.gameObject.GetComponent<Image>().sprite = cardSprite;
         return trumpStringSelected.Substring(0, 1);
     }
+
     public string SelectTrump(int selection)
     {
         InitTrumps();
@@ -73,10 +81,12 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
         this.gameObject.GetComponent<Image>().sprite = cardSprite;
         return trumpStringSelected.Substring(0, 1);
     }
+
     public void Appear()
     {
         StartCoroutine(TrumpAppear());
     }
+
     private IEnumerator TrumpAppear()
     {
         RectTransform myRect = GetComponent<RectTransform>();
@@ -89,7 +99,12 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
         _appeared = true;
     }
 
-    public IEnumerator MoveToPosition(Vector2 targetPosition, float duration, float targetRotationZ = 0f, bool toolTip = false)
+    public IEnumerator MoveToPosition(
+        Vector2 targetPosition,
+        float duration,
+        float targetRotationZ = 0f,
+        bool toolTip = false
+    )
     {
         this.GetComponent<ToolTip>().SetTooltipActiveState(false);
         RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
@@ -120,6 +135,7 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
             _ = this.GetComponent<ToolTip>().ShowToolTip();
         }
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (_appeared)
@@ -128,6 +144,7 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
             StartCoroutine(MoveToPosition(_hoverPos, 0.2f, 10, true));
         }
     }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         if (_appeared)
@@ -136,12 +153,28 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
             StartCoroutine(MoveToPosition(_revealPos, 0.2f, 5));
         }
     }
+
     public string GetToolTip()
     {
-        return $"<size=" + SettingsState.ToolTipFontSizeTitle + "><align=center>" + "The trump suit is " + "<color=" + _trumpColors[_trumpSelected] + ">" + _trumps[_trumpSelected] + "!</color></align></size>";
+        return $"<size="
+            + SettingsState.ToolTipFontSizeTitle
+            + "><align=center>"
+            + "The trump suit is "
+            + "<color="
+            + _trumpColors[_trumpSelected]
+            + ">"
+            + _trumps[_trumpSelected]
+            + "!</color></align></size>";
     }
+
     public string GetTrumpText()
     {
-        return $"<align=center>" + "The trump suit is " + "<color=" + _trumpColors[_trumpSelected] + ">" + _trumps[_trumpSelected] + "!</color></align></size>";
+        return $"<align=center>"
+            + "The trump suit is "
+            + "<color="
+            + _trumpColors[_trumpSelected]
+            + ">"
+            + _trumps[_trumpSelected]
+            + "!</color></align></size>";
     }
 }

@@ -16,6 +16,7 @@ public class PlayArea : MonoBehaviour
     private float _oldCanvasWidth;
     private TurnHandler _turnHandler;
     private RuleHandler _ruleHandler;
+
     [SerializeField]
     private List<Card> _cardsPlayed;
     private List<Card> _cardsDefendedWith;
@@ -23,7 +24,8 @@ public class PlayArea : MonoBehaviour
     private OpponentLogic _opponentHand;
     private Discard _discard;
     private ResponseText _responseText;
-    void Start()
+
+    void Awake()
     {
         _cardsDefendedWith = new List<Card>();
         _cardsPlayed = new List<Card>();
@@ -35,35 +37,37 @@ public class PlayArea : MonoBehaviour
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
         _oldCanvasWidth = _canvasRect.rect.width;
         _maxHandSpacing = _canvasRect.rect.width * 0.6f;
-        _turnHandler = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
-        _ruleHandler = GameObject.Find("RuleHandler").GetComponent<RuleHandler>();
-        _playerHand = GameObject.Find("CardHandArea").GetComponent<CardHandArea>();
-        _opponentHand = GameObject.Find("Opponent").GetComponent<OpponentLogic>();
-        _discard = GameObject.Find("Discard").GetComponent<Discard>();
-        _responseText = GameObject.Find("ResponseText").GetComponent<ResponseText>();
+        _turnHandler = GameObject.Find("TurnHandler")?.GetComponent<TurnHandler>();
+        _ruleHandler = GameObject.Find("RuleHandler")?.GetComponent<RuleHandler>();
+        _playerHand = GameObject.Find("CardHandArea")?.GetComponent<CardHandArea>();
+        _opponentHand = GameObject.Find("Opponent")?.GetComponent<OpponentLogic>();
+        _discard = GameObject.Find("Discard")?.GetComponent<Discard>();
+        _responseText = GameObject.Find("ResponseText")?.GetComponent<ResponseText>();
     }
-    void Update()
-    {
 
-    }
+    void Update() { }
+
     public void AddtoPlayedCards(Card card)
     {
         _cardsPlayed.Insert(0, card);
     }
+
     public void AddtoDefendedWithCards(Card card)
     {
         _cardsDefendedWith.Add(card);
     }
+
     public List<Card> GetDefendedWith()
     {
         return _cardsDefendedWith;
     }
+
     public List<Card> GetCardsPlayed()
     {
         return _cardsPlayed;
     }
-    public
-    void RealignCardsInPlay()
+
+    public void RealignCardsInPlay()
     {
         Vector2 initPosition = new Vector2(((_cardsPlayed.Count + 1) * _playAreaOffSet) / 2, 0);
         foreach (Card i in _cardsPlayed)
@@ -73,50 +77,64 @@ public class PlayArea : MonoBehaviour
         float it = 1;
         foreach (Card i in _cardsPlayed)
         {
-            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(initPosition.x - (_playAreaOffSet * it), 0);
+            i.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                initPosition.x - (_playAreaOffSet * it),
+                0
+            );
             it++;
             if (!i.IsDefended())
             {
                 i.UpdateCardArrows();
             }
-
         }
         RealignDefendingCards();
     }
+
     public void AttachCard()
     {
         this._cardsInPlay++;
         this._playAreaOffSet = GetCardSpacing();
         RealignCardsInPlay();
     }
+
     float GetCardSpacing()
     {
         float neededWidth = (this._cardsInPlay - 1) * this._playAreaIdealOffSet;
-        return (neededWidth <= this._maxHandSpacing) ? this._playAreaIdealOffSet : (this._maxHandSpacing / (this._cardsInPlay - 1));
+        return (neededWidth <= this._maxHandSpacing)
+            ? this._playAreaIdealOffSet
+            : (this._maxHandSpacing / (this._cardsInPlay - 1));
     }
+
     public int GetCardsInPlay()
     {
         return this._cardsInPlay;
     }
+
     public int GetAreaSize()
     {
         return this._playAreaSize;
     }
+
     public int GetCardDefending(Vector2 screenPoint)
     {
         foreach (RectTransform child in this.transform.Find("PlayedCards"))
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(child, screenPoint) && !child.gameObject.GetComponent<Card>().IsDefended())
+            if (
+                RectTransformUtility.RectangleContainsScreenPoint(child, screenPoint)
+                && !child.gameObject.GetComponent<Card>().IsDefended()
+            )
             {
                 return child.GetSiblingIndex();
             }
         }
         return -1;
     }
+
     public int GetNumCardsBlocking()
     {
         return this.transform.Find("DefendedCards").childCount;
     }
+
     public int UnblockedCardsAmount()
     {
         int amount = 0;
@@ -129,6 +147,7 @@ public class PlayArea : MonoBehaviour
         }
         return amount;
     }
+
     bool CanAtackWithAnotherCard()
     {
         int unblockedCardsNum = UnblockedCardsAmount();
@@ -142,6 +161,7 @@ public class PlayArea : MonoBehaviour
             //return (unblockedCardsNum + 1 <= _opponentHand.GetCardsInHand());
         }
     }
+
     bool CanReverseWithAnotherCard()
     {
         if (_turnHandler.GetTurnState() == 0)
@@ -154,9 +174,13 @@ public class PlayArea : MonoBehaviour
             // UnblockedCardsAmount() < _opponentHand.GetCardsInHand();
         }
     }
+
     public bool CanAttackWithCard(CardInfo card, bool ShowErrorResponses = false)
     {
-        if (this.transform.Find("PlayedCards").childCount == 0) { return true; }
+        if (this.transform.Find("PlayedCards").childCount == 0)
+        {
+            return true;
+        }
         else if (CanAtackWithAnotherCard())
         {
             foreach (RectTransform child in this.transform.Find("PlayedCards"))
@@ -175,7 +199,9 @@ public class PlayArea : MonoBehaviour
             }
             if (ShowErrorResponses)
             {
-                _responseText.AddToResponseText($"Cannot Attack with this card because it does not share its number with any other card!");
+                _responseText?.AddToResponseText(
+                    $"Cannot Attack with this card because it does not share its number with any other card!"
+                );
             }
         }
         else
@@ -187,32 +213,71 @@ public class PlayArea : MonoBehaviour
         }
         return false;
     }
-    public bool CardCanDefendCard(CardInfo defendingCard, CardInfo defendedCard, bool ShowErrorResponses = false)
+
+    public bool CardCanDefendCard(
+        CardInfo defendingCard,
+        CardInfo defendedCard,
+        bool ShowErrorResponses = false
+    )
     {
-        if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._blackCardsSameSuit && defendedCard._suitNumber > 1 && defendingCard._suitNumber > 1)
+        if (
+            defendedCard._opponentCard
+            && GameHandler.Instance.GetGameState()._blackCardsSameSuit
+            && defendedCard._suitNumber > 1
+            && defendingCard._suitNumber > 1
+        )
         {
-            if (defendingCard._number > defendedCard._number || defendedCard._card.IsDebuffed()) { return true; }
+            if (defendingCard._number > defendedCard._number || defendedCard._card.IsDebuffed())
+            {
+                return true;
+            }
             else
             {
-                if (ShowErrorResponses) { _responseText.AddToResponseText($"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"); }
+                if (ShowErrorResponses)
+                {
+                    _responseText.AddToResponseText(
+                        $"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"
+                    );
+                }
                 return false;
             }
         }
-        if (defendedCard._opponentCard && GameHandler.Instance.GetGameState()._redCardsSameSuit && defendedCard._suitNumber < 2 && defendingCard._suitNumber < 2)
+        if (
+            defendedCard._opponentCard
+            && GameHandler.Instance.GetGameState()._redCardsSameSuit
+            && defendedCard._suitNumber < 2
+            && defendingCard._suitNumber < 2
+        )
         {
-            if (defendingCard._number > defendedCard._number || defendedCard._card.IsDebuffed()) { return true; }
+            if (defendingCard._number > defendedCard._number || defendedCard._card.IsDebuffed())
+            {
+                return true;
+            }
             else
             {
-                if (ShowErrorResponses) { _responseText.AddToResponseText($"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"); }
+                if (ShowErrorResponses)
+                {
+                    _responseText.AddToResponseText(
+                        $"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"
+                    );
+                }
                 return false;
             }
         }
         if (defendedCard._suit == defendingCard._suit)
         {
-            if (defendingCard._number > defendedCard._number || defendedCard._card.IsDebuffed()) { return true; }
+            if (defendingCard._number > defendedCard._number || defendedCard._card.IsDebuffed())
+            {
+                return true;
+            }
             else
             {
-                if (ShowErrorResponses) { _responseText.AddToResponseText($"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"); }
+                if (ShowErrorResponses)
+                {
+                    _responseText.AddToResponseText(
+                        $"{defendingCard.CompileCardName()} does not have a larger number than {defendedCard.CompileCardName()}"
+                    );
+                }
                 return false;
             }
         }
@@ -232,18 +297,23 @@ public class PlayArea : MonoBehaviour
         {
             if (ShowErrorResponses)
             {
-                _responseText.AddToResponseText($"{defendingCard.CompileCardName()} cannot defend {defendedCard.CompileCardName()}!");
+                _responseText.AddToResponseText(
+                    $"{defendingCard.CompileCardName()} cannot defend {defendedCard.CompileCardName()}!"
+                );
             }
             return false;
         }
     }
+
     public bool CanReverseWithCard(CardInfo card, bool ShowErrorResponses = false)
     {
         if (_cardsDefendedWith.Count > 0 || !GameHandler.Instance.GetGameState()._reversePossible)
         {
             if (ShowErrorResponses)
             {
-                _responseText.AddToResponseText($"Cannot reverse when there are already cards defended!");
+                _responseText.AddToResponseText(
+                    $"Cannot reverse when there are already cards defended!"
+                );
             }
             return false;
         }
@@ -255,7 +325,9 @@ public class PlayArea : MonoBehaviour
                 {
                     if (ShowErrorResponses)
                     {
-                        _responseText.AddToResponseText($"Cannot attack with {card.CompileCardName()}");
+                        _responseText.AddToResponseText(
+                            $"Cannot attack with {card.CompileCardName()}"
+                        );
                     }
                     return false;
                 }
@@ -268,6 +340,7 @@ public class PlayArea : MonoBehaviour
         }
         return false;
     }
+
     public async Task Wipe()
     {
         foreach (Card card in _cardsDefendedWith)
@@ -300,6 +373,7 @@ public class PlayArea : MonoBehaviour
         }
         await Task.WhenAll(moveTasks);
     }
+
     public void RealignDefendingCards()
     {
         foreach (RectTransform cardTransform in this.transform.Find("PlayedCards"))
@@ -313,6 +387,7 @@ public class PlayArea : MonoBehaviour
             }
         }
     }
+
     public void ReverseArrowsOnPlayedCards()
     {
         foreach (Card card in _cardsPlayed)

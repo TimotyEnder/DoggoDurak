@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,8 +9,14 @@ using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
-
+public class Card
+    : MonoBehaviour,
+        IPointerEnterHandler,
+        IPointerExitHandler,
+        IBeginDragHandler,
+        IDragHandler,
+        IEndDragHandler,
+        IPointerClickHandler
 {
     private CardInfo _cardInfo;
     private RectTransform _cardRect;
@@ -23,15 +28,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private GameObject _cardImage;
     private Canvas _canvas;
     private RectTransform _cardImageRect;
+
     [SerializeField]
     private TextMeshProUGUI _numberText;
+
     [SerializeField]
     private TextMeshProUGUI _numberText2;
+
     [SerializeField]
     private bool _isInteractable;
     private int _cost;
+
     [SerializeField]
     private TextMeshProUGUI _costText;
+
     [SerializeField]
     private GameObject _costObject;
     private GameObject _playArea;
@@ -42,9 +52,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private bool _defended;
     private Card _cardDefending;
     private OpponentLogic _opponent;
+
     //visual modifiers
     [SerializeField]
     private GameObject _notPermissible;
+
     [SerializeField]
     private GameObject _marked;
     private GameObject _bounceOverlay;
@@ -70,42 +82,56 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     //text prefabs for card modifier effects
     [SerializeField]
     private GameObject burnTextPrefab;
+
     [SerializeField]
     private GameObject restoringTextPrefab;
+
     [SerializeField]
     private GameObject bounceTextPrefab;
+
     [SerializeField]
     private GameObject spikyTextPrefab;
+
     [SerializeField]
     private GameObject cripplingTextPrefab;
+
     [SerializeField]
     private GameObject parryTextPrefab;
+
     [SerializeField]
     private GameObject drawTextPrefab;
+
     [SerializeField]
     private GameObject poisonTextPrefab;
+
     [SerializeField]
     private GameObject _upArrow;
+
     [SerializeField]
     private TextMeshProUGUI _upArrowText;
+
     [SerializeField]
     private RectTransform _upArrowPos;
+
     [SerializeField]
     private GameObject _downArrow;
+
     [SerializeField]
     private TextMeshProUGUI _downArrowText;
+
     [SerializeField]
     private RectTransform _downArrowPos;
     private PassButton _passButton;
+
     //Draggins handled
     private bool _dragging;
 
     //debuff management
     private bool _Debuffed;
+
     //Response Error Text
-    void Start()
-    {
-    }
+    void Start() { }
+
     void Awake()
     {
         //card hand area
@@ -121,7 +147,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
         //RectTransform is commonly used so we init it
         _cardRect = this.GetComponent<RectTransform>();
-
 
         //sibling index
         this._oldSiblingIndex = -1;
@@ -177,10 +202,34 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _passButton = passBtnObj.GetComponent<PassButton>();
         }
     }
+
     public int getOldHandOrder()
     {
         return this._oldHandOrder;
     }
+
+    //TUTORIAL USE ONLY!
+    public void SetCardHandArea(CardHandArea ch)
+    {
+        this._cardHandAreaScript = ch;
+        this._cardHandArea = ch.gameObject;
+        this._cardHandAreaRect = ch.gameObject.GetComponent<RectTransform>();
+    }
+
+    //TUTORIAL USE ONLY!
+    public void SetPlayArea(PlayArea pa)
+    {
+        this._playArea = pa.gameObject;
+        this._playAreaRect = pa.gameObject.GetComponent<RectTransform>();
+        this._playAreaScript = pa;
+    }
+
+    //TUTORIAL USE ONLY!
+    public void SetTurnHandler(TurnHandler th)
+    {
+        this._turnHandler = th;
+    }
+
     public void MakeCard(CardInfo card, bool IsInteractable = true, int Cost = 0)
     {
         this._cardInfo = card;
@@ -188,8 +237,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         Sprite cardSprite = Resources.Load<Sprite>("Grafics/Cards/" + _cardInfo._suit);
         transform.Find("CardImage").gameObject.SetActive(true);
         _cardImage.GetComponent<Image>().sprite = cardSprite;
-        _numberText.text = $"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
-        _numberText2.text = $"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
+        _numberText.text =
+            $"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
+        _numberText2.text =
+            $"{CardInfo.suitToColorNumber[_cardInfo._suit]}{CardInfo.GetNumberShortName(_cardInfo._number)}</color>";
         _isInteractable = IsInteractable;
         _cost = Cost;
         if (_cost > 0)
@@ -202,6 +253,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.localScale = Vector3.one;
         this.GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
+
     public void UpdateCardArrows()
     {
         _upArrow.SetActive(false);
@@ -217,35 +269,41 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _upArrow.transform.SetAsFirstSibling();
             if (GameHandler.Instance.GetGameState()._opponentsShield > 0)
             {
-                _upArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._opponentsShield)}</color>";
+                _upArrowText.text =
+                    $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._opponentsShield)}</color>";
             }
             else
             {
-                _upArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}</color>";
+                _upArrowText.text =
+                    $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.OpponentDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}</color>";
             }
         }
-
         else
         {
             _downArrow.SetActive(true);
-            _downArrow.GetComponent<RectTransform>().anchoredPosition = _downArrowPos.anchoredPosition;
+            _downArrow.GetComponent<RectTransform>().anchoredPosition =
+                _downArrowPos.anchoredPosition;
             _downArrow.transform.SetParent(_canvas.transform);
             _downArrow.transform.SetAsFirstSibling();
             if (GameHandler.Instance.GetGameState()._playerShield > 0)
             {
-                _downArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._playerShield)}</color>";
+                _downArrowText.text =
+                    $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}-{StylisticClass.SecondaryColor}{StylisticClass.ShieldNumber(GameHandler.Instance.GetGameState()._playerShield)}</color>";
             }
             else
             {
-                _downArrowText.text = $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}</color>";
+                _downArrowText.text =
+                    $"<wave  a=0.1>{StylisticClass.DamageNumber(GameHandler.Instance.PlayerDamageCalculation(this._Debuffed ? 0 : _cardInfo._number, OnlyVisual: true))}</color>";
             }
         }
     }
+
     public void RemoveCardArrows()
     {
         _upArrow.SetActive(false);
         _downArrow.SetActive(false);
     }
+
     public void SetAnimatable(bool state)
     {
         if (_animator.enabled == false)
@@ -267,29 +325,35 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             _animator.applyRootMotion = true;
         }
     }
+
     public void GreyIn()
     {
         _grey = true;
         _cardImage.GetComponent<Image>().color = Color.grey;
     }
+
     public void GreyOut()
     {
         _grey = false;
         _cardImage.GetComponent<Image>().color = Color.white;
     }
+
     public bool IsDebuffed()
     {
         return _Debuffed;
     }
+
     public bool IsBeingDragged()
     {
         return this._dragging;
     }
+
     public void SetDebuffed(bool state)
     {
         this._Debuffed = state;
         CheckDebuffVisual();
     }
+
     public void CheckIsDebuffed()
     {
         if (!GameHandler.Instance.IsCardnotDebuffed(_cardInfo, _cardInfo._opponentCard ? 1 : 0))
@@ -298,6 +362,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             CheckDebuffVisual();
         }
     }
+
     public void CheckDebuffVisual()
     {
         if (this._Debuffed)
@@ -311,14 +376,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
+
     public void Mark()
     {
         _marked.SetActive(true);
     }
+
     public void Unmark()
     {
         _marked.SetActive(false);
     }
+
     public void Bling()
     {
         if (_animator != null && this.gameObject.activeSelf)
@@ -326,6 +394,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             StartCoroutine(BlingRoutine());
         }
     }
+
     private IEnumerator BlingRoutine()
     {
         SetAnimatable(true);
@@ -334,6 +403,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.localScale = Vector3.one;
         SetAnimatable(false);
     }
+
     public void Hit()
     {
         if (_animator != null)
@@ -341,6 +411,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             StartCoroutine(HitRoutine());
         }
     }
+
     private IEnumerator HitRoutine()
     {
         SetAnimatable(true);
@@ -350,6 +421,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardRect.eulerAngles = Vector3.zero;
         SetAnimatable(false);
     }
+
     public void SpawnModifierEffect(CardModifierContainer c)
     {
         GameObject instancedText = null;
@@ -360,35 +432,75 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             {
                 case "Restoring":
                     Debug.Log("Restoring");
-                    instancedText = Instantiate(restoringTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        restoringTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Bounce":
                     Debug.Log("Bounce");
-                    instancedText = Instantiate(bounceTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        bounceTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Burn":
                     Debug.Log("Burn");
-                    instancedText = Instantiate(burnTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        burnTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Parry":
                     Debug.Log("Parry");
-                    instancedText = Instantiate(parryTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        parryTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Draw":
                     Debug.Log("Draw");
-                    instancedText = Instantiate(drawTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        drawTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Cripple":
                     Debug.Log("Cripple");
-                    instancedText = Instantiate(cripplingTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        cripplingTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Spiky":
                     Debug.Log("Spiky");
-                    instancedText = Instantiate(spikyTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        spikyTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
                 case "Poison":
                     Debug.Log("Poison");
-                    instancedText = Instantiate(poisonTextPrefab, this.transform.position, this.transform.rotation, _canvas.transform);
+                    instancedText = Instantiate(
+                        poisonTextPrefab,
+                        this.transform.position,
+                        this.transform.rotation,
+                        _canvas.transform
+                    );
                     break;
             }
         }
@@ -396,12 +508,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             instancedText.GetComponent<ModifierText>().Init(this.GetCardInfo(), _canvas);
         }
-
     }
+
     public float GetAnimSpeed()
     {
         return _animator.speed;
     }
+
     public void UpdateModifiers()
     {
         //cardModifiers
@@ -466,9 +579,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             }
         }
     }
+
     public void OnDraw()
     {
-        UnityEngine.Debug.Log("OnDraw() is executing!");
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
         _cardRect.localScale = Vector3.one;
@@ -484,9 +597,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardHandAreaScript.AddToCards(this);
         _cardHandAreaScript.RealignCardsInHand();
     }
+
     public void OnDraw(Vector2 screenPoint, bool OnFailedPlay = false)
     {
-        UnityEngine.Debug.Log("OnDraw() is executing!");
         _played = false;
         _cardRect.SetParent(_cardHandAreaRect);
         _cardRect.localScale = Vector3.one;
@@ -502,6 +615,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         _cardHandAreaScript.AddToCards(this, screenPoint, OnFailedPlay);
         _cardHandAreaScript.RealignCardsInHand();
     }
+
     public void OnPlay(Vector2 screenPoint)
     {
         Debug.Log("On play turn state: " + _turnHandler.GetTurnState());
@@ -509,26 +623,47 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         CardInfo cardToDefend = null;
         if (cardDefendingIndex != -1)
         {
-            cardToDefend = _playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>().GetCardInfo();
+            cardToDefend = _playAreaRect
+                .Find("PlayedCards")
+                .GetChild(cardDefendingIndex)
+                .gameObject.GetComponent<Card>()
+                .GetCardInfo();
         }
         //playing cards  as it is your turn
-        if (cardDefendingIndex == -1 && _turnHandler.GetTurnState() == 0 && _playAreaScript.CanAttackWithCard(this.GetCardInfo(), true))
+        if (
+            cardDefendingIndex == -1
+            && _turnHandler.GetTurnState() == 0
+            && _playAreaScript.CanAttackWithCard(this.GetCardInfo(), true)
+        )
         {
             Debug.Log("Able to attack");
             PlayCard();
-            _opponent.resetDoublePass();
-            _passButton.SetJiggle(true);
+            _opponent?.resetDoublePass();
+            _passButton?.SetJiggle(true);
         }
         //Defending, not your turn
-        else if (_turnHandler.GetTurnState() != 0 && cardDefendingIndex != -1 && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend, true))
+        else if (
+            _turnHandler.GetTurnState() != 0
+            && cardDefendingIndex != -1
+            && _playAreaScript.CardCanDefendCard(this.GetCardInfo(), cardToDefend, true)
+        )
         {
             Debug.Log("Able to defend");
-            DefendCard(_playAreaRect.Find("PlayedCards").GetChild(cardDefendingIndex).gameObject.GetComponent<Card>());
+            DefendCard(
+                _playAreaRect
+                    .Find("PlayedCards")
+                    .GetChild(cardDefendingIndex)
+                    .gameObject.GetComponent<Card>()
+            );
             _opponent.resetDoublePass();
             _passButton.SetJiggle(true);
         }
         //reverse
-        else if (cardDefendingIndex == -1 && _playAreaScript.CanReverseWithCard(this._cardInfo, true) && _turnHandler.GetTurnState() != 0)
+        else if (
+            cardDefendingIndex == -1
+            && _playAreaScript.CanReverseWithCard(this._cardInfo, true)
+            && _turnHandler.GetTurnState() != 0
+        )
         {
             Debug.Log("Able to reverse");
             PlayCard();
@@ -547,6 +682,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             OnDraw(screenPoint, true);
         }
     }
+
     public void PlayCard()
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("PlayedCards"));
@@ -563,6 +699,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         GameHandler.Instance.GetCurrEncounter().OnPlayedCard(this);
     }
+
     public void DefendCard(Card card)
     {
         _cardRect.SetParent(_playAreaRect.transform.Find("DefendedCards"));
@@ -584,12 +721,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         this.RemoveCardArrows();
         card.RemoveCardArrows();
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         _tryToHighlightCard = true;
         _oldEuAngle = _cardRect.eulerAngles;
         StartCoroutine(CheckTopPointerUntilExit(eventData));
     }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         _tryToHighlightCard = false;
@@ -607,6 +746,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
         _cardImageRect.localScale = Vector3.one;
     }
+
     private IEnumerator CheckTopPointerUntilExit(PointerEventData ped)
     {
         while (_tryToHighlightCard)
@@ -632,6 +772,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             yield return null;
         }
     }
+
     private bool IsTopPointer(PointerEventData ped)
     {
         List<RaycastResult> results = new List<RaycastResult>();
@@ -647,23 +788,50 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
 
         return false;
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_played || _grey || !_isInteractable || _turnHandler.IsTurnEnding()) { return; } //return early in this method fails the drag.
+        if (
+            _played
+            || _grey
+            || !_isInteractable
+            || _turnHandler != null && _turnHandler.IsTurnEnding()
+        )
+        {
+            return;
+        } //return early in this method fails the drag.
         GetComponent<ToolTip>().SetTooltipActiveState(false);
         _oldHandOrder = _cardHandAreaScript.GetIndexOfCard(this);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         _dragging = true;
     }
+
     public void OnDrag(PointerEventData eventData)
     {
-        if (_played || _grey || !_isInteractable || _turnHandler.IsTurnEnding()) { return; }
+        if (
+            _played
+            || _grey
+            || !_isInteractable
+            || _turnHandler != null && _turnHandler.IsTurnEnding()
+        )
+        {
+            return;
+        }
         _cardRect.eulerAngles = Vector3.zero;
         _cardRect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
+
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        if (_played && !_opponent.IsEnemyPlaying() || _grey || !_isInteractable || _turnHandler.IsTurnEnding()) { return; }
+        if (
+            _played && !_opponent.IsEnemyPlaying()
+            || _grey
+            || !_isInteractable
+            || _turnHandler != null && _turnHandler.IsTurnEnding()
+        )
+        {
+            return;
+        }
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
@@ -678,28 +846,38 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             OnDraw(eventData.position);
         }
     }
+
     public Vector2 GetDefendPosition()
     {
-        return new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x, this.GetComponent<RectTransform>().anchoredPosition.y - (this.GetComponent<RectTransform>().rect.height * 0.5f));
+        return new Vector2(
+            this.GetComponent<RectTransform>().anchoredPosition.x,
+            this.GetComponent<RectTransform>().anchoredPosition.y
+                - (this.GetComponent<RectTransform>().rect.height * 0.5f)
+        );
     }
+
     public CardInfo GetCardInfo()
     {
         return this._cardInfo;
     }
+
     public void Defend(Card defendedWith)
     {
         _defended = true;
         _cardDefending = defendedWith;
         _cardInfo.OnBeingDefended(defendedWith);
     }
+
     public Card GetCardDefending()
     {
         return _cardDefending;
     }
+
     public bool IsDefended()
     {
         return _defended;
     }
+
     public async Task MoveTowardsDiscard(bool countAsPlayedDiscard = false)
     {
         if (countAsPlayedDiscard)
@@ -707,13 +885,24 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             GameHandler.Instance.GetCurrEncounter().OnPlayedCardDiscarded(this.GetCardInfo());
         }
         _isInteractable = false;
-        Vector2 target = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetDiscardPileCardPosition();
-        UnityEngine.Quaternion rotation = GameObject.Find("Discard").GetComponent<DiscardPilePositions>().GetRandomRotation();
+        Vector2 target = GameObject
+            .Find("Discard")
+            .GetComponent<DiscardPilePositions>()
+            .GetDiscardPileCardPosition();
+        UnityEngine.Quaternion rotation = GameObject
+            .Find("Discard")
+            .GetComponent<DiscardPilePositions>()
+            .GetRandomRotation();
         GetComponent<ToolTip>().SetTooltipActiveState(false);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         await MoveTowardsCoroutine(target, rotation);
     }
-    private async Task MoveTowardsCoroutine(Vector2 target, UnityEngine.Quaternion? rotation = null, bool dieAfterReaching = false)
+
+    private async Task MoveTowardsCoroutine(
+        Vector2 target,
+        UnityEngine.Quaternion? rotation = null,
+        bool dieAfterReaching = false
+    )
     {
         float speed = 2500f;
         while (Vector2.Distance(_cardRect.anchoredPosition, target) > 0.01f)
@@ -727,7 +916,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
                 step = distance;
             }
 
-            _cardRect.anchoredPosition = Vector2.MoveTowards(_cardRect.anchoredPosition, target, step);
+            _cardRect.anchoredPosition = Vector2.MoveTowards(
+                _cardRect.anchoredPosition,
+                target,
+                step
+            );
             await UniTask.NextFrame();
         }
         _cardRect.SetAsFirstSibling();
@@ -740,9 +933,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             Destroy(this.gameObject);
         }
     }
+
     public void OnPointerClick(PointerEventData eventData) //this is to handle buyable cards
     {
-
         if (!_isInteractable && _cost > 0 && GameHandler.Instance.GetGameState()._rubles >= _cost)
         {
             GameHandler.Instance.UpdateMoney(-_cost);
@@ -773,4 +966,3 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         }
     }
 }
-

@@ -5,35 +5,43 @@ public class CardHandArea : MonoBehaviour
 {
     [SerializeField]
     private float _maxHandSpacing;
+
     [SerializeField]
     private int _cardsInHand = 0;
     private RectTransform _canvasRect;
     private Canvas _canvas;
     private float _oldCanvasWidth;
-    private RectTransform _cardHandRect;
+
     [SerializeField]
     private float _angleDelta;
+
     [SerializeField]
     private float _idealAngleDelta;
+
     [SerializeField]
     private float radius;
+
     [SerializeField]
     private List<Card> _cards;
     private Discard _discard;
     private int _evens;
     private int _odds;
+
     void Start()
     {
         _canvasRect = GameObject.Find("UI").GetComponent<RectTransform>();
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
         _oldCanvasWidth = _canvasRect.rect.width;
-        _discard = GameObject.Find("Discard").GetComponent<Discard>();
+        GameObject _discardObj = GameObject.Find("Discard");
+        if (_discardObj != null)
+        {
+            _discard = _discardObj.GetComponent<Discard>();
+        }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-    }
+    void Update() { }
+
     public void RealignCardsInHand()
     {
         foreach (Card i in _cards)
@@ -52,46 +60,66 @@ public class CardHandArea : MonoBehaviour
             angle *= -Mathf.Deg2Rad;
             float x = Mathf.Sin(angle) * radius;
             float y = Mathf.Cos(angle) * radius;
-            i.GetComponent<RectTransform>().anchoredPosition = new Vector3(center.x + x, center.y + y, 0);
+            i.GetComponent<RectTransform>().anchoredPosition = new Vector3(
+                center.x + x,
+                center.y + y,
+                0
+            );
             index++;
         }
     }
+
     public List<Card> GetCards()
     {
         return this._cards;
     }
+
     public void OrderByRank()
     {
-        _cards.Sort((a, b) => (a.GetCardInfo()._number == b.GetCardInfo()._number) ? a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber) : a.GetCardInfo()._number.CompareTo(b.GetCardInfo()._number));
+        _cards.Sort(
+            (a, b) =>
+                (a.GetCardInfo()._number == b.GetCardInfo()._number)
+                    ? a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber)
+                    : a.GetCardInfo()._number.CompareTo(b.GetCardInfo()._number)
+        );
         RealignCardsInHand();
     }
+
     public void OrderBySuit()
     {
         _cards.Sort((a, b) => a.GetCardInfo()._suitNumber.CompareTo(b.GetCardInfo()._suitNumber));
         RealignCardsInHand();
     }
+
     public void AttachCard()
     {
         this._cardsInHand++;
     }
+
     public void DettachCard()
     {
         this._cardsInHand--;
         RealignCardsInHand();
     }
+
     float GetCardSpacing()
     {
         float neededWidth = (this._cardsInHand - 1) * this._idealAngleDelta;
-        return (neededWidth <= this._maxHandSpacing) ? this._idealAngleDelta : (this._maxHandSpacing / (this._cardsInHand - 1));
+        return (neededWidth <= this._maxHandSpacing)
+            ? this._idealAngleDelta
+            : (this._maxHandSpacing / (this._cardsInHand - 1));
     }
+
     public int GetCardsInHand()
     {
         return this._cardsInHand;
     }
+
     public int GetIndexOfCard(Card card)
     {
         return _cards.IndexOf(card);
     }
+
     public void AddToCards(Card card)
     {
         if (card.GetCardInfo().IsEven())
@@ -108,6 +136,7 @@ public class CardHandArea : MonoBehaviour
         }
         _cards.Add(card);
     }
+
     public void AddToCards(Card card, Vector2 screenPoint, bool OnFailedPlay = false) //overload for in hand card rearranging
     {
         if (card.GetCardInfo().IsEven())
@@ -147,7 +176,6 @@ public class CardHandArea : MonoBehaviour
                     return;
                 }
             }
-
         }
         else
         {
@@ -156,6 +184,7 @@ public class CardHandArea : MonoBehaviour
         }
         _cards.Add(card);
     }
+
     public void RemoveFromCards(Card card)
     {
         if (card.GetCardInfo().IsEven())
@@ -172,6 +201,7 @@ public class CardHandArea : MonoBehaviour
         }
         _cards.Remove(card);
     }
+
     public void GreyOutAllCards()
     {
         foreach (GameObject card in GameObject.FindGameObjectsWithTag("Card"))
@@ -179,6 +209,7 @@ public class CardHandArea : MonoBehaviour
             card.GetComponent<Card>().GreyOut();
         }
     }
+
     public void GreyInAllCards()
     {
         foreach (Card card in this._cards)
@@ -186,6 +217,7 @@ public class CardHandArea : MonoBehaviour
             card.GreyIn();
         }
     }
+
     public void CheckPlayPermissionHand()
     {
         foreach (Card card in this._cards)
@@ -193,6 +225,7 @@ public class CardHandArea : MonoBehaviour
             card.CheckIsDebuffed();
         }
     }
+
     public bool HasMorePlays()
     {
         PlayArea pa = GameObject.Find("PlayArea").GetComponent<PlayArea>();
@@ -202,11 +235,16 @@ public class CardHandArea : MonoBehaviour
         {
             foreach (Card card in this._cards)
             {
-                Debug.Log("Concidering Card: " + card.GetCardInfo()._suit + card.GetCardInfo()._number);
+                Debug.Log(
+                    "Concidering Card: " + card.GetCardInfo()._suit + card.GetCardInfo()._number
+                );
                 Debug.Log("Can Reverse With Card: " + pa.CanReverseWithCard(card.GetCardInfo()));
                 Debug.Log("Can Attack With Card: " + pa.CanAttackWithCard(card.GetCardInfo()));
                 Debug.Log("Turn State: " + th.GetTurnState());
-                if (pa.CanReverseWithCard(card.GetCardInfo()) || (pa.CanAttackWithCard(card.GetCardInfo()) && th.GetTurnState() == 0))
+                if (
+                    pa.CanReverseWithCard(card.GetCardInfo())
+                    || (pa.CanAttackWithCard(card.GetCardInfo()) && th.GetTurnState() == 0)
+                )
                 {
                     Debug.Log("Can Reverse Or Attack With Card");
                     return true;
@@ -228,9 +266,17 @@ public class CardHandArea : MonoBehaviour
                     }
                     foreach (Card pcard in pa.GetCardsPlayed())
                     {
-                        if (pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo()) && !pcard.IsDefended())
+                        if (
+                            pa.CardCanDefendCard(card.GetCardInfo(), pcard.GetCardInfo())
+                            && !pcard.IsDefended()
+                        )
                         {
-                            Debug.Log("Current Card " + card.GetCardInfo() + "Can Defend: " + pcard.GetCardInfo());
+                            Debug.Log(
+                                "Current Card "
+                                    + card.GetCardInfo()
+                                    + "Can Defend: "
+                                    + pcard.GetCardInfo()
+                            );
                             return true;
                         }
                     }
@@ -239,6 +285,7 @@ public class CardHandArea : MonoBehaviour
         }
         return false;
     }
+
     public void Discard(int index, int amount = 1)
     {
         if (index < _cards.Count)
@@ -249,7 +296,9 @@ public class CardHandArea : MonoBehaviour
                 {
                     Card cardToDiscard = _cards[index];
                     _discard.AddCard(cardToDiscard);
-                    GameHandler.Instance.GetCurrEncounter().OnHandCardDiscarded(cardToDiscard.GetCardInfo());
+                    GameHandler
+                        .Instance.GetCurrEncounter()
+                        .OnHandCardDiscarded(cardToDiscard.GetCardInfo());
                     _cards.RemoveAt(index);
                     _ = cardToDiscard.MoveTowardsDiscard();
                     DettachCard();
@@ -257,10 +306,12 @@ public class CardHandArea : MonoBehaviour
             }
         }
     }
+
     public int EvenCards()
     {
         return _evens;
     }
+
     public int OddCards()
     {
         return _odds;

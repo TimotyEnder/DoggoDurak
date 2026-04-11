@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "DefaultEncounter", menuName = "Encounters/Default")]
 public class DefaultEncounter : Encounter
 {
@@ -13,13 +14,13 @@ public class DefaultEncounter : Encounter
                 case 0:
                     for (int j = 6; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("C", j,true));
+                        deck.Add(new CardInfo("C", j, true));
                     }
                     break;
                 case 1:
                     for (int j = 6; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("S", j,true));
+                        deck.Add(new CardInfo("S", j, true));
                     }
                     break;
                 case 2:
@@ -31,7 +32,7 @@ public class DefaultEncounter : Encounter
                 case 3:
                     for (int j = 6; j < 15; j++)
                     {
-                        deck.Add(new CardInfo("H", j,true));
+                        deck.Add(new CardInfo("H", j, true));
                     }
                     break;
             }
@@ -44,67 +45,40 @@ public class DefaultEncounter : Encounter
         day = 0;
     }
 
-    public override void OnPlayedCardDiscarded(CardInfo card)
-    {
-        
-    }
+    public override void OnPlayedCardDiscarded(CardInfo card) { }
 
-    public override void OnCardDrawn(CardInfo card)
-    {
-        
-    }
+    public override void OnCardDrawn(CardInfo card) { }
 
-    public override void OnDamageOpponent(int amount, string fromMod)
-    {
-    }
+    public override void OnDamageOpponent(int amount, string fromMod) { }
 
-    public override void OnDamagePlayer(int amount, string fromMod)
-    {
-        
-    }
+    public override void OnDamagePlayer(int amount, string fromMod) { }
 
-    public override void OnDefendCard(Card card, Card defendedWith)
-    {
-        
-    }
+    public override void OnDefendCard(Card card, Card defendedWith) { }
 
-    public override void OnPlayedCard(Card card)
-    {
-    }
+    public override void OnPlayedCard(Card card) { }
 
-    public override void OnReverse(Card card)
-    {
-    }
+    public override void OnReverse(Card card) { }
 
-    public override void OnTurnEnd(int turnState)
-    {
-    }
+    public override void OnTurnEnd(int turnState) { }
 
-    public override void SetDebuffs()
-    {
-        
-    }
+    public override void SetDebuffs() { }
 
-    public override void OnHandCardDiscarded(CardInfo card)
-    {
-        
-    }
+    public override void OnHandCardDiscarded(CardInfo card) { }
 
-    public override void AddRules()
-    {
-    }
+    public override void AddRules() { }
 
-    public override void OnHealPlayer(int amount, string fromMod = "")
-    {
-        
-    }
+    public override void OnHealPlayer(int amount, string fromMod = "") { }
 
-    public override int ModifyDamagePlayer(int amount, string fromMod="", bool OnlyVisual=false)
+    public override int ModifyDamagePlayer(int amount, string fromMod = "", bool OnlyVisual = false)
     {
         return amount;
     }
 
-    public override int ModifyDamageOpponent(int amount, string fromMod = "", bool OnlyVisual = false)
+    public override int ModifyDamageOpponent(
+        int amount,
+        string fromMod = "",
+        bool OnlyVisual = false
+    )
     {
         return amount;
     }
