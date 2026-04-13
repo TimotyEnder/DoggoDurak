@@ -20,7 +20,7 @@ public class TrumpCardIndicator : MonoBehaviour, IPointerEnterHandler, IPointerE
     GameObject _trumpTextPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _revealPos = new Vector2(
             this.gameObject.GetComponent<RectTransform>().anchoredPosition.x - 80f,

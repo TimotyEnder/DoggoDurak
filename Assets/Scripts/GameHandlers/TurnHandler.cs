@@ -30,7 +30,7 @@ public class TurnHandler : MonoBehaviour
         //initialising
         _playerDeck = GameObject.Find("Deck")?.GetComponent<Deck>();
         _turnStateToggle = GameObject.Find("TurnStateToggle")?.GetComponent<TurnStateToggle>();
-        _trumpIndicator = GameObject.Find("TrumpCardIndicator")?.GetComponent<TrumpCardIndicator>();
+        _trumpIndicator = GameObject.Find("TrumpCardIndicator").GetComponent<TrumpCardIndicator>();
         _ruleHandler = GameObject.Find("RuleHandler")?.GetComponent<RuleHandler>();
         _playArea = GameObject.Find("PlayArea")?.GetComponent<PlayArea>();
         _opponent = GameObject.Find("Opponent")?.GetComponent<OpponentLogic>();
@@ -42,6 +42,12 @@ public class TurnHandler : MonoBehaviour
             .Find("TurnIndicator")
             ?.GetComponentInChildren<TextMeshProUGUI>();
         _cardHandArea = GameObject.Find("CardHandArea")?.GetComponent<CardHandArea>();
+    }
+
+    //TUTORIAL USE ONLY!
+    public void SetPlayArea(PlayArea pa)
+    {
+        this._playArea = pa;
     }
 
     private void TurnIndicatorLaunch()
@@ -69,8 +75,8 @@ public class TurnHandler : MonoBehaviour
     {
         _turnStateToggle?.Toggle();
         _toggled = true;
-        _ruleHandler?.SetTrumpSuit(_trumpIndicator?.SelectTrump());
-        _trumpIndicator?.Appear();
+        _ruleHandler.SetTrumpSuit(_trumpIndicator.SelectTrump(1));
+        _trumpIndicator.Appear();
         _opponent?.LoadDeck();
         _playerDeck?.LoadDeck();
         _playerHp?.SetHealth(GameHandler.Instance.GetGameState()._health);

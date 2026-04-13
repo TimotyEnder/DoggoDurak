@@ -655,8 +655,8 @@ public class Card
                     .GetChild(cardDefendingIndex)
                     .gameObject.GetComponent<Card>()
             );
-            _opponent.resetDoublePass();
-            _passButton.SetJiggle(true);
+            _opponent?.resetDoublePass();
+            _passButton?.SetJiggle(true);
         }
         //reverse
         else if (
@@ -667,7 +667,7 @@ public class Card
         {
             Debug.Log("Able to reverse");
             PlayCard();
-            _opponent.resetDoublePass();
+            _opponent?.resetDoublePass();
             _cardInfo.OnReverse(this);
             if (!_cardInfo._opponentCard)
             {

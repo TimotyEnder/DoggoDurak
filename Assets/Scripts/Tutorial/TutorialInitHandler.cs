@@ -30,7 +30,7 @@ public class TutorialInitHandler : MonoBehaviour
     private CardHandArea _chDefendkInfo;
 
     [SerializeField]
-    private PlayArea _paDefendkInfo;
+    private PlayArea _paDefendInfo;
 
     [SerializeField]
     private TurnHandler _thDefendInfo;
@@ -44,14 +44,13 @@ public class TutorialInitHandler : MonoBehaviour
     [SerializeField]
     private TurnHandler _thReverseInfo;
 
-    [SerializeField]
-    private TrumpCardIndicator _trumpIndicator;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _trumpIndicator.SelectTrump(1);
-        _trumpIndicator.Appear();
+        _thAttackInfo.SetPlayArea(_paAttackInfo);
+        _thDefendInfo.SetPlayArea(_paDefendInfo);
+        _thReverseInfo.SetPlayArea(_paReverseInfo);
+        _thTrumpInfo.SetPlayArea(_paTrumpInfo);
         //seting up card hands
         List<CardInfo> atkInfoList = new List<CardInfo>()
         {
@@ -103,7 +102,7 @@ public class TutorialInitHandler : MonoBehaviour
             Card cardSc = CardDrawn.GetComponent<Card>();
             cardSc.MakeCard(c);
             cardSc.SetCardHandArea(_chDefendkInfo);
-            cardSc.SetPlayArea(_paDefendkInfo);
+            cardSc.SetPlayArea(_paDefendInfo);
             cardSc.SetTurnHandler(_thDefendInfo);
             cardSc.OnDraw();
         }
@@ -133,6 +132,7 @@ public class TutorialInitHandler : MonoBehaviour
             Card cardSc = CardDrawn.GetComponent<Card>();
             cardSc.MakeCard(c);
             cardSc.SetPlayArea(_paTrumpInfo);
+            cardSc.SetTurnHandler(_thTrumpInfo);
             cardSc.PlayCard();
         }
         foreach (CardInfo c in defendInfoListPlay)
@@ -140,7 +140,8 @@ public class TutorialInitHandler : MonoBehaviour
             GameObject CardDrawn = Instantiate(_cardPrefab);
             Card cardSc = CardDrawn.GetComponent<Card>();
             cardSc.MakeCard(c);
-            cardSc.SetPlayArea(_paDefendkInfo);
+            cardSc.SetPlayArea(_paDefendInfo);
+            cardSc.SetTurnHandler(_thDefendInfo);
             cardSc.PlayCard();
         }
         foreach (CardInfo c in reverseInfoListPlay)
@@ -149,6 +150,7 @@ public class TutorialInitHandler : MonoBehaviour
             Card cardSc = CardDrawn.GetComponent<Card>();
             cardSc.MakeCard(c);
             cardSc.SetPlayArea(_paReverseInfo);
+            cardSc.SetTurnHandler(_thReverseInfo);
             cardSc.PlayCard();
         }
     }
