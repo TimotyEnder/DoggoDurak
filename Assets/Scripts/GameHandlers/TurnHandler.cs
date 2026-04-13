@@ -29,10 +29,16 @@ public class TurnHandler : MonoBehaviour
     {
         //initialising
         _playerDeck = GameObject.Find("Deck")?.GetComponent<Deck>();
-        _turnStateToggle = GameObject.Find("TurnStateToggle")?.GetComponent<TurnStateToggle>();
+        if (_turnStateToggle == null)
+        {
+            _turnStateToggle = GameObject.Find("TurnStateToggle")?.GetComponent<TurnStateToggle>();
+        }
         _trumpIndicator = GameObject.Find("TrumpCardIndicator").GetComponent<TrumpCardIndicator>();
         _ruleHandler = GameObject.Find("RuleHandler")?.GetComponent<RuleHandler>();
-        _playArea = GameObject.Find("PlayArea")?.GetComponent<PlayArea>();
+        if (_playArea == null)
+        {
+            _playArea = GameObject.Find("PlayArea")?.GetComponent<PlayArea>();
+        }
         _opponent = GameObject.Find("Opponent")?.GetComponent<OpponentLogic>();
         _playerHp = GameObject.Find("PlayerLifeTotal")?.GetComponent<LifeTotal>();
         _opponentHp = GameObject.Find("OpponentsLifeTotal")?.GetComponent<LifeTotal>();
@@ -48,6 +54,12 @@ public class TurnHandler : MonoBehaviour
     public void SetPlayArea(PlayArea pa)
     {
         this._playArea = pa;
+    }
+
+    //TUTORIAL USE ONLY!
+    public void SetTurnStateToggle(TurnStateToggle tsT)
+    {
+        this._turnStateToggle = tsT;
     }
 
     private void TurnIndicatorLaunch()
@@ -93,9 +105,9 @@ public class TurnHandler : MonoBehaviour
         TurnIndicatorLaunch();
         await _ruleHandler.CheckGameState();
         GameHandler.Instance.EncounterSetDebuffs();
-        _opponent.resetEndTurnFlag();
-        _playerDeck.DrawHand();
-        _opponent.DrawHand();
+        _opponent?.resetEndTurnFlag();
+        _playerDeck?.DrawHand();
+        _opponent?.DrawHand();
         if (_turnState == 0)
         {
             if (!_toggled)
@@ -111,7 +123,7 @@ public class TurnHandler : MonoBehaviour
                 _turnStateToggle.Toggle();
                 _toggled = false;
             }
-            _opponent.Attack();
+            _opponent?.Attack();
         }
     }
 

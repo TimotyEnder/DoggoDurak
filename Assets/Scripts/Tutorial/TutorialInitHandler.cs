@@ -8,6 +8,7 @@ public class TutorialInitHandler : MonoBehaviour
     [SerializeField]
     private GameObject _cardPrefab;
 
+    //Atack info
     [SerializeField]
     private CardHandArea _chAttackInfo;
 
@@ -16,6 +17,11 @@ public class TutorialInitHandler : MonoBehaviour
 
     [SerializeField]
     private TurnHandler _thAttackInfo;
+
+    [SerializeField]
+    private TurnStateToggle _tsTAttackInfo;
+
+    //Turmp info
 
     [SerializeField]
     private CardHandArea _chTrumpInfo;
@@ -27,6 +33,11 @@ public class TutorialInitHandler : MonoBehaviour
     private TurnHandler _thTrumpInfo;
 
     [SerializeField]
+    private TurnStateToggle _tsTTrumpInfo;
+
+    //defend info
+
+    [SerializeField]
     private CardHandArea _chDefendkInfo;
 
     [SerializeField]
@@ -34,6 +45,11 @@ public class TutorialInitHandler : MonoBehaviour
 
     [SerializeField]
     private TurnHandler _thDefendInfo;
+
+    [SerializeField]
+    private TurnStateToggle _tsTDefendInfo;
+
+    //reverse info
 
     [SerializeField]
     private CardHandArea _chReverseInfo;
@@ -44,13 +60,27 @@ public class TutorialInitHandler : MonoBehaviour
     [SerializeField]
     private TurnHandler _thReverseInfo;
 
+    [SerializeField]
+    private TurnStateToggle _tsTReverseInfo;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _thAttackInfo.SetPlayArea(_paAttackInfo);
+        _thAttackInfo.SetTurnStateToggle(_tsTAttackInfo);
         _thDefendInfo.SetPlayArea(_paDefendInfo);
+        _thDefendInfo.SetTurnStateToggle(_tsTDefendInfo);
         _thReverseInfo.SetPlayArea(_paReverseInfo);
+        _thReverseInfo.SetTurnStateToggle(_tsTReverseInfo);
         _thTrumpInfo.SetPlayArea(_paTrumpInfo);
+        _thTrumpInfo.SetTurnStateToggle(_tsTTrumpInfo);
+    }
+
+    void Start()
+    {
+        //_tsTReverseInfo.Toggle();
+        //_tsTDefendInfo.Toggle();
+        //_tsTTrumpInfo.Toggle();
         //seting up card hands
         List<CardInfo> atkInfoList = new List<CardInfo>()
         {

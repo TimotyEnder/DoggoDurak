@@ -35,9 +35,9 @@ public class RuleHandler : MonoBehaviour
 
     void Init()
     {
-        _playerHp = GameObject.Find("PlayerLifeTotal").GetComponent<LifeTotal>();
-        _opponentHp = GameObject.Find("OpponentsLifeTotal").GetComponent<LifeTotal>();
-        _playArea = GameObject.Find("PlayArea").GetComponent<PlayArea>();
+        _playerHp = GameObject.Find("PlayerLifeTotal")?.GetComponent<LifeTotal>();
+        _opponentHp = GameObject.Find("OpponentsLifeTotal")?.GetComponent<LifeTotal>();
+        _playArea = GameObject.Find("PlayArea")?.GetComponent<PlayArea>();
     }
 
     public bool isGameStateFinished()
@@ -72,6 +72,10 @@ public class RuleHandler : MonoBehaviour
             if (_playerHp == null)
             {
                 Init();
+                if (_playerHp == null)
+                {
+                    return;
+                }
             }
             if (_playerHp.GetHealth() <= 0 && !GameHandler.Instance.GetGameState()._loseToWin)
             {

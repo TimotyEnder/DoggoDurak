@@ -675,7 +675,7 @@ public class Card
             }
             GameHandler.Instance.GetCurrEncounter().OnReverse(this);
             _turnHandler.Reverse();
-            _ = _opponent.EnemyPlay();
+            _ = _opponent?.EnemyPlay();
         }
         else
         {

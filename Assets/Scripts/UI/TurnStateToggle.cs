@@ -9,7 +9,7 @@ public class TurnStateToggle : MonoBehaviour
     private Vector2 _atkPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _def = true;
         _defPos = new Vector2(
