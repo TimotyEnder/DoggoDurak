@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class TutorialInitHandler : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class TutorialInitHandler : MonoBehaviour
 
     [SerializeField]
     private TurnStateToggle _tsTAttackInfo;
+    private bool _attackInfoComplete = false;
 
     //Turmp info
 
@@ -34,6 +36,7 @@ public class TutorialInitHandler : MonoBehaviour
 
     [SerializeField]
     private TurnStateToggle _tsTTrumpInfo;
+    private bool _trumpInfoComplete = false;
 
     //defend info
 
@@ -48,6 +51,7 @@ public class TutorialInitHandler : MonoBehaviour
 
     [SerializeField]
     private TurnStateToggle _tsTDefendInfo;
+    private bool _defendInfoComplete = false;
 
     //reverse info
 
@@ -62,6 +66,10 @@ public class TutorialInitHandler : MonoBehaviour
 
     [SerializeField]
     private TurnStateToggle _tsTReverseInfo;
+    private bool _reverseInfoComplete = false;
+
+    [SerializeField]
+    private Button _passButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -186,5 +194,20 @@ public class TutorialInitHandler : MonoBehaviour
     }
 
     //Update is called once per frame
-    void Update() { }
+    void Update()
+    {
+        _attackInfoComplete = _paAttackInfo.GetCardsInPlay() == 2;
+        _defendInfoComplete = _paDefendInfo.GetNumCardsBlocking() == 3;
+        _trumpInfoComplete = _paTrumpInfo.GetNumCardsBlocking() == 1;
+        _reverseInfoComplete = _paReverseInfo.GetCardsInPlay() == 4;
+        if (
+            _attackInfoComplete
+            && _defendInfoComplete
+            && _trumpInfoComplete
+            && _reverseInfoComplete
+        )
+        {
+            _passButton.gameObject.SetActive(true);
+        }
+    }
 }
