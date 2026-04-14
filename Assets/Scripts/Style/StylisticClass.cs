@@ -12,6 +12,7 @@ public static class StylisticClass
     public static Color Day2Encounter = new Color(0, 0.478f, 0.49f);
     public static Color Day3Encounter = new Color(0.333f, 0, 0.569f);
     public static Color BossEncounter = new Color(0.345098f, 0.2784314f, 0);
+
     //modifier strings
     public static String BounceString = "<bounce a=0.4>BOUNCE</bounce>";
     public static String BurnString = "<shake d=0.8 a=1>BURN</shake>";
@@ -39,17 +40,23 @@ public static class StylisticClass
     public static string HighLight = "<b>";
     public static string HighLightClose = "</b>";
     public static string SecondaryColor = "<color=red>";
+
     public static string DamageNumber(int damage)
     {
         return $" <b>{damage}{DamageIcon}</b> ";
     }
+
     public static string ShieldNumber(int amount)
     {
         return $" <b>{ShieldIcon}{amount}</b> ";
     }
-    public static string DebuffedDesc = $"{DebuffedColor}<b>Debuffed (Is defended by everything and deals zero damage)</b></color>";
-    public static string LaikaDesc = "<b>Laika Card (Defends/Is defended by anything but it's number is 0)</b>";
-    public static string ShieldDesc = $"<b><sprite name=Shield>Shield (reduces damage by a flat amount to no less than 1<sprite name=Damage>)</b>";
+
+    public static string DebuffedDesc =
+        $"{DebuffedColor}<b>Debuffed (Is defended by everything and deals zero damage)</b></color>";
+    public static string LaikaDesc =
+        "<b>Laika Card (Defends/Is defended by anything but it's number is 0)</b>";
+    public static string ShieldDesc =
+        $"<b><sprite name=Shield>Shield (reduces damage by a flat amount to no less than 1<sprite name=Damage>)</b>";
 
     //active items
     public static Color ActiveItemUseInvalid = new Color(0.678f, 0.012f, 0.098f);
@@ -60,13 +67,4 @@ public static class StylisticClass
     public static string RestPoint = "<sprite name=RestPoint>";
     public static string RubleSign = "<sprite name=Ruble>";
     public static string ShieldIcon = "<sprite name=Shield>";
-
-
-
-
-
-
-
-
-
 }

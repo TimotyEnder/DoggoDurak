@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialInitHandler : MonoBehaviour
@@ -23,6 +24,9 @@ public class TutorialInitHandler : MonoBehaviour
     private TurnStateToggle _tsTAttackInfo;
     private bool _attackInfoComplete = false;
 
+    [SerializeField]
+    private TextMeshProUGUI _attackTrackTxt;
+
     //Turmp info
 
     [SerializeField]
@@ -38,6 +42,9 @@ public class TutorialInitHandler : MonoBehaviour
     private TurnStateToggle _tsTTrumpInfo;
     private bool _trumpInfoComplete = false;
 
+    [SerializeField]
+    private TextMeshProUGUI _trumpTrackTxt;
+
     //defend info
 
     [SerializeField]
@@ -52,6 +59,9 @@ public class TutorialInitHandler : MonoBehaviour
     [SerializeField]
     private TurnStateToggle _tsTDefendInfo;
     private bool _defendInfoComplete = false;
+
+    [SerializeField]
+    private TextMeshProUGUI _defendTrackText;
 
     //reverse info
 
@@ -69,6 +79,12 @@ public class TutorialInitHandler : MonoBehaviour
     private bool _reverseInfoComplete = false;
 
     [SerializeField]
+    private TextMeshProUGUI _reverseTrackText;
+
+    [SerializeField]
+    private Button _restartButton;
+
+    [SerializeField]
     private Button _passButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -82,6 +98,7 @@ public class TutorialInitHandler : MonoBehaviour
         _thReverseInfo.SetTurnStateToggle(_tsTReverseInfo);
         _thTrumpInfo.SetPlayArea(_paTrumpInfo);
         _thTrumpInfo.SetTurnStateToggle(_tsTTrumpInfo);
+        _restartButton.onClick.AddListener(() => SceneManager.LoadScene(3));
     }
 
     void Start()
@@ -197,9 +214,42 @@ public class TutorialInitHandler : MonoBehaviour
     void Update()
     {
         _attackInfoComplete = _paAttackInfo.GetCardsInPlay() == 2;
+        _attackTrackTxt.text =
+            "Attack with 2 cards (" + _paAttackInfo.GetCardsInPlay().ToString() + "/2)";
+        if (
+            _paAttackInfo.GetCardsPlayed().Count > 0
+            && _paAttackInfo.GetCardsPlayed()[0].GetCardInfo()._number != 8
+        )
+        {
+            _attackTrackTxt.color = Color.red;
+        }
+        if (_attackInfoComplete)
+        {
+            _attackTrackTxt.color = Color.green;
+        }
         _defendInfoComplete = _paDefendInfo.GetNumCardsBlocking() == 3;
+        _defendTrackText.text =
+            "Defend all cards (" + _paDefendInfo.GetNumCardsBlocking().ToString() + "/3)";
+        if (_defendInfoComplete)
+        {
+            _defendTrackText.color = Color.green;
+        }
         _trumpInfoComplete = _paTrumpInfo.GetNumCardsBlocking() == 1;
+        _trumpTrackTxt.text =
+            "Defend the HUGE card! (" + _paTrumpInfo.GetNumCardsBlocking().ToString() + "/1)";
+        if (_trumpInfoComplete)
+        {
+            _trumpTrackTxt.color = Color.green;
+        }
         _reverseInfoComplete = _paReverseInfo.GetCardsInPlay() == 4;
+        _reverseTrackText.text =
+            "Reverse the opponents attack and attack them back!("
+            + (_paReverseInfo.GetCardsInPlay() - 1).ToString()
+            + "/3)";
+        if (_reverseInfoComplete)
+        {
+            _reverseTrackText.color = Color.green;
+        }
         if (
             _attackInfoComplete
             && _defendInfoComplete
