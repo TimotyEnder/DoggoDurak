@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class RewardManager
@@ -20,15 +20,26 @@ public class RewardManager
         if (roll <= GameHandler.Instance.GetGameState()._rareItemRewardDropRate)
         {
             itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(1, 1));
-            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection - 1));
+            itemsDropped.AddRange(
+                _itemManager.RandomItemsWithRarity(
+                    0,
+                    GameHandler.Instance.GetGameState()._maxRewardSelection - 1
+                )
+            );
         }
         else
         {
-            itemsDropped.AddRange(_itemManager.RandomItemsWithRarity(0, GameHandler.Instance.GetGameState()._maxRewardSelection));
+            itemsDropped.AddRange(
+                _itemManager.RandomItemsWithRarity(
+                    0,
+                    GameHandler.Instance.GetGameState()._maxRewardSelection
+                )
+            );
         }
         Reward toReturn = new Reward(itemsDropped, _currencyManager.GetCurrency());
         return toReturn;
     }
+
     public Reward GenerateBossReward()
     {
         List<Item> itemsDropped = new List<Item>();
@@ -36,33 +47,38 @@ public class RewardManager
         Reward toReturn = new Reward(itemsDropped, _currencyManager.GetCurrency());
         return toReturn;
     }
+
     public List<Item> RollConsumableChance()
     {
-        int roll= Random.Range(0,100);
+        int roll = Random.Range(0, 100);
         List<Item> toAdd = new List<Item>();
-        if(roll<GameHandler.Instance.GetGameState()._consumableDropRate/2)
+        if (roll < GameHandler.Instance.GetGameState()._consumableDropRate / 2)
         {
             toAdd.AddRange(_itemManager.RandomConsumable(2));
         }
-        else if(roll<GameHandler.Instance.GetGameState()._consumableDropRate)
+        else if (roll < GameHandler.Instance.GetGameState()._consumableDropRate)
         {
             toAdd.AddRange(_itemManager.RandomConsumable(1));
         }
         return toAdd;
     }
+
     public List<Item> ShopReward(int rarity, int amount)
     {
         return _itemManager.RandomItemsWithRarity(rarity, amount);
     }
+
     public void ReAddItems(List<Item> items)
     {
         _itemManager.ReAddItems(items);
     }
+
     public void AddCurrencyCalculator(CurrencyCalculator cc)
     {
         _currencyManager.AddCurrencyCalculator(cc);
     }
-    public string GetCurrencyExplanationText() 
+
+    public string GetCurrencyExplanationText()
     {
         return _currencyManager.GetCurrencyExplanationText();
     }
