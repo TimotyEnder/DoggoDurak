@@ -398,4 +398,23 @@ public class PlayArea : MonoBehaviour
             }
         }
     }
+
+    public void SetUndefendableCardsLowOpacity(CardInfo card)
+    {
+        foreach (Card c in _cardsPlayed)
+        {
+            if (!c.IsDefended())
+            {
+                c.SetVisualToDefendableFrom(card);
+            }
+        }
+    }
+
+    public void ResetCardDefendableVisuals()
+    {
+        foreach (Card c in _cardsPlayed)
+        {
+            c.ResetVisualOpacity();
+        }
+    }
 }

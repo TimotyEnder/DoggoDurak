@@ -377,6 +377,31 @@ public class Card
         GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
 
+    public void SetVisualToDefendableFrom(CardInfo card)
+    {
+        if (!_playAreaScript.CardCanDefendCard(card, _cardInfo))
+        {
+            Color imageColor = _cardImage.gameObject.GetComponent<Image>().color;
+            _cardImage.gameObject.GetComponent<Image>().color = new Color(
+                imageColor.r,
+                imageColor.g,
+                imageColor.b,
+                0.5f
+            );
+        }
+    }
+
+    public void ResetVisualOpacity()
+    {
+        Color imageColor = _cardImage.gameObject.GetComponent<Image>().color;
+        _cardImage.gameObject.GetComponent<Image>().color = new Color(
+            imageColor.r,
+            imageColor.g,
+            imageColor.b,
+            1f
+        );
+    }
+
     public void Mark()
     {
         _marked.SetActive(true);
@@ -801,6 +826,10 @@ public class Card
             return;
         } //return early in this method fails the drag.
         GetComponent<ToolTip>().SetTooltipActiveState(false);
+        if (_turnHandler.GetTurnState() != 0)
+        {
+            _playAreaScript.SetUndefendableCardsLowOpacity(_cardInfo);
+        }
         _oldHandOrder = _cardHandAreaScript.GetIndexOfCard(this);
         _cardRect.SetParent(_canvas.gameObject.GetComponent<RectTransform>());
         _dragging = true;
@@ -835,6 +864,7 @@ public class Card
         GetComponent<ToolTip>().SetTooltipActiveState(true);
         _cardHandAreaScript.RemoveFromCards(this);
         _cardHandAreaScript.DettachCard();
+        _playAreaScript.ResetCardDefendableVisuals();
         if (RectTransformUtility.RectangleContainsScreenPoint(_playAreaRect, eventData.position))
         {
             _dragging = false;
