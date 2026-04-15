@@ -403,9 +403,9 @@ public class PlayArea : MonoBehaviour
     {
         foreach (Card c in _cardsPlayed)
         {
-            if (!c.IsDefended())
+            if (!c.IsDefended() && !CardCanDefendCard(card, c.GetCardInfo()))
             {
-                c.SetVisualToDefendableForm(card);
+                c.GreyIn();
             }
         }
     }
@@ -414,7 +414,7 @@ public class PlayArea : MonoBehaviour
     {
         foreach (Card c in _cardsPlayed)
         {
-            c.ResetVisualOpacity();
+            c.GreyOut();
         }
     }
 }

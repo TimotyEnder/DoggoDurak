@@ -335,7 +335,7 @@ public class Card
     public void GreyOut()
     {
         _grey = false;
-        _cardImage.GetComponent<Image>().color = Color.white;
+        _cardImage.gameObject.GetComponent<Image>().color = Color.white;
     }
 
     public bool IsDebuffed()
@@ -375,39 +375,6 @@ public class Card
             _notPermissible.SetActive(false);
         }
         GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
-    }
-
-    public void SetVisualToDefendableForm(CardInfo card)
-    {
-        if (!_playAreaScript.CardCanDefendCard(card, _cardInfo))
-        {
-            Color imageColor = _cardImage.gameObject.GetComponent<Image>().color;
-            _cardImage.gameObject.GetComponent<Image>().color = new Color(
-                imageColor.r,
-                imageColor.g,
-                imageColor.b,
-                0.5f
-            );
-        }
-    }
-
-    public void SetVisualToAttackableForm()
-    {
-        if (!_playAreaScript.CanAttackWithCard(_cardInfo))
-        {
-            Color imageColor = _cardImage.gameObject.GetComponent<Image>().color;
-            _cardImage.gameObject.GetComponent<Image>().color = new Color(
-                imageColor.r,
-                imageColor.g,
-                imageColor.b,
-                0.5f
-            );
-        }
-    }
-
-    public void ResetVisualOpacity()
-    {
-        Color imageColor = _cardImage.gameObject.GetComponent<Image>().color = Color.white;
     }
 
     public void Mark()

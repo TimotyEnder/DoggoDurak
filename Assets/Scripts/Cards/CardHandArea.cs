@@ -26,8 +26,10 @@ public class CardHandArea : MonoBehaviour
     private Discard _discard;
     private int _evens;
     private int _odds;
+    private PlayArea pa;
+    private TurnHandler th;
 
-    void Start()
+    void Awake()
     {
         _canvasRect = GameObject.Find("UI").GetComponent<RectTransform>();
         _canvas = GameObject.Find("UI").GetComponent<Canvas>();
@@ -37,6 +39,8 @@ public class CardHandArea : MonoBehaviour
         {
             _discard = _discardObj.GetComponent<Discard>();
         }
+        pa = GameObject.Find("PlayArea").GetComponent<PlayArea>();
+        th = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
     }
 
     // Update is called once per frame
@@ -208,6 +212,10 @@ public class CardHandArea : MonoBehaviour
         {
             card.GetComponent<Card>().GreyOut();
         }
+        if (th.GetTurnState() == 0)
+        {
+            SetUnAttackableLowOpacity();
+        }
     }
 
     public void GreyInAllCards()
@@ -228,8 +236,6 @@ public class CardHandArea : MonoBehaviour
 
     public bool HasMorePlays()
     {
-        PlayArea pa = GameObject.Find("PlayArea").GetComponent<PlayArea>();
-        TurnHandler th = GameObject.Find("TurnHandler").GetComponent<TurnHandler>();
         Debug.Log("HasMorePPlays Called");
         if (pa != null)
         {
@@ -309,9 +315,13 @@ public class CardHandArea : MonoBehaviour
 
     public void SetUnAttackableLowOpacity()
     {
+        PlayArea pa = GameObject.Find("PlayArea").GetComponent<PlayArea>();
         foreach (Card c in _cards)
         {
-            c.SetVisualToAttackableForm();
+            if (!pa.CanAttackWithCard(c.GetCardInfo()))
+            {
+                c.GreyIn();
+            }
         }
     }
 
@@ -319,7 +329,7 @@ public class CardHandArea : MonoBehaviour
     {
         foreach (Card c in _cards)
         {
-            c.ResetVisualOpacity();
+            c.GreyOut();
         }
     }
 
