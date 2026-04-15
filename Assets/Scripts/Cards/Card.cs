@@ -377,7 +377,7 @@ public class Card
         GetComponent<ToolTip>().SetToolTipText(_cardInfo.CompileTooltipDescription());
     }
 
-    public void SetVisualToDefendableFrom(CardInfo card)
+    public void SetVisualToDefendableForm(CardInfo card)
     {
         if (!_playAreaScript.CardCanDefendCard(card, _cardInfo))
         {
@@ -391,15 +391,23 @@ public class Card
         }
     }
 
+    public void SetVisualToAttackableForm()
+    {
+        if (!_playAreaScript.CanAttackWithCard(_cardInfo))
+        {
+            Color imageColor = _cardImage.gameObject.GetComponent<Image>().color;
+            _cardImage.gameObject.GetComponent<Image>().color = new Color(
+                imageColor.r,
+                imageColor.g,
+                imageColor.b,
+                0.5f
+            );
+        }
+    }
+
     public void ResetVisualOpacity()
     {
-        Color imageColor = _cardImage.gameObject.GetComponent<Image>().color;
-        _cardImage.gameObject.GetComponent<Image>().color = new Color(
-            imageColor.r,
-            imageColor.g,
-            imageColor.b,
-            1f
-        );
+        Color imageColor = _cardImage.gameObject.GetComponent<Image>().color = Color.white;
     }
 
     public void Mark()
@@ -721,6 +729,7 @@ public class Card
         if (!_cardInfo._opponentCard)
         {
             GameHandler.Instance.GetGameState().OnPlayedCard(this);
+            _cardHandAreaScript.SetUnAttackableLowOpacity();
         }
         GameHandler.Instance.GetCurrEncounter().OnPlayedCard(this);
     }
@@ -828,6 +837,7 @@ public class Card
         GetComponent<ToolTip>().SetTooltipActiveState(false);
         if (_turnHandler.GetTurnState() != 0)
         {
+            Debug.Log("Setting Blocked opacity");
             _playAreaScript.SetUndefendableCardsLowOpacity(_cardInfo);
         }
         _oldHandOrder = _cardHandAreaScript.GetIndexOfCard(this);

@@ -405,7 +405,7 @@ public class PlayArea : MonoBehaviour
         {
             if (!c.IsDefended())
             {
-                c.SetVisualToDefendableFrom(card);
+                c.SetVisualToDefendableForm(card);
             }
         }
     }

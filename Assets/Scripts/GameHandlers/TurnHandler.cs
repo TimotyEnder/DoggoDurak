@@ -154,6 +154,7 @@ public class TurnHandler : MonoBehaviour
         GameHandler.Instance.ResetPersistentItems();
         GameHandler.Instance.ClearTemporaryModifiers();
         GameHandler.Instance.GetGameState().DeleteConsumableItems();
+        _cardHandArea.ResetAttackableLowOpacity();
         //Change Turn State
         if (_turnState == 0)
         {

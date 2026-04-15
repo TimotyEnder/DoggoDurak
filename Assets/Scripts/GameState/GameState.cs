@@ -6,10 +6,12 @@ using UnityEngine;
 [Serializable]
 public class GameState
 {
-    public UnityEngine.Random.State _currentEncounterRandomState;//Responsible for all randomness in the game, used on load.
+    public UnityEngine.Random.State _currentEncounterRandomState; //Responsible for all randomness in the game, used on load.
     public List<CardInfo> _deck;
+
     [NonSerialized]
     public List<Item> _items;
+
     [SerializeField]
     public List<ItemContainer> _serializableItems;
     public String _currentEncounterName;
@@ -27,7 +29,7 @@ public class GameState
     public int _handSize;
     public int _maxRewardSelection;
     public int _maxRewardChoices;
-    public int _rareItemRewardDropRate;//  out of 100;
+    public int _rareItemRewardDropRate; //  out of 100;
     public int _consumableDropRate;
     public int _legendaryItemInshopDropRate;
     public int _rareItemInshopDropRate;
@@ -46,26 +48,26 @@ public class GameState
     public int _startingShopRerollCost;
     public bool[] _undamagable; //0 player 1 enemy
     private int __enemyHandSize;
-    public int _enemyHandSize 
+    public int _enemyHandSize
     {
         get => __enemyHandSize;
-        set 
+        set
         {
-            __enemyHandSize = value;  // <-- PUT YOUR BREAKPOINT HERE
+            __enemyHandSize = value; // <-- PUT YOUR BREAKPOINT HERE
         }
     }
-    public bool _loseToWin;//activates on Insider Investor.
+    public bool _loseToWin; //activates on Insider Investor.
     public bool _healingAndDamageInverted;
     public int _shopCostPerCardMod;
     public int _laikaCardInShopChance;
-    public int  _opponentsShield; 
+    public int _opponentsShield;
     public int _defaultOpponentsShield;
-    public  int _playerShield;
+    public int _playerShield;
     public bool _reversePossible;
     public int _playerPoisonCounters;
     public bool _poisonCountDown;
     public bool _burnPoison;
-    public Dictionary<string,int> _modifierAddedEffect;
+    public Dictionary<string, int> _modifierAddedEffect;
     public List<ItemContainer> _shopItems;
     public List<CardInfo> _shopCards;
     public int _gadalkaEffectsMax;
@@ -73,6 +75,7 @@ public class GameState
     public List<GadalkaEffectContainer> _gadalkaCurses;
     public int _opponentCardUpgradeDefault;
     public List<int> _itemsCostPerRarity;
+
     public GameState()
     {
         _deck = new List<CardInfo>(); //standart durak deck initialization
@@ -85,7 +88,6 @@ public class GameState
                     {
                         _deck.Add(new CardInfo("C", j));
                         //_deck.Add(new CardInfo("C", 13)); //debug
-
                     }
                     break;
                 case 1:
@@ -119,9 +121,9 @@ public class GameState
         _encounter = 0;
         _restPoints = 3;
         _maxrestPoints = 3;
-        _restRpointCost = 1;//cost to use rest action in the rest tab
-        _shopRpointCost = 2;//cost to use shop action in the rest tab
-        _gadalkaRpointCost=2;//cost to use gadalka in the rest tab
+        _restRpointCost = 1; //cost to use rest action in the rest tab
+        _shopRpointCost = 2; //cost to use shop action in the rest tab
+        _gadalkaRpointCost = 2; //cost to use gadalka in the rest tab
         _handSize = 6;
         _items = new List<Item>();
         _serializableItems = new List<ItemContainer>();
@@ -130,56 +132,58 @@ public class GameState
         _maxRewardSelection = 3;
         _maxRewardChoices = 1;
         _rareItemRewardDropRate = 10;
-        _consumableDropRate=20;
+        _consumableDropRate = 20;
         _legendaryItemInshopDropRate = 10;
-        _rareItemInshopDropRate=30;
+        _rareItemInshopDropRate = 30;
         _itemsShownInShop = 4;
         _maxCardModsInShop = 3;
-        _shopCostPerCardMod=5;
+        _shopCostPerCardMod = 5;
         _itemStacks = new Dictionary<string, List<Item>>();
         _discardingCardInShopCost = 5;
         _startingDiscardInShopCost = 5;
         _shopRerollCost = 5;
-        _shopUnlocked=false;
-        _gadalkaUnlocked=false;
-        _freeShopRerolls=0;
-        _maxFreeShopRerolls=0;
+        _shopUnlocked = false;
+        _gadalkaUnlocked = false;
+        _freeShopRerolls = 0;
+        _maxFreeShopRerolls = 0;
         _startingShopRerollCost = 5;
-        _undamagable=new bool[]{false,false};
+        _undamagable = new bool[] { false, false };
         _opponentsShield = 0;
-        _defaultOpponentsShield=0;
-        _playerShield=0;
+        _defaultOpponentsShield = 0;
+        _playerShield = 0;
         _enemyHandSize = 6;
-        _loseToWin=false;
-        _healingAndDamageInverted=false;
-        _laikaCardInShopChance=10;
-        _reversePossible=true;
-        _poisonCountDown=true;
-        _burnPoison=false;
+        _loseToWin = false;
+        _healingAndDamageInverted = false;
+        _laikaCardInShopChance = 10;
+        _reversePossible = true;
+        _poisonCountDown = true;
+        _burnPoison = false;
         InitModDamageDic();
-        _shopItems= new List<ItemContainer>();
+        _shopItems = new List<ItemContainer>();
         _shopCards = new List<CardInfo>();
-        _gadalkaEffectsMax=5;
-        _gadalkaBlessings=new List<GadalkaEffectContainer>();
-        _gadalkaCurses=new List<GadalkaEffectContainer>();
-        _opponentCardUpgradeDefault=0;
-        _itemsCostPerRarity=new List<int>{10,40,60};
-        _currentEncounterName="";
+        _gadalkaEffectsMax = 5;
+        _gadalkaBlessings = new List<GadalkaEffectContainer>();
+        _gadalkaCurses = new List<GadalkaEffectContainer>();
+        _opponentCardUpgradeDefault = 0;
+        _itemsCostPerRarity = new List<int> { 10, 40, 60 };
+        _currentEncounterName = "";
     }
+
     private void InitModDamageDic()
     {
-        _modifierAddedEffect = new Dictionary<string, int>  //-1 equals infinite copies
+        _modifierAddedEffect = new Dictionary<string, int> //-1 equals infinite copies
         {
-            {"Restoring", 0},
-            {"Bounce", 0},
-            {"Burn", 0},
-            {"Parry", 0},
-            {"Draw", 0},
-            {"Cripple", 0},
-            {"Spiky", 0},
-            {"Poison",0}
+            { "Restoring", 0 },
+            { "Bounce", 0 },
+            { "Burn", 0 },
+            { "Parry", 0 },
+            { "Draw", 0 },
+            { "Cripple", 0 },
+            { "Spiky", 0 },
+            { "Poison", 0 },
         };
     }
+
     public void ResetActiveItems() //this is called at the end of each encounter  to allow reactivating items that can be used once per combat
     {
         foreach (Item item in _items)
@@ -187,37 +191,41 @@ public class GameState
             item.ResetActivation();
         }
     }
+
     public void DeleteConsumableItems()
     {
-        List<Item> itemIt= new List<Item>(_items);
+        List<Item> itemIt = new List<Item>(_items);
         foreach (Item item in itemIt)
         {
             item.DeleteConsumable();
         }
     }
-    private void addItemOrStack(Item item) 
+
+    private void addItemOrStack(Item item)
     {
         if (_itemStacks.ContainsKey(item.GetId()))
         {
             _itemStacks[item.GetId()].Add(item);
         }
-        else 
+        else
         {
-            _itemStacks.Add(item.GetId(), new List<Item>(){item});
+            _itemStacks.Add(item.GetId(), new List<Item>() { item });
         }
     }
-    public List<ItemContainer> SaveItems(List<Item> items) 
+
+    public List<ItemContainer> SaveItems(List<Item> items)
     {
-        List<ItemContainer> toRet= new List<ItemContainer>();
+        List<ItemContainer> toRet = new List<ItemContainer>();
         foreach (Item item in items)
         {
             toRet.Add(new ItemContainer(item.GetId(), JsonUtility.ToJson(item)));
         }
         return toRet;
     }
-    public List<Item> LoadItems(List<ItemContainer> sItems) 
+
+    public List<Item> LoadItems(List<ItemContainer> sItems)
     {
-        List<Item> toRet= new List<Item>();
+        List<Item> toRet = new List<Item>();
         foreach (ItemContainer iCont in sItems)
         {
             // Get the base ScriptableObject (pre-loaded in Resources/Items/)
@@ -232,23 +240,28 @@ public class GameState
         OnLoad();
         return toRet;
     }
-    public List<GadalkaEffectContainer> SaveGEffects(List<GadalkaEffectInfo> effects) 
+
+    public List<GadalkaEffectContainer> SaveGEffects(List<GadalkaEffectInfo> effects)
     {
-        List<GadalkaEffectContainer> toRet= new List<GadalkaEffectContainer>();
+        List<GadalkaEffectContainer> toRet = new List<GadalkaEffectContainer>();
         foreach (GadalkaEffectInfo eff in effects)
         {
             toRet.Add(new GadalkaEffectContainer(eff.GetId(), JsonUtility.ToJson(eff)));
         }
         return toRet;
     }
-    public List<GadalkaEffectInfo> LoadGEffects(List<GadalkaEffectContainer> sItems) 
+
+    public List<GadalkaEffectInfo> LoadGEffects(List<GadalkaEffectContainer> sItems)
     {
-        List<GadalkaEffectInfo> toRet= new List<GadalkaEffectInfo>();
+        List<GadalkaEffectInfo> toRet = new List<GadalkaEffectInfo>();
         foreach (GadalkaEffectContainer iCont in sItems)
         {
             // Get the base ScriptableObject (pre-loaded in Resources/Items/)
-            GadalkaEffectInfo effect = Resources.Load<GadalkaEffectInfo>($"GadalkaEffects/{iCont.EffectID}");
-            GadalkaEffectInfo runtimeEffect = ScriptableObject.CreateInstance(effect.GetType()) as GadalkaEffectInfo;
+            GadalkaEffectInfo effect = Resources.Load<GadalkaEffectInfo>(
+                $"GadalkaEffects/{iCont.EffectID}"
+            );
+            GadalkaEffectInfo runtimeEffect =
+                ScriptableObject.CreateInstance(effect.GetType()) as GadalkaEffectInfo;
             // Create a runtime instance and apply saved data
             JsonUtility.FromJsonOverwrite(iCont.SerializedData, runtimeEffect);
             effect.InitEffect();
@@ -256,6 +269,7 @@ public class GameState
         }
         return toRet;
     }
+
     public void AddItem(Item item) //assumes item has been initialized with InitItem()
     {
         item.OnAquire();
@@ -264,9 +278,10 @@ public class GameState
         GameHandler.Instance.SaveState();
         GameObject itemInventory = GameObject.Find("ItemInventory");
         GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
-        if (activeItemInventory != null) 
+        if (activeItemInventory != null)
         {
-            ActiveItemInventoryGrid aIscript = activeItemInventory.GetComponent<ActiveItemInventoryGrid>();
+            ActiveItemInventoryGrid aIscript =
+                activeItemInventory.GetComponent<ActiveItemInventoryGrid>();
             if (aIscript != null)
             {
                 aIscript.UpdateItemGrid();
@@ -275,20 +290,22 @@ public class GameState
         if (itemInventory != null)
         {
             ItemInventoryGrid Iscript = itemInventory.GetComponent<ItemInventoryGrid>();
-            if (Iscript != null) 
+            if (Iscript != null)
             {
                 Iscript.UpdateItemGrid();
             }
         }
     }
+
     public void RemoveItem(Item item)
     {
         _items.Remove(item);
         GameObject itemInventory = GameObject.Find("ItemInventory");
         GameObject activeItemInventory = GameObject.Find("ActiveItemInventory");
-        if (activeItemInventory != null) 
+        if (activeItemInventory != null)
         {
-            ActiveItemInventoryGrid aIscript = activeItemInventory.GetComponent<ActiveItemInventoryGrid>();
+            ActiveItemInventoryGrid aIscript =
+                activeItemInventory.GetComponent<ActiveItemInventoryGrid>();
             if (aIscript != null)
             {
                 aIscript.UpdateItemGrid();
@@ -297,110 +314,162 @@ public class GameState
         if (itemInventory != null)
         {
             ItemInventoryGrid Iscript = itemInventory.GetComponent<ItemInventoryGrid>();
-            if (Iscript != null) 
+            if (Iscript != null)
             {
                 Iscript.UpdateItemGrid();
             }
         }
     }
+
     //happens when played loads a safe game. anything that needs to reapply its a affect of a default new character
     // and life total does it in it's OnLoad()
-    public void OnLoad() 
+    public void OnLoad()
     {
         foreach (Item item in _items)
         {
-            if(item.OnLoad()){item.GetInventoryItem()?.Bling();}
+            if (item.OnLoad())
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
-    public void OnDefendCard(Card defendee, Card defended) 
+
+    public void OnDefendCard(Card defendee, Card defended)
     {
         foreach (Item item in _items)
         {
-            if(item.OnDefendCard(defendee, defended)){item.GetInventoryItem()?.Bling();}
+            if (item.OnDefendCard(defendee, defended))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
-    public void OnPlayedCard(Card card) 
+
+    public void OnPlayedCard(Card card)
     {
         foreach (Item item in _items)
         {
-            if(item.OnPlayedCard(card)){item.GetInventoryItem()?.Bling();}
+            if (item.OnPlayedCard(card))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
-    public  void OnReverse(Card card) 
+
+    public void OnReverse(Card card)
     {
         foreach (Item item in _items)
         {
-            if(item.OnReverse(card)){item.GetInventoryItem()?.Bling();}
+            if (item.OnReverse(card))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
-    public void OnHeal(int amount) 
+
+    public void OnHeal(int amount)
     {
         foreach (Item item in _items)
         {
-            if(item.OnHeal(amount)){item.GetInventoryItem()?.Bling();}
+            if (item.OnHeal(amount))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
+
     public void OnDamageOpponent(int amount, string fromMod = "")
     {
         foreach (Item item in _items)
         {
-            if(item.OnDamageOpponent(amount,fromMod)){item.GetInventoryItem()?.Bling();}
+            if (item.OnDamageOpponent(amount, fromMod))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
-    public void OnDamagePlayer(int amount, string fromMod="")
+
+    public void OnDamagePlayer(int amount, string fromMod = "")
     {
         foreach (Item item in _items)
         {
-            if(item.OnDamagePlayer(amount,fromMod)){item.GetInventoryItem()?.Bling();}
+            if (item.OnDamagePlayer(amount, fromMod))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
+
     public void OnEndEncounter()
     {
         foreach (Item item in _items)
         {
-            if(item.OnEndEncounter()){item.GetInventoryItem()?.Bling();}
+            if (item.OnEndEncounter())
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
+
     public void OnEncounterStart()
     {
         foreach (Item item in _items)
         {
-            if(item.OnEncounterStart()){item.GetInventoryItem()?.Bling();}
+            if (item.OnEncounterStart())
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
+
     public void OnTurnEnd(int turnState)
     {
         foreach (Item item in _items)
         {
-            if(item.OnTurnEnd(turnState)){item.GetInventoryItem()?.Bling();}
+            if (item.OnTurnEnd(turnState))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
+
     public void OnCardAdded(CardInfo card)
     {
         foreach (Item item in _items)
         {
-            if(item.OnCardAdded(card)){item.GetInventoryItem()?.Bling();}
+            if (item.OnCardAdded(card))
+            {
+                item.GetInventoryItem()?.Bling();
+            }
         }
     }
-    public int AddToDamagePlayer(int amount, bool OnlyVisual=false) 
+
+    public int AddToDamagePlayer(int amount, bool OnlyVisual = false)
     {
-        int total=0;
+        int total = 0;
         foreach (Item item in _items)
         {
-            int fromItem=item.AddToDamagePlayer(amount);
-            if(fromItem>0){item.GetInventoryItem().Bling();}
-            total+=fromItem;
+            int fromItem = item.AddToDamagePlayer(amount);
+            if (fromItem > 0)
+            {
+                item.GetInventoryItem().Bling();
+            }
+            total += fromItem;
         }
         return total;
     }
-    public int AddToDamageOpponent(int amount, bool OnlyVisual=false) 
+
+    public int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
-        int total=0;
+        int total = 0;
         foreach (Item item in _items)
         {
-             int fromItem=item.AddToDamageOpponent(amount);
-            if(fromItem>0){item.GetInventoryItem().Bling();}
-            total+=fromItem;
+            int fromItem = item.AddToDamageOpponent(amount);
+            if (fromItem > 0)
+            {
+                item.GetInventoryItem().Bling();
+            }
+            total += fromItem;
         }
         return total;
     }

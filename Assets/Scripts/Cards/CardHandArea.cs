@@ -307,6 +307,22 @@ public class CardHandArea : MonoBehaviour
         }
     }
 
+    public void SetUnAttackableLowOpacity()
+    {
+        foreach (Card c in _cards)
+        {
+            c.SetVisualToAttackableForm();
+        }
+    }
+
+    public void ResetAttackableLowOpacity()
+    {
+        foreach (Card c in _cards)
+        {
+            c.ResetVisualOpacity();
+        }
+    }
+
     public int EvenCards()
     {
         return _evens;
