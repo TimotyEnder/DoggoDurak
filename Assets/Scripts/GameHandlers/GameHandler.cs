@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,9 @@ public class GameHandler : MonoBehaviour
     [SerializeField]
     private Reward _currentReward;
     private DebuffManager _debuffManager;
+
+    [SerializeField]
+    private GameObject _coinPrefab;
     public static GameHandler Instance
     {
         get
@@ -109,15 +113,15 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        //Item debugItem4 = ScriptableObject.CreateInstance<SadismOfSurplus>();
-        //debugItem4.InitItem();
-        //_state.AddItem(debugItem4);
+        Item debugItem4 = ScriptableObject.CreateInstance<StraysLuckyCoin>();
+        debugItem4.InitItem();
+        _state.AddItem(debugItem4);
         //Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
         //debugItem5.InitItem();
         //_state.AddItem(debugItem5);
         //_state._rubles=100; //debug
-        //_currentEncounter = new DebugEncounter();
-        //_currentEncounter.InitiateEncounter();
+        _currentEncounter = new RussianRouletteRascal();
+        _currentEncounter.InitiateEncounter();
         SaveState();
         Next();
     }
@@ -178,7 +182,7 @@ public class GameHandler : MonoBehaviour
         }
         else if (_state._encounter < 12)
         {
-            _currentEncounter = _encounterManager.RandomEncounter(_state._day);
+            //_currentEncounter = _encounterManager.RandomEncounter(_state._day);
             _state._currentEncounterName = _currentEncounter.GetEncounterName();
             SceneManager.LoadScene(1);
         }
@@ -897,5 +901,16 @@ public class GameHandler : MonoBehaviour
     public LoopList<Character> GetCharacterInfo()
     {
         return _characterManager.GetCharacterInfo();
+    }
+
+    public async void SpinCoinWithVerdict(bool IsGrate, Func<Task> executeAfter)
+    {
+        GameObject coinMade = Instantiate(
+            _coinPrefab,
+            GameObject.FindGameObjectWithTag("Canvas").transform
+        );
+        Coin cS = coinMade.GetComponent<Coin>();
+        await cS.SpinWithVerdict(IsGrate);
+        await executeAfter.Invoke();
     }
 }

@@ -4224,6 +4224,7 @@ MonoBehaviour:
     items: []
     consumables: []
     rubleReward: 0
+  _coinPrefab: {fileID: 5578047002697841121, guid: 0ed8d1f008181ad5f89bdf09cd666abf, type: 3}
 --- !u!1 &1818812276
 GameObject:
   m_ObjectHideFlags: 0
