@@ -30,7 +30,7 @@ public class RussianRouletteRascal : Encounter
     public override void AddRules()
     {
         AddRule(
-            "After each turn flip a coin,  Crest "
+            $"After each turn flip a coin,  {StylisticClass.CrestIcon} "
                 + StylisticClass.HighLight
                 + "("
                 + crestProbability
@@ -38,7 +38,7 @@ public class RussianRouletteRascal : Encounter
                 + StylisticClass.HighLightClose
                 + ": opponent takes "
                 + StylisticClass.DamageNumber(35)
-                + ",  Grate "
+                + $",  {StylisticClass.GrateIcon} "
                 + StylisticClass.HighLight
                 + "("
                 + (100 - crestProbability)
@@ -48,13 +48,13 @@ public class RussianRouletteRascal : Encounter
                 + StylisticClass.DamageNumber(35)
                 + ". For each "
                 + StylisticClass.DamageNumber(5)
-                + " you take Grate probability "
+                + $" you take {StylisticClass.GrateIcon} probability "
                 + StylisticClass.HighLight
                 + "+1%"
                 + StylisticClass.HighLightClose
                 + ". For each "
                 + StylisticClass.DamageNumber(5)
-                + " the opponent takes Crest probability "
+                + $" the opponent takes {StylisticClass.CrestIcon} probability "
                 + StylisticClass.HighLight
                 + "+1%"
                 + StylisticClass.HighLightClose

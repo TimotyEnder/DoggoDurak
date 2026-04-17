@@ -20,9 +20,9 @@ public class StraysLuckyCoin : Item
     {
         this.toolTipDesc =
             StylisticClass.ActivateString
-            + "Flip A Coin. Crest: have two random cards discarded from your hand <b>("
+            + $"Flip A Coin. {StylisticClass.CrestIcon}: have two random cards discarded from your hand <b>("
             + (100 - failPercentage)
-            + "%)</b>  Grate: make the opponent discard 3 cards <b>("
+            + $"%)</b>  {StylisticClass.GrateIcon}: make the opponent discard 3 cards <b>("
             + (failPercentage)
             + "%)</b>. A given outcome increases its possibility to happen in the future.";
     }

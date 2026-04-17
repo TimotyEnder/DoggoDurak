@@ -267,6 +267,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Crest
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 893
+        width: 97
+        height: 99
+      alignment: 9
+      pivot: {x: 0.008405368, y: 0.09764052}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66e12ca1a954ea528b35fd09043502bd
+      internalID: -493416532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -281,6 +303,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      Crest: -493416532
       Damage: -661355702085498197
       Healing: 7515698825314227898
       RestPoint: -9209479668324958208

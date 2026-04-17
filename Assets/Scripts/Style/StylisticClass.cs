@@ -67,4 +67,8 @@ public static class StylisticClass
     public static string RestPoint = "<sprite name=RestPoint>";
     public static string RubleSign = "<sprite name=Ruble>";
     public static string ShieldIcon = "<sprite name=Shield>";
+    public static string GrateIcon =
+        $"<size={SettingsState.ToolTipFontSizeText + 1}><sprite name=Ruble></size>";
+    public static string CrestIcon =
+        $"<size={SettingsState.ToolTipFontSizeText + 1}><sprite name=Crest></size>";
 }
