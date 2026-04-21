@@ -1,20 +1,8 @@
-using System.Diagnostics;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EmergencyContact", menuName = "Items/Active-Rare/EmergencyContact")]
-public class EmergencyContact : Item
+[CreateAssetMenu(fileName = "WolfsGambit", menuName = "Items/Active-Legendary/WolfsGambit")]
+class WolfsGambit : Item
 {
-    public EmergencyContact()
-    {
-        this.rarity = 1;
-        this.boss = false;
-        this.isActive = true;
-        this.itemId = "EmergencyContact";
-        this.itemName = "EmergencyContact";
-        this.toolTipDesc =
-            StylisticClass.ActivateString + " Discard right-most card, draw 1 card and heal 5 hp.";
-    }
-
     public override int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
         return 0;
@@ -25,13 +13,31 @@ public class EmergencyContact : Item
         return 0;
     }
 
-    public override void InitItem() { }
+    public override void InitItem()
+    {
+        this.rarity = 2;
+        this.boss = false;
+        this.isActive = true;
+        this.persistent = false;
+        this.itemId = "WolfsGambit";
+        this.itemName = "Wolf's Gambit";
+        this.toolTipDesc =
+            $"{StylisticClass.ActivateString} {StylisticClass.HighLight}double{StylisticClass.HighLightClose} the number of the {StylisticClass.HighLight}right-most{StylisticClass.HighLightClose} card and {StylisticClass.HighLight}discard{StylisticClass.HighLightClose} it. If it was a {StylisticClass.HighLight}face card{StylisticClass.HighLightClose}, {StylisticClass.HighLight}draw{StylisticClass.HighLightClose} 1 card";
+    }
 
     public override bool OnActivate()
     {
+        CardInfo cardToDouble = GameHandler.Instance.GetCardInHand(
+            GameHandler.Instance.GetPlayerCardsInHand() - 1
+        );
+        bool wasFace = cardToDouble.IsFace();
+        cardToDouble._number *= 2;
+        cardToDouble._card.MakeCard(cardToDouble);
         GameHandler.Instance.PlayerDiscard(GameHandler.Instance.GetPlayerCardsInHand() - 1);
-        GameHandler.Instance.Draw(1);
-        GameHandler.Instance.HealPlayer(5);
+        if (wasFace)
+        {
+            GameHandler.Instance.Draw(1);
+        }
         return true;
     }
 
@@ -45,7 +51,7 @@ public class EmergencyContact : Item
         return false;
     }
 
-    public override bool OnDamageOpponent(int amount, string fromMod)
+    public override bool OnDamageOpponent(int amount, string fromMod = "")
     {
         return false;
     }

@@ -113,9 +113,9 @@ public class GameHandler : MonoBehaviour
             //c.AddModifier("Poison");
         }
         //debug
-        //Item debugItem4 = ScriptableObject.CreateInstance<StraysLuckyCoin>();
-        //debugItem4.InitItem();
-        //_state.AddItem(debugItem4);
+        Item debugItem4 = ScriptableObject.CreateInstance<WolfsGambit>();
+        debugItem4.InitItem();
+        _state.AddItem(debugItem4);
         //Item debugItem5 = ScriptableObject.CreateInstance<BagOfTreats>();
         //debugItem5.InitItem();
         //_state.AddItem(debugItem5);
