@@ -1,40 +1,42 @@
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "PrimeLaikaDirective", menuName = "Items/Rare/PrimeLaikaDirective")]
 class PrimeLaikaDirective : Item
 {
-    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
 
     public override void InitItem()
     {
-         this.rarity = 1;
+        this.rarity = 1;
         this.boss = false;
         this.itemId = "PrimeLaikaDirective";
-        this.itemName="PrimeLaikaDirective";
-        this.toolTipDesc = $"All {StylisticClass.HighLight}7s and Jacks{StylisticClass.HighLightClose} become {StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} and gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5</color>";
+        this.itemName = "PrimeLaikaDirective";
+        this.toolTipDesc =
+            $"All {StylisticClass.HighLight}7s and Jacks{StylisticClass.HighLightClose} become {StylisticClass.HighLight}Laika Cards{StylisticClass.HighLightClose} and gain {StylisticClass.BurnColor}{StylisticClass.BurnString} 5</color>";
         AddSubtoolTip(ToolTip.SubtoolTips["Laika"]);
         AddSubtoolTip(ToolTip.SubtoolTips["Burn"]);
     }
 
     public override bool OnActivate()
     {
-         return false;
+        return false;
     }
 
     public override bool OnAquire()
     {
-        foreach(CardInfo c in GameHandler.Instance.GetGameState()._deck)
+        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
-            if(c.IsLaika())
+            if (c.IsLaika())
             {
-                c.AddModifier("Burn",5);
+                c.AddModifier("Burn", 5);
                 c.AddModifier("Bounce");
             }
         }
@@ -43,9 +45,9 @@ class PrimeLaikaDirective : Item
 
     public override bool OnCardAdded(CardInfo card)
     {
-        if(card.IsLaika())
+        if (card.IsLaika())
         {
-            card.AddModifier("Burn",5);
+            card.AddModifier("Burn", 5);
             card.AddModifier("Bounce");
         }
         return true;
@@ -53,51 +55,56 @@ class PrimeLaikaDirective : Item
 
     public override bool OnDamageOpponent(int amount, string fromMod = "")
     {
-         return false;
+        return false;
     }
 
-    public override bool OnDamagePlayer(int amount, string fromMod="")
+    public override bool OnDamagePlayer(int amount, string fromMod = "")
     {
-         return false;
+        return false;
     }
 
     public override bool OnDefendCard(Card defendee, Card defended)
     {
-          return false;
+        return false;
+    }
+
+    public override bool OnDrawCard(CardInfo card)
+    {
+        return false;
     }
 
     public override bool OnEncounterStart()
     {
-         return false;
+        return false;
     }
 
     public override bool OnEndEncounter()
     {
-         return false;
+        return false;
     }
 
     public override bool OnHeal(int amount)
     {
-         return false;
+        return false;
     }
 
     public override bool OnLoad()
     {
-         return false;
+        return false;
     }
 
     public override bool OnPlayedCard(Card card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnReverse(Card card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnTurnEnd(int turnState)
     {
-         return false;
+        return false;
     }
 }

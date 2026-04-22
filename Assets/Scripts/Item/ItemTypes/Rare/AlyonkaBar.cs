@@ -1,13 +1,14 @@
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "AlyonkaBar", menuName = "Items/Rare/AlyonkaBar")]
 class AlyonkaBar : Item
 {
-    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
@@ -17,21 +18,22 @@ class AlyonkaBar : Item
         this.rarity = 1;
         this.boss = false;
         this.itemId = "AlyonkaBar";
-        this.itemName="AlyonkaBar";
-        this.toolTipDesc = $"{StylisticClass.HighLight}Face cards gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color>";
+        this.itemName = "AlyonkaBar";
+        this.toolTipDesc =
+            $"{StylisticClass.HighLight}Face cards gain {StylisticClass.PoisonColor}{StylisticClass.PoisonString}</color>";
         AddSubtoolTip(ToolTip.SubtoolTips["Poison"]);
     }
 
     public override bool OnActivate()
     {
-         return false;
+        return false;
     }
 
     public override bool OnAquire()
     {
-        foreach(CardInfo c in GameHandler.Instance.GetGameState()._deck)
+        foreach (CardInfo c in GameHandler.Instance.GetGameState()._deck)
         {
-            if(c.IsFace())
+            if (c.IsFace())
             {
                 c.AddModifier("Poison");
             }
@@ -41,7 +43,7 @@ class AlyonkaBar : Item
 
     public override bool OnCardAdded(CardInfo card)
     {
-         if(card.IsFace())
+        if (card.IsFace())
         {
             card.AddModifier("Poison");
         }
@@ -50,51 +52,56 @@ class AlyonkaBar : Item
 
     public override bool OnDamageOpponent(int amount, string fromMod = "")
     {
-         return false;
+        return false;
     }
 
-    public override bool OnDamagePlayer(int amount, string fromMod="")
+    public override bool OnDamagePlayer(int amount, string fromMod = "")
     {
-         return false;
+        return false;
     }
 
     public override bool OnDefendCard(Card defendee, Card defended)
     {
-          return false;
+        return false;
+    }
+
+    public override bool OnDrawCard(CardInfo card)
+    {
+        return false;
     }
 
     public override bool OnEncounterStart()
     {
-         return false;
+        return false;
     }
 
     public override bool OnEndEncounter()
     {
-         return false;
+        return false;
     }
 
     public override bool OnHeal(int amount)
     {
-         return false;
+        return false;
     }
 
     public override bool OnLoad()
     {
-         return false;
+        return false;
     }
 
     public override bool OnPlayedCard(Card card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnReverse(Card card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnTurnEnd(int turnState)
     {
-         return false;
+        return false;
     }
 }

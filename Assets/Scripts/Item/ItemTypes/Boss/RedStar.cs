@@ -1,13 +1,14 @@
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "RedStar", menuName = "Items/Boss/RedStar")]
 public class RedStar : Item
 {
-    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
 
-    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
@@ -17,13 +18,13 @@ public class RedStar : Item
         this.rarity = 3;
         this.boss = true;
         this.itemId = "RedStar";
-        this.itemName="RedStar";
+        this.itemName = "RedStar";
         this.toolTipDesc = "Red cards are counted as the same suit";
     }
 
     public override bool OnActivate()
     {
-          return false;
+        return false;
     }
 
     public override bool OnAquire()
@@ -34,56 +35,61 @@ public class RedStar : Item
 
     public override bool OnCardAdded(CardInfo card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnDamageOpponent(int amount, string fromMod)
     {
-          return false;
+        return false;
     }
 
-    public override bool OnDamagePlayer(int amount, string fromMod="")
+    public override bool OnDamagePlayer(int amount, string fromMod = "")
     {
-         return false;
+        return false;
     }
 
     public override bool OnDefendCard(Card defendee, Card defended)
     {
-         return false;
+        return false;
+    }
+
+    public override bool OnDrawCard(CardInfo card)
+    {
+        return false;
     }
 
     public override bool OnEncounterStart()
     {
-         return false;
+        return false;
     }
 
     public override bool OnEndEncounter()
     {
-         return false;
+        return false;
     }
 
     public override bool OnHeal(int amount)
     {
-         return false;
+        return false;
     }
 
     public override bool OnLoad()
     {
-           return false;
+        return false;
     }
 
     public override bool OnPlayedCard(Card card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnReverse(Card card)
     {
-          return false;
+        return false;
     }
 
     public override bool OnTurnEnd(int turnState)
     {
-         return false;
+        return false;
     }
 }

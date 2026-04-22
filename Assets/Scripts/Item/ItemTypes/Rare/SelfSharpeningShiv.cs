@@ -53,6 +53,11 @@ class SelfSharpeningShiv : Item
         return false;
     }
 
+    public override bool OnDrawCard(CardInfo card)
+    {
+        return false;
+    }
+
     public override bool OnEncounterStart()
     {
         return false;

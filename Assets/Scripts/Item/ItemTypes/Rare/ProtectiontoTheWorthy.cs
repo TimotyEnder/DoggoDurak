@@ -60,6 +60,11 @@ class ProtectiontoTheWorthy : Item
         return false;
     }
 
+    public override bool OnDrawCard(CardInfo card)
+    {
+        return false;
+    }
+
     public override bool OnEncounterStart()
     {
         gained = false;

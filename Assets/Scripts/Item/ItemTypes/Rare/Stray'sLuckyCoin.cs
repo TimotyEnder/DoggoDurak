@@ -129,4 +129,9 @@ public class StraysLuckyCoin : Item
     {
         return 0;
     }
+
+    public override bool OnDrawCard(CardInfo card)
+    {
+        return false;
+    }
 }

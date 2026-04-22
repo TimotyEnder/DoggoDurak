@@ -1,11 +1,7 @@
-using System.Diagnostics;
 using UnityEngine;
 
-[CreateAssetMenu(
-    fileName = "OligarchsPrerogative",
-    menuName = "Items/Active-Legendary/OligarchsPrerogative"
-)]
-class OligarchsPrerogative : Item
+[CreateAssetMenu(fileName = "TrenchCoatPocket", menuName = "Items/Rare/TrenchCoatPocket")]
+class TrenchCoatPocket : Item
 {
     public override int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
@@ -19,29 +15,17 @@ class OligarchsPrerogative : Item
 
     public override void InitItem()
     {
-        this.rarity = 2;
+        this.rarity = 1;
         this.boss = false;
-        this.isActive = true;
-        this.itemId = "OligarchsPrerogative";
-        this.itemName = "Oligarch's Prerogative";
+        this.itemId = "TrenchCoatPocket";
+        this.itemName = "Trench Coat Pocket";
         this.toolTipDesc =
-            $"{StylisticClass.ActivateString} {StylisticClass.HighLight}All{StylisticClass.HighLightClose} cards in your hand lose {StylisticClass.DebuffedDesc} until the end of the turn";
+            $"Whenever you {StylisticClass.HighLight}draw{StylisticClass.HighLightClose} a card there is a {StylisticClass.HighLight}5%{StylisticClass.HighLightClose} chance to {StylisticClass.HighLight}draw{StylisticClass.HighLightClose} another card.";
     }
 
     public override bool OnActivate()
     {
-        for (int i = 0; i < GameHandler.Instance.GetPlayerCardsInHand(); i++)
-        {
-            CardInfo card = GameHandler.Instance.GetCardInHand(i);
-            GameHandler.Instance.SetDebuffs(
-                new string[] { $"{card._suit}{card._number}" },
-                false,
-                GameHandler.Instance.IsCardnotDebuffed(card, 1)
-            );
-            card._card.CheckDebuffVisual();
-            card._card.Bling();
-        }
-        return true;
+        return false;
     }
 
     public override bool OnAquire()
@@ -71,6 +55,12 @@ class OligarchsPrerogative : Item
 
     public override bool OnDrawCard(CardInfo card)
     {
+        int roll = UnityEngine.Random.Range(1, 101);
+        if (roll < 5)
+        {
+            GameHandler.Instance.Draw(1);
+            return true;
+        }
         return false;
     }
 

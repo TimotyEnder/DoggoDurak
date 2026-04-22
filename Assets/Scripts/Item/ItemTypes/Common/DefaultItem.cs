@@ -1,4 +1,5 @@
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "DefaultItem", menuName = "Items/Default")]
 public class DefaultItem : Item
 {
@@ -7,12 +8,14 @@ public class DefaultItem : Item
         rarity = 0;
         boss = false;
         itemId = "DefaultItem";
-        this.itemName="?";
-        this.toolTipDesc = "Hello Modders! Have your fun! Sorry shit might be a bit confusing but i am sur you will figure it out:)";
+        this.itemName = "?";
+        this.toolTipDesc =
+            "Hello Modders! Have your fun! Sorry shit might be a bit confusing but i am sur you will figure it out:)";
     }
+
     public override bool OnLoad()
     {
-           return false;
+        return false;
     }
 
     public override bool OnAquire()
@@ -23,66 +26,71 @@ public class DefaultItem : Item
 
     public override bool OnDefendCard(Card defendee, Card defended)
     {
-         return false;
+        return false;
     }
 
     public override bool OnPlayedCard(Card card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnReverse(Card card)
     {
-          return false;
+        return false;
     }
 
     public override bool OnHeal(int amount)
     {
-         return false;
+        return false;
     }
 
     public override bool OnDamageOpponent(int amount, string fromMod)
     {
-          return false;
+        return false;
     }
 
     public override bool OnActivate()
     {
-          return false;
+        return false;
     }
 
     public override bool OnEndEncounter()
     {
-         return false;
+        return false;
     }
 
     public override bool OnTurnEnd(int turnState)
     {
-         return false;
+        return false;
     }
 
     public override bool OnCardAdded(CardInfo card)
     {
-         return false;
+        return false;
     }
 
     public override bool OnEncounterStart()
     {
-         return false;
+        return false;
     }
 
-    public override bool OnDamagePlayer(int amount, string fromMod="")
+    public override bool OnDamagePlayer(int amount, string fromMod = "")
     {
-         return false;
+        return false;
     }
 
-    public override int AddToDamagePlayer(int amount, bool OnlyVisual=false)
+    public override int AddToDamagePlayer(int amount, bool OnlyVisual = false)
+    {
+        return 0;
+    }
+
+    public override int AddToDamageOpponent(int amount, bool OnlyVisual = false)
     {
         return 0;
     }
 
-    public override int AddToDamageOpponent(int amount, bool OnlyVisual=false)
+    public override bool OnDrawCard(CardInfo card)
     {
-        return 0;
+        return false;
     }
 }
