@@ -1,7 +1,7 @@
 # DoggoDurak
 
 A roguelike deckbuilder built on Durak, the Russian card game. You play a series of
-encounters against a cast of badly behaved dogs, drawing cards, defending yourself and
+encounters against a cast of Soviet Inspired dogs, drawing cards, defending yourself and
 collecting items until you win or run out of health.
 
 ![The main menu](MainMenu.png)
