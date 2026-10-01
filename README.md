@@ -100,8 +100,7 @@ card depending on what you have found.
 
 ![A boss fight](Boss.png)
 
-Every twelfth encounter is a boss. Bosses are not just bigger enemies, they carry rules
-that change how the fight works, such as shifting probabilities turn by turn or forcing a
+Every twelfth encounter is a boss. Bosses carry rules that change how the fight works, such as shifting probabilities turn by turn or forcing a
 different turn order. 
 Regular encounters do this too. With 35 encounters in the game, a lot of them bend the normal
 flow of a turn in some way.
